@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical" >
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingLeft="12dp"
+		android:paddingRight="12dp"
+		android:paddingTop="6dp" >
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal" >
+
+			<ImageView
+				android:layout_width="12dp"
+				android:layout_height="match_parent"
+				android:src="@drawable/notification_red_dot" />
+
+			<TextView
+				android:id="@+id/title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="4dp"
+				android:fontFamily="@font/seguisb"
+				android:text="Bla bla bla bla bla"
+				android:textColor="@color/black"
+				android:textSize="17sp" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal" >
+
+			<ImageView
+				android:layout_width="17dp"
+				android:layout_height="match_parent" />
+
+			<TextView
+				android:id="@+id/content"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="4dp"
+				android:ellipsize="end"
+				android:fontFamily="@font/segoeui"
+				android:maxLength="190"
+				android:maxLines="2"
+				android:text="asdkjadasdasdahsdasdasdasdasdasdqweqweqweadasdasdasdasdasdsadasdasdasdasdasdasdasdsadasdasdasdasdasdasdsadjhaskjdhakjdhaksjhdkajshkajshdkajshdkajshdkasjdhkajsdh"
+				android:textColor="@color/black"
+				android:textSize="15sp" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal" >
+
+			<ImageView
+				android:layout_width="17dp"
+				android:layout_height="match_parent" />
+
+			<TextView
+				android:id="@+id/tgl"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="4dp"
+				android:layout_weight="1"
+				android:fontFamily="@font/segoeui"
+				android:text="17-08-2020"
+				android:textColor="@color/darkgrey"
+				android:textSize="13sp" />
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="4dp"
+				android:layout_weight="1"
+				android:fontFamily="@font/segoeui"
+				android:gravity="end"
+				android:text="@string/title_open"
+				android:textColor="@color/colorPrimaryDark"
+				android:textSize="13sp" />
+		</LinearLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginTop="6dp"
+			android:background="@color/softgrey" />
+	</LinearLayout>
+
+</LinearLayout>

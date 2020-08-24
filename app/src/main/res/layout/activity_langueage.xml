@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Langueage"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backbtn"
+            android:layout_width="20dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:src="@drawable/back_white" />
+        <TextView
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:text="@string/title_language"
+            android:fontFamily="@font/seguisb" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="7dp">
+                <ImageView
+                    android:id="@+id/flageng"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:src="@drawable/ic_uk" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="7dp">
+                <ImageView
+                    android:id="@+id/flagid"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:src="@drawable/ic_indonesia" />
+            </LinearLayout>
+        </LinearLayout>
+        <RadioGroup
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp">
+            <RadioButton
+                android:textSize="12sp"
+                android:id="@+id/eng"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:checked="true"
+                android:text="English"
+                android:fontFamily="@font/seguisb" />
+            <RadioButton
+                android:textSize="12sp"
+                android:id="@+id/indo"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:checked="false"
+                android:text="Bahasa Indonesia"
+                android:fontFamily="@font/seguisb" />
+        </RadioGroup>
+        <TextView
+            android:textSize="14sp"
+            android:textColor="@color/dwhite"
+            android:gravity="center"
+            android:id="@+id/save"
+            android:background="@drawable/btnlogin"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="44dp"
+            android:text="@string/title_save"
+            android:fontFamily="@font/seguisb" />
+    </LinearLayout>
+
+</LinearLayout>
