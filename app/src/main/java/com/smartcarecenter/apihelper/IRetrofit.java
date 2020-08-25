@@ -75,6 +75,9 @@ public interface IRetrofit {
     @POST("api/Press/List")
     public Call<JsonObject> postRawJSONpresslist(@Body JsonObject var1);
 
+    @POST("api/FOCOrder/GetItemList")
+    public Call<JsonObject> list_add_item_foc(@Body JsonObject var1);
+
     @POST("api/store/getdaftarkota")
     Call<JsonObject> postRawJSON(@Body JsonObject locationPost);
 

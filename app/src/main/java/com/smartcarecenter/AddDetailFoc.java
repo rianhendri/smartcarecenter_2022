@@ -31,8 +31,11 @@ import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,20 +50,20 @@ public class AddDetailFoc extends AppCompatActivity {
     String akunid = "";
     Boolean internet = false;
     ProgressDialog loading;
-    ImageView mback,mimgbanner,mimgvis;
-    Spinner mbranch;
-    LinearLayout mcapture;
-    TextView mdate,mstartimpresi,moperator,mno_order,mrequiredfoto,msend;
+    ImageView mback;
+    LinearLayout mlaytotal;
+    TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty;
     EditText mlastimpresi;
     String mpressId = "";
-    LinearLayout mreadyfoto;
+    Integer previmpressvlaue = 100;
+    LinearLayout madd_item;
     Spinner msn;
     DatabaseReference reference;
     RecyclerView mlistitem_foc;
     String sesionid_new = "";
     List<String> snid = new ArrayList();
     List<String> snname = new ArrayList();
-    StorageReference storage;
+    List<Integer> previmpression = new ArrayList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +71,16 @@ public class AddDetailFoc extends AppCompatActivity {
         mlistitem_foc = findViewById(R.id.listitemfoc);
         mdate = findViewById(R.id.datefoc);
         mno_order = findViewById(R.id.noorder);
-        msend = findViewById(R.id.send);
+        msend = findViewById(R.id.submit);
         msn = findViewById(R.id.sn);
         moperator = findViewById(R.id.operator);
         mlastimpresi = findViewById(R.id.lastimprsi);
         mstartimpresi = findViewById(R.id.startimpresi);
         mback = findViewById(R.id.backbtn);
+        mtotalitem = findViewById(R.id.totalitemfoc);
+        mtotalqty = findViewById(R.id.totalqtyfoc);
+        mlaytotal = findViewById(R.id.totallay);
+        madd_item = findViewById(R.id.btnadditem_po);
         cekInternet();
         getSessionId();
         if (internet){
@@ -81,11 +88,15 @@ public class AddDetailFoc extends AppCompatActivity {
         }else {
 
         }
+        String string2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault()).format(new Date());
+        mdate.setText((CharSequence)string2);
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 for (int i = 0; i < snid.size(); ++i) {
                     mpressId = snid.get(i);
+                    previmpressvlaue = previmpression.get(i);
+                    mstartimpresi.setText(String.valueOf(previmpressvlaue));
                 }
             }
 
@@ -94,7 +105,22 @@ public class AddDetailFoc extends AppCompatActivity {
 
             }
         });
-
+        mback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        madd_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoaddfoc = new Intent(AddDetailFoc.this, Add_Foc_Item_List.class);
+                gotoaddfoc.putExtra("pressId",mpressId);
+                startActivity(gotoaddfoc);
+                finish();
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            }
+        });
 
 
     }
@@ -143,7 +169,7 @@ public class AddDetailFoc extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(AddDetailFoc.this,FormActivity.class);
+        Intent back = new Intent(AddDetailFoc.this,FreeofchargeActivity.class);
         back.putExtra("pos",valuefilter);
         startActivity(back);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
@@ -173,8 +199,10 @@ public class AddDetailFoc extends AppCompatActivity {
                         JsonObject jsonObject2 = (JsonObject)listsn.get(i);
                         String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
                         String string5 = jsonObject2.getAsJsonObject().get("id").getAsString();
+                        Integer previmpress = jsonObject2.getAsJsonObject().get("previousImpression").getAsInt();
                         snname.add(string4);
                         snid.add(string5);
+                        previmpression.add(previmpress);
                         ArrayAdapter arrayAdapter = new ArrayAdapter(AddDetailFoc.this, R.layout.spinstatus_layout, snname);
                         arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
                         arrayAdapter.notifyDataSetChanged();

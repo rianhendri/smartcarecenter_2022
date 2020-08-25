@@ -74,6 +74,7 @@
                 android:textSize="13sp" />
 
             <View
+                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_margin="4dp"
@@ -107,6 +108,7 @@
                 android:textSize="13sp" />
 
             <View
+                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_margin="4dp"
@@ -243,6 +245,7 @@
                 android:fontFamily="@font/segoeui"
                 android:paddingLeft="4dp"
                 android:text="-"
+                android:inputType="number"
                 android:textColor="@color/colorPrimary"
                 android:textSize="13sp" />
 
@@ -272,6 +275,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/segoeui"
                 android:paddingLeft="4dp"
+                android:inputType="number"
                 android:background="@drawable/background_transparent"
                 android:textColor="@color/colorPrimary"
                 android:textSize="13sp" />
@@ -287,7 +291,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="4dp"
+                android:paddingBottom="10dp"
                 android:paddingLeft="12sp"
                 android:paddingRight="12sp"
                 android:paddingTop="10dp"
@@ -316,46 +320,142 @@
                         android:src="@drawable/ic_pluswhite" />
                 </LinearLayout>
             </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listitemfoc"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toTopOf="@+id/addform"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingBottom="50dp"
-            android:scrollbars="none"
-            android:nestedScrollingEnabled="false">
-        </androidx.recyclerview.widget.RecyclerView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:id="@+id/imagevisible"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="4dp"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/send"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listitemfoc"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@+id/addform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingBottom="50dp"
+                android:scrollbars="none"
+                android:nestedScrollingEnabled="false">
+            </androidx.recyclerview.widget.RecyclerView>
+           <TextView
+               android:padding="50dp"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:fontFamily="@font/segoeui"
+               android:textSize="13sp"
+               android:gravity="center"
+               android:text="@string/title_noitem"/>
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/totallay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/bg_yellow_borderradius"
-                android:fontFamily="@font/seguisb"
-                android:gravity="center"
-                android:padding="14dp"
-                android:text="@string/title_submit"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-        </LinearLayout>
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:background="@color/colorPrimary"
+                    android:orientation="horizontal"
+                    android:padding="4dp" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/seguisb"
+                        android:gravity="center"
+                        android:text="@string/title_Summary"
+                        android:textColor="@color/dwhite"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/dwhite"
+                    android:orientation="vertical"
+                    android:padding="12sp" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/segoeui"
+                            android:text="@string/title_totalitem"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/totalitemfoc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:gravity="end"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/softgrey" />
+                    <LinearLayout
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:text="@string/title_totalqty"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/totalqtyfoc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:gravity="end"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/softgrey" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/submit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_yellow_borderradius"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="70dp"
+                        android:paddingRight="70dp"
+                        android:paddingTop="10dp"
+                        android:text="@string/title_submit" />
+                </LinearLayout>
+            </LinearLayout>
 
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
