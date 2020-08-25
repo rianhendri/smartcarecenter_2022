@@ -97,7 +97,18 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             totalqty += addFoclistreq.get(x).getQty();
             mtotalqty.setText(String.valueOf(totalqty));
         }
-
+        myviewholder.mimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(context, R.style.TransparentDialog);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.popupfoto);
+                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                mimgpopup = dialog.findViewById(R.id.imagepopup);
+                Picasso.with(context).load(addFoclistreq.get(i).getImgban()).into(mimgpopup);
+                dialog.show();
+            }
+        });
         // delete button
         myviewholder.mdelete.setOnClickListener(new View.OnClickListener() {
             @Override

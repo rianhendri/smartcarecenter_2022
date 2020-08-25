@@ -64,6 +64,7 @@ public class AddDetailFoc extends AppCompatActivity {
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem;
     EditText mlastimpresi;
     String mpressId = "";
+    String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item;
     Spinner msn;
@@ -157,7 +158,20 @@ public class AddDetailFoc extends AppCompatActivity {
                     mpressId = snid.get(i);
                     previmpressvlaue = previmpression.get(i);
                     mstartimpresi.setText(String.valueOf(previmpressvlaue));
+
                 }
+                if (position==0){
+
+                }else {
+                    listpoact.clear();
+                    reitem.clear();
+                    req_adapter = new Add_foc_req_adapter(AddDetailFoc.this, reitem);
+                    mlistitem_foc.setAdapter(req_adapter);
+                    mlaytotal.setVisibility(View.GONE);
+                    mnoitem.setVisibility(View.VISIBLE);
+                    mlistitem_foc.setVisibility(View.GONE);
+                }
+//
             }
 
             @Override
@@ -165,6 +179,7 @@ public class AddDetailFoc extends AppCompatActivity {
 
             }
         });
+        mpressId2 = mpressId;
         mback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,7 +205,7 @@ public class AddDetailFoc extends AppCompatActivity {
                         sendData();
                     }else {
                         mlastimpresi.setError(getString(R.string.title_requiredimpressi));
-                        Toast.makeText(AddDetailFoc.this, getString(R.string.title_requiredimpressi),Toast.LENGTH_LONG).show();
+                        Toast.makeText(AddDetailFoc.this, getString(R.string.title_requiredimpressi),Toast.LENGTH_SHORT).show();
                     }
                 }
             }

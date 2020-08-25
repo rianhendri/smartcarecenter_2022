@@ -41,12 +41,12 @@
             android:orientation="horizontal"
             android:padding="12dp" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/segoeui"
-                android:text="Total:"
-                android:textColor="@color/dwhite" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/segoeui"-->
+<!--                android:text="Total:"-->
+<!--                android:textColor="@color/dwhite" />-->
 
             <TextView
                 android:id="@+id/totalorder"
@@ -64,12 +64,6 @@
         android:background="@color/dwhite"
         android:orientation="horizontal"
         android:padding="12dp" >
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_filter"
-            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -124,18 +118,39 @@
         android:paddingRight="12dp"
         android:paddingTop="4dp" >
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listpo"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedscrol"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp" >
-    </androidx.recyclerview.widget.RecyclerView>
+        android:fillViewport="true"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/contentinbox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listpo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp" >
+                </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:id="@+id/norequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/segoeui"
+                android:textSize="13sp"
+                android:text="@string/title_RequestNone"
+                android:gravity="center"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
