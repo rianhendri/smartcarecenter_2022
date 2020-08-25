@@ -64,4 +64,21 @@
     <string name="title_fotorequired">Photo Required *</string>
     <string name="title_deserror">Description Required *</string>
     <string name="title_passwordRequired">Password Required</string>
+    <string name="title_itemcode">Code Item</string>
+    <string name="title_nameproduct">Product Name</string>
+    <string name="title_categoryproduct">Product Category</string>
+    <string name="title_additem">Submit</string>
+    <string name="title_qty">Qty</string>
+    <string name="title_additemfoc">Add Foc</string>
+    <string name="title_submit">Submit</string>
+    <string name="title_totalbarang">Total Product</string>
+    <string name="title_totalitem">Total Item</string>
+    <string name="title_Summary">Summary</string>
+    <string name="additemlist">Add Item</string>
+    <string name="title_date">Date</string>
+    <string name="title_NoFoc">No Foc</string>
+    <string name="title_serach">Search...</string>
+    <string name="title_norder">Order No.</string>
+    <string name="title_startimpesi">Previous Impression</string>
+    <string name="title_endimpresi">Present Impression</string>
 </resources>

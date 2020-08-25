@@ -65,4 +65,21 @@
     <string name="title_fotorequired">" Foto Diperlukan *"</string>
     <string name="title_deserror">Descripsi Diperlukan *</string>
     <string name="title_passwordRequired">Password diperlukan</string>
+    <string name="title_itemcode">Kode Item</string>
+    <string name="title_nameproduct">Nama Produk</string>
+    <string name="title_categoryproduct">Kategori Prouk</string>
+    <string name="title_additem">Submit</string>
+    <string name="title_qty">Qty</string>
+    <string name="title_additemfoc">Tambah FOC</string>
+    <string name="title_submit">Submit</string>
+    <string name="title_totalbarang">Jumlah Produk</string>
+    <string name="title_totalitem">Jumlah Item</string>
+    <string name="title_Summary">Ringkasan</string>
+    <string name="additemlist">Tambah Item</string>
+    <string name="title_date">Tanggal</string>
+    <string name="title_serach">Pencarian...</string>
+    <string name="title_norder">No Order</string>
+    <string name="title_NoFoc">No Foc</string>
+    <string name="title_startimpesi">Impresi Sebelumnya</string>
+    <string name="title_endimpresi">Imresi Terbaru</string>
 </resources>

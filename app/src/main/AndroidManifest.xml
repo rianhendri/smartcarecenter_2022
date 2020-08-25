@@ -17,11 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
-        <activity android:name=".FreeofchargeActivity"></activity>
-
-
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Add_Foc_Item_List"></activity>
+        <activity android:name=".AddDetailFoc" />
+        <activity android:name=".FreeofchargeActivity" />
         <activity android:name=".ChargeableActivity" />
         <activity android:name=".PurchaseMenu" />
         <activity android:name=".DetailsNotification">
@@ -37,10 +36,10 @@
         <activity android:name=".DetailsFormActivity">
             <intent-filter>
                 <action android:name="FormRequest" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".FormActivity" />
         <activity android:name=".DetailsNews" />
         <activity android:name=".NewsActivity" />
@@ -51,17 +50,19 @@
         <activity android:name=".UpdateActivity" />
         <activity android:name=".NoInternet" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Dashboard"
-
-            android:taskAffinity=""
+        <activity
+            android:name=".Dashboard"
             android:excludeFromRecents="true"
-            android:parentActivityName=".SpalshScreen"/>
+            android:parentActivityName=".SpalshScreen"
+            android:taskAffinity="" />
         <activity android:name=".SpalshScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".messagecloud.FirebaseMessaging"
             android:exported="false">
@@ -73,8 +74,10 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_stat_name" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/black" />
