@@ -80,6 +80,7 @@ public class Add_Foc_Item_List extends AppCompatActivity {
         mback = findViewById(R.id.backbtn);
         msearch = findViewById(R.id.searchitem);
         mlistFoc_item = findViewById(R.id.listadditemfoc);
+        loading = findViewById(R.id.loadingfooter);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             mpressId = bundle2.getString("pressId");
@@ -103,8 +104,6 @@ public class Add_Foc_Item_List extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak

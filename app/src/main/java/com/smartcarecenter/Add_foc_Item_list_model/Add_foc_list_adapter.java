@@ -44,10 +44,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonArray;
+import com.smartcarecenter.AddDetailFoc;
+import com.smartcarecenter.Add_Foc_Item_List;
+import com.smartcarecenter.Add_Foc_request.Add_foc_req_item;
 import com.smartcarecenter.DetailsFormActivity;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
@@ -57,6 +62,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.smartcarecenter.Add_Foc_request.Add_foc_req_adapter.addFoclistreq;
 import static com.smartcarecenter.FormActivity.valuefilter;
 
 public class Add_foc_list_adapter
@@ -64,7 +70,8 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
     ArrayList<Add_foc_list_item> addFoclistitem;
     Context context;
     ImageView mimgpopup;
-
+    public static ArrayList<Add_foc_req_item> listpoact = new ArrayList<Add_foc_req_item>();
+    Add_foc_req_item tambahitem;
     public Add_foc_list_adapter(Context context, ArrayList<Add_foc_list_item> addFoclistitem) {
         this.context = context;
         this.addFoclistitem = addFoclistitem;
@@ -112,7 +119,19 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
                 boolean status = true;
                 status = addFoclistitem.get(i).getStsActive();
                 if (status){
-
+                    tambahitem = new Add_foc_req_item();
+                    tambahitem.setItemCd(addFoclistitem.get(i).getItemCd());
+                    tambahitem.setCategory(addFoclistitem.get(i).getCategoryName());
+                    tambahitem.setNameitem(addFoclistitem.get(i).getName());
+                    tambahitem.setImgpic(addFoclistitem.get(i).getImageThumbFullURL());
+                    tambahitem.setImgban(addFoclistitem.get(i).getImageFullURL());
+                    tambahitem.setQty(1);
+                    tambahitem.setPosition(addFoclistreq.size()+1);
+                    listpoact.add(tambahitem);
+                    Intent intent = new Intent(context, AddDetailFoc.class);
+                    context.startActivity(intent);
+                    ((android.app.Activity)context).finish();
+                    ((android.app.Activity)context).overridePendingTransition(R.anim.left_in, R.anim.right_out);
                 }else {
 
                 }
@@ -126,7 +145,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         return addFoclistitem.size();
     }
 
-    public class Myviewholder extends RecyclerView.ViewHolder{
+    public static class Myviewholder extends RecyclerView.ViewHolder{
 
         TextView xdate_news;
         ImageView xgambar_item,xadd;

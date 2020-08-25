@@ -2,8 +2,10 @@ package com.smartcarecenter;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +15,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +30,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.smartcarecenter.Add_Foc_request.Add_foc_req_adapter;
+import com.smartcarecenter.Add_Foc_request.Add_foc_req_item;
+import com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_item;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 
@@ -41,6 +47,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
 import static com.smartcarecenter.FormActivity.valuefilter;
 
 public class AddDetailFoc extends AppCompatActivity {
@@ -51,8 +58,8 @@ public class AddDetailFoc extends AppCompatActivity {
     Boolean internet = false;
     ProgressDialog loading;
     ImageView mback;
-    LinearLayout mlaytotal;
-    TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty;
+    public static LinearLayout mlaytotal;
+    public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem;
     EditText mlastimpresi;
     String mpressId = "";
     Integer previmpressvlaue = 100;
@@ -64,6 +71,11 @@ public class AddDetailFoc extends AppCompatActivity {
     List<String> snid = new ArrayList();
     List<String> snname = new ArrayList();
     List<Integer> previmpression = new ArrayList();
+    //list item add
+    ArrayList<Add_foc_req_item> reitem;
+    Add_foc_req_adapter req_adapter;
+    private LinearLayoutManager linearLayoutManager;
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +83,7 @@ public class AddDetailFoc extends AppCompatActivity {
         mlistitem_foc = findViewById(R.id.listitemfoc);
         mdate = findViewById(R.id.datefoc);
         mno_order = findViewById(R.id.noorder);
+        mnoitem = findViewById(R.id.noitem);
         msend = findViewById(R.id.submit);
         msn = findViewById(R.id.sn);
         moperator = findViewById(R.id.operator);
@@ -83,11 +96,47 @@ public class AddDetailFoc extends AppCompatActivity {
         madd_item = findViewById(R.id.btnadditem_po);
         cekInternet();
         getSessionId();
+        //setlayout recyler
+        linearLayoutManager = new LinearLayoutManager(AddDetailFoc.this, LinearLayout.VERTICAL,false);
+//        linearLayoutManager.setReverseLayout(true);
+//        linearLayoutManager.setStackFromEnd(true);
+        mlistitem_foc.setLayoutManager(linearLayoutManager);
+        mlistitem_foc.setHasFixedSize(true);
+        reitem = new ArrayList<Add_foc_req_item>();
         if (internet){
             LoadPress();
         }else {
 
         }
+        if (listpoact.isEmpty()){
+            mlaytotal.setVisibility(View.GONE);
+            mno_order.setVisibility(View.VISIBLE);
+        }else {
+                mlaytotal.setVisibility(View.VISIBLE);
+            mno_order.setVisibility(View.GONE);
+        }
+        ////////////////// kalo item sama quatity di replace////
+        for (int i = 0; i < listpoact.size(); i++) {
+            for (int j = i + 1; j < listpoact.size(); j++) {
+                if (listpoact.get(i).getItemCd().equals(listpoact.get(j).getItemCd())) {
+//                    listpoact.get(i).setQuantity(listpoact.get(j).getQuantity());
+//                    listpoact.get(i).setHarga(listpoact.get(j).getHarga());
+                    listpoact.remove(j);
+                    j--;
+//                    Log.d("remove", String.valueOf(cartModels.size()));
+
+                }
+            }
+
+        }
+
+        reitem.addAll(listpoact);
+        listpoact.clear();
+        Log.d("sizecart_11", String.valueOf(reitem.size()));
+        Log.d("sizecart_22", String.valueOf(listpoact.size()));
+////////////////////// adapter di masukan ke recyler//
+        req_adapter = new Add_foc_req_adapter(this, reitem);
+        mlistitem_foc.setAdapter(req_adapter);
         String string2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault()).format(new Date());
         mdate.setText((CharSequence)string2);
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -119,6 +168,7 @@ public class AddDetailFoc extends AppCompatActivity {
                 startActivity(gotoaddfoc);
                 finish();
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                listpoact.addAll(reitem);
             }
         });
 
@@ -172,8 +222,8 @@ public class AddDetailFoc extends AppCompatActivity {
         Intent back = new Intent(AddDetailFoc.this,FreeofchargeActivity.class);
         back.putExtra("pos",valuefilter);
         startActivity(back);
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
+        overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
     public void LoadPress(){
         loading = ProgressDialog.show(AddDetailFoc.this, "", getString(R.string.title_loading), true);
