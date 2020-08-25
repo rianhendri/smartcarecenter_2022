@@ -322,7 +322,7 @@
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listitemfoc"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/addform"
@@ -336,8 +336,8 @@
             </androidx.recyclerview.widget.RecyclerView>
            <TextView
                android:id="@+id/noitem"
-               android:visibility="gone"
-               android:padding="50dp"
+               android:visibility="visible"
+               android:padding="10dp"
                android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:fontFamily="@font/segoeui"

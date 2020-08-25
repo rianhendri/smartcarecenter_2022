@@ -148,7 +148,7 @@ public class Add_Foc_Item_List extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(Add_Foc_Item_List.this,FreeofchargeActivity.class);
+        Intent back = new Intent(Add_Foc_Item_List.this,AddDetailFoc.class);
         back.putExtra("pos",valuefilter);
         startActivity(back);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);

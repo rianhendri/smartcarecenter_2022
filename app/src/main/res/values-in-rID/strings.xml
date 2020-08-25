@@ -85,4 +85,5 @@
     <string name="title_totalqty">Jumlah Qty</string>
     <string name="title_noitem">Tidak ada item</string>
     <string name="title_category">Kategori</string>
+    <string name="title_requiredimpressi">Impresi terbaru perludisi</string>
 </resources>

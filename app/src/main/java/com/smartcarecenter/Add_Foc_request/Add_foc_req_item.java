@@ -18,12 +18,12 @@ public class Add_foc_req_item {
     }
 
 
-    public String getItemCd() {
-        return ItemCd;
+    public String getItemcd() {
+        return itemcd;
     }
 
-    public void setItemCd(String itemCd) {
-        ItemCd = itemCd;
+    public void setItemcd(String itemcd) {
+        this.itemcd = itemcd;
     }
 
     public Integer getPosition() {
@@ -75,9 +75,9 @@ public class Add_foc_req_item {
 
 
 
-    public Add_foc_req_item(String itemCd, Integer position, Integer qty,
+    public Add_foc_req_item(String itemcd, Integer position, Integer qty,
                             String imgpic, String nameitem, String category,String imgban) {
-        ItemCd = itemCd;
+        this.itemcd = itemcd;
         this.position = position;
         this.qty = qty;
         this.imgpic = imgpic;
@@ -85,8 +85,11 @@ public class Add_foc_req_item {
         this.nameitem = nameitem;
         this.category = category;
     }
-    @SerializedName("ItemCd")
-    private String ItemCd;
+
+
+
+    @SerializedName("itemcd")
+    private String itemcd;
     @Expose
     @SerializedName("position")
     private Integer position;

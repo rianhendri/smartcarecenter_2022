@@ -85,4 +85,5 @@
     <string name="title_totalqty">Total Qty</string>
     <string name="title_noitem">No Item</string>
     <string name="title_category">Category</string>
+    <string name="title_requiredimpressi">Current Impressi Required</string>
 </resources>

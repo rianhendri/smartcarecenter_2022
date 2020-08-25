@@ -28,6 +28,8 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.smartcarecenter.Add_Foc_request.Add_foc_req_adapter;
@@ -66,15 +68,18 @@ public class AddDetailFoc extends AppCompatActivity {
     LinearLayout madd_item;
     Spinner msn;
     DatabaseReference reference;
-    RecyclerView mlistitem_foc;
+    public static RecyclerView mlistitem_foc;
     String sesionid_new = "";
     List<String> snid = new ArrayList();
     List<String> snname = new ArrayList();
     List<Integer> previmpression = new ArrayList();
     //list item add
-    ArrayList<Add_foc_req_item> reitem;
+    public static ArrayList<Add_foc_req_item> reitem;
     Add_foc_req_adapter req_adapter;
     private LinearLayoutManager linearLayoutManager;
+    String jsonarayitem = "";
+    JsonArray myCustomArray;
+    Gson gson;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,15 +115,17 @@ public class AddDetailFoc extends AppCompatActivity {
         }
         if (listpoact.isEmpty()){
             mlaytotal.setVisibility(View.GONE);
-            mno_order.setVisibility(View.VISIBLE);
+            mnoitem.setVisibility(View.VISIBLE);
+            mlistitem_foc.setVisibility(View.GONE);
         }else {
-                mlaytotal.setVisibility(View.VISIBLE);
-            mno_order.setVisibility(View.GONE);
+            mlaytotal.setVisibility(View.VISIBLE);
+            mnoitem.setVisibility(View.GONE);
+            mlistitem_foc.setVisibility(View.VISIBLE);
         }
         ////////////////// kalo item sama quatity di replace////
         for (int i = 0; i < listpoact.size(); i++) {
             for (int j = i + 1; j < listpoact.size(); j++) {
-                if (listpoact.get(i).getItemCd().equals(listpoact.get(j).getItemCd())) {
+                if (listpoact.get(i).getItemcd().equals(listpoact.get(j).getItemcd())) {
 //                    listpoact.get(i).setQuantity(listpoact.get(j).getQuantity());
 //                    listpoact.get(i).setHarga(listpoact.get(j).getHarga());
                     listpoact.remove(j);
@@ -131,6 +138,10 @@ public class AddDetailFoc extends AppCompatActivity {
         }
 
         reitem.addAll(listpoact);
+        Gson gson = new GsonBuilder().create();
+        myCustomArray = gson.toJsonTree(reitem).getAsJsonArray();
+        jsonarayitem = myCustomArray.toString();
+
         listpoact.clear();
         Log.d("sizecart_11", String.valueOf(reitem.size()));
         Log.d("sizecart_22", String.valueOf(listpoact.size()));
@@ -169,6 +180,19 @@ public class AddDetailFoc extends AppCompatActivity {
                 finish();
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 listpoact.addAll(reitem);
+            }
+        });
+        msend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (internet){
+                    if (mlastimpresi.getText().toString().length()!=0){
+                        sendData();
+                    }else {
+                        mlastimpresi.setError(getString(R.string.title_requiredimpressi));
+                        Toast.makeText(AddDetailFoc.this, getString(R.string.title_requiredimpressi),Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
 
@@ -259,6 +283,47 @@ public class AddDetailFoc extends AppCompatActivity {
                         msn.setAdapter(arrayAdapter);
                         loading.dismiss();
                     }
+                }else {
+                    Toast.makeText(AddDetailFoc.this, errornya.toString(),Toast.LENGTH_LONG).show();
+                    loading.dismiss();
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(AddDetailFoc.this, t.toString(),Toast.LENGTH_LONG).show();
+                cekInternet();
+
+
+            }
+        });
+    }
+    public void sendData(){
+        gson = new Gson();
+        loading = ProgressDialog.show(AddDetailFoc.this, "", getString(R.string.title_loading), true);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("pressGuid",mpressId);
+        jsonObject.addProperty("currentImpression",2222);
+        jsonObject.add("items", myCustomArray);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        Call<JsonObject> panggilkomplek = jsonPostService.sendData(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                String errornya = homedata.get("errorMessage").toString();
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                if (statusnya.equals("OK")) {
+                    loading.dismiss();
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    String ok=data.get("message").getAsString();
+                    Toast.makeText(AddDetailFoc.this, ok,Toast.LENGTH_LONG).show();
                 }else {
                     Toast.makeText(AddDetailFoc.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();

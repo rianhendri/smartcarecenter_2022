@@ -120,7 +120,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
                 status = addFoclistitem.get(i).getStsActive();
                 if (status){
                     tambahitem = new Add_foc_req_item();
-                    tambahitem.setItemCd(addFoclistitem.get(i).getItemCd());
+                    tambahitem.setItemcd(addFoclistitem.get(i).getItemCd());
                     tambahitem.setCategory(addFoclistitem.get(i).getCategoryName());
                     tambahitem.setNameitem(addFoclistitem.get(i).getName());
                     tambahitem.setImgpic(addFoclistitem.get(i).getImageThumbFullURL());
