@@ -68,7 +68,7 @@
     <string name="title_nameproduct">Product Name</string>
     <string name="title_categoryproduct">Product Category</string>
     <string name="title_additem">Submit</string>
-    <string name="title_qty">Qty</string>
+    <string name="title_qty">"Qty: "</string>
     <string name="title_additemfoc">Add Foc</string>
     <string name="title_submit">Submit</string>
     <string name="title_totalbarang">Total Product</string>

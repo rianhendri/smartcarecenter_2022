@@ -133,23 +133,34 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:orientation="vertical">
+                        android:gravity="start"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="110dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/seguisb"
-                            android:gravity="center"
+                            android:gravity="center_vertical"
                             android:text="@string/title_qty"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
 
+                        <TextView
+                            android:id="@+id/qtyitempo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/background_transparent"
+                            android:fontFamily="@font/segoeui"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp" />
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:gravity="end"
+                            android:gravity="start"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -159,19 +170,6 @@
                                 android:layout_height="20dp"
                                 android:src="@drawable/ic_minus" />
 
-                            <TextView
-                                android:id="@+id/qtyitempo"
-                                android:layout_width="110dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
-                                android:layout_marginRight="4dp"
-                                android:background="@drawable/background_transparent"
-                                android:fontFamily="@font/segoeui"
-                                android:gravity="center"
-                                android:inputType="number"
-                                android:text="0"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="12sp" />
 
                             <ImageView
                                 android:visibility="gone"

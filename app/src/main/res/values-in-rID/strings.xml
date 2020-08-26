@@ -69,7 +69,7 @@
     <string name="title_nameproduct">Nama Produk</string>
     <string name="title_categoryproduct">Kategori Prouk</string>
     <string name="title_additem">Submit</string>
-    <string name="title_qty">Qty</string>
+    <string name="title_qty">"Qty: "</string>
     <string name="title_additemfoc">Tambah FOC</string>
     <string name="title_submit">Submit</string>
     <string name="title_totalbarang">Jumlah Produk</string>
