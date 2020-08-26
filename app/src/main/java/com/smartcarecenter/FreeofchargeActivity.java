@@ -427,7 +427,7 @@ public class FreeofchargeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent((Context)this, Dashboard.class));
+        startActivity(new Intent((Context)this, PurchaseMenu.class));
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
     }

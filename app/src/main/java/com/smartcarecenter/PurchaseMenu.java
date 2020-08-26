@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
+import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
+
 public class PurchaseMenu extends AppCompatActivity {
     ImageView mback;
     LinearLayout mbtnfoc;
@@ -21,7 +24,14 @@ public class PurchaseMenu extends AppCompatActivity {
         mback = findViewById(R.id.backbtn);
         mbtnfoc = findViewById(R.id.btnfoc);
         mbtnpo = findViewById(R.id.pobtn);
-
+        if (mshowPurchaseOrderFOC.equals("false")){
+            mbtnfoc.setVisibility(View.GONE);
+        }else if (mshowPurchaseOrderPO.equals("false")){
+            mbtnpo.setVisibility(View.GONE);
+        }else {
+            mbtnpo.setVisibility(View.VISIBLE);
+            mbtnfoc.setVisibility(View.VISIBLE);
+        }
         mback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -55,6 +55,8 @@ import com.squareup.picasso.RequestCreator;
 import java.util.ArrayList;
 
 import static com.smartcarecenter.Dashboard.installed;
+import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
+import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
 
 public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder> {
 
@@ -92,6 +94,8 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 }
                 if (namemenu.equals(context.getString(R.string.title_purchase_order))){
                     Intent gotonews = new Intent(context, PurchaseMenu.class);
+                    gotonews.putExtra("mshowPurchaseOrderPO",mshowPurchaseOrderPO);
+                    gotonews.putExtra("mshowPurchaseOrderPO",mshowPurchaseOrderFOC);
                     context.startActivity(gotonews);
                     ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
