@@ -14,6 +14,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -103,6 +105,22 @@ public class Add_Foc_Item_List extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        msearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
             }
         });
     }
@@ -197,5 +215,18 @@ public class Add_Foc_Item_List extends AppCompatActivity {
 
             }
         });
+    }
+    private void filter(String text) {
+        ArrayList<Add_foc_list_item> filteredList = new ArrayList<>();
+        for (Add_foc_list_item item : list2) {
+            if (item.getName().contains(text)) {
+                filteredList.add(item);
+            }else if (item.getCategoryName().contains(text)){
+                filteredList.add(item);
+            }else if (item.getItemCd().contains(text)){
+                filteredList.add(item);
+            }
+        }
+        addfocitemadapter.filterList(filteredList);
     }
 }

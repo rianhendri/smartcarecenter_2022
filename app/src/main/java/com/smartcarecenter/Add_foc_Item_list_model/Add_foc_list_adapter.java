@@ -158,6 +158,11 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         return addFoclistitem.size();
     }
 
+    public void filterList(ArrayList<Add_foc_list_item> filteredList) {
+        addFoclistitem = filteredList;
+        notifyDataSetChanged();
+    }
+
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
         TextView xdate_news;

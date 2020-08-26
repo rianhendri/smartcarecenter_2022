@@ -6,10 +6,10 @@
     android:width="1700.791dp" >
 
     <path
-        android:fillColor="#0D9B79"
+        android:fillColor="#bf202d"
         android:pathData="M850.4,867.68m-850.4,0a850.4,850.4 0,1 1,1700.79 0a850.4,850.4 0,1 1,-1700.79 0" />
     <path
-        android:fillColor="#056B5C"
+        android:fillColor="#bf202d"
         android:pathData="M0,884.96c0,468.7 378.89,847.59 850.4,847.59c468.7,0 847.59,-378.89 847.59,-847.59" />
     <path
         android:fillColor="#EBFFF6"

@@ -60,7 +60,7 @@
     <string name="title_SendReq">Kirim Request</string>
     <string name="title_Submitreq">" Mengirimkan permintaan baru Lanjutkan?"</string>
     <string name="title_chargelabel">Chargeable</string>
-    <string name="title_foc">Free of charge</string>
+    <string name="title_foc">Free of Charge</string>
     <string name="title_Passwordwrong">Kata sandi tidak sama</string>
     <string name="title_fotorequired">" Foto Diperlukan *"</string>
     <string name="title_deserror">Descripsi Diperlukan *</string>
@@ -96,4 +96,6 @@
     <string name="title_newOrder">Order Baru</string>
     <string name="title_listitem">List Item</string>
     <string name="title_tanyafoc">Saya ingin menanyakan tentang No order:</string>
+    <string name="title_submitorder">" Mengirimkan Pesanan baru Lanjutkan?"</string>
+    <string name="title_sendorder">Kirim Pesanan Baru</string>
 </resources>

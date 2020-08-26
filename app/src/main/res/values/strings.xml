@@ -58,7 +58,7 @@
     <string name="title_no">No</string>
     <string name="title_SendReq">Send Request</string>
     <string name="title_Submitreq">Submiting a new request Continue?</string>
-    <string name="title_foc">Free of charge</string>
+    <string name="title_foc">Free of Charge</string>
     <string name="title_chargelabel">Chargeable</string>
     <string name="title_Passwordwrong">Password no same</string>
     <string name="title_fotorequired">Photo Required *</string>
@@ -69,7 +69,7 @@
     <string name="title_categoryproduct">Product Category</string>
     <string name="title_additem">Submit</string>
     <string name="title_qty">"Qty: "</string>
-    <string name="title_additemfoc">Add Foc</string>
+    <string name="title_additemfoc">Add FOC</string>
     <string name="title_submit">Submit</string>
     <string name="title_totalbarang">Total Product</string>
     <string name="title_totalitem">Total Item</string>
@@ -94,5 +94,7 @@
     <string name="add_items">Add Item</string>
     <string name="title_newOrder">New Order</string>
     <string name="title_listitem">Item List</string>
-    <string name="title_tanyafoc">I want to ask about the No Order:</string>
+    <string name="title_tanyafoc">Hi</string>
+    <string name="title_submitorder">Submiting a new Order Continue?</string>
+    <string name="title_sendorder">Send New Order</string>
 </resources>

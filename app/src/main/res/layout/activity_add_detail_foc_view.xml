@@ -334,7 +334,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="title_listitem"
+                    android:text="@string/title_listitem"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="13sp" />
 

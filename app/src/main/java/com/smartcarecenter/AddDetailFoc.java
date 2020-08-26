@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -206,7 +208,7 @@ public class AddDetailFoc extends AppCompatActivity {
             public void onClick(View v) {
                 if (internet){
                     if (mlastimpresi.getText().toString().length()!=0){
-                        sendData();
+                        showDialog();
                     }else {
                         mlastimpresi.setError(getString(R.string.title_requiredimpressi));
                         Toast.makeText(AddDetailFoc.this, getString(R.string.title_requiredimpressi),Toast.LENGTH_SHORT).show();
@@ -365,5 +367,37 @@ public class AddDetailFoc extends AppCompatActivity {
 
             }
         });
+    }
+    private void showDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set title dialog
+        alertDialogBuilder.setTitle(getString(R.string.title_sendorder));
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage(getString(R.string.title_submitorder))
+                .setIcon(R.mipmap.ic_launcher)
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.title_yes),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // jika tombol diklik, maka akan menutup activity ini
+                        sendData();
+                    }
+                })
+                .setNegativeButton(getString(R.string.title_no),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // jika tombol ini diklik, akan menutup dialog
+                        // dan tidak terjadi apa2
+                        dialog.cancel();
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
     }
 }
