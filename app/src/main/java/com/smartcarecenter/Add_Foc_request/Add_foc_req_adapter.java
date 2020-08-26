@@ -91,6 +91,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
         myviewholder.mcategory.setText(addFoclistreq.get(i).getCategory());
         myviewholder.mqty.setText(String.valueOf(addFoclistreq.get(i).getQty()));
         myviewholder.mpos.setText(String.valueOf(addFoclistreq.get(i).getPosition()));
+        myviewholder.munit.setText(addFoclistreq.get(i).getUnitName());
         mtotalitem.setText(String.valueOf(addFoclistreq.size()));
         totalqty = 0;
         for (int x = 0 ; x < addFoclistreq.size(); x++) {
@@ -191,7 +192,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mcode, mname, mcategory, mqty, mpos;
+        TextView mcode, mname, mcategory, mqty, mpos, munit;
         ImageView mimg, mminus, mplus,mdelete;
 
         public Myviewholder(@NonNull View itemView) {
@@ -206,6 +207,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             mminus = itemView.findViewById(R.id.minus);
             mplus = itemView.findViewById(R.id.plus);
             mdelete = itemView.findViewById(R.id.deletelistpo);
+            munit = itemView.findViewById(R.id.unitname);
 
 
 

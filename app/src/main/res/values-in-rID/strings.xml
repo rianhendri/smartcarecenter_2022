@@ -93,4 +93,7 @@
     <string name="title_cancelordertitledialog">Batalkan Pesanan</string>
     <string name="title_areyoucancelorder">Anda yakin ingin membatalkan pesanan?</string>
     <string name="add_items">Tambah Item</string>
+    <string name="title_newOrder">Order Baru</string>
+    <string name="title_listitem">List Item</string>
+    <string name="title_tanyafoc">Saya ingin menanyakan tentang No order:</string>
 </resources>

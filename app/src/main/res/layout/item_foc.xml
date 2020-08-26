@@ -72,35 +72,12 @@
 						android:gravity="end"
 						android:orientation="horizontal">
 
-						<ImageView
-							android:layout_width="12dp"
-							android:layout_height="match_parent"
-							android:layout_marginLeft="0dp"
-							android:layout_marginRight="4dp"
-							android:src="@drawable/ic_eye" />
-
-						<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginRight="12dp"
-							android:fontFamily="@font/segoeui"
-							android:text="@string/title_view"
-							android:textColor="@color/black"
-							android:textSize="12sp" />
-
-						<ImageView
-							android:id="@+id/checkimgstatus"
-							android:layout_width="10dp"
-							android:layout_height="match_parent"
-							android:layout_marginLeft="0dp"
-							android:layout_marginRight="4dp"
-							android:src="@drawable/ic_percent" />
-
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="match_parent"
 							android:fontFamily="@font/segoeui"
 							android:text="Status:"
+							android:layout_marginRight="4dp"
 							android:textColor="@color/black"
 							android:textSize="12sp" />
 

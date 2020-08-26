@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -64,6 +65,7 @@ public class AddDetailFocView extends AppCompatActivity {
     String MsessionExpired = "";
     String akunid = "";
     Boolean internet = false;
+    boolean installed= true;
     ProgressDialog loading;
     ImageView mback;
     public static LinearLayout mlaytotal;
@@ -71,7 +73,7 @@ public class AddDetailFocView extends AppCompatActivity {
     String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
-    LinearLayout madd_item;
+    LinearLayout madd_item,mchat;
     TextView msn;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
@@ -108,6 +110,7 @@ public class AddDetailFocView extends AppCompatActivity {
         mlaytotal = findViewById(R.id.totallay);
         madd_item = findViewById(R.id.btnadditem_po);
         mstatus = findViewById(R.id.status);
+        mchat = findViewById(R.id.chatcspo);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
@@ -147,7 +150,24 @@ public class AddDetailFocView extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+        mchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                appInstalledOrNot("com.whatsapp");
+                if (installed) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("http://api.whatsapp.com/send?phone=+62822 9868 0099&text=Hi Support,  ");
+                    stringBuilder.append(getString(R.string.title_tanyafoc));
+                    stringBuilder.append("#");
+                    stringBuilder.append(noOrder);
+                    intent.setData(android.net.Uri.parse((String)stringBuilder.toString()));
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(AddDetailFocView.this,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak
@@ -306,8 +326,11 @@ public class AddDetailFocView extends AppCompatActivity {
                     String cancelshow = data.get("allowToCancel").toString();
                     if (cancelshow.equals("true")){
                         msend.setVisibility(View.VISIBLE);
+                        mchat.setVisibility(View.GONE);
+
                     }else {
                         msend.setVisibility(View.GONE);
+                        mchat.setVisibility(View.VISIBLE);
                     }
                     mstartimpresi.setText(pressstart);
                     mno_order.setText(orderno);
@@ -420,5 +443,18 @@ public class AddDetailFocView extends AppCompatActivity {
 
             }
         });
+    }
+    public boolean appInstalledOrNot(String string2) {
+        PackageManager packageManager = this.getPackageManager();
+
+        try {
+            packageManager.getPackageInfo(string2, packageManager.GET_ACTIVITIES);
+            installed = true;
+        }
+        catch (PackageManager.NameNotFoundException nameNotFoundException) {
+            installed = false;
+
+        }
+        return installed;
     }
 }

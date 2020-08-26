@@ -85,7 +85,7 @@
     <string name="title_totalqty">Total Qty</string>
     <string name="title_noitem">No Item</string>
     <string name="title_category">"Category: "</string>
-    <string name="title_requiredimpressi">Current Impressi Required</string>
+    <string name="title_requiredimpressi">Present Impression Required</string>
     <string name="title_view">View</string>
     <string name="title_nodata">No data</string>
     <string name="title_vieworderfoc">View Order Foc</string>
@@ -93,4 +93,7 @@
     <string name="title_cancelordertitledialog">Cancel Order</string>
     <string name="title_areyoucancelorder">" Are you sure you want to cancel your order?"</string>
     <string name="add_items">Add Item</string>
+    <string name="title_newOrder">New Order</string>
+    <string name="title_listitem">Item List</string>
+    <string name="title_tanyafoc">I want to ask about the No Order:</string>
 </resources>

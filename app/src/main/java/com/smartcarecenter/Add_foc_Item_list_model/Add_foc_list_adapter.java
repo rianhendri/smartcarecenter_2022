@@ -137,6 +137,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
                     tambahitem.setNameitem(addFoclistitem.get(i).getName());
                     tambahitem.setImgpic(addFoclistitem.get(i).getImageThumbFullURL());
                     tambahitem.setImgban(addFoclistitem.get(i).getImageFullURL());
+                    tambahitem.setUnitName(addFoclistitem.get(i).getUnitName());
                     tambahitem.setQty(1);
                     tambahitem.setPosition(addFoclistreq.size()+1);
                     listpoact.add(tambahitem);

@@ -152,6 +152,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append("http://api.whatsapp.com/send?phone=+62822 9868 0099&text=Hi Support,  ");
                     stringBuilder.append(getString(R.string.title_tanyacs));
+                    stringBuilder.append("#");
                     stringBuilder.append(noreq);
                     intent.setData(android.net.Uri.parse((String)stringBuilder.toString()));
                     startActivity(intent);

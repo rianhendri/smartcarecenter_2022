@@ -73,10 +73,16 @@ public class Add_foc_req_item {
         this.imgban = imgban;
     }
 
+    public String getUnitName() {
+        return UnitName;
+    }
 
+    public void setUnitName(String unitName) {
+        UnitName = unitName;
+    }
 
     public Add_foc_req_item(String itemcd, Integer position, Integer qty,
-                            String imgpic, String nameitem, String category,String imgban) {
+                            String imgpic, String nameitem, String category,String imgban,String unitName) {
         this.itemcd = itemcd;
         this.position = position;
         this.qty = qty;
@@ -84,6 +90,7 @@ public class Add_foc_req_item {
         this.imgban = imgban;
         this.nameitem = nameitem;
         this.category = category;
+        UnitName = unitName;
     }
 
 
@@ -108,6 +115,10 @@ public class Add_foc_req_item {
     @Expose
     @SerializedName("category")
     private String category;
+
+    @Expose
+    @SerializedName("UnitName")
+    private String UnitName;
 
 
 
