@@ -80,6 +80,8 @@ public interface IRetrofit {
 
     @POST("api/FOCOrder/GetItemList")
     public Call<JsonObject> list_add_item_foc(@Body JsonObject var1);
+    @POST("api/Chargeable/GetItemList")
+    public Call<JsonObject> list_add_item_po(@Body JsonObject var1);
 
     @POST("api/FOCOrder/List")
     public Call<JsonObject> list_foc(@Body JsonObject var1);
