@@ -67,6 +67,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
     Add_foc_req_item modelqty;
     Context context;
     ImageView mimgpopup;
+
     public static int totalqty = 0;
     public Add_foc_req_adapter(Context context, ArrayList<Add_foc_req_item> addFoclistitem) {
         this.context = context;
@@ -165,18 +166,21 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             @Override
             public void onClick(View v) {
                 int qtynya = Integer.parseInt(myviewholder.mqty.getText().toString());
-                if (1==Integer.parseInt(myviewholder.mqty.getText().toString())){
+                if (qtynya==1){
 
                 }else {
+
+                    totalqty=0;
                     qtynya -=1;
                     myviewholder.mqty.setText(String.valueOf(qtynya));
                     addFoclistreq.get(i).setQty(qtynya);
                     mtotalitem.setText(String.valueOf(addFoclistreq.size()));
                     for (int i = 0 ; i < addFoclistreq.size(); i++) {
-                        totalqty -= addFoclistreq.get(i).getQty();
+                        totalqty += addFoclistreq.get(i).getQty();
                         mtotalqty.setText(String.valueOf(totalqty));
                     }
                 }
+
 
             }
         });

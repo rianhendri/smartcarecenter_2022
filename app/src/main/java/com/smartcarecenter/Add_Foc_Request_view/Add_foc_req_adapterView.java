@@ -48,6 +48,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.smartcarecenter.AddDetailFoc.reitem;
 import static com.smartcarecenter.AddDetailFocView.mlaytotal;
 import static com.smartcarecenter.AddDetailFocView.mlistitem_foc;
 import static com.smartcarecenter.AddDetailFocView.mno_order;
@@ -62,6 +63,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
     Context context;
     ImageView mimgpopup;
     public static int totalqty = 0;
+    int qtynya = 1;
     public Add_foc_req_adapterView(Context context, ArrayList<Add_foc_req_itemView> addFoclistitem) {
         this.context = context;
         this.addFoclistreq = addFoclistitem;
@@ -108,76 +110,6 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
         myviewholder.mdelete.setVisibility(View.GONE);
         myviewholder.mplus.setVisibility(View.GONE);
         myviewholder.mminus.setVisibility(View.GONE);
-        myviewholder.mdelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (addFoclistreq.size() >= 0) {
-                    addFoclistreq.remove(i);
-                    notifyItemRemoved(i);
-                    notifyItemRangeChanged(i, addFoclistreq.size());
-                    totalqty = 0;
-                    for (int x = 0 ; x < addFoclistreq.size(); x++) {
-                        totalqty += addFoclistreq.get(x).getQty();
-                        mtotalqty.setText(String.valueOf(totalqty));
-                    }
-                    mtotalitem.setText(String.valueOf(addFoclistreq.size()));
-//                    grandTotalplus = 0;
-//                    intSum = 0;
-//                    for (int i = 0; i < list.size(); i++) {
-//                        grandTotalplus = grandTotalplus + list.get(i).getTotal();
-//                    }
-                    if (addFoclistreq.size()==0){
-                        mlaytotal.setVisibility(View.GONE);
-                        mnoitem.setVisibility(View.VISIBLE);
-                        mlistitem_foc.setVisibility(View.GONE);
-                    }
-
-                }else {
-//                    Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
-                    mlaytotal.setVisibility(View.GONE);
-                    mno_order.setVisibility(View.VISIBLE);
-
-                }
-            }
-        });
-        //button plus minus qty
-        myviewholder.mplus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int qtynya = Integer.parseInt(myviewholder.mqty.getText().toString());
-                totalqty=0;
-                qtynya +=1;
-                myviewholder.mqty.setText(String.valueOf(qtynya));
-                addFoclistreq.get(i).setQty(qtynya);
-                mtotalitem.setText(String.valueOf(addFoclistreq.size()));
-                for (int i = 0 ; i < addFoclistreq.size(); i++) {
-                    totalqty += addFoclistreq.get(i).getQty();
-                    mtotalqty.setText(String.valueOf(totalqty));
-                }
-
-
-            }
-        });
-        myviewholder.mminus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int qtynya = Integer.parseInt(myviewholder.mqty.getText().toString());
-                if (1==Integer.parseInt(myviewholder.mqty.getText().toString())){
-
-                }else {
-                    qtynya -=1;
-                    myviewholder.mqty.setText(String.valueOf(qtynya));
-                    addFoclistreq.get(i).setQty(qtynya);
-                    mtotalitem.setText(String.valueOf(addFoclistreq.size()));
-                    for (int i = 0 ; i < addFoclistreq.size(); i++) {
-                        totalqty -= addFoclistreq.get(i).getQty();
-                        mtotalqty.setText(String.valueOf(totalqty));
-                    }
-                }
-
-            }
-        });
-
 
     }
 
