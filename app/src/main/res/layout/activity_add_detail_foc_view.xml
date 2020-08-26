@@ -334,7 +334,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="List Order"
+                    android:text="List Item"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="13sp" />
 
@@ -387,7 +387,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/softgrey"
                     android:orientation="horizontal"
                     android:padding="4dp" >
 
@@ -397,7 +397,7 @@
                         android:fontFamily="@font/seguisb"
                         android:gravity="center"
                         android:text="@string/title_Summary"
-                        android:textColor="@color/dwhite"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -481,13 +481,16 @@
                     <TextView
                         android:id="@+id/submit"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/bg_yellow_borderradius"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="70dp"
-                        android:paddingRight="70dp"
-                        android:paddingTop="10dp"
-                        android:text="@string/title_cancle" />
+                        android:fontFamily="@font/segoeui"
+                        android:paddingBottom="15dp"
+                        android:paddingLeft="100dp"
+                        android:paddingRight="100dp"
+                        android:paddingTop="15dp"
+                        android:text="@string/title_cancle"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 

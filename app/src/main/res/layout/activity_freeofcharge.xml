@@ -48,13 +48,7 @@
 <!--                android:text="Total:"-->
 <!--                android:textColor="@color/dwhite" />-->
 
-            <TextView
-                android:id="@+id/totalorder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/seguisb"
-                android:text="--"
-                android:textColor="@color/dwhite" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -73,7 +67,6 @@
             android:text="Status:"
             android:textColor="@color/black"
             android:textSize="14sp" />
-
         <Spinner
             android:id="@+id/spinstatus"
             android:layout_width="wrap_content"
@@ -84,29 +77,26 @@
             android:spinnerMode="dialog"
             android:text="Semua"
             android:textColor="@color/black" />
-
         <LinearLayout
-            android:id="@+id/addfoc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="end"
-            android:orientation="horizontal"
-            android:padding="4dp" >
-
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_pluswhite" />
+            android:orientation="horizontal" >
 
             <TextView
+                android:gravity="center"
+                android:id="@+id/totalorder"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="4dp"
                 android:fontFamily="@font/segoeui"
-                android:text="Add New FOC"
+                android:text="Record:-"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
         </LinearLayout>
+
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -118,39 +108,76 @@
         android:paddingRight="12dp"
         android:paddingTop="4dp" >
     </LinearLayout>
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedscrol"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:scrollbars="none" >
-
-        <LinearLayout
-            android:id="@+id/contentinbox"
+        android:layout_height="match_parent" >
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedscrol"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/listpo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp" >
-                </androidx.recyclerview.widget.RecyclerView>
-            <TextView
-                android:id="@+id/norequest"
+            android:fillViewport="true"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:id="@+id/contentinbox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/segoeui"
-                android:textSize="13sp"
-                android:text="@string/title_nodata"
-                android:gravity="center"/>
+                android:orientation="vertical" >
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/listpo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp" >
+                    </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/norequest"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/segoeui"
+                    android:textSize="13sp"
+                    android:text="@string/title_nodata"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+        <LinearLayout
+            android:id="@+id/addfoc"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="0dp"
+            android:paddingRight="14dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/ic_plus" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="center"
+                    android:text="@string/title_additemfoc"
+                    android:textColor="@color/dwhite"
+                    android:textSize="15sp" />
+            </LinearLayout>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

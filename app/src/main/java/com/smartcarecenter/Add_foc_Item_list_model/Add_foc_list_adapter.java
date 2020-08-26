@@ -62,6 +62,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.smartcarecenter.Add_Foc_Item_List.stsinac;
 import static com.smartcarecenter.Add_Foc_request.Add_foc_req_adapter.addFoclistreq;
 import static com.smartcarecenter.FormActivity.valuefilter;
 
@@ -92,15 +93,26 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         Picasso.with(context).load(addFoclistitem.get(i).getImageThumbFullURL()).into(myviewholder.xgambar_item);
         myviewholder.xname.setText(addFoclistitem.get(i).getName());
         myviewholder.xcode.setText(addFoclistitem.get(i).getItemCd());
-        myviewholder.xstatus.setText(addFoclistitem.get(i).getStsActiveInfo());
-        String status = addFoclistitem.get(i).getStsActiveInfo();
-        if (Build.VERSION.SDK_INT >= 24) {
-            myviewholder.xstatus.setText((CharSequence) Html.fromHtml((String)status, Html.FROM_HTML_MODE_COMPACT));
+        myviewholder.xcategory.setText(addFoclistitem.get(i).getCategoryName());
+        myviewholder.xunit.setText(addFoclistitem.get(i).getUnitName());
+//        myviewholder.xstatus.setText(addFoclistitem.get(i).getStsActiveInfo());
+        boolean sts = true;
+         sts = addFoclistitem.get(i).getStsActive();
+        if (sts){
 
-        } else {
-            myviewholder.xstatus.setText((CharSequence)Html.fromHtml((String)status));
-
+        }else{
+            myviewholder.xstatus.setText(stsinac);
+            myviewholder.xstatus.setTextColor(Color.parseColor(	"#B22222"));
+            myviewholder.xadd.setVisibility(View.GONE);
         }
+        String status = addFoclistitem.get(i).getStsActiveInfo();
+//        if (Build.VERSION.SDK_INT >= 24) {
+//            myviewholder.xstatus.setText((CharSequence) Html.fromHtml((String)status, Html.FROM_HTML_MODE_COMPACT));
+//
+//        } else {
+//            myviewholder.xstatus.setText((CharSequence)Html.fromHtml((String)status));
+//
+//        }
         myviewholder.xgambar_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,13 +163,14 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         ImageView xgambar_item,xadd;
         TextView xid;
         TextView xstatus;
-        TextView xname,xcode,xcategory;
+        TextView xname,xcode,xcategory,xunit;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
             xgambar_item = itemView.findViewById(R.id.xpic);
-            xstatus = itemView.findViewById(R.id.statusfoclist);
+            xstatus = itemView.findViewById(R.id.status);
             xname = itemView.findViewById(R.id.codebarang);
+            xunit = itemView.findViewById(R.id.unitname);
             xcode = itemView.findViewById(R.id.namabarang);
             xadd = itemView.findViewById(R.id.addpoitem);
             xcategory = itemView.findViewById(R.id.categoryfoclist);

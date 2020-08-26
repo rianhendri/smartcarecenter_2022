@@ -72,6 +72,7 @@ public class Add_Foc_Item_List extends AppCompatActivity {
     ArrayList<Add_foc_list_item> list2;
     private LinearLayoutManager linearLayoutManager;
     Add_foc_list_adapter addfocitemadapter;
+    public static String stsinac="";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +177,7 @@ public class Add_Foc_Item_List extends AppCompatActivity {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     getArrayItem = data.getAsJsonArray("list");
+                    stsinac = data.get("inactiveStatusName").getAsString();
                     Gson gson = new Gson();
                     Type listType = new TypeToken<ArrayList<Add_foc_list_item>>() {
                     }.getType();

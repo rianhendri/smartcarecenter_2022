@@ -70,7 +70,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
     @NonNull
     @Override
     public Myviewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_add_foc_buy,
+        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_add_foc_buy_view,
                 viewGroup, false));
 
     }

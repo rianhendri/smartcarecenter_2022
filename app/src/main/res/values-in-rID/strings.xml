@@ -92,4 +92,5 @@
     <string name="title_cancelorder">Order berhasil di batalkan</string>
     <string name="title_cancelordertitledialog">Batalkan Pesanan</string>
     <string name="title_areyoucancelorder">Anda yakin ingin membatalkan pesanan?</string>
+    <string name="add_items">Tambah Item</string>
 </resources>

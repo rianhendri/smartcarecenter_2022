@@ -16,12 +16,12 @@ public class Add_foc_list_item {
 
     public Add_foc_list_item() {
     }
-
     public Add_foc_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, String usingMatrix,
                              String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks,
                              Boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL,
-                             Integer lastImpression, String stsActiveInfo) {
-        ItemCd = itemCd;
+                             Integer lastImpression, String stsActiveInfo,String unitName) {
+        ItemCd = itemCd;UnitName = unitName;
+
         Name = name;
         ItemTypeCd = itemTypeCd;
         CategoryCd = categoryCd;
@@ -165,6 +165,14 @@ public class Add_foc_list_item {
     public void setStsActiveInfo(String stsActiveInfo) {
         StsActiveInfo = stsActiveInfo;
     }
+    public String getUnitName() {
+        return UnitName;
+    }
+
+    public void setUnitName(String unitName) {
+        UnitName = unitName;
+    }
+
     @Expose
     @SerializedName("ItemCd")
     private String ItemCd;
@@ -213,6 +221,12 @@ public class Add_foc_list_item {
     @Expose
     @SerializedName("StsActiveInfo")
     private String StsActiveInfo;
+
+
+
+    @Expose
+    @SerializedName("UnitName")
+    private String UnitName;
 
 
 
