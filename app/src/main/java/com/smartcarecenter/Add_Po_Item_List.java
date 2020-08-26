@@ -28,7 +28,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter;
+import com.smartcarecenter.Add_Po_Item_list_model.Add_po_list_adapter;
+import com.smartcarecenter.Add_Po_Item_list_model.Add_po_list_item;
 import com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_item;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
@@ -66,9 +67,9 @@ public class Add_Po_Item_List extends AppCompatActivity {
     List<String> snname = new ArrayList();
     List<Integer> previmpression = new ArrayList();
     JsonArray getArrayItem;
-    ArrayList<Add_foc_list_item> list2;
+    ArrayList<Add_po_list_item> list2;
     private LinearLayoutManager linearLayoutManager;
-    Add_foc_list_adapter addfocitemadapter;
+    Add_po_list_adapter addpoitemadapter;
     public static String stsinac="";
     @SuppressLint("WrongConstant")
     @Override
@@ -90,7 +91,7 @@ public class Add_Po_Item_List extends AppCompatActivity {
 //        linearLayoutManager.setStackFromEnd(true);
         mlistFoc_item.setLayoutManager(linearLayoutManager);
         mlistFoc_item.setHasFixedSize(true);
-        list2 = new ArrayList<Add_foc_list_item>();
+        list2 = new ArrayList<Add_po_list_item>();
         getSessionId();
         cekInternet();
         if (internet){
@@ -162,7 +163,7 @@ public class Add_Po_Item_List extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(Add_Po_Item_List.this,AddDetailFoc.class);
+        Intent back = new Intent(Add_Po_Item_List.this,AddDetailsPo.class);
         back.putExtra("pos",valuefilter);
         back.putExtra("pressId",mpressId);
         startActivity(back);
@@ -191,11 +192,11 @@ public class Add_Po_Item_List extends AppCompatActivity {
                     getArrayItem = data.getAsJsonArray("list");
                     stsinac = data.get("inactiveStatusName").getAsString();
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<ArrayList<Add_foc_list_item>>() {
+                    Type listType = new TypeToken<ArrayList<Add_po_list_item>>() {
                     }.getType();
                     list2 = gson.fromJson(getArrayItem.toString(), listType);
-                    addfocitemadapter = new Add_foc_list_adapter(Add_Po_Item_List.this, list2);
-                    mlistFoc_item.setAdapter(addfocitemadapter);
+                    addpoitemadapter = new Add_po_list_adapter(Add_Po_Item_List.this, list2);
+                    mlistFoc_item.setAdapter(addpoitemadapter);
                     mlistFoc_item.setVisibility(View.VISIBLE);
                     loading.setVisibility(View.GONE);
                 }
@@ -211,8 +212,8 @@ public class Add_Po_Item_List extends AppCompatActivity {
         });
     }
     private void filter(String text) {
-        ArrayList<Add_foc_list_item> filteredList = new ArrayList<>();
-        for (Add_foc_list_item item : list2) {
+        ArrayList<Add_po_list_item> filteredList = new ArrayList<>();
+        for (Add_po_list_item item : list2) {
             if (item.getName().contains(text)) {
                 filteredList.add(item);
             }else if (item.getCategoryName().contains(text)){
@@ -221,6 +222,6 @@ public class Add_Po_Item_List extends AppCompatActivity {
                 filteredList.add(item);
             }
         }
-        addfocitemadapter.filterList(filteredList);
+        addpoitemadapter.filterList(filteredList);
     }
 }

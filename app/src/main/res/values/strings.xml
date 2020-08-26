@@ -98,4 +98,11 @@
     <string name="title_submitorder">Submiting a new Order Continue?</string>
     <string name="title_sendorder">Send New Order</string>
     <string name="title_chrageadd">Add Chargeable</string>
+    <string name="title_price">"Price: "</string>
+    <string name="title_subprice">"Sub Price: "</string>
+    <string name="title_grandtotal">Grand Total:</string>
+    <string name="title_totalprice">"Total Price: "</string>
+    <string name="title_tax">Tax:</string>
+    <string name="title_addchargeable">Add Chargeable</string>
+    <string name="title_requirenopo">No.Po Required</string>
 </resources>

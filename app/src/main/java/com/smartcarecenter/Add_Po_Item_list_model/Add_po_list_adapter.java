@@ -46,31 +46,36 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartcarecenter.AddDetailFoc;
+import com.smartcarecenter.AddDetailsPo;
 import com.smartcarecenter.Add_Foc_request.Add_foc_req_item;
+import com.smartcarecenter.Add_Po_Request.Add_po_req_item;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static com.smartcarecenter.Add_Foc_Item_List.stsinac;
-import static com.smartcarecenter.Add_Foc_request.Add_foc_req_adapter.addFoclistreq;
+import static com.smartcarecenter.Add_Po_Request.Add_po_req_adapter.addFoclistreq;
 
 public class Add_po_list_adapter
 extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
-    ArrayList<Add_po_list_item> addFoclistitem;
+    ArrayList<Add_po_list_item> addPolistitem;
     Context context;
     ImageView mimgpopup;
-    public static ArrayList<Add_foc_req_item> listpoact = new ArrayList<Add_foc_req_item>();
-    Add_foc_req_item tambahitem;
+    public static ArrayList<Add_po_req_item> listpoact = new ArrayList<Add_po_req_item>();
+    Add_po_req_item tambahitem;
     public Add_po_list_adapter(Context context, ArrayList<Add_po_list_item> addFoclistitem) {
         this.context = context;
-        this.addFoclistitem = addFoclistitem;
+        this.addPolistitem = addFoclistitem;
     }
 
     @NonNull
     @Override
     public Myviewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_add_foc_list,
+        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_add_po_list,
                 viewGroup, false));
 
     }
@@ -79,14 +84,19 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
         String newdate = "";
-        Picasso.with(context).load(addFoclistitem.get(i).getImageThumbFullURL()).into(myviewholder.xgambar_item);
-        myviewholder.xname.setText(addFoclistitem.get(i).getName());
-        myviewholder.xcode.setText(addFoclistitem.get(i).getItemCd());
-        myviewholder.xcategory.setText(addFoclistitem.get(i).getCategoryName());
-        myviewholder.xunit.setText(addFoclistitem.get(i).getUnitName());
-//        myviewholder.xstatus.setText(addFoclistitem.get(i).getStsActiveInfo());
+        Picasso.with(context).load(addPolistitem.get(i).getImageThumbFullURL()).into(myviewholder.xgambar_item);
+        myviewholder.xname.setText(addPolistitem.get(i).getName());
+        myviewholder.xcode.setText(addPolistitem.get(i).getItemCd());
+        myviewholder.xcategory.setText(addPolistitem.get(i).getCategoryName());
+        myviewholder.xunit.setText(addPolistitem.get(i).getUnitName());
+        Double harga = 0.0;
+        harga=addPolistitem.get(i).getSellPrice();
+        Locale localeID = new Locale("in", "ID");
+        final DecimalFormat formatRupiah = (DecimalFormat) NumberFormat.getNumberInstance(localeID);
+        myviewholder.xharga.setText("Rp."+ " "+String.valueOf(formatRupiah.format(harga)));
+//        myviewholder.xstatus.setText(addPolistitem.get(i).getStsActiveInfo());
         boolean sts = true;
-         sts = addFoclistitem.get(i).getStsActive();
+         sts = addPolistitem.get(i).getStsActive();
         if (sts){
 
         }else{
@@ -94,7 +104,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
             myviewholder.xstatus.setTextColor(Color.parseColor(	"#B22222"));
             myviewholder.xadd.setVisibility(View.GONE);
         }
-        String status = addFoclistitem.get(i).getStsActiveInfo();
+        String status = addPolistitem.get(i).getStsActiveInfo();
 //        if (Build.VERSION.SDK_INT >= 24) {
 //            myviewholder.xstatus.setText((CharSequence) Html.fromHtml((String)status, Html.FROM_HTML_MODE_COMPACT));
 //
@@ -110,7 +120,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
                 dialog.setContentView(R.layout.popupfoto);
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                 mimgpopup = dialog.findViewById(R.id.imagepopup);
-                Picasso.with(context).load(addFoclistitem.get(i).getImageFullURL()).into(mimgpopup);
+                Picasso.with(context).load(addPolistitem.get(i).getImageFullURL()).into(mimgpopup);
                 dialog.show();
             }
         });
@@ -118,19 +128,20 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
             @Override
             public void onClick(View v) {
                 boolean status = true;
-                status = addFoclistitem.get(i).getStsActive();
+                status = addPolistitem.get(i).getStsActive();
                 if (status){
-                    tambahitem = new Add_foc_req_item();
-                    tambahitem.setItemcd(addFoclistitem.get(i).getItemCd());
-                    tambahitem.setCategory(addFoclistitem.get(i).getCategoryName());
-                    tambahitem.setNameitem(addFoclistitem.get(i).getName());
-                    tambahitem.setImgpic(addFoclistitem.get(i).getImageThumbFullURL());
-                    tambahitem.setImgban(addFoclistitem.get(i).getImageFullURL());
-                    tambahitem.setUnitName(addFoclistitem.get(i).getUnitName());
+                    tambahitem = new Add_po_req_item();
+                    tambahitem.setItemcd(addPolistitem.get(i).getItemCd());
+                    tambahitem.setCategory(addPolistitem.get(i).getCategoryName());
+                    tambahitem.setNameitem(addPolistitem.get(i).getName());
+                    tambahitem.setImgpic(addPolistitem.get(i).getImageThumbFullURL());
+                    tambahitem.setImgban(addPolistitem.get(i).getImageFullURL());
+                    tambahitem.setUnitName(addPolistitem.get(i).getUnitName());
                     tambahitem.setQty(1);
                     tambahitem.setPosition(addFoclistreq.size()+1);
+                    tambahitem.setSellPrice(addPolistitem.get(i).getSellPrice());
                     listpoact.add(tambahitem);
-                    Intent intent = new Intent(context, AddDetailFoc.class);
+                    Intent intent = new Intent(context, AddDetailsPo.class);
                     context.startActivity(intent);
                     ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.left_in, R.anim.right_out);
@@ -144,11 +155,11 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
 
     @Override
     public int getItemCount() {
-        return addFoclistitem.size();
+        return addPolistitem.size();
     }
 
     public void filterList(ArrayList<Add_po_list_item> filteredList) {
-        addFoclistitem = filteredList;
+        addPolistitem = filteredList;
         notifyDataSetChanged();
     }
 
@@ -158,17 +169,18 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
         ImageView xgambar_item,xadd;
         TextView xid;
         TextView xstatus;
-        TextView xname,xcode,xcategory,xunit;
+        TextView xname,xcode,xcategory,xunit,xharga;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
             xgambar_item = itemView.findViewById(R.id.xpic);
             xstatus = itemView.findViewById(R.id.status);
-            xname = itemView.findViewById(R.id.codebarang);
+            xcode = itemView.findViewById(R.id.codebarang);
             xunit = itemView.findViewById(R.id.unitname);
-            xcode = itemView.findViewById(R.id.namabarang);
+            xname = itemView.findViewById(R.id.namabarang);
             xadd = itemView.findViewById(R.id.addpoitem);
-            xcategory = itemView.findViewById(R.id.categoryfoclist);
+            xcategory = itemView.findViewById(R.id.categorypolist);
+            xharga = itemView.findViewById(R.id.harga);
 
 
         }

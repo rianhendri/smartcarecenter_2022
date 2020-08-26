@@ -332,7 +332,7 @@ public class AddDetailFoc extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("pressGuid",mpressId);
-        jsonObject.addProperty("currentImpression",2222);
+        jsonObject.addProperty("currentImpression",mlastimpresi.getText().toString());
         jsonObject.add("items", myCustomArray);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
         Call<JsonObject> panggilkomplek = jsonPostService.sendData(jsonObject);

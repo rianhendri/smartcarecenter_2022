@@ -16,12 +16,13 @@ public class Add_po_list_item {
 
     public Add_po_list_item() {
     }
-    public Add_po_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, String usingMatrix,
-                            String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks,
-                            Boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL,
-                            Integer lastImpression, String stsActiveInfo, String unitName) {
-        ItemCd = itemCd;UnitName = unitName;
 
+    public Add_po_list_item(String itemCd, String name, String itemTypeCd, String categoryCd,
+                            String usingMatrix, String mps, String itemsPerPress, Integer shelfLife,
+                            String lifeSpan, String remarks, Boolean stsActive, String categoryName,
+                            String imageFullURL, String imageThumbFullURL, Integer lastImpression,
+                            String stsActiveInfo, String unitName, double sellPrice) {
+        ItemCd = itemCd;
         Name = name;
         ItemTypeCd = itemTypeCd;
         CategoryCd = categoryCd;
@@ -37,7 +38,11 @@ public class Add_po_list_item {
         ImageThumbFullURL = imageThumbFullURL;
         LastImpression = lastImpression;
         StsActiveInfo = stsActiveInfo;
+        UnitName = unitName;
+        this.SellPrice = sellPrice;
+
     }
+
     public String getItemCd() {
         return ItemCd;
     }
@@ -165,6 +170,7 @@ public class Add_po_list_item {
     public void setStsActiveInfo(String stsActiveInfo) {
         StsActiveInfo = stsActiveInfo;
     }
+
     public String getUnitName() {
         return UnitName;
     }
@@ -173,6 +179,15 @@ public class Add_po_list_item {
         UnitName = unitName;
     }
 
+    public double getSellPrice() {
+
+        return SellPrice;
+    }
+
+    public void setSellPrice(double sellPrice) {
+
+        SellPrice = sellPrice;
+    }
     @Expose
     @SerializedName("ItemCd")
     private String ItemCd;
@@ -221,17 +236,12 @@ public class Add_po_list_item {
     @Expose
     @SerializedName("StsActiveInfo")
     private String StsActiveInfo;
-
-
-
     @Expose
     @SerializedName("UnitName")
     private String UnitName;
-
-
-
-
-
+    @Expose
+    @SerializedName("SellPrice")
+    private double SellPrice;
 }
 
 

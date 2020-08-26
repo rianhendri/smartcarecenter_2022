@@ -77,6 +77,8 @@ public interface IRetrofit {
 
     @POST("api/FOCOrder/Add")
     public Call<JsonObject> sendData(@Body JsonObject var1);
+    @POST("api/Chargeable/Add")
+    public Call<JsonObject> sendPo(@Body JsonObject var1);
 
     @POST("api/FOCOrder/GetItemList")
     public Call<JsonObject> list_add_item_foc(@Body JsonObject var1);

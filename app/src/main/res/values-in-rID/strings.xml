@@ -99,4 +99,11 @@
     <string name="title_submitorder">" Mengirimkan Pesanan baru Lanjutkan?"</string>
     <string name="title_sendorder">Kirim Pesanan Baru</string>
     <string name="title_chrageadd">Tambah Chargeable</string>
+    <string name="title_price">"Harga: "</string>
+    <string name="title_subprice">"Sub Harga: "</string>
+    <string name="title_grandtotal">"Grand Tota: "</string>
+    <string name="title_totalprice">"Total Harga: "</string>
+    <string name="title_tax">Pajak:</string>
+    <string name="title_addchargeable">Tambah Chargeable</string>
+    <string name="title_requirenopo">No.Po diperlukan</string>
 </resources>
