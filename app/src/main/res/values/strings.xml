@@ -97,4 +97,5 @@
     <string name="title_tanyafoc">Hi</string>
     <string name="title_submitorder">Submiting a new Order Continue?</string>
     <string name="title_sendorder">Send New Order</string>
+    <string name="title_chrageadd">Add Chargeable</string>
 </resources>
