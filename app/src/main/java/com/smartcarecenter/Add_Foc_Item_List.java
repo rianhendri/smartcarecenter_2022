@@ -44,6 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.AddDetailFoc.mpressId;
 import static com.smartcarecenter.FormActivity.valuefilter;
 
 public class Add_Foc_Item_List extends AppCompatActivity {
@@ -59,7 +60,6 @@ public class Add_Foc_Item_List extends AppCompatActivity {
     LinearLayout mlaytotal;
     TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty;
     EditText mlastimpresi;
-    String mpressId = "";
     Integer previmpressvlaue = 100;
     LinearLayout mreadyfoto;
     Spinner msn;
@@ -150,6 +150,7 @@ public class Add_Foc_Item_List extends AppCompatActivity {
         super.onBackPressed();
         Intent back = new Intent(Add_Foc_Item_List.this,AddDetailFoc.class);
         back.putExtra("pos",valuefilter);
+        back.putExtra("pressId",mpressId);
         startActivity(back);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();

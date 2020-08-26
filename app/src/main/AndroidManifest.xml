@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Add_Foc_Item_List"></activity>
+        <activity android:name=".AddDetailFocView"></activity>
+        <activity android:name=".Add_Foc_Item_List" />
         <activity android:name=".AddDetailFoc" />
         <activity android:name=".FreeofchargeActivity" />
         <activity android:name=".ChargeableActivity" />

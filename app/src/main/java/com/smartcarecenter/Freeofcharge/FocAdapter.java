@@ -46,6 +46,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.smartcarecenter.AddDetailFoc;
+import com.smartcarecenter.AddDetailFocView;
 import com.smartcarecenter.DetailsFormActivity;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
@@ -55,7 +57,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static com.smartcarecenter.FormActivity.valuefilter;
+import static com.smartcarecenter.FreeofchargeActivity.valuefilter;
 
 public class FocAdapter
 extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
@@ -71,7 +73,7 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
     @NonNull
     @Override
     public Myviewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_form,
+        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_foc,
                 viewGroup, false));
 
     }
@@ -79,48 +81,36 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
-//        String newdate = "";
-//        Picasso.with(context).load(focItem.get(i).getPhotoThumbURL()).into(myviewholder.xgambar_item);
-//        myviewholder.xtitlenews.setText("#"+ focItem.get(i).getFormRequestCd());
-//        String oldadate = focItem.get(i).getDate();
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
-//        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault());
-//        try {
-//            newdate = simpleDateFormat2.format(simpleDateFormat.parse(oldadate));
-//            System.out.println(newdate);
-//            Log.e((String)"Date", (String)newdate);
-//        }
-//        catch (ParseException parseException) {
-//            parseException.printStackTrace();
-//        }
-//        myviewholder.xdate_news.setText(newdate);
-//        myviewholder.xstatus.setText(focItem.get(i).getStatusName());
-//        myviewholder.xstatus.setTextColor(Color.parseColor("#"+ focItem.get(i).getStatusColorCode()));
-//        myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, DetailsFormActivity.class);
-//                intent.putExtra("id", (focItem.get(i).getFormRequestCd()));
-//                intent.putExtra("noticket", (focItem.get(i)).getServiceTicketCd());
-//                intent.putExtra("pos", valuefilter);
-//                context.startActivity(intent);
-//                ((Activity)context).finish();
-//                ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
-//            }
-//        });
-//        myviewholder.xgambar_item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Dialog dialog = new Dialog(context, R.style.TransparentDialog);
-//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                dialog.setContentView(R.layout.popupfoto);
-//                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-//                mimgpopup = dialog.findViewById(R.id.imagepopup);
-//                Picasso.with(context).load(focItem.get(i).getPhotoURL()).into(mimgpopup);
-//                dialog.show();
-//            }
-//        });
+        String newdate = "";
 
+        myviewholder.mnofoc.setText("#"+ focItem.get(i).getOrderNo());
+        String oldadate = focItem.get(i).getDate();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault());
+        try {
+            newdate = simpleDateFormat2.format(simpleDateFormat.parse(oldadate));
+            System.out.println(newdate);
+            Log.e((String)"Date", (String)newdate);
+        }
+        catch (ParseException parseException) {
+            parseException.printStackTrace();
+        }
+        myviewholder.mdate.setText(newdate);
+        myviewholder.mstatus.setText(focItem.get(i).getStatusName());
+        myviewholder.mstatus.setTextColor(Color.parseColor("#"+ focItem.get(i).getStatusColorCode()));
+        myviewholder.mpos.setText(String.valueOf(i+1));
+        myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AddDetailFocView.class);
+                intent.putExtra("id", (focItem.get(i).getOrderNo()));
+//                intent.putExtra("noticket", (focItem.get(i)).getServiceTicketCd());
+                intent.putExtra("pos", valuefilter);
+                context.startActivity(intent);
+                ((Activity)context).finish();
+                ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            }
+        });
     }
 
     @Override
@@ -130,18 +120,15 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView xdate_news;
-        ImageView xgambar_item;
-        TextView xid;
-        TextView xstatus;
-        TextView xtitlenews;
+        TextView mnofoc,mstatus,mdate,mpos;
+
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
-            xgambar_item = itemView.findViewById(R.id.xpic);
-            xstatus = itemView.findViewById(R.id.donestatus);
-            xtitlenews = itemView.findViewById(R.id.tetleform);
-            xdate_news = itemView.findViewById(R.id.dateform);
+            mnofoc = itemView.findViewById(R.id.nopolist);
+            mstatus = itemView.findViewById(R.id.statusfoc);
+            mdate = itemView.findViewById(R.id.tanggallistpo);
+            mpos = itemView.findViewById(R.id.nolist);
 
         }
     }

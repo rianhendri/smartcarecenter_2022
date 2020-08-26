@@ -209,16 +209,22 @@ public class Dashboard extends AppCompatActivity {
                     new MenuItem();
                     MenuItem menuItem7 = new MenuItem();
                     menuItemlist = new ArrayList();
+
                     if (mshowFormRequest.equals("true")){
                         menuItem.setMenuname(getString(R.string.title_ServiceSupport));
                         menuItem.setImg(R.drawable.req);
                         menuItem.setShow(mshowFormRequest);
                         menuItemlist.add(menuItem);
                     }
-                    menuItem2.setMenuname(getString(R.string.title_purchase_order));
-                    menuItem2.setImg(R.drawable.purchase);
-                    menuItem2.setShow("true");
-                    menuItemlist.add(menuItem2);
+                    if (mshowPurchaseOrderPO.equals("false") && mshowPurchaseOrderFOC.equals("false")){
+
+                    }else{
+                        menuItem2.setMenuname(getString(R.string.title_purchase_order));
+                        menuItem2.setImg(R.drawable.purchase);
+                        menuItem2.setShow("true");
+                        menuItemlist.add(menuItem2);
+                    }
+
                     if (mshowPressList.equals("true")){
                         menuItem3.setMenuname(getString(R.string.title_Presslist));
                         menuItem3.setImg(R.drawable.req);

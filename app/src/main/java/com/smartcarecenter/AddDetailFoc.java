@@ -60,10 +60,11 @@ public class AddDetailFoc extends AppCompatActivity {
     Boolean internet = false;
     ProgressDialog loading;
     ImageView mback;
+    int pos = 0;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem;
     EditText mlastimpresi;
-    String mpressId = "";
+    public static String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item;
@@ -100,6 +101,7 @@ public class AddDetailFoc extends AppCompatActivity {
         mtotalqty = findViewById(R.id.totalqtyfoc);
         mlaytotal = findViewById(R.id.totallay);
         madd_item = findViewById(R.id.btnadditem_po);
+
         cekInternet();
         getSessionId();
         //setlayout recyler
@@ -154,13 +156,16 @@ public class AddDetailFoc extends AppCompatActivity {
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                for (int i = 0; i < snid.size(); ++i) {
-                    mpressId = snid.get(i);
-                    previmpressvlaue = previmpression.get(i);
-                    mstartimpresi.setText(String.valueOf(previmpressvlaue));
 
+                    mpressId = snid.get(position);
+                    previmpressvlaue = previmpression.get(position);
+                    mstartimpresi.setText(String.valueOf(previmpressvlaue));
+//                    Toast.makeText(AddDetailFoc.this, mpressId,Toast.LENGTH_SHORT).show();
+                Bundle bundle2 = getIntent().getExtras();
+                if (bundle2 != null) {
+                    mpressId = bundle2.getString("pressId");
                 }
-                if (position==0){
+                if (pos==position){
 
                 }else {
                     listpoact.clear();
@@ -179,7 +184,6 @@ public class AddDetailFoc extends AppCompatActivity {
 
             }
         });
-        mpressId2 = mpressId;
         mback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -291,11 +295,18 @@ public class AddDetailFoc extends AppCompatActivity {
                         Integer previmpress = jsonObject2.getAsJsonObject().get("previousImpression").getAsInt();
                         snname.add(string4);
                         snid.add(string5);
+
+                        for (int j = 0; j < snid.size(); ++j) {
+                            if (snid.get(i).equals(mpressId)){
+                                pos=j;
+                            }
+                        }
                         previmpression.add(previmpress);
                         ArrayAdapter arrayAdapter = new ArrayAdapter(AddDetailFoc.this, R.layout.spinstatus_layout, snname);
                         arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
                         arrayAdapter.notifyDataSetChanged();
                         msn.setAdapter(arrayAdapter);
+                        msn.setSelection(pos);
                         loading.dismiss();
                     }
                 }else {
@@ -339,6 +350,7 @@ public class AddDetailFoc extends AppCompatActivity {
                     JsonObject data = homedata.getAsJsonObject("data");
                     String ok=data.get("message").getAsString();
                     Toast.makeText(AddDetailFoc.this, ok,Toast.LENGTH_LONG).show();
+                    onBackPressed();
                 }else {
                     Toast.makeText(AddDetailFoc.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();

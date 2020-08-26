@@ -84,6 +84,12 @@
     <string name="title_endimpresi">Imresi Terbaru</string>
     <string name="title_totalqty">Jumlah Qty</string>
     <string name="title_noitem">Tidak ada item</string>
-    <string name="title_category">Kategori</string>
+    <string name="title_category">"Kategori: "</string>
     <string name="title_requiredimpressi">Impresi terbaru perludisi</string>
+    <string name="title_view">Lihat</string>
+    <string name="title_nodata">Tidak ada data</string>
+    <string name="title_vieworderfoc">Lihat Order Foc</string>
+    <string name="title_cancelorder">Order berhasil di batalkan</string>
+    <string name="title_cancelordertitledialog">Batalkan Pesanan</string>
+    <string name="title_areyoucancelorder">Anda yakin ingin membatalkan pesanan?</string>
 </resources>

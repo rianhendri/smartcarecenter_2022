@@ -148,7 +148,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/segoeui"
                 android:textSize="13sp"
-                android:text="@string/title_RequestNone"
+                android:text="@string/title_nodata"
                 android:gravity="center"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
