@@ -160,15 +160,9 @@ public class AddDetailsPo extends AppCompatActivity {
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 mpressId = snid.get(position);
                 previmpressvlaue = previmpression.get(position);
-//                mstartimpresi.setText(String.valueOf(previmpressvlaue));
-                    Toast.makeText(AddDetailsPo.this, mpressId,Toast.LENGTH_SHORT).show();
-//                Bundle bundle2 = getIntent().getExtras();
-//                if (bundle2 != null) {
-//                    mpressId = bundle2.getString("pressId");
-//                }
+//                    Toast.makeText(AddDetailsPo.this, mpressId,Toast.LENGTH_SHORT).show();
                 if (pos==position){
 
                 }else {

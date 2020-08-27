@@ -175,9 +175,9 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
             super(itemView);
             xgambar_item = itemView.findViewById(R.id.xpic);
             xstatus = itemView.findViewById(R.id.status);
-            xname = itemView.findViewById(R.id.codebarang);
+            xcode= itemView.findViewById(R.id.codebarang);
             xunit = itemView.findViewById(R.id.unitname);
-            xcode = itemView.findViewById(R.id.namabarang);
+            xname = itemView.findViewById(R.id.namabarang);
             xadd = itemView.findViewById(R.id.addpoitem);
             xcategory = itemView.findViewById(R.id.categoryfoclist);
 

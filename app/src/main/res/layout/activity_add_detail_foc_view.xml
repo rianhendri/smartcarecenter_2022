@@ -52,15 +52,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/seguisb"
-                    android:paddingLeft="4dp"
-                    android:text="@string/title_norder"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/seguisb"
+                        android:paddingLeft="4dp"
+                        android:text="@string/title_norder"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        />
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeui"
+                        android:paddingLeft="4dp"
+                        android:inputType="number"
+                        android:gravity="end"
+                        android:background="@drawable/background_transparent"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/noorder"
@@ -70,7 +87,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text="@string/title_newOrder"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -104,7 +121,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text="-"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -182,7 +199,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text="-"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -214,7 +231,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text=""
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -246,7 +263,7 @@
                     android:paddingLeft="4dp"
                     android:text="-"
                     android:inputType="number"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -277,38 +294,7 @@
                     android:paddingLeft="4dp"
                     android:inputType="number"
                     android:background="@drawable/background_transparent"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="13sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="4dp"
-                    android:background="@color/softgrey" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/seguisb"
-                    android:paddingLeft="4dp"
-                    android:text="Status"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/segoeui"
-                    android:paddingLeft="4dp"
-                    android:inputType="number"
-                    android:background="@drawable/background_transparent"
-                    android:textColor="@color/colorPrimary"
                     android:textSize="13sp" />
 
                 <View
@@ -317,6 +303,7 @@
                     android:layout_margin="4dp"
                     android:background="@color/softgrey" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btnadditem_po"
                 android:layout_width="match_parent"

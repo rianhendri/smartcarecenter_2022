@@ -89,6 +89,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
         myviewholder.xcode.setText(addPolistitem.get(i).getItemCd());
         myviewholder.xcategory.setText(addPolistitem.get(i).getCategoryName());
         myviewholder.xunit.setText(addPolistitem.get(i).getUnitName());
+        myviewholder.mmps.setText(addPolistitem.get(i).getMps());
         Double harga = 0.0;
         harga=addPolistitem.get(i).getSellPrice();
         Locale localeID = new Locale("in", "ID");
@@ -140,6 +141,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
                     tambahitem.setQty(1);
                     tambahitem.setPosition(addFoclistreq.size()+1);
                     tambahitem.setSellPrice(addPolistitem.get(i).getSellPrice());
+                    tambahitem.setMps(addPolistitem.get(i).getMps());
                     listpoact.add(tambahitem);
                     Intent intent = new Intent(context, AddDetailsPo.class);
                     context.startActivity(intent);
@@ -169,7 +171,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
         ImageView xgambar_item,xadd;
         TextView xid;
         TextView xstatus;
-        TextView xname,xcode,xcategory,xunit,xharga;
+        TextView xname,xcode,xcategory,xunit,xharga, mmps;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -181,6 +183,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
             xadd = itemView.findViewById(R.id.addpoitem);
             xcategory = itemView.findViewById(R.id.categorypolist);
             xharga = itemView.findViewById(R.id.harga);
+            mmps = itemView.findViewById(R.id.mps);
 
 
         }

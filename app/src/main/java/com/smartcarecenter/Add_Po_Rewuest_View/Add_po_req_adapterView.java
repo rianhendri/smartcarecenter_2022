@@ -136,7 +136,7 @@ extends RecyclerView.Adapter<Add_po_req_adapterView.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mcode, mname, mcategory, mqty, mpos,munit,msubharga, mharga;
+        TextView mcode, mname, mcategory, mqty, mpos,munit,msubharga, mharga, mps;
         ImageView mimg, mminus, mplus,mdelete;
 
         public Myviewholder(@NonNull View itemView) {
@@ -154,6 +154,7 @@ extends RecyclerView.Adapter<Add_po_req_adapterView.Myviewholder> {
             munit = itemView.findViewById(R.id.unitname);
             msubharga = itemView.findViewById(R.id.subharga);
             mharga = itemView.findViewById(R.id.price);
+            mps = itemView.findViewById(R.id.mps);
 
 
 

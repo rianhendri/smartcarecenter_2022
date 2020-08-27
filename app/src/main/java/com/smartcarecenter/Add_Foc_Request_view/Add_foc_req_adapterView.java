@@ -108,8 +108,8 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
         });
         // delete button
         myviewholder.mdelete.setVisibility(View.GONE);
-        myviewholder.mplus.setVisibility(View.GONE);
-        myviewholder.mminus.setVisibility(View.GONE);
+//        myviewholder.mplus.setVisibility(View.GONE);
+//        myviewholder.mminus.setVisibility(View.GONE);
 
     }
 
@@ -133,8 +133,8 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
             mqty = itemView.findViewById(R.id.qtyitempo);
             mpos = itemView.findViewById(R.id.nolistpo);
             mimg = itemView.findViewById(R.id.xpic);
-            mminus = itemView.findViewById(R.id.minus);
-            mplus = itemView.findViewById(R.id.plus);
+//            mminus = itemView.findViewById(R.id.minus);
+//            mplus = itemView.findViewById(R.id.plus);
             mdelete = itemView.findViewById(R.id.deletelistpo);
             munit = itemView.findViewById(R.id.unitname);
 

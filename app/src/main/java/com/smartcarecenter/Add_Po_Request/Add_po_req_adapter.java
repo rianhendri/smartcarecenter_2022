@@ -104,16 +104,17 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
         totalqty = 0;
         totalprice = 0.0;
         addFoclistreq.get(i).setSubharga(harga);
+        myviewholder.mmps.setText(addFoclistreq.get(i).getMps());
         for (int x = 0 ; x < addFoclistreq.size(); x++) {
             totalqty += addFoclistreq.get(x).getQty();
             mtotalqty.setText(String.valueOf(totalqty));
             totalprice +=addFoclistreq.get(x).getSubharga();
             mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
-
+            mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
         }
         //taxes
         mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*10/100)));
-        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
+
         myviewholder.mimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,7 +180,7 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                     totalprice +=addFoclistreq.get(i).getSubharga();
                     mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
                     mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*10/100)));
-                    mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*10/100))));
+                    mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
                 }
 
 
@@ -208,7 +209,7 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                         totalprice +=addFoclistreq.get(i).getSubharga();
                         mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
                         mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*10/100)));
-                        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*10/100))));
+                        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
                     }
                 }
 
@@ -227,7 +228,7 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mcode, mname, mcategory, mqty, mpos, munit,mprice,msubharga;
+        TextView mcode, mname, mcategory, mqty, mpos, munit,mprice,msubharga, mmps;
         ImageView mimg, mminus, mplus,mdelete;
 
         public Myviewholder(@NonNull View itemView) {
@@ -245,6 +246,7 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
             munit = itemView.findViewById(R.id.unitname);
             mprice = itemView.findViewById(R.id.price);
             msubharga = itemView.findViewById(R.id.subharga);
+            mmps = itemView.findViewById(R.id.mps);
 
 
 

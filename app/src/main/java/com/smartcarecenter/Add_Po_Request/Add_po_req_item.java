@@ -17,7 +17,20 @@ public class Add_po_req_item {
     public Add_po_req_item() {
     }
 
-
+    public Add_po_req_item(String itemcd, Integer position, Integer qty, String imgpic, String imgban, String nameitem,
+                           String category, String unitName, double sellPrice, double subharga, String mps) {
+        this.itemcd = itemcd;
+        this.position = position;
+        this.qty = qty;
+        this.imgpic = imgpic;
+        this.imgban = imgban;
+        this.nameitem = nameitem;
+        this.category = category;
+        UnitName = unitName;
+        SellPrice = sellPrice;
+        Subharga = subharga;
+        Mps = mps;
+    }
 
     public String getItemcd() {
         return itemcd;
@@ -51,6 +64,14 @@ public class Add_po_req_item {
         this.imgpic = imgpic;
     }
 
+    public String getImgban() {
+        return imgban;
+    }
+
+    public void setImgban(String imgban) {
+        this.imgban = imgban;
+    }
+
     public String getNameitem() {
         return nameitem;
     }
@@ -66,13 +87,6 @@ public class Add_po_req_item {
     public void setCategory(String category) {
         this.category = category;
     }
-    public String getImgban() {
-        return imgban;
-    }
-
-    public void setImgban(String imgban) {
-        this.imgban = imgban;
-    }
 
     public String getUnitName() {
         return UnitName;
@@ -81,6 +95,7 @@ public class Add_po_req_item {
     public void setUnitName(String unitName) {
         UnitName = unitName;
     }
+
     public double getSellPrice() {
         return SellPrice;
     }
@@ -88,6 +103,7 @@ public class Add_po_req_item {
     public void setSellPrice(double sellPrice) {
         SellPrice = sellPrice;
     }
+
     public double getSubharga() {
         return Subharga;
     }
@@ -96,23 +112,13 @@ public class Add_po_req_item {
         Subharga = subharga;
     }
 
-    public Add_po_req_item(String itemcd, Integer position, Integer qty,
-                           String imgpic, String nameitem, String category, String imgban, String unitName,
-                           double sellPrice,double subharga) {
-        this.itemcd = itemcd;
-        this.position = position;
-        this.qty = qty;
-        this.imgpic = imgpic;
-        this.imgban = imgban;
-        this.nameitem = nameitem;
-        this.category = category;
-        this. UnitName = unitName;
-        this. SellPrice = sellPrice;
-        this. Subharga = subharga;
-
+    public String getMps() {
+        return Mps;
     }
 
-
+    public void setMps(String mps) {
+        Mps = mps;
+    }
 
     @SerializedName("itemcd")
     private String itemcd;
@@ -146,6 +152,9 @@ public class Add_po_req_item {
     @Expose
     @SerializedName("Subharga")
     private double Subharga;
+    @Expose
+    @SerializedName("Mps")
+    private String Mps;
 
 }
 

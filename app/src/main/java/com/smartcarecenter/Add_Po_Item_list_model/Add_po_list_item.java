@@ -242,6 +242,7 @@ public class Add_po_list_item {
     @Expose
     @SerializedName("SellPrice")
     private double SellPrice;
+
 }
 
 

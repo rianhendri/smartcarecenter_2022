@@ -68,7 +68,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:background="@drawable/background_transparent"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp"
                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
                     android:inputType="textFilter"/>
@@ -101,7 +101,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text="@string/title_newOrder"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -135,7 +135,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text="-"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -213,7 +213,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text="-"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -245,7 +245,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text=""
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
