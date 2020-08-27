@@ -70,7 +70,7 @@
     <string name="title_categoryproduct">Kategori Prouk</string>
     <string name="title_additem">Submit</string>
     <string name="title_qty">"Qty: "</string>
-    <string name="title_additemfoc">Tambah FOC</string>
+    <string name="title_additemfoc">" Tambahkan Pesanan FOC Baru"</string>
     <string name="title_submit">Submit</string>
     <string name="title_totalbarang">Jumlah Produk</string>
     <string name="title_totalitem">Jumlah Item</string>
@@ -104,8 +104,13 @@
     <string name="title_grandtotal">"Grand Tota: "</string>
     <string name="title_totalprice">"Total Harga: "</string>
     <string name="title_tax">Pajak:</string>
-    <string name="title_addchargeable">Tambah Chargeable</string>
+    <string name="title_addchargeable">" Tambahkan Pesanan Chargeable Baru"</string>
     <string name="title_requirenopo">No.Po diperlukan</string>
     <string name="title_detailfoc">Detail FOC</string>
     <string name="title_detailchargeable">Detail Chargeable</string>
+    <string name="title_addneworder">Tambah Order Baru</string>
+    <string name="title_Chargeable">Chargeable Orders</string>
+    <string name="title_fororder">FOC Orders</string>
+    <string name="title_nopo">PO No.</string>
+    <string name="title_pleaseinputnopo">Silahkan masukan Nomor PO Anda</string>
 </resources>

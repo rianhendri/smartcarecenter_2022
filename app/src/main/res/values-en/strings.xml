@@ -70,7 +70,7 @@
     <string name="title_categoryproduct">Product Category</string>
     <string name="title_additem">S</string>
     <string name="title_qty">"Qty: "</string>
-    <string name="title_additemfoc">Add FOC</string>
+    <string name="title_additemfoc">Add New FOC Order</string>
     <string name="title_submit">Submit</string>
     <string name="title_totalbarang">Total Product</string>
     <string name="title_totalitem">Total Item</string>
@@ -104,8 +104,13 @@
     <string name="title_grandtotal">"Grand Total: "</string>
     <string name="title_totalprice">"Total Price: "</string>
     <string name="title_tax">Tax:</string>
-    <string name="title_addchargeable">Add Chargeable</string>
+    <string name="title_addchargeable">Add New Chargeable Order</string>
     <string name="title_requirenopo">No.Po Required</string>
     <string name="title_detailfoc">Detail FOC</string>
     <string name="title_detailchargeable">Detail Chargeable</string>
+    <string name="title_addneworder">Add New Order</string>
+    <string name="title_Chargeable">Chargeable Orders</string>
+    <string name="title_fororder">FOC Orders</string>
+    <string name="title_nopo">No. PO</string>
+    <string name="title_pleaseinputnopo">Please input your PO number</string>
 </resources>

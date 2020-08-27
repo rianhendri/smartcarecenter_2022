@@ -69,7 +69,7 @@
                         android:id="@+id/status"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/segoeui"
+                        android:fontFamily="@font/segoeuib"
                         android:paddingLeft="4dp"
                         android:inputType="number"
                         android:gravity="end"

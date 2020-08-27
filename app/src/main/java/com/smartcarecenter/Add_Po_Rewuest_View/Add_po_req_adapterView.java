@@ -93,6 +93,7 @@ extends RecyclerView.Adapter<Add_po_req_adapterView.Myviewholder> {
         myviewholder.mpos.setText(String.valueOf(addFoclistreq.get(i).getPosition()));
         myviewholder.munit.setText(addFoclistreq.get(i).getUnitName());
         mtotalitem.setText(String.valueOf(addFoclistreq.size()));
+        myviewholder.mps.setText(addFoclistreq.get(i).getMps());
         harga = addFoclistreq.get(i).getPricePerQty();
         totalqty = 0;
         subharga = addFoclistreq.get(i).getTotalPrice();

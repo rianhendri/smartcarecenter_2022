@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/segoeuib"
                         android:paddingLeft="4dp"
-                        android:text="Po. NO"
+                        android:text="No. PO"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                     <TextView
@@ -84,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
+                    android:hint="@string/title_pleaseinputnopo"
                     android:background="@drawable/background_transparent"
                     android:textColor="@color/black"
                     android:textSize="13sp"
@@ -106,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/seguisb"
                     android:paddingLeft="4dp"
-                    android:text="@string/title_norder"
+                    android:text="Ref#"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 

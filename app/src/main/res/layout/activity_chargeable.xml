@@ -30,7 +30,7 @@
             android:layout_marginRight="64dp"
             android:fontFamily="@font/seguisb"
             android:gravity="center_vertical"
-            android:text="@string/title_chargelabel"
+            android:text="@string/title_Chargeable"
             android:textColor="@color/dwhite"
             android:textSize="15sp" />
 
@@ -173,7 +173,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/seguisb"
                     android:gravity="center"
-                    android:text="@string/title_chrageadd"
+                    android:text="@string/title_addneworder"
                     android:textColor="@color/dwhite"
                     android:textSize="15sp" />
             </LinearLayout>
