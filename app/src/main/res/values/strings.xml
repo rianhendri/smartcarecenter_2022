@@ -112,4 +112,5 @@
     <string name="title_fororder">FOC Orders</string>
     <string name="title_nopo">No. PO</string>
     <string name="title_pleaseinputnopo">Please input your PO number</string>
+    <string name="title_pleaseinputimpres">Please input the present impression</string>
 </resources>

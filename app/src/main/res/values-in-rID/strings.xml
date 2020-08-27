@@ -112,5 +112,6 @@
     <string name="title_Chargeable">Chargeable Orders</string>
     <string name="title_fororder">FOC Orders</string>
     <string name="title_nopo">PO No.</string>
-    <string name="title_pleaseinputnopo">Silahkan masukan Nomor PO Anda</string>
+    <string name="title_pleaseinputnopo">Mohon masukan Nomor PO Anda</string>
+    <string name="title_pleaseinputimpres">Mohon masukkan angka impresi terkini</string>
 </resources>

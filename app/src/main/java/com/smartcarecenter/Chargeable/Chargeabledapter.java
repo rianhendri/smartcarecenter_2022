@@ -95,7 +95,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
         myviewholder.mstatus.setText(chargeableItem.get(i).getStatusName());
         myviewholder.mstatus.setTextColor(Color.parseColor("#"+ chargeableItem.get(i).getStatusColorCode()));
         myviewholder.mpos.setText(String.valueOf(i+1));
-        myviewholder.mNoPo.setText("No. PO: "+chargeableItem.get(i).getPoNo());
+        myviewholder.mNoPo.setText(context.getString(R.string.title_nopo)+chargeableItem.get(i).getPoNo());
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -276,6 +276,7 @@
                 android:fontFamily="@font/segoeui"
                 android:paddingLeft="4dp"
                 android:inputType="number"
+                android:hint="@string/title_pleaseinputimpres"
                 android:background="@drawable/background_transparent"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
