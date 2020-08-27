@@ -25,13 +25,13 @@
             android:src="@drawable/back_white" />
 
         <TextView
-            android:id="@+id/title_language"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="64dp"
             android:fontFamily="@font/seguisb"
             android:gravity="center_vertical"
-            android:text="@string/title_additemfoc"
+            android:text="@string/title_detailchargeable"
             android:textColor="@color/dwhite"
             android:textSize="15sp" />
     </LinearLayout>
@@ -48,6 +48,54 @@
             android:paddingRight="12dp"
             android:paddingTop="14dp" >
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:paddingLeft="4dp"
+                        android:text="Po. NO"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuib"
+                        android:paddingLeft="4dp"
+                        android:inputType="number"
+                        android:background="@drawable/background_transparent"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:gravity="end"/>
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/pono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoeui"
+                    android:paddingLeft="4dp"
+                    android:background="@drawable/background_transparent"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+                    android:inputType="textFilter"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="4dp"
+                    android:background="@color/softgrey" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +118,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text="@string/title_newOrder"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -104,7 +152,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text="-"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -182,7 +230,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text="-"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -214,39 +262,7 @@
                     android:fontFamily="@font/segoeui"
                     android:paddingLeft="4dp"
                     android:text=""
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="13sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="4dp"
-                    android:background="@color/softgrey" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/seguisb"
-                    android:paddingLeft="4dp"
-                    android:text="@string/title_startimpesi"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/startimpresi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:fontFamily="@font/segoeui"
-                    android:paddingLeft="4dp"
-                    android:text="-"
-                    android:inputType="number"
-                    android:textColor="@color/colorPrimary"
                     android:textSize="13sp" />
 
                 <View
@@ -255,38 +271,9 @@
                     android:layout_margin="4dp"
                     android:background="@color/softgrey" />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/seguisb"
-                    android:paddingLeft="4dp"
-                    android:text="@string/title_endimpresi"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/lastimprsi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/segoeui"
-                    android:paddingLeft="4dp"
-                    android:inputType="number"
-                    android:background="@drawable/background_transparent"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="13sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="4dp"
-                    android:background="@color/softgrey" />
-            </LinearLayout>
-            <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
@@ -300,16 +287,7 @@
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/segoeui"
-                    android:paddingLeft="4dp"
-                    android:inputType="number"
-                    android:background="@drawable/background_transparent"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="13sp" />
+
 
                 <View
                     android:layout_width="match_parent"
@@ -415,14 +393,14 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:fontFamily="@font/segoeui"
                             android:text="@string/title_totalitem"
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 
                         <TextView
-                            android:id="@+id/totalitemfoc"
+                            android:id="@+id/totalitempo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/segoeui"
@@ -431,15 +409,12 @@
                             android:textColor="@color/black"
                             android:textSize="13sp" />
                     </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/softgrey" />
+
                     <LinearLayout
-                        android:layout_marginTop="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal"
+                        android:layout_marginTop="2dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -450,7 +425,7 @@
                             android:textSize="13sp" />
 
                         <TextView
-                            android:id="@+id/totalqtyfoc"
+                            android:id="@+id/totalqtypo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/segoeui"
@@ -460,15 +435,85 @@
                             android:textSize="13sp" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="2dp">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:text="@string/title_totalprice"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
 
+                        <TextView
+                            android:id="@+id/totalpricepo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:gravity="end"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="2dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:text="@string/title_tax"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/totaltax"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:gravity="end"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/softgrey" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeuib"
+                            android:text="@string/title_grandtotal"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/grantotalpo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeuib"
+                            android:gravity="end"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

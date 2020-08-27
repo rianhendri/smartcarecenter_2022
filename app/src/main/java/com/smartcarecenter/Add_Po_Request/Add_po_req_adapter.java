@@ -113,7 +113,7 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
         }
         //taxes
         mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*10/100)));
-        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*10/100))));
+        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
         myviewholder.mimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

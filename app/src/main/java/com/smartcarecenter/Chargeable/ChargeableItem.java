@@ -16,7 +16,7 @@ public class ChargeableItem {
 
 
     public ChargeableItem(String orderNo, String date, String pressGuid, String pressName, String status, String statusName,
-                          String statusColorCode, String createdBy, String createdDateTime) {
+                          String statusColorCode, String createdBy, String poNo, String createdDateTime) {
         this.orderNo = orderNo;
         this.date = date;
         this.pressGuid = pressGuid;
@@ -25,33 +25,9 @@ public class ChargeableItem {
         this.statusName = statusName;
         this.statusColorCode = statusColorCode;
         this.createdBy = createdBy;
+        this.poNo = poNo;
         this.createdDateTime = createdDateTime;
     }
-
-    @Expose
-    @SerializedName("orderNo")
-    private String orderNo;
-    @Expose
-    @SerializedName("date")
-    private String date;
-    @Expose
-    @SerializedName("pressGuid")
-    private String pressGuid;
-    @Expose
-    @SerializedName("pressName")
-    private String pressName;
-    @Expose
-    @SerializedName("status")
-    private String status;
-    @Expose
-    @SerializedName("statusName")
-    private String statusName;
-    @Expose
-    @SerializedName("statusColorCode")
-    private String statusColorCode;
-    @Expose
-    @SerializedName("createdBy")
-    private String createdBy;
 
     public String getOrderNo() {
         return orderNo;
@@ -117,6 +93,14 @@ public class ChargeableItem {
         this.createdBy = createdBy;
     }
 
+    public String getPoNo() {
+        return poNo;
+    }
+
+    public void setPoNo(String poNo) {
+        this.poNo = poNo;
+    }
+
     public String getCreatedDateTime() {
         return createdDateTime;
     }
@@ -125,6 +109,33 @@ public class ChargeableItem {
         this.createdDateTime = createdDateTime;
     }
 
+    @Expose
+    @SerializedName("orderNo")
+    private String orderNo;
+    @Expose
+    @SerializedName("date")
+    private String date;
+    @Expose
+    @SerializedName("pressGuid")
+    private String pressGuid;
+    @Expose
+    @SerializedName("pressName")
+    private String pressName;
+    @Expose
+    @SerializedName("status")
+    private String status;
+    @Expose
+    @SerializedName("statusName")
+    private String statusName;
+    @Expose
+    @SerializedName("statusColorCode")
+    private String statusColorCode;
+    @Expose
+    @SerializedName("createdBy")
+    private String createdBy;
+    @Expose
+    @SerializedName("poNo")
+    private String poNo;
     @Expose
     @SerializedName("createdDateTime")
     private String createdDateTime;

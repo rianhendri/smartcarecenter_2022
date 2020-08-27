@@ -69,7 +69,8 @@ public class AddDetailFocView extends AppCompatActivity {
     ProgressDialog loading;
     ImageView mback;
     public static LinearLayout mlaytotal;
-    public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem,mlastimpresi,mstatus;
+    public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,
+            mnoitem,mlastimpresi,mstatus, mtilte;
     String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
@@ -111,11 +112,13 @@ public class AddDetailFocView extends AppCompatActivity {
         madd_item = findViewById(R.id.btnadditem_po);
         mstatus = findViewById(R.id.status);
         mchat = findViewById(R.id.chatcspo);
+        mtilte = findViewById(R.id.title);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
             valuefilter = bundle2.getString("pos");
         }
+        mtilte.setText("View FOC #"+noOrder);
         cekInternet();
         getSessionId();
         //setlayout recyler
@@ -298,6 +301,7 @@ public class AddDetailFocView extends AppCompatActivity {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     pressid = data.get("pressGuid").getAsString();
+
                     for (int i = 0; i < listsn.size(); ++i) {
                         JsonObject jsonObject2 = (JsonObject)listsn.get(i);
                         String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
@@ -309,7 +313,7 @@ public class AddDetailFocView extends AppCompatActivity {
                         for (int x = 0; x < snid.size(); ++x) {
                             for (int z = 0; z < snname.size(); ++z) {
                                 if (pressid.equals(snid.get(x))){
-                                    msn.setText(snname.get(z));
+                                    msn.setText(snname.get(x));
                                 }
                             }
 

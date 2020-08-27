@@ -29,6 +29,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.smartcarecenter.Chargeable.ChargeableItem;
+import com.smartcarecenter.Chargeable.Chargeabledapter;
 import com.smartcarecenter.Freeofcharge.FocAdapter;
 import com.smartcarecenter.Freeofcharge.FocItem;
 import com.smartcarecenter.apihelper.IRetrofit;
@@ -47,10 +49,10 @@ public class ChargeableActivity extends AppCompatActivity {
     public static String valuefilter = "-";
     String MhaveToUpdate = "";
     String MsessionExpired = "";
-    FocAdapter addFormAdapterAdapter;
+    Chargeabledapter addFormAdapterAdapter;
     boolean internet = true;
     private LinearLayoutManager linearLayoutManager;
-    ArrayList<FocItem> list2;
+    ArrayList<ChargeableItem> list2;
     JsonArray listformreq;
     List<String> listnamestatus = new ArrayList();
     JsonArray liststatus;
@@ -91,7 +93,7 @@ public class ChargeableActivity extends AppCompatActivity {
 //        linearLayoutManager.setStackFromEnd(true);
         myitem_place.setLayoutManager(linearLayoutManager);
         myitem_place.setHasFixedSize(true);
-        list2 = new ArrayList<FocItem>();
+        list2 = new ArrayList<ChargeableItem>();
         getSessionId();
         cekInternet();
         if (internet){
@@ -216,10 +218,10 @@ public class ChargeableActivity extends AppCompatActivity {
                     totalrec = data.get("totalRec").toString();
                     mrecord.setText("Record: "+totalrec);
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<ArrayList<FocItem>>() {
+                    Type listType = new TypeToken<ArrayList<ChargeableItem>>() {
                     }.getType();
                     list2 = gson.fromJson(listformreq.toString(), listType);
-                    addFormAdapterAdapter = new FocAdapter(ChargeableActivity.this, list2);
+                    addFormAdapterAdapter = new Chargeabledapter(ChargeableActivity.this, list2);
                     myitem_place.setAdapter(addFormAdapterAdapter);
                     myitem_place.setVisibility(View.VISIBLE);
 
@@ -341,10 +343,10 @@ public class ChargeableActivity extends AppCompatActivity {
                     totalrec = data.get("totalRec").toString();
                     mrecord.setText("Record: "+totalrec);
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<ArrayList<FocItem>>() {
+                    Type listType = new TypeToken<ArrayList<ChargeableItem>>() {
                     }.getType();
                     list2 = gson.fromJson(listformreq.toString(), listType);
-                    addFormAdapterAdapter = new FocAdapter(ChargeableActivity.this, list2);
+                    addFormAdapterAdapter = new Chargeabledapter(ChargeableActivity.this, list2);
                     myitem_place.setAdapter(addFormAdapterAdapter);
                     myitem_place.setVisibility(View.VISIBLE);
                     loading.dismiss();

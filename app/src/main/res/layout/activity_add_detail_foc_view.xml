@@ -25,13 +25,13 @@
             android:src="@drawable/back_white" />
 
         <TextView
-            android:id="@+id/title_language"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="64dp"
             android:fontFamily="@font/seguisb"
             android:gravity="center_vertical"
-            android:text="@string/title_additemfoc"
+            android:text="@string/title_detailfoc"
             android:textColor="@color/dwhite"
             android:textSize="15sp" />
     </LinearLayout>

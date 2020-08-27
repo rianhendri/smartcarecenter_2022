@@ -164,7 +164,7 @@ public class AddDetailsPo extends AppCompatActivity {
                 mpressId = snid.get(position);
                 previmpressvlaue = previmpression.get(position);
 //                mstartimpresi.setText(String.valueOf(previmpressvlaue));
-//                    Toast.makeText(AddDetailFoc.this, mpressId,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddDetailsPo.this, mpressId,Toast.LENGTH_SHORT).show();
 //                Bundle bundle2 = getIntent().getExtras();
 //                if (bundle2 != null) {
 //                    mpressId = bundle2.getString("pressId");

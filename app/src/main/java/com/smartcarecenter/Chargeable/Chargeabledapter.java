@@ -69,7 +69,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
     @NonNull
     @Override
     public Myviewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_foc,
+        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_po,
                 viewGroup, false));
 
     }
@@ -79,7 +79,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
         String newdate = "";
 
-        myviewholder.mnofoc.setText("#"+ chargeableItem.get(i).getOrderNo());
+        myviewholder.mnofoc.setText("Ref: "+"#"+ chargeableItem.get(i).getOrderNo());
         String oldadate = chargeableItem.get(i).getDate();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault());
@@ -95,6 +95,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
         myviewholder.mstatus.setText(chargeableItem.get(i).getStatusName());
         myviewholder.mstatus.setTextColor(Color.parseColor("#"+ chargeableItem.get(i).getStatusColorCode()));
         myviewholder.mpos.setText(String.valueOf(i+1));
+        myviewholder.mNoPo.setText("No. PO: "+chargeableItem.get(i).getPoNo());
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +117,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mnofoc,mstatus,mdate,mpos;
+        TextView mnofoc,mstatus,mdate,mpos,mNoPo;
 
 
         public Myviewholder(@NonNull View itemView) {
@@ -125,6 +126,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
             mstatus = itemView.findViewById(R.id.statusfoc);
             mdate = itemView.findViewById(R.id.tanggallistpo);
             mpos = itemView.findViewById(R.id.nolist);
+            mNoPo = itemView.findViewById(R.id.NoPo);
 
         }
     }

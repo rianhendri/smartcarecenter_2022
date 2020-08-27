@@ -92,9 +92,13 @@ public interface IRetrofit {
 
     @POST("api/FOCOrder/Get")
     public Call<JsonObject> vieworderfoc(@Body JsonObject var1);
+    @POST("api/Chargeable/Get")
+    public Call<JsonObject> viewchargeable(@Body JsonObject var1);
 
     @POST("api/FOCOrder/Cancel")
     public Call<JsonObject> cancelfoc (@Body JsonObject var1);
+    @POST("api/Chargeable/Cancel")
+    public Call<JsonObject> cancelpo (@Body JsonObject var1);
 
 
 

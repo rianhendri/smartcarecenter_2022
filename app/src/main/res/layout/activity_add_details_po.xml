@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeuib"
                     android:paddingLeft="4dp"
-                    android:text="Po. No"
+                    android:text="Po. NO"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -428,6 +428,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"

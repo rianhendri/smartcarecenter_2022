@@ -105,4 +105,6 @@
     <string name="title_tax">Tax:</string>
     <string name="title_addchargeable">Add Chargeable</string>
     <string name="title_requirenopo">No.Po Required</string>
+    <string name="title_detailfoc">Detail FOC</string>
+    <string name="title_detailchargeable">Detail Chargeable</string>
 </resources>
