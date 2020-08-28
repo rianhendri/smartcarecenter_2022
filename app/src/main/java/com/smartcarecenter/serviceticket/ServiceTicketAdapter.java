@@ -124,18 +124,30 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         solved = myItem.get(i).isBar4Red();
         String startdate = "";
         String enddate = "";
-        String oladstart = myItem.get(i).getSupportStartDateTime();
-        String oladend = myItem.get(i).getSupportEndDateTime();
-        try {
-            startdate = simpleDateFormat2.format(simpleDateFormat.parse(oladstart));
-            System.out.println(startdate);
-            enddate = simpleDateFormat2.format(simpleDateFormat.parse(oladend));
-            System.out.println(enddate);
-            Log.e((String)"Date", (String)startdate);
+        if (myItem.get(i).getSupportStartDateTime()!=null){
+            if (myItem.get(i).getSupportEndDateTime()!=null){
+                String oladend = myItem.get(i).getSupportEndDateTime();
+                try {
+                    enddate = simpleDateFormat2.format(simpleDateFormat.parse(oladend));
+                    System.out.println(enddate);
+                    Log.e((String)"Date", (String)startdate);
+                }
+                catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                }
+            }
+            String oladstart = myItem.get(i).getSupportStartDateTime();
+
+            try {
+                startdate = simpleDateFormat2.format(simpleDateFormat.parse(oladstart));
+                System.out.println(startdate);
+                Log.e((String)"Date", (String)startdate);
+            }
+            catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
         }
-        catch (ParseException parseException) {
-            parseException.printStackTrace();
-        }
+
         if (myItem.get(i).getFeedbackComments().equals("")){
             myviewholder.mlayoutstart.setAlpha(0);
         }else {

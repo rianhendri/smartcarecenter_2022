@@ -318,25 +318,37 @@
                 android:background="@color/softgrey">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/segoeui"
+                    android:fontFamily="@font/seguisb"
                     android:text="@string/title_listitem"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="13sp" />
+                    android:textColor="@color/darkgrey2"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="end" >
+                    android:gravity="center_vertical"
+                    >
 
                     <ImageView
-                        android:visibility="gone"
                         android:layout_width="14dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/segoeui"
                         android:gravity="end"
+                        android:layout_marginRight="4dp"
                         android:src="@drawable/ic_pluswhite" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeui"
+                        android:text="@string/additemlist"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
@@ -384,7 +396,7 @@
                         android:fontFamily="@font/seguisb"
                         android:gravity="center"
                         android:text="@string/title_Summary"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/darkgrey2"
                         android:textSize="15sp" />
                 </LinearLayout>
 

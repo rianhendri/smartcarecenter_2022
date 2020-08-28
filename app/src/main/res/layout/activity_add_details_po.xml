@@ -270,17 +270,21 @@
                 android:background="@color/softgrey">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/segoeui"
+                    android:fontFamily="@font/seguisb"
                     android:text="@string/title_listitem"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="13sp" />
+                    android:textColor="@color/darkgrey2"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginLeft="80dp"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="end" >
+                    android:gravity="center_vertical"
+                    >
 
                     <ImageView
                         android:layout_width="14dp"
@@ -343,7 +347,7 @@
                         android:fontFamily="@font/seguisb"
                         android:gravity="center"
                         android:text="@string/title_Summary"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/darkgrey2"
                         android:textSize="15sp" />
                 </LinearLayout>
 
