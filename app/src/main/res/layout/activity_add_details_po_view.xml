@@ -88,7 +88,7 @@
                     android:background="@drawable/background_transparent"
                     android:textColor="@color/black"
                     android:textSize="13sp"
-                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+                    android:textAllCaps="true"
                     android:inputType="textFilter"/>
 
                 <View

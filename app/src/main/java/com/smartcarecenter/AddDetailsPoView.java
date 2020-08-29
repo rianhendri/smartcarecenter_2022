@@ -57,7 +57,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     String MhaveToUpdate = "";
     String MsessionExpired = "";
     String akunid = "";
-    double tax = 0;
+    double tax = 0.0;
     String taxname = "";
     Boolean internet = false;
     boolean installed= true;
@@ -243,12 +243,8 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
-                    tax = data.get("totalTax").getAsDouble();
-                    Locale localeID = new Locale("in", "ID");
-                    final DecimalFormat formatRupiah = (DecimalFormat) NumberFormat.getNumberInstance(localeID);
-                    mtax.setText(String.valueOf(formatRupiah.format(tax)));
-                    mtotalprice.setText(String.valueOf(formatRupiah.format(data.get("totalPrice").getAsDouble())));
-                    mgrandtotal.setText(String.valueOf(formatRupiah.format(data.get("grandTotal").getAsDouble())));
+
+
                     loading.dismiss();
 
                     listsn=data.getAsJsonArray("pressList");
@@ -299,6 +295,12 @@ public class AddDetailsPoView extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    tax = data.get("totalTax").getAsDouble();
+                    Locale localeID = new Locale("in", "ID");
+                    final DecimalFormat formatRupiah = (DecimalFormat) NumberFormat.getNumberInstance(localeID);
+                    mtax.setText("Rp. "+String.valueOf(formatRupiah.format(tax)));
+                    mtotalprice.setText("Rp. "+String.valueOf(formatRupiah.format(data.get("totalPrice").getAsDouble())));
+                    mgrandtotal.setText("Rp. "+String.valueOf(formatRupiah.format(data.get("grandTotal").getAsDouble())));
                     pressid = data.get("pressGuid").getAsString();
                     String nopo = data.get("poNo").getAsString();
                     mpono.setText(nopo);
