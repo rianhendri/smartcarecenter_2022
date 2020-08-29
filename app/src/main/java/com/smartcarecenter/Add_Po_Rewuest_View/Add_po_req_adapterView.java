@@ -106,9 +106,9 @@ extends RecyclerView.Adapter<Add_po_req_adapterView.Myviewholder> {
             totalprice +=addFoclistreq.get(x).getTotalPrice();
             mtotalqty.setText(String.valueOf(totalqty));
             mtotalprice.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
-            double taxnya = totalprice*10/100;
-            mtax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(taxnya)));
-            mgrandtotal.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
+//            double taxnya = totalprice*10/100;
+//            mtax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(taxnya)));
+//            mgrandtotal.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
         }
         myviewholder.mimg.setOnClickListener(new View.OnClickListener() {
             @Override

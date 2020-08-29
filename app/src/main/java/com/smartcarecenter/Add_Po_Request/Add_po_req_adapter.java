@@ -60,6 +60,7 @@ import static com.smartcarecenter.AddDetailsPo.mtotalitem;
 import static com.smartcarecenter.AddDetailsPo.mtotalpricepo;
 import static com.smartcarecenter.AddDetailsPo.mtotalqty;
 import static com.smartcarecenter.AddDetailsPo.mtotaltax;
+import static com.smartcarecenter.AddDetailsPo.tax;
 
 public class Add_po_req_adapter
 extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
@@ -110,10 +111,11 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
             mtotalqty.setText(String.valueOf(totalqty));
             totalprice +=addFoclistreq.get(x).getSubharga();
             mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
-            mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
+
         }
         //taxes
-        mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*10/100)));
+        mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*tax/100)));
+        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*tax/100))));
 
         myviewholder.mimg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,8 +181,8 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                     mtotalqty.setText(String.valueOf(totalqty));
                     totalprice +=addFoclistreq.get(i).getSubharga();
                     mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
-                    mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*10/100)));
-                    mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
+                    mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*tax/100)));
+                    mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*tax/100))));
                 }
 
 
@@ -208,8 +210,8 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                         mtotalqty.setText(String.valueOf(totalqty));
                         totalprice +=addFoclistreq.get(i).getSubharga();
                         mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
-                        mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*10/100)));
-                        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
+                        mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*tax/100)));
+                        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*tax/100))));
                     }
                 }
 

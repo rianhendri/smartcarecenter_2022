@@ -46,6 +46,8 @@ public class Dashboard extends AppCompatActivity {
     public static String mshowPurchaseOrderPO = "";
     public static String mshowSettings = "";
     public static String mshowSurvey = "";
+    int tax = 0;
+    String taxename = "";
     String MhaveToUpdate = "";
     String MsessionExpired = "";
     MenuAdapter addmenu;
@@ -179,6 +181,12 @@ public class Dashboard extends AppCompatActivity {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     //HEADER
+                    tax = data.get("taxPercentage").getAsInt();
+                    taxename = data.get("taxLabel").getAsString();
+                    SharedPreferences.Editor editor = getSharedPreferences("Tax", MODE_PRIVATE).edit();
+                    editor.putInt("tax", tax);
+                    editor.putString("taxname",taxename);
+                    editor.apply();
                     mhomeName = data.get("homeName").getAsString();
                     mcompanyName = data.get("companyName").getAsString();
                     mgroupName = data.get("groupName").getAsString();

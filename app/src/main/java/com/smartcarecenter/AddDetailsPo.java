@@ -58,12 +58,14 @@ public class AddDetailsPo extends AppCompatActivity {
     String MsessionExpired = "";
     String akunid = "";
     Boolean internet = false;
+    public static int tax = 0;
+    public static String taxname = "";
     ProgressDialog loading;
     ImageView mback;
     int pos = 0;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem,mtotaltax,mgrantotalpo
-            ,mtotalpricepo;
+            ,mtotalpricepo,mLabeltax;
     EditText mlastimpresi;
     public static String mpressId = "";
     String mpressId2 = "";
@@ -105,6 +107,7 @@ public class AddDetailsPo extends AppCompatActivity {
         mtotalpricepo = findViewById(R.id.totalpricepo);
         mtotaltax =findViewById(R.id.totaltax);
         mgrantotalpo = findViewById(R.id.grantotalpo);
+        mLabeltax = findViewById(R.id.labeltax);
 
         cekInternet();
         getSessionId();
@@ -212,6 +215,7 @@ public class AddDetailsPo extends AppCompatActivity {
                 }
             }
         });
+        mLabeltax.setText(taxname);
 
 
     }
@@ -237,6 +241,9 @@ public class AddDetailsPo extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("SESSION_ID",MODE_PRIVATE);
         sesionid_new = sharedPreferences.getString("session_id", "");
+        SharedPreferences taxes = getSharedPreferences("Tax",MODE_PRIVATE);
+        tax = taxes.getInt("tax", 0);
+        taxname = taxes.getString("taxename","");
 
     }
     public void sesionid() {

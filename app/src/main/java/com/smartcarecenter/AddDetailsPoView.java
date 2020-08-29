@@ -38,6 +38,8 @@ import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,6 +57,8 @@ public class AddDetailsPoView extends AppCompatActivity {
     String MhaveToUpdate = "";
     String MsessionExpired = "";
     String akunid = "";
+    double tax = 0;
+    String taxname = "";
     Boolean internet = false;
     boolean installed= true;
     ProgressDialog loading;
@@ -188,6 +192,9 @@ public class AddDetailsPoView extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("SESSION_ID",MODE_PRIVATE);
         sesionid_new = sharedPreferences.getString("session_id", "");
+        SharedPreferences taxes = getSharedPreferences("Tax",MODE_PRIVATE);
+        tax = taxes.getInt("tax", 0);
+        taxname = taxes.getString("taxename","");
 
     }
     public void sesionid() {
@@ -236,6 +243,12 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    tax = data.get("totalTax").getAsDouble();
+                    Locale localeID = new Locale("in", "ID");
+                    final DecimalFormat formatRupiah = (DecimalFormat) NumberFormat.getNumberInstance(localeID);
+                    mtax.setText(String.valueOf(formatRupiah.format(tax)));
+                    mtotalprice.setText(String.valueOf(formatRupiah.format(data.get("totalPrice").getAsDouble())));
+                    mgrandtotal.setText(String.valueOf(formatRupiah.format(data.get("grandTotal").getAsDouble())));
                     loading.dismiss();
 
                     listsn=data.getAsJsonArray("pressList");
