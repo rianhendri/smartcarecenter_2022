@@ -70,6 +70,7 @@ public class RatingStar extends AppCompatActivity {
         }else {
 
         }
+        mnoticket.setText("#"+noreq);
         mratingstar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
@@ -80,7 +81,16 @@ public class RatingStar extends AppCompatActivity {
         msolved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cekInternet();
+                if (ratvalue == 0) {
+                    Toast.makeText(RatingStar.this, getString(R.string.title_require_rate), Toast.LENGTH_SHORT).show();
 
+                }else {
+                    approve = true;
+                    if (internet) {
+                        sendRate();
+                    }
+                }
             }
         });
         munsolved.setOnClickListener(new View.OnClickListener() {
@@ -98,21 +108,6 @@ public class RatingStar extends AppCompatActivity {
                 }
 
 
-            }
-        });
-        munsolved.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cekInternet();
-                if (ratvalue == 0) {
-                    Toast.makeText(RatingStar.this, getString(R.string.title_require_rate), Toast.LENGTH_SHORT).show();
-
-                }else {
-                    approve = false;
-                    if (internet) {
-                        sendRate();
-                    }
-                }
             }
         });
     }
@@ -204,7 +199,7 @@ public class RatingStar extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent back = new Intent(RatingStar.this,DetailsFormActivity.class);
-        back.putExtra("noreq",noreq);
+        back.putExtra("id",noreq);
         back.putExtra("pos",valuefilter);
         startActivity(back);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);

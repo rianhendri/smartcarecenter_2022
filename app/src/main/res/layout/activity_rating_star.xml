@@ -52,7 +52,9 @@
                         android:fontFamily="@font/segoeuib"
                         android:gravity="center"
                         android:text="Rating: 0"
-                        android:textSize="15dp" />
+                        android:textSize="15dp"
+                        android:maxLength="9"
+                        />
                 </LinearLayout>
 
                 <TextView
