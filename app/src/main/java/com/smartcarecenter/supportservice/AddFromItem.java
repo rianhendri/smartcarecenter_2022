@@ -164,6 +164,7 @@ public class AddFromItem {
     @SerializedName("statusName")
     private String statusName;
 
+
     public AddFromItem() {
     }
 

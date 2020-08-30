@@ -93,6 +93,8 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
         catch (ParseException parseException) {
             parseException.printStackTrace();
         }
+        myviewholder.xby.setText(addFromItem.get(i).getRequestedBy());
+        myviewholder.xpress.setText(addFromItem.get(i).getPressName());
         myviewholder.xdate_news.setText(newdate);
         myviewholder.xstatus.setText(addFromItem.get(i).getStatusName());
         myviewholder.xstatus.setTextColor(Color.parseColor("#"+addFromItem.get(i).getStatusColorCode()));
@@ -134,7 +136,7 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
         ImageView xgambar_item;
         TextView xid;
         TextView xstatus;
-        TextView xtitlenews;
+        TextView xtitlenews, xby, xpress;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -142,6 +144,8 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
             xstatus = itemView.findViewById(R.id.donestatus);
             xtitlenews = itemView.findViewById(R.id.tetleform);
             xdate_news = itemView.findViewById(R.id.dateform);
+            xpress = itemView.findViewById(R.id.press);
+            xby = itemView.findViewById(R.id.by);
 
         }
     }
