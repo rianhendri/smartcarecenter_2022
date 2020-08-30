@@ -16,6 +16,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -66,7 +68,8 @@ public class AddDetailsPo extends AppCompatActivity {
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem,mtotaltax,mgrantotalpo
             ,mtotalpricepo,mLabeltax;
-    EditText mlastimpresi;
+    EditText mnopo;
+    public static String pono="";
     public static String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
@@ -97,7 +100,7 @@ public class AddDetailsPo extends AppCompatActivity {
         msend = findViewById(R.id.submit);
         msn = findViewById(R.id.sn);
         moperator = findViewById(R.id.operator);
-        mlastimpresi = findViewById(R.id.lastimprsi);
+        mnopo = findViewById(R.id.lastimprsi);
         mstartimpresi = findViewById(R.id.startimpresi);
         mback = findViewById(R.id.backbtn);
         mtotalitem = findViewById(R.id.totalitempo);
@@ -155,7 +158,25 @@ public class AddDetailsPo extends AppCompatActivity {
         listpoact.clear();
         Log.d("sizecart_11", String.valueOf(reitem.size()));
         Log.d("sizecart_22", String.valueOf(listpoact.size()));
+        mnopo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                pono = s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        mnopo.setText(pono);
 ////////////////////// adapter di masukan ke recyler//
+
         req_adapter = new Add_po_req_adapter(this, reitem);
         mlistitem_foc.setAdapter(req_adapter);
         String string2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault()).format(new Date());
@@ -196,6 +217,7 @@ public class AddDetailsPo extends AppCompatActivity {
             public void onClick(View v) {
                 Intent gotoaddfoc = new Intent(AddDetailsPo.this, Add_Po_Item_List.class);
                 gotoaddfoc.putExtra("pressId",mpressId);
+                gotoaddfoc.putExtra("nopo",pono);
                 startActivity(gotoaddfoc);
                 finish();
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
@@ -206,16 +228,16 @@ public class AddDetailsPo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (internet){
-                    if (mlastimpresi.getText().toString().length()!=0){
+                    if (mnopo.getText().toString().length()!=0){
                         showDialog();
                     }else {
-                        mlastimpresi.setError(getString(R.string.title_requirenopo));
+                        mnopo.setError(getString(R.string.title_requirenopo));
                         Toast.makeText(AddDetailsPo.this, getString(R.string.title_requirenopo),Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
-        mLabeltax.setText(taxname);
+        mLabeltax.setText(taxname+":");
 
 
     }
@@ -243,7 +265,7 @@ public class AddDetailsPo extends AppCompatActivity {
         sesionid_new = sharedPreferences.getString("session_id", "");
         SharedPreferences taxes = getSharedPreferences("Tax",MODE_PRIVATE);
         tax = taxes.getInt("tax", 0);
-        taxname = taxes.getString("taxename","");
+        taxname = taxes.getString("taxname","");
 
     }
     public void sesionid() {
@@ -335,7 +357,7 @@ public class AddDetailsPo extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("pressGuid",mpressId);
-        jsonObject.addProperty("poNo",mlastimpresi.getText().toString());
+        jsonObject.addProperty("poNo",mnopo.getText().toString());
         jsonObject.add("items", myCustomArray);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
         Call<JsonObject> panggilkomplek = jsonPostService.sendPo(jsonObject);

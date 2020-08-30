@@ -65,7 +65,8 @@ public class AddDetailsPoView extends AppCompatActivity {
     ImageView mback;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,
-            mnoitem,mpono,mstatus, mtotalprice,mtax,mgrandtotal,mtitle;
+            mnoitem,mpono,mstatus, mtotalprice,mtax,mgrandtotal,mtitle,mlabeltax;
+
     String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
@@ -111,6 +112,7 @@ public class AddDetailsPoView extends AppCompatActivity {
         mtax =findViewById(R.id.totaltax);
         mgrandtotal = findViewById(R.id.grantotalpo);
         mtitle = findViewById(R.id.title);
+        mlabeltax = findViewById(R.id.labeltax);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
@@ -194,7 +196,7 @@ public class AddDetailsPoView extends AppCompatActivity {
         sesionid_new = sharedPreferences.getString("session_id", "");
         SharedPreferences taxes = getSharedPreferences("Tax",MODE_PRIVATE);
         tax = taxes.getInt("tax", 0);
-        taxname = taxes.getString("taxename","");
+        taxname = taxes.getString("taxname","");
 
     }
     public void sesionid() {
@@ -297,8 +299,9 @@ public class AddDetailsPoView extends AppCompatActivity {
                     JsonObject data = homedata.getAsJsonObject("data");
                     tax = data.get("totalTax").getAsDouble();
                     Locale localeID = new Locale("in", "ID");
-                    final DecimalFormat formatRupiah = (DecimalFormat) NumberFormat.getNumberInstance(localeID);
+                    final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###.00");
                     mtax.setText("Rp. "+String.valueOf(formatRupiah.format(tax)));
+                    mlabeltax.setText(taxname+":");
                     mtotalprice.setText("Rp. "+String.valueOf(formatRupiah.format(data.get("totalPrice").getAsDouble())));
                     mgrandtotal.setText("Rp. "+String.valueOf(formatRupiah.format(data.get("grandTotal").getAsDouble())));
                     pressid = data.get("pressGuid").getAsString();

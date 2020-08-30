@@ -15,8 +15,7 @@ import com.google.gson.annotations.SerializedName;
 public class ChargeableItem {
 
 
-    public ChargeableItem(String orderNo, String date, String pressGuid, String pressName, String status, String statusName,
-                          String statusColorCode, String createdBy, String poNo, String createdDateTime) {
+    public ChargeableItem(String orderNo, String date, String pressGuid, String pressName, String status, String statusName, String statusColorCode, String createdBy, String poNo, String createdDateTime, double grandTotal) {
         this.orderNo = orderNo;
         this.date = date;
         this.pressGuid = pressGuid;
@@ -27,6 +26,7 @@ public class ChargeableItem {
         this.createdBy = createdBy;
         this.poNo = poNo;
         this.createdDateTime = createdDateTime;
+        this.grandTotal = grandTotal;
     }
 
     public String getOrderNo() {
@@ -109,6 +109,14 @@ public class ChargeableItem {
         this.createdDateTime = createdDateTime;
     }
 
+    public double getGrandTotal() {
+        return grandTotal;
+    }
+
+    public void setGrandTotal(double grandTotal) {
+        this.grandTotal = grandTotal;
+    }
+
     @Expose
     @SerializedName("orderNo")
     private String orderNo;
@@ -139,6 +147,9 @@ public class ChargeableItem {
     @Expose
     @SerializedName("createdDateTime")
     private String createdDateTime;
+    @Expose
+    @SerializedName("grandTotal")
+    private double grandTotal;
 
     public ChargeableItem() {
     }

@@ -98,7 +98,7 @@ extends RecyclerView.Adapter<Add_po_req_adapterView.Myviewholder> {
         totalqty = 0;
         subharga = addFoclistreq.get(i).getTotalPrice();
         Locale localeID = new Locale("in", "ID");
-        final DecimalFormat formatRupiah = (DecimalFormat) NumberFormat.getNumberInstance(localeID);
+        final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###.00");
         myviewholder.mharga.setText("Rp."+ " "+String.valueOf(formatRupiah.format(harga)));
         myviewholder.msubharga.setText("Rp."+ " "+String.valueOf(formatRupiah.format(subharga)));
         for (int x = 0 ; x < addFoclistreq.size(); x++) {

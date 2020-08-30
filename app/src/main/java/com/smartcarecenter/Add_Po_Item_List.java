@@ -42,7 +42,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.smartcarecenter.AddDetailFoc.mpressId;
+import static com.smartcarecenter.AddDetailsPo.mpressId;
+import static com.smartcarecenter.AddDetailsPo.pono;
 import static com.smartcarecenter.FormActivity.valuefilter;
 
 public class Add_Po_Item_List extends AppCompatActivity {
@@ -83,6 +84,7 @@ public class Add_Po_Item_List extends AppCompatActivity {
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             mpressId = bundle2.getString("pressId");
+            pono = bundle2.getString("nopo");
 
         }
         //setlayout recyler
@@ -166,6 +168,7 @@ public class Add_Po_Item_List extends AppCompatActivity {
         Intent back = new Intent(Add_Po_Item_List.this,AddDetailsPo.class);
         back.putExtra("pos",valuefilter);
         back.putExtra("pressId",mpressId);
+        back.putExtra("nopo",pono);
         startActivity(back);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();

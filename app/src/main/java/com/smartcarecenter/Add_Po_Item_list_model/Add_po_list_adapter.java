@@ -93,7 +93,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
         Double harga = 0.0;
         harga=addPolistitem.get(i).getSellPrice();
         Locale localeID = new Locale("in", "ID");
-        final DecimalFormat formatRupiah = (DecimalFormat) NumberFormat.getNumberInstance(localeID);
+        final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###.00");
         myviewholder.xharga.setText("Rp."+ " "+String.valueOf(formatRupiah.format(harga)));
 //        myviewholder.xstatus.setText(addPolistitem.get(i).getStsActiveInfo());
         boolean sts = true;

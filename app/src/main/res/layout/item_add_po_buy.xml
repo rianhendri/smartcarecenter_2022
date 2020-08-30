@@ -221,13 +221,13 @@
                                 <ImageView
                                     android:id="@+id/minus"
                                     android:padding="5dp"
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
                                     android:src="@drawable/ic_minus" />
                                 <TextView
                                     android:id="@+id/qtyitempo"
                                     android:layout_width="40dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="match_parent"
                                     android:layout_marginLeft="4dp"
                                     android:layout_marginRight="4dp"
                                     android:background="@drawable/background_transparent"
@@ -240,8 +240,8 @@
                                 <ImageView
                                     android:padding="5dp"
                                     android:id="@+id/plus"
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
                                     android:src="@drawable/ic_plus" />
                             </LinearLayout>
 
@@ -276,7 +276,7 @@
                                 android:layout_weight="1">
                                 <TextView
                                     android:id="@+id/price"
-                                    android:layout_width="70dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="4dp"
                                     android:layout_marginRight="4dp"
@@ -309,7 +309,7 @@
                                     android:layout_height="match_parent"
                                     android:fontFamily="@font/seguisb"
                                     android:gravity="center"
-                                    android:text="@string/title_subprice"
+                                    android:text="@string/title_Total"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -321,7 +321,7 @@
                                 android:layout_weight="1">
                                 <TextView
                                     android:id="@+id/subharga"
-                                    android:layout_width="70dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="4dp"
                                     android:layout_marginRight="4dp"

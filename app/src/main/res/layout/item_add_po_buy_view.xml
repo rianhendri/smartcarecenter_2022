@@ -321,7 +321,7 @@
                                     android:layout_height="match_parent"
                                     android:fontFamily="@font/seguisb"
                                     android:gravity="center"
-                                    android:text="@string/title_subprice"
+                                    android:text="@string/title_Total"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
                             </LinearLayout>

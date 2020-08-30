@@ -62,13 +62,41 @@
 
 					<TextView
 						android:id="@+id/nopolist"
-						android:layout_width="match_parent"
+						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:fontFamily="@font/seguisb"
 						android:paddingLeft="4dp"
 						android:text="A1SASE232C"
-						android:textSize="11sp"
-						android:textColor="@color/black" />
+						android:textSize="12sp"
+						android:textColor="@color/black"
+						android:layout_weight="1"/>
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:gravity="end"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:fontFamily="@font/segoeui"
+							android:text="Status:"
+							android:gravity="center"
+							android:layout_marginRight="4dp"
+							android:textColor="@color/black"
+							android:textSize="12sp" />
+
+						<TextView
+							android:id="@+id/statusfoc"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:fontFamily="@font/segoeuib"
+							android:gravity="center"
+							android:text="asdasdasdagdfgdfgdfdfgfdgsd"
+							android:textColor="@color/green"
+							android:textSize="12sp" />
+					</LinearLayout>
+
 				</LinearLayout>
 
 				<LinearLayout
@@ -82,33 +110,21 @@
 						android:layout_height="match_parent"
 						android:fontFamily="@font/segoeui"
 						android:text="20 Juni 2020"
+						android:paddingLeft="4dp"
 						android:textColor="@color/darkgrey"
 						android:textSize="13sp" />
-
-					<LinearLayout
+					<TextView
+						android:id="@+id/grandtotal"
 						android:layout_width="match_parent"
-						android:layout_height="match_parent"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/seguisb"
+						android:paddingLeft="4dp"
+						android:text="A1SASE232C"
+						android:textSize="11sp"
 						android:gravity="end"
-						android:orientation="horizontal">
+						android:textColor="@color/black"
+						/>
 
-						<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="match_parent"
-							android:fontFamily="@font/segoeui"
-							android:text="Status:"
-							android:layout_marginRight="4dp"
-							android:textColor="@color/black"
-							android:textSize="12sp" />
-
-						<TextView
-							android:id="@+id/statusfoc"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:fontFamily="@font/segoeui"
-
-							android:textColor="@color/green"
-							android:textSize="12sp" />
-					</LinearLayout>
 				</LinearLayout>
 			</LinearLayout>
 		</LinearLayout>

@@ -65,6 +65,7 @@ import static com.smartcarecenter.AddDetailsPo.tax;
 public class Add_po_req_adapter
 extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
     public static ArrayList<Add_po_req_item> addFoclistreq;
+
     Add_po_req_item modelqty;
     Context context;
     ImageView mimgpopup;
@@ -98,7 +99,7 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
         Double harga = 0.0;
         harga=addFoclistreq.get(i).getSellPrice();
         Locale localeID = new Locale("in", "ID");
-        final DecimalFormat formatRupiah = (DecimalFormat) NumberFormat.getNumberInstance(localeID);
+        final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###.00");
         myviewholder.mprice.setText("Rp."+ " "+String.valueOf(formatRupiah.format(harga)));
         myviewholder.msubharga.setText("Rp."+ " "+String.valueOf(formatRupiah.format(harga)));
         mtotalitem.setText(String.valueOf(addFoclistreq.size()));

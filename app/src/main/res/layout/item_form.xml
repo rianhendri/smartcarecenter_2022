@@ -61,9 +61,80 @@
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/segoeui"
 					android:text="12 Juni 2020"
-					android:textColor="@color/softgrey"
+					android:textColor="@color/black"
 					android:textSize="12sp" />
 
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="4dp"
+					android:gravity="center_vertical"
+					android:orientation="horizontal" >
+
+
+					<TextView
+
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/segoeui"
+						android:text="@string/title_press"
+						android:textColor="@color/black"
+						android:textSize="11sp" />
+
+					<TextView
+						android:id="@+id/press"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="4dp"
+						android:fontFamily="@font/segoeui"
+						android:textSize="11sp" />
+
+
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/segoeui"
+						android:text="Ticket Status:"
+						android:textColor="@color/black"
+						android:textSize="11sp"
+						android:visibility="gone" />
+				</LinearLayout>
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="4dp"
+					android:gravity="center_vertical"
+					android:orientation="horizontal" >
+
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/segoeui"
+						android:text="@string/title_By"
+						android:textColor="@color/black"
+						android:textSize="11sp" />
+
+					<TextView
+						android:id="@+id/by"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="4dp"
+						android:fontFamily="@font/segoeui"
+						android:textSize="11sp" />
+
+
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/segoeui"
+						android:text="Ticket Status:"
+						android:textColor="@color/black"
+						android:textSize="11sp"
+						android:visibility="gone" />
+				</LinearLayout>
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -101,25 +172,7 @@
 						android:visibility="gone" />
 				</LinearLayout>
 
-				<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="0dp"
-					android:gravity="center_vertical"
-					android:orientation="horizontal"
-					android:visibility="gone" >
 
-
-					<TextView
-						android:id="@+id/noform"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
-						android:text="SC12983GR"
-						android:textColor="@color/black"
-						android:textSize="11sp"
-						android:visibility="gone" />
-				</LinearLayout>
 			</LinearLayout>
 		</LinearLayout>
 	</LinearLayout>

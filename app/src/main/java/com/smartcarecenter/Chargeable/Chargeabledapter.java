@@ -48,6 +48,7 @@ import com.smartcarecenter.AddDetailFocView;
 import com.smartcarecenter.AddDetailsPoView;
 import com.smartcarecenter.R;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,6 +92,8 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
         catch (ParseException parseException) {
             parseException.printStackTrace();
         }
+        final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###.00");
+        myviewholder.mgrand.setText(context.getString(R.string.title_grandtotal)+" Rp. "+String.valueOf(formatRupiah.format(chargeableItem.get(i).getGrandTotal())));
         myviewholder.mdate.setText(newdate);
         myviewholder.mstatus.setText(chargeableItem.get(i).getStatusName());
         myviewholder.mstatus.setTextColor(Color.parseColor("#"+ chargeableItem.get(i).getStatusColorCode()));
@@ -117,7 +120,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mnofoc,mstatus,mdate,mpos,mNoPo;
+        TextView mnofoc,mstatus,mdate,mpos,mNoPo,mgrand;
 
 
         public Myviewholder(@NonNull View itemView) {
@@ -127,6 +130,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
             mdate = itemView.findViewById(R.id.tanggallistpo);
             mpos = itemView.findViewById(R.id.nolist);
             mNoPo = itemView.findViewById(R.id.NoPo);
+            mgrand = itemView.findViewById(R.id.grandtotal);
 
         }
     }

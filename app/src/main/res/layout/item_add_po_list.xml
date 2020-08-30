@@ -209,7 +209,7 @@
                                 android:id="@+id/harga"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/segoeui"
+                                android:fontFamily="@font/segoeuib"
                                 android:text="Rp.999.999.999"
                                 android:layout_marginLeft="4dp"
                                 android:textColor="@color/black"

@@ -72,8 +72,8 @@
     <string name="title_qty">"Qty: "</string>
     <string name="title_additemfoc">" Tambahkan Pesanan FOC Baru"</string>
     <string name="title_submit">Submit</string>
-    <string name="title_totalbarang">Jumlah Produk</string>
-    <string name="title_totalitem">Jumlah Item</string>
+    <string name="title_totalbarang">Jumlah Produk:</string>
+    <string name="title_totalitem">Jumlah Item:</string>
     <string name="title_Summary">Ringkasan</string>
     <string name="additemlist">Tambah Item</string>
     <string name="title_date">Tanggal</string>
@@ -82,7 +82,7 @@
     <string name="title_NoFoc">No Foc</string>
     <string name="title_startimpesi">Impresi Sebelumnya</string>
     <string name="title_endimpresi">Impresi Terbaru</string>
-    <string name="title_totalqty">Jumlah Qty</string>
+    <string name="title_totalqty">Jumlah Qty:</string>
     <string name="title_noitem">Tidak ada item</string>
     <string name="title_category">"Kategori: "</string>
     <string name="title_requiredimpressi">Impresi terbaru perludisi</string>
@@ -101,7 +101,7 @@
     <string name="title_chrageadd">Tambah Chargeable</string>
     <string name="title_price">"Harga: "</string>
     <string name="title_subprice">"Sub Harga: "</string>
-    <string name="title_grandtotal">"Grand Tota: "</string>
+    <string name="title_grandtotal">"Grand Total: "</string>
     <string name="title_totalprice">"Total Harga: "</string>
     <string name="title_tax">Pajak:</string>
     <string name="title_addchargeable">" Tambahkan Pesanan Chargeable Baru"</string>
@@ -114,4 +114,7 @@
     <string name="title_nopo">PO No.</string>
     <string name="title_pleaseinputnopo">Mohon masukan Nomor PO Anda</string>
     <string name="title_pleaseinputimpres">Mohon masukkan angka impresi terkini</string>
+    <string name="title_Total">Total:</string>
+    <string name="title_press">"Press: "</string>
+    <string name="title_By">"Oleh: "</string>
 </resources>
