@@ -255,7 +255,7 @@ public class ChargeableActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(ChargeableActivity.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(ChargeableActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 loading.dismiss();
 
@@ -311,7 +311,7 @@ public class ChargeableActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(ChargeableActivity.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(ChargeableActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 loading.dismiss();
 
@@ -372,7 +372,7 @@ public class ChargeableActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(ChargeableActivity.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(ChargeableActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 loading.dismiss();
 

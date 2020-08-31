@@ -85,8 +85,8 @@
 						android:id="@+id/press"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginLeft="4dp"
-						android:fontFamily="@font/segoeuib"
+						android:layout_marginLeft="2dp"
+						android:fontFamily="@font/segoeui"
 						android:textSize="11sp" />
 
 
@@ -120,8 +120,8 @@
 						android:id="@+id/by"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginLeft="4dp"
-						android:fontFamily="@font/segoeuib"
+						android:layout_marginLeft="2dp"
+						android:fontFamily="@font/segoeui"
 						android:textSize="11sp" />
 
 
@@ -148,7 +148,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:fontFamily="@font/segoeui"
-						android:text="Status:"
+						android:text="Status: "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
 
@@ -156,7 +156,7 @@
 						android:id="@+id/donestatus"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginLeft="4dp"
+						android:layout_marginLeft="2dp"
 						android:fontFamily="@font/segoeuib"
 						android:textSize="11sp" />
 

@@ -105,7 +105,7 @@ public class DetailsNotification extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(DetailsNotification.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailsNotification.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
 

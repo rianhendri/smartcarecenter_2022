@@ -249,7 +249,7 @@ public class FormActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(FormActivity.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(FormActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 mfooterload.setVisibility(View.GONE);
 
@@ -303,7 +303,7 @@ public class FormActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(FormActivity.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(FormActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 mfooterload.setVisibility(View.GONE);
 
@@ -363,7 +363,7 @@ public class FormActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(FormActivity.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(FormActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 mfooterload.setVisibility(View.GONE);
 

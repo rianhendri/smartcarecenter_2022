@@ -60,19 +60,24 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <ImageView
-                            android:id="@+id/fotoprofile"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/nonefoto" />
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="40dp">
+                            <ImageView
+                                android:id="@+id/foto"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/nonefoto" />
+                        </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/seguisb"
-                        android:text="John Doe"
+                        android:text="-"
                         android:textColor="@color/dwhite"
                         android:textSize="22sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -80,17 +85,17 @@
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/namapt2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/segoeui"
-                        android:text="johndoe@gmail.com"
+                        android:text="-"
                         android:textColor="@color/dwhite"
                         android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                        app:layout_constraintBottom_toBottomOf="@+id/username"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                        app:layout_constraintTop_toBottomOf="@+id/username" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
             <LinearLayout
@@ -128,15 +133,39 @@
                             android:paddingTop="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="@string/title_Namalengkap"
+                            android:fontFamily="@font/seguisb" />
+                        <TextView
+                            android:id="@+id/username2"
+                            android:textSize="16sp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/seguisb" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="@string/title_username"
                             android:fontFamily="@font/seguisb" />
-                        <EditText
+                        <TextView
+                            android:id="@+id/user"
                             android:textSize="16sp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="John Doe"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:fontFamily="@font/seguisb" />
                     </LinearLayout>
                     <LinearLayout
@@ -148,15 +177,17 @@
                             android:paddingTop="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_emailadress"
+                            android:text="@string/title_namapt"
                             android:fontFamily="@font/seguisb" />
-                        <EditText
+                        <TextView
+                            android:id="@+id/namapt"
                             android:textSize="16sp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="johndoe@gmail.com"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:fontFamily="@font/seguisb" />
                     </LinearLayout>
                     <LinearLayout
@@ -168,15 +199,17 @@
                             android:paddingTop="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_nohandphone"
+                            android:text="@string/title_group"
                             android:fontFamily="@font/seguisb" />
-                        <EditText
+                        <TextView
+                            android:id="@+id/group2"
                             android:textSize="16sp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="+62 12345667890"
+                            android:text="-"
+                            android:textColor="@color/black"
                             android:fontFamily="@font/seguisb" />
                     </LinearLayout>
 

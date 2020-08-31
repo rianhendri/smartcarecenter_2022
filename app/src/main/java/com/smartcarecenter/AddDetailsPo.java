@@ -344,7 +344,7 @@ public class AddDetailsPo extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(AddDetailsPo.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(AddDetailsPo.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
 
@@ -386,7 +386,7 @@ public class AddDetailsPo extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(AddDetailsPo.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(AddDetailsPo.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
 

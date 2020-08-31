@@ -274,7 +274,7 @@ public class Dashboard extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(Dashboard.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(Dashboard.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
             }

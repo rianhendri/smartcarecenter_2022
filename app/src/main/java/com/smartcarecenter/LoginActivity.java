@@ -33,7 +33,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView mlogin, mforgotpassword;
+    TextView mlogin, mforgotpassword, mversi;
     EditText musername,mpassword;
     String token="";
     String password="";
@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         musername = findViewById(R.id.username);
         mpassword = findViewById(R.id.password);
         mlogin = findViewById(R.id.login);
+        mversi = findViewById(R.id.version_name);
         mforgotpassword = findViewById(R.id.forgotpassword);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -90,7 +91,8 @@ public class LoginActivity extends AppCompatActivity {
             }
             }
         });
-
+        String versionName = BuildConfig.VERSION_NAME;
+        mversi.setText("Samafitro Smart Care Center - "+getString(R.string.title_Version)+ versionName);
     }
     public void loginApi(){
         loading = ProgressDialog.show(LoginActivity.this, "", getString(R.string.title_loading), true);
@@ -120,9 +122,11 @@ public class LoginActivity extends AppCompatActivity {
                     JsonObject data = post.getAsJsonObject("data");
                     language = data.get("languageCd").getAsString();
                     String sessionId = data.get("sessionId").getAsString();
+                    String user = data.get("username").getAsString();
                     SharedPreferences sharedPreferences = getSharedPreferences("SESSION_ID", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("session_id", sessionId);
+                    editor.putString("user",user);
                     editor.apply();
                     setLocale(language);
 //                    Toast.makeText(LoginActivity.this, sessionId, Toast.LENGTH_SHORT).show();
@@ -145,7 +149,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                cekInternet();
+                Toast.makeText(LoginActivity.this, getString(R.string.title_excpetation), Toast.LENGTH_SHORT).show();
 
             }
         });

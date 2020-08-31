@@ -111,7 +111,7 @@
 						android:fontFamily="@font/segoeui"
 						android:text="20 Juni 2020"
 						android:paddingLeft="4dp"
-						android:textColor="@color/darkgrey"
+						android:textColor="@color/black"
 						android:textSize="13sp" />
 					<TextView
 						android:id="@+id/grandtotal"

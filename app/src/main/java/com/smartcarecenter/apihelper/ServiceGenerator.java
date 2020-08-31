@@ -15,6 +15,8 @@
  */
 package com.smartcarecenter.apihelper;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -23,14 +25,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
 
-    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    private static OkHttpClient httpClient = new OkHttpClient().newBuilder()
+                                .connectTimeout(100, TimeUnit.SECONDS)
+                                .readTimeout(150, TimeUnit.SECONDS)
+                                .writeTimeout(150, TimeUnit.SECONDS)
+                                .build();
 
     public static <S> S createService(Class<S> serviceClass, String baseUrl) {
 
         Retrofit builder = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient.build())
+                .client(httpClient)
                 .build();
 
         return builder.create(serviceClass);

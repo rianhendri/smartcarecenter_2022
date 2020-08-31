@@ -207,7 +207,7 @@ public class Add_Po_Item_List extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 loading.setVisibility(View.GONE);
-                Toast.makeText(Add_Po_Item_List.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(Add_Po_Item_List.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
 

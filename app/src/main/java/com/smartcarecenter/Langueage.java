@@ -161,7 +161,7 @@ public class Langueage extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(Langueage.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(Langueage.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 loading.dismiss();
 

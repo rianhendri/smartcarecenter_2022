@@ -117,4 +117,8 @@
     <string name="title_Total">Total:</string>
     <string name="title_press">"Press: "</string>
     <string name="title_By">"By: "</string>
+    <string name="title_namapt">Company:</string>
+    <string name="title_group">Company Group:</string>
+    <string name="title_Namalengkap">Full name:</string>
+    <string name="title_excpetation">Failed to connect the server. Please check your internet connection.</string>
 </resources>

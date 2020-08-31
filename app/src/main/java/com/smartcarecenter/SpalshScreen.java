@@ -95,7 +95,7 @@ public class SpalshScreen extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<JsonObject> call, Throwable t) {
 
-                                Toast.makeText(SpalshScreen.this, t.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SpalshScreen.this, getString(R.string.title_excpetation), Toast.LENGTH_SHORT).show();
 
                             }
                         });

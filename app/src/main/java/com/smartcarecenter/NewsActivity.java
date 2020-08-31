@@ -140,7 +140,7 @@ public class NewsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(NewsActivity.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(NewsActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 mfooterload.setVisibility(View.GONE);
 
@@ -189,7 +189,6 @@ public class NewsActivity extends AppCompatActivity {
         }
 
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -379,7 +379,7 @@ public class AddRequest extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(AddRequest.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(AddRequest.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
 
@@ -417,6 +417,8 @@ public class AddRequest extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 loading.dismiss();
+                Toast.makeText(AddRequest.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
             }
         });
 

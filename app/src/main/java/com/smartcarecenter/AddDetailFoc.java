@@ -319,7 +319,7 @@ public class AddDetailFoc extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(AddDetailFoc.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(AddDetailFoc.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
 
@@ -361,7 +361,7 @@ public class AddDetailFoc extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 loading.dismiss();
-                Toast.makeText(AddDetailFoc.this, t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(AddDetailFoc.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
 
