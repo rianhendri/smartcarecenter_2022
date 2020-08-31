@@ -269,7 +269,7 @@ public class ChargeableActivity extends AppCompatActivity {
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status","-");
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
-        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
+        Call<JsonObject> panggilkomplek = jsonPostService.list_po(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
