@@ -219,8 +219,9 @@ public class AddDetailsPo extends AppCompatActivity {
                 gotoaddfoc.putExtra("pressId",mpressId);
                 gotoaddfoc.putExtra("nopo",pono);
                 startActivity(gotoaddfoc);
-                finish();
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+
                 listpoact.addAll(reitem);
             }
         });

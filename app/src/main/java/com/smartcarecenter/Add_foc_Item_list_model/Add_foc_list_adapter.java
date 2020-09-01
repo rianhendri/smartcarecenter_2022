@@ -143,8 +143,9 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
                     listpoact.add(tambahitem);
                     Intent intent = new Intent(context, AddDetailFoc.class);
                     context.startActivity(intent);
-                    ((android.app.Activity)context).finish();
                     ((android.app.Activity)context).overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    ((android.app.Activity)context).finish();
+
                 }else {
 
                 }

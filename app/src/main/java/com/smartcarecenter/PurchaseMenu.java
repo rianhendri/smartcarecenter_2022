@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,11 +29,7 @@ public class PurchaseMenu extends AppCompatActivity {
         mbtnfoc = findViewById(R.id.btnfoc);
         mbtnpo = findViewById(R.id.pobtn);
         //showadd
-        Bundle bundle2 = getIntent().getExtras();
-        if (bundle2 != null) {
-            showaddfoc = bundle2.getString("showaddfoc");
-            showaddpo = bundle2.getString("showaddpo");
-        }
+        getSessionId();
         if (mshowPurchaseOrderFOC.equals("false")){
             mbtnfoc.setVisibility(View.GONE);
         }else if (mshowPurchaseOrderPO.equals("false")){
@@ -76,5 +73,16 @@ public class PurchaseMenu extends AppCompatActivity {
         startActivity(new Intent((Context)this, Dashboard.class));
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
+    }
+    public void getSessionId(){
+
+        SharedPreferences show = getSharedPreferences("Show",MODE_PRIVATE);
+        showaddpo = show.getString("showaddpo", "");
+        showaddfoc = show.getString("showaddfoc", "");
+        showaddform = show.getString("showaddform", "");
+        mshowPurchaseOrderPO = show.getString("mshowPurchaseOrderPO", "");
+        mshowPurchaseOrderFOC = show.getString("mshowPurchaseOrderFOC", "");
+
+
     }
 }

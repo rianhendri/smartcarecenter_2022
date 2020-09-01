@@ -112,8 +112,9 @@ extends RecyclerView.Adapter<NewsAdapter.Myviewholder> {
                 intent.putExtra("date", (newdate));
                 intent.putExtra("content", (myItem.get(i)).getContent());
                 context.startActivity(intent);
-                ((Activity)context).finish();
                 ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                ((Activity)context).finish();
+
             }
         });
 

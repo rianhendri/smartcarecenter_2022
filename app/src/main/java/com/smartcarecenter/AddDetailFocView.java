@@ -162,9 +162,10 @@ public class AddDetailFocView extends AppCompatActivity {
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder.append("http://api.whatsapp.com/send?phone=+62822 9868 0099&text=Hi Support,  ");
                     stringBuilder.append(getString(R.string.title_tanyafoc));
-                    stringBuilder.append("#");
+//                    stringBuilder.append(" #");
                     stringBuilder.append(noOrder);
-                    intent.setData(android.net.Uri.parse((String)stringBuilder.toString()));
+                    String message =stringBuilder.toString();
+                    intent.setData(android.net.Uri.parse(message));
                     startActivity(intent);
                 }else {
                     Toast.makeText(AddDetailFocView.this,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
@@ -220,8 +221,9 @@ public class AddDetailFocView extends AppCompatActivity {
         Intent back = new Intent(AddDetailFocView.this,FreeofchargeActivity.class);
         back.putExtra("pos",valuefilter);
         startActivity(back);
-        finish();
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
+        finish();
+
     }
     public void LoadPress(){
         loading = ProgressDialog.show(AddDetailFocView.this, "", getString(R.string.title_loading), true);

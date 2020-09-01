@@ -198,8 +198,9 @@ public class AddDetailFoc extends AppCompatActivity {
                 Intent gotoaddfoc = new Intent(AddDetailFoc.this, Add_Foc_Item_List.class);
                 gotoaddfoc.putExtra("pressId",mpressId);
                 startActivity(gotoaddfoc);
-                finish();
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+
                 listpoact.addAll(reitem);
             }
         });
@@ -267,8 +268,9 @@ public class AddDetailFoc extends AppCompatActivity {
         Intent back = new Intent(AddDetailFoc.this,FreeofchargeActivity.class);
         back.putExtra("pos",valuefilter);
         startActivity(back);
-        finish();
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
+        finish();
+
     }
     public void LoadPress(){
         loading = ProgressDialog.show(AddDetailFoc.this, "", getString(R.string.title_loading), true);

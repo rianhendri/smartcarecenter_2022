@@ -12,10 +12,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,6 +58,7 @@ public class Dashboard extends AppCompatActivity {
     MenuAdapter addmenu;
     String akunid = "";
     Boolean internet = false;
+    Boolean exit = false;
     private LinearLayoutManager linearLayoutManager;
     private LinearLayoutManager linearLayoutManager2;
     String mcompanyLogoURL = "";
@@ -212,6 +215,13 @@ public class Dashboard extends AppCompatActivity {
                     showaddfoc = access.get("allowAddPurchaseOrderFOC").toString();
                     showaddpo = access.get("allowAddPurchaseOrderPO").toString();
                     showaddform = access.get("allowAddFormRequest").toString();
+                    SharedPreferences.Editor show = getSharedPreferences("Show", MODE_PRIVATE).edit();
+                    show.putString("showaddpo", showaddpo);
+                    show.putString("showaddfoc",showaddfoc);
+                    show.putString("showaddform",showaddform);
+                    show.putString("mshowPurchaseOrderPO",mshowPurchaseOrderPO);
+                    show.putString("mshowPurchaseOrderFOC",mshowPurchaseOrderFOC);
+                    show.apply();
                     linearLayoutManager = new GridLayoutManager(Dashboard.this, 2);
                     mymenu.setLayoutManager(linearLayoutManager);
                     MenuItem menuItem = new MenuItem();
@@ -285,5 +295,24 @@ public class Dashboard extends AppCompatActivity {
 
             }
         });
+    }
+    public void onBackPressed(){
+            if (exit) {
+                finish(); // finish activity
+            } else {
+                Toast.makeText(this, getString(R.string.title_exit),
+                        Toast.LENGTH_SHORT).show();
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 3 * 1000);
+
+            }
+
+
+
     }
 }

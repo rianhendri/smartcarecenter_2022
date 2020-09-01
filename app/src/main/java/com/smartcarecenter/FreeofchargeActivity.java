@@ -45,8 +45,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
+import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
 import static com.smartcarecenter.Dashboard.showaddfoc;
 import static com.smartcarecenter.Dashboard.showaddform;
+import static com.smartcarecenter.Dashboard.showaddpo;
 
 public class FreeofchargeActivity extends AppCompatActivity {
     LinearLayout maddFoc;
@@ -187,10 +190,6 @@ public class FreeofchargeActivity extends AppCompatActivity {
             }
         });
         //showadd
-        Bundle bundle2 = getIntent().getExtras();
-        if (bundle2 != null) {
-            showaddfoc = bundle2.getString("showaddfoc");
-        }
         if (showaddfoc.equals("false")){
             maddFoc.setVisibility(View.GONE);
         }else {
@@ -202,8 +201,9 @@ public class FreeofchargeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent gotoaddfoc = new Intent(FreeofchargeActivity.this, AddDetailFoc.class);
                 startActivity(gotoaddfoc);
-                finish();
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+
             }
         });
     }
@@ -418,6 +418,13 @@ public class FreeofchargeActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("SESSION_ID",MODE_PRIVATE);
         sesionid_new = sharedPreferences.getString("session_id", "");
+        SharedPreferences show = getSharedPreferences("Show",MODE_PRIVATE);
+        showaddpo = show.getString("showaddpo", "");
+        showaddfoc = show.getString("showaddfoc", "");
+        showaddform = show.getString("showaddform", "");
+        mshowPurchaseOrderPO = show.getString("mshowPurchaseOrderPO", "");
+        mshowPurchaseOrderFOC = show.getString("mshowPurchaseOrderFOC", "");
+
 
     }
     public void sesionid() {

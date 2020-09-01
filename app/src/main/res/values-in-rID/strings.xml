@@ -95,7 +95,7 @@
     <string name="add_items">Tambah Item</string>
     <string name="title_newOrder">Order Baru</string>
     <string name="title_listitem">List Item</string>
-    <string name="title_tanyafoc">Saya ingin menanyakan tentang No order:</string>
+    <string name="title_tanyafoc">"Saya ingin menanyakan tentang No Order: "</string>
     <string name="title_submitorder">" Mengirimkan Pesanan baru Lanjutkan?"</string>
     <string name="title_sendorder">Kirim Pesanan Baru</string>
     <string name="title_chrageadd">Tambah Chargeable</string>
@@ -121,4 +121,6 @@
     <string name="title_group">" Grup Perusahaan:"</string>
     <string name="title_Namalengkap">Nama Lengkap:</string>
     <string name="title_excpetation">" Gagal menghubungkan server. Silakan periksa koneksi internet Anda."</string>
+    <string name="title_User">User</string>
+    <string name="title_exit">Klik sekali lagi untuk keluar</string>
 </resources>

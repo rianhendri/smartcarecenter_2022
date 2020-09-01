@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/seguisb"
                     android:paddingLeft="4dp"
-                    android:text="Operator"
+                    android:text="@string/title_User"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 

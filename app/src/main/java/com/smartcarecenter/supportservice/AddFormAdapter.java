@@ -106,8 +106,9 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
                 intent.putExtra("noticket", (addFromItem.get(i)).getServiceTicketCd());
                 intent.putExtra("pos", valuefilter);
                 context.startActivity(intent);
-                ((Activity)context).finish();
                 ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                ((Activity)context).finish();
+
             }
         });
         myviewholder.xgambar_item.setOnClickListener(new View.OnClickListener() {

@@ -103,8 +103,9 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                     gotonews.putExtra("showaddpo",showaddpo);
                     gotonews.putExtra("showaddfoc",showaddfoc);
                     context.startActivity(gotonews);
-                    ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    ((Activity)context).finish();
+
                 }
 //                if (namemenu.equals(context.getString(R.string.title_survei))){
 //
@@ -112,8 +113,9 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 if (namemenu.equals(context.getString(R.string.title_News))){
                     Intent gotonews = new Intent(context, NewsActivity.class);
                     context.startActivity(gotonews);
-                    ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    ((Activity)context).finish();
+
                 }
                 if (namemenu.equals(context.getString(R.string.title_live_chat))){
                     if (installed) {
@@ -128,8 +130,9 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 if (namemenu.equals(context.getString(R.string.title_Setting))){
                     Intent gotosetting = new Intent(context, SettingActivity.class);
                     context.startActivity(gotosetting);
-                    ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    ((Activity)context).finish();
+
                 }
 //
             }

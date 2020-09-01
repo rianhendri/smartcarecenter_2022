@@ -43,7 +43,7 @@
     <string name="title_contactCS">Chat With Support</string>
     <string name="title_comment">Comment</string>
     <string name="title_require_rate">Rating is require</string>
-    <string name="title_tanyacs">" I want to ask about the Request Form:"</string>
+    <string name="title_tanyacs">" I want to ask about the Request Form: #"</string>
     <string name="title_uploadphoto">Upload Photo</string>
     <string name="title_newrequest">New Request</string>
     <string name="title_bracnh">Bracnh</string>
@@ -95,7 +95,7 @@
     <string name="add_items">Add Item</string>
     <string name="title_newOrder">New Order</string>
     <string name="title_listitem">Item List</string>
-    <string name="title_tanyafoc">I want to ask about the No Order:</string>
+    <string name="title_tanyafoc">"I want to ask about the Order No: "</string>
     <string name="title_submitorder">Submiting a new Order Continue?</string>
     <string name="title_sendorder">Send New Order</string>
     <string name="title_chrageadd">Add Chargeable</string>
@@ -121,4 +121,6 @@
     <string name="title_group">Company Group:</string>
     <string name="title_Namalengkap">Full name:</string>
     <string name="title_excpetation">Failed to connect the server. Please check your internet connection.</string>
+    <string name="title_User">User</string>
+    <string name="title_exit">Click one more time to exit</string>
 </resources>

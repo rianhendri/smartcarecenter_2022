@@ -160,12 +160,14 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (installed) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("http://api.whatsapp.com/send?phone=+62822 9868 0099&text=Hi Support,  ");
-                    stringBuilder.append(getString(R.string.title_tanyafoc));
-                    stringBuilder.append("#");
+                    stringBuilder.append("http://api.whatsapp.com/send?phone=+62822 9868 0099&text=Hi Support,  "+getString(R.string.title_tanyafoc)+" ");
+//                    stringBuilder.append(getString(R.string.title_tanyafoc));
                     stringBuilder.append(noOrder);
-                    intent.setData(android.net.Uri.parse((String)stringBuilder.toString()));
+                    String message = stringBuilder.toString();
+                    intent.setData(android.net.Uri.parse(message));
+//                    Toast.makeText(AddDetailsPoView.this,message, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
+
                 }else {
                     Toast.makeText(AddDetailsPoView.this,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
                 }
@@ -223,8 +225,9 @@ public class AddDetailsPoView extends AppCompatActivity {
         Intent back = new Intent(AddDetailsPoView.this,ChargeableActivity.class);
         back.putExtra("pos",valuefilter);
         startActivity(back);
-        finish();
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
+        finish();
+
     }
     public void LoadPress(){
         loading = ProgressDialog.show(AddDetailsPoView.this, "", getString(R.string.title_loading), true);
