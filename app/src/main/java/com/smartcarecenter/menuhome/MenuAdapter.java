@@ -57,6 +57,9 @@ import java.util.ArrayList;
 import static com.smartcarecenter.Dashboard.installed;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
+import static com.smartcarecenter.Dashboard.showaddfoc;
+import static com.smartcarecenter.Dashboard.showaddform;
+import static com.smartcarecenter.Dashboard.showaddpo;
 
 public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder> {
 
@@ -88,6 +91,7 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 String namemenu = myItem.get(i).getMenuname();
                 if (namemenu.equals(context.getString(R.string.title_ServiceSupport))){
                     Intent gotonews = new Intent(context, FormActivity.class);
+                    gotonews.putExtra("showaddform",showaddform);
                     context.startActivity(gotonews);
                     ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
@@ -96,6 +100,8 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                     Intent gotonews = new Intent(context, PurchaseMenu.class);
                     gotonews.putExtra("mshowPurchaseOrderPO",mshowPurchaseOrderPO);
                     gotonews.putExtra("mshowPurchaseOrderPO",mshowPurchaseOrderFOC);
+                    gotonews.putExtra("showaddpo",showaddpo);
+                    gotonews.putExtra("showaddfoc",showaddfoc);
                     context.startActivity(gotonews);
                     ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);

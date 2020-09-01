@@ -46,6 +46,9 @@ public class Dashboard extends AppCompatActivity {
     public static String mshowPurchaseOrderPO = "";
     public static String mshowSettings = "";
     public static String mshowSurvey = "";
+    public static String showaddform = "";
+    public static String showaddfoc = "";
+    public static String showaddpo = "";
     int tax = 0;
     String taxename = "";
     String MhaveToUpdate = "";
@@ -206,6 +209,9 @@ public class Dashboard extends AppCompatActivity {
                     mshowLiveChat = access.get("showLiveChat").toString();
                     mshowNotification = access.get("showNotification").toString();
                     mshowSettings = access.get("showSettings").toString();
+                    showaddfoc = access.get("allowAddPurchaseOrderFOC").toString();
+                    showaddpo = access.get("allowAddPurchaseOrderPO").toString();
+                    showaddform = access.get("allowAddFormRequest").toString();
                     linearLayoutManager = new GridLayoutManager(Dashboard.this, 2);
                     mymenu.setLayoutManager(linearLayoutManager);
                     MenuItem menuItem = new MenuItem();

@@ -45,6 +45,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.Dashboard.showaddfoc;
+import static com.smartcarecenter.Dashboard.showaddform;
+
 public class FreeofchargeActivity extends AppCompatActivity {
     LinearLayout maddFoc;
     public static String valuefilter = "-";
@@ -183,6 +186,17 @@ public class FreeofchargeActivity extends AppCompatActivity {
 
             }
         });
+        //showadd
+        Bundle bundle2 = getIntent().getExtras();
+        if (bundle2 != null) {
+            showaddfoc = bundle2.getString("showaddfoc");
+        }
+        if (showaddfoc.equals("false")){
+            maddFoc.setVisibility(View.GONE);
+        }else {
+            maddFoc.setVisibility(View.VISIBLE);
+
+        }
         maddFoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

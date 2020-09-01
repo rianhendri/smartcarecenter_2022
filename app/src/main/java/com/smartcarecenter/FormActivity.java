@@ -43,6 +43,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.Dashboard.showaddform;
+
 public class FormActivity extends AppCompatActivity {
     public static String valuefilter = "-";
     String MhaveToUpdate = "";
@@ -179,6 +181,17 @@ public class FormActivity extends AppCompatActivity {
 
             }
         });
+        //showadd
+        Bundle bundle2 = getIntent().getExtras();
+        if (bundle2 != null) {
+            showaddform = bundle2.getString("showaddform");
+        }
+        if (showaddform.equals("false")){
+            maddform.setVisibility(View.GONE);
+        }else {
+            maddform.setVisibility(View.VISIBLE);
+
+        }
         maddform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
