@@ -63,7 +63,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     ImageView mback,mbanner;
     LinearLayout mcancel, mconfirm, mcs;
     TextView mcreatedate, mdate, mdeskription, missu, moperator, mreqno, mservicetype, msn, mstatusdetail,
-            mstid, mtitle, munitcategory;
+            mstid, mtitle, munitcategory, mlocation;
     String mdateapi = "";
     String mdeskriptionapi = "";
     String mformRequestCd = "";
@@ -76,6 +76,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     String mrequestedBy = "";
     String mrequestedDateTime = "";
     String mserviceTicketCd = "";
+    String xlocation = "";
     JsonArray mserviceTicketHistory;
     RecyclerView mservice_layout;
     String mstatus = "";
@@ -113,6 +114,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         mlayoutunit3=findViewById(R.id.layoutunit3);
         mlayoutticket=findViewById(R.id.layoutticket);
         mservice_layout=findViewById(R.id.serviceticket);
+        mlocation = findViewById(R.id.locationsn);
 
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(DetailsFormActivity.this, LinearLayout.VERTICAL,false);
@@ -284,6 +286,8 @@ public class DetailsFormActivity extends AppCompatActivity {
                     mrequestedDateTime = data.get("requestedDateTime").getAsString();
                     mallowToCancel = data.get("allowToCancel").toString();
                     mallowtoconfirm = data.get("allowToConfirm").toString();
+                    xlocation = data.get("locationName").getAsString();
+                    mlocation.setText(xlocation);
                     if (mserviceTicketCd.equals("null")){
                         mlayoutticket.setVisibility(View.GONE);
                     }else {

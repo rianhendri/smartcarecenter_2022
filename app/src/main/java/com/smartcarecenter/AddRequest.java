@@ -95,6 +95,7 @@ public class AddRequest extends AppCompatActivity {
     TextView mdate,mlocation,moperator,mrequest_no,mrequiredfoto,msend;
     EditText mdescrip;
     String mpressId = "";
+    String xlocation = "";
     LinearLayout mreadyfoto;
     Spinner msn;
     String nameFile;
@@ -104,6 +105,7 @@ public class AddRequest extends AppCompatActivity {
     DatabaseReference reference;
     String sesionid_new = "";
     List<String> snid = new ArrayList();
+    List<String> locations = new ArrayList();
     List<String> snname = new ArrayList();
     StorageReference storage;
     @Override
@@ -124,6 +126,7 @@ public class AddRequest extends AppCompatActivity {
         mimgbanner = (ImageView)this.findViewById(R.id.imgbanner);
         mlocation = (TextView)this.findViewById(R.id.locationsn);
         mbranch = (Spinner)this.findViewById(R.id.branchspin);
+        mlocation = findViewById(R.id.locationsn);
         //getsessionId
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
@@ -160,6 +163,11 @@ public class AddRequest extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 for (int i = 0; i < snid.size(); ++i) {
                     mpressId = snid.get(i);
+//                    Toast.makeText(AddRequest.this, mpressId,Toast.LENGTH_LONG).show();
+                }
+                for (int x = 0; x < locations.size(); ++x) {
+                    xlocation = locations.get(position);
+                    mlocation.setText(xlocation);
                 }
             }
 
@@ -363,8 +371,10 @@ public class AddRequest extends AppCompatActivity {
                         JsonObject jsonObject2 = (JsonObject)listsn.get(i);
                         String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
                         String string5 = jsonObject2.getAsJsonObject().get("id").getAsString();
+                        String location = jsonObject2.getAsJsonObject().get("locationName").getAsString();
                         snname.add(string4);
                         snid.add(string5);
+                        locations.add(location);
                         ArrayAdapter arrayAdapter = new ArrayAdapter(AddRequest.this, R.layout.spinstatus_layout, snname);
                         arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
                         arrayAdapter.notifyDataSetChanged();
