@@ -166,12 +166,18 @@ public class AddDetailsPo extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                pono = s.toString();
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                String result = s.toString().replaceAll(" ", "");
+                if (!s.toString().equals(result)) {
+                    mnopo.setText(result);
+                    mnopo.setSelection(result.length());
+                    pono = result.toString();
+                    // alert the user
+                }
             }
         });
         mnopo.setText(pono);
@@ -179,7 +185,7 @@ public class AddDetailsPo extends AppCompatActivity {
 
         req_adapter = new Add_po_req_adapter(this, reitem);
         mlistitem_foc.setAdapter(req_adapter);
-        String string2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault()).format(new Date());
+        String string2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         mdate.setText((CharSequence)string2);
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

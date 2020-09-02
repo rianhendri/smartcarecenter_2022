@@ -153,7 +153,7 @@ public class AddDetailFoc extends AppCompatActivity {
 ////////////////////// adapter di masukan ke recyler//
         req_adapter = new Add_foc_req_adapter(this, reitem);
         mlistitem_foc.setAdapter(req_adapter);
-        String string2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault()).format(new Date());
+        String string2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         mdate.setText((CharSequence)string2);
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

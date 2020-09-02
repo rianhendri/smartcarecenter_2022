@@ -217,11 +217,11 @@ public class Add_Po_Item_List extends AppCompatActivity {
     private void filter(String text) {
         ArrayList<Add_po_list_item> filteredList = new ArrayList<>();
         for (Add_po_list_item item : list2) {
-            if (item.getName().contains(text)) {
+            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
-            }else if (item.getCategoryName().contains(text)){
+            }else if (item.getCategoryName().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
-            }else if (item.getItemCd().contains(text)){
+            }else if (item.getItemCd().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
         }

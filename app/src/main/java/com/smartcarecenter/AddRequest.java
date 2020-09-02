@@ -133,7 +133,7 @@ public class AddRequest extends AppCompatActivity {
 
             valuefilter = bundle2.getString("pos");
         }
-        String string2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault()).format(new Date());
+        String string2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         mdate.setText((CharSequence)string2);
         getSessionId();
         cekInternet();

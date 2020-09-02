@@ -349,7 +349,7 @@ public class AddDetailsPoView extends AppCompatActivity {
                     mstatus.setTextColor(Color.parseColor("#"+statuscolor));
                     String newdate = "";
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
-                    SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("d-MM-yyyy", Locale.getDefault());
+                    SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                     try {
                         newdate = simpleDateFormat2.format(simpleDateFormat.parse(date));
                         System.out.println(newdate);
