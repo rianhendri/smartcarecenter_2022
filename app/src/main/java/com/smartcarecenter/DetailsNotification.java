@@ -158,9 +158,7 @@ public class DetailsNotification extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (username==null){
-            startActivity(new Intent((Context)this, Dashboard.class));
-            overridePendingTransition(R.anim.left_in, R.anim.right_out);
-            finish();
+            super.onBackPressed();
         }else {
             startActivity(new Intent((Context)this, Notification.class));
             overridePendingTransition(R.anim.left_in, R.anim.right_out);

@@ -166,18 +166,19 @@ public class AddDetailsPo extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
                 String result = s.toString().replaceAll(" ", "");
                 if (!s.toString().equals(result)) {
                     mnopo.setText(result);
                     mnopo.setSelection(result.length());
-                    pono = result.toString();
+
                     // alert the user
                 }
+                pono = mnopo.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         mnopo.setText(pono);

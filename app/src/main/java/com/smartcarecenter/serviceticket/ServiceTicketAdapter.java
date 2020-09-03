@@ -105,7 +105,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         String string6 = ((ServicesTicketItem)this.myItem.get(i)).getSupportStartDateTime();
         String string7 = ((ServicesTicketItem)this.myItem.get(i)).getSupportEndDateTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("d-MM-yyyy hh:mm:ss", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss", Locale.getDefault());
         String string8 = ((ServicesTicketItem)this.myItem.get(i)).getBar1Text();
         String string9 = ((ServicesTicketItem)this.myItem.get(i)).getBar2Text();
         String string10 = ((ServicesTicketItem)this.myItem.get(i)).getBar3Text();
@@ -124,6 +124,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         solved = myItem.get(i).isBar4Red();
         String startdate = "";
         String enddate = "";
+        String assigndate = "";
         if (myItem.get(i).getSupportStartDateTime()!=null){
             if (myItem.get(i).getSupportEndDateTime()!=null){
                 String oladend = myItem.get(i).getSupportEndDateTime();
@@ -147,6 +148,19 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
                 parseException.printStackTrace();
             }
         }
+        if (myItem.get(i).getAssignedDateTime()!=null){
+            String oldass = myItem.get(i).getAssignedDateTime();
+            try {
+                assigndate = simpleDateFormat2.format(simpleDateFormat.parse(oldass));
+                System.out.println(enddate);
+                Log.e((String)"Date", (String)startdate);
+            }
+            catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+            myviewholder.massigndate.setText(assigndate);
+        }
+
 
         if (myItem.get(i).getFeedbackComments().equals("")){
             myviewholder.mlayoutstart.setAlpha(0);
@@ -186,6 +200,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         }
         myviewholder.mstarttime.setText(startdate);
         myviewholder.mendtime.setText(enddate);
+        myviewholder.mengineer.setText(myItem.get(i).getEngineerName());
 
 
     }

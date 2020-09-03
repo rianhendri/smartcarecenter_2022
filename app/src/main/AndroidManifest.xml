@@ -27,20 +27,22 @@
         <activity android:name=".FreeofchargeActivity" />
         <activity android:name=".ChargeableActivity" />
         <activity android:name=".PurchaseMenu" />
-        <activity android:name=".DetailsNotification">
-            <intent-filter>
-                <action android:name="Notification" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+        <activity android:name=".DetailsNotification"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="Notification" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".Notification" />
         <activity android:name=".AddRequest" />
         <activity android:name=".RatingStar" />
-        <activity android:name=".DetailsFormActivity">
+        <activity android:name=".DetailsFormActivity"
+           >
             <intent-filter>
                 <action android:name="FormRequest" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -58,7 +60,8 @@
             android:name=".Dashboard"
             android:excludeFromRecents="true"
             android:parentActivityName=".SpalshScreen"
-            android:taskAffinity="" />
+            android:taskAffinity=""
+            />
         <activity android:name=".SpalshScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -85,6 +88,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/black" />
+
     </application>
 
 </manifest>

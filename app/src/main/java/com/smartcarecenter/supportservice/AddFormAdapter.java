@@ -105,6 +105,7 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
                 intent.putExtra("id", (addFromItem.get(i).getFormRequestCd()));
                 intent.putExtra("noticket", (addFromItem.get(i)).getServiceTicketCd());
                 intent.putExtra("pos", valuefilter);
+                intent.putExtra("user", addFromItem.get(i).getRequestedBy());
                 context.startActivity(intent);
                 ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 ((Activity)context).finish();

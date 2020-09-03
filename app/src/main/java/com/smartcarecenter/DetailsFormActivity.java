@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.messagecloud.FirebaseMessaging;
 import com.smartcarecenter.serviceticket.ServiceTicketAdapter;
 import com.smartcarecenter.serviceticket.ServicesTicketItem;
 import com.squareup.picasso.Picasso;
@@ -84,6 +85,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     String mstatusName = "";
     String noticket = "";
     String sesionid_new = "";
+    String username = "";
     boolean installed= true;
 
 
@@ -128,16 +130,21 @@ public class DetailsFormActivity extends AppCompatActivity {
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noreq = bundle2.getString("id");
+            username = bundle2.getString("user");
             noticket = bundle2.getString("noticket");
             valuefilter = bundle2.getString("pos");
-        }
-        getSessionId();
-        cekInternet();
-        if (internet){
-            loadData();
-        }else {
+            getSessionId();
+            cekInternet();
+            if (internet){
+                loadData();
+            }else {
 
+            }
         }
+        String TAG = "FirebaseMessaging";
+        Log.d(TAG,"noreq:"+noreq);
+
+
 
         mback.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -257,6 +264,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("formRequestCd",noreq);
+        Toast.makeText(DetailsFormActivity.this,jsonObject.toString(), Toast.LENGTH_SHORT).show();
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -422,6 +430,11 @@ public class DetailsFormActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("SESSION_ID",MODE_PRIVATE);
         sesionid_new = sharedPreferences.getString("session_id", "");
+        if (noreq.equals("")){
+            SharedPreferences noreqid = getSharedPreferences("Id",MODE_PRIVATE);
+            noreq = noreqid.getString("dataId", "");
+        }
+
 
     }
     public void sesionid() {
@@ -442,14 +455,19 @@ public class DetailsFormActivity extends AppCompatActivity {
         }
 
     }
-    @Override
+//    @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(DetailsFormActivity.this,FormActivity.class);
-        back.putExtra("pos",valuefilter);
-        startActivity(back);
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-        finish();
+        if (username==null){
+            super.onBackPressed();
+        }else {
+            Intent back = new Intent(DetailsFormActivity.this,FormActivity.class);
+            back.putExtra("pos",valuefilter);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }
+
     }
     public boolean appInstalledOrNot(String string2) {
         PackageManager packageManager = this.getPackageManager();

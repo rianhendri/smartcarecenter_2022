@@ -298,7 +298,8 @@ public class Dashboard extends AppCompatActivity {
     }
     public void onBackPressed(){
             if (exit) {
-                finish(); // finish activity
+                this.finish();
+
             } else {
                 Toast.makeText(this, getString(R.string.title_exit),
                         Toast.LENGTH_SHORT).show();
