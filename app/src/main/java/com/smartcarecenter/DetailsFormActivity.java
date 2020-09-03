@@ -133,13 +133,14 @@ public class DetailsFormActivity extends AppCompatActivity {
             username = bundle2.getString("user");
             noticket = bundle2.getString("noticket");
             valuefilter = bundle2.getString("pos");
-            getSessionId();
-            cekInternet();
-            if (internet){
-                loadData();
-            }else {
 
-            }
+        }
+        getSessionId();
+        cekInternet();
+        if (internet){
+            loadData();
+        }else {
+
         }
         String TAG = "FirebaseMessaging";
         Log.d(TAG,"noreq:"+noreq);
@@ -264,7 +265,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("formRequestCd",noreq);
-        Toast.makeText(DetailsFormActivity.this,jsonObject.toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(DetailsFormActivity.this,jsonObject.toString(), Toast.LENGTH_SHORT).show();
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -430,10 +431,7 @@ public class DetailsFormActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("SESSION_ID",MODE_PRIVATE);
         sesionid_new = sharedPreferences.getString("session_id", "");
-        if (noreq.equals("")){
-            SharedPreferences noreqid = getSharedPreferences("Id",MODE_PRIVATE);
-            noreq = noreqid.getString("dataId", "");
-        }
+
 
 
     }
