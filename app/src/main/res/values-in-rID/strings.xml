@@ -41,7 +41,7 @@
     <string name="title_location">Lokasi</string>
     <string name="title_confirm">Konfirmasi</string>
     <string name="title_contactCS">Hubungi CS Kami</string>
-    <string name="title_comment">Coment</string>
+    <string name="title_comment">Coment:</string>
     <string name="title_require_rate">Rating Wajib di isi</string>
     <string name="title_tanyacs">Saya ingin bertanya seputar Formulir Permintaan:</string>
     <string name="title_uploadphoto">Upload Foto</string>
@@ -123,4 +123,5 @@
     <string name="title_excpetation">" Gagal menghubungkan server. Silakan periksa koneksi internet Anda."</string>
     <string name="title_User">User</string>
     <string name="title_exit">Klik sekali lagi untuk keluar</string>
+    <string name="title_ratingissue">Apakah issue Anda telah selesai ditangani?</string>
 </resources>

@@ -12,9 +12,12 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,7 @@ public class RatingStar extends AppCompatActivity {
     String noticket = "";
     int ratvalue = 0;
     String sesionid_new = "";
+    Spinner msn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +59,14 @@ public class RatingStar extends AppCompatActivity {
         mnoticket = (TextView)findViewById(R.id.noticket);
         mcomment = (EditText)findViewById(R.id.comment);
         mratingstar = (RatingBar)findViewById(R.id.ratingstar);
-
+        msn = findViewById(R.id.snrat);
+        String[] arraySpinner = new String[]{
+                getString(R.string.title_yes), getString(R.string.title_no)
+        };
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinstatus_layout, arraySpinner);
+        arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
+        arrayAdapter.notifyDataSetChanged();
+        msn.setAdapter(arrayAdapter);
         Bundle extras = this.getIntent().getExtras();
         if (extras != null) {
             noreq = extras.getString("id");
@@ -70,6 +81,24 @@ public class RatingStar extends AppCompatActivity {
         }else {
 
         }
+        msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position==1){
+                    approve = false;
+//                    Toast.makeText(RatingStar.this, "false",Toast.LENGTH_LONG).show();
+                }else {
+                    approve = true;
+//                    Toast.makeText(RatingStar.this, "true",Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         mnoticket.setText("#"+noreq);
         mratingstar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -93,23 +122,23 @@ public class RatingStar extends AppCompatActivity {
                 }
             }
         });
-        munsolved.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cekInternet();
-                if (ratvalue == 0) {
-                    Toast.makeText(RatingStar.this, getString(R.string.title_require_rate), Toast.LENGTH_SHORT).show();
-
-                }else {
-                    approve = true;
-                    if (internet) {
-                        sendRate();
-                    }
-                }
-
-
-            }
-        });
+//        munsolved.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                cekInternet();
+//                if (ratvalue == 0) {
+//                    Toast.makeText(RatingStar.this, getString(R.string.title_require_rate), Toast.LENGTH_SHORT).show();
+//
+//                }else {
+//                    approve = true;
+//                    if (internet) {
+//                        sendRate();
+//                    }
+//                }
+//
+//
+//            }
+//        });
     }
     public void sendRate(){
         loading = ProgressDialog.show(RatingStar.this, "", getString(R.string.title_loading), true);

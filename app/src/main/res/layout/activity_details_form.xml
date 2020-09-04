@@ -260,11 +260,11 @@
                         android:inputType="textMultiLine"
                         android:lines="6"
                         android:overScrollMode="always"
-                        android:padding="4dp"
+                        android:padding="8dp"
                         android:scrollHorizontally="false"
                         android:scrollbarStyle="insideInset"
                         android:scrollbars="vertical"
-                        android:text="-"
+                        android:text="asdasdasdasdsad"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
