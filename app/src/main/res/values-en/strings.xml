@@ -124,4 +124,5 @@
     <string name="title_User">User</string>
     <string name="title_exit">Click one more time to exit</string>
     <string name="title_ratingissue">Has your issue been resolved?</string>
+    <string name="title_lastiimpressi">Last Impression:</string>
 </resources>

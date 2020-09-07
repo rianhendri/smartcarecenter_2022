@@ -13,9 +13,13 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ServicesTicketItem {
-    public ServicesTicketItem(String assignedDateTime, String bar1Text, String bar2Text, String bar3Text, boolean bar4Red, String bar4Text, int barPosition, String engineerName, String feedbackComments, int feedbackRating, String issueCategoryName, int position, String serviceTypeName,
-                              String statusName, String supportEndDateTime, String supportStartDateTime,
-                              String unitCategoryName) {
+
+    public ServicesTicketItem() {
+    }
+
+
+    public ServicesTicketItem(String assignedDateTime, String bar1Text, String bar2Text, String bar3Text, boolean bar4Red, String bar4Text, int barPosition, String engineerName, String feedbackComments, int feedbackRating, String issueCategoryName, int position, String serviceTypeName, String statusName, String supportEndDateTime,
+                              String supportStartDateTime, String unitCategoryName, String assist, int lastImpression) {
         AssignedDateTime = assignedDateTime;
         Bar1Text = bar1Text;
         Bar2Text = bar2Text;
@@ -33,6 +37,8 @@ public class ServicesTicketItem {
         SupportEndDateTime = supportEndDateTime;
         SupportStartDateTime = supportStartDateTime;
         UnitCategoryName = unitCategoryName;
+        Assist = assist;
+        LastImpression = lastImpression;
     }
 
     public String getAssignedDateTime() {
@@ -171,7 +177,20 @@ public class ServicesTicketItem {
         UnitCategoryName = unitCategoryName;
     }
 
-    public ServicesTicketItem() {
+    public String getAssist() {
+        return Assist;
+    }
+
+    public void setAssist(String assist) {
+        Assist = assist;
+    }
+
+    public int getLastImpression() {
+        return LastImpression;
+    }
+
+    public void setLastImpression(int lastImpression) {
+        LastImpression = lastImpression;
     }
 
     @Expose
@@ -226,5 +245,12 @@ public class ServicesTicketItem {
     @SerializedName("UnitCategoryName")
     private String UnitCategoryName;
 
+    @Expose
+    @SerializedName("Assist")
+    private String Assist;
+
+    @Expose
+    @SerializedName("LastImpression")
+    private int LastImpression;
 }
 

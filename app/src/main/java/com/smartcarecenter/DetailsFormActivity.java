@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.smartcarecenter.apihelper.IRetrofit;
@@ -85,6 +86,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     String mserviceTicketCd = "";
     String xlocation = "";
     JsonArray mserviceTicketHistory;
+    JsonArray massistengineer;
     RecyclerView mservice_layout;
     String mstatus = "";
     String mstatusColorCode = "";
@@ -94,7 +96,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     String username = "";
     boolean installed= true;
     //timer
-
+    public static String assist="";
     public static int seconds = 0;
     public static String usetime="";
     private boolean running;
@@ -321,6 +323,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                     }else {
                         mlayoutticket.setVisibility(View.VISIBLE);
                         mserviceTicketHistory = data.getAsJsonArray("serviceTicketHistory");
+
                         Gson gson = new Gson();
                         Type type = new TypeToken<ArrayList<ServicesTicketItem>>(){}.getType();
                         listticket = gson.fromJson(mserviceTicketHistory.toString(), type);
@@ -330,7 +333,18 @@ public class DetailsFormActivity extends AppCompatActivity {
                         for (int i = 0; i < mserviceTicketHistory.size(); ++i) {
                             String string6 = (mserviceTicketHistory.get(0)).getAsJsonObject().get("ServiceTicketCd").getAsString();
                             mstid.setText(string6);
+                            String asist = "";
+                           JsonObject ass = mserviceTicketHistory.get(i).getAsJsonObject();
+                            massistengineer = ass.getAsJsonArray("Assists");
+                            for (int x = 0; x < massistengineer.size(); ++x){
+                                JsonObject assobj = massistengineer.get(x).getAsJsonObject();
+                                asist += assobj.get("Name").getAsString();
+                                asist += "\n";
+                                listticket.get(i).setAssist(asist);
+
+                            }
                         }
+
                         String string7 = data.get("serviceTicketCreated").getAsString();
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
                         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());

@@ -409,6 +409,30 @@
 						android:textColor="@color/colorPrimaryDark"
 						android:textSize="11sp" />
 				</LinearLayout>
+				<LinearLayout
+					android:id="@+id/layimpress"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="start"
+					android:orientation="vertical" >
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/segoeui"
+						android:text="@string/title_lastiimpressi"
+						android:textColor="@color/black"
+						android:textSize="11sp" />
+
+					<TextView
+						android:id="@+id/lastimpression"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:fontFamily="@font/seguisb"
+						android:text="Electronics"
+						android:textColor="@color/colorPrimaryDark"
+						android:textSize="11sp" />
+				</LinearLayout>
 			</LinearLayout>
 
 			<LinearLayout
@@ -466,7 +490,8 @@
 						android:textSize="11sp" />
 				</LinearLayout>
 				<LinearLayout
-					android:visibility="gone"
+					android:visibility="visible"
+					android:id="@+id/layass"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:gravity="end"
@@ -476,7 +501,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:fontFamily="@font/segoeui"
-						android:text="Ass Engineer: "
+						android:text="Assist: "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
 
@@ -485,7 +510,8 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:fontFamily="@font/seguisb"
-						android:text="Andre"
+						android:text="Andre\nasdasdasd \nasdasdasd"
+						android:gravity="end"
 						android:textColor="@color/colorPrimaryDark"
 						android:textSize="11sp" />
 				</LinearLayout>

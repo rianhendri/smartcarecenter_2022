@@ -124,4 +124,5 @@
     <string name="title_User">User</string>
     <string name="title_exit">Klik sekali lagi untuk keluar</string>
     <string name="title_ratingissue">Apakah issue Anda telah selesai ditangani?</string>
+    <string name="title_lastiimpressi">Impresi Terakhir:</string>
 </resources>

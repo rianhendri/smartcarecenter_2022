@@ -230,9 +230,34 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             myviewholder.mbar4.setTextColor(context.getResources().getColor(R.color.black));
 
         }
-        myviewholder.mstarttime.setText(startdate);
-        myviewholder.mendtime.setText(enddate);
+        if (myItem.get(i).getSupportEndDateTime()==null){
+            myviewholder.mendtime.setText("-");
+        }else {
+            myviewholder.mendtime.setText(enddate);
+        }
+        if (myItem.get(i).getSupportStartDateTime()==null){
+            myviewholder.mendtime.setText("-");
+        }else {
+            myviewholder.mstarttime.setText(startdate);
+        }
+
+
         myviewholder.mengineer.setText(myItem.get(i).getEngineerName());
+        if (myItem.get(i).getAssist()==null){
+            myviewholder.mlasyass.setVisibility(View.GONE);
+        }else {
+            myviewholder.massengineer.setText(myItem.get(i).getAssist());
+            myviewholder.mlasyass.setVisibility(View.VISIBLE);
+        }
+        String last = null;
+        last = String.valueOf(myItem.get(i).getLastImpression());
+        if (myItem.get(i).getLastImpression()==0){
+            myviewholder.mlayimpres.setVisibility(View.GONE);
+        }else {
+            myviewholder.mlayimpres.setVisibility(View.VISIBLE);
+            myviewholder.mlastimpresi.setText(last);
+        }
+
         //timer
 
         handler = new Handler() ;
@@ -278,11 +303,11 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         TextView massigndate;
         TextView mbar1,mbar2,mbar3,mbar4,mcomment,mendtime,mengineer,mservicetype,mstarttime
                 ,mstatusservice,mstatustik;
-        TextView mtimer,msupport;
+        TextView mtimer,msupport,massengineer,mlastimpresi;
 
         ImageView mposbar;
         RatingBar mrating;
-        LinearLayout mlayoutstart;
+        LinearLayout mlayoutstart,mlasyass,mlayimpres;
         public Myviewholder(@NonNull View view) {
             super(view);
 
@@ -302,7 +327,10 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             mlayoutstart = view.findViewById(R.id.ratingstarlayout);
             mtimer = view.findViewById(R.id.timer);
             msupport = view.findViewById(R.id.support);
-
+            massengineer = view.findViewById(R.id.asengineer);
+            mlasyass = view.findViewById(R.id.layass);
+            mlastimpresi = view.findViewById(R.id.lastimpression);
+            mlayimpres = view.findViewById(R.id.layimpress);
         }
     }
 
