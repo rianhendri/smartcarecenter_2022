@@ -473,14 +473,14 @@ public class DetailsFormActivity extends AppCompatActivity {
     }
 //    @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         if (username==null){
             list2.clear();
             super.onBackPressed();
             refresh=true;
         }else {
-//            super.onBackPressed();
-            refresh=true;
+            super.onBackPressed();
+//            refresh=true;
             Intent back = new Intent(DetailsFormActivity.this,FormActivity.class);
             back.putExtra("pos",valuefilter);
             startActivity(back);

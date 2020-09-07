@@ -417,6 +417,31 @@
 				android:layout_weight="1"
 				android:orientation="vertical" >
 
+
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="end"
+					android:orientation="vertical" >
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/segoeui"
+						android:text="Assigned: "
+						android:textColor="@color/black"
+						android:textSize="11sp" />
+
+					<TextView
+						android:id="@+id/assigndate"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:fontFamily="@font/seguisb"
+						android:text="Remote"
+						android:textColor="@color/colorPrimaryDark"
+						android:textSize="11sp" />
+				</LinearLayout>
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -440,8 +465,8 @@
 						android:textColor="@color/colorPrimaryDark"
 						android:textSize="11sp" />
 				</LinearLayout>
-
 				<LinearLayout
+					android:visibility="gone"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:gravity="end"
@@ -451,16 +476,16 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:fontFamily="@font/segoeui"
-						android:text="Assigned: "
+						android:text="Ass Engineer: "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
 
 					<TextView
-						android:id="@+id/assigndate"
+						android:id="@+id/asengineer"
 						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
+						android:layout_height="wrap_content"
 						android:fontFamily="@font/seguisb"
-						android:text="Remote"
+						android:text="Andre"
 						android:textColor="@color/colorPrimaryDark"
 						android:textSize="11sp" />
 				</LinearLayout>

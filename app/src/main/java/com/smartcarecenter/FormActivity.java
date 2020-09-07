@@ -378,7 +378,7 @@ public class FormActivity extends AppCompatActivity {
 //                    page++;
                     refreshscroll=true;
                 }else {
-                    sesionid();
+
                     mfooterload.setVisibility(View.GONE);
                     Toast.makeText(FormActivity.this, errornya,Toast.LENGTH_LONG).show();
                 }

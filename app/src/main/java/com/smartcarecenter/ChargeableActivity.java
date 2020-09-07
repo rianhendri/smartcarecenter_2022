@@ -35,6 +35,7 @@ import com.smartcarecenter.Freeofcharge.FocAdapter;
 import com.smartcarecenter.Freeofcharge.FocItem;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.supportservice.AddFromItem;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -361,7 +362,11 @@ public class ChargeableActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     Type listType = new TypeToken<ArrayList<ChargeableItem>>() {
                     }.getType();
-                    list2 = gson.fromJson(listformreq.toString(), listType);
+                    ArrayList<ChargeableItem> list;
+                    list=new ArrayList<>();
+                    list = gson.fromJson(listformreq.toString(), listType);
+                    list2.addAll(list);
+
                     addFormAdapterAdapter = new Chargeabledapter(ChargeableActivity.this, list2);
                     myitem_place.setAdapter(addFormAdapterAdapter);
                     myitem_place.setVisibility(View.VISIBLE);

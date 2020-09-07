@@ -30,6 +30,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.smartcarecenter.Chargeable.ChargeableItem;
 import com.smartcarecenter.Freeofcharge.FocAdapter;
 import com.smartcarecenter.Freeofcharge.FocItem;
 import com.smartcarecenter.apihelper.IRetrofit;
@@ -363,7 +364,11 @@ public class FreeofchargeActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     Type listType = new TypeToken<ArrayList<FocItem>>() {
                     }.getType();
-                    list2 = gson.fromJson(listformreq.toString(), listType);
+                    ArrayList<FocItem> list;
+                    list=new ArrayList<>();
+                    list = gson.fromJson(listformreq.toString(), listType);
+                    list2.addAll(list);
+
                     addFormAdapterAdapter = new FocAdapter(FreeofchargeActivity.this, list2);
                     myitem_place.setAdapter(addFormAdapterAdapter);
                     myitem_place.setVisibility(View.VISIBLE);
