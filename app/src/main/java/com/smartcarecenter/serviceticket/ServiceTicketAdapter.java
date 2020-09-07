@@ -38,6 +38,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,10 +55,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonObject;
+import com.smartcarecenter.DetailsFormActivity;
 import com.smartcarecenter.FormActivity;
+import com.smartcarecenter.LoginActivity;
 import com.smartcarecenter.NewsActivity;
 import com.smartcarecenter.R;
 import com.smartcarecenter.SettingActivity;
+import com.smartcarecenter.SpalshScreen;
+import com.smartcarecenter.apihelper.IRetrofit;
+import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.menuhome.MenuAdapter;
 import com.smartcarecenter.menuhome.MenuItem;
 import com.smartcarecenter.serviceticket.ServicesTicketItem;
@@ -69,7 +77,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static com.smartcarecenter.Dashboard.installed;
+import static com.smartcarecenter.DetailsFormActivity.seconds;
+import static com.smartcarecenter.DetailsFormActivity.usetime;
+
 
 public class ServiceTicketAdapter
 extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
@@ -78,6 +93,11 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
     ArrayList<ServicesTicketItem> myItem;
     public static int positem = 0;
 
+    //timer
+    long MillisecondTime, StartTime, UpdateTime = 0L ;
+    long TimeBuff = seconds ;
+    Handler handler;
+    int Seconds, Minutes, MilliSeconds, Jam ;
     public ServiceTicketAdapter(Context c, ArrayList<ServicesTicketItem> p){
         context = c;
         myItem = p;
@@ -100,6 +120,17 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         stringBuilder.append("#");
         stringBuilder.append(String.valueOf((int)((ServicesTicketItem)this.myItem.get(i)).getPosition()));
         textView.setText((CharSequence)stringBuilder.toString());
+
+        if (myItem.get(i).getPosition()==myItem.size()){
+            if (usetime.equals("true")){
+                myviewholder.msupport.setVisibility(View.GONE);
+                myviewholder.mtimer.setVisibility(View.VISIBLE);
+            }else {
+                myviewholder.msupport.setVisibility(View.VISIBLE);
+                myviewholder.mtimer.setVisibility(View.GONE);
+            }
+        }
+//        Toast.makeText(context, String.valueOf(myItem.size()),Toast.LENGTH_LONG).show();
 
         String string5 = ((ServicesTicketItem)this.myItem.get(i)).getAssignedDateTime();
         String string6 = ((ServicesTicketItem)this.myItem.get(i)).getSupportStartDateTime();
@@ -189,6 +220,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             myviewholder.mbar2.setTextColor(context.getResources().getColor(R.color.black));
             myviewholder.mbar3.setTextColor(context.getResources().getColor(R.color.black));
             myviewholder.mbar4.setTextColor(context.getResources().getColor(R.color.black));
+
         }
         else {
             myviewholder.mposbar.setImageResource(R.drawable.complete);
@@ -201,7 +233,37 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         myviewholder.mstarttime.setText(startdate);
         myviewholder.mendtime.setText(enddate);
         myviewholder.mengineer.setText(myItem.get(i).getEngineerName());
+        //timer
 
+        handler = new Handler() ;
+        StartTime = SystemClock.uptimeMillis();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MillisecondTime = SystemClock.uptimeMillis() - StartTime;
+//            mest.setText(String.valueOf(MillisecondTime));
+                UpdateTime = TimeBuff + MillisecondTime;
+
+                Seconds = (int) (UpdateTime / 1000);
+                Jam = (Seconds/60/60);
+                if (TimeBuff>=3600000){
+                    Minutes = (Seconds/60)-(Jam*60);
+                }else {
+                    Minutes = Seconds / 60;
+                }
+                Seconds = Seconds % 60;
+                MilliSeconds = (int) (UpdateTime % 1000);
+
+                myviewholder.mtimer.setText(String.format("%02d", Jam) + ":"
+                        + String.format("%02d", Minutes) + ":"
+                        + String.format("%02d", Seconds));
+
+
+
+                handler.postDelayed(this, 0);
+            }
+        }, 2000);
+//        if ()
 
     }
 
@@ -211,11 +273,12 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
                 myItem.size();
     }
 
-    public class Myviewholder extends RecyclerView.ViewHolder{
+    public static class Myviewholder extends RecyclerView.ViewHolder{
 
         TextView massigndate;
         TextView mbar1,mbar2,mbar3,mbar4,mcomment,mendtime,mengineer,mservicetype,mstarttime
                 ,mstatusservice,mstatustik;
+        TextView mtimer,msupport;
 
         ImageView mposbar;
         RatingBar mrating;
@@ -237,6 +300,8 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             mstatustik = (TextView)view.findViewById(R.id.statustick);
             mcomment = (TextView)view.findViewById(R.id.comment);
             mlayoutstart = view.findViewById(R.id.ratingstarlayout);
+            mtimer = view.findViewById(R.id.timer);
+            msupport = view.findViewById(R.id.support);
 
         }
     }

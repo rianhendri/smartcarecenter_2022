@@ -381,6 +381,7 @@ public class AddRequest extends AppCompatActivity {
                         msn.setAdapter(arrayAdapter);
                         loading.dismiss();
                     }
+                    loading.dismiss();
                 }else {
                     Toast.makeText(AddRequest.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();

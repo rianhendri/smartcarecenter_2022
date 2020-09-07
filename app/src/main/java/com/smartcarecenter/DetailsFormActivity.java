@@ -20,8 +20,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,7 +51,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.FormActivity.refresh;
+import static com.smartcarecenter.FormActivity.list2;
 import static com.smartcarecenter.FormActivity.valuefilter;
+
 
 public class DetailsFormActivity extends AppCompatActivity {
     public static String noreq = "";
@@ -87,8 +93,11 @@ public class DetailsFormActivity extends AppCompatActivity {
     String sesionid_new = "";
     String username = "";
     boolean installed= true;
+    //timer
 
-
+    public static int seconds = 0;
+    public static String usetime="";
+    private boolean running;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +136,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         listticket = new ArrayList();
 
         //getsessionId
+        seconds=0;
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noreq = bundle2.getString("id");
@@ -282,6 +292,14 @@ public class DetailsFormActivity extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    //timer
+                    usetime = data.get("useTimer").toString();
+                    int hours = data.get("timerStartHours").getAsInt();
+                    int minute = data.get("timerStartMinutes").getAsInt();
+                    int second = data.get("timerStartSeconds").getAsInt();
+                    seconds = (hours*60*60*1000)+(minute*60*1000)+(second*1000);
+//                    Toast.makeText(DetailsFormActivity.this, String.valueOf(seconds),Toast.LENGTH_LONG).show();
+
                     mformRequestCd = data.get("formRequestCd").getAsString();
                     mserviceTicketCd = data.get("serviceTicketCd").toString();
                     mdateapi = data.get("date").getAsString();
@@ -457,8 +475,12 @@ public class DetailsFormActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (username==null){
+            list2.clear();
             super.onBackPressed();
+            refresh=true;
         }else {
+//            super.onBackPressed();
+            refresh=true;
             Intent back = new Intent(DetailsFormActivity.this,FormActivity.class);
             back.putExtra("pos",valuefilter);
             startActivity(back);
@@ -480,4 +502,6 @@ public class DetailsFormActivity extends AppCompatActivity {
         }
         return installed;
     }
+
+
 }

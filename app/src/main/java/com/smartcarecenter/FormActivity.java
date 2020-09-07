@@ -16,6 +16,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -50,13 +51,15 @@ import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
 
 public class FormActivity extends AppCompatActivity {
+    private static final String TAG = "FormActivity";
+    public static boolean refresh = false;
     public static String valuefilter = "-";
     String MhaveToUpdate = "";
     String MsessionExpired = "";
     AddFormAdapter addFormAdapterAdapter;
     boolean internet = true;
     private LinearLayoutManager linearLayoutManager;
-    ArrayList<AddFromItem> list2;
+    public static ArrayList<AddFromItem> list2;
     JsonArray listformreq;
     List<String> listnamestatus = new ArrayList();
     JsonArray liststatus;
@@ -101,6 +104,7 @@ public class FormActivity extends AppCompatActivity {
         list2 = new ArrayList<AddFromItem>();
         getSessionId();
         cekInternet();
+        refreshnotif();
         if (internet){
             loadData();
             loadSpin();
@@ -189,8 +193,10 @@ public class FormActivity extends AppCompatActivity {
 
         if (showaddform.equals("false")){
             maddform.setVisibility(View.GONE);
+            myitem_place.setPadding(0,0,0,0);
         }else {
             maddform.setVisibility(View.VISIBLE);
+            myitem_place.setPadding(0,0,0,120);
 
         }
         maddform.setOnClickListener(new View.OnClickListener() {
@@ -233,6 +239,7 @@ public class FormActivity extends AppCompatActivity {
                     }.getType();
                     list2 = gson.fromJson(listformreq.toString(), listType);
                     addFormAdapterAdapter = new AddFormAdapter(FormActivity.this, list2);
+//                    addFormAdapterAdapter.notifyDataSetChanged();
                     myitem_place.setAdapter(addFormAdapterAdapter);
                     myitem_place.setVisibility(View.VISIBLE);
                     mfooterload.setVisibility(View.GONE);
@@ -351,7 +358,10 @@ public class FormActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     Type listType = new TypeToken<ArrayList<AddFromItem>>() {
                     }.getType();
-                    list2 = gson.fromJson(listformreq.toString(), listType);
+                    ArrayList<AddFromItem> list;
+                    list=new ArrayList<>();
+                    list = gson.fromJson(listformreq.toString(), listType);
+                    list2.addAll(list);
                     addFormAdapterAdapter = new AddFormAdapter(FormActivity.this, list2);
                     myitem_place.setAdapter(addFormAdapterAdapter);
                     myitem_place.setVisibility(View.VISIBLE);
@@ -441,4 +451,25 @@ public class FormActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
     }
+    public  void refreshnotif() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!refresh){
+                    refreshnotif();
+//
+//
+                }else {
+
+                    loadData();
+//                    Toast.makeText(FormActivity.this, "true",Toast.LENGTH_SHORT).show();
+                    refresh=false;
+                }
+
+            }
+        }, 1000);
+
+    }
+
 }

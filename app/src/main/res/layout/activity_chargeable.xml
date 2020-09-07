@@ -125,15 +125,16 @@
                 android:orientation="vertical" >
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/listpo"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/addform"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp" >
+                    android:paddingBottom="50dp"
+                    android:scrollbars="none" >
                 </androidx.recyclerview.widget.RecyclerView>
                 <TextView
                     android:id="@+id/norequest"
@@ -164,9 +165,10 @@
 
                 <ImageView
                     android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="12dp"
-                    android:src="@drawable/ic_plus2" />
+                    android:src="@drawable/ic_plus2"
+                    android:rotation="-90"/>
 
                 <TextView
                     android:layout_width="wrap_content"

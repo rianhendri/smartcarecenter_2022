@@ -191,8 +191,10 @@ public class ChargeableActivity extends AppCompatActivity {
         //showadd
         if (showaddpo.equals("false")){
             maddFoc.setVisibility(View.GONE);
+            myitem_place.setPadding(0,0,0,0);
         }else {
             maddFoc.setVisibility(View.VISIBLE);
+            myitem_place.setPadding(0,0,0,50);
 
         }
         maddFoc.setOnClickListener(new View.OnClickListener() {

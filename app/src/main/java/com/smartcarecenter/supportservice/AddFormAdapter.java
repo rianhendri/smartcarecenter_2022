@@ -151,5 +151,25 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
 
         }
     }
+    public interface CallBackUs {
+        void addCartItemView();
+    }
+    // this interface creates for call the invalidateoptionmenu() for refresh the menu item
+    public interface HomeCallBack {
+        void updateCartCount(Context context);
+    }
+    public void clear() {
+        addFromItem.clear();
+        notifyDataSetChanged();
+    }
+    public void setAddFromItem(ArrayList<AddFromItem> addFromItem)
+    {
+        for (AddFromItem im : addFromItem)
+        {
+            addFromItem.add(im);
+        }
+        notifyDataSetChanged();
+
+    }
 }
 
