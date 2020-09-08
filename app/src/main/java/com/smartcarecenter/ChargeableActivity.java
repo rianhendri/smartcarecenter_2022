@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,7 +67,7 @@ public class ChargeableActivity extends AppCompatActivity {
     List<String> listvalue = new ArrayList();
     LinearLayout maddform;
     ImageView mback;
-    ProgressDialog loading;
+    ProgressBar mfooterload;
     private LinearLayoutManager mlinear;
     NestedScrollView mnested;
     TextView mrecord,mempetyreq;
@@ -93,6 +94,7 @@ public class ChargeableActivity extends AppCompatActivity {
         mnested = findViewById(R.id.nestedscrol);
         mempetyreq = findViewById(R.id.norequest);
         mrecord = findViewById(R.id.totalorder);
+        mfooterload = findViewById(R.id.footerload);
 
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(ChargeableActivity.this, LinearLayout.VERTICAL,false);
@@ -123,7 +125,7 @@ public class ChargeableActivity extends AppCompatActivity {
                         if (internet){
                             if (refreshscroll){
                                 page++;
-                                loading = ProgressDialog.show(ChargeableActivity.this, "", getString(R.string.title_loading), true);
+                                mfooterload.setVisibility(View.VISIBLE);
                                 refreshscroll=false;
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable()
@@ -133,9 +135,9 @@ public class ChargeableActivity extends AppCompatActivity {
                                         if (page <=totalpage){
                                             myitem_place.setLayoutFrozen(true);
                                             pagination();
-                                            loading.dismiss();
+                                            mfooterload.setVisibility(View.GONE);
                                         }else {
-                                            loading.dismiss();
+                                            mfooterload.setVisibility(View.GONE);
                                             refreshscroll=false;
                                         }
                                     }
@@ -144,7 +146,7 @@ public class ChargeableActivity extends AppCompatActivity {
                             }
 
                         }else {
-                            loading.dismiss();
+                            mfooterload.setVisibility(View.GONE);
 //                                    Toast.makeText(getActivity(), String.valueOf(page), Toast.LENGTH_SHORT).show();
 //                                    mfooterload.setVisibility(View.GONE);
 //                                    mdatahabis.setVisibility(View.GONE);
@@ -195,7 +197,7 @@ public class ChargeableActivity extends AppCompatActivity {
             myitem_place.setPadding(0,0,0,0);
         }else {
             maddFoc.setVisibility(View.VISIBLE);
-            myitem_place.setPadding(0,0,0,50);
+            myitem_place.setPadding(0,0,0,150);
 
         }
         maddFoc.setOnClickListener(new View.OnClickListener() {
@@ -228,7 +230,7 @@ public class ChargeableActivity extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")){
-                    loading.dismiss();
+                    mfooterload.setVisibility(View.GONE);
                     JsonObject data = homedata.getAsJsonObject("data");
                     totalpage = data.get("totalPage").getAsInt();
                     listformreq = data.getAsJsonArray("frList");
@@ -243,28 +245,28 @@ public class ChargeableActivity extends AppCompatActivity {
                     myitem_place.setVisibility(View.VISIBLE);
 
                     if (totalpage == 1) {
-                        loading.dismiss();
+                        mfooterload.setVisibility(View.GONE);
                     }
                     if (totalpage == 0) {
-                        loading.dismiss();
+                        mfooterload.setVisibility(View.GONE);
                     } else if (list2 != null) {
                         list2.size();
-                        loading.dismiss();
+                        mfooterload.setVisibility(View.GONE);
                     }
                     if (listformreq.size() == 0) {
                         myitem_place.setVisibility(View.GONE);
                         mempetyreq.setVisibility(View.VISIBLE);
-                        loading.dismiss();
+                        mfooterload.setVisibility(View.GONE);
 
                     }else {
                         myitem_place.setVisibility(View.VISIBLE);
                         mempetyreq.setVisibility(View.GONE);
-                        loading.dismiss();
+                        mfooterload.setVisibility(View.GONE);
                     }
-                    loading.dismiss();
+                    mfooterload.setVisibility(View.GONE);
                 }else {
                     sesionid();
-                    loading.dismiss();
+                    mfooterload.setVisibility(View.GONE);
                     Toast.makeText(ChargeableActivity.this, errornya,Toast.LENGTH_LONG).show();
                 }
 
@@ -274,13 +276,13 @@ public class ChargeableActivity extends AppCompatActivity {
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(ChargeableActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
-                loading.dismiss();
+                mfooterload.setVisibility(View.GONE);
 
             }
         });
     }
     public void loadSpin(){
-        loading = ProgressDialog.show(ChargeableActivity.this, "", getString(R.string.title_loading), true);
+        mfooterload.setVisibility(View.VISIBLE);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
@@ -318,11 +320,11 @@ public class ChargeableActivity extends AppCompatActivity {
                         kategori.notifyDataSetChanged();
                         mstatus_spin.setAdapter(kategori);
                         mstatus_spin.setSelection(pos);
-                        loading.dismiss();
+                        mfooterload.setVisibility(View.GONE);
                     }
                 } else {
                     Toast.makeText(ChargeableActivity.this, errornya,Toast.LENGTH_LONG).show();
-                    loading.dismiss();
+                    mfooterload.setVisibility(View.GONE);
                 }
             }
 
@@ -330,13 +332,13 @@ public class ChargeableActivity extends AppCompatActivity {
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(ChargeableActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
-                loading.dismiss();
+                mfooterload.setVisibility(View.GONE);
 
             }
         });
     }
     public void pagination(){
-
+        mfooterload.setVisibility(View.VISIBLE);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
@@ -370,22 +372,22 @@ public class ChargeableActivity extends AppCompatActivity {
                     addFormAdapterAdapter = new Chargeabledapter(ChargeableActivity.this, list2);
                     myitem_place.setAdapter(addFormAdapterAdapter);
                     myitem_place.setVisibility(View.VISIBLE);
-                    loading.dismiss();
+                    mfooterload.setVisibility(View.GONE);
                     if (totalpage == 1) {
-                        loading.dismiss();
+                        mfooterload.setVisibility(View.GONE);
                     }
                     if (totalpage == 0) {
-                        loading.dismiss();
+                        mfooterload.setVisibility(View.GONE);
                     } else if (list2 != null) {
                         list2.size();
-                        loading.dismiss();
+                        mfooterload.setVisibility(View.GONE);
                     }
-                    loading.dismiss();
+                    mfooterload.setVisibility(View.GONE);
 //                    page++;
                     refreshscroll=true;
                 }else {
                     sesionid();
-                    loading.dismiss();
+                    mfooterload.setVisibility(View.GONE);
                     Toast.makeText(ChargeableActivity.this, errornya,Toast.LENGTH_LONG).show();
                 }
 
@@ -395,7 +397,7 @@ public class ChargeableActivity extends AppCompatActivity {
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(ChargeableActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
-                loading.dismiss();
+                mfooterload.setVisibility(View.GONE);
 
             }
         });

@@ -15,6 +15,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +28,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.smartcarecenter.Freeofcharge.FocAdapter;
+import com.smartcarecenter.Freeofcharge.FocItem;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.listnews.NewsAdapter;
@@ -56,6 +59,7 @@ public class NewsActivity extends AppCompatActivity {
     NestedScrollView mnested;
     TextView mnonews;
     NewsAdapter newsAdapter;
+    ProgressDialog loading;
     int page = 1;
     boolean refreshscroll = true;
     String sesionid_new = "";
@@ -69,6 +73,7 @@ public class NewsActivity extends AppCompatActivity {
         mback = findViewById(R.id.backbtn);
         layoutnews = findViewById(R.id.newscontentlist);
         mnonews = findViewById(R.id.nonews);
+        mnested = findViewById(R.id.nested);
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(NewsActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -83,9 +88,124 @@ public class NewsActivity extends AppCompatActivity {
         }else {
 
         }
-    }
-    public void loadnews(){
+        mnested.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
 
+                if(nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1) != null)
+                {
+                    if ((i1 >= (nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1)
+                            .getMeasuredHeight() - nestedScrollView.getMeasuredHeight()))
+                            && i1 > i3)
+                    {
+                        cekInternet();
+                        if (internet){
+                            if (refreshscroll){
+                                page++;
+                                loading = ProgressDialog.show(NewsActivity.this, "", getString(R.string.title_loading), true);
+                                refreshscroll=false;
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable()
+                                {
+                                    @Override
+                                    public void run() {
+                                        if (page <=totalpage){
+                                            layoutnews.setLayoutFrozen(true);
+                                            pagination();
+                                            loading.dismiss();
+                                        }else {
+                                            loading.dismiss();
+                                            refreshscroll=false;
+                                        }
+                                    }
+                                },500);
+
+                            }
+
+                        }else {
+                            loading.dismiss();
+//                                    Toast.makeText(getActivity(), String.valueOf(page), Toast.LENGTH_SHORT).show();
+//                                    mfooterload.setVisibility(View.GONE);
+//                                    mdatahabis.setVisibility(View.GONE);
+//                                    mrefreshcoba.setVisibility(View.VISIBLE);
+
+                        }
+
+
+
+
+
+                    }
+                }
+
+            }
+        });
+    }
+    public void pagination(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("page",page);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONnews(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                String errornya = homedata.get("errorMessage").toString();
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                sesionid();
+                if (statusnya.equals("OK")){
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    totalpage = data.get("totalPage").getAsInt();
+                    listnews = data.getAsJsonArray("frList");
+//                    totalrec = data.get("totalRec").toString();
+//                    mrecord.setText("Record: "+totalrec);
+                    Gson gson = new Gson();
+                    Type listType = new TypeToken<ArrayList<NewsItem>>() {
+                    }.getType();
+                    ArrayList<NewsItem> list;
+                    list=new ArrayList<>();
+                    list = gson.fromJson(listnews.toString(), listType);
+                    list2.addAll(list);
+                    newsAdapter = new NewsAdapter(NewsActivity.this, list2);
+                    layoutnews.setAdapter(newsAdapter);
+                    layoutnews.setVisibility(View.VISIBLE);
+                    loading.dismiss();
+                    if (totalpage == 1) {
+                        loading.dismiss();
+                    }
+                    if (totalpage == 0) {
+                        loading.dismiss();
+                    } else if (list2 != null) {
+                        list2.size();
+                        loading.dismiss();
+                    }
+                    loading.dismiss();
+//                    page++;
+                    refreshscroll=true;
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    Toast.makeText(NewsActivity.this, errornya,Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(NewsActivity.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+                loading.dismiss();
+
+            }
+        });
+    }
+
+    public void loadnews(){
+        loading = ProgressDialog.show(this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
@@ -130,8 +250,10 @@ public class NewsActivity extends AppCompatActivity {
                         mnonews.setVisibility(View.GONE);
                         layoutnews.setVisibility(View.VISIBLE);
                     }
+                    loading.dismiss();
 
                 }else {
+                    loading.dismiss();
                     sesionid();
                     mfooterload.setVisibility(View.GONE);
                     Toast.makeText(NewsActivity.this, errornya,Toast.LENGTH_LONG).show();
@@ -143,6 +265,7 @@ public class NewsActivity extends AppCompatActivity {
                 Toast.makeText(NewsActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 mfooterload.setVisibility(View.GONE);
+                loading.dismiss();
 
             }
         });
