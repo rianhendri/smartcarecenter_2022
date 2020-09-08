@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.messagecloud.check;
 
 import java.util.Locale;
 
@@ -39,6 +40,7 @@ public class SpalshScreen extends AppCompatActivity {
         getSessionId();
         cekInternet();
         loadLanguage();
+        check.checknotif=1;
         if (stringlang.equals("")) {
             setLocale("EN");
         } else {

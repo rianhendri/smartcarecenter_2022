@@ -32,6 +32,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.smartcarecenter.messagecloud.check;
 import com.smartcarecenter.supportservice.AddFormAdapter;
 import com.smartcarecenter.supportservice.AddFromItem;
 import com.smartcarecenter.apihelper.IRetrofit;
@@ -96,7 +97,7 @@ public class FormActivity extends AppCompatActivity {
         mnested = findViewById(R.id.nestedscrol);
         mempetyreq = findViewById(R.id.norequest);
         mswip = findViewById(R.id.swiprefresh);
-
+        check.checklistform=1;
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(FormActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);

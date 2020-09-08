@@ -38,6 +38,7 @@ import com.google.gson.reflect.TypeToken;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.messagecloud.FirebaseMessaging;
+import com.smartcarecenter.messagecloud.check;
 import com.smartcarecenter.serviceticket.ServiceTicketAdapter;
 import com.smartcarecenter.serviceticket.ServicesTicketItem;
 import com.squareup.picasso.Picasso;
@@ -488,19 +489,31 @@ public class DetailsFormActivity extends AppCompatActivity {
 //    @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        if (username==null){
-            list2.clear();
-            super.onBackPressed();
-            refresh=true;
-        }else {
-            super.onBackPressed();
+        if (check.checknotif==1){
+            if (username==null){
+                if (check.checklistform==1){
+                    list2.clear();
+                    refresh=true;
+                }
+                super.onBackPressed();
+
+            }else {
+                super.onBackPressed();
 //            refresh=true;
-            Intent back = new Intent(DetailsFormActivity.this,FormActivity.class);
+                Intent back = new Intent(DetailsFormActivity.this,FormActivity.class);
+                back.putExtra("pos",valuefilter);
+                startActivity(back);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                finish();
+            }
+        }else {
+            Intent back = new Intent(DetailsFormActivity.this,Dashboard.class);
             back.putExtra("pos",valuefilter);
             startActivity(back);
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
             finish();
         }
+
 
     }
     public boolean appInstalledOrNot(String string2) {
