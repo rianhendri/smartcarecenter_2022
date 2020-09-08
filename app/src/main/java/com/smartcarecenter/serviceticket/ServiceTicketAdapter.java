@@ -193,7 +193,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         }
 
 
-        if (myItem.get(i).getFeedbackComments().equals("")){
+        if (myItem.get(i).getFeedbackRating()==0){
             myviewholder.mlayoutstart.setAlpha(0);
         }else {
             myviewholder.mlayoutstart.setAlpha(1);
@@ -232,14 +232,13 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         }
         if (myItem.get(i).getSupportEndDateTime()==null){
             myviewholder.mendtime.setText("-");
-        }else {
-            myviewholder.mendtime.setText(enddate);
-        }
-        if (myItem.get(i).getSupportStartDateTime()==null){
+        }else if (myItem.get(i).getSupportStartDateTime()==null){
             myviewholder.mstarttime.setText("-");
         }else {
+            myviewholder.mendtime.setText(enddate);
             myviewholder.mstarttime.setText(startdate);
         }
+
 
 
         myviewholder.mengineer.setText(myItem.get(i).getEngineerName());

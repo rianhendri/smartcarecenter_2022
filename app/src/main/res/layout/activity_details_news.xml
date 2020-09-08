@@ -42,7 +42,7 @@
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
                 android:text=""
-                android:textColor="@color/darkgrey"
+                android:textColor="@color/black"
                 android:textSize="12sp" />
             <View
                 android:layout_width="match_parent"

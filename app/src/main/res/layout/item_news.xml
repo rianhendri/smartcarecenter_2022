@@ -37,7 +37,15 @@
 				android:text=""
 				android:textColor="@color/black"
 				android:textSize="17sp" />
-
+			<TextView
+				android:id="@+id/datenews"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/segoeui"
+				android:gravity="bottom"
+				android:text=""
+				android:textColor="@color/black"
+				android:textSize="12sp" />
 			<TextView
 				android:id="@+id/contentview"
 				android:layout_width="match_parent"
@@ -47,17 +55,8 @@
 				android:maxLength="70"
 				android:maxLines="2"
 				android:text=""
-				android:textColor="@color/darkgrey"
+				android:textColor="@color/black"
 				android:textSize="13sp" />
-
-			<TextView
-				android:id="@+id/datenews"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:fontFamily="@font/segoeui"
-				android:gravity="bottom"
-				android:text=""
-				android:textSize="12sp" />
 		</LinearLayout>
 	</LinearLayout>
 
