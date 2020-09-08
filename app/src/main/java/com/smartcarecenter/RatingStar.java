@@ -150,7 +150,7 @@ public class RatingStar extends AppCompatActivity {
         jsonObject.addProperty("rating", ratvalue);
         jsonObject.addProperty("comments", mcomment.getText().toString());
         jsonObject.addProperty("isApprove",value);
-        Toast.makeText(RatingStar.this,  String.valueOf(jsonObject),Toast.LENGTH_LONG).show();
+//        Toast.makeText(RatingStar.this,  String.valueOf(jsonObject),Toast.LENGTH_LONG).show();
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONconfirm(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
