@@ -236,7 +236,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             myviewholder.mendtime.setText(enddate);
         }
         if (myItem.get(i).getSupportStartDateTime()==null){
-            myviewholder.mendtime.setText("-");
+            myviewholder.mstarttime.setText("-");
         }else {
             myviewholder.mstarttime.setText(startdate);
         }
