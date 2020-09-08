@@ -25,6 +25,9 @@ import com.google.gson.JsonObject;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,6 +52,8 @@ public class RatingStar extends AppCompatActivity {
     int ratvalue = 0;
     String sesionid_new = "";
     Spinner msn;
+    List<Boolean> listvalue = new ArrayList<>();
+    boolean value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,8 @@ public class RatingStar extends AppCompatActivity {
         String[] arraySpinner = new String[]{
                 getString(R.string.title_yes), getString(R.string.title_no)
         };
+        listvalue.add(true);
+        listvalue.add(false);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinstatus_layout, arraySpinner);
         arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
         arrayAdapter.notifyDataSetChanged();
@@ -84,14 +91,9 @@ public class RatingStar extends AppCompatActivity {
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position==1){
-                    approve = false;
-//                    Toast.makeText(RatingStar.this, "false",Toast.LENGTH_LONG).show();
-                }else {
-                    approve = true;
-//                    Toast.makeText(RatingStar.this, "true",Toast.LENGTH_LONG).show();
+                value = listvalue.get(position);
+//                Toast.makeText(RatingStar.this, String.valueOf(value), Toast.LENGTH_SHORT).show();
 
-                }
             }
 
             @Override
@@ -147,7 +149,8 @@ public class RatingStar extends AppCompatActivity {
         jsonObject.addProperty("formRequestCd", noreq);
         jsonObject.addProperty("rating", ratvalue);
         jsonObject.addProperty("comments", mcomment.getText().toString());
-        jsonObject.addProperty("isApprove",approve);
+        jsonObject.addProperty("isApprove",value);
+        Toast.makeText(RatingStar.this,  String.valueOf(jsonObject),Toast.LENGTH_LONG).show();
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONconfirm(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

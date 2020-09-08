@@ -135,8 +135,8 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         String string5 = ((ServicesTicketItem)this.myItem.get(i)).getAssignedDateTime();
         String string6 = ((ServicesTicketItem)this.myItem.get(i)).getSupportStartDateTime();
         String string7 = ((ServicesTicketItem)this.myItem.get(i)).getSupportEndDateTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
         String string8 = ((ServicesTicketItem)this.myItem.get(i)).getBar1Text();
         String string9 = ((ServicesTicketItem)this.myItem.get(i)).getBar2Text();
         String string10 = ((ServicesTicketItem)this.myItem.get(i)).getBar3Text();

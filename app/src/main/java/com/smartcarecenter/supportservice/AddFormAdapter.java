@@ -83,7 +83,7 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
         Picasso.with(context).load(addFromItem.get(i).getPhotoThumbURL()).into(myviewholder.xgambar_item);
         myviewholder.xtitlenews.setText("#"+ addFromItem.get(i).getFormRequestCd());
         String oldadate = addFromItem.get(i).getDate();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         try {
             newdate = simpleDateFormat2.format(simpleDateFormat.parse(oldadate));

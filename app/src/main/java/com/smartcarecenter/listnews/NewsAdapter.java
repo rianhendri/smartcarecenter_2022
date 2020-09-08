@@ -92,7 +92,7 @@ extends RecyclerView.Adapter<NewsAdapter.Myviewholder> {
         myviewholder.mconten.setText(myItem.get(i).getContent());
         String string2 = (myItem.get(i).getDate());
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         try {
             newdate = simpleDateFormat2.format(simpleDateFormat.parse(string2));

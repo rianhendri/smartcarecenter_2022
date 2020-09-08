@@ -85,7 +85,7 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
 
         myviewholder.mnofoc.setText("#"+ focItem.get(i).getOrderNo());
         String oldadate = focItem.get(i).getDate();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         try {
             newdate = simpleDateFormat2.format(simpleDateFormat.parse(oldadate));

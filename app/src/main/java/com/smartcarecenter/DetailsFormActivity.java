@@ -347,7 +347,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                         }
 
                         String string7 = data.get("serviceTicketCreated").getAsString();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                         String string5 = null;
                         try {
@@ -391,7 +391,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                     mtitle.setText("#"+mformRequestCd);
                     mreqno.setText(mformRequestCd);
                     String datenew = "";
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                     SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                     try {
                         datenew = simpleDateFormat3.format(simpleDateFormat.parse(mdateapi));

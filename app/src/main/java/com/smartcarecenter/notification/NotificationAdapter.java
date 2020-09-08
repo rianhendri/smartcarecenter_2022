@@ -90,8 +90,8 @@ extends RecyclerView.Adapter<NotificationAdapter.Myviewholder> {
         myviewholder.mtitle.setText(myItem.get(i).getTitle());
         myviewholder.mcontent.setText(myItem.get(i).getContent());
         String string3 = myItem.get(i).getPostedDateTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("d-MM-yyyy hh:mm:ss", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
         try {
             string2 = simpleDateFormat2.format(simpleDateFormat.parse(string3));
             System.out.println(string2);
