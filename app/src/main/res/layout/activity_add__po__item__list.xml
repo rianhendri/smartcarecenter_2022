@@ -62,7 +62,6 @@
             android:focusableInTouchMode="true"
             android:fontFamily="@font/segoeui"
             android:hint="@string/title_serach"
-            android:inputType="textCapCharacters"
             android:textSize="14sp" />
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout

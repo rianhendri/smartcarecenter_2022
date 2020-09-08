@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -81,7 +82,7 @@ public class ChargeableActivity extends AppCompatActivity {
     List<String> spinstatus = new ArrayList();
     int totalpage = 0;
     String totalrec = "";
-
+    SwipeRefreshLayout mswip;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +96,7 @@ public class ChargeableActivity extends AppCompatActivity {
         mempetyreq = findViewById(R.id.norequest);
         mrecord = findViewById(R.id.totalorder);
         mfooterload = findViewById(R.id.footerload);
-
+        mswip = findViewById(R.id.swiprefresh);
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(ChargeableActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -208,6 +209,38 @@ public class ChargeableActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
 
+            }
+        });
+        int color = getResources().getColor(R.color.colorPrimary);
+        mswip.setColorSchemeColors(color);
+        mswip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                cekInternet();
+
+                if (internet){
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override public void run() {
+
+                            // Berhenti berputar/refreshing
+
+                            mswip.setRefreshing(false);
+                            loadData();
+
+                            // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+
+                        }
+                    }, 500);
+
+                }else {
+//                    mswip.setEnabled(false);
+//                    mswip.setRefreshing(false);
+//                    mcontent.setVisibility(View.GONE);
+
+
+                }
             }
         });
     }

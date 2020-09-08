@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -80,7 +81,7 @@ public class FormActivity extends AppCompatActivity {
     List<String> spinstatus = new ArrayList();
     int totalpage = 0;
     String totalrec = "";
-
+    SwipeRefreshLayout mswip;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,7 @@ public class FormActivity extends AppCompatActivity {
         mstatus_spin = findViewById(R.id.spinstatus);
         mnested = findViewById(R.id.nestedscrol);
         mempetyreq = findViewById(R.id.norequest);
+        mswip = findViewById(R.id.swiprefresh);
 
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(FormActivity.this, LinearLayout.VERTICAL,false);
@@ -206,6 +208,39 @@ public class FormActivity extends AppCompatActivity {
                 startActivity(gotonews);
                finish();
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            }
+        });
+
+        int color = getResources().getColor(R.color.colorPrimary);
+        mswip.setColorSchemeColors(color);
+        mswip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                cekInternet();
+
+                if (internet){
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override public void run() {
+
+                            // Berhenti berputar/refreshing
+
+                            mswip.setRefreshing(false);
+                            loadData();
+
+                            // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+
+                        }
+                    }, 500);
+
+                }else {
+//                    mswip.setEnabled(false);
+//                    mswip.setRefreshing(false);
+//                    mcontent.setVisibility(View.GONE);
+
+
+                }
             }
         });
     }
@@ -394,7 +429,6 @@ public class FormActivity extends AppCompatActivity {
             }
         });
     }
-
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak
         ConnectivityManager connectivityManager = (ConnectivityManager) FormActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);

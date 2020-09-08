@@ -165,7 +165,11 @@ public class RatingStar extends AppCompatActivity {
                     JsonObject data = homedata.getAsJsonObject("data");
                     String message = data.get("message").getAsString();
                     Toast.makeText(RatingStar.this, message,Toast.LENGTH_LONG).show();
-                    onBackPressed();
+                    Intent back = new Intent(RatingStar.this,FormActivity.class);
+                    back.putExtra("pos",valuefilter);
+                    startActivity(back);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    finish();
                     loading.dismiss();
                 }else {
                     sesionid();

@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Get new Instance ID token
                         token = task.getResult().getToken();
-//                        musername.setText(token);
+                        musername.setText(token);
 
 
                         // Log and toast
