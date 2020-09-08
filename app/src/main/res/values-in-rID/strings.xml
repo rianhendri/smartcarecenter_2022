@@ -64,7 +64,7 @@
     <string name="title_Passwordwrong">Kata sandi tidak sama</string>
     <string name="title_fotorequired">" Foto Diperlukan *"</string>
     <string name="title_deserror">Descripsi Diperlukan *</string>
-    <string name="title_passwordRequired">Password diperlukan</string>
+    <string name="title_passwordRequired">kata sandi minimal 6 karakter</string>
     <string name="title_itemcode">Kode Item</string>
     <string name="title_nameproduct">Nama Produk</string>
     <string name="title_categoryproduct">Kategori Prouk</string>
@@ -125,4 +125,5 @@
     <string name="title_exit">Klik sekali lagi untuk keluar</string>
     <string name="title_ratingissue">Apakah issue Anda telah selesai ditangani?</string>
     <string name="title_lastiimpressi">Impresi Terakhir:</string>
+    <string name="empetypassword">Password Diperlukan</string>
 </resources>

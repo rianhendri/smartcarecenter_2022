@@ -60,10 +60,10 @@
     <string name="title_Submitreq">Submiting a new request Continue?</string>
     <string name="title_foc">Free of Charge</string>
     <string name="title_chargelabel">Chargeable</string>
-    <string name="title_Passwordwrong">Password no same</string>
+    <string name="title_Passwordwrong">The retype password is not matched</string>
     <string name="title_fotorequired">Photo Required *</string>
     <string name="title_deserror">Description Required *</string>
-    <string name="title_passwordRequired">Password Required</string>
+    <string name="title_passwordRequired">Password of at least 6 characters</string>
     <string name="title_itemcode">Code Item</string>
     <string name="title_nameproduct">Product Name</string>
     <string name="title_categoryproduct">Product Category</string>
@@ -124,4 +124,5 @@
     <string name="title_exit">Click one more time to exit</string>
     <string name="title_ratingissue">Has your issue been resolved?</string>
     <string name="title_lastiimpressi">Last Impression:</string>
+    <string name="empetypassword">Password Required</string>
 </resources>

@@ -58,21 +58,63 @@ public class ChangePassword extends AppCompatActivity {
         msave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mnewpassword.length()==0){
-                    mnewpassword.setError(getString(R.string.title_passwordRequired));
-                    if (moldpassword.length()==0){
-                        moldpassword.setError(getString(R.string.title_passwordRequired));
+                if (moldpassword.length()==0){
+                    moldpassword.setError(getString(R.string.empetypassword));
+                    if (mnewpassword.length()==0){
+                        mnewpassword.setError(getString(R.string.empetypassword));
                         if (mretypepassword.length()==0){
-                            mretypepassword.setError(getString(R.string.title_passwordRequired));
+                            mretypepassword.setError(getString(R.string.empetypassword));
+                        }
+                    }
+                }else {
+                    if (mnewpassword.length()==0){
+                        mnewpassword.setError(getString(R.string.empetypassword));
+                        if (moldpassword.length()==0){
+                            moldpassword.setError(getString(R.string.empetypassword));
+                            if (mretypepassword.length()==0){
+                                mretypepassword.setError(getString(R.string.empetypassword));
+                            }
+                        }
+                    }else {
+                        if (mretypepassword.length()==0){
+                            mretypepassword.setError(getString(R.string.empetypassword));
+                            if (moldpassword.length()==0){
+                                moldpassword.setError(getString(R.string.empetypassword));
+                                if (mnewpassword.length()==0){
+                                    mnewpassword.setError(getString(R.string.empetypassword));
+                                }
+                            }
                         }else {
-                            if (internet){
-                                changepassword();
+                            if (moldpassword.length()<=5){
+                                moldpassword.setError(getString(R.string.title_passwordRequired));
+
                             }else {
-                                cekInternet();
+                                if (mnewpassword.length()<=5){
+                                    mnewpassword.setError(getString(R.string.title_passwordRequired));
+
+                                }else {
+                                    if (mretypepassword.length()<=5){
+                                        mretypepassword.setError(getString(R.string.title_passwordRequired));
+
+                                    }else {
+                                        if (mnewpassword.getText().toString().equals(mretypepassword.getText().toString())){
+                                            cekInternet();
+                                            if (internet){
+                                                changepassword();
+                                            }else {
+                                                cekInternet();
+                                            }
+                                        }else {
+
+                                        }
+                                    }
+                                }
+
                             }
                         }
                     }
                 }
+
 
             }
         });
@@ -85,9 +127,10 @@ public class ChangePassword extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (mretypepassword.getText().toString().equals(mnewpassword.getText().toString())){
-                    msave.setEnabled(true);
+//                    msave.setEnabled(true);
                 }else {
                     mretypepassword.setError(getString(R.string.title_Passwordwrong));
+
 
                 }
             }
