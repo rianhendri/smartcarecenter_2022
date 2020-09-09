@@ -129,7 +129,7 @@ public class AddDetailFocView extends AppCompatActivity {
         mlistitem_foc.setHasFixedSize(true);
         reitem = new ArrayList<Add_foc_req_itemView>();
         if (internet){
-            LoadPress();
+//            LoadPress();
             LoadData();
         }else {
 
@@ -225,64 +225,67 @@ public class AddDetailFocView extends AppCompatActivity {
         finish();
 
     }
-    public void LoadPress(){
-        loading = ProgressDialog.show(AddDetailFocView.this, "", getString(R.string.title_loading), true);
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("sessionId",sesionid_new);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
-        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
-        panggilkomplek.enqueue(new Callback<JsonObject>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                JsonObject homedata=response.body();
-                String statusnya = homedata.get("status").getAsString();
-                String errornya = homedata.get("errorMessage").toString();
-                MhaveToUpdate = homedata.get("haveToUpdate").toString();
-                MsessionExpired = homedata.get("sessionExpired").toString();
-                if (statusnya.equals("OK")) {
-                    sesionid();
-                    JsonObject data = homedata.getAsJsonObject("data");
-                    loading.dismiss();
-
-                    listsn=data.getAsJsonArray("pressList");
-                    for (int i = 0; i < listsn.size(); ++i) {
-                        JsonObject jsonObject2 = (JsonObject)listsn.get(i);
-                        String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
-                        String string5 = jsonObject2.getAsJsonObject().get("id").getAsString();
-                        Integer previmpress = jsonObject2.getAsJsonObject().get("previousImpression").getAsInt();
-                        snname.add(string4);
-                        snid.add(string5);
-                        previmpression.add(previmpress);
-                        for (int x = 0; x < snid.size(); ++x) {
-                            for (int z = 0; z < snname.size(); ++z) {
-                                if (pressid.equals(snid.get(x))){
-                                    msn.setText(snname.get(z));
-                                }
-                            }
-
-                        }
-                        loading.dismiss();
-                    }
-                }else {
-                    Toast.makeText(AddDetailFocView.this, errornya.toString(),Toast.LENGTH_LONG).show();
-                    loading.dismiss();
-                }
-            }
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                loading.dismiss();
-                Toast.makeText(AddDetailFocView.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
-                cekInternet();
-
-
-            }
-        });
-    }
+//    public void LoadPress(){
+//        loading = ProgressDialog.show(AddDetailFocView.this, "", getString(R.string.title_loading), true);
+//        JsonObject jsonObject = new JsonObject();
+//        jsonObject.addProperty("sessionId",sesionid_new);
+//        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+//        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
+//        panggilkomplek.enqueue(new Callback<JsonObject>() {
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                JsonObject homedata=response.body();
+//                String statusnya = homedata.get("status").getAsString();
+//                String errornya = homedata.get("errorMessage").toString();
+//                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+//                MsessionExpired = homedata.get("sessionExpired").toString();
+//                if (statusnya.equals("OK")) {
+//                    sesionid();
+//                    JsonObject data = homedata.getAsJsonObject("data");
+//                    loading.dismiss();
+//                    if (data.getAsJsonArray("pressList")!=null){
+//                        listsn=data.getAsJsonArray("pressList");
+//                        for (int i = 0; i < listsn.size(); ++i) {
+//                            JsonObject jsonObject2 = (JsonObject)listsn.get(i);
+//                            String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
+//                            String string5 = jsonObject2.getAsJsonObject().get("id").getAsString();
+//                            Integer previmpress = jsonObject2.getAsJsonObject().get("previousImpression").getAsInt();
+//                            snname.add(string4);
+//                            snid.add(string5);
+//                            previmpression.add(previmpress);
+//                            for (int x = 0; x < snid.size(); ++x) {
+//                                for (int z = 0; z < snname.size(); ++z) {
+//                                    if (pressid.equals(snid.get(x))){
+//                                        msn.setText(snname.get(z));
+//                                    }
+//                                }
+//
+//                            }
+//                            loading.dismiss();
+//                        }
+//                    }else {
+//
+//                    }
+//
+//                }else {
+//                    Toast.makeText(AddDetailFocView.this, errornya.toString(),Toast.LENGTH_LONG).show();
+//                    loading.dismiss();
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                loading.dismiss();
+//                Toast.makeText(AddDetailFocView.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+//                cekInternet();
+//
+//
+//            }
+//        });
+//    }
     public void LoadData(){
         gson = new Gson();
-//        loading = ProgressDialog.show(AddDetailFocView.this, "", getString(R.string.title_loading), true);
+        loading = ProgressDialog.show(AddDetailFocView.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("orderNo",noOrder);
@@ -299,29 +302,11 @@ public class AddDetailFocView extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
-
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     pressid = data.get("pressGuid").getAsString();
-
-                    for (int i = 0; i < listsn.size(); ++i) {
-                        JsonObject jsonObject2 = (JsonObject)listsn.get(i);
-                        String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
-                        String string5 = jsonObject2.getAsJsonObject().get("id").getAsString();
-                        Integer previmpress = jsonObject2.getAsJsonObject().get("previousImpression").getAsInt();
-                        snname.add(string4);
-                        snid.add(string5);
-                        previmpression.add(previmpress);
-                        for (int x = 0; x < snid.size(); ++x) {
-                            for (int z = 0; z < snname.size(); ++z) {
-                                if (pressid.equals(snid.get(x))){
-                                    msn.setText(snname.get(x));
-                                }
-                            }
-
-                        }
-                        loading.dismiss();
-                    }
+                    String pressname = data.get("pressTypeName").getAsString();
+                    msn.setText(pressname);
                     String orderno = data.get("orderNo").getAsString();
                     String date = data.get("date").getAsString();
                     String pressstart = data.get("previousImpression").getAsString();

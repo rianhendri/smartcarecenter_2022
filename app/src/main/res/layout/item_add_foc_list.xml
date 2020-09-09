@@ -187,7 +187,7 @@
 
 
                 <LinearLayout
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -206,16 +206,6 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="end">
-                            <TextView
-                                android:id="@+id/harga"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/segoeui"
-                                android:text="Rp.999.999.999"
-                                android:layout_marginLeft="4dp"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
-                                android:layout_marginBottom="2dp"/>
                         </LinearLayout>
 
                     </LinearLayout>

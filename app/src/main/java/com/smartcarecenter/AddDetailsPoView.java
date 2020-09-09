@@ -129,7 +129,7 @@ public class AddDetailsPoView extends AppCompatActivity {
         mlistitem_foc.setHasFixedSize(true);
         reitem = new ArrayList<Add_po_req_itemView>();
         if (internet){
-            LoadPress();
+//            LoadPress();
             LoadData();
         }else {
 
@@ -239,7 +239,6 @@ public class AddDetailsPoView extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
                 String errornya = homedata.get("errorMessage").toString();
@@ -248,21 +247,21 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
-
-
                     loading.dismiss();
-
-                    listsn=data.getAsJsonArray("pressList");
-                    for (int i = 0; i < listsn.size(); ++i) {
-                        JsonObject jsonObject2 = (JsonObject)listsn.get(i);
-                        String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
-                        String string5 = jsonObject2.getAsJsonObject().get("id").getAsString();
-                        Integer previmpress = jsonObject2.getAsJsonObject().get("previousImpression").getAsInt();
-                        snname.add(string4);
-                        snid.add(string5);
-                        previmpression.add(previmpress);
-                        loading.dismiss();
+                    if (data.getAsJsonArray("pressList")!=null){
+                        listsn=data.getAsJsonArray("pressList");
+                        for (int i = 0; i < listsn.size(); ++i) {
+                            JsonObject jsonObject2 = (JsonObject)listsn.get(i);
+                            String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
+                            String string5 = jsonObject2.getAsJsonObject().get("id").getAsString();
+                            Integer previmpress = jsonObject2.getAsJsonObject().get("previousImpression").getAsInt();
+                            snname.add(string4);
+                            snid.add(string5);
+                            previmpression.add(previmpress);
+                            loading.dismiss();
+                        }
                     }
+
                 }else {
                     Toast.makeText(AddDetailsPoView.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();
@@ -280,7 +279,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     }
     public void LoadData(){
         gson = new Gson();
-//        loading = ProgressDialog.show(AddDetailFocView.this, "", getString(R.string.title_loading), true);
+        loading = ProgressDialog.show(AddDetailsPoView.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("orderNo",noOrder);
@@ -297,9 +296,10 @@ public class AddDetailsPoView extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
-
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    String pressname = data.get("pressTypeName").getAsString();
+                        msn.setText(pressname);
                     tax = data.get("totalTax").getAsDouble();
                     Locale localeID = new Locale("in", "ID");
                     final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###.00");
@@ -310,22 +310,7 @@ public class AddDetailsPoView extends AppCompatActivity {
                     pressid = data.get("pressGuid").getAsString();
                     String nopo = data.get("poNo").getAsString();
                     mpono.setText(nopo);
-                    for (int i = 0; i < listsn.size(); ++i) {
-                        JsonObject jsonObject2 = (JsonObject)listsn.get(i);
-                        String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
-                        String string5 = jsonObject2.getAsJsonObject().get("id").getAsString();
-                        snname.add(string4);
-                        snid.add(string5);
-                        for (int x = 0; x < snid.size(); ++x) {
-                            for (int z = 0; z < snname.size(); ++z) {
-                                if (pressid.equals(snid.get(x))){
-                                    msn.setText(snname.get(x));
-                                }
-                            }
 
-                        }
-                        loading.dismiss();
-                    }
                     String orderno = data.get("orderNo").getAsString();
                     String date = data.get("date").getAsString();
 //                    String pressstart = data.get("previousImpression").getAsString();

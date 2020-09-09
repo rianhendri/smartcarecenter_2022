@@ -216,40 +216,43 @@ public class AddRequest extends AppCompatActivity {
                 }
             }
             if (requestCode==REQUEST_IMAGE_GALLERY) {
-                photo_location = data.getData();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photo_location);
-                    Bitmap bitmap3 = ThumbnailUtils.extractThumbnail(bitmap, 220, 220);
-                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
-                    datatyp = byteArrayOutputStream.toByteArray();
-                    imagefile = null;
+                if (photo_location!=null){
+                    photo_location = data.getData();
                     try {
-                        File file;
-                        String string2 = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.append("JPEG_");
-                        stringBuilder.append(string2);
-                        stringBuilder.append("_");
-                        imagefile = file = File.createTempFile((String)stringBuilder.toString(), (String)".jpg", (File)this.getExternalFilesDir(Environment.DIRECTORY_PICTURES));
-                        file.createNewFile();
-                        FileOutputStream fileOutputStream = new FileOutputStream(imagefile);
-                        fileOutputStream.write(datatyp);
-                        fileOutputStream.flush();
-                        fileOutputStream.close();
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photo_location);
+                        Bitmap bitmap3 = ThumbnailUtils.extractThumbnail(bitmap, 220, 220);
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
+                        datatyp = byteArrayOutputStream.toByteArray();
+                        imagefile = null;
+                        try {
+                            File file;
+                            String string2 = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                            StringBuilder stringBuilder = new StringBuilder();
+                            stringBuilder.append("JPEG_");
+                            stringBuilder.append(string2);
+                            stringBuilder.append("_");
+                            imagefile = file = File.createTempFile((String)stringBuilder.toString(), (String)".jpg", (File)this.getExternalFilesDir(Environment.DIRECTORY_PICTURES));
+                            file.createNewFile();
+                            FileOutputStream fileOutputStream = new FileOutputStream(imagefile);
+                            fileOutputStream.write(datatyp);
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+                        }
+                        catch (Exception exception) {
+                            exception.printStackTrace();
+                            Toast.makeText(AddRequest.this, exception.toString(),Toast.LENGTH_LONG).show();
+                        }
+                        mimgvis.setImageBitmap(bitmap3);
+                        mimgbanner.setImageBitmap(bitmap);
+                        mrequiredfoto.setVisibility(View.GONE);
                     }
-                    catch (Exception exception) {
-                        exception.printStackTrace();
-                        Toast.makeText(AddRequest.this, exception.toString(),Toast.LENGTH_LONG).show();
+                    catch (IOException iOException) {
+                        iOException.printStackTrace();
+                        Toast.makeText(AddRequest.this, iOException.toString(),Toast.LENGTH_LONG).show();
                     }
-                    mimgvis.setImageBitmap(bitmap3);
-                    mimgbanner.setImageBitmap(bitmap);
-                    mrequiredfoto.setVisibility(View.GONE);
                 }
-                catch (IOException iOException) {
-                    iOException.printStackTrace();
-                    Toast.makeText(AddRequest.this, iOException.toString(),Toast.LENGTH_LONG).show();
-                }
+
             }
 
     }

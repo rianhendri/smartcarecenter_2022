@@ -1,10 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#4fbaf8"
+    android:background="@color/dwhite"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     >
     <ImageView android:layout_width="250dp"
         android:layout_height="185dp"
-        android:src="@drawable/logo1" />
+        android:src="@drawable/logo_new_withtext" />
 </LinearLayout>

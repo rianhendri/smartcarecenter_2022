@@ -23,15 +23,15 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="0dp"
-                    android:src="@drawable/logo_black" />
-                <TextView
-                    android:textSize="20sp"
-                    android:textColor="#303030"
+                    android:src="@drawable/logo_new" />
+                <ImageView
+
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Smart Care Center"
+                    android:src="@drawable/text_logo"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:fontFamily="@font/seguisb"/>
                 <LinearLayout
                     android:id="@+id/notifikasi"
