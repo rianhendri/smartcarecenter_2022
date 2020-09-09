@@ -98,6 +98,15 @@ public class FormActivity extends AppCompatActivity {
         mempetyreq = findViewById(R.id.norequest);
         mswip = findViewById(R.id.swiprefresh);
         check.checklistform=1;
+        //showadd
+        if (showaddform.equals("false")){
+            maddform.setVisibility(View.GONE);
+            myitem_place.setPadding(0,0,0,0);
+        }else {
+            maddform.setVisibility(View.VISIBLE);
+            myitem_place.setPadding(0,0,0,120);
+
+        }
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(FormActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -192,16 +201,7 @@ public class FormActivity extends AppCompatActivity {
 
             }
         });
-        //showadd
 
-        if (showaddform.equals("false")){
-            maddform.setVisibility(View.GONE);
-            myitem_place.setPadding(0,0,0,0);
-        }else {
-            maddform.setVisibility(View.VISIBLE);
-            myitem_place.setPadding(0,0,0,120);
-
-        }
         maddform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

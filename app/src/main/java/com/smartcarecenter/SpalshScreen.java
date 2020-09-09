@@ -160,6 +160,8 @@ public class SpalshScreen extends AppCompatActivity {
         }else {
             internet=false;
             Intent noconnection = new Intent(SpalshScreen.this,NoInternet.class);
+            startActivity(noconnection);
+            finish();
         }
         //// pengecekan internet selesai
 

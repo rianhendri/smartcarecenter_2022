@@ -205,6 +205,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                     gotorating.putExtra("noticket", noticket);
                     startActivity(gotorating);
                     overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
                 }else {
 
                 }
@@ -496,6 +497,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                     refresh=true;
                 }
                 super.onBackPressed();
+                finish();
 
             }else {
                 super.onBackPressed();

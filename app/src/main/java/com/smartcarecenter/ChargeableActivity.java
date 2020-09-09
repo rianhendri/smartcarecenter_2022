@@ -97,6 +97,15 @@ public class ChargeableActivity extends AppCompatActivity {
         mrecord = findViewById(R.id.totalorder);
         mfooterload = findViewById(R.id.footerload);
         mswip = findViewById(R.id.swiprefresh);
+        //showadd
+        if (showaddpo.equals("false")){
+            maddFoc.setVisibility(View.GONE);
+            myitem_place.setPadding(0,0,0,0);
+        }else {
+            maddFoc.setVisibility(View.VISIBLE);
+            myitem_place.setPadding(0,0,0,150);
+
+        }
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(ChargeableActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -192,15 +201,7 @@ public class ChargeableActivity extends AppCompatActivity {
 
             }
         });
-        //showadd
-        if (showaddpo.equals("false")){
-            maddFoc.setVisibility(View.GONE);
-            myitem_place.setPadding(0,0,0,0);
-        }else {
-            maddFoc.setVisibility(View.VISIBLE);
-            myitem_place.setPadding(0,0,0,150);
 
-        }
         maddFoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

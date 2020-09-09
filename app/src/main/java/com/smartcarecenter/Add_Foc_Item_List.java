@@ -46,6 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.AddDetailFoc.lastimpresi;
 import static com.smartcarecenter.AddDetailFoc.mpressId;
 import static com.smartcarecenter.FormActivity.valuefilter;
 
@@ -87,6 +88,7 @@ public class Add_Foc_Item_List extends AppCompatActivity {
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             mpressId = bundle2.getString("pressId");
+            lastimpresi = bundle2.getString("lastImpres");
 
         }
         //setlayout recyler

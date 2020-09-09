@@ -67,6 +67,7 @@ public class AddDetailFoc extends AppCompatActivity {
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem;
     EditText mlastimpresi;
     public static String mpressId = "";
+    public static String lastimpresi = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item;
@@ -127,6 +128,7 @@ public class AddDetailFoc extends AppCompatActivity {
             mnoitem.setVisibility(View.GONE);
             mlistitem_foc.setVisibility(View.VISIBLE);
         }
+        mlastimpresi.setText(lastimpresi);
         ////////////////// kalo item sama quatity di replace////
         for (int i = 0; i < listpoact.size(); i++) {
             for (int j = i + 1; j < listpoact.size(); j++) {
@@ -195,8 +197,10 @@ public class AddDetailFoc extends AppCompatActivity {
         madd_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                lastimpresi = mlastimpresi.getText().toString();
                 Intent gotoaddfoc = new Intent(AddDetailFoc.this, Add_Foc_Item_List.class);
                 gotoaddfoc.putExtra("pressId",mpressId);
+                gotoaddfoc.putExtra("lastImpres",lastimpresi);
                 startActivity(gotoaddfoc);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();

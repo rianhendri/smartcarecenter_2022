@@ -21,10 +21,15 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.messagecloud.check;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.smartcarecenter.FormActivity.list2;
+import static com.smartcarecenter.FormActivity.refresh;
+import static com.smartcarecenter.FormActivity.valuefilter;
 
 public class DetailsNotification extends AppCompatActivity {
     String MhaveToUpdate = "";
@@ -156,11 +161,28 @@ public class DetailsNotification extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (username==null){
-            super.onBackPressed();
+        if (check.checknotif==1){
+            if (username==null){
+                if (check.checklistform==1){
+//                    list2.clear();
+//                    refresh=true;
+                }
+                super.onBackPressed();
+                finish();
+
+            }else {
+                super.onBackPressed();
+//            refresh=true;
+                Intent back = new Intent(DetailsNotification.this,Notification.class);
+                back.putExtra("pos",valuefilter);
+                startActivity(back);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                finish();
+            }
         }else {
-            startActivity(new Intent((Context)this, Notification.class));
+            Intent back = new Intent(DetailsNotification.this,Dashboard.class);
+            back.putExtra("pos",valuefilter);
+            startActivity(back);
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
             finish();
         }

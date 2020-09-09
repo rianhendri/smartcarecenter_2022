@@ -230,13 +230,16 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             myviewholder.mbar4.setTextColor(context.getResources().getColor(R.color.black));
 
         }
-        if (myItem.get(i).getSupportEndDateTime()==null){
-            myviewholder.mendtime.setText("-");
-        }else if (myItem.get(i).getSupportStartDateTime()==null){
+        if (myItem.get(i).getSupportStartDateTime()==null){
             myviewholder.mstarttime.setText("-");
         }else {
-            myviewholder.mendtime.setText(enddate);
             myviewholder.mstarttime.setText(startdate);
+
+            if (myItem.get(i).getSupportEndDateTime()==null){
+                myviewholder.mendtime.setText("-");
+            }else {
+                myviewholder.mendtime.setText(enddate);
+            }
         }
 
 
