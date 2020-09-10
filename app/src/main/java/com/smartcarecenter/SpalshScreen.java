@@ -96,7 +96,7 @@ public class SpalshScreen extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                                cekInternet();
                                 Toast.makeText(SpalshScreen.this, getString(R.string.title_excpetation), Toast.LENGTH_SHORT).show();
 
                             }
@@ -128,10 +128,8 @@ public class SpalshScreen extends AppCompatActivity {
 
     }
     public void getSessionId(){
-
         SharedPreferences sharedPreferences = getSharedPreferences("SESSION_ID",MODE_PRIVATE);
         sesionid_new = sharedPreferences.getString("session_id", "");
-
     }
     public void setLocale(String lang) {
         Locale locale = new Locale(lang);
@@ -139,9 +137,9 @@ public class SpalshScreen extends AppCompatActivity {
         Configuration configuration = new Configuration();
         configuration.locale = locale;
         getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-        editor.putString("My_Lang", lang);
-        editor.apply();
+//        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+//        editor.putString("My_Lang", lang);
+//        editor.apply();
     }
     public void loadLanguage() {
         SharedPreferences preferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
@@ -155,8 +153,6 @@ public class SpalshScreen extends AppCompatActivity {
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)
         {
             internet = true;
-
-
         }else {
             internet=false;
             Intent noconnection = new Intent(SpalshScreen.this,NoInternet.class);

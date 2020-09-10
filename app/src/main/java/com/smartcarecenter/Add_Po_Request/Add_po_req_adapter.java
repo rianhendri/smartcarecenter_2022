@@ -43,6 +43,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.smartcarecenter.AddDetailsPo;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
 
@@ -138,6 +139,8 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                     addFoclistreq.remove(i);
                     notifyItemRemoved(i);
                     notifyItemRangeChanged(i, addFoclistreq.size());
+
+
                     totalqty = 0;
                     for (int x = 0 ; x < addFoclistreq.size(); x++) {
                         totalqty += addFoclistreq.get(x).getQty();

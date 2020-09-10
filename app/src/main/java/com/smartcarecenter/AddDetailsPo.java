@@ -83,7 +83,7 @@ public class AddDetailsPo extends AppCompatActivity {
     List<Integer> previmpression = new ArrayList();
     //list item add
     public static ArrayList<Add_po_req_item> reitem;
-    Add_po_req_adapter req_adapter;
+    public static Add_po_req_adapter req_adapter;
     private LinearLayoutManager linearLayoutManager;
     String jsonarayitem = "";
     JsonArray myCustomArray;
@@ -119,7 +119,7 @@ public class AddDetailsPo extends AppCompatActivity {
 //        linearLayoutManager.setReverseLayout(true);
 //        linearLayoutManager.setStackFromEnd(true);
         mlistitem_foc.setLayoutManager(linearLayoutManager);
-        mlistitem_foc.setHasFixedSize(true);
+        mlistitem_foc.setHasFixedSize(false);
         reitem = new ArrayList<Add_po_req_item>();
         if (internet){
             LoadPress();

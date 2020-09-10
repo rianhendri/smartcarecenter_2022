@@ -85,31 +85,25 @@ public class ChangePassword extends AppCompatActivity {
                                 }
                             }
                         }else {
-                            if (moldpassword.length()<=5){
-                                moldpassword.setError(getString(R.string.title_passwordRequired));
+                            if (mnewpassword.length()<=5){
+                                mnewpassword.setError(getString(R.string.title_passwordRequired));
 
                             }else {
-                                if (mnewpassword.length()<=5){
-                                    mnewpassword.setError(getString(R.string.title_passwordRequired));
+                                if (mretypepassword.length()<=5){
+                                    mretypepassword.setError(getString(R.string.title_passwordRequired));
 
                                 }else {
-                                    if (mretypepassword.length()<=5){
-                                        mretypepassword.setError(getString(R.string.title_passwordRequired));
-
-                                    }else {
-                                        if (mnewpassword.getText().toString().equals(mretypepassword.getText().toString())){
-                                            cekInternet();
-                                            if (internet){
-                                                changepassword();
-                                            }else {
-                                                cekInternet();
-                                            }
+                                    if (mnewpassword.getText().toString().equals(mretypepassword.getText().toString())){
+                                        cekInternet();
+                                        if (internet){
+                                            changepassword();
                                         }else {
-
+                                            cekInternet();
                                         }
+                                    }else {
+
                                     }
                                 }
-
                             }
                         }
                     }

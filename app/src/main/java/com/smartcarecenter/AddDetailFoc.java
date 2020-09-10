@@ -112,7 +112,7 @@ public class AddDetailFoc extends AppCompatActivity {
 //        linearLayoutManager.setReverseLayout(true);
 //        linearLayoutManager.setStackFromEnd(true);
         mlistitem_foc.setLayoutManager(linearLayoutManager);
-        mlistitem_foc.setHasFixedSize(true);
+        mlistitem_foc.setHasFixedSize(false);
         reitem = new ArrayList<Add_foc_req_item>();
         if (internet){
             LoadPress();
