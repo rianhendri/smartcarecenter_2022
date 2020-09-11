@@ -6,139 +6,145 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:orientation="vertical">
-    <LinearLayout
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:id="@+id/header"
-        android:background="@color/backgourndgrey"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        >
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="250dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/logopanjang" >
-        </ImageView>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/bgwhitecorner"
-        android:elevation="5dp"
-        android:orientation="vertical"
-        android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0">
-
-        <TextView
+        android:layout_height="match_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="26dp"
-            android:layout_marginBottom="55dp"
-            android:fontFamily="@font/segoeuib"
-            android:gravity="center"
-            android:text="@string/title_pleasesignin"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp" />
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/header"
+                android:background="@color/backgourndgrey"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="26dp"
-            android:fontFamily="@font/segoeui"
-            android:gravity="center"
-            android:text="@string/title_username" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="250dp"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/logopanjang" >
+                </ImageView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bgwhitecorner"
+                android:elevation="5dp"
+                android:orientation="vertical"
+                android:padding="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout"
+                app:layout_constraintVertical_bias="0.0">
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/segoeui"
-            android:maxLength="450"
-            android:padding="5dp"
-            android:text="" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="26dp"
+                    android:layout_marginBottom="55dp"
+                    android:fontFamily="@font/segoeuib"
+                    android:gravity="center"
+                    android:text="@string/title_pleasesignin"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="26dp"
-            android:fontFamily="@font/segoeui"
-            android:gravity="center"
-            android:text="@string/title_password" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="26dp"
+                    android:fontFamily="@font/segoeui"
+                    android:gravity="center"
+                    android:text="@string/title_username" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/segoeui"
-            android:inputType="textPassword"
-            android:maxLength="50"
-            android:padding="5dp"
-            android:text="" />
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/segoeui"
+                    android:maxLength="450"
+                    android:padding="5dp"
+                    android:text="" />
 
-        <TextView
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/btnlogin"
-            android:gravity="center"
-            android:padding="15dp"
-            android:text="@string/title_login"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="26dp"
+                    android:fontFamily="@font/segoeui"
+                    android:gravity="center"
+                    android:text="@string/title_password" />
 
-        <TextView
-            android:id="@+id/forgotpassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/title_forgot_password"
-            android:textColor="@color/colorPrimary"
-            android:textSize="15sp" />
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/segoeui"
+                    android:inputType="textPassword"
+                    android:maxLength="50"
+                    android:padding="5dp"
+                    android:text="" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
-        android:layout_marginTop="-250dp">
+                <TextView
+                    android:id="@+id/login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/btnlogin"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="@string/title_login"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/forgotpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="@string/title_forgot_password"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header"
+                android:layout_marginTop="-250dp">
 
-    <TextView
-        android:id="@+id/version_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
-        android:layout_marginTop="250dp"
-        android:fontFamily="@font/segoeui"
-        android:gravity="center"
-        android:padding="14dp"
-        android:text="Version"
-        android:textColor="@color/darkgrey"
-        android:textSize="12sp" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/version_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header"
+                android:layout_marginTop="250dp"
+                android:fontFamily="@font/segoeui"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="Version"
+                android:textColor="@color/darkgrey"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

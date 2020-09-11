@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -19,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -226,6 +228,17 @@ public class Dashboard extends AppCompatActivity {
                     show.apply();
                     linearLayoutManager = new GridLayoutManager(Dashboard.this, 2);
                     mymenu.setLayoutManager(linearLayoutManager);
+                    Configuration orientation = new Configuration();
+
+                    if(mymenu.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        mymenu.setLayoutManager(new GridLayoutManager(Dashboard.this, 2));
+                    } else if (mymenu.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        mymenu.setLayoutManager(new GridLayoutManager(Dashboard.this, 3));
+                        ViewGroup.LayoutParams params=mymenu.getLayoutParams();
+                        params.height=700;
+                        mymenu.setLayoutParams(params);
+                    }
+                    mymenu.setHasFixedSize(true);
                     MenuItem menuItem = new MenuItem();
                     MenuItem menuItem2 = new MenuItem();
                     MenuItem menuItem3 = new MenuItem();

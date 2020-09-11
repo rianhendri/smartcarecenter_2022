@@ -177,7 +177,12 @@ public class AddRequest extends AppCompatActivity {
 
             }
         });
-
+        mback.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,  resultCode,  data);
