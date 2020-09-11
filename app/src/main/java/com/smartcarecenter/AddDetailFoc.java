@@ -53,6 +53,7 @@ import retrofit2.Response;
 
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
 import static com.smartcarecenter.FormActivity.valuefilter;
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 
 public class AddDetailFoc extends AppCompatActivity {
     public static JsonArray listsn;
@@ -280,7 +281,7 @@ public class AddDetailFoc extends AppCompatActivity {
         loading = ProgressDialog.show(AddDetailFoc.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -340,7 +341,7 @@ public class AddDetailFoc extends AppCompatActivity {
         jsonObject.addProperty("pressGuid",mpressId);
         jsonObject.addProperty("currentImpression",mlastimpresi.getText().toString());
         jsonObject.add("items", myCustomArray);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.sendData(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)

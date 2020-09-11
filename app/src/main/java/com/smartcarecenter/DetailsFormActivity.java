@@ -56,6 +56,7 @@ import retrofit2.Response;
 import static com.smartcarecenter.FormActivity.refresh;
 import static com.smartcarecenter.FormActivity.list2;
 import static com.smartcarecenter.FormActivity.valuefilter;
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 
 
 public class DetailsFormActivity extends AppCompatActivity {
@@ -280,7 +281,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("formRequestCd",noreq);
 //        Toast.makeText(DetailsFormActivity.this,jsonObject.toString(), Toast.LENGTH_SHORT).show();
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -428,7 +429,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("formRequestCd",noreq);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONcancelform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)

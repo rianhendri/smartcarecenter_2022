@@ -30,6 +30,7 @@ import retrofit2.Response;
 import static com.smartcarecenter.FormActivity.list2;
 import static com.smartcarecenter.FormActivity.refresh;
 import static com.smartcarecenter.FormActivity.valuefilter;
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 
 public class DetailsNotification extends AppCompatActivity {
     String MhaveToUpdate = "";
@@ -82,7 +83,7 @@ public class DetailsNotification extends AppCompatActivity {
         cekInternet();
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("guid", id);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetnotifget(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)

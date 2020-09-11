@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-
+    public static String baseurl= "https://api.smartcarecenter.id/";
     private static OkHttpClient httpClient = new OkHttpClient().newBuilder()
                                 .connectTimeout(100, TimeUnit.SECONDS)
                                 .readTimeout(150, TimeUnit.SECONDS)

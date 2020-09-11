@@ -75,6 +75,7 @@ import static android.os.Build.VERSION.SDK_INT;
 import static android.widget.AdapterView.*;
 import static com.smartcarecenter.DetailsFormActivity.noreq;
 import static com.smartcarecenter.FormActivity.valuefilter;
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 
 public class AddRequest extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1000;
@@ -364,7 +365,7 @@ public class AddRequest extends AppCompatActivity {
         loading = ProgressDialog.show(AddRequest.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -413,7 +414,7 @@ public class AddRequest extends AppCompatActivity {
     public void uploadData(){
         loading = ProgressDialog.show(AddRequest.this, "", getString(R.string.title_loading), true);
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),imagefile);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         jsonPostService.uploadImage(MultipartBody.Part.createFormData((String)"",
                         imagefile.getName(),requestBody), RequestBody.create(MultipartBody.FORM,sesionid_new), RequestBody.create((MediaType)MultipartBody.FORM,
                 mpressId), RequestBody.create((MediaType)MultipartBody.FORM,

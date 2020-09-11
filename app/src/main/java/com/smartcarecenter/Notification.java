@@ -37,6 +37,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+
 public class Notification extends AppCompatActivity {
     String MhaveToUpdate = "";
     String MsessionExpired = "";
@@ -109,7 +111,7 @@ public class Notification extends AppCompatActivity {
         loading = ProgressDialog.show(Notification.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetnotiflist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)

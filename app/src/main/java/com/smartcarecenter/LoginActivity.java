@@ -32,6 +32,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+
 public class LoginActivity extends AppCompatActivity {
     TextView mlogin, mforgotpassword, mversi;
     EditText musername,mpassword;
@@ -101,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         jsonObject.addProperty("password",mpassword.getText().toString());
         jsonObject.addProperty("firebaseToken",token);
         jsonObject.addProperty("ver","1.0.0");
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> call = jsonPostService.postRawJSONlogin(jsonObject);
         call.enqueue(new Callback<JsonObject>() {
             @Override

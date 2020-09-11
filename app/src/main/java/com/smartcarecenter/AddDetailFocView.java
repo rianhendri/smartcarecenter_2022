@@ -58,6 +58,7 @@ import retrofit2.Response;
 
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
 import static com.smartcarecenter.FormActivity.valuefilter;
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 
 public class AddDetailFocView extends AppCompatActivity {
     public static JsonArray listsn;
@@ -225,71 +226,13 @@ public class AddDetailFocView extends AppCompatActivity {
         finish();
 
     }
-//    public void LoadPress(){
-//        loading = ProgressDialog.show(AddDetailFocView.this, "", getString(R.string.title_loading), true);
-//        JsonObject jsonObject = new JsonObject();
-//        jsonObject.addProperty("sessionId",sesionid_new);
-//        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
-//        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
-//        panggilkomplek.enqueue(new Callback<JsonObject>() {
-//            @RequiresApi(api = Build.VERSION_CODES.N)
-//            @Override
-//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-//                JsonObject homedata=response.body();
-//                String statusnya = homedata.get("status").getAsString();
-//                String errornya = homedata.get("errorMessage").toString();
-//                MhaveToUpdate = homedata.get("haveToUpdate").toString();
-//                MsessionExpired = homedata.get("sessionExpired").toString();
-//                if (statusnya.equals("OK")) {
-//                    sesionid();
-//                    JsonObject data = homedata.getAsJsonObject("data");
-//                    loading.dismiss();
-//                    if (data.getAsJsonArray("pressList")!=null){
-//                        listsn=data.getAsJsonArray("pressList");
-//                        for (int i = 0; i < listsn.size(); ++i) {
-//                            JsonObject jsonObject2 = (JsonObject)listsn.get(i);
-//                            String string4 = jsonObject2.getAsJsonObject().get("name").getAsString();
-//                            String string5 = jsonObject2.getAsJsonObject().get("id").getAsString();
-//                            Integer previmpress = jsonObject2.getAsJsonObject().get("previousImpression").getAsInt();
-//                            snname.add(string4);
-//                            snid.add(string5);
-//                            previmpression.add(previmpress);
-//                            for (int x = 0; x < snid.size(); ++x) {
-//                                for (int z = 0; z < snname.size(); ++z) {
-//                                    if (pressid.equals(snid.get(x))){
-//                                        msn.setText(snname.get(z));
-//                                    }
-//                                }
-//
-//                            }
-//                            loading.dismiss();
-//                        }
-//                    }else {
-//
-//                    }
-//
-//                }else {
-//                    Toast.makeText(AddDetailFocView.this, errornya.toString(),Toast.LENGTH_LONG).show();
-//                    loading.dismiss();
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<JsonObject> call, Throwable t) {
-//                loading.dismiss();
-//                Toast.makeText(AddDetailFocView.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
-//                cekInternet();
-//
-//
-//            }
-//        });
-//    }
     public void LoadData(){
         gson = new Gson();
         loading = ProgressDialog.show(AddDetailFocView.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("orderNo",noOrder);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.vieworderfoc(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -402,7 +345,7 @@ public class AddDetailFocView extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("orderNo",noOrder);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.cancelfoc(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)

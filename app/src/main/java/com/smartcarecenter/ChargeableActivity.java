@@ -52,6 +52,7 @@ import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
 import static com.smartcarecenter.Dashboard.showaddfoc;
 import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 
 public class ChargeableActivity extends AppCompatActivity {
     LinearLayout maddFoc;
@@ -251,7 +252,7 @@ public class ChargeableActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.list_po(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -321,7 +322,7 @@ public class ChargeableActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status","-");
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.list_po(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -377,7 +378,7 @@ public class ChargeableActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://api.smartcarecenter.id/");
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.list_po(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
