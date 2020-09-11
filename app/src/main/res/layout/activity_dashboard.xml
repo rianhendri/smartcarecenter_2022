@@ -23,16 +23,18 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="0dp"
-                    android:src="@drawable/logo_new" />
+                    android:src="@mipmap/ic_launcher" />
+
                 <ImageView
 
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/text_logo"
                     android:layout_weight="1"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="center"
                     android:padding="15dp"
-                    android:fontFamily="@font/seguisb"/>
+                    android:src="@drawable/logotext" />
+
                 <LinearLayout
                     android:id="@+id/notifikasi"
                     android:layout_width="59dp"
