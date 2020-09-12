@@ -28,6 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class ChangePassword extends AppCompatActivity {
     EditText moldpassword, mnewpassword, mretypepassword;
@@ -162,6 +163,7 @@ public class ChangePassword extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("oldPassword", moldpassword.getText().toString());
         jsonObject.addProperty("newPassword", mnewpassword.getText().toString());
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONchangepassword(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

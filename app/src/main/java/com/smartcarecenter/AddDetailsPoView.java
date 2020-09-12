@@ -52,6 +52,7 @@ import retrofit2.Response;
 
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddDetailsPoView extends AppCompatActivity {
     public static JsonArray listsn;
@@ -234,6 +235,7 @@ public class AddDetailsPoView extends AppCompatActivity {
         loading = ProgressDialog.show(AddDetailsPoView.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
+
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -284,6 +286,7 @@ public class AddDetailsPoView extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("orderNo",noOrder);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.viewchargeable(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -407,6 +410,7 @@ public class AddDetailsPoView extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("orderNo",noOrder);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.cancelpo(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

@@ -54,6 +54,7 @@ import retrofit2.Response;
 import static com.smartcarecenter.Add_Po_Item_list_model.Add_po_list_adapter.listpoact;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddDetailsPo extends AppCompatActivity {
     public static JsonArray listsn;
@@ -308,6 +309,7 @@ public class AddDetailsPo extends AppCompatActivity {
         loading = ProgressDialog.show(AddDetailsPo.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -368,6 +370,7 @@ public class AddDetailsPo extends AppCompatActivity {
         jsonObject.addProperty("pressGuid",mpressId);
         jsonObject.addProperty("poNo",mnopo.getText().toString());
         jsonObject.add("items", myCustomArray);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.sendPo(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

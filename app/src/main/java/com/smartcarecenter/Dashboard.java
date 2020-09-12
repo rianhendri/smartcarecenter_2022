@@ -40,6 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class Dashboard extends AppCompatActivity {
     public static boolean installed = true;
@@ -175,6 +176,7 @@ public class Dashboard extends AppCompatActivity {
     public void reqApi() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONconfig(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -187,6 +189,7 @@ public class Dashboard extends AppCompatActivity {
                 String errornya = homedata.get("errorMessage").toString();
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
+                jsonObject.addProperty("ver",ver);
                 if (statusnya.equals("OK")){
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");

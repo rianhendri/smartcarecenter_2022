@@ -31,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class SettingActivity extends AppCompatActivity {
     LinearLayout mmyprofile, mchangepass, mlanguage, mlogout;
@@ -131,6 +132,7 @@ public class SettingActivity extends AppCompatActivity {
         loading = ProgressDialog.show(SettingActivity.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlogout(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

@@ -26,6 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class SpalshScreen extends AppCompatActivity {
     String MhaveToUpdate = "";
@@ -62,7 +63,7 @@ public class SpalshScreen extends AppCompatActivity {
                         /////////// cek sesion id nya
                         final JsonObject jsonObject = new JsonObject();
                         jsonObject.addProperty("sessionId",sesionid_new);
-//                    jsonObject.addProperty("ver","1.0.0");
+                        jsonObject.addProperty("ver",ver);
                         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class,
                                 baseurl);
                         Call<JsonObject> call = jsonPostService.postRawJSONping(jsonObject);

@@ -52,6 +52,7 @@ import static com.smartcarecenter.Dashboard.showaddfoc;
 import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class FormActivity extends AppCompatActivity {
     private static final String TAG = "FormActivity";
@@ -253,6 +254,7 @@ public class FormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -320,6 +322,7 @@ public class FormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status","-");
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -374,6 +377,7 @@ public class FormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

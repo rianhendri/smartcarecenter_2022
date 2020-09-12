@@ -38,6 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class Notification extends AppCompatActivity {
     String MhaveToUpdate = "";
@@ -111,6 +112,7 @@ public class Notification extends AppCompatActivity {
         loading = ProgressDialog.show(Notification.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetnotiflist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

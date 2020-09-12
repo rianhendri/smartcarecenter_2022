@@ -31,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class Myprofile extends AppCompatActivity {
     ImageView mback;
@@ -97,6 +98,7 @@ public class Myprofile extends AppCompatActivity {
     public void reqApi() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONconfig(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

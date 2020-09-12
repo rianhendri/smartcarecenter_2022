@@ -76,6 +76,7 @@ import static android.widget.AdapterView.*;
 import static com.smartcarecenter.DetailsFormActivity.noreq;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddRequest extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1000;
@@ -370,6 +371,7 @@ public class AddRequest extends AppCompatActivity {
         loading = ProgressDialog.show(AddRequest.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -423,7 +425,7 @@ public class AddRequest extends AppCompatActivity {
         jsonPostService.uploadImage(MultipartBody.Part.createFormData((String)"",
                         imagefile.getName(),requestBody), RequestBody.create(MultipartBody.FORM,sesionid_new), RequestBody.create((MediaType)MultipartBody.FORM,
                 mpressId), RequestBody.create((MediaType)MultipartBody.FORM,
-                mdescrip.getText().toString())).enqueue(new Callback<JsonObject>() {
+                mdescrip.getText().toString()),RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 JsonObject jsonObject = (JsonObject)response.body();

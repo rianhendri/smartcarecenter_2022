@@ -46,6 +46,7 @@ import static com.smartcarecenter.AddDetailsPo.mpressId;
 import static com.smartcarecenter.AddDetailsPo.pono;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class Add_Po_Item_List extends AppCompatActivity {
     ImageView mback;
@@ -179,6 +180,7 @@ public class Add_Po_Item_List extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("pressGuid",mpressId);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.list_add_item_po(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

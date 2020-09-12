@@ -59,6 +59,7 @@ import retrofit2.Response;
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddDetailFocView extends AppCompatActivity {
     public static JsonArray listsn;
@@ -232,6 +233,7 @@ public class AddDetailFocView extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("orderNo",noOrder);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.vieworderfoc(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -345,6 +347,7 @@ public class AddDetailFocView extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("orderNo",noOrder);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.cancelfoc(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

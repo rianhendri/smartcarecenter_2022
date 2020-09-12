@@ -110,6 +110,7 @@ public interface IRetrofit {
     public Call<JsonObject> uploadImage(@Part MultipartBody.Part multipart,
                                         @Part("sessionId") RequestBody sessionId,
                                         @Part("pressId") RequestBody pressId,
-                                        @Part("description") RequestBody description);
+                                        @Part("description") RequestBody description,
+                                        @Part("ver") RequestBody ver);
 }
 

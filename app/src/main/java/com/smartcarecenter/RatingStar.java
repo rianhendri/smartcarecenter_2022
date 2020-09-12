@@ -34,6 +34,7 @@ import retrofit2.Response;
 
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class RatingStar extends AppCompatActivity {
     String MhaveToUpdate = "";
@@ -151,6 +152,7 @@ public class RatingStar extends AppCompatActivity {
         jsonObject.addProperty("rating", ratvalue);
         jsonObject.addProperty("comments", mcomment.getText().toString());
         jsonObject.addProperty("isApprove",value);
+        jsonObject.addProperty("ver",ver);
 //        Toast.makeText(RatingStar.this,  String.valueOf(jsonObject),Toast.LENGTH_LONG).show();
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONconfirm(jsonObject);

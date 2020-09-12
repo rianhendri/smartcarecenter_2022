@@ -15,6 +15,8 @@
  */
 package com.smartcarecenter.apihelper;
 
+import com.smartcarecenter.BuildConfig;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -25,6 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
     public static String baseurl= "https://api.smartcarecenter.id/";
+    public static String ver = BuildConfig.VERSION_NAME;
     private static OkHttpClient httpClient = new OkHttpClient().newBuilder()
                                 .connectTimeout(100, TimeUnit.SECONDS)
                                 .readTimeout(150, TimeUnit.SECONDS)

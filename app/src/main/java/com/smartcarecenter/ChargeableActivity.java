@@ -53,6 +53,7 @@ import static com.smartcarecenter.Dashboard.showaddfoc;
 import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class ChargeableActivity extends AppCompatActivity {
     LinearLayout maddFoc;
@@ -252,6 +253,7 @@ public class ChargeableActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.list_po(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -322,6 +324,7 @@ public class ChargeableActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status","-");
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.list_po(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -378,6 +381,7 @@ public class ChargeableActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.list_po(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -437,7 +441,6 @@ public class ChargeableActivity extends AppCompatActivity {
             }
         });
     }
-
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak
         ConnectivityManager connectivityManager = (ConnectivityManager) ChargeableActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -126,4 +126,5 @@
     <string name="title_ratingissue">Apakah issue Anda telah selesai ditangani?</string>
     <string name="title_lastiimpressi">Impresi Terakhir:</string>
     <string name="empetypassword">Password Diperlukan</string>
+    <string name="title_updatenew">Versi terbaru tersedia</string>
 </resources>

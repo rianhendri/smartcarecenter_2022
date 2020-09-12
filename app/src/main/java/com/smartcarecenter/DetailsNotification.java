@@ -31,6 +31,7 @@ import static com.smartcarecenter.FormActivity.list2;
 import static com.smartcarecenter.FormActivity.refresh;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
+import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class DetailsNotification extends AppCompatActivity {
     String MhaveToUpdate = "";
@@ -83,6 +84,7 @@ public class DetailsNotification extends AppCompatActivity {
         cekInternet();
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("guid", id);
+        jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetnotifget(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
