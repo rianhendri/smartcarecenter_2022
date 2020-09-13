@@ -98,7 +98,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     String mstatusName = "";
     String noticket = "";
     String sesionid_new = "";
-    String username = "";
+    public static String username = "";
     boolean installed= true;
     //timer
     public static String assist="";
@@ -209,6 +209,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                     Intent gotorating = new Intent(DetailsFormActivity.this, RatingStar.class);
                     gotorating.putExtra("id", noreq);
                     gotorating.putExtra("noticket", noticket);
+                    gotorating.putExtra("user", username);
                     startActivity(gotorating);
                     overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     finish();

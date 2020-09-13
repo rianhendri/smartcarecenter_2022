@@ -240,6 +240,7 @@ public class RatingStar extends AppCompatActivity {
         Intent back = new Intent(RatingStar.this,DetailsFormActivity.class);
         back.putExtra("id",noreq);
         back.putExtra("pos",valuefilter);
+        back.putExtra("user", DetailsFormActivity.username);
         startActivity(back);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
