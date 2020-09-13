@@ -51,7 +51,7 @@
     <string name="title_send_request">Send Request</string>
     <string name="title_notification">Notification</string>
     <string name="title_nonotif">No Notification</string>
-    <string name="title_notificationdetail">Detail Notification</string>
+    <string name="title_notificationdetail">Notification Details</string>
     <string name="title_open">Open</string>
     <string name="title_canelreq">Are you sure to cancel this request?</string>
     <string name="title_deleteReq">Delete Request</string>

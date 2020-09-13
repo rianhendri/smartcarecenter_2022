@@ -51,7 +51,7 @@
     <string name="title_send_request">Kirim Request</string>
     <string name="title_notification">Notifikasi</string>
     <string name="title_nonotif">Tidak ada notifiasi</string>
-    <string name="title_notificationdetail">Notifikasi deteail</string>
+    <string name="title_notificationdetail">Detail Notifikasi</string>
     <string name="title_open">Buka</string>
     <string name="title_canelreq">Anda yakin ingin membatalkan request?</string>
     <string name="title_deleteReq">Hapus Request</string>
