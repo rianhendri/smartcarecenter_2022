@@ -2,15 +2,15 @@
 <resources>
     <string name="app_name">Smart Care Center</string>
     <string name="title_session_Expired">Session Telah Berakhir</string>
-    <string name="title_forgot_password">Lupas Password?</string>
+    <string name="title_forgot_password">Lupa Password?</string>
     <string name="title_login">Masuk</string>
-    <string name="title_pleasesignin">Silahkan Masuk</string>
-    <string name="title_username">"Nama Pengguna: "</string>
+    <string name="title_pleasesignin">Login</string>
+    <string name="title_username">"Username: "</string>
     <string name="title_password">Kata Sandi:</string>
     <string name="title_loading">Mohon Tunggu...</string>
     <string name="title_purchase_order">Pesanan Pembelian</string>
     <string name="title_ServiceSupport">Service Support</string>
-    <string name="title_live_chat">Chat Langsung</string>
+    <string name="title_live_chat">Live Chat</string>
     <string name="title_News">Berita</string>
     <string name="title_survei">Survei</string>
     <string name="title_Setting">Pengaturan</string>
@@ -26,7 +26,7 @@
     <string name="title_fillrequired">Isi Semua form</string>
     <string name="title_oldpassword">Password Lama:</string>
     <string name="title_newpassword">Password Baru:</string>
-    <string name="title_retypepassword">Ketik Ulang Password;</string>
+    <string name="title_retypepassword">"Konfirmasi Password Baru: "</string>
     <string name="title_save">Simpan</string>
     <string name="title_changepass_succsess">Berhasil Ganti Password</string>
     <string name="title_languagechange">Bahasa Berhasil di ganti</string>
@@ -35,12 +35,12 @@
     <string name="title_detail">Details Service Support</string>
     <string name="title_Requestno">Nomor Request</string>
     <string name="title_daterequest">Tanggal Request</string>
-    <string name="title_descriptionproblem">Jelaskan Masalahnya</string>
+    <string name="title_descriptionproblem">Penjelasan Masalah</string>
     <string name="title_cancle">Batal</string>
     <string name="title_serviceticket">Ticket Service</string>
     <string name="title_location">Lokasi</string>
     <string name="title_confirm">Konfirmasi</string>
-    <string name="title_contactCS">Hubungi CS Kami</string>
+    <string name="title_contactCS">Chat dengan Support</string>
     <string name="title_comment">Coment:</string>
     <string name="title_require_rate">Rating Wajib di isi</string>
     <string name="title_tanyacs">Saya ingin bertanya seputar Formulir Permintaan:</string>
@@ -58,7 +58,7 @@
     <string name="title_yes">Ya</string>
     <string name="title_no">Tidak</string>
     <string name="title_SendReq">Kirim Request</string>
-    <string name="title_Submitreq">" Mengirimkan permintaan baru Lanjutkan?"</string>
+    <string name="title_Submitreq">Mengirimkan permintaan Service Support baru. Lanjutkan?</string>
     <string name="title_chargelabel">Chargeable</string>
     <string name="title_foc">Free of Charge</string>
     <string name="title_Passwordwrong">Kata sandi tidak sama</string>
@@ -81,7 +81,7 @@
     <string name="title_norder">No Order</string>
     <string name="title_NoFoc">No Foc</string>
     <string name="title_startimpesi">Impresi Sebelumnya</string>
-    <string name="title_endimpresi">Impresi Terbaru</string>
+    <string name="title_endimpresi">Impresi Terakhir</string>
     <string name="title_totalqty">Jumlah Qty:</string>
     <string name="title_noitem">Tidak ada item</string>
     <string name="title_category">"Kategori: "</string>
@@ -96,7 +96,7 @@
     <string name="title_newOrder">Order Baru</string>
     <string name="title_listitem">List Item</string>
     <string name="title_tanyafoc">"Saya ingin menanyakan tentang No Order: "</string>
-    <string name="title_submitorder">" Mengirimkan Pesanan baru Lanjutkan?"</string>
+    <string name="title_submitorder">Proses pesanan baru. Lanjutkan?</string>
     <string name="title_sendorder">Kirim Pesanan Baru</string>
     <string name="title_chrageadd">Tambah Chargeable</string>
     <string name="title_price">"Harga: "</string>
@@ -118,7 +118,7 @@
     <string name="title_press">"Press: "</string>
     <string name="title_By">"Oleh: "</string>
     <string name="title_namapt">Perusahaan:</string>
-    <string name="title_group">" Grup Perusahaan:"</string>
+    <string name="title_group">Grup Perusahaan:</string>
     <string name="title_Namalengkap">Nama Lengkap:</string>
     <string name="title_excpetation">" Gagal menghubungkan server. Silakan periksa koneksi internet Anda."</string>
     <string name="title_User">User</string>

@@ -3,7 +3,7 @@
     <string name="title_session_Expired">Session Expired Please Login</string>
     <string name="title_forgot_password">Forgot Password?</string>
     <string name="title_login">Login</string>
-    <string name="title_pleasesignin">Please Sign in</string>
+    <string name="title_pleasesignin">Login</string>
     <string name="title_username">"Username: "</string>
     <string name="title_password">Password:</string>
     <string name="title_loading">Please Wait....</string>
@@ -57,7 +57,7 @@
     <string name="title_yes">Yes</string>
     <string name="title_no">No</string>
     <string name="title_SendReq">Send Request</string>
-    <string name="title_Submitreq">Submiting a new request Continue?</string>
+    <string name="title_Submitreq">Submiting a new Service Support Request. Continue?</string>
     <string name="title_foc">Free of Charge</string>
     <string name="title_chargelabel">Chargeable</string>
     <string name="title_Passwordwrong">The retype password is not matched</string>
@@ -90,12 +90,12 @@
     <string name="title_vieworderfoc">View Order Foc</string>
     <string name="title_cancelorder">Order successfully canceled</string>
     <string name="title_cancelordertitledialog">Cancel Order</string>
-    <string name="title_areyoucancelorder">Are you sure you want to cancel your order?</string>
+    <string name="title_areyoucancelorder">Are you sure you want to cancel the order?</string>
     <string name="add_items">Add Item</string>
     <string name="title_newOrder">New Order</string>
     <string name="title_listitem">Item List</string>
     <string name="title_tanyafoc">"I want to ask about the Order No: "</string>
-    <string name="title_submitorder">Submiting a new Order Continue?</string>
+    <string name="title_submitorder">Submiting a new order. Continue?</string>
     <string name="title_sendorder">Send New Order</string>
     <string name="title_chrageadd">Add Chargeable</string>
     <string name="title_price">"Price: "</string>

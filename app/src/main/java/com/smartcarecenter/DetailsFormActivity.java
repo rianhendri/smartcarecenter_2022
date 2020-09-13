@@ -16,12 +16,14 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -72,9 +74,9 @@ public class DetailsFormActivity extends AppCompatActivity {
     String mallowToCancel = "";
     String mallowtoconfirm = "";
     ImageView mback,mbanner;
-    LinearLayout mcancel, mconfirm, mcs;
+    LinearLayout mcancel, mconfirm, mcs, mbackgroundalert;
     TextView mcreatedate, mdate, mdeskription, missu, moperator, mreqno, mservicetype, msn, mstatusdetail,
-            mstid, mtitle, munitcategory, mlocation;
+            mstid, mtitle, munitcategory, mlocation, mtextalert;
     String mdateapi = "";
     String mdeskriptionapi = "";
     String mformRequestCd = "";
@@ -131,6 +133,8 @@ public class DetailsFormActivity extends AppCompatActivity {
         mlayoutticket=findViewById(R.id.layoutticket);
         mservice_layout=findViewById(R.id.serviceticket);
         mlocation = findViewById(R.id.locationsn);
+        mtextalert = findViewById(R.id.textalert);
+        mbackgroundalert = findViewById(R.id.backgroundalert);
 
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(DetailsFormActivity.this, LinearLayout.VERTICAL,false);
@@ -299,6 +303,30 @@ public class DetailsFormActivity extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    String showalert = data.get("showMessage").toString();
+
+                    //check alert
+                    if (showalert.equals("true")){
+
+                        String text = data.get("messageText").getAsString();
+                        String textcolor = data.get("messageTextColor").getAsString();
+                        String bgcolor = data.get("messageBackgroundColor").getAsString();
+
+                        GradientDrawable shape =  new GradientDrawable();
+                        shape.setCornerRadius( 15 );
+                        shape.setColor(Color.parseColor("#"+bgcolor));
+
+                        mbackgroundalert.setVisibility(View.VISIBLE);
+                        mtextalert.setTextColor(Color.parseColor("#"+textcolor));
+                        mbackgroundalert.setBackground(shape);
+                        if (Build.VERSION.SDK_INT >= 24) {
+                            mtextalert.setText((CharSequence)Html.fromHtml((String)text, Html.FROM_HTML_MODE_COMPACT));
+                        } else {
+                            mtextalert.setText((CharSequence)Html.fromHtml((String)text));
+                        }
+                    }else {
+                        mbackgroundalert.setVisibility(View.GONE);
+                    }
                     //timer
                     usetime = data.get("useTimer").toString();
                     int hours = data.get("timerStartHours").getAsInt();
