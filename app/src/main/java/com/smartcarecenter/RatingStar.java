@@ -161,9 +161,14 @@ public class RatingStar extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
+                String errornya = "";
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
-                String errornya = homedata.get("errorMessage").toString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 sesionid();
@@ -180,6 +185,7 @@ public class RatingStar extends AppCompatActivity {
                 }else {
                     sesionid();
                     loading.dismiss();
+                    Toast.makeText(RatingStar.this, errornya,Toast.LENGTH_LONG).show();
                 }
             }
 

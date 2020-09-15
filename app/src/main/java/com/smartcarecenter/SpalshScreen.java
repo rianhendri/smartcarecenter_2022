@@ -70,26 +70,25 @@ public class SpalshScreen extends AppCompatActivity {
                         call.enqueue(new Callback<JsonObject>() {
                             @Override
                             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                                JsonObject post=response.body();
-                                String statusnya = post.get("status").getAsString();
-                                String errornya = post.get("errorMessage").toString();
-                                MhaveToUpdate = post.get("haveToUpdate").toString();
+                                String errornya = "";
+                                JsonObject homedata=response.body();
+                                String statusnya = homedata.get("status").getAsString();
+                                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                                }else {
+                                    errornya = homedata.get("errorMessage").getAsString();
+                                }
+                                MhaveToUpdate = homedata.get("haveToUpdate").toString();
 //                           Toast.makeText(SplashScreen.this, logonya, Toast.LENGTH_SHORT).show();
                                 ////////////
                                 if (statusnya.equals("OK")){
-                                    JsonObject data= post.getAsJsonObject("data");
+                                    JsonObject data= homedata.getAsJsonObject("data");
                                     MsessionExpired = data.get("sessionExpired").toString();
                                     sesionid();
 
                                 }else{
                                     sesionid();
-                                    //// error message
-                                    if (errornya.equals("null")){
-
-                                    }else {
-                                        Toast.makeText(SpalshScreen.this, errornya.toString(), Toast.LENGTH_SHORT).show();
-                                    }
-
+                                    Toast.makeText(SpalshScreen.this, errornya.toString(), Toast.LENGTH_SHORT).show();
 //                              Toast.makeText(EditProfile.this, sesionid_new.toString(), Toast.LENGTH_SHORT).show();
 
                                 }

@@ -190,10 +190,14 @@ public class Add_Foc_Item_List extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
+                String errornya = "";
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
-                String errornya = homedata.get("errorMessage").toString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
@@ -209,6 +213,8 @@ public class Add_Foc_Item_List extends AppCompatActivity {
                     mlistFoc_item.setAdapter(addfocitemadapter);
                     mlistFoc_item.setVisibility(View.VISIBLE);
                     loading.setVisibility(View.GONE);
+                }else {
+                    Toast.makeText(Add_Foc_Item_List.this, errornya.toString(),Toast.LENGTH_LONG).show();
                 }
             }
             @Override

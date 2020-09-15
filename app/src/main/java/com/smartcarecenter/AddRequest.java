@@ -379,9 +379,14 @@ public class AddRequest extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
+                String errornya = "";
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
-                String errornya = homedata.get("errorMessage").toString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
@@ -428,20 +433,25 @@ public class AddRequest extends AppCompatActivity {
                 mdescrip.getText().toString()),RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                JsonObject jsonObject = (JsonObject)response.body();
-                String string2 = jsonObject.get("status").getAsString();
-                String string3 = jsonObject.get("errorMessage").toString();
+                String errornya = "";
+                JsonObject jsonObject=response.body();
+                String statusnya = jsonObject.get("status").getAsString();
+                if (jsonObject.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = jsonObject.get("errorMessage").getAsString();
+                }
                 MhaveToUpdate = jsonObject.get("haveToUpdate").toString();
                 MsessionExpired = jsonObject.get("sessionExpired").toString();
                 sesionid();
-                if (string2.equals((Object)"OK")) {
+                if (statusnya.equals((Object)"OK")) {
                     String string4 = jsonObject.getAsJsonObject("data").get("message").getAsString();
                     loading.dismiss();
                     Toast.makeText((Context)AddRequest.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
                     onBackPressed();
 
                 }else {
-                    Toast.makeText((Context)AddRequest.this, (CharSequence)string3,Toast.LENGTH_SHORT).show();
+                    Toast.makeText((Context)AddRequest.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
                     loading.dismiss();
                 }
             }

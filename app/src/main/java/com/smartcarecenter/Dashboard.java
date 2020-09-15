@@ -185,9 +185,14 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
+                String errornya = "";
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
-                String errornya = homedata.get("errorMessage").toString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 jsonObject.addProperty("ver",ver);
@@ -303,6 +308,7 @@ public class Dashboard extends AppCompatActivity {
                     mymenu.setAdapter(addmenu);
                 }
                 else {
+                    Toast.makeText(Dashboard.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     sesionid();
                 }
             }
