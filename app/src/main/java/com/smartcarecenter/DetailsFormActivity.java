@@ -513,6 +513,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                 }else {
                     sesionid();
                     loading.dismiss();
+                    Toast.makeText(DetailsFormActivity.this,errornya,Toast.LENGTH_LONG).show();
                 }
             }
 
