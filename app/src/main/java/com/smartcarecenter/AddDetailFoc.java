@@ -271,6 +271,7 @@ public class AddDetailFoc extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        lastimpresi="";
         Intent back = new Intent(AddDetailFoc.this,FreeofchargeActivity.class);
         back.putExtra("pos",valuefilter);
         startActivity(back);

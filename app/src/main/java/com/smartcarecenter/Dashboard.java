@@ -31,6 +31,7 @@ import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.menuhome.MenuAdapter;
 import com.smartcarecenter.menuhome.MenuItem;
+import com.smartcarecenter.messagecloud.check;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -100,7 +101,7 @@ public class Dashboard extends AppCompatActivity {
         mnotif_btn = findViewById(R.id.notifikasi);
         cekInternet();
         getSessionId();
-
+        check.checknotif=1;
         if (internet){
             reqApi();
             appInstalledOrNot("com.whatsapp");

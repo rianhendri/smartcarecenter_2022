@@ -299,6 +299,7 @@ public class AddDetailsPo extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        pono="";
         Intent back = new Intent(AddDetailsPo.this,ChargeableActivity.class);
         back.putExtra("pos",valuefilter);
         startActivity(back);
