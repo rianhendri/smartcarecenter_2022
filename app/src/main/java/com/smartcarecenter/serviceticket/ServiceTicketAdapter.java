@@ -241,9 +241,6 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
                 myviewholder.mendtime.setText(enddate);
             }
         }
-
-
-
         myviewholder.mengineer.setText(myItem.get(i).getEngineerName());
         if (myItem.get(i).getAssist()==null){
             myviewholder.mlasyass.setVisibility(View.GONE);
@@ -290,7 +287,14 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
                 handler.postDelayed(this, 0);
             }
         }, 2000);
-//        if ()
+
+        // notes engineering
+        if (myItem.get(i).getDescription().equals("")){
+            myviewholder.mlayoutnotes.setVisibility(View.GONE);
+        }else {
+            myviewholder.mlayoutnotes.setVisibility(View.VISIBLE);
+            myviewholder.mnotes.setText(myItem.get(i).getDescription());
+        }
 
     }
 
@@ -305,17 +309,16 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         TextView massigndate;
         TextView mbar1,mbar2,mbar3,mbar4,mcomment,mendtime,mengineer,mservicetype,mstarttime
                 ,mstatusservice,mstatustik;
-        TextView mtimer,msupport,massengineer,mlastimpresi;
+        TextView mtimer,msupport,massengineer,mlastimpresi,mnotes;
 
         ImageView mposbar;
         RatingBar mrating;
-        LinearLayout mlayoutstart,mlasyass,mlayimpres;
+        LinearLayout mlayoutstart,mlasyass,mlayimpres,mlayoutnotes;
         public Myviewholder(@NonNull View view) {
             super(view);
 
             massigndate = (TextView)view.findViewById(R.id.assigndate);
             mengineer = (TextView)view.findViewById(R.id.engineer);
-
             mstarttime = (TextView)view.findViewById(R.id.starttime);
             mendtime = (TextView)view.findViewById(R.id.endtime);
             mrating = (RatingBar)view.findViewById(R.id.ratingstar);
@@ -333,6 +336,8 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             mlasyass = view.findViewById(R.id.layass);
             mlastimpresi = view.findViewById(R.id.lastimpression);
             mlayimpres = view.findViewById(R.id.layimpress);
+            mlayoutnotes = view.findViewById(R.id.layoutnotes);
+            mnotes = view.findViewById(R.id.engineernote);
         }
     }
 

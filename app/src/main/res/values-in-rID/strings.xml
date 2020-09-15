@@ -127,4 +127,5 @@
     <string name="title_lastiimpressi">Impresi Terakhir:</string>
     <string name="empetypassword">Password Diperlukan</string>
     <string name="title_updatenew">Versi terbaru tersedia</string>
+    <string name="title_engineernote">Catatan Engineer:</string>
 </resources>

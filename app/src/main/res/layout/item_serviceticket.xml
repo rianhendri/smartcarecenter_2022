@@ -517,7 +517,38 @@
 				</LinearLayout>
 			</LinearLayout>
 		</LinearLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:paddingLeft="12dp"
+			android:paddingRight="12dp" >
+			<LinearLayout
+				android:id="@+id/layoutnotes"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="start"
+				android:orientation="vertical" >
 
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/segoeui"
+					android:text="@string/title_engineernote"
+					android:textColor="@color/black"
+					android:textSize="11sp" />
+
+				<TextView
+					android:id="@+id/engineernote"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/segoeui"
+					android:text="-ASDASD"
+					android:textColor="@color/black"
+					android:textSize="11sp" />
+			</LinearLayout>
+
+		</LinearLayout>
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

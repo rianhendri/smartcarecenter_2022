@@ -105,6 +105,11 @@ public class DetailsFormActivity extends AppCompatActivity {
     public static int seconds = 0;
     public static String usetime="";
     private boolean running;
+    //timer
+    private static int START_TIME_IN_MILLIS = 0;
+    private TextView mtimerconfirm;
+    private CountDownTimer mCountDownTimer;
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +140,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         mlocation = findViewById(R.id.locationsn);
         mtextalert = findViewById(R.id.textalert);
         mbackgroundalert = findViewById(R.id.backgroundalert);
-
+        mtimerconfirm = findViewById(R.id.timerconfirm);
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(DetailsFormActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -230,6 +235,8 @@ public class DetailsFormActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+        updateCountDownText();
+
     }
     private void showDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -305,7 +312,20 @@ public class DetailsFormActivity extends AppCompatActivity {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     String showalert = data.get("showMessage").toString();
+                    if (data.get("confirmCountDown").toString().equals("false")){
 
+                    }else{
+                        int hour = data.get("confirmHours").getAsInt();
+                        int minutes = data.get("confirmMinutes").getAsInt();
+                        int secondss = data.get("confirmSeconds").getAsInt();
+                        int totalsecond = (hour*60*60*1000)+(minutes*60*1000)+(secondss*1000);
+                        START_TIME_IN_MILLIS = totalsecond;
+                        mTimeLeftInMillis=START_TIME_IN_MILLIS;
+                        //timer
+//                        Toast.makeText(DetailsFormActivity.this, String.valueOf(mTimeLeftInMillis),Toast.LENGTH_LONG).show();
+                        startTimer();
+                        updateCountDownText();
+                    }
                     //check alert
                     if (showalert.equals("true")){
 
@@ -564,6 +584,27 @@ public class DetailsFormActivity extends AppCompatActivity {
         }
         return installed;
     }
+    private void startTimer() {
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mTimeLeftInMillis = millisUntilFinished;
+                updateCountDownText();
+            }
 
+            @Override
+            public void onFinish() {
+//                mtimerconfirm.setText("00:00:00");
 
+            }
+        }.start();
+
+    }
+    private void updateCountDownText() {
+        int hours = (int) (mTimeLeftInMillis / 1000) / 3600;
+        int minutes = (int) ((mTimeLeftInMillis / 1000) % 3600) / 60;
+        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d:%02d",hours, minutes, seconds);
+        mtimerconfirm.setText(getString(R.string.title_confirm)+" ("+timeLeftFormatted+")");
+    }
 }
