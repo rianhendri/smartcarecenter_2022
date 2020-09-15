@@ -54,7 +54,7 @@ public class NewsActivity extends AppCompatActivity {
     ArrayList<NewsItem> list2;
     JsonArray listnews;
     JsonArray liststatus;
-    ImageView mback;
+    LinearLayout mback;
     DatabaseReference mbannerlink;
     ProgressBar mfooterload;
     private LinearLayoutManager mlinear;
@@ -141,6 +141,12 @@ public class NewsActivity extends AppCompatActivity {
                     }
                 }
 
+            }
+        });
+        mback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

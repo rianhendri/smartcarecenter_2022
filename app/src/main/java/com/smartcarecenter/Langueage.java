@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +41,8 @@ public class Langueage extends AppCompatActivity {
     String sesionid_new = "";
     ProgressDialog loading;
     RadioButton meng,mind;
-    ImageView mindonesia, menglish, mback;
+    ImageView mindonesia, menglish;
+    LinearLayout mback;
     TextView msave;
 
     @Override

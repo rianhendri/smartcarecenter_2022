@@ -13,9 +13,12 @@
         android:elevation="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
-
-        <ImageView
+        <LinearLayout
             android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
             android:layout_width="19dp"
             android:layout_height="60dp"
             android:layout_gravity="left"
@@ -25,16 +28,17 @@
             android:gravity="left"
             android:src="@drawable/back_white" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="64dp"
-            android:fontFamily="@font/seguisb"
-            android:gravity="center_vertical"
-            android:text="@string/title_notification"
-            android:textColor="@color/dwhite"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="64dp"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center_vertical"
+                android:text="@string/title_notification"
+                android:textColor="@color/dwhite"
+                android:textSize="15sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

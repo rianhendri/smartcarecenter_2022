@@ -69,7 +69,7 @@ public class FreeofchargeActivity extends AppCompatActivity {
     JsonArray liststatus;
     List<String> listvalue = new ArrayList();
     LinearLayout maddform;
-    ImageView mback;
+    LinearLayout mback;
     ProgressBar mfooterload;
     private LinearLayoutManager mlinear;
     NestedScrollView mnested;

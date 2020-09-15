@@ -17,7 +17,7 @@ import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
 
 public class PurchaseMenu extends AppCompatActivity {
-    ImageView mback;
+    LinearLayout mback;
     LinearLayout mbtnfoc;
     LinearLayout mbtnpo;
 

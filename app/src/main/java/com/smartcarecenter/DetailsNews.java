@@ -19,7 +19,8 @@ public class DetailsNews extends AppCompatActivity {
     String content_details = "";
     String date = "";
     String img_details = "";
-    ImageView mback,mimage,mimgpopup;
+    ImageView mimage,mimgpopup;
+    LinearLayout mback;
     TextView mcontentnews,mcountdislike,mcountlike,mcountview,mdate,mtitlenews;
     String title_details = "";
     @Override

@@ -35,7 +35,7 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class SettingActivity extends AppCompatActivity {
     LinearLayout mmyprofile, mchangepass, mlanguage, mlogout;
-    ImageView mback;
+    LinearLayout mback;
     boolean internet = true;
     String MhaveToUpdate = "";
     String MsessionExpired = "";

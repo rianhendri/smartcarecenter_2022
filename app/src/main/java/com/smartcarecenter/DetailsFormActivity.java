@@ -73,8 +73,8 @@ public class DetailsFormActivity extends AppCompatActivity {
     ProgressDialog loading;
     String mallowToCancel = "";
     String mallowtoconfirm = "";
-    ImageView mback,mbanner;
-    LinearLayout mcancel, mconfirm, mcs, mbackgroundalert;
+    ImageView mbanner;
+    LinearLayout mcancel, mconfirm, mcs, mbackgroundalert,mback;
     TextView mcreatedate, mdate, mdeskription, missu, moperator, mreqno, mservicetype, msn, mstatusdetail,
             mstid, mtitle, munitcategory, mlocation, mtextalert;
     String mdateapi = "";

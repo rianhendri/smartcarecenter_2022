@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +40,7 @@ public class DetailsNotification extends AppCompatActivity {
     String id = "";
     boolean internet = true;
     private LinearLayoutManager linearLayoutManager;
-    ImageView mback;
+    LinearLayout mback;
     TextView mcontent;
     private LinearLayoutManager mlinear;
     RecyclerView mlistnotif;
@@ -50,7 +51,7 @@ public class DetailsNotification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_notification);
-        mback = (ImageView)this.findViewById(R.id.backbtn);
+        mback = findViewById(R.id.backbtn);
         mtitle = (TextView)this.findViewById(R.id.title);
         mcontent = (TextView)this.findViewById(R.id.content);
         Bundle bundle2 = this.getIntent().getExtras();

@@ -47,7 +47,7 @@ public class Notification extends AppCompatActivity {
     boolean internet = true;
     private LinearLayoutManager linearLayoutManager;
     JsonArray listnotif;
-    ImageView mback;
+    LinearLayout mback;
     private LinearLayoutManager mlinear;
     RecyclerView mlistnotif;
     TextView mnonotif;

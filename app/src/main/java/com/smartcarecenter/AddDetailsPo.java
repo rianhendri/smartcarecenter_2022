@@ -65,7 +65,7 @@ public class AddDetailsPo extends AppCompatActivity {
     public static int tax = 0;
     public static String taxname = "";
     ProgressDialog loading;
-    ImageView mback;
+    LinearLayout mback;
     int pos = 0;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem,mtotaltax,mgrantotalpo

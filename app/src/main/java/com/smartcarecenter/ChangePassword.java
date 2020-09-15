@@ -16,6 +16,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class ChangePassword extends AppCompatActivity {
     EditText moldpassword, mnewpassword, mretypepassword;
-    ImageView mback;
+    LinearLayout mback;
     TextView msave;
     boolean internet = true;
     String MhaveToUpdate = "";
@@ -179,9 +180,10 @@ public class ChangePassword extends AppCompatActivity {
                 if (statusnya.equals("OK")){
                     sesionid();
                     Toast.makeText(ChangePassword.this, getString(R.string.title_changepass_succsess),Toast.LENGTH_LONG).show();
-                    mnewpassword.setText("");
-                    moldpassword.setText("");
-                    mretypepassword.setText("");
+                    Intent gohome = new Intent(ChangePassword.this,Dashboard.class);
+                    startActivity(gohome);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    finish();
                     loading.dismiss();
 
                 }else {

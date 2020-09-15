@@ -91,9 +91,9 @@ public class AddRequest extends AppCompatActivity {
     Uri imguri;
     Boolean internet = false;
     ProgressDialog loading;
-    ImageView mback,mimgbanner,mimgvis;
+    ImageView mimgbanner,mimgvis;
     Spinner mbranch;
-    LinearLayout mcapture;
+    LinearLayout mcapture,mback;
     TextView mdate,mlocation,moperator,mrequest_no,mrequiredfoto,msend;
     EditText mdescrip;
     String mpressId = "";
@@ -114,7 +114,7 @@ public class AddRequest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_request);
-        mback = (ImageView)this.findViewById(R.id.backbtn);
+        mback = findViewById(R.id.backbtn);
         msn = (Spinner)this.findViewById(R.id.sn);
         moperator = (TextView)this.findViewById(R.id.operator);
         mrequest_no = (TextView)this.findViewById(R.id.request_no);

@@ -69,7 +69,7 @@ public class AddDetailFocView extends AppCompatActivity {
     Boolean internet = false;
     boolean installed= true;
     ProgressDialog loading;
-    ImageView mback;
+    LinearLayout mback;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,
             mnoitem,mlastimpresi,mstatus, mtilte;

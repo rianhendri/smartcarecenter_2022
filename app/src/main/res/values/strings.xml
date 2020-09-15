@@ -27,7 +27,7 @@
     <string name="title_newpassword">New Password:</string>
     <string name="title_retypepassword">Retype Password:</string>
     <string name="title_save">Save</string>
-    <string name="title_changepass_succsess">Successfully Changed Password</string>
+    <string name="title_changepass_succsess">Password is successfully changed</string>
     <string name="title_languagechange">Language changed successfully</string>
     <string name="title_addform">Add Request</string>
     <string name="title_RequestNone">No Request</string>

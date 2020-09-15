@@ -63,7 +63,7 @@ public class AddDetailFoc extends AppCompatActivity {
     String akunid = "";
     Boolean internet = false;
     ProgressDialog loading;
-    ImageView mback;
+    LinearLayout mback;
     int pos = 0;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem;
