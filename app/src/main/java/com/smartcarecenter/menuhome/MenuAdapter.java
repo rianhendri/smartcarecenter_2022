@@ -120,7 +120,7 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 if (namemenu.equals(context.getString(R.string.title_live_chat))){
                     if (installed) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse("http://api.whatsapp.com/send?phone=+62822 9868 0099&text= "));
+                        intent.setData(Uri.parse("http://api.whatsapp.com/send?phone=+628111930199&text= "));
                         context.startActivity(intent);
                     }else {
                         Toast.makeText(context,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();

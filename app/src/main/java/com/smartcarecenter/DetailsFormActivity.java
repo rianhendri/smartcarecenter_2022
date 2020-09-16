@@ -74,12 +74,13 @@ public class DetailsFormActivity extends AppCompatActivity {
     String mallowToCancel = "";
     String mallowtoconfirm = "";
     ImageView mbanner;
-    LinearLayout mcancel, mconfirm, mcs, mbackgroundalert,mback;
+    LinearLayout mcancel, mconfirm, mcs, mbackgroundalert,mback, mreopenbtn;
     TextView mcreatedate, mdate, mdeskription, missu, moperator, mreqno, mservicetype, msn, mstatusdetail,
             mstid, mtitle, munitcategory, mlocation, mtextalert;
     String mdateapi = "";
     String mdeskriptionapi = "";
     String mformRequestCd = "";
+    String mreopen = "";
     ImageView mimgpopup;
     LinearLayout mlayoutticket,mlayoutunit1, mlayoutunit2, mlayoutunit3;
     private LinearLayoutManager mlinear;
@@ -141,6 +142,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         mtextalert = findViewById(R.id.textalert);
         mbackgroundalert = findViewById(R.id.backgroundalert);
         mtimerconfirm = findViewById(R.id.timerconfirm);
+        mreopenbtn = findViewById(R.id.reopen);
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(DetailsFormActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -184,7 +186,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                 if (installed) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("http://api.whatsapp.com/send?phone=+62822 9868 0099&text=Hi Support,  ");
+                    stringBuilder.append("http://api.whatsapp.com/send?phone=+628111930199&text=Hi Support,  ");
                     stringBuilder.append(getString(R.string.title_tanyacs));
 //                    stringBuilder.append(" #");
                     stringBuilder.append(noreq);
@@ -235,6 +237,13 @@ public class DetailsFormActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+        //REOPEN
+        mreopenbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogreopen();
+            }
+        });
         updateCountDownText();
 
     }
@@ -254,6 +263,38 @@ public class DetailsFormActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,int id) {
                         // jika tombol diklik, maka akan menutup activity ini
                         cancelreq();
+                    }
+                })
+                .setNegativeButton(getString(R.string.title_no),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // jika tombol ini diklik, akan menutup dialog
+                        // dan tidak terjadi apa2
+                        dialog.cancel();
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
+    }
+    private void showDialogreopen() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set title dialog
+        alertDialogBuilder.setTitle(getString(R.string.title_reopendialod));
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage(getString(R.string.title_dialogreopen))
+                .setIcon(R.mipmap.ic_launcher)
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.title_yes),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // jika tombol diklik, maka akan menutup activity ini
+                        reopenreq();
                     }
                 })
                 .setNegativeButton(getString(R.string.title_no),new DialogInterface.OnClickListener() {
@@ -362,6 +403,12 @@ public class DetailsFormActivity extends AppCompatActivity {
 //                    Toast.makeText(DetailsFormActivity.this, String.valueOf(seconds),Toast.LENGTH_LONG).show();
 
                     mformRequestCd = data.get("formRequestCd").getAsString();
+                    mreopen = data.get("allowToReopenCase").toString();
+                    if (mreopen.equals("true")){
+                        mreopenbtn.setVisibility(View.VISIBLE);
+                    }else {
+                        mreopenbtn.setVisibility(View.GONE);
+                    }
                     mserviceTicketCd = data.get("serviceTicketCd").toString();
                     mdateapi = data.get("date").getAsString();
                     mpressGuid = data.get("pressGuid").getAsString();
@@ -489,6 +536,51 @@ public class DetailsFormActivity extends AppCompatActivity {
         jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONcancelform(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                sesionid();
+                if (statusnya.equals("OK")){
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    String message = data.get("message").getAsString();
+                    Toast.makeText(DetailsFormActivity.this, message,Toast.LENGTH_LONG).show();
+                    onBackPressed();
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    Toast.makeText(DetailsFormActivity.this,errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(DetailsFormActivity.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+                loading.dismiss();
+
+            }
+        });
+    }
+    public void reopenreq(){
+        loading = ProgressDialog.show(DetailsFormActivity.this, "", getString(R.string.title_loading), true);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("formRequestCd",noreq);
+        jsonObject.addProperty("ver",ver);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONreopen(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

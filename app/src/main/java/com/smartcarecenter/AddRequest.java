@@ -163,14 +163,18 @@ public class AddRequest extends AppCompatActivity {
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                for (int i = 0; i < snid.size(); ++i) {
-                    mpressId = snid.get(i);
-//                    Toast.makeText(AddRequest.this, mpressId,Toast.LENGTH_LONG).show();
-                }
-                for (int x = 0; x < locations.size(); ++x) {
-                    xlocation = locations.get(position);
+                mpressId = snid.get(position);
+                xlocation = locations.get(position);
                     mlocation.setText(xlocation);
-                }
+//                Toast.makeText(AddRequest.this, mpressId,Toast.LENGTH_LONG).show();
+//                for (int i = 0; i < snid.size(); ++i) {
+//                    mpressId = snid.get(i);
+////                    Toast.makeText(AddRequest.this, mpressId,Toast.LENGTH_LONG).show();
+//                }
+//                for (int x = 0; x < locations.size(); ++x) {
+//                    xlocation = locations.get(position);
+//                    mlocation.setText(xlocation);
+//                }
             }
 
             @Override

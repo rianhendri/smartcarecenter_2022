@@ -162,7 +162,7 @@ public class AddDetailFocView extends AppCompatActivity {
                 if (installed) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("http://api.whatsapp.com/send?phone=+62822 9868 0099&text=Hi Support,  ");
+                    stringBuilder.append("http://api.whatsapp.com/send?phone=+628111930199&text=Hi Support,  ");
                     stringBuilder.append(getString(R.string.title_tanyafoc));
 //                    stringBuilder.append(" #");
                     stringBuilder.append(noOrder);

@@ -27,6 +27,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 public interface IRetrofit {
+    @POST("api/FormRequest/ReopenCase")
+    public Call<JsonObject> postRawJSONreopen(@Body JsonObject var1);
+
     @POST("api/FormRequest/Cancel")
     public Call<JsonObject> postRawJSONcancelform(@Body JsonObject var1);
 

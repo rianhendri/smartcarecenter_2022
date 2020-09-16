@@ -127,4 +127,7 @@
     <string name="empetypassword">Password Required</string>
     <string name="title_updatenew">New version available</string>
     <string name="title_engineernote">Engineer Notes:</string>
+    <string name="title_reopen">Reopen Case</string>
+    <string name="title_dialogreopen">Reopening Service Support case. Continue?</string>
+    <string name="title_reopendialod">Reopen Case Request</string>
 </resources>
