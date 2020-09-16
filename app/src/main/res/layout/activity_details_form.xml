@@ -620,7 +620,7 @@
                 <LinearLayout
                     android:layout_width="250dp"
                     android:layout_height="45dp"
-                    android:background="@drawable/bg_cornerblue"
+                    android:background="@drawable/bg_cornergrey"
                     android:gravity="center" >
 
                     <TextView
@@ -628,7 +628,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/segoeui"
                         android:text="@string/title_reopen"
-                        android:textColor="@color/dwhite"
+                        android:textColor="@color/black"
                         android:textSize="17sp" />
                 </LinearLayout>
             </LinearLayout>
