@@ -16,12 +16,9 @@ public class Add_foc_list_item {
 
     public Add_foc_list_item() {
     }
-    public Add_foc_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, String usingMatrix,
-                             String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks,
-                             Boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL,
-                             Integer lastImpression, String stsActiveInfo,String unitName) {
-        ItemCd = itemCd;UnitName = unitName;
 
+    public Add_foc_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, String usingMatrix, String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks, boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL, Integer lastImpression, String stsActiveInfo, String unitName) {
+        ItemCd = itemCd;
         Name = name;
         ItemTypeCd = itemTypeCd;
         CategoryCd = categoryCd;
@@ -37,7 +34,9 @@ public class Add_foc_list_item {
         ImageThumbFullURL = imageThumbFullURL;
         LastImpression = lastImpression;
         StsActiveInfo = stsActiveInfo;
+        UnitName = unitName;
     }
+
     public String getItemCd() {
         return ItemCd;
     }
@@ -118,11 +117,11 @@ public class Add_foc_list_item {
         Remarks = remarks;
     }
 
-    public Boolean getStsActive() {
+    public boolean isStsActive() {
         return StsActive;
     }
 
-    public void setStsActive(Boolean stsActive) {
+    public void setStsActive(boolean stsActive) {
         StsActive = stsActive;
     }
 
@@ -165,6 +164,7 @@ public class Add_foc_list_item {
     public void setStsActiveInfo(String stsActiveInfo) {
         StsActiveInfo = stsActiveInfo;
     }
+
     public String getUnitName() {
         return UnitName;
     }
@@ -205,7 +205,7 @@ public class Add_foc_list_item {
     private String Remarks;
     @Expose
     @SerializedName("StsActive")
-    private Boolean StsActive;
+    private boolean StsActive;
     @Expose
     @SerializedName("CategoryName")
     private String CategoryName;

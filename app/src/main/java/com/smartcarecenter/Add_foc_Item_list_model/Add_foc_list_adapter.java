@@ -73,6 +73,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
     ImageView mimgpopup;
     public static ArrayList<Add_foc_req_item> listpoact = new ArrayList<Add_foc_req_item>();
     Add_foc_req_item tambahitem;
+    boolean stsS = true;
     public Add_foc_list_adapter(Context context, ArrayList<Add_foc_list_item> addFoclistitem) {
         this.context = context;
         this.addFoclistitem = addFoclistitem;
@@ -96,11 +97,14 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         myviewholder.xcategory.setText(addFoclistitem.get(i).getCategoryName());
         myviewholder.xunit.setText(addFoclistitem.get(i).getUnitName());
 //        myviewholder.xstatus.setText(addFoclistitem.get(i).getStsActiveInfo());
-        boolean sts = true;
-         sts = addFoclistitem.get(i).getStsActive();
-        if (sts){
+
+         stsS = addFoclistitem.get(i).isStsActive();
+        if (stsS){
+            myviewholder.xadd.setVisibility(View.VISIBLE);
+            myviewholder.xstatus.setVisibility(View.GONE);
 
         }else{
+            myviewholder.xstatus.setVisibility(View.VISIBLE);
             myviewholder.xstatus.setText(stsinac);
             myviewholder.xstatus.setTextColor(Color.parseColor(	"#B22222"));
             myviewholder.xadd.setVisibility(View.GONE);
@@ -128,9 +132,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         myviewholder.xadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean status = true;
-                status = addFoclistitem.get(i).getStsActive();
-                if (status){
+                if (stsS){
                     tambahitem = new Add_foc_req_item();
                     tambahitem.setItemcd(addFoclistitem.get(i).getItemCd());
                     tambahitem.setCategory(addFoclistitem.get(i).getCategoryName());

@@ -48,6 +48,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.smartcarecenter.AddDetailFoc;
 import com.smartcarecenter.AddDetailsPo;
 import com.smartcarecenter.Add_Foc_request.Add_foc_req_item;
+import com.smartcarecenter.Add_Po_Item_List;
 import com.smartcarecenter.Add_Po_Request.Add_po_req_item;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
@@ -99,11 +100,14 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
         boolean sts = true;
          sts = addPolistitem.get(i).getStsActive();
         if (sts){
-
+            myviewholder.xharga.setVisibility(View.VISIBLE);
+            myviewholder.xstatus.setVisibility(View.GONE);
         }else{
-            myviewholder.xstatus.setText(stsinac);
+            myviewholder.xstatus.setText(Add_Po_Item_List.stsinac);
+            myviewholder.xstatus.setVisibility(View.VISIBLE);
             myviewholder.xstatus.setTextColor(Color.parseColor(	"#B22222"));
             myviewholder.xadd.setVisibility(View.GONE);
+            myviewholder.xharga.setVisibility(View.GONE);
         }
         String status = addPolistitem.get(i).getStsActiveInfo();
 //        if (Build.VERSION.SDK_INT >= 24) {

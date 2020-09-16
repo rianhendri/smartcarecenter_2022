@@ -201,6 +201,7 @@ public class Add_Foc_Item_List extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
+
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     getArrayItem = data.getAsJsonArray("list");
@@ -235,6 +236,8 @@ public class Add_Foc_Item_List extends AppCompatActivity {
             }else if (item.getCategoryName().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }else if (item.getItemCd().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }else if (item.getStsActiveInfo().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
         }

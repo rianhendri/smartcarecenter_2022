@@ -328,6 +328,7 @@ public class AddDetailFoc extends AppCompatActivity {
                 }else {
                     Toast.makeText(AddDetailFoc.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();
+                    sesionid();
                 }
             }
             @Override

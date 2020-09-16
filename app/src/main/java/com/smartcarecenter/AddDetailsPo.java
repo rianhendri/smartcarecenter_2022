@@ -356,6 +356,7 @@ public class AddDetailsPo extends AppCompatActivity {
                 }else {
                     Toast.makeText(AddDetailsPo.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();
+                    sesionid();
                 }
             }
             @Override
