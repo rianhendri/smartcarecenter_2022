@@ -110,9 +110,9 @@
 
 					<TextView
 						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
+						android:layout_height="match_parent"
 						android:fontFamily="@font/segoeui"
-						android:text="@string/title_By"
+						android:text="Issue:"
 						android:textColor="@color/black"
 						android:textSize="11sp" />
 
@@ -121,6 +121,7 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="2dp"
+						android:text="asdasd asd asd asd asdasdasd as das dasdas das das das das dasd asd asd asd asd "
 						android:fontFamily="@font/segoeui"
 						android:textSize="11sp" />
 

@@ -72,6 +72,7 @@ public class SpalshScreen extends AppCompatActivity {
                             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                                 String errornya = "";
                                 JsonObject homedata=response.body();
+//                                Toast.makeText(SpalshScreen.this, homedata.toString(), Toast.LENGTH_SHORT).show();
                                 String statusnya = homedata.get("status").getAsString();
                                 if (homedata.get("errorMessage").toString().equals("null")) {
 
@@ -119,8 +120,11 @@ public class SpalshScreen extends AppCompatActivity {
                 finish();
 
             }
-//            startActivity(new Intent(SpalshScreen.this, UpdateActivity.class));
-            finish();
+            else {
+                startActivity(new Intent(SpalshScreen.this, UpdateActivity.class));
+                finish();
+            }
+
 
         }else {
             startActivity(new Intent(SpalshScreen.this, LoginActivity.class));

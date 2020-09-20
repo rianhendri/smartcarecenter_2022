@@ -13,6 +13,23 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class AddFromItem {
+
+    public AddFromItem(String date, String formRequestCd, String photoURL, String photoThumbURL, String pressGuid, String pressName, String requestedBy, String requestedDateTime, String serviceTicketCd, String status, String statusColorCode, String statusName, String description) {
+        this.date = date;
+        this.formRequestCd = formRequestCd;
+        this.photoURL = photoURL;
+        this.photoThumbURL = photoThumbURL;
+        this.pressGuid = pressGuid;
+        this.pressName = pressName;
+        this.requestedBy = requestedBy;
+        this.requestedDateTime = requestedDateTime;
+        this.serviceTicketCd = serviceTicketCd;
+        this.status = status;
+        this.statusColorCode = statusColorCode;
+        this.statusName = statusName;
+        this.description = description;
+    }
+
     public String getDate() {
         return date;
     }
@@ -109,22 +126,12 @@ public class AddFromItem {
         this.statusName = statusName;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
-    public AddFromItem(String date, String formRequestCd, String photoURL, String photoThumbURL,
-                       String pressGuid, String pressName, String requestedBy, String requestedDateTime,
-                       String serviceTicketCd, String status, String statusColorCode, String statusName) {
-        this.date = date;
-        this.formRequestCd = formRequestCd;
-        this.photoURL = photoURL;
-        this.photoThumbURL = photoThumbURL;
-        this.pressGuid = pressGuid;
-        this.pressName = pressName;
-        this.requestedBy = requestedBy;
-        this.requestedDateTime = requestedDateTime;
-        this.serviceTicketCd = serviceTicketCd;
-        this.status = status;
-        this.statusColorCode = statusColorCode;
-        this.statusName = statusName;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Expose
@@ -163,6 +170,10 @@ public class AddFromItem {
     @Expose
     @SerializedName("statusName")
     private String statusName;
+
+    @Expose
+    @SerializedName("description")
+    private String description;
 
 
     public AddFromItem() {

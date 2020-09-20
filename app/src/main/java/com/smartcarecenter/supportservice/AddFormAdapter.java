@@ -93,7 +93,7 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
         catch (ParseException parseException) {
             parseException.printStackTrace();
         }
-        myviewholder.xby.setText(addFromItem.get(i).getRequestedBy());
+        myviewholder.xby.setText(addFromItem.get(i).getDescription());
         myviewholder.xpress.setText(addFromItem.get(i).getPressName());
         myviewholder.xdate_news.setText(newdate);
         myviewholder.xstatus.setText(addFromItem.get(i).getStatusName());
