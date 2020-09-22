@@ -44,10 +44,9 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:fontFamily="@font/seguisb"
-                    android:text="asdasdasdasd"
-                    android:inputType="textCapCharacters"
-                    android:maxLength="50"
-                    android:maxLines="1"
+                    android:maxLength="150"
+                    android:maxLines="2"
+                    android:text="asdasdasdasdasdn//n\nasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdsadasdasdsdfsdfsdfsdfsdfsdf"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 

@@ -46,8 +46,8 @@
                     android:fontFamily="@font/seguisb"
                     android:text="zzzzzzzzzzzzzzzzzzzzzwwewerwerwrwerzzzzzzzzzzzzzzzzzzz"
                     android:inputType="textCapCharacters"
-                    android:maxLength="50"
-                    android:maxLines="1"
+                    android:maxLength="150"
+                    android:maxLines="2"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
