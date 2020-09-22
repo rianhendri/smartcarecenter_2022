@@ -130,4 +130,5 @@
     <string name="title_reopen">Reopen Case</string>
     <string name="title_dialogreopen">Reopening Service Support case. Continue?</string>
     <string name="title_reopendialod">Reopen Case Request</string>
+    <string name="title_approved">"Approved: "</string>
 </resources>

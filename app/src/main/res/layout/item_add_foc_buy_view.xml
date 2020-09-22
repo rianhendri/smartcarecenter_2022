@@ -183,13 +183,32 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
+                            android:layout_marginRight="12dp"
                             android:background="@drawable/background_transparent"
                             android:fontFamily="@font/segoeuib"
                             android:gravity="center_vertical"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/seguisb"
+                            android:gravity="center_vertical"
+                            android:text="@string/title_approved"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                        <TextView
+                            android:id="@+id/qtyapprov"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/background_transparent"
+                            android:fontFamily="@font/segoeuib"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
 

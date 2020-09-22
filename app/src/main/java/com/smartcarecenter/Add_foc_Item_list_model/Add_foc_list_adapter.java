@@ -104,10 +104,11 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
             myviewholder.xstatus.setVisibility(View.GONE);
 
         }else{
+            myviewholder.xadd.setVisibility(View.GONE);
             myviewholder.xstatus.setVisibility(View.VISIBLE);
             myviewholder.xstatus.setText(stsinac);
             myviewholder.xstatus.setTextColor(Color.parseColor(	"#B22222"));
-            myviewholder.xadd.setVisibility(View.GONE);
+
         }
         String status = addFoclistitem.get(i).getStsActiveInfo();
 //        if (Build.VERSION.SDK_INT >= 24) {

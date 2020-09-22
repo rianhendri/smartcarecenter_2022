@@ -18,7 +18,8 @@ public class Add_foc_req_itemView {
     }
 
     public Add_foc_req_itemView(String itemCd, Integer position, Integer qty, String itemName,
-                                String categoryName, String imageThumbFullURL, String imageFullURL,String unitName) {
+                                String categoryName, String imageThumbFullURL, String imageFullURL,
+                                String unitName, String qtyApproved) {
         ItemCd = itemCd;
         Position = position;
         Qty = qty;
@@ -27,6 +28,7 @@ public class Add_foc_req_itemView {
         ImageThumbFullURL = imageThumbFullURL;
         ImageFullURL = imageFullURL;
         UnitName = unitName;
+        QtyApproved = qtyApproved;
     }
 
     public String getItemCd() {
@@ -84,6 +86,7 @@ public class Add_foc_req_itemView {
     public void setImageFullURL(String imageFullURL) {
         ImageFullURL = imageFullURL;
     }
+
     public String getUnitName() {
         return UnitName;
     }
@@ -91,6 +94,15 @@ public class Add_foc_req_itemView {
     public void setUnitName(String unitName) {
         UnitName = unitName;
     }
+
+    public String getQtyApproved() {
+        return QtyApproved;
+    }
+
+    public void setQtyApproved(String qtyApproved) {
+        QtyApproved = qtyApproved;
+    }
+
     @SerializedName("ItemCd")
     private String ItemCd;
     @Expose
@@ -115,6 +127,10 @@ public class Add_foc_req_itemView {
     @Expose
     @SerializedName("UnitName")
     private String UnitName;
+
+    @Expose
+    @SerializedName("QtyApproved")
+    private String QtyApproved;
 }
 
 

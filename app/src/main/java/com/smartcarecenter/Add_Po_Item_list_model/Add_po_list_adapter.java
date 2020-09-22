@@ -100,6 +100,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
         boolean sts = true;
          sts = addPolistitem.get(i).getStsActive();
         if (sts){
+            myviewholder.xadd.setVisibility(View.VISIBLE);
             myviewholder.xharga.setVisibility(View.VISIBLE);
             myviewholder.xstatus.setVisibility(View.GONE);
         }else{
