@@ -70,6 +70,9 @@ extends RecyclerView.Adapter<NewsAdapter.Myviewholder> {
     Context context;
     ArrayList<NewsItem> myItem;
     public static int positem = 0;
+    public static boolean download = true;
+    public static String textdownload = "";
+    public static String linkdownload = "";
 
     public NewsAdapter(Context c, ArrayList<NewsItem> p){
         context = c;
@@ -106,6 +109,9 @@ extends RecyclerView.Adapter<NewsAdapter.Myviewholder> {
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                download = myItem.get(i).isShowDownloadButton();
+                textdownload = myItem.get(i).getDownloadButtonText();
+                linkdownload = myItem.get(i).getDownloadButtonURL();
                 Intent intent = new Intent(context, DetailsNews.class);
                 intent.putExtra("banner", (myItem.get(i).getBannerURL()));
                 intent.putExtra("title", (myItem.get(i).getTitle()));

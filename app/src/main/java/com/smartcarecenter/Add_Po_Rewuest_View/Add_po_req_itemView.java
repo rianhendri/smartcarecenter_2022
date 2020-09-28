@@ -17,8 +17,9 @@ public class Add_po_req_itemView {
     public Add_po_req_itemView() {
     }
 
-    public Add_po_req_itemView(String itemCd, Integer position, Integer qty, String itemName, String categoryName, String imageThumbFullURL,
-                               String imageFullURL, String unitName, double pricePerQty, double totalPrice, String mps) {
+
+    public Add_po_req_itemView(String itemCd, Integer position, Integer qty, String itemName, String categoryName, String imageThumbFullURL, String imageFullURL, String unitName, double pricePerQty, double totalPrice,
+                               String mps) {
         ItemCd = itemCd;
         Position = position;
         Qty = qty;
@@ -30,6 +31,7 @@ public class Add_po_req_itemView {
         PricePerQty = pricePerQty;
         TotalPrice = totalPrice;
         Mps = mps;
+
     }
 
     public String getItemCd() {

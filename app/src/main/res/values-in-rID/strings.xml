@@ -132,4 +132,5 @@
     <string name="title_dialogreopen">Reopen case Service Support. Lanjutkan?</string>
     <string name="title_reopendialod">Reopen Case Request</string>
     <string name="title_approved">"Approved: "</string>
+    <string name="title_tanpanopo">No. PO kosong. Lanjutkan?</string>
 </resources>

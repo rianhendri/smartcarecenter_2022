@@ -13,13 +13,19 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class NewsItem {
-    public NewsItem(String bannerThumbURL, String bannerURL, String content, String date, String newsCd, String title) {
+
+    public NewsItem(String bannerThumbURL, String bannerURL, String content, String date,
+                    String newsCd, String title, String downloadButtonURL, String downloadButtonText,
+                    boolean showDownloadButton) {
         this.bannerThumbURL = bannerThumbURL;
         this.bannerURL = bannerURL;
         this.content = content;
         this.date = date;
         this.newsCd = newsCd;
         this.title = title;
+        this.downloadButtonURL = downloadButtonURL;
+        this.downloadButtonText = downloadButtonText;
+        this.showDownloadButton = showDownloadButton;
     }
 
     public String getBannerThumbURL() {
@@ -70,7 +76,28 @@ public class NewsItem {
         this.title = title;
     }
 
-    public NewsItem() {
+    public String getDownloadButtonURL() {
+        return downloadButtonURL;
+    }
+
+    public void setDownloadButtonURL(String downloadButtonURL) {
+        this.downloadButtonURL = downloadButtonURL;
+    }
+
+    public String getDownloadButtonText() {
+        return downloadButtonText;
+    }
+
+    public void setDownloadButtonText(String downloadButtonText) {
+        this.downloadButtonText = downloadButtonText;
+    }
+
+    public boolean isShowDownloadButton() {
+        return showDownloadButton;
+    }
+
+    public void setShowDownloadButton(boolean showDownloadButton) {
+        this.showDownloadButton = showDownloadButton;
     }
 
     @Expose
@@ -91,6 +118,15 @@ public class NewsItem {
     @Expose
     @SerializedName("title")
     private String title;
+    @Expose
+    @SerializedName("downloadButtonURL")
+    private String downloadButtonURL;
+    @Expose
+    @SerializedName("downloadButtonText")
+    private String downloadButtonText;
+    @Expose
+    @SerializedName("showDownloadButton")
+    private boolean showDownloadButton;
 
 
 }

@@ -131,4 +131,5 @@
     <string name="title_dialogreopen">Reopening Service Support case. Continue?</string>
     <string name="title_reopendialod">Reopen Case Request</string>
     <string name="title_approved">"Approved: "</string>
+    <string name="title_tanpanopo">Your PO Number is empty. Continue?</string>
 </resources>

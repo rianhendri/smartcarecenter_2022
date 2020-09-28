@@ -18,13 +18,9 @@ public class ServicesTicketItem {
     }
 
 
-    public ServicesTicketItem(String assignedDateTime, String bar1Text, String bar2Text,
-                              String bar3Text, boolean bar4Red, String bar4Text, int barPosition,
-                              String engineerName, String feedbackComments, int feedbackRating,
-                              String issueCategoryName, int position, String serviceTypeName,
-                              String statusName, String supportEndDateTime, String supportStartDateTime,
-                              String unitCategoryName, String assist, int lastImpression, String description)
-    {
+    public ServicesTicketItem(String assignedDateTime, String bar1Text, String bar2Text, String bar3Text,
+                              boolean bar4Red, String bar4Text, int barPosition, String engineerName, String feedbackComments, int feedbackRating, String issueCategoryName, int position, String serviceTypeName, String statusName, String supportEndDateTime, String supportStartDateTime, String unitCategoryName, String assist,
+                              int lastImpression, String description, boolean showOnProgressAction, String onProgressActionName) {
         AssignedDateTime = assignedDateTime;
         Bar1Text = bar1Text;
         Bar2Text = bar2Text;
@@ -45,6 +41,8 @@ public class ServicesTicketItem {
         Assist = assist;
         LastImpression = lastImpression;
         Description = description;
+        ShowOnProgressAction = showOnProgressAction;
+        OnProgressActionName = onProgressActionName;
     }
 
     public String getAssignedDateTime() {
@@ -207,6 +205,22 @@ public class ServicesTicketItem {
         Description = description;
     }
 
+    public boolean isShowOnProgressAction() {
+        return ShowOnProgressAction;
+    }
+
+    public void setShowOnProgressAction(boolean showOnProgressAction) {
+        ShowOnProgressAction = showOnProgressAction;
+    }
+
+    public String getOnProgressActionName() {
+        return OnProgressActionName;
+    }
+
+    public void setOnProgressActionName(String onProgressActionName) {
+        OnProgressActionName = onProgressActionName;
+    }
+
     @Expose
     @SerializedName("AssignedDateTime")
     private String AssignedDateTime;
@@ -270,5 +284,11 @@ public class ServicesTicketItem {
     @Expose
     @SerializedName("Description")
     private String Description;
+
+    @SerializedName("ShowOnProgressAction")
+    private boolean ShowOnProgressAction;
+    @Expose
+    @SerializedName("OnProgressActionName")
+    private String OnProgressActionName;
 }
 

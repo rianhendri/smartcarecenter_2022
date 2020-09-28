@@ -89,6 +89,7 @@ import static com.smartcarecenter.DetailsFormActivity.usetime;
 public class ServiceTicketAdapter
 extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
     boolean solved = true;
+    boolean showprogress = true;
     Context context;
     ArrayList<ServicesTicketItem> myItem;
     public static int positem = 0;
@@ -121,6 +122,13 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         stringBuilder.append(String.valueOf((int)((ServicesTicketItem)this.myItem.get(i)).getPosition()));
         textView.setText((CharSequence)stringBuilder.toString());
 
+        showprogress = myItem.get(i).isShowOnProgressAction();
+        if (showprogress){
+            myviewholder.mlayac.setVisibility(View.VISIBLE);
+            myviewholder.mactionprogress.setText(myItem.get(i).getOnProgressActionName());
+        }else {
+            myviewholder.mlayac.setVisibility(View.GONE);
+        }
         if (myItem.get(i).getPosition()==myItem.size()){
             if (usetime.equals("true")){
                 myviewholder.msupport.setVisibility(View.GONE);
@@ -309,11 +317,11 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         TextView massigndate;
         TextView mbar1,mbar2,mbar3,mbar4,mcomment,mendtime,mengineer,mservicetype,mstarttime
                 ,mstatusservice,mstatustik;
-        TextView mtimer,msupport,massengineer,mlastimpresi,mnotes;
+        TextView mtimer,msupport,massengineer,mlastimpresi,mnotes, mactionprogress;
 
         ImageView mposbar;
         RatingBar mrating;
-        LinearLayout mlayoutstart,mlasyass,mlayimpres,mlayoutnotes;
+        LinearLayout mlayoutstart,mlasyass,mlayimpres,mlayoutnotes,mlayac;
         public Myviewholder(@NonNull View view) {
             super(view);
 
@@ -338,6 +346,9 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             mlayimpres = view.findViewById(R.id.layimpress);
             mlayoutnotes = view.findViewById(R.id.layoutnotes);
             mnotes = view.findViewById(R.id.engineernote);
+            mactionprogress = view.findViewById(R.id.actionprogress);
+            mlayac = view.findViewById(R.id.layaction);
+
         }
     }
 

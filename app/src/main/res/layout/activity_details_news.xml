@@ -63,16 +63,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/seguisb"
-                    android:text=""
+                    android:text="asdasd"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
+                <LinearLayout
+                    android:id="@+id/layoutdownload"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/linkdownload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeui"
+                        android:textColor="@color/colorPrimary"
+                        android:text="asdasd"
+                        android:autoLink="all"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/contentnews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text=""
+                    android:text="adasdasd"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>

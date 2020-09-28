@@ -57,6 +57,7 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddDetailsPo extends AppCompatActivity {
+    String message = "";
     public static JsonArray listsn;
     String MhaveToUpdate = "";
     String MsessionExpired = "";
@@ -239,11 +240,11 @@ public class AddDetailsPo extends AppCompatActivity {
             public void onClick(View v) {
                 if (internet){
                     if (mnopo.getText().toString().length()!=0){
-                        showDialog();
+                        message = getString(R.string.title_submitorder);
                     }else {
-                        mnopo.setError(getString(R.string.title_requirenopo));
-                        Toast.makeText(AddDetailsPo.this, getString(R.string.title_requirenopo),Toast.LENGTH_SHORT).show();
+                        message = getString(R.string.title_tanpanopo);
                     }
+                    showDialog();
                 }
             }
         });
@@ -426,7 +427,7 @@ public class AddDetailsPo extends AppCompatActivity {
 
         // set pesan dari dialog
         alertDialogBuilder
-                .setMessage(getString(R.string.title_submitorder))
+                .setMessage(message)
                 .setIcon(R.mipmap.ic_launcher)
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.title_yes),new DialogInterface.OnClickListener() {
