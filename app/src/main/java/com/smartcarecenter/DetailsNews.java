@@ -34,6 +34,7 @@ public class DetailsNews extends AppCompatActivity {
     String linkdownloadnya = "";
     long queid;
     DownloadManager downloadManager;
+    View underline;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,16 +46,19 @@ public class DetailsNews extends AppCompatActivity {
         mtitlenews = findViewById(R.id.titlenewsdetail);
         mbuttondownload = findViewById(R.id.linkdownload);
         mlaydownload = findViewById(R.id.layoutdownload);
+        underline = findViewById(R.id.underline);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 == null) {
             ;
         } else {
             if (download){
                 mlaydownload.setVisibility(View.VISIBLE);
+                underline.setVisibility(View.VISIBLE);
                 mbuttondownload.setText(textdownload);
                 linkdownloadnya = linkdownload;
             }else {
                 mlaydownload.setVisibility(View.GONE);
+                underline.setVisibility(View.GONE);
             }
             img_details = bundle2.getString("banner");
             title_details = bundle2.getString("title");

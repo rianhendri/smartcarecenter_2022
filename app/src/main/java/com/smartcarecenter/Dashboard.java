@@ -14,11 +14,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -72,14 +74,14 @@ public class Dashboard extends AppCompatActivity {
     ArrayList<MenuItem> menuItemlist;
     ImageView mfoto;
     String mgroupName = "";
-    TextView mgrouppt;
+    TextView mgrouppt,malert;
     String mhomeName = "";
     LinearLayout mmechine;
     TextView mnamaid;
     TextView mnamapt;
     LinearLayout mnews;
     LinearLayout mnotif;
-    LinearLayout mnotif_btn;
+    LinearLayout mnotif_btn,mlayoutalert;
     LinearLayout morder;
     LinearLayout mreq;
     LinearLayout msetting;
@@ -88,6 +90,7 @@ public class Dashboard extends AppCompatActivity {
     TextView mversion;
     RecyclerView mymenu;
     String sesionid_new = "";
+    boolean notes = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +102,8 @@ public class Dashboard extends AppCompatActivity {
         mgrouppt = findViewById(R.id.groupname);
         mfoto = findViewById(R.id.foto);
         mnotif_btn = findViewById(R.id.notifikasi);
+        mlayoutalert = findViewById(R.id.backgroundalert);
+        malert = findViewById(R.id.textalert);
         cekInternet();
         getSessionId();
         check.checknotif=1;
@@ -199,6 +204,25 @@ public class Dashboard extends AppCompatActivity {
                 if (statusnya.equals("OK")){
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    //alertnotes
+
+                    notes = data.get("showHomeNotes").getAsBoolean();
+                    if (notes){
+                        String background = data.get("homeNotesBackgroundColor").getAsString();
+                        GradientDrawable shape =  new GradientDrawable();
+                        shape.setCornerRadius( 15 );
+                        shape.setColor(Color.parseColor(background));
+                        mlayoutalert.setVisibility(View.VISIBLE);
+                        mlayoutalert.setBackground(shape);
+                        String text = data.get("homeNotesText").getAsString();
+                        if (Build.VERSION.SDK_INT >= 24) {
+                            malert.setText((CharSequence) Html.fromHtml((String)text, Html.FROM_HTML_MODE_COMPACT));
+                        } else {
+                            malert.setText((CharSequence)Html.fromHtml((String)text));
+                        }
+                    }else {
+                        mlayoutalert.setVisibility(View.GONE);
+                    }
                     //HEADER
                     tax = data.get("taxPercentage").getAsInt();
                     taxename = data.get("taxLabel").getAsString();
@@ -239,14 +263,6 @@ public class Dashboard extends AppCompatActivity {
                     mymenu.setLayoutManager(linearLayoutManager);
                     Configuration orientation = new Configuration();
 
-                    if(mymenu.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                        mymenu.setLayoutManager(new GridLayoutManager(Dashboard.this, 2));
-                    } else if (mymenu.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                        mymenu.setLayoutManager(new GridLayoutManager(Dashboard.this, 3));
-                        ViewGroup.LayoutParams params=mymenu.getLayoutParams();
-                        params.height=700;
-                        mymenu.setLayoutParams(params);
-                    }
                     mymenu.setHasFixedSize(true);
                     MenuItem menuItem = new MenuItem();
                     MenuItem menuItem2 = new MenuItem();
@@ -306,6 +322,26 @@ public class Dashboard extends AppCompatActivity {
                     }
                     addmenu = new MenuAdapter(Dashboard.this, menuItemlist);
                     mymenu.setAdapter(addmenu);
+                    if(mymenu.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                      if (menuItemlist.size()>4)
+                      { mymenu.getLayoutParams().height = 1400;
+                      }
+                      else if( menuItemlist.size()>6) {
+                          mymenu.getLayoutParams().height = 1700;
+                        }else if (menuItemlist.size()>8) {
+                          mymenu.getLayoutParams().height = 2000;
+                      }else if( menuItemlist.size()>10) {
+                          mymenu.getLayoutParams().height = 2300;
+                      }
+                        mymenu.setNestedScrollingEnabled(false);
+                        mymenu.setLayoutManager(new GridLayoutManager(Dashboard.this, 2));
+                    } else if (mymenu.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        mymenu.setNestedScrollingEnabled(true);
+                        mymenu.setLayoutManager(new GridLayoutManager(Dashboard.this, 3));
+                        ViewGroup.LayoutParams params=mymenu.getLayoutParams();
+                        params.height=700;
+                        mymenu.setLayoutParams(params);
+                    }
                 }
                 else {
                     Toast.makeText(Dashboard.this, errornya.toString(),Toast.LENGTH_LONG).show();
