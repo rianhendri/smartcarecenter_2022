@@ -88,7 +88,7 @@ public class DetailsNews extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startDownload();
-                Toast.makeText(DetailsNews.this, linkdownloadnya,Toast.LENGTH_LONG).show();
+//                Toast.makeText(DetailsNews.this, linkdownloadnya,Toast.LENGTH_LONG).show();
             }
         });
 
