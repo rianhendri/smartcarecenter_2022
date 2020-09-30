@@ -184,8 +184,12 @@ public class AddRequest extends AppCompatActivity {
                     String string5 = jobc.getAsJsonObject().get("operatorName").getAsString();
                     operatorcd.add(string4);
                     operatorname.add(string5);
-                    if (moperatorcd.equals(operatorcd.get(i))){
+
+                    if (operatorcd.get(i).equals(moperatorcd)){
                         operatorpos = i;
+//                        Toast.makeText(AddRequest.this, String.valueOf(operatorpos),Toast.LENGTH_LONG).show();
+                    }else {
+                        operatorpos = 0;
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(AddRequest.this, R.layout.spinstatus_layout, operatorname);
                     arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
