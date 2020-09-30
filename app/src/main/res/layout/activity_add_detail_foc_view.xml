@@ -463,6 +463,31 @@
                             android:textSize="13sp" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:text="@string/title_totalapproved"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/totalaproved"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:gravity="end"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
 
 
 
@@ -470,7 +495,32 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/softgrey" />
+                    <LinearLayout
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp">
 
+                                <TextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/seguisb"
+                                    android:text="Notes: "
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/mnotes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeuib"
+                            android:gravity="start"
+                            android:text="-asdasfs\ndfsdfsdfssdfsdfsdfsdfdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdasd"
+                            android:textColor="@color/red"
+                            android:textSize="13sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
 

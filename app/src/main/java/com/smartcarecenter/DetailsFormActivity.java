@@ -23,10 +23,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.Html;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -63,6 +67,7 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 
 public class DetailsFormActivity extends AppCompatActivity {
+    EditText mreasonnya;
     public static String noreq = "";
     String MhaveToUpdate = "";
     String MsessionExpired = "";
@@ -99,6 +104,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     String mstatusName = "";
     String noticket = "";
     String sesionid_new = "";
+    String mreason="";
     public static String username = "";
     boolean installed= true;
     //timer
@@ -253,31 +259,81 @@ public class DetailsFormActivity extends AppCompatActivity {
 
         // set title dialog
         alertDialogBuilder.setTitle(getString(R.string.title_deleteReq));
+        final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        View v = getLayoutInflater().inflate(R.layout.item_cancel, null);
+        mreasonnya=v.findViewById(R.id.reasondes);
+        mreasonnya.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mreason = mreasonnya.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         // set pesan dari dialog
-        alertDialogBuilder
-                .setMessage(getString(R.string.title_canelreq))
-                .setIcon(R.mipmap.ic_launcher)
-                .setCancelable(false)
-                .setPositiveButton(getString(R.string.title_yes),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // jika tombol diklik, maka akan menutup activity ini
-                        cancelreq();
-                    }
-                })
-                .setNegativeButton(getString(R.string.title_no),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // jika tombol ini diklik, akan menutup dialog
-                        // dan tidak terjadi apa2
-                        dialog.cancel();
-                    }
-                });
+        AlertDialog d = new AlertDialog.Builder(DetailsFormActivity.this)
+                .setView(v)
+                .setMessage(R.string.title_canelreq)
+                .setPositiveButton(getString(R.string.title_yes), null) //Set to null. We override the onclick
+                .setNegativeButton(getString(R.string.title_no), null)
+                .create();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            alertDialogBuilder
+//                    .setMessage(getString(R.string.title_canelreq))
+//                    .setView(v)
+//                    .setIcon(R.mipmap.ic_launcher)
+//                    .setCancelable(false)
+//                    .setPositiveButton(getString(R.string.title_yes),null)
+//                    .setNegativeButton(getString(R.string.title_no),new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            // jika tombol ini diklik, akan menutup dialog
+//                            // dan tidak terjadi apa2
+//                            dialog.cancel();
+//                        }
+//                    });
+//        }
 
         // membuat alert dialog dari builder
-        AlertDialog alertDialog = alertDialogBuilder.create();
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//
+//        // menampilkan alert dialog
+        d.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button b = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                Button C = d.getButton(AlertDialog.BUTTON_NEGATIVE);
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-        // menampilkan alert dialog
-        alertDialog.show();
+                        if (mreasonnya.length()==0){
+                            Toast.makeText(DetailsFormActivity.this, getString(R.string.title_reasonrequired),Toast.LENGTH_LONG).show();
+                        }else {
+                            cancelreq();
+                            d.dismiss();
+                        }
+                    }
+                });
+                C.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        d.dismiss();
+                    }
+                });
+            }
+        });
+        d.show();
+
     }
     private void showDialogreopen() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -533,6 +589,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("formRequestCd",noreq);
+        jsonObject.addProperty("reason",mreason);
         jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONcancelform(jsonObject);

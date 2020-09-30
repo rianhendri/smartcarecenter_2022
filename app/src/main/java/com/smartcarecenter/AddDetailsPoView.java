@@ -67,7 +67,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     LinearLayout mback;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,
-            mnoitem,mpono,mstatus, mtotalprice,mtax,mgrandtotal,mtitle,mlabeltax;
+            mnoitem,mpono,mstatus, mtotalprice,mtax,mgrandtotal,mtitle,mlabeltax, mnotes;
 
     String mpressId = "";
     String mpressId2 = "";
@@ -115,6 +115,7 @@ public class AddDetailsPoView extends AppCompatActivity {
         mgrandtotal = findViewById(R.id.grantotalpo);
         mtitle = findViewById(R.id.title);
         mlabeltax = findViewById(R.id.labeltax);
+        mnotes = findViewById(R.id.mnotes);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
@@ -313,6 +314,10 @@ public class AddDetailsPoView extends AppCompatActivity {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     String pressname = data.get("pressTypeName").getAsString();
+                    //setnotes
+                    String note = data.get("notes").getAsString();
+                    mnotes.setText(note);
+
                         msn.setText(pressname);
                     tax = data.get("totalTax").getAsDouble();
                     Locale localeID = new Locale("in", "ID");

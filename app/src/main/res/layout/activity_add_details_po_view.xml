@@ -532,6 +532,32 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/seguisb"
+                            android:text="Notes: "
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/mnotes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/segoeui"
+                            android:gravity="start"
+                            android:text="-asdasfs\ndfsdfsdfssdfsdfsdfsdfdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdasd"
+                            android:textColor="@color/red"
+                            android:textSize="13sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

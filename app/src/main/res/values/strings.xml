@@ -53,7 +53,7 @@
     <string name="title_notificationdetail">Notification Details</string>
     <string name="title_open">Open</string>
     <string name="title_canelreq">Are you sure to cancel this request?</string>
-    <string name="title_deleteReq">Delete Request</string>
+    <string name="title_deleteReq">Cancel Request</string>
     <string name="title_yes">Yes</string>
     <string name="title_no">No</string>
     <string name="title_SendReq">Send Request</string>
@@ -132,4 +132,7 @@
     <string name="title_reopendialod">Reopen Case Request</string>
     <string name="title_approved">"Approved: "</string>
     <string name="title_tanpanopo">Your PO Number is empty. Continue?</string>
+    <string name="title_totalapproved">Total Approved:</string>
+    <string name="title_reasoncancel">Cancellation Reason:</string>
+    <string name="title_reasonrequired">please input the cancellation reason</string>
 </resources>

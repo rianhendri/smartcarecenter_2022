@@ -53,6 +53,7 @@ import static com.smartcarecenter.AddDetailFocView.mlaytotal;
 import static com.smartcarecenter.AddDetailFocView.mlistitem_foc;
 import static com.smartcarecenter.AddDetailFocView.mno_order;
 import static com.smartcarecenter.AddDetailFocView.mnoitem;
+import static com.smartcarecenter.AddDetailFocView.mtotalapproved;
 import static com.smartcarecenter.AddDetailFocView.mtotalitem;
 import static com.smartcarecenter.AddDetailFocView.mtotalqty;
 
@@ -64,6 +65,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
     ImageView mimgpopup;
     public static int totalqty = 0;
     int qtynya = 1;
+    public static int totalapproved =0;
     public Add_foc_req_adapterView(Context context, ArrayList<Add_foc_req_itemView> addFoclistitem) {
         this.context = context;
         this.addFoclistreq = addFoclistitem;
@@ -88,12 +90,15 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
         myviewholder.mqty.setText(String.valueOf(addFoclistreq.get(i).getQty()));
         myviewholder.mpos.setText(String.valueOf(addFoclistreq.get(i).getPosition()));
         myviewholder.munit.setText(addFoclistreq.get(i).getUnitName());
-        myviewholder.mapprove.setText(addFoclistreq.get(i).getQtyApproved());
+        myviewholder.mapprove.setText(String.valueOf(addFoclistreq.get(i).getQtyApproved()));
         mtotalitem.setText(String.valueOf(addFoclistreq.size()));
         totalqty = 0;
+        totalapproved = 0;
         for (int x = 0 ; x < addFoclistreq.size(); x++) {
+            totalapproved +=addFoclistreq.get(x).getQtyApproved();
             totalqty += addFoclistreq.get(x).getQty();
             mtotalqty.setText(String.valueOf(totalqty));
+            mtotalapproved.setText(String.valueOf(totalapproved));
         }
         myviewholder.mimg.setOnClickListener(new View.OnClickListener() {
             @Override

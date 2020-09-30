@@ -18,6 +18,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -72,7 +76,7 @@ public class AddDetailFocView extends AppCompatActivity {
     LinearLayout mback;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,
-            mnoitem,mlastimpresi,mstatus, mtilte;
+            mnoitem,mlastimpresi,mstatus, mtilte,mnotes, mtotalapproved;
     String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
@@ -115,6 +119,8 @@ public class AddDetailFocView extends AppCompatActivity {
         mstatus = findViewById(R.id.status);
         mchat = findViewById(R.id.chatcspo);
         mtilte = findViewById(R.id.title);
+        mnotes = findViewById(R.id.mnotes);
+        mtotalapproved = findViewById(R.id.totalaproved);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
@@ -256,6 +262,15 @@ public class AddDetailFocView extends AppCompatActivity {
                     JsonObject data = homedata.getAsJsonObject("data");
                     pressid = data.get("pressGuid").getAsString();
                     String pressname = data.get("pressTypeName").getAsString();
+                    //setNotes
+                    String note = data.get("notes").getAsString();
+
+                    mnotes.setText(note);
+//                    if (Build.VERSION.SDK_INT >= 24) {
+//                        mnotes.setText((CharSequence) Html.fromHtml((String)note+"<font color=red>", Html.FROM_HTML_MODE_COMPACT));
+//                    } else {
+//                        mnotes.setText((CharSequence)Html.fromHtml((String)note+"<font color=red>"));
+//                    }
                     msn.setText(pressname);
                     String orderno = data.get("orderNo").getAsString();
                     String date = data.get("date").getAsString();
