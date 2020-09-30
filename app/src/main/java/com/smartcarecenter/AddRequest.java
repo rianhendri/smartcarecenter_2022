@@ -81,6 +81,8 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 public class AddRequest extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1000;
     public static JsonArray listsn;
+    public static JsonArray listoperator;
+    public static String requestby="";
     String MhaveToUpdate = "";
     String MsessionExpired = "";
     final int REQUEST_CAPTURE_IMAGE = 1;
@@ -94,12 +96,15 @@ public class AddRequest extends AppCompatActivity {
     ImageView mimgbanner,mimgvis;
     Spinner mbranch;
     LinearLayout mcapture,mback;
-    TextView mdate,mlocation,moperator,mrequest_no,mrequiredfoto,msend;
+    TextView mdate,mlocation,mrequest_no,mrequiredfoto,msend,mrequestname;
     EditText mdescrip;
     String mpressId = "";
+    String moperatorcd="";
+    int operatorpos = 0;
     String xlocation = "";
     LinearLayout mreadyfoto;
     Spinner msn;
+    Spinner moperator;
     String nameFile;
     String pathImage;
     Uri photo_location;
@@ -109,6 +114,8 @@ public class AddRequest extends AppCompatActivity {
     List<String> snid = new ArrayList();
     List<String> locations = new ArrayList();
     List<String> snname = new ArrayList();
+    List<String> operatorname = new ArrayList();
+    List<String> operatorcd = new ArrayList();
     StorageReference storage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +123,7 @@ public class AddRequest extends AppCompatActivity {
         setContentView(R.layout.activity_add_request);
         mback = findViewById(R.id.backbtn);
         msn = (Spinner)this.findViewById(R.id.sn);
-        moperator = (TextView)this.findViewById(R.id.operator);
+        moperator = findViewById(R.id.operator);
         mrequest_no = (TextView)this.findViewById(R.id.request_no);
         mdescrip = (EditText)this.findViewById(R.id.descrip);
         mdate = (TextView)this.findViewById(R.id.datereq);
@@ -129,6 +136,7 @@ public class AddRequest extends AppCompatActivity {
         mlocation = (TextView)this.findViewById(R.id.locationsn);
         mbranch = (Spinner)this.findViewById(R.id.branchspin);
         mlocation = findViewById(R.id.locationsn);
+        mrequestname = findViewById(R.id.requestname);
         //getsessionId
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
@@ -163,18 +171,41 @@ public class AddRequest extends AppCompatActivity {
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                operatorname.clear();
+                operatorcd.clear();
                 mpressId = snid.get(position);
                 xlocation = locations.get(position);
                     mlocation.setText(xlocation);
-//                Toast.makeText(AddRequest.this, mpressId,Toast.LENGTH_LONG).show();
-//                for (int i = 0; i < snid.size(); ++i) {
-//                    mpressId = snid.get(i);
-////                    Toast.makeText(AddRequest.this, mpressId,Toast.LENGTH_LONG).show();
-//                }
-//                for (int x = 0; x < locations.size(); ++x) {
-//                    xlocation = locations.get(position);
-//                    mlocation.setText(xlocation);
-//                }
+                JsonObject jsonObject2 = (JsonObject)listsn.get(position);
+                listoperator=jsonObject2.getAsJsonArray("operatorList");
+                for (int i = 0; i < listoperator.size(); ++i) {
+                    JsonObject jobc = (JsonObject)listoperator.get(i);
+                    String string4 = jobc.getAsJsonObject().get("operatorCd").getAsString();
+                    String string5 = jobc.getAsJsonObject().get("operatorName").getAsString();
+                    operatorcd.add(string4);
+                    operatorname.add(string5);
+                    if (moperatorcd.equals(operatorcd.get(i))){
+                        operatorpos = i;
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(AddRequest.this, R.layout.spinstatus_layout, operatorname);
+                    arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
+                    arrayAdapter.notifyDataSetChanged();
+                    moperator.setAdapter(arrayAdapter);
+                    moperator.setSelection(operatorpos);
+                }
+//                Toast.makeText(AddRequest.this, listoperator.toString(),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        moperator.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                moperatorcd = operatorcd.get(position);
+//                Toast.makeText(AddRequest.this, moperatorcd.toString(),Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -394,6 +425,7 @@ public class AddRequest extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
+                    mrequestname.setText(requestby);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     listsn=data.getAsJsonArray("pressList");
@@ -434,7 +466,8 @@ public class AddRequest extends AppCompatActivity {
         jsonPostService.uploadImage(MultipartBody.Part.createFormData((String)"",
                         imagefile.getName(),requestBody), RequestBody.create(MultipartBody.FORM,sesionid_new), RequestBody.create((MediaType)MultipartBody.FORM,
                 mpressId), RequestBody.create((MediaType)MultipartBody.FORM,
-                mdescrip.getText().toString()),RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
+                mdescrip.getText().toString()),RequestBody.create((MediaType)MultipartBody.FORM,
+                moperatorcd),RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 String errornya = "";

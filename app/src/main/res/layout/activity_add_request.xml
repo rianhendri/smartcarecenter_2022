@@ -250,8 +250,39 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
-                    <TextView
+                    <Spinner
                         android:id="@+id/operator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="@font/segoeui"
+                        android:paddingLeft="4dp"
+                        android:text="Lorem Ipsum"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="4dp"
+                        android:background="@color/softgrey" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/seguisb"
+                        android:paddingLeft="4dp"
+                        android:text="Request By"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/requestname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"

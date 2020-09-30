@@ -81,7 +81,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     ImageView mbanner;
     LinearLayout mcancel, mconfirm, mcs, mbackgroundalert,mback, mreopenbtn;
     TextView mcreatedate, mdate, mdeskription, missu, moperator, mreqno, mservicetype, msn, mstatusdetail,
-            mstid, mtitle, munitcategory, mlocation, mtextalert;
+            mstid, mtitle, munitcategory, mlocation, mtextalert, mrequestby;
     String mdateapi = "";
     String mdeskriptionapi = "";
     String mformRequestCd = "";
@@ -149,6 +149,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         mbackgroundalert = findViewById(R.id.backgroundalert);
         mtimerconfirm = findViewById(R.id.timerconfirm);
         mreopenbtn = findViewById(R.id.reopen);
+        mrequestby = findViewById(R.id.requestby);
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(DetailsFormActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -474,7 +475,8 @@ public class DetailsFormActivity extends AppCompatActivity {
                     mstatusName = data.get("statusName").getAsString();
                     mstatusColorCode = data.get("statusColorCode").getAsString();
                     mdeskriptionapi = data.get("description").getAsString();
-                    mrequestedBy = data.get("requestedBy").getAsString();
+                   mrequestby.setText(data.get("requestedBy").getAsString());
+                    moperator.setText(data.get("operatorName").getAsString());
                     mrequestedDateTime = data.get("requestedDateTime").getAsString();
                     mallowToCancel = data.get("allowToCancel").toString();
                     mallowtoconfirm = data.get("allowToConfirm").toString();
@@ -564,7 +566,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                     }
                     mdate.setText((CharSequence)datenew);
                     msn.setText(mpressName);
-                    moperator.setText(mrequestedBy);
+
                     mdeskription.setText(mdeskriptionapi);
                     mstatusdetail.setText(mstatusName);
                     mstatusdetail.setTextColor(Color.parseColor("#"+mstatusColorCode));

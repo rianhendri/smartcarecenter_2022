@@ -114,6 +114,7 @@ public interface IRetrofit {
                                         @Part("sessionId") RequestBody sessionId,
                                         @Part("pressId") RequestBody pressId,
                                         @Part("description") RequestBody description,
+                                        @Part("operatorCd") RequestBody operatorCd,
                                         @Part("ver") RequestBody ver);
 }
 

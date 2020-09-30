@@ -44,7 +44,7 @@ import retrofit2.Response;
 
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
-
+import static com.smartcarecenter.AddRequest.requestby;
 public class Dashboard extends AppCompatActivity {
     public static boolean installed = true;
     public static String mshowFormRequest = "";
@@ -231,6 +231,7 @@ public class Dashboard extends AppCompatActivity {
                     editor.putString("taxname",taxename);
                     editor.apply();
                     mhomeName = data.get("homeName").getAsString();
+                    requestby = data.get("homeName").getAsString();
                     mcompanyName = data.get("companyName").getAsString();
                     mgroupName = data.get("groupName").getAsString();
                     mcompanyLogoURL = data.get("companyLogoURL").getAsString();
