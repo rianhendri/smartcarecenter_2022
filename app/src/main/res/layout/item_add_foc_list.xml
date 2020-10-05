@@ -107,22 +107,22 @@
                                     android:fontFamily="@font/segoeui"
                                     android:text="@string/title_category"
                                     android:textColor="@color/black"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
 
                                 <TextView
                                     android:id="@+id/categoryfoclist"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginLeft="4dp"
                                     android:fontFamily="@font/segoeui"
                                     android:text="-"
-                                    android:layout_marginLeft="4dp"
                                     android:textColor="@color/black"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="25dp"
-                                android:layout_marginTop="4dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
                                 android:gravity="start"
                                 android:orientation="horizontal">
                                 <LinearLayout
@@ -136,16 +136,17 @@
                                         android:fontFamily="@font/segoeui"
                                         android:text="Unit: "
                                         android:textColor="@color/black"
-                                        android:textSize="12sp" />
+                                        android:textSize="10sp" />
+
                                     <TextView
                                         android:id="@+id/unitname"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginLeft="4dp"
                                         android:fontFamily="@font/segoeui"
                                         android:text="-"
-                                        android:layout_marginLeft="4dp"
                                         android:textColor="@color/black"
-                                        android:textSize="12sp" />
+                                        android:textSize="10sp" />
                                 </LinearLayout>
                                 <LinearLayout
                                     android:visibility="gone"
@@ -171,6 +172,31 @@
                                         android:textSize="12sp" />
                                 </LinearLayout>
 
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="@string/title_startimpesi"
+                                    android:textColor="@color/black"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/previmpres"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="4dp"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="-"
+                                    android:textColor="@color/black"
+                                    android:textSize="10sp" />
                             </LinearLayout>
                         </LinearLayout>
 

@@ -67,7 +67,7 @@ public class AddDetailFoc extends AppCompatActivity {
     int pos = 0;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem;
-    EditText mlastimpresi;
+    public static EditText mlastimpresi;
     public static String mpressId = "";
     public static String lastimpresi = "";
     String mpressId2 = "";
@@ -106,6 +106,7 @@ public class AddDetailFoc extends AppCompatActivity {
         mtotalqty = findViewById(R.id.totalqtyfoc);
         mlaytotal = findViewById(R.id.totallay);
         madd_item = findViewById(R.id.btnadditem_po);
+
 
         cekInternet();
         getSessionId();

@@ -96,6 +96,12 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         myviewholder.xcode.setText(addFoclistitem.get(i).getItemCd());
         myviewholder.xcategory.setText(addFoclistitem.get(i).getCategoryName());
         myviewholder.xunit.setText(addFoclistitem.get(i).getUnitName());
+        if (addFoclistitem.get(i).getLastImpression()==0){
+            myviewholder.xprevimpresion.setText("-");
+        }else {
+            myviewholder.xprevimpresion.setText(String.valueOf(addFoclistitem.get(i).getLastImpression()));
+        }
+
 //        myviewholder.xstatus.setText(addFoclistitem.get(i).getStsActiveInfo());
 
          stsS = addFoclistitem.get(i).isStsActive();
@@ -141,6 +147,10 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
                     tambahitem.setImgpic(addFoclistitem.get(i).getImageThumbFullURL());
                     tambahitem.setImgban(addFoclistitem.get(i).getImageFullURL());
                     tambahitem.setUnitName(addFoclistitem.get(i).getUnitName());
+                    tambahitem.setLastImpression(addFoclistitem.get(i).getLastImpression());
+                    tambahitem.setMatrixLifeSpanPcs(addFoclistitem.get(i).getMatrixLifeSpanPcs());
+                    tambahitem.setUsingMatrix(addFoclistitem.get(i).isUsingMatrix());
+                    tambahitem.setMatrix("-");
                     tambahitem.setQty(1);
                     tambahitem.setPosition(addFoclistreq.size()+1);
                     listpoact.add(tambahitem);
@@ -173,7 +183,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         ImageView xgambar_item,xadd;
         TextView xid;
         TextView xstatus;
-        TextView xname,xcode,xcategory,xunit;
+        TextView xname,xcode,xcategory,xunit, xprevimpresion;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -184,6 +194,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
             xname = itemView.findViewById(R.id.namabarang);
             xadd = itemView.findViewById(R.id.addpoitem);
             xcategory = itemView.findViewById(R.id.categoryfoclist);
+            xprevimpresion = itemView.findViewById(R.id.previmpres);
 
 
         }

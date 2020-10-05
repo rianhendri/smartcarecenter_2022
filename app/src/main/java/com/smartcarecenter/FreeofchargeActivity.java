@@ -47,6 +47,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.AddDetailFoc.mpressId;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
 import static com.smartcarecenter.Dashboard.showaddfoc;
@@ -207,6 +208,7 @@ public class FreeofchargeActivity extends AppCompatActivity {
         maddFoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mpressId = "";
                 Intent gotoaddfoc = new Intent(FreeofchargeActivity.this, AddDetailFoc.class);
                 startActivity(gotoaddfoc);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);

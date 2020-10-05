@@ -31,6 +31,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.smartcarecenter.Add_Foc_request.Add_foc_req_adapter;
 import com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter;
 import com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_item;
 import com.smartcarecenter.apihelper.IRetrofit;
@@ -204,6 +205,8 @@ public class Add_Foc_Item_List extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    Add_foc_req_adapter.matrixmeter=data.get("matrixMeter").getAsDouble();
+//                    Toast.makeText(Add_Foc_Item_List.this, String.valueOf(Add_foc_req_adapter.matrixmeter),Toast.LENGTH_LONG).show();
                     getArrayItem = data.getAsJsonArray("list");
                     stsinac = data.get("inactiveStatusName").getAsString();
                     Gson gson = new Gson();

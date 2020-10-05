@@ -17,7 +17,11 @@ public class Add_foc_list_item {
     public Add_foc_list_item() {
     }
 
-    public Add_foc_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, String usingMatrix, String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks, boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL, Integer lastImpression, String stsActiveInfo, String unitName) {
+
+    public Add_foc_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, boolean usingMatrix,
+                             String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks,
+                             boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL,
+                             Integer lastImpression, String stsActiveInfo, String unitName, Integer matrixLifeSpanPcs) {
         ItemCd = itemCd;
         Name = name;
         ItemTypeCd = itemTypeCd;
@@ -35,6 +39,7 @@ public class Add_foc_list_item {
         LastImpression = lastImpression;
         StsActiveInfo = stsActiveInfo;
         UnitName = unitName;
+        MatrixLifeSpanPcs = matrixLifeSpanPcs;
     }
 
     public String getItemCd() {
@@ -69,11 +74,11 @@ public class Add_foc_list_item {
         CategoryCd = categoryCd;
     }
 
-    public String getUsingMatrix() {
+    public boolean isUsingMatrix() {
         return UsingMatrix;
     }
 
-    public void setUsingMatrix(String usingMatrix) {
+    public void setUsingMatrix(boolean usingMatrix) {
         UsingMatrix = usingMatrix;
     }
 
@@ -173,6 +178,14 @@ public class Add_foc_list_item {
         UnitName = unitName;
     }
 
+    public Integer getMatrixLifeSpanPcs() {
+        return MatrixLifeSpanPcs;
+    }
+
+    public void setMatrixLifeSpanPcs(Integer matrixLifeSpanPcs) {
+        MatrixLifeSpanPcs = matrixLifeSpanPcs;
+    }
+
     @Expose
     @SerializedName("ItemCd")
     private String ItemCd;
@@ -187,7 +200,7 @@ public class Add_foc_list_item {
     private String CategoryCd;
     @Expose
     @SerializedName("UsingMatrix")
-    private String UsingMatrix;
+    private boolean UsingMatrix;
     @Expose
     @SerializedName("Mps")
     private String Mps;
@@ -221,12 +234,14 @@ public class Add_foc_list_item {
     @Expose
     @SerializedName("StsActiveInfo")
     private String StsActiveInfo;
-
-
-
     @Expose
     @SerializedName("UnitName")
     private String UnitName;
+
+    @Expose
+    @SerializedName("MatrixLifeSpanPcs")
+    private Integer MatrixLifeSpanPcs;
+
 
 
 

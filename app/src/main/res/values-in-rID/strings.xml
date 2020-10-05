@@ -80,7 +80,7 @@
     <string name="title_serach">Pencarian...</string>
     <string name="title_norder">No Order</string>
     <string name="title_NoFoc">No Foc</string>
-    <string name="title_startimpesi">Impresi Sebelumnya</string>
+    <string name="title_startimpesi">"Impresi Sebelumnya: "</string>
     <string name="title_endimpresi">Impresi Terakhir</string>
     <string name="title_totalqty">Jumlah Qty:</string>
     <string name="title_noitem">Tidak ada item</string>

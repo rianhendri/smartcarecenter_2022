@@ -80,7 +80,7 @@
     <string name="title_serach">Search...</string>
     <string name="title_norder">Order No.</string>
     <string name="title_NoFoc">No Foc</string>
-    <string name="title_startimpesi">Previous Impression</string>
+    <string name="title_startimpesi">"Previous Impression: "</string>
     <string name="title_endimpresi">Present Impression</string>
     <string name="title_totalqty">Total Qty:</string>
     <string name="title_noitem">No Item</string>

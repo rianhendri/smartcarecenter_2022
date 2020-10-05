@@ -146,8 +146,9 @@
 
 					<TextView
 						android:id="@+id/status"
+						android:gravity="center"
 						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
+						android:layout_height="match_parent"
 						android:fontFamily="@font/segoeui"
 						android:text="Status: "
 						android:textColor="@color/black"
@@ -159,7 +160,8 @@
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="2dp"
 						android:fontFamily="@font/segoeuib"
-						android:textSize="11sp" />
+						android:textSize="11sp"
+						android:text="asdasdasdasdasd"/>
 
 
 

@@ -18,6 +18,23 @@ public class Add_foc_req_item {
     }
 
 
+    public Add_foc_req_item(String itemcd, Integer position, Integer qty, String imgpic, String imgban,
+                            String nameitem, String category, String unitName,
+                            Integer matrixLifeSpanPcs, boolean usingMatrix, Integer lastImpression, String matrix) {
+        this.itemcd = itemcd;
+        this.position = position;
+        this.qty = qty;
+        this.imgpic = imgpic;
+        this.imgban = imgban;
+        this.nameitem = nameitem;
+        this.category = category;
+        UnitName = unitName;
+        MatrixLifeSpanPcs = matrixLifeSpanPcs;
+        UsingMatrix = usingMatrix;
+        LastImpression = lastImpression;
+        Matrix = matrix;
+    }
+
     public String getItemcd() {
         return itemcd;
     }
@@ -50,6 +67,14 @@ public class Add_foc_req_item {
         this.imgpic = imgpic;
     }
 
+    public String getImgban() {
+        return imgban;
+    }
+
+    public void setImgban(String imgban) {
+        this.imgban = imgban;
+    }
+
     public String getNameitem() {
         return nameitem;
     }
@@ -65,13 +90,6 @@ public class Add_foc_req_item {
     public void setCategory(String category) {
         this.category = category;
     }
-    public String getImgban() {
-        return imgban;
-    }
-
-    public void setImgban(String imgban) {
-        this.imgban = imgban;
-    }
 
     public String getUnitName() {
         return UnitName;
@@ -81,19 +99,37 @@ public class Add_foc_req_item {
         UnitName = unitName;
     }
 
-    public Add_foc_req_item(String itemcd, Integer position, Integer qty,
-                            String imgpic, String nameitem, String category,String imgban,String unitName) {
-        this.itemcd = itemcd;
-        this.position = position;
-        this.qty = qty;
-        this.imgpic = imgpic;
-        this.imgban = imgban;
-        this.nameitem = nameitem;
-        this.category = category;
-        UnitName = unitName;
+    public Integer getMatrixLifeSpanPcs() {
+        return MatrixLifeSpanPcs;
     }
 
+    public void setMatrixLifeSpanPcs(Integer matrixLifeSpanPcs) {
+        MatrixLifeSpanPcs = matrixLifeSpanPcs;
+    }
 
+    public boolean isUsingMatrix() {
+        return UsingMatrix;
+    }
+
+    public void setUsingMatrix(boolean usingMatrix) {
+        UsingMatrix = usingMatrix;
+    }
+
+    public Integer getLastImpression() {
+        return LastImpression;
+    }
+
+    public void setLastImpression(Integer lastImpression) {
+        LastImpression = lastImpression;
+    }
+
+    public String getMatrix() {
+        return Matrix;
+    }
+
+    public void setMatrix(String matrix) {
+        Matrix = matrix;
+    }
 
     @SerializedName("itemcd")
     private String itemcd;
@@ -115,10 +151,21 @@ public class Add_foc_req_item {
     @Expose
     @SerializedName("category")
     private String category;
-
     @Expose
     @SerializedName("UnitName")
     private String UnitName;
+    @Expose
+    @SerializedName("MatrixLifeSpanPcs")
+    private Integer MatrixLifeSpanPcs;
+    @Expose
+    @SerializedName("UsingMatrix")
+    private boolean UsingMatrix;
+    @Expose
+    @SerializedName("LastImpression")
+    private Integer LastImpression;
+    @Expose
+    @SerializedName("Matrix")
+    private String Matrix;
 
 
 
