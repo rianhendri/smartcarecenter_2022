@@ -91,6 +91,8 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
         myviewholder.mpos.setText(String.valueOf(addFoclistreq.get(i).getPosition()));
         myviewholder.munit.setText(addFoclistreq.get(i).getUnitName());
         myviewholder.mapprove.setText(String.valueOf(addFoclistreq.get(i).getQtyApproved()));
+        myviewholder.mprevimpress.setText(String.valueOf(addFoclistreq.get(i).getPreviousImpression()));
+        myviewholder.mmatrix.setText(String.valueOf(addFoclistreq.get(i).getMatrixResult()));
         mtotalitem.setText(String.valueOf(addFoclistreq.size()));
         totalqty = 0;
         totalapproved = 0;
@@ -127,7 +129,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mcode, mname, mcategory, mqty, mpos,munit, mapprove;
+        TextView mcode, mname, mcategory, mqty, mpos,munit, mapprove, mprevimpress, mmatrix;
         ImageView mimg, mminus, mplus,mdelete;
 
         public Myviewholder(@NonNull View itemView) {
@@ -144,6 +146,8 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
             mdelete = itemView.findViewById(R.id.deletelistpo);
             munit = itemView.findViewById(R.id.unitname);
             mapprove = itemView.findViewById(R.id.qtyapprov);
+            mprevimpress = itemView.findViewById(R.id.previmpres);
+            mmatrix = itemView.findViewById(R.id.matrix);
 
 
 

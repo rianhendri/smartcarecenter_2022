@@ -19,7 +19,8 @@ public class Add_foc_req_itemView {
 
     public Add_foc_req_itemView(String itemCd, Integer position, Integer qty, String itemName,
                                 String categoryName, String imageThumbFullURL, String imageFullURL,
-                                String unitName, int qtyApproved) {
+                                String unitName,
+                                int qtyApproved, int matrixResult, int previousImpression) {
         ItemCd = itemCd;
         Position = position;
         Qty = qty;
@@ -29,6 +30,8 @@ public class Add_foc_req_itemView {
         ImageFullURL = imageFullURL;
         UnitName = unitName;
         QtyApproved = qtyApproved;
+        MatrixResult = matrixResult;
+        PreviousImpression = previousImpression;
     }
 
     public String getItemCd() {
@@ -103,6 +106,22 @@ public class Add_foc_req_itemView {
         QtyApproved = qtyApproved;
     }
 
+    public int getMatrixResult() {
+        return MatrixResult;
+    }
+
+    public void setMatrixResult(int matrixResult) {
+        MatrixResult = matrixResult;
+    }
+
+    public int getPreviousImpression() {
+        return PreviousImpression;
+    }
+
+    public void setPreviousImpression(int previousImpression) {
+        PreviousImpression = previousImpression;
+    }
+
     @SerializedName("ItemCd")
     private String ItemCd;
     @Expose
@@ -131,6 +150,12 @@ public class Add_foc_req_itemView {
     @Expose
     @SerializedName("QtyApproved")
     private int QtyApproved;
+    @Expose
+    @SerializedName("MatrixResult")
+    private int MatrixResult;
+    @Expose
+    @SerializedName("PreviousImpression")
+    private int PreviousImpression;
 }
 
 

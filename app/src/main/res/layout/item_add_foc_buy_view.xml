@@ -141,6 +141,31 @@
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
                             </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="@string/title_startimpesi"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/previmpres"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="-"
+                                    android:layout_marginLeft="4dp"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
                         </LinearLayout>
 
                         <ImageView
@@ -167,6 +192,25 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/seguisb"
+                            android:gravity="center_vertical"
+                            android:text="Matrix: "
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                        <TextView
+                            android:id="@+id/matrix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/background_transparent"
+                            android:fontFamily="@font/segoeuib"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
