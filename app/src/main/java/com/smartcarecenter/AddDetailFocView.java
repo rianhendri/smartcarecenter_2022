@@ -69,6 +69,7 @@ public class AddDetailFocView extends AppCompatActivity {
     public static JsonArray listsn;
     String MhaveToUpdate = "";
     String MsessionExpired = "";
+    public static String matrixlabel = "";
     String akunid = "";
     Boolean internet = false;
     boolean installed= true;

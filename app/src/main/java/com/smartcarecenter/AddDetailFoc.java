@@ -58,6 +58,8 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddDetailFoc extends AppCompatActivity {
     public static JsonArray listsn;
+    public static  String username = "";
+    public static String matrixlabel = "";
     String MhaveToUpdate = "";
     String MsessionExpired = "";
     String akunid = "";
@@ -302,6 +304,7 @@ public class AddDetailFoc extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
+                    moperator.setText(username);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     listsn=data.getAsJsonArray("pressList");

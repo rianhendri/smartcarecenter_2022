@@ -49,6 +49,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import static com.smartcarecenter.AddDetailFoc.reitem;
+import static com.smartcarecenter.AddDetailFocView.matrixlabel;
 import static com.smartcarecenter.AddDetailFocView.mlaytotal;
 import static com.smartcarecenter.AddDetailFocView.mlistitem_foc;
 import static com.smartcarecenter.AddDetailFocView.mno_order;
@@ -82,7 +83,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
-
+        myviewholder.mmatrixlabel.setText(matrixlabel);
         Picasso.with(context).load(addFoclistreq.get(i).getImageThumbFullURL()).into(myviewholder.mimg);
         myviewholder.mname.setText(addFoclistreq.get(i).getItemName());
         myviewholder.mcode.setText(addFoclistreq.get(i).getItemCd());
@@ -129,7 +130,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mcode, mname, mcategory, mqty, mpos,munit, mapprove, mprevimpress, mmatrix;
+        TextView mcode, mname, mcategory, mqty, mpos,munit, mapprove, mprevimpress, mmatrix, mmatrixlabel;
         ImageView mimg, mminus, mplus,mdelete;
 
         public Myviewholder(@NonNull View itemView) {
@@ -148,6 +149,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
             mapprove = itemView.findViewById(R.id.qtyapprov);
             mprevimpress = itemView.findViewById(R.id.previmpres);
             mmatrix = itemView.findViewById(R.id.matrix);
+            mmatrixlabel = itemView.findViewById(R.id.matrixlabel);
 
 
 

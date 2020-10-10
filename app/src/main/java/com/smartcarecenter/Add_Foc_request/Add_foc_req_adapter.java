@@ -57,6 +57,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static com.smartcarecenter.AddDetailFoc.lastimpresi;
+import static com.smartcarecenter.AddDetailFoc.matrixlabel;
 import static com.smartcarecenter.AddDetailFoc.mlastimpresi;
 import static com.smartcarecenter.AddDetailFoc.mlaytotal;
 import static com.smartcarecenter.AddDetailFoc.mlistitem_foc;
@@ -124,7 +125,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                 myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(matrixcount)));
             }
         }
-
+        myviewholder.mmatrixlabel.setText(matrixlabel);
         Picasso.with(context).load(addFoclistreq.get(i).getImgpic()).into(myviewholder.mimg);
         myviewholder.mname.setText(addFoclistreq.get(i).getNameitem());
         myviewholder.mcode.setText(addFoclistreq.get(i).getItemcd());
@@ -276,7 +277,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mcode, mname, mcategory, mqty, mpos, munit, mprevimpress,mmatrix;
+        TextView mcode, mname, mcategory, mqty, mpos, munit, mprevimpress,mmatrix, mmatrixlabel;
         ImageView mimg, mminus, mplus,mdelete;
 
         public Myviewholder(@NonNull View itemView) {
@@ -294,6 +295,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             munit = itemView.findViewById(R.id.unitname);
             mprevimpress = itemView.findViewById(R.id.previmpres);
             mmatrix = itemView.findViewById(R.id.matrixvalue);
+            mmatrixlabel = itemView.findViewById(R.id.matrixlabel);
 
 
 

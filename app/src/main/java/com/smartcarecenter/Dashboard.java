@@ -224,6 +224,9 @@ public class Dashboard extends AppCompatActivity {
                         mlayoutalert.setVisibility(View.GONE);
                     }
                     //HEADER
+                    AddDetailFoc.matrixlabel = data.get("matrixLabel").getAsString() + ": ";
+                    AddDetailFocView.matrixlabel = data.get("matrixLabel").getAsString() + ": ";
+
                     tax = data.get("taxPercentage").getAsInt();
                     taxename = data.get("taxLabel").getAsString();
                     SharedPreferences.Editor editor = getSharedPreferences("Tax", MODE_PRIVATE).edit();
@@ -232,6 +235,8 @@ public class Dashboard extends AppCompatActivity {
                     editor.apply();
                     mhomeName = data.get("homeName").getAsString();
                     requestby = data.get("homeName").getAsString();
+                    AddDetailsPo.username = data.get("homeName").getAsString();
+                    AddDetailFoc.username = data.get("homeName").getAsString();
                     mcompanyName = data.get("companyName").getAsString();
                     mgroupName = data.get("groupName").getAsString();
                     mcompanyLogoURL = data.get("companyLogoURL").getAsString();

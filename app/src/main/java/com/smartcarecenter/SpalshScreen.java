@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.JsonObject;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
@@ -40,6 +41,7 @@ public class SpalshScreen extends AppCompatActivity {
         setContentView(R.layout.activity_spalsh_screen);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        FirebaseMessaging.getInstance().subscribeToTopic("bebas18");
         getSessionId();
         cekInternet();
         loadLanguage();
