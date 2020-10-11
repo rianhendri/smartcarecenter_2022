@@ -93,7 +93,13 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
         myviewholder.munit.setText(addFoclistreq.get(i).getUnitName());
         myviewholder.mapprove.setText(String.valueOf(addFoclistreq.get(i).getQtyApproved()));
         myviewholder.mprevimpress.setText(String.valueOf(addFoclistreq.get(i).getPreviousImpression()));
-        myviewholder.mmatrix.setText(String.valueOf(addFoclistreq.get(i).getMatrixResult()));
+        Integer matrixnya = addFoclistreq.get(i).getMatrixResult();
+        if (matrixnya==null){
+            myviewholder.mmatrix.setText("-");
+        }else {
+            myviewholder.mmatrix.setText(String.valueOf(addFoclistreq.get(i).getMatrixResult()));
+        }
+
         mtotalitem.setText(String.valueOf(addFoclistreq.size()));
         totalqty = 0;
         totalapproved = 0;
