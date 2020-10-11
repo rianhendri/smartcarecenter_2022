@@ -86,8 +86,8 @@ public class AddDetailFoc extends AppCompatActivity {
     public static ArrayList<Add_foc_req_item> reitem;
     Add_foc_req_adapter req_adapter;
     private LinearLayoutManager linearLayoutManager;
-    String jsonarayitem = "";
-    JsonArray myCustomArray;
+    public static String jsonarayitem = "";
+    public static JsonArray myCustomArray;
     Gson gson;
     @SuppressLint("WrongConstant")
     @Override

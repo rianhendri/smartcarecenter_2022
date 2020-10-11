@@ -17,10 +17,9 @@ public class Add_foc_req_itemView {
     public Add_foc_req_itemView() {
     }
 
-    public Add_foc_req_itemView(String itemCd, Integer position, Integer qty, String itemName,
-                                String categoryName, String imageThumbFullURL, String imageFullURL,
-                                String unitName,
-                                int qtyApproved, int matrixResult, int previousImpression) {
+
+    public Add_foc_req_itemView(String itemCd, Integer position, Integer qty, String itemName, String categoryName, String imageThumbFullURL, String imageFullURL,
+                                String unitName, int qtyApproved, String deserveQty, int previousImpression) {
         ItemCd = itemCd;
         Position = position;
         Qty = qty;
@@ -30,7 +29,7 @@ public class Add_foc_req_itemView {
         ImageFullURL = imageFullURL;
         UnitName = unitName;
         QtyApproved = qtyApproved;
-        MatrixResult = matrixResult;
+        DeserveQty = deserveQty;
         PreviousImpression = previousImpression;
     }
 
@@ -106,12 +105,12 @@ public class Add_foc_req_itemView {
         QtyApproved = qtyApproved;
     }
 
-    public int getMatrixResult() {
-        return MatrixResult;
+    public String getDeserveQty() {
+        return DeserveQty;
     }
 
-    public void setMatrixResult(int matrixResult) {
-        MatrixResult = matrixResult;
+    public void setDeserveQty(String deserveQty) {
+        DeserveQty = deserveQty;
     }
 
     public int getPreviousImpression() {
@@ -151,8 +150,8 @@ public class Add_foc_req_itemView {
     @SerializedName("QtyApproved")
     private int QtyApproved;
     @Expose
-    @SerializedName("MatrixResult")
-    private int MatrixResult;
+    @SerializedName("DeserveQty")
+    private String DeserveQty;
     @Expose
     @SerializedName("PreviousImpression")
     private int PreviousImpression;

@@ -50,6 +50,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.smartcarecenter.AddDetailFoc;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
 
@@ -65,13 +68,15 @@ import static com.smartcarecenter.AddDetailFoc.mno_order;
 import static com.smartcarecenter.AddDetailFoc.mnoitem;
 import static com.smartcarecenter.AddDetailFoc.mtotalitem;
 import static com.smartcarecenter.AddDetailFoc.mtotalqty;
+import static com.smartcarecenter.AddDetailFoc.myCustomArray;
+import static com.smartcarecenter.AddDetailFoc.jsonarayitem;
 import static com.smartcarecenter.AddDetailFoc.reitem;
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
 
 public class Add_foc_req_adapter
 extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
     public static ArrayList<Add_foc_req_item> addFoclistreq;
-    public static int lastimpresivalue = 0;
+    public static long lastimpresivalue = 0;
     public static Double matrixcount = 0.00;
     public static double matrixmeter = 0.00;
     public static double selisih = 0.00;
@@ -110,7 +115,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             if (mlastimpresi.length()==0){
                 lastimpresivalue = 0;
             }else {
-                lastimpresivalue = Integer.parseInt(mlastimpresi.getText().toString());
+                lastimpresivalue = Long.parseLong(mlastimpresi.getText().toString());
             }
             selisih = lastimpresivalue-addFoclistreq.get(i).getLastImpression();
             spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();
@@ -119,10 +124,10 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             matrixcount = (selisih/spanmax)*matrixmeter;
 //                    Toast.makeText(context, String.valueOf(form.format(matrixcount)),Toast.LENGTH_LONG).show();
 
-            if ((int)Math.ceil(matrixcount)<=0){
+            if ((long)Math.ceil(matrixcount)<=0){
                 myviewholder.mmatrix.setText("0");
             }else {
-                myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(matrixcount)));
+                myviewholder.mmatrix.setText(String.valueOf((long) Math.ceil(matrixcount)));
             }
         }
         myviewholder.mmatrixlabel.setText(matrixlabel);
@@ -165,6 +170,9 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                         totalqty += addFoclistreq.get(x).getQty();
                         mtotalqty.setText(String.valueOf(totalqty));
                     }
+                    Gson gson = new GsonBuilder().create();
+                   myCustomArray = gson.toJsonTree(reitem).getAsJsonArray();
+                    jsonarayitem = myCustomArray.toString();
                     mtotalitem.setText(String.valueOf(addFoclistreq.size()));
 //                    grandTotalplus = 0;
 //                    intSum = 0;
@@ -233,30 +241,35 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (addFoclistreq.get(i).getLastImpression()==0){
-                    myviewholder.mmatrix.setText("-");
-                }else if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
-                    myviewholder.mmatrix.setText("-");
-                }else if (!usingmatrix){
-                    myviewholder.mmatrix.setText("-");
-                }else {
-                    if (mlastimpresi.length()==0){
-                        lastimpresivalue=0;
-                    }else {
-                        lastimpresivalue = Integer.parseInt(mlastimpresi.getText().toString());
-                    }
+                if (addFoclistreq.size()==0){
 
-                    selisih = lastimpresivalue-addFoclistreq.get(i).getLastImpression();
-                    spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();
-                    matrixcount = (selisih/spanmax)*matrixmeter;
+                }else {
+                    if (addFoclistreq.get(i).getLastImpression()==0){
+                        myviewholder.mmatrix.setText("-");
+                    }else if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                        myviewholder.mmatrix.setText("-");
+                    }else if (!usingmatrix){
+                        myviewholder.mmatrix.setText("-");
+                    }else {
+                        if (mlastimpresi.length()==0){
+                            lastimpresivalue=0;
+                        }else {
+                            lastimpresivalue = Integer.parseInt(mlastimpresi.getText().toString());
+                        }
+
+                        selisih = lastimpresivalue-addFoclistreq.get(i).getLastImpression();
+                        spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();
+                        matrixcount = (selisih/spanmax)*matrixmeter;
 //                    Toast.makeText(context, String.valueOf(form.format(matrixcount)),Toast.LENGTH_LONG).show();
 
-                    if ((int)Math.ceil(matrixcount)<=0){
-                        myviewholder.mmatrix.setText("0");
-                    }else {
-                        myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(matrixcount)));
+                        if ((int)Math.ceil(matrixcount)<=0){
+                            myviewholder.mmatrix.setText("0");
+                        }else {
+                            myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(matrixcount)));
+                        }
                     }
                 }
+
 
             }
 
