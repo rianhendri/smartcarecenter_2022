@@ -207,7 +207,9 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                     totalqty += addFoclistreq.get(i).getQty();
                     mtotalqty.setText(String.valueOf(totalqty));
                 }
-
+                Gson gson = new GsonBuilder().create();
+                myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
+//                Toast.makeText(context, myCustomArray.toString(),Toast.LENGTH_LONG).show();
 
             }
         });
@@ -228,6 +230,9 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                         totalqty += addFoclistreq.get(i).getQty();
                         mtotalqty.setText(String.valueOf(totalqty));
                     }
+                    Gson gson = new GsonBuilder().create();
+                    myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
+//                    Toast.makeText(context, myCustomArray.toString(),Toast.LENGTH_LONG).show();
                 }
 
 
