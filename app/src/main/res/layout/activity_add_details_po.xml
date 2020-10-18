@@ -55,6 +55,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/backgroundalert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp"
+                    android:background="@color/colorPrimaryDark">
+                    <TextView
+                        android:id="@+id/textalert"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeui"
+                        android:paddingLeft="4dp"
+                        android:text="@string/title_Requestno"
+                        android:textColor="@color/dwhite"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
                 <TextView
                     android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -60,12 +61,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddDetailFocView extends AppCompatActivity {
+    boolean showprep = true;
+    String colortextrep = "";
+    String textprep="";
+    String bgprep = "";
     public static JsonArray listsn;
     String MhaveToUpdate = "";
     String MsessionExpired = "";
@@ -74,7 +81,7 @@ public class AddDetailFocView extends AppCompatActivity {
     Boolean internet = false;
     boolean installed= true;
     ProgressDialog loading;
-    LinearLayout mback;
+    LinearLayout mback, mbgalert;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,
             mnoitem,mlastimpresi,mstatus, mtilte,mnotes, mtotalapproved;
@@ -82,7 +89,7 @@ public class AddDetailFocView extends AppCompatActivity {
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item,mchat;
-    TextView msn;
+    TextView msn, mtextalert;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
     String sesionid_new = "";
@@ -122,6 +129,8 @@ public class AddDetailFocView extends AppCompatActivity {
         mtilte = findViewById(R.id.title);
         mnotes = findViewById(R.id.mnotes);
         mtotalapproved = findViewById(R.id.totalaproved);
+        mbgalert = findViewById(R.id.backgroundalert);
+        mtextalert = findViewById(R.id.textalert);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
@@ -140,6 +149,7 @@ public class AddDetailFocView extends AppCompatActivity {
         if (internet){
 //            LoadPress();
             LoadData();
+            prepform();
         }else {
 
         }
@@ -414,5 +424,60 @@ public class AddDetailFocView extends AppCompatActivity {
 
         }
         return installed;
+    }
+    public void prepform(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",ver);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.prepfoc(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                if (statusnya.equals("OK")) {
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    showprep = data.get("showMessage").getAsBoolean();
+
+                    if (showprep){
+                        colortextrep = data.get("messageTextColor").getAsString();
+                        textprep=data.get("messageText").getAsString();
+                        bgprep = data.get("messageBackgroundColor").getAsString();
+                        mbgalert.setVisibility(VISIBLE);
+                        mtextalert.setText(textprep);
+                        mtextalert.setTextColor(Color.parseColor("#"+colortextrep));
+                        GradientDrawable shape =  new GradientDrawable();
+                        shape.setCornerRadius( 15 );
+                        shape.setColor(Color.parseColor("#"+bgprep));
+                        mbgalert.setBackground(shape);
+                    }else {
+                        mbgalert.setVisibility(GONE);
+                    }
+
+                }else {
+                    loading.dismiss();
+                    Toast.makeText(AddDetailFocView.this, errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(AddDetailFocView.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+
+
+            }
+        });
     }
 }

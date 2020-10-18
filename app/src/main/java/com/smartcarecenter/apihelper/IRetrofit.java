@@ -103,10 +103,17 @@ public interface IRetrofit {
     @POST("api/Chargeable/Cancel")
     public Call<JsonObject> cancelpo (@Body JsonObject var1);
 
-
-
     @POST("api/store/getdaftarkota")
     Call<JsonObject> postRawJSON(@Body JsonObject locationPost);
+
+    @POST("api/FOCOrder/PrepareNew")
+    Call<JsonObject> prepfoc(@Body JsonObject locationPost);
+
+    @POST("api/formRequest/PrepareNew")
+    Call<JsonObject> prepform(@Body JsonObject locationPost);
+
+    @POST("api/Chargeable/PrepareNew")
+    Call<JsonObject> prepcharge(@Body JsonObject locationPost);
 
     @Multipart
     @POST("api/FormRequest/Add")

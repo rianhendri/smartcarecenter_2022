@@ -209,12 +209,14 @@ public class Dashboard extends AppCompatActivity {
                     notes = data.get("showHomeNotes").getAsBoolean();
                     if (notes){
                         String background = data.get("homeNotesBackgroundColor").getAsString();
+                        String textcolor = data.get("homeNotesTextColor").getAsString();
                         GradientDrawable shape =  new GradientDrawable();
                         shape.setCornerRadius( 15 );
-                        shape.setColor(Color.parseColor(background));
+                        shape.setColor(Color.parseColor("#"+background));
                         mlayoutalert.setVisibility(View.VISIBLE);
                         mlayoutalert.setBackground(shape);
                         String text = data.get("homeNotesText").getAsString();
+                        malert.setTextColor(Color.parseColor("#"+textcolor));
                         if (Build.VERSION.SDK_INT >= 24) {
                             malert.setText((CharSequence) Html.fromHtml((String)text, Html.FROM_HTML_MODE_COMPACT));
                         } else {

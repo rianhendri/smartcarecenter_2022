@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -51,12 +53,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static com.smartcarecenter.Add_Po_Item_list_model.Add_po_list_adapter.listpoact;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddDetailsPo extends AppCompatActivity {
+    boolean showprep = true;
+    String colortextrep = "";
+    String textprep="";
+    String bgprep = "";
     String message = "";
     public static JsonArray listsn;
     public static  String username = "";
@@ -78,7 +86,8 @@ public class AddDetailsPo extends AppCompatActivity {
     public static String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
-    LinearLayout madd_item;
+    LinearLayout madd_item, mbgalert;
+    TextView mtextalert;
     Spinner msn;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
@@ -116,7 +125,8 @@ public class AddDetailsPo extends AppCompatActivity {
         mtotaltax =findViewById(R.id.totaltax);
         mgrantotalpo = findViewById(R.id.grantotalpo);
         mLabeltax = findViewById(R.id.labeltax);
-
+        mbgalert = findViewById(R.id.backgroundalert);
+        mtextalert = findViewById(R.id.textalert);
         cekInternet();
         getSessionId();
         //setlayout recyler
@@ -128,6 +138,7 @@ public class AddDetailsPo extends AppCompatActivity {
         reitem = new ArrayList<Add_po_req_item>();
         if (internet){
             LoadPress();
+            prepform();
         }else {
 
         }
@@ -453,5 +464,58 @@ public class AddDetailsPo extends AppCompatActivity {
         // menampilkan alert dialog
         alertDialog.show();
     }
+    public void prepform(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",ver);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.prepcharge(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                if (statusnya.equals("OK")) {
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    showprep = data.get("showMessage").getAsBoolean();
+                    if (showprep){
+                        colortextrep = data.get("messageTextColor").getAsString();
+                        textprep=data.get("messageText").getAsString();
+                        bgprep = data.get("messageBackgroundColor").getAsString();
+                        mbgalert.setVisibility(VISIBLE);
+                        mtextalert.setText(textprep);
+                        mtextalert.setTextColor(Color.parseColor("#"+colortextrep));
+                        GradientDrawable shape =  new GradientDrawable();
+                        shape.setCornerRadius( 15 );
+                        shape.setColor(Color.parseColor("#"+bgprep));
+                        mbgalert.setBackground(shape);
+                    }else {
+                        mbgalert.setVisibility(GONE);
+                    }
+
+                }else {
+                    loading.dismiss();
+                    Toast.makeText(AddDetailsPo.this, errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(AddDetailsPo.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+
+
+            }
+        });
+    }
 }

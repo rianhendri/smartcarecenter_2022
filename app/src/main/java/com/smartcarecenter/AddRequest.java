@@ -18,6 +18,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.media.ThumbnailUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -79,6 +80,10 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddRequest extends AppCompatActivity {
+    boolean showprep = true;
+    String colortextrep = "";
+    String textprep="";
+    String bgprep = "";
     private static final int PERMISSION_CODE = 1000;
     public static JsonArray listsn;
     public static JsonArray listoperator;
@@ -95,8 +100,8 @@ public class AddRequest extends AppCompatActivity {
     ProgressDialog loading;
     ImageView mimgbanner,mimgvis;
     Spinner mbranch;
-    LinearLayout mcapture,mback;
-    TextView mdate,mlocation,mrequest_no,mrequiredfoto,msend,mrequestname;
+    LinearLayout mcapture,mback, mbgalert;
+    TextView mdate,mlocation,mrequest_no,mrequiredfoto,msend,mrequestname,mtextalert;
     EditText mdescrip;
     String mpressId = "";
     String moperatorcd="";
@@ -137,6 +142,8 @@ public class AddRequest extends AppCompatActivity {
         mbranch = (Spinner)this.findViewById(R.id.branchspin);
         mlocation = findViewById(R.id.locationsn);
         mrequestname = findViewById(R.id.requestname);
+        mbgalert = findViewById(R.id.backgroundalert);
+        mtextalert = findViewById(R.id.textalert);
         //getsessionId
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
@@ -149,6 +156,7 @@ public class AddRequest extends AppCompatActivity {
         cekInternet();
         if (internet){
             LoadPress();
+            prepform();
         }else {
 
         }
@@ -552,5 +560,59 @@ public class AddRequest extends AppCompatActivity {
         // menampilkan alert dialog
         alertDialog.show();
     }
+    public void prepform(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",ver);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.prepform(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                if (statusnya.equals("OK")) {
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    showprep = data.get("showMessage").getAsBoolean();
+
+                     if (showprep){
+                         colortextrep = data.get("messageTextColor").getAsString();
+                         textprep=data.get("messageText").getAsString();
+                         bgprep = data.get("messageBackgroundColor").getAsString();
+                         mbgalert.setVisibility(VISIBLE);
+                         mtextalert.setText(textprep);
+                         mtextalert.setTextColor(Color.parseColor("#"+colortextrep));
+                         GradientDrawable shape =  new GradientDrawable();
+                         shape.setCornerRadius( 15 );
+                         shape.setColor(Color.parseColor("#"+bgprep));
+                         mbgalert.setBackground(shape);
+                     }else {
+                         mbgalert.setVisibility(GONE);
+                     }
+
+                }else {
+                    loading.dismiss();
+                    Toast.makeText(AddRequest.this, errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(AddRequest.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+
+
+            }
+        });
+    }
 }
