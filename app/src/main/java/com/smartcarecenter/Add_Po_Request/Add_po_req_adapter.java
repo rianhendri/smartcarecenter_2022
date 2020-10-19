@@ -43,6 +43,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.smartcarecenter.AddDetailsPo;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
@@ -61,6 +63,8 @@ import static com.smartcarecenter.AddDetailsPo.mtotalitem;
 import static com.smartcarecenter.AddDetailsPo.mtotalpricepo;
 import static com.smartcarecenter.AddDetailsPo.mtotalqty;
 import static com.smartcarecenter.AddDetailsPo.mtotaltax;
+import static com.smartcarecenter.AddDetailsPo.myCustomArray;
+import static com.smartcarecenter.AddDetailsPo.jsonarayitem;
 import static com.smartcarecenter.AddDetailsPo.tax;
 
 public class Add_po_req_adapter
@@ -188,6 +192,8 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                     mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*tax/100)));
                     mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*tax/100))));
                 }
+                Gson gson = new GsonBuilder().create();
+                myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
 
 
             }
@@ -216,6 +222,8 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                         mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
                         mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*tax/100)));
                         mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*tax/100))));
+                        Gson gson = new GsonBuilder().create();
+                        myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
                     }
                 }
 

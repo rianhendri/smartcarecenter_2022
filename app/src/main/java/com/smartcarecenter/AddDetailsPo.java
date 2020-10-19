@@ -99,9 +99,9 @@ public class AddDetailsPo extends AppCompatActivity {
     public static ArrayList<Add_po_req_item> reitem;
     public static Add_po_req_adapter req_adapter;
     private LinearLayoutManager linearLayoutManager;
-    String jsonarayitem = "";
-    JsonArray myCustomArray;
-    Gson gson;
+    public static String jsonarayitem = "";
+    public static JsonArray myCustomArray;
+    public static Gson gson;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

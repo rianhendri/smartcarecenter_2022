@@ -154,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                 loading.dismiss();
                 cekInternet();
                 Toast.makeText(LoginActivity.this, getString(R.string.title_excpetation), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });
