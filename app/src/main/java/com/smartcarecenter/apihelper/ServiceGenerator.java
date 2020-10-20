@@ -38,11 +38,11 @@ public class ServiceGenerator {
 
     public static String baseurl= "https://api.smartcarecenter.id/";
     public static String ver = BuildConfig.VERSION_NAME;
-    private static OkHttpClient httpClient = new OkHttpClient().newBuilder()
-                                .connectTimeout(100, TimeUnit.SECONDS)
-                                .readTimeout(150, TimeUnit.SECONDS)
-                                .writeTimeout(150, TimeUnit.SECONDS)
-                                .build();
+//    private static OkHttpClient httpClient = new OkHttpClient().newBuilder()
+//                                .connectTimeout(100, TimeUnit.SECONDS)
+//                                .readTimeout(150, TimeUnit.SECONDS)
+//                                .writeTimeout(150, TimeUnit.SECONDS)
+//                                .build();
 
     public static <S> S createService(Class<S> serviceClass, String baseUrl) {
 

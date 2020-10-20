@@ -12,6 +12,7 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -68,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (!task.isSuccessful()) {
 //                                    Log.w(TAG, "getInstanceId failed", task.getException());
+//                            musername.setText(task.getException().toString());
                             return;
                         }
 
