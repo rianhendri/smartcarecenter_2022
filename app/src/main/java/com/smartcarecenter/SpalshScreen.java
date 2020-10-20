@@ -41,7 +41,7 @@ public class SpalshScreen extends AppCompatActivity {
         setContentView(R.layout.activity_spalsh_screen);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        FirebaseMessaging.getInstance().subscribeToTopic("bebas18");
+
         getSessionId();
         cekInternet();
         loadLanguage();
@@ -52,6 +52,8 @@ public class SpalshScreen extends AppCompatActivity {
             setLocale(stringlang);
         }
         if (internet){
+            //kirim all notifikasi
+//            FirebaseMessaging.getInstance().subscribeToTopic("all");
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
