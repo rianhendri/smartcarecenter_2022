@@ -36,8 +36,7 @@
         <activity android:name=".Notification" />
         <activity android:name=".AddRequest" />
         <activity android:name=".RatingStar" />
-        <activity android:name=".DetailsFormActivity"
-           >
+        <activity android:name=".DetailsFormActivity">
             <intent-filter>
                 <action android:name="FormRequest"
                     />

@@ -13,16 +13,32 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class NotificationItem {
-    public NotificationItem(String content, String guid, String postedDateTime, String title, String username) {
+    public NotificationItem() {
+    }
+
+
+    public NotificationItem(String username, String content, String guid,
+                            String postedDateTime, String title, String stsRead, String readDateTime) {
+        Username = username;
         Content = content;
         Guid = guid;
         PostedDateTime = postedDateTime;
         Title = title;
-        Username = username;
-    }
-    public NotificationItem() {
+        StsRead = stsRead;
+        ReadDateTime = readDateTime;
     }
 
+    @Expose
+    @SerializedName("Username")
+    private String Username;
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String username) {
+        Username = username;
+    }
 
     public String getContent() {
         return Content;
@@ -56,17 +72,22 @@ public class NotificationItem {
         Title = title;
     }
 
-    public String getUsername() {
-        return Username;
+    public String getStsRead() {
+        return StsRead;
     }
 
-    public void setUsername(String username) {
-        Username = username;
+    public void setStsRead(String stsRead) {
+        StsRead = stsRead;
     }
 
-    @Expose
-    @SerializedName("Username")
-    private String Username;
+    public String getReadDateTime() {
+        return ReadDateTime;
+    }
+
+    public void setReadDateTime(String readDateTime) {
+        ReadDateTime = readDateTime;
+    }
+
     @Expose
     @SerializedName("Content")
     private String Content;
@@ -79,6 +100,12 @@ public class NotificationItem {
     @Expose
     @SerializedName("Title")
     private String Title;
+    @Expose
+    @SerializedName("StsRead")
+    private String StsRead;
+    @Expose
+    @SerializedName("ReadDateTime")
+    private String ReadDateTime;
 
 
 

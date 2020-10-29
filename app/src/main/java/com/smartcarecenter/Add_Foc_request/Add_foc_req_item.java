@@ -14,13 +14,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class Add_foc_req_item {
 
+
+
     public Add_foc_req_item() {
     }
 
 
-    public Add_foc_req_item(String itemcd, Integer position, Integer qty, String imgpic, String imgban,
-                            String nameitem, String category, String unitName,
-                            Integer matrixLifeSpanPcs, boolean usingMatrix, Integer lastImpression, String matrix) {
+    public Add_foc_req_item(String itemcd, Integer position, Integer qty, String imgpic,
+                            String imgban, String nameitem, String category, String unitName, Integer matrixLifeSpanPcs,
+                            boolean usingMatrix, Integer lastImpression, String matrix, String stockOnHand) {
         this.itemcd = itemcd;
         this.position = position;
         this.qty = qty;
@@ -33,6 +35,7 @@ public class Add_foc_req_item {
         UsingMatrix = usingMatrix;
         LastImpression = lastImpression;
         Matrix = matrix;
+        this.stockOnHand = stockOnHand;
     }
 
     public String getItemcd() {
@@ -131,6 +134,14 @@ public class Add_foc_req_item {
         Matrix = matrix;
     }
 
+    public String getStockOnHand() {
+        return stockOnHand;
+    }
+
+    public void setStockOnHand(String stockOnHand) {
+        this.stockOnHand = stockOnHand;
+    }
+
     @SerializedName("itemcd")
     private String itemcd;
     @Expose
@@ -166,6 +177,10 @@ public class Add_foc_req_item {
     @Expose
     @SerializedName("Matrix")
     private String Matrix;
+
+    @Expose
+    @SerializedName("stockOnHand")
+    private String stockOnHand;
 
 
 

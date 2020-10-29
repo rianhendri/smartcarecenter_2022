@@ -30,6 +30,9 @@ public interface IRetrofit {
     @POST("api/FormRequest/ReopenCase")
     public Call<JsonObject> postRawJSONreopen(@Body JsonObject var1);
 
+    @POST("api/Notification/Read")
+    public Call<JsonObject> Read(@Body JsonObject var1);
+
     @POST("api/FormRequest/Cancel")
     public Call<JsonObject> postRawJSONcancelform(@Body JsonObject var1);
 
@@ -123,5 +126,15 @@ public interface IRetrofit {
                                         @Part("description") RequestBody description,
                                         @Part("operatorCd") RequestBody operatorCd,
                                         @Part("ver") RequestBody ver);
+
+    @Multipart
+    @POST("api/FormRequest/Add")
+    public Call<JsonObject> uploadRating(@Part RequestBody multipart,
+                                        @Part("sessionId") String sessionId,
+                                        @Part("formRequestCd") String formRequestCd,
+                                        @Part("rating") Integer rating,
+                                        @Part("comments") String comments,
+                                         @Part("isApprove") Boolean isApprove,
+                                        @Part("ver") String ver);
 }
 

@@ -93,6 +93,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
                     android:text="adasdasd"
+                    android:layout_marginTop="12dp"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>

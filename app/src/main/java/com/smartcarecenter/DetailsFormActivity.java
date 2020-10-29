@@ -27,6 +27,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -104,6 +105,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     String mstatusName = "";
     String noticket = "";
     String sesionid_new = "";
+    String guid = "";
     String mreason="";
     public static String username = "";
     boolean installed= true;
@@ -163,6 +165,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noreq = bundle2.getString("id");
+            guid = bundle2.getString("guid");
             username = bundle2.getString("user");
             noticket = bundle2.getString("noticket");
             valuefilter = bundle2.getString("pos");
@@ -172,6 +175,11 @@ public class DetailsFormActivity extends AppCompatActivity {
         cekInternet();
         if (internet){
             loadData();
+            if (check.checknotif==1){
+
+            }else {
+                ReadNotif();
+            }
         }else {
 
         }
@@ -445,8 +453,10 @@ public class DetailsFormActivity extends AppCompatActivity {
                         mbackgroundalert.setBackground(shape);
                         if (Build.VERSION.SDK_INT >= 24) {
                             mtextalert.setText((CharSequence)Html.fromHtml((String)text, Html.FROM_HTML_MODE_COMPACT));
+                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
                         } else {
                             mtextalert.setText((CharSequence)Html.fromHtml((String)text));
+                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
                         }
                     }else {
                         mbackgroundalert.setVisibility(View.GONE);
@@ -769,5 +779,47 @@ public class DetailsFormActivity extends AppCompatActivity {
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d:%02d",hours, minutes, seconds);
         mtimerconfirm.setText(getString(R.string.title_confirm)+" ("+timeLeftFormatted+")");
+    }
+    public void ReadNotif(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("guid",guid);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.Read(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                sesionid();
+                if (statusnya.equals("OK")){
+                    JsonObject data = homedata.getAsJsonObject("data");
+//                    String message = data.get("message").getAsString();
+//                    Toast.makeText(DetailsFormActivity.this, message,Toast.LENGTH_LONG).show();
+
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    Toast.makeText(DetailsFormActivity.this,errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(DetailsFormActivity.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+                loading.dismiss();
+
+            }
+        });
     }
 }

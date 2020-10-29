@@ -19,6 +19,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -518,8 +520,16 @@ public class AddDetailsPoView extends AppCompatActivity {
                         textprep=data.get("messageText").getAsString();
                         bgprep = data.get("messageBackgroundColor").getAsString();
                         mbgalert.setVisibility(VISIBLE);
-                        mtextalert.setText(textprep);
+
+//                        mtextalert.setText(textprep);
                         mtextalert.setTextColor(Color.parseColor("#"+colortextrep));
+                        if (Build.VERSION.SDK_INT >= 24) {
+                            mtextalert.setText((CharSequence) Html.fromHtml((String)textprep, Html.FROM_HTML_MODE_COMPACT));
+                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
+                        } else {
+                            mtextalert.setText((CharSequence)Html.fromHtml((String)textprep));
+                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
+                        }
                         GradientDrawable shape =  new GradientDrawable();
                         shape.setCornerRadius( 15 );
                         shape.setColor(Color.parseColor("#"+bgprep));

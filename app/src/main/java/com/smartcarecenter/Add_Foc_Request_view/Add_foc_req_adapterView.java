@@ -93,6 +93,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
         myviewholder.munit.setText(addFoclistreq.get(i).getUnitName());
         myviewholder.mapprove.setText(String.valueOf(addFoclistreq.get(i).getQtyApproved()));
         myviewholder.mprevimpress.setText(String.valueOf(addFoclistreq.get(i).getPreviousImpression()));
+        myviewholder.mstockhand.setText(addFoclistreq.get(i).getStockOnHand());
 
         if (addFoclistreq.get(i).getDeserveQty()==null){
             myviewholder.mmatrix.setText("-");
@@ -136,7 +137,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mcode, mname, mcategory, mqty, mpos,munit, mapprove, mprevimpress, mmatrix, mmatrixlabel;
+        TextView mcode, mname, mcategory, mqty, mpos,munit, mapprove, mprevimpress, mmatrix, mmatrixlabel, mstockhand;
         ImageView mimg, mminus, mplus,mdelete;
 
         public Myviewholder(@NonNull View itemView) {
@@ -156,6 +157,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
             mprevimpress = itemView.findViewById(R.id.previmpres);
             mmatrix = itemView.findViewById(R.id.matrix);
             mmatrixlabel = itemView.findViewById(R.id.matrixlabel);
+            mstockhand = itemView.findViewById(R.id.stockhandview);
 
 
 

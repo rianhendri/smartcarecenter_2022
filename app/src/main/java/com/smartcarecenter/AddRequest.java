@@ -328,20 +328,25 @@ public class AddRequest extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CAPTURE_IMAGE);
     }
     private void setRequestImage() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this, Manifest.permission.CAMERA)&& ActivityCompat.shouldShowRequestPermissionRationale((Activity) this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this, Manifest.permission.CAMERA)
+                    && ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
                 //Show permission dialog
             } else {
-
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE);
+                ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE);
 
         }
 
         }
         CharSequence[] arrcharSequence = new CharSequence[]{"Kamera", "Galeri"};
-        AlertDialog.Builder builder = new AlertDialog.Builder((Context)this).setTitle((CharSequence)"Add Image").setItems(arrcharSequence,
+        AlertDialog.Builder builder = new AlertDialog.Builder((Context)this).setTitle((CharSequence)"Add Image")
+                .setItems(arrcharSequence,
                 new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialogInterface, int n) {
                         if (n != 0) {

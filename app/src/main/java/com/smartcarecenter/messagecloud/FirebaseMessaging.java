@@ -44,6 +44,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
     String message;
     String title;
     String data;
+    String guide;
     public FirebaseMessaging(){
         super();
     }
@@ -52,6 +53,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         if (isAppIsInBackground(getApplicationContext())){
             if (remoteMessage.getData().size()>0){
                 data = remoteMessage.getData().get("id");
+                guide = remoteMessage.getData().get("guid");
 
 
 
@@ -73,7 +75,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
 
 
             }
-            sendNotification(title,message,click_action,bitmap,data);
+            sendNotification(title,message,click_action,bitmap,data,guide);
             /**
              * Called if InstanceID token is updated. This may occur if the security of
              * the previous token had been compromised. Note that this is called when the InstanceID token
@@ -98,7 +100,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
     }
 
 
-    private void sendNotification(String title, String message, String click_action, Bitmap bitmap, String data) {
+    private void sendNotification(String title, String message, String click_action, Bitmap bitmap, String data, String guide) {
         Intent intent=null;
 
 //        if (click_action.equals("Notification")) {
@@ -133,7 +135,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         NotificationCompat.Builder notificationbuilder = new NotificationCompat.Builder(this,"M_CH_ID")
                 .setSmallIcon(R.drawable.ic_stat_name)
                 .setLargeIcon(bitmap)
-                .setContentTitle(title)
+                .setContentTitle(guide)
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

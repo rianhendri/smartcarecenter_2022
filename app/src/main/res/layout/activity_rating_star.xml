@@ -68,6 +68,20 @@
                     android:textSize="25dp" />
 
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutimg"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/dwhite" >
+
+                    <ImageView
+                        android:id="@+id/imgbanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -138,6 +152,39 @@
                         android:scrollbars="vertical"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textSize="13sp" />
+                    <LinearLayout
+                        android:id="@+id/upladfoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:orientation="horizontal"
+                        android:visibility="visible"
+                        android:layout_marginTop="24dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/seguisb"
+                            android:text="@string/title_uploadphoto"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="14dp"
+                            android:layout_marginRight="4dp"
+                            android:src="@drawable/ic_camera" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="14dp"
+                            android:fontFamily="@font/seguisb"
+                            android:text="*"
+                            android:textColor="@color/red" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

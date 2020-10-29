@@ -55,6 +55,7 @@ import retrofit2.Response;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.smartcarecenter.Add_Foc_request.Add_foc_req_adapter.addFoclistreq;
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
@@ -228,11 +229,18 @@ public class AddDetailFoc extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (internet){
-                    if (mlastimpresi.getText().toString().length()!=0){
-                        showDialog();
-                    }else {
+                    if (mlastimpresi.getText().toString().length()==0){
                         mlastimpresi.setError(getString(R.string.title_requiredimpressi));
                         Toast.makeText(AddDetailFoc.this, getString(R.string.title_requiredimpressi),Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        for (int ad = 0; ad < addFoclistreq.size(); ++ad) {
+                            if (addFoclistreq.get(ad).getStockOnHand().equals("0")){
+                                Toast.makeText(AddDetailFoc.this, getString(R.string.title_stockhandrequired),Toast.LENGTH_SHORT).show();
+                            }else {
+                                showDialog();
+                            }
+                        }
                     }
                 }
             }

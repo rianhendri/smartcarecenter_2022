@@ -29,6 +29,7 @@ package com.smartcarecenter.notification;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartcarecenter.DetailsNotification;
@@ -87,6 +89,15 @@ extends RecyclerView.Adapter<NotificationAdapter.Myviewholder> {
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
 
         String string2 = "";
+        if (myItem.get(i).getStsRead()==null){
+            myviewholder.mdot.setAlpha(100);
+            Typeface face =  ResourcesCompat.getFont(context, R.font.segoeuib);
+            myviewholder.mcontent.setTypeface(face);
+        }else {
+            myviewholder.mdot.setAlpha(0);
+            Typeface face =  ResourcesCompat.getFont(context, R.font.segoeui);
+            myviewholder.mcontent.setTypeface(face);
+        }
         myviewholder.mtitle.setText(myItem.get(i).getTitle());
         myviewholder.mcontent.setText(myItem.get(i).getContent());
         String string3 = myItem.get(i).getPostedDateTime();
@@ -107,6 +118,9 @@ extends RecyclerView.Adapter<NotificationAdapter.Myviewholder> {
                Intent intent = new Intent(context, DetailsNotification.class);
                 intent.putExtra("id", (myItem.get(i)).getGuid());
                 intent.putExtra("username", (myItem.get(i)).getTitle());
+                intent.putExtra("guid", (myItem.get(i)).getGuid());
+                intent.putExtra("Title", (myItem.get(i)).getTitle());
+                intent.putExtra("Content", (myItem.get(i)).getContent());
                 context.startActivity(intent);
                 ((Activity)context).finish();
                 ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
@@ -126,12 +140,14 @@ extends RecyclerView.Adapter<NotificationAdapter.Myviewholder> {
         TextView mcontent;
         TextView mdate;
         TextView mtitle;
+        ImageView mdot;
 
         public Myviewholder(@NonNull View view) {
             super(view);
             mtitle = (TextView)view.findViewById(R.id.title);
             mcontent = (TextView)view.findViewById(R.id.content);
             mdate = (TextView)view.findViewById(R.id.tgl);
+            mdot = view.findViewById(R.id.dot);
         }
     }
 

@@ -56,6 +56,7 @@ public class Notification extends AppCompatActivity {
     ArrayList<NotificationItem> notiflist;
     String sesionid_new = "";
 
+
     ProgressDialog loading;
     @SuppressLint("WrongConstant")
     @Override

@@ -38,6 +38,7 @@ public class DetailsNotification extends AppCompatActivity {
     String MhaveToUpdate = "";
     String MsessionExpired = "";
     String id = "";
+    String guid = "";
     boolean internet = true;
     private LinearLayoutManager linearLayoutManager;
     LinearLayout mback;
@@ -47,6 +48,8 @@ public class DetailsNotification extends AppCompatActivity {
     TextView mtitle;
     String sesionid_new = "";
     String username = "";
+    String Title = "";
+    String Content = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +60,18 @@ public class DetailsNotification extends AppCompatActivity {
         Bundle bundle2 = this.getIntent().getExtras();
         if (bundle2 != null) {
             id = bundle2.getString("id");
+            guid = bundle2.getString("guid");
             username = bundle2.getString("username");
+            Title = bundle2.getString("Title");
+            Content = bundle2.getString("Content");
+//            Toast.makeText(DetailsNotification.this, guid,Toast.LENGTH_LONG).show();
         }
         getSessionId();
         cekInternet();
         if (internet){
-            loadNotif();
+           ReadNotif();
+           mtitle.setText(Title);
+           mcontent.setText(Content);
         }
         else {
 
@@ -196,5 +205,47 @@ public class DetailsNotification extends AppCompatActivity {
             finish();
         }
 
+    }
+    public void ReadNotif(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("guid",guid);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.Read(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                sesionid();
+                if (statusnya.equals("OK")){
+                    JsonObject data = homedata.getAsJsonObject("data");
+//                    String message = data.get("message").getAsString();
+//                    Toast.makeText(DetailsNotification.this, message,Toast.LENGTH_LONG).show();
+
+                }else {
+                    sesionid();
+//                    loading.dismiss();
+                    Toast.makeText(DetailsNotification.this,errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(DetailsNotification.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading.dismiss();
+
+            }
+        });
     }
 }

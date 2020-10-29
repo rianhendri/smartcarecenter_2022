@@ -17,9 +17,9 @@ public class Add_foc_req_itemView {
     public Add_foc_req_itemView() {
     }
 
-
-    public Add_foc_req_itemView(String itemCd, Integer position, Integer qty, String itemName, String categoryName, String imageThumbFullURL, String imageFullURL,
-                                String unitName, int qtyApproved, String deserveQty, int previousImpression) {
+    public Add_foc_req_itemView(String itemCd, Integer position, Integer qty, String itemName, String categoryName,
+                                String imageThumbFullURL, String imageFullURL, String unitName, int qtyApproved,
+                                String deserveQty, int previousImpression, String stockOnHand) {
         ItemCd = itemCd;
         Position = position;
         Qty = qty;
@@ -31,6 +31,7 @@ public class Add_foc_req_itemView {
         QtyApproved = qtyApproved;
         DeserveQty = deserveQty;
         PreviousImpression = previousImpression;
+        StockOnHand = stockOnHand;
     }
 
     public String getItemCd() {
@@ -121,6 +122,14 @@ public class Add_foc_req_itemView {
         PreviousImpression = previousImpression;
     }
 
+    public String getStockOnHand() {
+        return StockOnHand;
+    }
+
+    public void setStockOnHand(String stockOnHand) {
+        StockOnHand = stockOnHand;
+    }
+
     @SerializedName("ItemCd")
     private String ItemCd;
     @Expose
@@ -155,6 +164,11 @@ public class Add_foc_req_itemView {
     @Expose
     @SerializedName("PreviousImpression")
     private int PreviousImpression;
+
+    @Expose
+    @SerializedName("StockOnHand")
+    private String StockOnHand;
+
 }
 
 

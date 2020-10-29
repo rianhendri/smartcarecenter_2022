@@ -21,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -205,7 +206,6 @@ public class Dashboard extends AppCompatActivity {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     //alertnotes
-
                     notes = data.get("showHomeNotes").getAsBoolean();
                     if (notes){
                         String background = data.get("homeNotesBackgroundColor").getAsString();
@@ -219,8 +219,10 @@ public class Dashboard extends AppCompatActivity {
                         malert.setTextColor(Color.parseColor("#"+textcolor));
                         if (Build.VERSION.SDK_INT >= 24) {
                             malert.setText((CharSequence) Html.fromHtml((String)text, Html.FROM_HTML_MODE_COMPACT));
+                            malert.setMovementMethod(LinkMovementMethod.getInstance());
                         } else {
                             malert.setText((CharSequence)Html.fromHtml((String)text));
+                            malert.setMovementMethod(LinkMovementMethod.getInstance());
                         }
                     }else {
                         mlayoutalert.setVisibility(View.GONE);

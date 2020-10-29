@@ -115,7 +115,7 @@ extends RecyclerView.Adapter<NewsAdapter.Myviewholder> {
                 Intent intent = new Intent(context, DetailsNews.class);
                 intent.putExtra("banner", (myItem.get(i).getBannerURL()));
                 intent.putExtra("title", (myItem.get(i).getTitle()));
-                intent.putExtra("date", (newdate));
+                intent.putExtra("date", (myviewholder.mdate.getText().toString()));
                 intent.putExtra("content", (myItem.get(i)).getContent());
                 context.startActivity(intent);
                 ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);

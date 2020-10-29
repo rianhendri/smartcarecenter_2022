@@ -136,4 +136,7 @@
     <string name="title_totalapproved">Jumlah Approved:</string>
     <string name="title_reasoncancel">Alasan Pembatalan:</string>
     <string name="title_reasonrequired">mohon masukkan alasan pembatalan</string>
+    <string name="title_stockhand">"Stock Dimiliki: "</string>
+    <string name="title_unduhan">Unduh Flile</string>
+    <string name="title_stockhandrequired">Stock On Hand Required</string>
 </resources>
