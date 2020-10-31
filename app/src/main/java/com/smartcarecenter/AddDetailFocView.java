@@ -330,6 +330,8 @@ public class AddDetailFocView extends AppCompatActivity {
                     mlistitem_foc.setAdapter(req_adapter);
                     mlistitem_foc.setVisibility(View.VISIBLE);
                 }else {
+                    sesionid();
+                    cekInternet();
                     Toast.makeText(AddDetailFocView.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();
                 }

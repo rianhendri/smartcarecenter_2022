@@ -420,6 +420,7 @@ public class AddDetailsPoView extends AppCompatActivity {
                     mlistitem_foc.setVisibility(View.VISIBLE);
                 }else {
                     cekInternet();
+                    sesionid();
                     Toast.makeText(AddDetailsPoView.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();
                 }
