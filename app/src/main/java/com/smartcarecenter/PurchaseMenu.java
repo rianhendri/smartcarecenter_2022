@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.smartcarecenter.messagecloud.check;
+
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
 import static com.smartcarecenter.Dashboard.showaddfoc;
@@ -28,6 +30,7 @@ public class PurchaseMenu extends AppCompatActivity {
         mback = findViewById(R.id.backbtn);
         mbtnfoc = findViewById(R.id.btnfoc);
         mbtnpo = findViewById(R.id.pobtn);
+//        check.checknotif=0;
         //showadd
         getSessionId();
         if (mshowPurchaseOrderFOC.equals("false")){

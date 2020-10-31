@@ -33,6 +33,9 @@ public interface IRetrofit {
     @POST("api/Notification/Read")
     public Call<JsonObject> Read(@Body JsonObject var1);
 
+    @POST("api/Notification/ReadAll")
+    public Call<JsonObject> ReadAll(@Body JsonObject var1);
+
     @POST("api/FormRequest/Cancel")
     public Call<JsonObject> postRawJSONcancelform(@Body JsonObject var1);
 

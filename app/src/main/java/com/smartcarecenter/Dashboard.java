@@ -82,15 +82,18 @@ public class Dashboard extends AppCompatActivity {
     TextView mnamapt;
     LinearLayout mnews;
     LinearLayout mnotif;
-    LinearLayout mnotif_btn,mlayoutalert;
+    LinearLayout mlayoutalert, mdot;
+    ConstraintLayout mnotif_btn;
     LinearLayout morder;
     LinearLayout mreq;
     LinearLayout msetting;
     LinearLayout msupport;
     LinearLayout msurvey;
-    TextView mversion;
+    TextView mversion, mnewnotif;
     RecyclerView mymenu;
     String sesionid_new = "";
+    String notifications_new = "";
+    public static String news_new = "";
     boolean notes = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,8 @@ public class Dashboard extends AppCompatActivity {
         mnotif_btn = findViewById(R.id.notifikasi);
         mlayoutalert = findViewById(R.id.backgroundalert);
         malert = findViewById(R.id.textalert);
+        mdot = findViewById(R.id.dot);
+        mnewnotif = findViewById(R.id.newnotif);
         cekInternet();
         getSessionId();
         check.checknotif=1;
@@ -207,6 +212,14 @@ public class Dashboard extends AppCompatActivity {
                     JsonObject data = homedata.getAsJsonObject("data");
                     //alertnotes
                     notes = data.get("showHomeNotes").getAsBoolean();
+                    notifications_new = String.valueOf(data.get("newNotification").getAsInt());
+                    news_new = String.valueOf(data.get("newNews").getAsInt());
+                    if (notifications_new.equals("0")){
+                        mdot.setVisibility(View.GONE);
+                    }else {
+                        mdot.setVisibility(View.VISIBLE);
+                        mnewnotif.setText(notifications_new);
+                    }
                     if (notes){
                         String background = data.get("homeNotesBackgroundColor").getAsString();
                         String textcolor = data.get("homeNotesTextColor").getAsString();

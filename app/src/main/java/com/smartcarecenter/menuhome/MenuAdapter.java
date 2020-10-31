@@ -57,6 +57,7 @@ import java.util.ArrayList;
 import static com.smartcarecenter.Dashboard.installed;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
+import static com.smartcarecenter.Dashboard.news_new;
 import static com.smartcarecenter.Dashboard.showaddfoc;
 import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
@@ -83,6 +84,15 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
 
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
+        if (myItem.get(i).getMenuname().equals((context.getString(R.string.title_News)))){
+            if (news_new.equals("0")){
+                myviewholder.mdot.setVisibility(View.GONE);
+            }else {
+                myviewholder.mdot.setVisibility(View.VISIBLE);
+                myviewholder.mnews_new.setText(news_new);
+            }
+        }
+
         Picasso.with(context).load(myItem.get(i).getImg()).into(myviewholder.mimg_menu);
         myviewholder.mnama_menu.setText(myItem.get(i).getMenuname());
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -148,14 +158,17 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView  mnama_menu;
+        TextView  mnama_menu,mnews_new;
         ImageView mimg_menu;
         ProgressBar mporg;
+        LinearLayout mdot;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
             mnama_menu = itemView.findViewById(R.id.namemenu);
             mimg_menu=itemView.findViewById(R.id.menuimg);
+            mnews_new=itemView.findViewById(R.id.newnotif);
+            mdot=itemView.findViewById(R.id.dot);
 
         }
     }

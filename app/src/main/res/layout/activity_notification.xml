@@ -39,6 +39,24 @@
                 android:textColor="@color/dwhite"
                 android:textSize="15sp" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingRight="24dp">
+            <TextView
+                android:id="@+id/readall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="12dp"
+                android:fontFamily="@font/seguisb"
+                android:textSize="12sp"
+                android:textColor="@color/dwhite"
+                android:text="Read All"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

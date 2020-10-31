@@ -104,6 +104,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, AddDetailsPoView.class);
                 intent.putExtra("id", (chargeableItem.get(i).getOrderNo()));
+                intent.putExtra("username", (chargeableItem.get(i).getCreatedBy()));
 //                intent.putExtra("noticket", (focItem.get(i)).getServiceTicketCd());
                 intent.putExtra("pos", valuefilter);
                 context.startActivity(intent);

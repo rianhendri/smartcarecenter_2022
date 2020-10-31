@@ -36,6 +36,7 @@ import com.smartcarecenter.Freeofcharge.FocAdapter;
 import com.smartcarecenter.Freeofcharge.FocItem;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.messagecloud.check;
 import com.smartcarecenter.supportservice.AddFormAdapter;
 import com.smartcarecenter.supportservice.AddFromItem;
 
@@ -64,7 +65,7 @@ public class FreeofchargeActivity extends AppCompatActivity {
     FocAdapter addFormAdapterAdapter;
     boolean internet = true;
     private LinearLayoutManager linearLayoutManager;
-    ArrayList<FocItem> list2;
+    public static ArrayList<FocItem> list2;
     JsonArray listformreq;
     List<String> listnamestatus = new ArrayList();
     JsonArray liststatus;
@@ -100,6 +101,7 @@ public class FreeofchargeActivity extends AppCompatActivity {
         mrecord = findViewById(R.id.totalorder);
         mfooterload =findViewById(R.id.footerload);
         mswip = findViewById(R.id.swiprefresh);
+        check.checklistform=1;
         //showadd
         if (showaddfoc.equals("false")){
             maddFoc.setVisibility(View.GONE);

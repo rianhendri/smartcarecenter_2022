@@ -138,4 +138,5 @@
     <string name="title_stockhand">"Stock  On-hand: "</string>
     <string name="title_unduhan">Download File</string>
     <string name="title_stockhandrequired">Stock On Hand Required</string>
+    <string name="title_readAll">Mark all as read</string>
 </resources>

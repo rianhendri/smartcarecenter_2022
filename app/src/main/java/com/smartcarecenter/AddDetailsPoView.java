@@ -39,6 +39,7 @@ import com.smartcarecenter.Add_Po_Rewuest_View.Add_po_req_adapterView;
 import com.smartcarecenter.Add_Po_Rewuest_View.Add_po_req_itemView;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.messagecloud.check;
 
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
@@ -55,7 +56,9 @@ import retrofit2.Response;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.smartcarecenter.FormActivity.refresh;
 import static com.smartcarecenter.FormActivity.valuefilter;
+import static com.smartcarecenter.ChargeableActivity.list2;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
@@ -99,6 +102,8 @@ public class AddDetailsPoView extends AppCompatActivity {
     String noOrder="";
     String pressid= "";
     Gson gson;
+    String guid = "";
+    String username = "";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +137,8 @@ public class AddDetailsPoView extends AppCompatActivity {
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
             valuefilter = bundle2.getString("pos");
+            guid = bundle2.getString("guid");
+            username = bundle2.getString("username");
         }
         mtitle.setText("View Chargeable #"+noOrder);
         cekInternet();
@@ -147,6 +154,11 @@ public class AddDetailsPoView extends AppCompatActivity {
 //            LoadPress();
             LoadData();
             prepform();
+            if (guid==null){
+
+            }else {
+                ReadNotif();
+            }
         }else {
 
         }
@@ -237,12 +249,33 @@ public class AddDetailsPoView extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent back = new Intent(AddDetailsPoView.this,ChargeableActivity.class);
-        back.putExtra("pos",valuefilter);
-        startActivity(back);
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-        finish();
+//        super.onBackPressed();
+        if (check.checknotif==1){
+            if (username==null){
+                if (check.checklistform==1){
+                    list2.clear();
+                    refresh=true;
+                }
+                super.onBackPressed();
+                finish();
+
+            }else {
+                super.onBackPressed();
+//              refresh=true;
+                Intent back = new Intent(AddDetailsPoView.this,ChargeableActivity.class);
+                back.putExtra("pos",valuefilter);
+                startActivity(back);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                finish();
+            }
+        }else {
+            Intent back = new Intent(AddDetailsPoView.this,Dashboard.class);
+            back.putExtra("pos",valuefilter);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }
+
 
     }
     public void LoadPress(){
@@ -386,6 +419,7 @@ public class AddDetailsPoView extends AppCompatActivity {
                     mlistitem_foc.setAdapter(req_adapter);
                     mlistitem_foc.setVisibility(View.VISIBLE);
                 }else {
+                    cekInternet();
                     Toast.makeText(AddDetailsPoView.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();
                 }
@@ -549,6 +583,45 @@ public class AddDetailsPoView extends AppCompatActivity {
                 Toast.makeText(AddDetailsPoView.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
+
+            }
+        });
+    }
+    public void ReadNotif(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("guid",guid);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.Read(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                sesionid();
+                if (statusnya.equals("OK")){
+                    JsonObject data = homedata.getAsJsonObject("data");
+
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    Toast.makeText(AddDetailsPoView.this,errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(AddDetailsPoView.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+                loading.dismiss();
 
             }
         });

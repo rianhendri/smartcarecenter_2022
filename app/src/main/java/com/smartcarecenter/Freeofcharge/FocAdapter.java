@@ -104,6 +104,7 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, AddDetailFocView.class);
                 intent.putExtra("id", (focItem.get(i).getOrderNo()));
+                intent.putExtra("username", (focItem.get(i).getCreatedBy()));
 //                intent.putExtra("noticket", (focItem.get(i)).getServiceTicketCd());
                 intent.putExtra("pos", valuefilter);
                 context.startActivity(intent);

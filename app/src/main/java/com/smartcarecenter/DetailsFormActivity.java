@@ -175,7 +175,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         cekInternet();
         if (internet){
             loadData();
-            if (check.checknotif==1){
+            if (guid==null){
 
             }else {
                 ReadNotif();

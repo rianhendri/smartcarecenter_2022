@@ -204,7 +204,6 @@ public class FormActivity extends AppCompatActivity {
 
             }
         });
-
         maddform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -214,7 +213,6 @@ public class FormActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
             }
         });
-
         int color = getResources().getColor(R.color.colorPrimary);
         mswip.setColorSchemeColors(color);
         mswip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

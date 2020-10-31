@@ -37,6 +37,7 @@ import com.smartcarecenter.Freeofcharge.FocAdapter;
 import com.smartcarecenter.Freeofcharge.FocItem;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.messagecloud.check;
 import com.smartcarecenter.supportservice.AddFromItem;
 
 import java.lang.reflect.Type;
@@ -63,7 +64,7 @@ public class ChargeableActivity extends AppCompatActivity {
     Chargeabledapter addFormAdapterAdapter;
     boolean internet = true;
     private LinearLayoutManager linearLayoutManager;
-    ArrayList<ChargeableItem> list2;
+    public static ArrayList<ChargeableItem> list2;
     JsonArray listformreq;
     List<String> listnamestatus = new ArrayList();
     JsonArray liststatus;
@@ -99,6 +100,7 @@ public class ChargeableActivity extends AppCompatActivity {
         mrecord = findViewById(R.id.totalorder);
         mfooterload = findViewById(R.id.footerload);
         mswip = findViewById(R.id.swiprefresh);
+        check.checklistform=1;
         //showadd
         if (showaddpo.equals("false")){
             maddFoc.setVisibility(View.GONE);

@@ -49,6 +49,7 @@ import com.smartcarecenter.Freeofcharge.FocAdapter;
 import com.smartcarecenter.Freeofcharge.FocItem;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.messagecloud.check;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -65,6 +66,9 @@ import retrofit2.Response;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
+import static com.smartcarecenter.DetailsFormActivity.username;
+import static com.smartcarecenter.FreeofchargeActivity.list2;
+import static com.smartcarecenter.FormActivity.refresh;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
@@ -106,6 +110,8 @@ public class AddDetailFocView extends AppCompatActivity {
     String noOrder="";
     String pressid= "";
     Gson gson;
+    public static String username = "";
+    String guid = "";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +141,9 @@ public class AddDetailFocView extends AppCompatActivity {
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
+            guid = bundle2.getString("guid");
             valuefilter = bundle2.getString("pos");
+            username = bundle2.getString("username");
         }
         mtilte.setText("View FOC #"+noOrder);
         cekInternet();
@@ -151,6 +159,11 @@ public class AddDetailFocView extends AppCompatActivity {
 //            LoadPress();
             LoadData();
             prepform();
+            if (guid==null){
+
+            }else {
+                ReadNotif();
+            }
         }else {
 
         }
@@ -233,16 +246,6 @@ public class AddDetailFocView extends AppCompatActivity {
             finish();
             Toast.makeText(AddDetailFocView.this, getString(R.string.title_session_Expired),Toast.LENGTH_LONG).show();
         }
-
-    }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent back = new Intent(AddDetailFocView.this,FreeofchargeActivity.class);
-        back.putExtra("pos",valuefilter);
-        startActivity(back);
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-        finish();
 
     }
     public void LoadData(){
@@ -484,6 +487,77 @@ public class AddDetailFocView extends AppCompatActivity {
                 Toast.makeText(AddDetailFocView.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
 
+
+            }
+        });
+    }
+    public void onBackPressed() {
+//        super.onBackPressed();
+        if (check.checknotif==1){
+            if (username==null){
+                if (check.checklistform==1){
+                    list2.clear();
+                    refresh=true;
+                }
+                super.onBackPressed();
+                finish();
+
+            }else {
+                super.onBackPressed();
+//            refresh=true;
+                Intent back = new Intent(AddDetailFocView.this,FreeofchargeActivity.class);
+                back.putExtra("pos",valuefilter);
+                startActivity(back);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                finish();
+            }
+        }else {
+            Intent back = new Intent(AddDetailFocView.this,Dashboard.class);
+            back.putExtra("pos",valuefilter);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }
+
+
+    }
+    public void ReadNotif(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("guid",guid);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.Read(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                sesionid();
+                if (statusnya.equals("OK")){
+                    JsonObject data = homedata.getAsJsonObject("data");
+//                    String message = data.get("message").getAsString();
+//                    Toast.makeText(DetailsFormActivity.this, message,Toast.LENGTH_LONG).show();
+
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    Toast.makeText(AddDetailFocView.this,errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(AddDetailFocView.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+                loading.dismiss();
 
             }
         });

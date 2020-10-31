@@ -93,10 +93,12 @@ extends RecyclerView.Adapter<NotificationAdapter.Myviewholder> {
             myviewholder.mdot.setAlpha(100);
             Typeface face =  ResourcesCompat.getFont(context, R.font.segoeuib);
             myviewholder.mcontent.setTypeface(face);
+            myviewholder.mtitle.setTypeface(face);
         }else {
             myviewholder.mdot.setAlpha(0);
             Typeface face =  ResourcesCompat.getFont(context, R.font.segoeui);
             myviewholder.mcontent.setTypeface(face);
+            myviewholder.mtitle.setTypeface(face);
         }
         myviewholder.mtitle.setText(myItem.get(i).getTitle());
         myviewholder.mcontent.setText(myItem.get(i).getContent());

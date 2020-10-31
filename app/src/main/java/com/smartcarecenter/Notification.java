@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.NativeActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -51,7 +54,7 @@ public class Notification extends AppCompatActivity {
     private LinearLayoutManager mlinear;
     RecyclerView mlistnotif;
     TextView mnonotif;
-    TextView mtitle;
+    TextView mtitle, mreadall;
     NotificationAdapter notificationAdapter;
     ArrayList<NotificationItem> notiflist;
     String sesionid_new = "";
@@ -67,6 +70,7 @@ public class Notification extends AppCompatActivity {
         mtitle = findViewById(R.id.title);
         mlistnotif = findViewById(R.id.listnotif);
         mnonotif = findViewById(R.id.nonotif);
+        mreadall = findViewById(R.id.readall);
         linearLayoutManager = new LinearLayoutManager(Notification.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
 //        linearLayoutManager.setStackFromEnd(true);
@@ -88,6 +92,13 @@ public class Notification extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        mreadall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReadAll();
+
             }
         });
     }
@@ -192,12 +203,81 @@ public class Notification extends AppCompatActivity {
         }
 
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent((Context)this, Dashboard.class));
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
+    }
+    public void ReadAll(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.ReadAll(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                sesionid();
+                if (statusnya.equals("OK")){
+                   loadNotiflist();
+
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    Toast.makeText(Notification.this,errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(Notification.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+                loading.dismiss();
+
+            }
+        });
+    }
+    private void showDialogreadall() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set title dialog
+        alertDialogBuilder.setTitle(getString(R.string.title_readAll));
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.title_yes),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // jika tombol diklik, maka akan menutup activity ini
+                        ReadAll();
+                    }
+                })
+                .setNegativeButton(getString(R.string.title_no),new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // jika tombol ini diklik, akan menutup dialog
+                        // dan tidak terjadi apa2
+                        dialog.cancel();
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
     }
 }

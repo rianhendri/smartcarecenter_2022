@@ -43,22 +43,52 @@
 
                     android:src="@drawable/logotext" />
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/notifikasi"
-                    android:layout_width="44dp"
-                    android:layout_height="match_parent"
-                   >
+                    android:layout_width="64dp"
+                    android:layout_height="match_parent">
+
                     <ImageView
-                        android:gravity="center"
-                        android:layout_gravity="center"
+                        android:id="@+id/imageView2"
                         android:layout_width="30dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:src="@drawable/ic_notification"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-                </LinearLayout>
+                        app:layout_constraintHorizontal_bias="0.411"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <LinearLayout
+                        android:id="@+id/dot"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:background="@drawable/notification_red_dot2"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.619"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.421">
+
+                        <TextView
+                            android:id="@+id/newnotif"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/segoeuib"
+                            android:gravity="center"
+                            android:text="44"
+                            android:textColor="@color/dwhite"
+                            android:textSize="9dp"
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"

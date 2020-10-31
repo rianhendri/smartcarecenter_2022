@@ -135,7 +135,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         NotificationCompat.Builder notificationbuilder = new NotificationCompat.Builder(this,"M_CH_ID")
                 .setSmallIcon(R.drawable.ic_stat_name)
                 .setLargeIcon(bitmap)
-                .setContentTitle(guide)
+                .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
