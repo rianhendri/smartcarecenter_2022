@@ -53,7 +53,7 @@ public class SpalshScreen extends AppCompatActivity {
         }
         if (internet){
             //kirim all notifikasi
-            FirebaseMessaging.getInstance().subscribeToTopic("all");
+//            FirebaseMessaging.getInstance().subscribeToTopic("all");
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override

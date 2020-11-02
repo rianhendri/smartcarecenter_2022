@@ -522,7 +522,7 @@ public class FormActivity extends AppCompatActivity {
                 }
 
             }
-        }, 1000);
+        }, 700);
 
     }
 

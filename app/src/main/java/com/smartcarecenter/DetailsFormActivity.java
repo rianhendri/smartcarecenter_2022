@@ -68,6 +68,7 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 
 public class DetailsFormActivity extends AppCompatActivity {
+    boolean inforeopen = true;
     EditText mreasonnya;
     public static String noreq = "";
     String MhaveToUpdate = "";
@@ -82,13 +83,13 @@ public class DetailsFormActivity extends AppCompatActivity {
     ImageView mbanner;
     LinearLayout mcancel, mconfirm, mcs, mbackgroundalert,mback, mreopenbtn;
     TextView mcreatedate, mdate, mdeskription, missu, moperator, mreqno, mservicetype, msn, mstatusdetail,
-            mstid, mtitle, munitcategory, mlocation, mtextalert, mrequestby;
+            mstid, mtitle, munitcategory, mlocation, mtextalert, mrequestby, mreopeninfo;
     String mdateapi = "";
     String mdeskriptionapi = "";
     String mformRequestCd = "";
     String mreopen = "";
     ImageView mimgpopup;
-    LinearLayout mlayoutticket,mlayoutunit1, mlayoutunit2, mlayoutunit3;
+    LinearLayout mlayoutticket,mlayoutunit1, mlayoutunit2, mlayoutunit3, mreinfolay;
     private LinearLayoutManager mlinear;
     String mphotoURL = "";
     String mpressGuid = "";
@@ -152,6 +153,8 @@ public class DetailsFormActivity extends AppCompatActivity {
         mtimerconfirm = findViewById(R.id.timerconfirm);
         mreopenbtn = findViewById(R.id.reopen);
         mrequestby = findViewById(R.id.requestby);
+        mreinfolay = findViewById(R.id.reinfolay);
+        mreopeninfo = findViewById(R.id.reopeninfo);
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(DetailsFormActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -256,7 +259,14 @@ public class DetailsFormActivity extends AppCompatActivity {
         mreopenbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogreopen();
+                Intent gotorating = new Intent(DetailsFormActivity.this, ReopenCase.class);
+                gotorating.putExtra("id", noreq);
+                gotorating.putExtra("noticket", noticket);
+                gotorating.putExtra("user", username);
+                startActivity(gotorating);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+//                showDialogreopen();
             }
         });
         updateCountDownText();
@@ -422,6 +432,14 @@ public class DetailsFormActivity extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+
+                    inforeopen = data.get("allowToReopenCase").getAsBoolean();
+                    if (inforeopen){
+                        mreinfolay.setVisibility(View.VISIBLE);
+                        mreopeninfo.setText(data.get("reopenCaseInformation").getAsString());
+                    }else {
+                        mreinfolay.setVisibility(View.GONE);
+                    }
                     String showalert = data.get("showMessage").toString();
                     if (data.get("confirmCountDown").toString().equals("false")){
 

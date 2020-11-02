@@ -663,7 +663,29 @@
                         android:textSize="17sp" />
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
 
+                android:id="@+id/reinfolay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="12dp"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:visibility="visible" >
+
+
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/reopeninfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeui"
+                        android:text="@string/title_reopen"
+                        android:textColor="@color/darkgrey2"
+                        android:textSize="11sp" />
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/chatcspo"
                 android:layout_width="match_parent"

@@ -18,17 +18,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Add_Po_Item_List"></activity>
+        <activity android:name=".ReopenCase"></activity>
+        <activity android:name=".Add_Po_Item_List" />
         <activity android:name=".AddDetailsPoView">
             <intent-filter>
-                <action android:name="ChargeableOrder"/>
+                <action android:name="ChargeableOrder" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".AddDetailsPo" />
         <activity android:name=".AddDetailFocView">
             <intent-filter>
-                <action android:name="FOCOrder"/>
+                <action android:name="FOCOrder" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -40,6 +43,7 @@
         <activity android:name=".DetailsNotification">
             <intent-filter>
                 <action android:name="Notification" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -48,11 +52,12 @@
         <activity android:name=".RatingStar" />
         <activity android:name=".DetailsFormActivity">
             <intent-filter>
-                <action android:name="FormRequest"/>
+                <action android:name="FormRequest" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".FormActivity"></activity>
+        <activity android:name=".FormActivity" />
         <activity android:name=".DetailsNews" />
         <activity android:name=".NewsActivity" />
         <activity android:name=".Langueage" />
@@ -66,8 +71,7 @@
             android:name=".Dashboard"
             android:excludeFromRecents="true"
             android:parentActivityName=".SpalshScreen"
-            android:taskAffinity=""
-            />
+            android:taskAffinity="" />
         <activity android:name=".SpalshScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -94,7 +98,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/black" />
-
     </application>
 
 </manifest>

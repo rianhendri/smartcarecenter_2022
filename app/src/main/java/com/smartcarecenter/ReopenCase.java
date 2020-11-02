@@ -1,6 +1,5 @@
 package com.smartcarecenter;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -22,22 +21,16 @@ import android.media.ThumbnailUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
@@ -59,12 +52,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.view.View.GONE;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
-public class RatingStar extends AppCompatActivity {
+public class ReopenCase extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1000;
     Uri photo_location;
     int quality = 40;
@@ -79,49 +71,28 @@ public class RatingStar extends AppCompatActivity {
     String errornya = "";
     boolean internet = true;
     ProgressDialog loading;
-    EditText mcomment;
-    TextView mnoticket;
-    RatingBar mratingstar;
-    TextView mratingvalue;
-    LinearLayout msolved;
-    LinearLayout munsolved,mcapture;
-    ConstraintLayout mlayoutimg;
+    LinearLayout msubmit, mcapture, mback;
+    ConstraintLayout muploadlay;
     ImageView mimage;
+    EditText mcomment;
     String noreq = "";
     String noticket = "";
     int ratvalue = 0;
     String sesionid_new = "";
-    Spinner msn;
-    List<Boolean> listvalue = new ArrayList<>();
     boolean value;
     RequestBody requestBody = null;
     String imgreq ="";
-    String imgbody ="";
-    ConstraintLayout muploadlay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rating_star);
-        msolved = (LinearLayout)findViewById(R.id.solved);
-        munsolved = (LinearLayout)findViewById(R.id.unsolved);
-        mratingvalue = (TextView)findViewById(R.id.ratingvalue);
-        mnoticket = (TextView)findViewById(R.id.noticket);
-        mcomment = (EditText)findViewById(R.id.comment);
-        mratingstar = (RatingBar)findViewById(R.id.ratingstar);
-        msn = findViewById(R.id.snrat);
+        setContentView(R.layout.activity_reopen_case);
+
         mimage = findViewById(R.id.imgbanner);
         mcapture = (LinearLayout)this.findViewById(R.id.upladfoto);
         muploadlay = findViewById(R.id.uploadlay);
-//        mlayoutimg= findViewById(R.id.layoutimg);
-        String[] arraySpinner = new String[]{
-                getString(R.string.title_yes), getString(R.string.title_no)
-        };
-        listvalue.add(true);
-        listvalue.add(false);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinstatus_layout, arraySpinner);
-        arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
-        arrayAdapter.notifyDataSetChanged();
-        msn.setAdapter(arrayAdapter);
+        mcomment = (EditText)findViewById(R.id.comment);
+        msubmit = findViewById(R.id.submit);
+        mback = findViewById(R.id.backbtn);
         Bundle extras = this.getIntent().getExtras();
         if (extras != null) {
             noreq = extras.getString("id");
@@ -136,124 +107,27 @@ public class RatingStar extends AppCompatActivity {
         }else {
 
         }
-        msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mback.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                value = listvalue.get(position);
-//                Toast.makeText(RatingStar.this, String.valueOf(value), Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
-        mnoticket.setText("#"+noreq);
-        mratingstar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        msubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-            mratingvalue.setText("Rating: "+ String.valueOf(v));
-            ratvalue = (int) v;
-            }
-        });
-        msolved.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cekInternet();
-                if (ratvalue == 0) {
-                    Toast.makeText(RatingStar.this, getString(R.string.title_require_rate), Toast.LENGTH_SHORT).show();
-
+            public void onClick(View v) {
+                if (mcomment.length()!=0){
+                    uploadData();
                 }else {
-                    approve = true;
-                    if (internet) {
-//                        sendRate();
-                        uploadData();
-                    }
+                    mcomment.setError(getString(R.string.title_deserror));
+//                    mcomment.setTextColor(getResources().getColor(R.color.red));
                 }
             }
         });
         mcapture.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                setRequestImage();
-            }
-        });
-        muploadlay.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 setRequestImage();
-            }
-        });
-//        munsolved.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                cekInternet();
-//                if (ratvalue == 0) {
-//                    Toast.makeText(RatingStar.this, getString(R.string.title_require_rate), Toast.LENGTH_SHORT).show();
-//
-//                }else {
-//                    approve = true;
-//                    if (internet) {
-//                        sendRate();
-//                    }
-//                }
-//
-//
-//            }
-//        });
-    }
-    public void sendRate(){
-        loading = ProgressDialog.show(RatingStar.this, "", getString(R.string.title_loading), true);
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("sessionId", sesionid_new);
-        jsonObject.addProperty("formRequestCd", noreq);
-        jsonObject.addProperty("rating", ratvalue);
-        jsonObject.addProperty("comments", mcomment.getText().toString());
-        jsonObject.addProperty("isApprove",value);
-        jsonObject.addProperty("ver",ver);
-//        Toast.makeText(RatingStar.this,  String.valueOf(jsonObject),Toast.LENGTH_LONG).show();
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONconfirm(jsonObject);
-        panggilkomplek.enqueue(new Callback<JsonObject>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                String errornya = "";
-                JsonObject homedata=response.body();
-                String statusnya = homedata.get("status").getAsString();
-                if (homedata.get("errorMessage").toString().equals("null")) {
-
-                }else {
-                    errornya = homedata.get("errorMessage").getAsString();
-                }
-                MhaveToUpdate = homedata.get("haveToUpdate").toString();
-                MsessionExpired = homedata.get("sessionExpired").toString();
-                sesionid();
-                if (statusnya.equals("OK")){
-                    JsonObject data = homedata.getAsJsonObject("data");
-                    String message = data.get("message").getAsString();
-                    Toast.makeText(RatingStar.this, message,Toast.LENGTH_LONG).show();
-                    Intent back = new Intent(RatingStar.this,FormActivity.class);
-                    back.putExtra("pos",valuefilter);
-                    startActivity(back);
-                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
-                    finish();
-                    loading.dismiss();
-                }else {
-                    sesionid();
-                    loading.dismiss();
-                    Toast.makeText(RatingStar.this, errornya,Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(RatingStar.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
-                cekInternet();
-                loading.dismiss();
-
             }
         });
     }
@@ -324,7 +198,7 @@ public class RatingStar extends AppCompatActivity {
                         }
                         catch (Exception exception) {
                             exception.printStackTrace();
-                            Toast.makeText(RatingStar.this, exception.toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(ReopenCase.this, exception.toString(),Toast.LENGTH_LONG).show();
                         }
 //                        mimgvis.setImageBitmap(bitmap3);
                         mimage.setImageBitmap(bitmap);
@@ -333,7 +207,7 @@ public class RatingStar extends AppCompatActivity {
                     }
                     catch (IOException iOException) {
                         iOException.printStackTrace();
-                        Toast.makeText(RatingStar.this, iOException.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(ReopenCase.this, iOException.toString(),Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -392,7 +266,7 @@ public class RatingStar extends AppCompatActivity {
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak
-        ConnectivityManager connectivityManager = (ConnectivityManager) RatingStar.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) ReopenCase.this.getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)
         {
@@ -401,7 +275,7 @@ public class RatingStar extends AppCompatActivity {
 
         }else {
             internet=false;
-            Intent noconnection = new Intent(RatingStar.this, NoInternet.class);
+            Intent noconnection = new Intent(ReopenCase.this, NoInternet.class);
             startActivity(noconnection);
             finish();
         }
@@ -420,22 +294,22 @@ public class RatingStar extends AppCompatActivity {
 
 
             }else {
-                Intent gotoupdate = new Intent(RatingStar.this, UpdateActivity.class);
+                Intent gotoupdate = new Intent(ReopenCase.this, UpdateActivity.class);
                 startActivity(gotoupdate);
                 finish();
             }
 
         }else {
-            startActivity(new Intent(RatingStar.this, LoginActivity.class));
+            startActivity(new Intent(ReopenCase.this, LoginActivity.class));
             finish();
-            Toast.makeText(RatingStar.this, getString(R.string.title_session_Expired),Toast.LENGTH_LONG).show();
+            Toast.makeText(ReopenCase.this, getString(R.string.title_session_Expired),Toast.LENGTH_LONG).show();
         }
 
     }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(RatingStar.this,DetailsFormActivity.class);
+        Intent back = new Intent(ReopenCase.this,DetailsFormActivity.class);
         back.putExtra("id",noreq);
         back.putExtra("pos",valuefilter);
         back.putExtra("user", DetailsFormActivity.username);
@@ -444,20 +318,20 @@ public class RatingStar extends AppCompatActivity {
         finish();
     }
     public void uploadData(){
-        loading = ProgressDialog.show(RatingStar.this, "", getString(R.string.title_loading), true);
+        loading = ProgressDialog.show(ReopenCase.this, "", getString(R.string.title_loading), true);
         if (imagefile==null){
             IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-            jsonPostService.uploadRating(MultipartBody.Part.createFormData((String)"",
+            jsonPostService.reopen(MultipartBody.Part.createFormData((String)"",
                     ""),
-                    RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),RequestBody.create((MediaType)MultipartBody.FORM,noreq),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)), RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),
+                    RequestBody.create((MediaType)MultipartBody.FORM,noreq),
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     String errornya = "";
                     JsonObject jsonObject=response.body();
-//                    Toast.makeText((Context)RatingStar.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
+//                    Toast.makeText((Context)ReopenCase.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
                     String statusnya = jsonObject.get("status").getAsString();
                     if (jsonObject.get("errorMessage").toString().equals("null")) {
 
@@ -470,11 +344,17 @@ public class RatingStar extends AppCompatActivity {
                     if (statusnya.equals((Object)"OK")) {
                         String string4 = jsonObject.getAsJsonObject("data").get("message").getAsString();
                         loading.dismiss();
-                        Toast.makeText((Context)RatingStar.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
-                        onBackPressed();
+                        Toast.makeText((Context)ReopenCase.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
+                        Intent back = new Intent(ReopenCase.this,FormActivity.class);
+                        back.putExtra("id",noreq);
+                        back.putExtra("pos",valuefilter);
+                        back.putExtra("user", DetailsFormActivity.username);
+                        startActivity(back);
+                        overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                        finish();
 
                     }else {
-                        Toast.makeText((Context)RatingStar.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
+                        Toast.makeText((Context)ReopenCase.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
                         loading.dismiss();
                     }
                 }
@@ -482,7 +362,7 @@ public class RatingStar extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<JsonObject> call, Throwable t) {
                     loading.dismiss();
-                    Toast.makeText(RatingStar.this, t.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(ReopenCase.this, t.toString(),Toast.LENGTH_LONG).show();
 //                Toast.makeText(RatingStar.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                     cekInternet();
                 }
@@ -491,11 +371,12 @@ public class RatingStar extends AppCompatActivity {
             requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),imagefile);
             imgreq = String.valueOf(imagefile.getName());
             IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-            jsonPostService.uploadRating(MultipartBody.Part.createFormData((String)"",
+            jsonPostService.reopen(
+                    MultipartBody.Part.createFormData((String)"",
                     imgreq,requestBody),
-                    RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),RequestBody.create((MediaType)MultipartBody.FORM,noreq),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)), RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),
+                    RequestBody.create((MediaType)MultipartBody.FORM,noreq),
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -514,11 +395,18 @@ public class RatingStar extends AppCompatActivity {
                     if (statusnya.equals((Object)"OK")) {
                         String string4 = jsonObject.getAsJsonObject("data").get("message").getAsString();
                         loading.dismiss();
-                        Toast.makeText((Context)RatingStar.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
-                        onBackPressed();
+                        Toast.makeText((Context)ReopenCase.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
+                        Toast.makeText((Context)ReopenCase.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
+                        Intent back = new Intent(ReopenCase.this,FormActivity.class);
+                        back.putExtra("id",noreq);
+                        back.putExtra("pos",valuefilter);
+                        back.putExtra("user", DetailsFormActivity.username);
+                        startActivity(back);
+                        overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                        finish();
 
                     }else {
-                        Toast.makeText((Context)RatingStar.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
+                        Toast.makeText((Context)ReopenCase.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
                         loading.dismiss();
                     }
                 }
@@ -526,7 +414,7 @@ public class RatingStar extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<JsonObject> call, Throwable t) {
                     loading.dismiss();
-                    Toast.makeText(RatingStar.this, t.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(ReopenCase.this, t.toString(),Toast.LENGTH_LONG).show();
 //                Toast.makeText(RatingStar.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                     cekInternet();
                 }
@@ -535,38 +423,5 @@ public class RatingStar extends AppCompatActivity {
 
 
 
-    }
-    private void showDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this);
-
-        // set title dialog
-        alertDialogBuilder.setTitle(getString(R.string.title_send_request));
-
-        // set pesan dari dialog
-        alertDialogBuilder
-                .setMessage(getString(R.string.title_Submitreq))
-                .setIcon(R.mipmap.ic_launcher)
-                .setCancelable(false)
-                .setPositiveButton(getString(R.string.title_yes),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // jika tombol diklik, maka akan menutup activity ini
-                        uploadData();
-
-                    }
-                })
-                .setNegativeButton(getString(R.string.title_no),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // jika tombol ini diklik, akan menutup dialog
-                        // dan tidak terjadi apa2
-                        dialog.cancel();
-                    }
-                });
-
-        // membuat alert dialog dari builder
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // menampilkan alert dialog
-        alertDialog.show();
     }
 }

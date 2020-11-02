@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/dwhite"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".ReopenCase">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="10dp"
+        android:orientation="horizontal" >
+        <LinearLayout
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+
+                android:layout_width="19dp"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="0dp"
+                android:gravity="left"
+                android:src="@drawable/back_white" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="64dp"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center_vertical"
+                android:text="@string/title_reopen"
+                android:textColor="@color/dwhite"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/seguisb"
+                android:gravity="start"
+                android:padding="4dp"
+                android:textColor="@color/black"
+                android:text="@string/title_deskription"
+                android:textSize="12dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/seguisb"
+                android:text="*"
+                android:textColor="@color/red"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/bgwhite_cornerblack"
+            android:fontFamily="@font/segoeui"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="6"
+
+            android:overScrollMode="always"
+            android:padding="8dp"
+            android:maxLines="2"
+            android:scrollHorizontally="false"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="13sp" />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:id="@+id/upladfoto"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/seguisb"
+                android:text="@string/title_fotooptional"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="4dp"
+                android:src="@drawable/ic_camera" />
+
+
+        </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/uploadlay"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/softgrey" >
+
+            <ImageView
+                android:id="@+id/imgbanner1"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_no_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imgbanner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/unsolved"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_cornerred"
+            android:orientation="horizontal" >
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center"
+                android:text="Unsolved"
+                android:textColor="@color/dwhite"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/submit"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_cornerblue"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center"
+                android:text="@string/title_submit"
+                android:textColor="@color/dwhite"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

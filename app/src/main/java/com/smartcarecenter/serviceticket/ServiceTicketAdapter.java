@@ -33,9 +33,12 @@
 package com.smartcarecenter.serviceticket;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -93,7 +96,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
     Context context;
     ArrayList<ServicesTicketItem> myItem;
     public static int positem = 0;
-
+    ImageView mimgpopup;
     //timer
     long MillisecondTime, StartTime, UpdateTime = 0L ;
     long TimeBuff = seconds ;
@@ -121,6 +124,25 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         stringBuilder.append("#");
         stringBuilder.append(String.valueOf((int)((ServicesTicketItem)this.myItem.get(i)).getPosition()));
         textView.setText((CharSequence)stringBuilder.toString());
+
+        if (myItem.get(i).getFeedbackPhotoFullURL()==null){
+            myviewholder.murlfoto.setVisibility(View.GONE);
+        }else {
+            myviewholder.murlfoto.setVisibility(View.VISIBLE);
+        }
+
+        myviewholder.murlfoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(context, R.style.TransparentDialog);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.popupfoto);
+                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                mimgpopup = dialog.findViewById(R.id.imagepopup);
+                Picasso.with(context).load(myItem.get(i).getFeedbackPhotoFullURL()).into(mimgpopup);
+                dialog.show();
+            }
+        });
 
         showprogress = myItem.get(i).isShowOnProgressAction();
         if (showprogress){
@@ -317,11 +339,11 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         TextView massigndate;
         TextView mbar1,mbar2,mbar3,mbar4,mcomment,mendtime,mengineer,mservicetype,mstarttime
                 ,mstatusservice,mstatustik;
-        TextView mtimer,msupport,massengineer,mlastimpresi,mnotes, mactionprogress;
+        TextView mtimer,msupport,massengineer,mlastimpresi,mnotes, mactionprogress, mfeedbackfoto;
 
         ImageView mposbar;
         RatingBar mrating;
-        LinearLayout mlayoutstart,mlasyass,mlayimpres,mlayoutnotes,mlayac;
+        LinearLayout mlayoutstart,mlasyass,mlayimpres,mlayoutnotes,mlayac, murlfoto;
         public Myviewholder(@NonNull View view) {
             super(view);
 
@@ -348,6 +370,8 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             mnotes = view.findViewById(R.id.engineernote);
             mactionprogress = view.findViewById(R.id.actionprogress);
             mlayac = view.findViewById(R.id.layaction);
+            mfeedbackfoto = view.findViewById(R.id.feedbackfoto);
+            murlfoto = view.findViewById(R.id.urlfeedback);
 
         }
     }

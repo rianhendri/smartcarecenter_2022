@@ -19,8 +19,12 @@ public class ServicesTicketItem {
 
 
     public ServicesTicketItem(String assignedDateTime, String bar1Text, String bar2Text, String bar3Text,
-                              boolean bar4Red, String bar4Text, int barPosition, String engineerName, String feedbackComments, int feedbackRating, String issueCategoryName, int position, String serviceTypeName, String statusName, String supportEndDateTime, String supportStartDateTime, String unitCategoryName, String assist,
-                              int lastImpression, String description, boolean showOnProgressAction, String onProgressActionName) {
+                              boolean bar4Red, String bar4Text, int barPosition, String engineerName,
+                              String feedbackComments, int feedbackRating, String issueCategoryName,
+                              int position, String serviceTypeName, String statusName, String supportEndDateTime,
+                              String supportStartDateTime, String unitCategoryName, String assist, int lastImpression,
+                              String description,
+                              boolean showOnProgressAction, String onProgressActionName, String feedbackPhotoFullURL) {
         AssignedDateTime = assignedDateTime;
         Bar1Text = bar1Text;
         Bar2Text = bar2Text;
@@ -43,6 +47,7 @@ public class ServicesTicketItem {
         Description = description;
         ShowOnProgressAction = showOnProgressAction;
         OnProgressActionName = onProgressActionName;
+        FeedbackPhotoFullURL = feedbackPhotoFullURL;
     }
 
     public String getAssignedDateTime() {
@@ -221,6 +226,14 @@ public class ServicesTicketItem {
         OnProgressActionName = onProgressActionName;
     }
 
+    public String getFeedbackPhotoFullURL() {
+        return FeedbackPhotoFullURL;
+    }
+
+    public void setFeedbackPhotoFullURL(String feedbackPhotoFullURL) {
+        FeedbackPhotoFullURL = feedbackPhotoFullURL;
+    }
+
     @Expose
     @SerializedName("AssignedDateTime")
     private String AssignedDateTime;
@@ -290,5 +303,8 @@ public class ServicesTicketItem {
     @Expose
     @SerializedName("OnProgressActionName")
     private String OnProgressActionName;
+    @Expose
+    @SerializedName("FeedbackPhotoFullURL")
+    private String FeedbackPhotoFullURL;
 }
 
