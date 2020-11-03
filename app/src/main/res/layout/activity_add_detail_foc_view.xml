@@ -547,7 +547,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/segoeuib"
                             android:gravity="start"
-                            android:text="-asdasfs\ndfsdfsdfssdfsdfsdfsdfdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdasd"
+                            android:text=""
                             android:textColor="@color/red"
                             android:textSize="13sp" />
                     </LinearLayout>

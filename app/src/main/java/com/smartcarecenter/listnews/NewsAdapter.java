@@ -32,6 +32,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,7 +95,14 @@ extends RecyclerView.Adapter<NewsAdapter.Myviewholder> {
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
         Picasso.with(context).load(myItem.get(i).getBannerThumbURL()).into(myviewholder.mpic);
         myviewholder.mname.setText(myItem.get(i).getTitle());
-        myviewholder.mconten.setText(myItem.get(i).getContent());
+        if (Build.VERSION.SDK_INT >= 24) {
+            myviewholder.mconten.setText((CharSequence) Html.fromHtml((String)myItem.get(i).getContent(), Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            myviewholder.mconten.setText((CharSequence)Html.fromHtml((String)myItem.get(i).getContent()));
+
+
+        }
+//        myviewholder.mconten.setText(myItem.get(i).getContent());
         String string2 = (myItem.get(i).getDate());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());

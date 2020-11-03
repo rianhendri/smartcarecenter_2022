@@ -151,7 +151,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
                     tambahitem.setMatrixLifeSpanPcs(addFoclistitem.get(i).getMatrixLifeSpanPcs());
                     tambahitem.setUsingMatrix(addFoclistitem.get(i).isUsingMatrix());
                     tambahitem.setMatrix("-");
-                    tambahitem.setStockOnHand("0");
+                    tambahitem.setStockOnHand(" ");
                     tambahitem.setQty(1);
                     tambahitem.setPosition(addFoclistreq.size()+1);
                     listpoact.add(tambahitem);

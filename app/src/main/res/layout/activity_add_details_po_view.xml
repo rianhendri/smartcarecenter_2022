@@ -81,15 +81,16 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/laypoinv"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="end">
+                android:gravity="start">
 
                 <LinearLayout
                     android:padding="4dp"
-
+                    android:id="@+id/downloadpo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <ImageView
@@ -97,15 +98,29 @@
                         android:layout_height="20dp"
                         android:layout_marginRight="4dp"
                         android:src="@drawable/poicon"/>
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:fontFamily="@font/segoeui"
-                        android:textSize="12sp"
-                        android:text="Download PO"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:fontFamily="@font/segoeui"
+                            android:textSize="12sp"
+                            android:text="Download PO"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorPrimaryDark"/>
+                    </LinearLayout>
+
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/downloadinvoice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
@@ -626,7 +641,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/segoeui"
                             android:gravity="start"
-                            android:text="-asdasfs\ndfsdfsdfssdfsdfsdfsdfdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdasd"
+                            android:text=""
                             android:textColor="@color/red"
                             android:textSize="13sp" />
                     </LinearLayout>

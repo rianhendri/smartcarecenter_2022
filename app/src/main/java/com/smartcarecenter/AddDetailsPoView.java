@@ -2,11 +2,16 @@ package com.smartcarecenter;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,8 +22,10 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -41,6 +48,7 @@ import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.messagecloud.check;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -54,6 +62,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.smartcarecenter.FormActivity.refresh;
@@ -63,6 +72,8 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddDetailsPoView extends AppCompatActivity {
+    private static final int PERMISSION_CODE = 1000;
+    String linkPo = "";
     boolean showprep = true;
     String colortextrep = "";
     String textprep="";
@@ -77,7 +88,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     Boolean internet = false;
     boolean installed= true;
     ProgressDialog loading;
-    LinearLayout mback,mbgalert;
+    LinearLayout mback,mbgalert, mlayinvpo, mlaypo,mlayinv;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,
             mnoitem,mpono,mstatus, mtotalprice,mtax,mgrandtotal,mtitle,mlabeltax, mnotes;
@@ -133,6 +144,9 @@ public class AddDetailsPoView extends AppCompatActivity {
         mnotes = findViewById(R.id.mnotes);
         mbgalert = findViewById(R.id.backgroundalert);
         mtextalert = findViewById(R.id.textalert);
+        mlayinvpo = findViewById(R.id.laypoinv);
+        mlayinv = findViewById(R.id.downloadinvoice);
+        mlaypo = findViewById(R.id.downloadpo);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
@@ -163,7 +177,12 @@ public class AddDetailsPoView extends AppCompatActivity {
 
         }
 
-
+        mlaypo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setRequestImage();
+            }
+        });
         msend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -359,6 +378,18 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    //laydownloadpoinv
+                    if (data.get("poDownloadURL").toString().equals("null")){
+                        mlayinvpo.setVisibility(GONE);
+                        mlaypo.setVisibility(GONE);
+
+                    }else {
+                        mlayinvpo.setVisibility(VISIBLE);
+                        mlaypo.setVisibility(VISIBLE);
+                        linkPo = data.get("poDownloadURL").getAsString();
+
+                    }
+
                     String pressname = data.get("pressTypeName").getAsString();
                     //setnotes
                     String note = data.get("notes").getAsString();
@@ -626,5 +657,52 @@ public class AddDetailsPoView extends AppCompatActivity {
 
             }
         });
+    }
+    private void setRequestImage() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this, Manifest.permission.CAMERA)
+                    && ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                //Show permission dialog
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE);
+
+
+            }
+
+        }else {
+            startDownload();
+        }
+    }
+    public void startDownload() {
+        File direct = new File(Environment.getExternalStorageDirectory()
+                + "/dhaval_files");
+
+        if (!direct.exists()) {
+            direct.mkdirs();
+        }
+
+        DownloadManager mgr = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
+
+        Uri downloadUri = Uri.parse(linkPo);
+        DownloadManager.Request request = new DownloadManager.Request(
+                downloadUri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+//        request.setDestinationInExternalPublicDir("/SmartcareCenter", downloadUri.getLastPathSegment());
+//        Long referese = dm.enqueue(request);
+        request.setDestinationInExternalPublicDir(DIRECTORY_DOWNLOADS, downloadUri.getLastPathSegment());
+        mgr.enqueue(request);
+        Toast.makeText(getApplicationContext(), getString(R.string.title_unduhan), Toast.LENGTH_SHORT).show();
+
+//        downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
+//        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(linkdownloadnya));
+//
+//        queid = downloadManager.enqueue(request);
     }
 }

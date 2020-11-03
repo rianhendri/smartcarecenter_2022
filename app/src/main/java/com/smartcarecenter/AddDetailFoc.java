@@ -63,6 +63,7 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class AddDetailFoc extends AppCompatActivity {
     boolean showprep = true;
+    boolean stockhandcek = true;
     String colortextrep = "";
     String textprep="";
     String bgprep = "";
@@ -234,12 +235,19 @@ public class AddDetailFoc extends AppCompatActivity {
                         Toast.makeText(AddDetailFoc.this, getString(R.string.title_requiredimpressi),Toast.LENGTH_SHORT).show();
 
                     }else {
+
                         for (int ad = 0; ad < addFoclistreq.size(); ++ad) {
-                            if (addFoclistreq.get(ad).getStockOnHand().equals("0")){
+                            if (addFoclistreq.get(ad).getStockOnHand().equals(" ")){
+                                stockhandcek = false;
                                 Toast.makeText(AddDetailFoc.this, getString(R.string.title_stockhandrequired),Toast.LENGTH_SHORT).show();
                             }else {
-                                showDialog();
+
                             }
+                        }
+                        if (stockhandcek){
+                            showDialog();
+                        }else {
+                            stockhandcek = true;
                         }
                     }
                 }

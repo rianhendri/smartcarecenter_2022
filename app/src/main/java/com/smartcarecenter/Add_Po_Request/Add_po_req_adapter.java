@@ -101,6 +101,7 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
         myviewholder.mqty.setText(String.valueOf(addFoclistreq.get(i).getQty()));
         myviewholder.mpos.setText(String.valueOf(addFoclistreq.get(i).getPosition()));
         myviewholder.munit.setText(addFoclistreq.get(i).getUnitName());
+
         Double harga = 0.0;
         harga=addFoclistreq.get(i).getSellPrice();
         Locale localeID = new Locale("in", "ID");

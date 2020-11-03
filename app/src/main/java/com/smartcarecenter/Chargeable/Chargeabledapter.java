@@ -39,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,6 +62,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
     ArrayList<ChargeableItem> chargeableItem;
     Context context;
     ImageView mimgpopup;
+    boolean laypo = true;
 
     public Chargeabledapter(Context context, ArrayList<ChargeableItem> chargeableItem) {
         this.context = context;
@@ -79,7 +81,12 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
         String newdate = "";
-
+        laypo = chargeableItem.get(i).isShowIconPO();
+        if (laypo){
+            myviewholder.mlaypo.setVisibility(View.VISIBLE);
+        }else {
+            myviewholder.mlaypo.setVisibility(View.GONE);
+        }
         myviewholder.mnofoc.setText("Ref: "+"#"+ chargeableItem.get(i).getOrderNo());
         String oldadate = chargeableItem.get(i).getDate();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
@@ -123,7 +130,7 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
     public class Myviewholder extends RecyclerView.ViewHolder{
 
         TextView mnofoc,mstatus,mdate,mpos,mNoPo,mgrand;
-
+        LinearLayout mlaypo;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -133,7 +140,8 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
             mpos = itemView.findViewById(R.id.nolist);
             mNoPo = itemView.findViewById(R.id.NoPo);
             mgrand = itemView.findViewById(R.id.grandtotal);
-
+            mgrand = itemView.findViewById(R.id.grandtotal);
+            mlaypo = itemView.findViewById(R.id.laypo);
         }
     }
 }

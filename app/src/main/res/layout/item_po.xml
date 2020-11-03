@@ -129,13 +129,15 @@
 						android:textSize="13sp" />
 
 					<LinearLayout
-						android:visibility="gone"
+
+						android:visibility="visible"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:orientation="horizontal"
 						android:layout_weight="1"
 						android:gravity="end">
 						<LinearLayout
+							android:id="@+id/laypo"
 							android:padding="4dp"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
@@ -155,6 +157,8 @@
 								android:textColor="@color/black"/>
 						</LinearLayout>
 						<LinearLayout
+							android:visibility="gone"
+							android:id="@+id/layinv"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:padding="4dp"

@@ -141,6 +141,13 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
         myviewholder.mpos.setText(String.valueOf(addFoclistreq.get(i).getPosition()));
         myviewholder.munit.setText(addFoclistreq.get(i).getUnitName());
         myviewholder.mprevimpress.setText(String.valueOf(addFoclistreq.get(i).getLastImpression()));
+
+        if (addFoclistreq.get(i).getStockOnHand().equals(" ")){
+            myviewholder.mstockhand.setText("");
+        }else {
+            myviewholder.mstockhand.setText(String.valueOf(addFoclistreq.get(i).getStockOnHand()));
+        }
+
         mtotalitem.setText(String.valueOf(addFoclistreq.size()));
         totalqty = 0;
         for (int x = 0 ; x < addFoclistreq.size(); x++) {
@@ -171,11 +178,8 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                     for (int x = 0 ; x < addFoclistreq.size(); x++) {
                         totalqty += addFoclistreq.get(x).getQty();
                         mtotalqty.setText(String.valueOf(totalqty));
+
                     }
-                    Gson gson = new GsonBuilder().create();
-                   myCustomArray = gson.toJsonTree(reitem).getAsJsonArray();
-                    jsonarayitem = myCustomArray.toString();
-                    mtotalitem.setText(String.valueOf(addFoclistreq.size()));
 //                    grandTotalplus = 0;
 //                    intSum = 0;
 //                    for (int i = 0; i < list.size(); i++) {
@@ -193,6 +197,10 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                     mno_order.setVisibility(View.VISIBLE);
 
                 }
+                Gson gson = new GsonBuilder().create();
+                myCustomArray = gson.toJsonTree(reitem).getAsJsonArray();
+                jsonarayitem = myCustomArray.toString();
+                mtotalitem.setText(String.valueOf(addFoclistreq.size()));
             }
         });
         //button plus minus qty
@@ -310,46 +318,63 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (myviewholder.mstockhand.length()==0){
-                    addFoclistreq.get(i).setStockOnHand("0");
-                    if ((int)Math.ceil(matrixcount)<=0){
-                        myviewholder.mmatrix.setText("0");
-                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                    }else {
-                        myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(matrixcount)));
-                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                    }
-                    myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("123456789"));
-                }else {
-                    addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
-                    myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
-                    if (myviewholder.mmatrix.equals("0")){
-
-                    }else {
-                        int deservqty = (int)Math.ceil(matrixcount);
-                        int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
-                        if (deservqty-stockhand<=0){
-                            myviewholder.mmatrix.setText("0");
-                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                        }else {
-                            myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
-                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                        }
-
-                    }
-                }
-
-                Gson gson = new GsonBuilder().create();
-                myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
-//                Toast.makeText(context, myCustomArray.toString(),Toast.LENGTH_LONG).show();
+//
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                for (int i = 0 ; i < addFoclistreq.size(); i++) {
+                    if (myviewholder.mstockhand.length()==0){
+                        addFoclistreq.get(i).setStockOnHand(" ");
+                    }else{
+                        addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
+                    }
+                    if (addFoclistreq.get(i).getLastImpression()==0){
+                        myviewholder.mmatrix.setText("-");
+                    }else if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                        myviewholder.mmatrix.setText("-");
+                    }else if (!usingmatrix){
+                        myviewholder.mmatrix.setText("-");
+                    }else{
+                        if (myviewholder.mstockhand.length()==0){
+                            addFoclistreq.get(i).setStockOnHand(" ");
+                            if ((int)Math.ceil(matrixcount)<=0){
+                                myviewholder.mmatrix.setText("0");
+                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                            }else {
+                                myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(matrixcount)));
+                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                            }
+                            myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+                        }else {
+                            addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
+                            myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+                            if (myviewholder.mmatrix.equals("0")){
 
+                            }else {
+                                int deservqty = (int)Math.ceil(matrixcount);
+                                int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
+                                if (deservqty-stockhand<=0){
+                                    myviewholder.mmatrix.setText("0");
+                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }else {
+                                    myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
+                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }
+
+                            }
+                        }
+                    }
+
+
+                }
+                    Gson gson = new GsonBuilder().create();
+                    myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
+//                Toast.makeText(context, myCustomArray.toString(),Toast.LENGTH_LONG).show();
             }
         });
+
 
 
     }
