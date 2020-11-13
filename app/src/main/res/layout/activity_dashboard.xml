@@ -4,8 +4,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".Dashboard">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@color/backgourndgrey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:elevation="5dp">
+        <ImageView
+            android:gravity="center"
+            android:layout_width="45dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/logoicon" />
 
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/seguisb"
+            android:gravity="start"
+            android:paddingLeft="4dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginRight="50dp"
+            android:paddingTop="0dp"
+
+            android:src="@drawable/logotext" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/notifikasi"
+            android:layout_width="64dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:src="@drawable/ic_notification"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.411"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <LinearLayout
+                android:id="@+id/dot"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:background="@drawable/notification_red_dot2"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.619"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.421">
+
+                <TextView
+                    android:id="@+id/newnotif"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/segoeuib"
+                    android:gravity="center"
+                    android:text="44"
+                    android:textColor="@color/dwhite"
+                    android:textSize="9dp"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,83 +90,9 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
-                android:orientation="horizontal"
-                android:background="@color/backgourndgrey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:elevation="5dp">
-                <ImageView
-                    android:gravity="center"
-                    android:layout_width="45dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="64dp"
-                    android:layout_marginTop="0dp"
-                    android:src="@drawable/logoicon" />
 
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/seguisb"
-                    android:gravity="start"
-                    android:paddingLeft="4dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginRight="50dp"
-                    android:paddingTop="0dp"
-
-                    android:src="@drawable/logotext" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/notifikasi"
-                    android:layout_width="64dp"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="30dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:src="@drawable/ic_notification"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.411"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
-
-                    <LinearLayout
-                        android:id="@+id/dot"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:background="@drawable/notification_red_dot2"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.619"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.421">
-
-                        <TextView
-                            android:id="@+id/newnotif"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/segoeuib"
-                            android:gravity="center"
-                            android:text="44"
-                            android:textColor="@color/dwhite"
-                            android:textSize="9dp"
-                            android:visibility="visible" />
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-            <LinearLayout
                 android:orientation="vertical"
                 android:background="@drawable/bgheader"
                 android:padding="14dp"
@@ -192,11 +194,42 @@
                 android:textColor="@color/darkgrey"
                 android:gravity="center"
                 android:id="@+id/version_name"
-                android:padding="14dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Version"
                 android:fontFamily="@font/segoeui" />
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/termandconditionsbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="24dp">
+                    <TextView
+                        android:textSize="11sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:gravity="center"
+                        android:id="@+id/termandconditions"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Terms &amp; Conditions"
+                        android:fontFamily="@font/segoeui" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorPrimaryDark"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

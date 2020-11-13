@@ -100,6 +100,7 @@ public class AddDetailFoc extends AppCompatActivity {
     public static String jsonarayitem = "";
     public static JsonArray myCustomArray;
     Gson gson;
+    EditText mnotes;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,7 @@ public class AddDetailFoc extends AppCompatActivity {
         madd_item = findViewById(R.id.btnadditem_po);
         mbgalert = findViewById(R.id.backgroundalert);
         mtextalert = findViewById(R.id.textalert);
+        mnotes = findViewById(R.id.descrip);
 
         cekInternet();
         getSessionId();
@@ -379,6 +381,7 @@ public class AddDetailFoc extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("pressGuid",mpressId);
         jsonObject.addProperty("currentImpression",mlastimpresi.getText().toString());
+        jsonObject.addProperty("notes",mnotes.getText().toString());
         jsonObject.add("items", myCustomArray);
         jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);

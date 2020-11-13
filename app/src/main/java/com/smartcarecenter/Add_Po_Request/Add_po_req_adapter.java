@@ -104,14 +104,16 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
 
         Double harga = 0.0;
         harga=addFoclistreq.get(i).getSellPrice();
+        double subharga2=addFoclistreq.get(i).getSellPrice()*addFoclistreq.get(i).getQty();
         Locale localeID = new Locale("in", "ID");
         final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###.00");
         myviewholder.mprice.setText("Rp."+ " "+String.valueOf(formatRupiah.format(harga)));
-        myviewholder.msubharga.setText("Rp."+ " "+String.valueOf(formatRupiah.format(harga)));
+        myviewholder.msubharga.setText("Rp."+ " "+String.valueOf(formatRupiah.format(subharga2)));
+        addFoclistreq.get(i).setSubharga(subharga2);
         mtotalitem.setText(String.valueOf(addFoclistreq.size()));
         totalqty = 0;
         totalprice = 0.0;
-        addFoclistreq.get(i).setSubharga(harga);
+//        addFoclistreq.get(i).setSubharga(harga);
         myviewholder.mmps.setText(addFoclistreq.get(i).getMps());
         for (int x = 0 ; x < addFoclistreq.size(); x++) {
             totalqty += addFoclistreq.get(x).getQty();
@@ -120,9 +122,11 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
             mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
 
         }
+        Gson gson = new GsonBuilder().create();
+        myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
         //taxes
         mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*tax/100)));
-        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*tax/100))));
+        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format((int)totalprice+((int)totalprice*tax/100))));
 
         myviewholder.mimg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,12 +148,18 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                     addFoclistreq.remove(i);
                     notifyItemRemoved(i);
                     notifyItemRangeChanged(i, addFoclistreq.size());
-
-
                     totalqty = 0;
+                    totalprice = 0.0;
                     for (int x = 0 ; x < addFoclistreq.size(); x++) {
+//                        totalqty += addFoclistreq.get(x).getQty();
+//                        mtotalqty.setText(String.valueOf(totalqty));
                         totalqty += addFoclistreq.get(x).getQty();
                         mtotalqty.setText(String.valueOf(totalqty));
+                        totalprice +=addFoclistreq.get(x).getSubharga();
+                        mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
+                        mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*tax/100)));
+                        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format((int)totalprice+((int)totalprice*tax/100))));
+
                     }
                     mtotalitem.setText(String.valueOf(addFoclistreq.size()));
 //                    grandTotalplus = 0;
@@ -163,12 +173,15 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                         mlistitem_foc.setVisibility(View.GONE);
                     }
 
+
+
                 }else {
 //                    Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
                     mlaytotal.setVisibility(View.GONE);
                     mno_order.setVisibility(View.VISIBLE);
 
                 }
+
             }
         });
         //button plus minus qty
@@ -191,7 +204,7 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                     totalprice +=addFoclistreq.get(i).getSubharga();
                     mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
                     mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*tax/100)));
-                    mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*tax/100))));
+                    mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format((int)totalprice+((int)totalprice*tax/100))));
                 }
                 Gson gson = new GsonBuilder().create();
                 myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
@@ -222,7 +235,7 @@ extends RecyclerView.Adapter<Add_po_req_adapter.Myviewholder> {
                         totalprice +=addFoclistreq.get(i).getSubharga();
                         mtotalpricepo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice)));
                         mtotaltax.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice*tax/100)));
-                        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format(totalprice+(totalprice*tax/100))));
+                        mgrantotalpo.setText("Rp."+ " "+String.valueOf(formatRupiah.format((int)totalprice+((int)totalprice*tax/100))));
                         Gson gson = new GsonBuilder().create();
                         myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
                     }

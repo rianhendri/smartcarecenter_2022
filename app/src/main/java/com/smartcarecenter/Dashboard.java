@@ -88,7 +88,7 @@ public class Dashboard extends AppCompatActivity {
     LinearLayout mreq;
     LinearLayout msetting;
     LinearLayout msupport;
-    LinearLayout msurvey;
+    LinearLayout msurvey, mtermandcondition;
     TextView mversion, mnewnotif;
     RecyclerView mymenu;
     String sesionid_new = "";
@@ -110,6 +110,7 @@ public class Dashboard extends AppCompatActivity {
         malert = findViewById(R.id.textalert);
         mdot = findViewById(R.id.dot);
         mnewnotif = findViewById(R.id.newnotif);
+        mtermandcondition = findViewById(R.id.termandconditionsbtn);
         cekInternet();
         getSessionId();
         check.checknotif=1;
@@ -125,6 +126,15 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent gotonews = new Intent(Dashboard.this, Notification.class);
+                startActivity(gotonews);
+                finish();
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            }
+        });
+        mtermandcondition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotonews = new Intent(Dashboard.this, TermActivity.class);
                 startActivity(gotonews);
                 finish();
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
@@ -208,6 +218,7 @@ public class Dashboard extends AppCompatActivity {
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 jsonObject.addProperty("ver",ver);
                 if (statusnya.equals("OK")){
+                    mtermandcondition.setVisibility(View.VISIBLE);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     //alertnotes
@@ -345,16 +356,20 @@ public class Dashboard extends AppCompatActivity {
                     }
                     addmenu = new MenuAdapter(Dashboard.this, menuItemlist);
                     mymenu.setAdapter(addmenu);
+                    float width3 = getResources().getDimension(R.dimen.height3);
+                    float width4 = getResources().getDimension(R.dimen.height4);
+                    float width5 = getResources().getDimension(R.dimen.height5);
+                    float width6 = getResources().getDimension(R.dimen.height6);
                     if(mymenu.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                       if (menuItemlist.size()>4)
-                      { mymenu.getLayoutParams().height = 1400;
+                      { mymenu.getLayoutParams().height = (int) width3;
                       }
                       else if( menuItemlist.size()>6) {
-                          mymenu.getLayoutParams().height = 1700;
+                          mymenu.getLayoutParams().height = (int) width4;
                         }else if (menuItemlist.size()>8) {
-                          mymenu.getLayoutParams().height = 2000;
+                          mymenu.getLayoutParams().height = (int) width5;
                       }else if( menuItemlist.size()>10) {
-                          mymenu.getLayoutParams().height = 2300;
+                          mymenu.getLayoutParams().height = (int) width6;
                       }
                         mymenu.setNestedScrollingEnabled(false);
                         mymenu.setLayoutManager(new GridLayoutManager(Dashboard.this, 2));

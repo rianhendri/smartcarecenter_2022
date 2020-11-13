@@ -279,7 +279,30 @@ public class AddDetailFocView extends AppCompatActivity {
                     String pressname = data.get("pressTypeName").getAsString();
                     //setNotes
                     String note = data.get("notes").getAsString();
+                    String showalert = data.get("showMessage").toString();
+                    if (showalert.equals("true")){
 
+                        String text = data.get("messageText").getAsString();
+                        String textcolor = data.get("messageTextColor").getAsString();
+                        String bgcolor = data.get("messageBackgroundColor").getAsString();
+
+                        GradientDrawable shape =  new GradientDrawable();
+                        shape.setCornerRadius( 15 );
+                        shape.setColor(Color.parseColor("#"+bgcolor));
+
+                        mbgalert.setVisibility(View.VISIBLE);
+                        mtextalert.setTextColor(Color.parseColor("#"+textcolor));
+                        mbgalert.setBackground(shape);
+                        if (Build.VERSION.SDK_INT >= 24) {
+                            mtextalert.setText((CharSequence)Html.fromHtml((String)text, Html.FROM_HTML_MODE_COMPACT));
+                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
+                        } else {
+                            mtextalert.setText((CharSequence)Html.fromHtml((String)text));
+                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
+                        }
+                    }else {
+                        mbgalert.setVisibility(View.GONE);
+                    }
                     mnotes.setText(note);
 //                    if (Build.VERSION.SDK_INT >= 24) {
 //                        mnotes.setText((CharSequence) Html.fromHtml((String)note+"<font color=red>", Html.FROM_HTML_MODE_COMPACT));
@@ -432,66 +455,66 @@ public class AddDetailFocView extends AppCompatActivity {
         return installed;
     }
     public void prepform(){
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("ver",ver);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        Call<JsonObject> panggilkomplek = jsonPostService.prepfoc(jsonObject);
-        panggilkomplek.enqueue(new Callback<JsonObject>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                String errornya = "";
-                JsonObject homedata=response.body();
-                String statusnya = homedata.get("status").getAsString();
-                if (homedata.get("errorMessage").toString().equals("null")) {
-
-                }else {
-                    errornya = homedata.get("errorMessage").getAsString();
-                }
-                MhaveToUpdate = homedata.get("haveToUpdate").toString();
-                MsessionExpired = homedata.get("sessionExpired").toString();
-                if (statusnya.equals("OK")) {
-                    JsonObject data = homedata.getAsJsonObject("data");
-                    showprep = data.get("showMessage").getAsBoolean();
-
-                    if (showprep){
-                        colortextrep = data.get("messageTextColor").getAsString();
-                        textprep=data.get("messageText").getAsString();
-                        bgprep = data.get("messageBackgroundColor").getAsString();
-                        mbgalert.setVisibility(VISIBLE);
-//                        mtextalert.setText(textprep);
-                        mtextalert.setTextColor(Color.parseColor("#"+colortextrep));
-                        if (Build.VERSION.SDK_INT >= 24) {
-                            mtextalert.setText((CharSequence) Html.fromHtml((String)textprep, Html.FROM_HTML_MODE_COMPACT));
-                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
-                        } else {
-                            mtextalert.setText((CharSequence)Html.fromHtml((String)textprep));
-                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
-                        }
-                        GradientDrawable shape =  new GradientDrawable();
-                        shape.setCornerRadius( 15 );
-                        shape.setColor(Color.parseColor("#"+bgprep));
-                        mbgalert.setBackground(shape);
-                    }else {
-                        mbgalert.setVisibility(GONE);
-                    }
-
-                }else {
-                    loading.dismiss();
-                    Toast.makeText(AddDetailFocView.this, errornya,Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                loading.dismiss();
-                Toast.makeText(AddDetailFocView.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
-                cekInternet();
-
-
-            }
-        });
+//        JsonObject jsonObject = new JsonObject();
+//        jsonObject.addProperty("sessionId",sesionid_new);
+//        jsonObject.addProperty("ver",ver);
+//        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+//        Call<JsonObject> panggilkomplek = jsonPostService.prepfoc(jsonObject);
+//        panggilkomplek.enqueue(new Callback<JsonObject>() {
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//
+//                String errornya = "";
+//                JsonObject homedata=response.body();
+//                String statusnya = homedata.get("status").getAsString();
+//                if (homedata.get("errorMessage").toString().equals("null")) {
+//
+//                }else {
+//                    errornya = homedata.get("errorMessage").getAsString();
+//                }
+//                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+//                MsessionExpired = homedata.get("sessionExpired").toString();
+//                if (statusnya.equals("OK")) {
+//                    JsonObject data = homedata.getAsJsonObject("data");
+//                    showprep = data.get("showMessage").getAsBoolean();
+//
+//                    if (showprep){
+//                        colortextrep = data.get("messageTextColor").getAsString();
+//                        textprep=data.get("messageText").getAsString();
+//                        bgprep = data.get("messageBackgroundColor").getAsString();
+//                        mbgalert.setVisibility(VISIBLE);
+////                        mtextalert.setText(textprep);
+//                        mtextalert.setTextColor(Color.parseColor("#"+colortextrep));
+//                        if (Build.VERSION.SDK_INT >= 24) {
+//                            mtextalert.setText((CharSequence) Html.fromHtml((String)textprep, Html.FROM_HTML_MODE_COMPACT));
+//                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
+//                        } else {
+//                            mtextalert.setText((CharSequence)Html.fromHtml((String)textprep));
+//                            mtextalert.setMovementMethod(LinkMovementMethod.getInstance());
+//                        }
+//                        GradientDrawable shape =  new GradientDrawable();
+//                        shape.setCornerRadius( 15 );
+//                        shape.setColor(Color.parseColor("#"+bgprep));
+//                        mbgalert.setBackground(shape);
+//                    }else {
+//                        mbgalert.setVisibility(GONE);
+//                    }
+//
+//                }else {
+//                    loading.dismiss();
+//                    Toast.makeText(AddDetailFocView.this, errornya,Toast.LENGTH_LONG).show();
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                loading.dismiss();
+//                Toast.makeText(AddDetailFocView.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+//                cekInternet();
+//
+//
+//            }
+//        });
     }
     public void onBackPressed() {
 //        super.onBackPressed();

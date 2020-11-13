@@ -142,4 +142,5 @@
     <string name="title_readAll">Mark all as read</string>
     <string name="title_fotooptional">Upload Photo (Optional):</string>
     <string name="title_deskription">"Description: "</string>
+    <string name="title_note">Notes:</string>
 </resources>

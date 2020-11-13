@@ -109,11 +109,12 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
         usingmatrix = addFoclistreq.get(i).isUsingMatrix();
         if (addFoclistreq.get(i).getLastImpression()==0){
             myviewholder.mmatrix.setText("-");
-        }else if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
-            myviewholder.mmatrix.setText("-");
         }else if (!usingmatrix){
             myviewholder.mmatrix.setText("-");
         }else {
+            if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                myviewholder.mmatrix.setText("-");
+            }
             if (mlastimpresi.length()==0){
                 lastimpresivalue = 0;
             }else {
@@ -154,6 +155,11 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             totalqty += addFoclistreq.get(x).getQty();
             mtotalqty.setText(String.valueOf(totalqty));
         }
+        /// set list untuk json
+        Gson gson = new GsonBuilder().create();
+        myCustomArray = gson.toJsonTree(reitem).getAsJsonArray();
+        jsonarayitem = myCustomArray.toString();
+        mtotalitem.setText(String.valueOf(addFoclistreq.size()));
         myviewholder.mimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -259,13 +265,14 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                 if (addFoclistreq.size()==0){
 
                 }else {
-                    if (addFoclistreq.get(i).getLastImpression()==0){
-                        myviewholder.mmatrix.setText("-");
-                    }else if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                    if (addFoclistreq.get(i).getLastImpression()==0) {
                         myviewholder.mmatrix.setText("-");
                     }else if (!usingmatrix){
                         myviewholder.mmatrix.setText("-");
                     }else {
+                        if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                            myviewholder.mmatrix.setText("-");
+                        }
                         if (mlastimpresi.length()==0){
                             lastimpresivalue=0;
                         }else {
@@ -332,11 +339,12 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                     }
                     if (addFoclistreq.get(i).getLastImpression()==0){
                         myviewholder.mmatrix.setText("-");
-                    }else if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
-                        myviewholder.mmatrix.setText("-");
                     }else if (!usingmatrix){
                         myviewholder.mmatrix.setText("-");
                     }else{
+                        if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                            myviewholder.mmatrix.setText("-");
+                        }
                         if (myviewholder.mstockhand.length()==0){
                             addFoclistreq.get(i).setStockOnHand(" ");
                             if ((int)Math.ceil(matrixcount)<=0){

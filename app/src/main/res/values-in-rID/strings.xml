@@ -142,4 +142,5 @@
     <string name="title_readAll">Tandai semua sudah terbaca</string>
     <string name="title_fotooptional">Upload Foto (Optional):</string>
     <string name="title_deskription">"Deskripsi: "</string>
+    <string name="title_note">"Catatan: "</string>
 </resources>

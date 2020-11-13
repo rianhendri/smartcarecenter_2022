@@ -324,7 +324,7 @@
                         android:scrollHorizontally="false"
                         android:scrollbarStyle="insideInset"
                         android:scrollbars="vertical"
-                        android:text="asdasdasdasdsad"
+                        android:text=""
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/black"
                         android:textSize="13sp" />

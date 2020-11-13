@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReopenCase"></activity>
+        <activity android:name=".TermActivity"></activity>
+        <activity android:name=".ReopenCase" />
         <activity android:name=".Add_Po_Item_List" />
         <activity android:name=".AddDetailsPoView">
             <intent-filter>

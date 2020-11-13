@@ -81,7 +81,7 @@ public class AddDetailsPo extends AppCompatActivity {
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem,mtotaltax,mgrantotalpo
             ,mtotalpricepo,mLabeltax;
-    EditText mnopo;
+    EditText mnopo, mnotes;
     public static String pono="";
     public static String mpressId = "";
     String mpressId2 = "";
@@ -102,6 +102,7 @@ public class AddDetailsPo extends AppCompatActivity {
     public static String jsonarayitem = "";
     public static JsonArray myCustomArray;
     public static Gson gson;
+    String notes = "";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +128,7 @@ public class AddDetailsPo extends AppCompatActivity {
         mLabeltax = findViewById(R.id.labeltax);
         mbgalert = findViewById(R.id.backgroundalert);
         mtextalert = findViewById(R.id.textalert);
+        mnotes = findViewById(R.id.descrip);
         cekInternet();
         getSessionId();
         //setlayout recyler
@@ -391,6 +393,7 @@ public class AddDetailsPo extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("pressGuid",mpressId);
         jsonObject.addProperty("poNo",mnopo.getText().toString());
+        jsonObject.addProperty("notes",mnotes.getText().toString());
         jsonObject.add("items", myCustomArray);
         jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
