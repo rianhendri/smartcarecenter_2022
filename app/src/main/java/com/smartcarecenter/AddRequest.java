@@ -539,7 +539,7 @@ public class AddRequest extends AppCompatActivity {
                                 uploadData();
                             }else {
                                 mdescrip.setError(getString(R.string.title_deserror));
-                                mrequiredfoto.setText(getString(R.string.title_deserror));
+                                mrequiredfoto.setText(getString(R.string.title_fotorequired));
                                 mrequiredfoto.setTextColor(getResources().getColor(R.color.red));
                             }
 

@@ -141,6 +141,16 @@ public interface IRetrofit {
                                         @Part("ver") RequestBody ver);
 
     @Multipart
+    @POST("api/FormRequest/ConfirmWithInformation")
+    public Call<JsonObject> uploadfoc(@Part MultipartBody.Part multipart,
+                                         @Part("sessionId") RequestBody sessionId,
+                                         @Part("pressGuid") RequestBody formRequestCd,
+                                         @Part("currentImpression") RequestBody rating,
+                                         @Part("notes") RequestBody comments,
+                                         @Part("items") RequestBody isApprove,
+                                         @Part("ver") RequestBody ver);
+
+    @Multipart
     @POST("api/FormRequest/ReopenCaseWithInformation")
     public Call<JsonObject> reopen(@Part MultipartBody.Part multipart,
                                          @Part("sessionId") RequestBody sessionId,

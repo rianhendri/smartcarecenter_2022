@@ -143,4 +143,6 @@
     <string name="title_fotooptional">Upload Foto (Optional):</string>
     <string name="title_deskription">"Deskripsi: "</string>
     <string name="title_note">"Catatan: "</string>
+    <string name="title_uploadfotoimpresi">Upload Foto Impresi Terakhir</string>
+    <string name="title_choosephoto"><u>pilih foto</u></string>
 </resources>
