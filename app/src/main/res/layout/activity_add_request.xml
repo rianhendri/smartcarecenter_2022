@@ -51,10 +51,11 @@
             android:orientation="vertical" >
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/upladfoto"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimaryDark" >
+                android:background="@color/darkgrey" >
 
                 <ImageView
                     android:id="@+id/imgbanner"
@@ -63,7 +64,7 @@
                     android:scaleType="centerCrop" />
 
                 <LinearLayout
-                    android:id="@+id/upladfoto"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -75,11 +76,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/seguisb"
-                        android:text="@string/title_uploadphoto"
-                        android:textColor="@color/dwhite"
+                        android:text="@string/title_choosephoto"
+                        android:textColor="@color/black"
                         android:textSize="13sp" />
 
                     <ImageView
+                        android:visibility="gone"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="14dp"

@@ -144,5 +144,6 @@
     <string name="title_deskription">"Deskripsi: "</string>
     <string name="title_note">"Catatan: "</string>
     <string name="title_uploadfotoimpresi">Upload Foto Impresi Terakhir</string>
-    <string name="title_choosephoto"><u>pilih foto</u></string>
+    <string name="title_choosephoto"><u>Pilih Foto</u></string>
+    <string name="title_photoimpression">Foto Impresi Terakhir</string>
 </resources>

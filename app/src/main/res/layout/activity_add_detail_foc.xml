@@ -364,7 +364,7 @@
                         android:layout_height="100dp"
                         android:layout_weight="1"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/noimagerating"
+                        android:background="@color/backgourndgrey"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                     <TextView
@@ -433,7 +433,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bgwhite_cornerblack"
-                    android:enabled="false"
                     android:fontFamily="@font/segoeui"
                     android:gravity="top|left"
                     android:inputType="textMultiLine"
@@ -557,6 +556,7 @@
                     android:padding="12sp" >
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal" >
@@ -580,6 +580,7 @@
                             android:textSize="13sp" />
                     </LinearLayout>
                     <View
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/softgrey" />

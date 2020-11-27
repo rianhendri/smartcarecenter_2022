@@ -129,7 +129,9 @@ public interface IRetrofit {
                                         @Part("description") RequestBody description,
                                         @Part("operatorCd") RequestBody operatorCd,
                                         @Part("ver") RequestBody ver);
-
+    @Multipart
+    @POST("api/FOCOrder/AddWithInformation")
+    public Call<JsonObject> uploadRating2(@Body JsonObject locationPost);
     @Multipart
     @POST("api/FormRequest/ConfirmWithInformation")
     public Call<JsonObject> uploadRating(@Part MultipartBody.Part multipart,
@@ -141,13 +143,13 @@ public interface IRetrofit {
                                         @Part("ver") RequestBody ver);
 
     @Multipart
-    @POST("api/FormRequest/ConfirmWithInformation")
+    @POST("api/FOCOrder/AddWithInformation")
     public Call<JsonObject> uploadfoc(@Part MultipartBody.Part multipart,
                                          @Part("sessionId") RequestBody sessionId,
-                                         @Part("pressGuid") RequestBody formRequestCd,
-                                         @Part("currentImpression") RequestBody rating,
-                                         @Part("notes") RequestBody comments,
-                                         @Part("items") RequestBody isApprove,
+                                         @Part("pressGuid") RequestBody pressGuid,
+                                         @Part("currentImpression") RequestBody currentImpression,
+                                         @Part("custNotes") RequestBody custNotes,
+                                         @Part("items") RequestBody items,
                                          @Part("ver") RequestBody ver);
 
     @Multipart

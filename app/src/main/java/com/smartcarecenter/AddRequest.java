@@ -2,6 +2,7 @@ package com.smartcarecenter;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -100,7 +101,8 @@ public class AddRequest extends AppCompatActivity {
     ProgressDialog loading;
     ImageView mimgbanner,mimgvis;
     Spinner mbranch;
-    LinearLayout mcapture,mback, mbgalert;
+    LinearLayout mback, mbgalert;
+    ConstraintLayout mcapture;
     TextView mdate,mlocation,mrequest_no,mrequiredfoto,msend,mrequestname,mtextalert;
     EditText mdescrip;
     String mpressId = "";
@@ -134,7 +136,7 @@ public class AddRequest extends AppCompatActivity {
         mdate = (TextView)this.findViewById(R.id.datereq);
         msend = (TextView)this.findViewById(R.id.send);
         mrequiredfoto = (TextView)this.findViewById(R.id.requiredfoto);
-        mcapture = (LinearLayout)this.findViewById(R.id.upladfoto);
+        mcapture = findViewById(R.id.upladfoto);
         mreadyfoto = (LinearLayout)this.findViewById(R.id.readyfoto);
         mimgvis = (ImageView)this.findViewById(R.id.imagevisible);
         mimgbanner = (ImageView)this.findViewById(R.id.imgbanner);

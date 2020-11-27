@@ -14,9 +14,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class FocItem {
 
-
-    public FocItem(String orderNo, String date, String pressGuid, String pressName, String status, String statusName,
-                   String statusColorCode, String createdBy, String createdDateTime) {
+    public FocItem(String orderNo, String date, String pressGuid, String pressName, String status,
+                   String statusName, String statusColorCode, String createdBy,
+                   String notes, String createdDateTime) {
         this.orderNo = orderNo;
         this.date = date;
         this.pressGuid = pressGuid;
@@ -25,33 +25,9 @@ public class FocItem {
         this.statusName = statusName;
         this.statusColorCode = statusColorCode;
         this.createdBy = createdBy;
+        this.notes = notes;
         this.createdDateTime = createdDateTime;
     }
-
-    @Expose
-    @SerializedName("orderNo")
-    private String orderNo;
-    @Expose
-    @SerializedName("date")
-    private String date;
-    @Expose
-    @SerializedName("pressGuid")
-    private String pressGuid;
-    @Expose
-    @SerializedName("pressName")
-    private String pressName;
-    @Expose
-    @SerializedName("status")
-    private String status;
-    @Expose
-    @SerializedName("statusName")
-    private String statusName;
-    @Expose
-    @SerializedName("statusColorCode")
-    private String statusColorCode;
-    @Expose
-    @SerializedName("createdBy")
-    private String createdBy;
 
     public String getOrderNo() {
         return orderNo;
@@ -117,6 +93,14 @@ public class FocItem {
         this.createdBy = createdBy;
     }
 
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     public String getCreatedDateTime() {
         return createdDateTime;
     }
@@ -124,13 +108,40 @@ public class FocItem {
     public void setCreatedDateTime(String createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
+    public FocItem() {
+    }
 
+    @Expose
+    @SerializedName("orderNo")
+    private String orderNo;
+    @Expose
+    @SerializedName("date")
+    private String date;
+    @Expose
+    @SerializedName("pressGuid")
+    private String pressGuid;
+    @Expose
+    @SerializedName("pressName")
+    private String pressName;
+    @Expose
+    @SerializedName("status")
+    private String status;
+    @Expose
+    @SerializedName("statusName")
+    private String statusName;
+    @Expose
+    @SerializedName("statusColorCode")
+    private String statusColorCode;
+    @Expose
+    @SerializedName("createdBy")
+    private String createdBy;
+    @Expose
+    @SerializedName("notes")
+    private String notes;
     @Expose
     @SerializedName("createdDateTime")
     private String createdDateTime;
 
-    public FocItem() {
-    }
 
 }
 

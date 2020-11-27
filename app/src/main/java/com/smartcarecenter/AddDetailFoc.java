@@ -120,12 +120,13 @@ public class AddDetailFoc extends AppCompatActivity {
     public static JsonArray myCustomArray;
     Gson gson;
     EditText mnotes;
+    public static String notes1 = "";
     final int REQUEST_CAPTURE_IMAGE = 1;
     final int REQUEST_IMAGE_GALLERY = 2;
     byte[] datatyp;
-    File imagefile = null;
+    public static File imagefile = null;
     private static final int PERMISSION_CODE = 1000;
-    Uri photo_location;
+    public static Uri photo_location=null;
     int quality = 40;
     @SuppressLint("WrongConstant")
     @Override
@@ -154,6 +155,27 @@ public class AddDetailFoc extends AppCompatActivity {
         mimgbanner = (ImageView)this.findViewById(R.id.imgbanner);
         cekInternet();
         getSessionId();
+//        Toast.makeText(AddDetailFoc.this, notes1.toString(),Toast.LENGTH_LONG).show();
+        if (notes1.equals("")){
+
+        }else{
+            mnotes.setText(notes1);
+        }
+        if (imagefile!=null){
+            try {
+                String imgreq = String.valueOf(imagefile.getName());
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.fromFile(new File(String.valueOf(imagefile))));
+//                Toast.makeText(AddDetailFoc.this, imagefile.toString(),Toast.LENGTH_LONG).show();
+//                Toast.makeText(AddDetailFoc.this, photo_location.toString(),Toast.LENGTH_LONG).show();
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap((ContentResolver)getContentResolver(), (Uri)this.photo_location);
+                mimgbanner.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+//            Toast.makeText(AddDetailFoc.this, imagefile.toString(),Toast.LENGTH_LONG).show();
+        }
+
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(AddDetailFoc.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -245,15 +267,33 @@ public class AddDetailFoc extends AppCompatActivity {
         madd_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                notes1=mnotes.getText().toString();
                 lastimpresi = mlastimpresi.getText().toString();
-                Intent gotoaddfoc = new Intent(AddDetailFoc.this, Add_Foc_Item_List.class);
-                gotoaddfoc.putExtra("pressId",mpressId);
-                gotoaddfoc.putExtra("lastImpres",lastimpresi);
-                startActivity(gotoaddfoc);
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                finish();
+                if (imagefile!=null){
 
-                listpoact.addAll(reitem);
+                    Intent gotoaddfoc = new Intent(AddDetailFoc.this, Add_Foc_Item_List.class);
+                    gotoaddfoc.putExtra("pressId",mpressId);
+                    gotoaddfoc.putExtra("lastImpres",lastimpresi);
+                    gotoaddfoc.putExtra("foto",imagefile);
+                    gotoaddfoc.putExtra("uri",photo_location);
+                    gotoaddfoc.putExtra("notesa",notes1);
+//                    Toast.makeText(AddDetailFoc.this, imagefile.toString(),Toast.LENGTH_LONG).show();
+//                    Toast.makeText(AddDetailFoc.this, photo_location.toString(),Toast.LENGTH_LONG).show();
+                    startActivity(gotoaddfoc);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
+                    listpoact.addAll(reitem);
+                }else {
+                    Intent gotoaddfoc = new Intent(AddDetailFoc.this, Add_Foc_Item_List.class);
+                    gotoaddfoc.putExtra("pressId",mpressId);
+                    gotoaddfoc.putExtra("lastImpres",lastimpresi);
+                    gotoaddfoc.putExtra("notesa",notes1);
+                    startActivity(gotoaddfoc);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
+                    listpoact.addAll(reitem);
+                }
+
             }
         });
         msend.setOnClickListener(new View.OnClickListener() {
@@ -342,6 +382,8 @@ public class AddDetailFoc extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         lastimpresi="";
+        imagefile = null;
+        notes1 ="";
         Intent back = new Intent(AddDetailFoc.this,FreeofchargeActivity.class);
         back.putExtra("pos",valuefilter);
         startActivity(back);
@@ -500,9 +542,10 @@ public class AddDetailFoc extends AppCompatActivity {
         if (requestCode==REQUEST_IMAGE_GALLERY) {
 
             if (photo_location!=null){
-//                    Toast.makeText(AddRequest.this, photo_location.toString(),Toast.LENGTH_LONG).show();
+
                 if (data!=null){
                     photo_location = data.getData();
+//                    Toast.makeText(AddDetailFoc.this, photo_location.toString(),Toast.LENGTH_LONG).show();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photo_location);
                         Bitmap bitmap3 = ThumbnailUtils.extractThumbnail(bitmap, 220, 220);
@@ -601,7 +644,9 @@ public class AddDetailFoc extends AppCompatActivity {
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),imagefile);
         String imgreq = String.valueOf(imagefile.getName());
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        jsonPostService.uploadRating(MultipartBody.Part.createFormData((String)"",
+//        mnotes.setText(myCustomArray.toString()+mpressId);
+        //
+        jsonPostService.uploadfoc(MultipartBody.Part.createFormData((String)"",
                 imgreq,requestBody),
                 RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),
                 RequestBody.create((MediaType)MultipartBody.FORM,mpressId),
@@ -614,7 +659,7 @@ public class AddDetailFoc extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 String errornya = "";
                 JsonObject jsonObject=response.body();
-//                    Toast.makeText((Context)RatingStar.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText((Context)AddDetailFoc.this, jsonObject.toString(),Toast.LENGTH_SHORT).show();
                 String statusnya = jsonObject.get("status").getAsString();
                 if (jsonObject.get("errorMessage").toString().equals("null")) {
 
@@ -644,6 +689,7 @@ public class AddDetailFoc extends AppCompatActivity {
                 cekInternet();
             }
         });
+
     }
     private void showDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -661,7 +707,7 @@ public class AddDetailFoc extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,int id) {
                         // jika tombol diklik, maka akan menutup activity ini
 //                        sendData();
-//                        uploadData();
+                        uploadData();
                     }
                 })
                 .setNegativeButton(getString(R.string.title_no),new DialogInterface.OnClickListener() {

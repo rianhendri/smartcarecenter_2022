@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -50,6 +52,7 @@ import com.smartcarecenter.Freeofcharge.FocItem;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.messagecloud.check;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -86,7 +89,7 @@ public class AddDetailFocView extends AppCompatActivity {
     Boolean internet = false;
     boolean installed= true;
     ProgressDialog loading;
-    LinearLayout mback, mbgalert;
+    LinearLayout mback, mbgalert, mlayoutphotoimpressi;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,
             mnoitem,mlastimpresi,mstatus, mtilte,mnotes, mtotalapproved;
@@ -94,7 +97,7 @@ public class AddDetailFocView extends AppCompatActivity {
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item,mchat;
-    TextView msn, mtextalert;
+    TextView msn, mtextalert,mdescrip;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
     String sesionid_new = "";
@@ -110,6 +113,7 @@ public class AddDetailFocView extends AppCompatActivity {
     String noOrder="";
     String pressid= "";
     Gson gson;
+    ImageView mimgbanner,mimgpopup;
     public static String username = "";
     String guid = "";
     @SuppressLint("WrongConstant")
@@ -138,6 +142,9 @@ public class AddDetailFocView extends AppCompatActivity {
         mtotalapproved = findViewById(R.id.totalaproved);
         mbgalert = findViewById(R.id.backgroundalert);
         mtextalert = findViewById(R.id.textalert);
+        mimgbanner = findViewById(R.id.imgbanner);
+        mlayoutphotoimpressi = findViewById(R.id.layoutphotoimpressi);
+        mdescrip = findViewById(R.id.descrip);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
@@ -275,6 +282,27 @@ public class AddDetailFocView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    mdescrip.setText(data.get("custNotes").getAsString());
+                    if (data.get("photoURL").toString().equals("null")){
+                        mlayoutphotoimpressi.setVisibility(GONE);
+                    }else {
+                        mlayoutphotoimpressi.setVisibility(VISIBLE);
+                        String photourl = data.get("photoURL").getAsString();
+                        Picasso.with(AddDetailFocView.this).load(photourl+"?w=100").into(mimgbanner);
+                        mimgbanner.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Dialog dialog = new Dialog(AddDetailFocView.this, R.style.TransparentDialog);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.popupfoto);
+                                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                                mimgpopup = dialog.findViewById(R.id.imagepopup);
+                                Picasso.with(AddDetailFocView.this).load(photourl).into(mimgpopup);
+                                dialog.show();
+                            }
+                        });
+                    }
+
                     pressid = data.get("pressGuid").getAsString();
                     String pressname = data.get("pressTypeName").getAsString();
                     //setNotes

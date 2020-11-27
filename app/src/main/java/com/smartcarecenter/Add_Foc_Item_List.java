@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -39,6 +40,7 @@ import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.supportservice.AddFormAdapter;
 import com.smartcarecenter.supportservice.AddFromItem;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +49,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.AddDetailFoc.imagefile;
 import static com.smartcarecenter.AddDetailFoc.lastimpresi;
 import static com.smartcarecenter.AddDetailFoc.mpressId;
+
+import static com.smartcarecenter.AddDetailFoc.notes1;
+import static com.smartcarecenter.AddDetailFoc.photo_location;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
@@ -92,7 +98,9 @@ public class Add_Foc_Item_List extends AppCompatActivity {
         if (bundle2 != null) {
             mpressId = bundle2.getString("pressId");
             lastimpresi = bundle2.getString("lastImpres");
-
+            imagefile = (File) bundle2.get("foto");
+            photo_location = (Uri) bundle2.get("uri");
+            notes1 = bundle2.getString("notesa");
         }
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(Add_Foc_Item_List.this, LinearLayout.VERTICAL,false);
