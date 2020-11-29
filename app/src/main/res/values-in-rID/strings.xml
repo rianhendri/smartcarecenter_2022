@@ -136,7 +136,7 @@
     <string name="title_totalapproved">Jumlah Approved:</string>
     <string name="title_reasoncancel">Alasan Pembatalan:</string>
     <string name="title_reasonrequired">mohon masukkan alasan pembatalan</string>
-    <string name="title_stockhand">"Stock Dimiliki: "</string>
+    <string name="title_stockhand">"Stock On-hand: "</string>
     <string name="title_unduhan">Unduh Flile</string>
     <string name="title_stockhandrequired">Stock On Hand Required</string>
     <string name="title_readAll">Tandai semua sudah terbaca</string>
@@ -146,4 +146,8 @@
     <string name="title_uploadfotoimpresi">Upload Foto Impresi Terakhir</string>
     <string name="title_choosephoto"><u>Pilih Foto</u></string>
     <string name="title_photoimpression">Foto Impresi Terakhir</string>
+    <string name="title_choosefile">Pilih File (.pdf)</string>
+    <string name="title_attachfilepdf">Lampiran PO</string>
+    <string name="title_bigfile">" file terlalu besar"</string>
+    <string name="title_reqpdf">" Lampiran PO diperlukan"</string>
 </resources>

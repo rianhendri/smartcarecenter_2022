@@ -363,7 +363,48 @@
                     android:layout_margin="4dp"
                     android:background="@color/softgrey" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/seguisb"
+                    android:paddingLeft="4dp"
+                    android:text="@string/title_note"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/descrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bgwhite_cornerblack"
+
+                    android:fontFamily="@font/segoeui"
+                    android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:lines="6"
+                    android:overScrollMode="always"
+                    android:padding="8dp"
+                    android:scrollHorizontally="false"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="4dp"
+                    android:background="@color/softgrey" />
+            </LinearLayout>
             <LinearLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"

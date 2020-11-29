@@ -83,5 +83,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'org.jsoup:jsoup:1.13.1'
 
+    //filepicke
+    implementation 'com.nbsp:materialfilepicker:1.9.1'
+
 
 }

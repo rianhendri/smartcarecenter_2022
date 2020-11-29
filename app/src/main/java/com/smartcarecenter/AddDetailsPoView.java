@@ -97,7 +97,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item,mchat;
-    TextView msn,mtextalert;
+    TextView msn,mtextalert, mdeskrip;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
     String sesionid_new = "";
@@ -147,6 +147,7 @@ public class AddDetailsPoView extends AppCompatActivity {
         mlayinvpo = findViewById(R.id.laypoinv);
         mlayinv = findViewById(R.id.downloadinvoice);
         mlaypo = findViewById(R.id.downloadpo);
+        mdeskrip = findViewById(R.id.descrip);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
@@ -378,6 +379,7 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    mdeskrip.setText(data.get("custNotes").getAsString());
                     //laydownloadpoinv
                     if (data.get("poDownloadURL").toString().equals("null")){
                         mlayinvpo.setVisibility(GONE);

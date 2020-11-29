@@ -153,6 +153,16 @@ public interface IRetrofit {
                                          @Part("ver") RequestBody ver);
 
     @Multipart
+    @POST("api/Chargeable/AddWithInformation")
+    public Call<JsonObject> uploadcharge(@Part MultipartBody.Part multipart,
+                                      @Part("sessionId") RequestBody sessionId,
+                                      @Part("pressGuid") RequestBody pressGuid,
+                                      @Part("poNo") RequestBody currentImpression,
+                                      @Part("custNotes") RequestBody custNotes,
+                                      @Part("items") RequestBody items,
+                                      @Part("ver") RequestBody ver);
+
+    @Multipart
     @POST("api/FormRequest/ReopenCaseWithInformation")
     public Call<JsonObject> reopen(@Part MultipartBody.Part multipart,
                                          @Part("sessionId") RequestBody sessionId,

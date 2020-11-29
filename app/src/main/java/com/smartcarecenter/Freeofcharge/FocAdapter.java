@@ -97,12 +97,13 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
             parseException.printStackTrace();
         }
         myviewholder.mdate.setText(newdate);
-        if (focItem.get(i).getNotes().equals("")){
-            myviewholder.mnoteslay.setVisibility(View.GONE);
-        }else {
-            myviewholder.mnoteslay.setVisibility(View.VISIBLE);
-            myviewholder.mnotes.setText(focItem.get(i).getNotes());
-        }
+        // layout list notes foc
+//        if (focItem.get(i).getNotes().equals("")){
+//            myviewholder.mnoteslay.setVisibility(View.GONE);
+//        }else {
+//            myviewholder.mnoteslay.setVisibility(View.VISIBLE);
+//            myviewholder.mnotes.setText(focItem.get(i).getNotes());
+//        }
 
         myviewholder.mstatus.setText(focItem.get(i).getStatusName());
         myviewholder.mstatus.setTextColor(Color.parseColor("#"+ focItem.get(i).getStatusColorCode()));

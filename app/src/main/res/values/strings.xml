@@ -145,4 +145,8 @@
     <string name="title_uploadfotoimpresi">Last Impression Photo Upload</string>
     <string name="title_choosephoto"><u>Choose Photo</u></string>
     <string name="title_photoimpression">Last Impression Photo</string>
+    <string name="title_choosefile">Choose File (.pdf)</string>
+    <string name="title_attachfilepdf">PO Attachment</string>
+    <string name="title_bigfile">the file size is too big</string>
+    <string name="title_reqpdf">PO attachment is require</string>
 </resources>

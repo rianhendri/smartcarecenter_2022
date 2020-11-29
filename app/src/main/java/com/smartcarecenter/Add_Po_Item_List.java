@@ -34,6 +34,7 @@ import com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_item;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.AddDetailsPo.imagefile;
 import static com.smartcarecenter.AddDetailsPo.mpressId;
+import static com.smartcarecenter.AddDetailsPo.notes1;
 import static com.smartcarecenter.AddDetailsPo.pono;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
@@ -87,6 +90,8 @@ public class Add_Po_Item_List extends AppCompatActivity {
         if (bundle2 != null) {
             mpressId = bundle2.getString("pressId");
             pono = bundle2.getString("nopo");
+            notes1 = bundle2.getString("notesa");
+            imagefile = (File) bundle2.get("file");
 
         }
         //setlayout recyler

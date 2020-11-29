@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -163,6 +165,32 @@
 
                                 <TextView
                                     android:id="@+id/previmpres"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/segoeuib"
+                                    android:text="-"
+                                    android:layout_marginLeft="4dp"
+                                    android:textColor="@color/black"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="Life Span"
+                                    android:textColor="@color/black"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/lifespan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/segoeuib"
