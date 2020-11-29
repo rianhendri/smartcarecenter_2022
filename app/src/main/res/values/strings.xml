@@ -142,7 +142,7 @@
     <string name="title_fotooptional">Upload Photo (Optional):</string>
     <string name="title_deskription">"Description: "</string>
     <string name="title_note">Notes:</string>
-    <string name="title_uploadfotoimpresi">Last Impression Photo Upload</string>
+    <string name="title_uploadfotoimpresi">Present Impression Photo Upload</string>
     <string name="title_choosephoto"><u>Choose Photo</u></string>
     <string name="title_photoimpression">Last Impression Photo</string>
     <string name="title_choosefile">Choose File (.pdf)</string>

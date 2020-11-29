@@ -419,6 +419,7 @@ public class AddDetailsPoView extends AppCompatActivity {
                     //setnotes
                     String note = data.get("notes").getAsString();
                     mnotes.setText(note);
+                    mnotes.setTextColor(Color.parseColor("#"+data.get("notesTextColor").getAsString()));
 
                         msn.setText(pressname);
                     tax = data.get("totalTax").getAsDouble();
