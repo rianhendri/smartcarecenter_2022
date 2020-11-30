@@ -114,7 +114,7 @@ public class AddDetailsPo extends AppCompatActivity {
     public static JsonArray myCustomArray;
     public static Gson gson;
     String notes = "";
-    private static final int PICK_PDF_REQUEST = 1;
+    private static final int PICK_PDF_REQUEST = 1000;
     Uri filePath = null;
     public static File imagefile = null;
     boolean muploadPOPdf = true;
@@ -751,6 +751,7 @@ public class AddDetailsPo extends AppCompatActivity {
                 .withRequestCode(PICK_PDF_REQUEST)
                 .withHiddenFiles(true)
                 .withFilter(Pattern.compile(".*\\.pdf$"))
+                .withFilterDirectories(false)
                 .withTitle("Select PDF file")
                 .start();
     }
