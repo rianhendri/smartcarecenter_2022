@@ -2,16 +2,21 @@ package com.smartcarecenter;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
@@ -746,14 +751,32 @@ public class AddDetailsPo extends AppCompatActivity {
 
     }
     private void launchPicker() {
-        new MaterialFilePicker()
-                .withActivity(this)
-                .withRequestCode(PICK_PDF_REQUEST)
-                .withHiddenFiles(true)
-                .withFilter(Pattern.compile(".*\\.pdf$"))
-                .withFilterDirectories(false)
-                .withTitle("Select PDF file")
-                .start();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this, Manifest.permission.CAMERA)
+                    && ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                //Show permission dialog
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_PDF_REQUEST);
+
+            }
+
+        }else {
+            new MaterialFilePicker()
+                    .withActivity(this)
+                    .withRequestCode(PICK_PDF_REQUEST)
+                    .withHiddenFiles(true)
+                    .withFilter(Pattern.compile(".*\\.pdf$"))
+                    .withFilterDirectories(false)
+                    .withTitle("Select PDF file")
+                    .start();
+        }
+
     }
     //handling the image chooser activity result
 

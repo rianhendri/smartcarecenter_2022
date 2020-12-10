@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +49,8 @@ public class LoginActivity extends AppCompatActivity {
     String  errornya = "";
     String language = "";
     Boolean internet = true;
-
+    String ModelHp= "";
+    String osHp = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         mforgotpassword = findViewById(R.id.forgotpassword);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        getVersionHp();
         cekInternet();
         //generate token notifikasi
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -89,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         mlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Toast.makeText(LoginActivity.this, osHp+"-"+ModelHp, Toast.LENGTH_SHORT).show();
             if (internet){
                 loginApi();
             }else {
@@ -106,6 +109,8 @@ public class LoginActivity extends AppCompatActivity {
         jsonObject.addProperty("password",mpassword.getText().toString());
         jsonObject.addProperty("firebaseToken",token);
         jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("model",ModelHp);
+        jsonObject.addProperty("osversion",osHp);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> call = jsonPostService.postRawJSONlogin(jsonObject);
         call.enqueue(new Callback<JsonObject>() {
@@ -187,5 +192,10 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("My_Lang", lang);
         editor.apply();
+    }
+    public void getVersionHp(){
+        ModelHp = Build.MANUFACTURER + ""+ Build.MODEL;
+        osHp=  Build.VERSION.RELEASE
+            + " " + Build.VERSION_CODES.class.getFields()[android.os.Build.VERSION.SDK_INT].getName();
     }
 }

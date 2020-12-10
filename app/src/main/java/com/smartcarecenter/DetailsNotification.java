@@ -62,8 +62,8 @@ public class DetailsNotification extends AppCompatActivity {
             id = bundle2.getString("id");
             guid = bundle2.getString("guid");
             username = bundle2.getString("username");
-            Title = bundle2.getString("Title");
-            Content = bundle2.getString("Content");
+            Title = bundle2.getString("title");
+            Content = bundle2.getString("body");
 //            Toast.makeText(DetailsNotification.this, guid,Toast.LENGTH_LONG).show();
         }
         getSessionId();
@@ -228,6 +228,7 @@ public class DetailsNotification extends AppCompatActivity {
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 sesionid();
                 if (statusnya.equals("OK")){
+                    loadNotif();
                     JsonObject data = homedata.getAsJsonObject("data");
 //                    String message = data.get("message").getAsString();
 //                    Toast.makeText(DetailsNotification.this, message,Toast.LENGTH_LONG).show();

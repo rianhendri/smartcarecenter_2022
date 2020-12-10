@@ -121,8 +121,8 @@ extends RecyclerView.Adapter<NotificationAdapter.Myviewholder> {
                 intent.putExtra("id", (myItem.get(i)).getGuid());
                 intent.putExtra("username", (myItem.get(i)).getTitle());
                 intent.putExtra("guid", (myItem.get(i)).getGuid());
-                intent.putExtra("Title", (myItem.get(i)).getTitle());
-                intent.putExtra("Content", (myItem.get(i)).getContent());
+                intent.putExtra("title", (myItem.get(i)).getTitle());
+                intent.putExtra("body", (myItem.get(i)).getContent());
                 context.startActivity(intent);
                 ((Activity)context).finish();
                 ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
