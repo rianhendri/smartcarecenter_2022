@@ -139,7 +139,9 @@ public interface IRetrofit {
                                         @Part("formRequestCd") RequestBody formRequestCd,
                                         @Part("rating") RequestBody rating,
                                         @Part("comments") RequestBody comments,
-                                         @Part("isApprove") RequestBody isApprove,
+                                        @Part("isApprove") RequestBody isApprove,
+                                        @Part("monitorCase ") RequestBody monitorCase ,
+                                        @Part("monitorDays ") RequestBody monitorDays ,
                                         @Part("ver") RequestBody ver);
 
     @Multipart

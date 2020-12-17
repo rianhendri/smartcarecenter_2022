@@ -150,4 +150,9 @@
     <string name="title_attachfilepdf">Lampiran PO</string>
     <string name="title_bigfile">" file terlalu besar"</string>
     <string name="title_reqpdf">" Lampiran PO diperlukan"</string>
+    <string name="title_undermonitoring">Apakah ingin mengatur case ini menjadi Under Monitoring?</string>
+    <string name="title_followupwithin">Di follow up dalam:</string>
+    <string name="title_3hari">3 Hari</string>
+    <string name="title_7hari">7 Hari</string>
+    <string name="title_14hari">14 Hari</string>
 </resources>

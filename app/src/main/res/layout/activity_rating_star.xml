@@ -106,7 +106,105 @@
                             android:layout_margin="4dp"
                             android:background="@color/softgrey" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/layoutmonitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/seguisb"
+                            android:paddingLeft="4dp"
+                            android:text="@string/title_undermonitoring"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioGroup
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp">
+                            <RadioButton
+                                android:textSize="12sp"
+                                android:id="@+id/yesin"
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="7dp"
+                                android:checked="false"
+                                android:text="@string/title_yes"
+                                android:fontFamily="@font/seguisb" />
+                            <RadioButton
+                                android:textSize="12sp"
+                                android:id="@+id/noin"
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="7dp"
+                                android:checked="true"
+                                android:text="@string/title_no"
+                                android:fontFamily="@font/seguisb" />
+                        </RadioGroup>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="4dp"
+                            android:background="@color/softgrey" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/waktu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/seguisb"
+                            android:paddingLeft="4dp"
+                            android:text="@string/title_followupwithin"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioGroup
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp">
+                            <RadioButton
+                                android:textSize="12sp"
+                                android:id="@+id/tiga"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="7dp"
+                                android:checked="true"
+                                android:text="@string/title_3hari"
+                                android:fontFamily="@font/seguisb" />
+                            <RadioButton
+                                android:textSize="12sp"
+                                android:id="@+id/tujuh"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="7dp"
+                                android:checked="false"
+                                android:text="@string/title_7hari"
+                                android:fontFamily="@font/seguisb" />
+                            <RadioButton
+                                android:textSize="12sp"
+                                android:id="@+id/patbelas"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="7dp"
+                                android:checked="false"
+                                android:text="@string/title_14hari"
+                                android:fontFamily="@font/seguisb" />
+                        </RadioGroup>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="4dp"
+                            android:background="@color/softgrey" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"

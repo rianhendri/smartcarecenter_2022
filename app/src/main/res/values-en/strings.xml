@@ -150,4 +150,9 @@
     <string name="title_attachfilepdf">PO Attachment</string>
     <string name="title_bigfile">the file size is too big</string>
     <string name="title_reqpdf">PO attachment is require</string>
+    <string name="title_undermonitoring">Do you want to set this case to be Under Monitoring?</string>
+    <string name="title_followupwithin">Follow up within:</string>
+    <string name="title_3hari">3 Days</string>
+    <string name="title_7hari">7 Days</string>
+    <string name="title_14hari">14 Days</string>
 </resources>

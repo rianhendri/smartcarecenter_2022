@@ -143,7 +143,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
         myviewholder.munit.setText(addFoclistreq.get(i).getUnitName());
         myviewholder.mprevimpress.setText(String.valueOf(addFoclistreq.get(i).getLastImpression()));
 
-        if (addFoclistreq.get(i).getStockOnHand().equals("0")){
+        if (addFoclistreq.get(i).getStockOnHand().equals("?")){
             myviewholder.mstockhand.setText("");
         }else {
             myviewholder.mstockhand.setText(String.valueOf(addFoclistreq.get(i).getStockOnHand()));
@@ -349,7 +349,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                 }
                 if (cekdel){
                     if (myviewholder.mstockhand.length()==0){
-                    addFoclistreq.get(i).setStockOnHand("0");
+                    addFoclistreq.get(i).setStockOnHand("?");
                 }else{
                     addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
                 }
@@ -362,7 +362,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                         myviewholder.mmatrix.setText("-");
                     }
                     if (myviewholder.mstockhand.length()==0){
-                        addFoclistreq.get(i).setStockOnHand("0");
+                        addFoclistreq.get(i).setStockOnHand("?");
                         if ((int)Math.ceil(matrixcount)<=0){
                             myviewholder.mmatrix.setText("0");
                             addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());

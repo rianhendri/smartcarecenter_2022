@@ -569,7 +569,8 @@ public class DetailsFormActivity extends AppCompatActivity {
                     if (mallowtoconfirm.equals("true")) {
                         mconfirm.setVisibility(View.VISIBLE);
                     } else {
-                        mconfirm.setVisibility(View.GONE);
+                        //RATINGVISIBLE
+                        mconfirm.setVisibility(View.VISIBLE);
                     }
                     if (mallowToCancel.equals("true")) {
                        mcancel.setVisibility(View.VISIBLE);

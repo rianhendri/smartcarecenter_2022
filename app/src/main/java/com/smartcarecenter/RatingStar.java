@@ -32,6 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -84,7 +85,7 @@ public class RatingStar extends AppCompatActivity {
     RatingBar mratingstar;
     TextView mratingvalue;
     LinearLayout msolved;
-    LinearLayout munsolved,mcapture;
+    LinearLayout munsolved,mcapture, mlayoutmonitor, mlayoutwaktu;
     ConstraintLayout mlayoutimg;
     ImageView mimage;
     String noreq = "";
@@ -93,11 +94,15 @@ public class RatingStar extends AppCompatActivity {
     String sesionid_new = "";
     Spinner msn;
     List<Boolean> listvalue = new ArrayList<>();
-    boolean value;
+    boolean value = true;
     RequestBody requestBody = null;
     String imgreq ="";
     String imgbody ="";
     ConstraintLayout muploadlay;
+    Integer solve = null;
+    RadioButton myes,mno, mtiga, mpatbelas, mtujuh;
+    boolean cekmonitor = false;
+    Integer days = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +117,13 @@ public class RatingStar extends AppCompatActivity {
         mimage = findViewById(R.id.imgbanner);
         mcapture = (LinearLayout)this.findViewById(R.id.upladfoto);
         muploadlay = findViewById(R.id.uploadlay);
+        mlayoutmonitor = findViewById(R.id.layoutmonitor);
+        mlayoutwaktu = findViewById(R.id.waktu);
+        mtiga = findViewById(R.id.tiga);
+        mtujuh = findViewById(R.id.tujuh);
+        mpatbelas = findViewById(R.id.patbelas);
+        myes = findViewById(R.id.yesin);
+        mno = findViewById(R.id.noin);
 //        mlayoutimg= findViewById(R.id.layoutimg);
         String[] arraySpinner = new String[]{
                 getString(R.string.title_yes), getString(R.string.title_no)
@@ -136,11 +148,65 @@ public class RatingStar extends AppCompatActivity {
         }else {
 
         }
+        myes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cekmonitor = true;
+                days = 3;
+                if (cekmonitor){
+                    mlayoutwaktu.setVisibility(View.VISIBLE);
+                }else {
+                    mlayoutwaktu.setVisibility(GONE);
+                }
+            }
+        });
+        mno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cekmonitor = false;
+                days = null;
+                if (cekmonitor){
+                    mlayoutwaktu.setVisibility(View.VISIBLE);
+                }else {
+                    mlayoutwaktu.setVisibility(GONE);
+                }
+            }
+        });
+        mtiga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                days = 3;
+            }
+        });
+        mtujuh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                days = 7;
+            }
+        });
+        mpatbelas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                days = 14;
+            }
+        });
         msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 value = listvalue.get(position);
 //                Toast.makeText(RatingStar.this, String.valueOf(value), Toast.LENGTH_SHORT).show();
+                if (value){
+                    mlayoutmonitor.setVisibility(View.VISIBLE);
+                    if (cekmonitor){
+                        mlayoutwaktu.setVisibility(View.VISIBLE);
+                    }else {
+                        mlayoutwaktu.setVisibility(GONE);
+                    }
+                }else {
+                    mlayoutmonitor.setVisibility(GONE);
+                        mlayoutwaktu.setVisibility(GONE);
+                    days = null;
+                }
 
             }
 
@@ -449,9 +515,13 @@ public class RatingStar extends AppCompatActivity {
             IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
             jsonPostService.uploadRating(MultipartBody.Part.createFormData((String)"",
                     ""),
-                    RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),RequestBody.create((MediaType)MultipartBody.FORM,noreq),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)), RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
+                    RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),
+                    RequestBody.create((MediaType)MultipartBody.FORM,noreq),
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(cekmonitor)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days)),
                     RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -493,9 +563,13 @@ public class RatingStar extends AppCompatActivity {
             IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
             jsonPostService.uploadRating(MultipartBody.Part.createFormData((String)"",
                     imgreq,requestBody),
-                    RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),RequestBody.create((MediaType)MultipartBody.FORM,noreq),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)), RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
+                    RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),
+                    RequestBody.create((MediaType)MultipartBody.FORM,noreq),
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(cekmonitor)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days)),
                     RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
