@@ -115,6 +115,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     Gson gson;
     String guid = "";
     String username = "";
+    public static String Nowpo = "0";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,14 +207,10 @@ public class AddDetailsPoView extends AppCompatActivity {
             public void onClick(View view) {
                 appInstalledOrNot("com.whatsapp");
                 if (installed) {
+                    String message = "Hi Support, "+getString(R.string.title_tanyafoc)+noOrder;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("http://api.whatsapp.com/send?phone=+628111930199&text=Hi Support,  "+getString(R.string.title_tanyafoc)+" ");
-//                    stringBuilder.append(getString(R.string.title_tanyafoc));
-                    stringBuilder.append(noOrder);
-                    String message = stringBuilder.toString();
-                    intent.setData(android.net.Uri.parse(message));
-//                    Toast.makeText(AddDetailsPoView.this,message, Toast.LENGTH_SHORT).show();
+                    intent.setData(android.net.Uri.parse(
+                            String.format("https://api.whatsapp.com/send?phone=%s&text=%s", Nowpo, message)));
                     startActivity(intent);
 
                 }else {
@@ -443,7 +440,7 @@ public class AddDetailsPoView extends AppCompatActivity {
                     String cancelshow = data.get("allowToCancel").toString();
                     if (cancelshow.equals("true")){
                         msend.setVisibility(View.VISIBLE);
-                        mchat.setVisibility(View.GONE);
+                        mchat.setVisibility(View.VISIBLE);
 
                     }else {
                         msend.setVisibility(View.GONE);

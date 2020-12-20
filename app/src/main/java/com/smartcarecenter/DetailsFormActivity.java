@@ -120,6 +120,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     private TextView mtimerconfirm;
     private CountDownTimer mCountDownTimer;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    public static String Nowaform = "0";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,14 +203,10 @@ public class DetailsFormActivity extends AppCompatActivity {
             public void onClick(View view) {
             appInstalledOrNot("com.whatsapp");
                 if (installed) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("http://api.whatsapp.com/send?phone=+628111930199&text=Hi Support,  ");
-                    stringBuilder.append(getString(R.string.title_tanyacs));
-//                    stringBuilder.append(" #");
-                    stringBuilder.append(noreq);
-                    String message =stringBuilder.toString();
-                    intent.setData(android.net.Uri.parse(message));
+                    String message = "Hi Support, "+getString(R.string.title_tanyacs)+noreq;
+                     Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(android.net.Uri.parse(
+                            String.format("https://api.whatsapp.com/send?phone=%s&text=%s", Nowaform, message)));
                     startActivity(intent);
                 }else {
                     Toast.makeText(DetailsFormActivity.this,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
@@ -570,7 +567,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                         mconfirm.setVisibility(View.VISIBLE);
                     } else {
                         //RATINGVISIBLE
-                        mconfirm.setVisibility(View.VISIBLE);
+                        mconfirm.setVisibility(View.GONE);
                     }
                     if (mallowToCancel.equals("true")) {
                        mcancel.setVisibility(View.VISIBLE);

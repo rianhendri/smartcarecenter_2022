@@ -308,7 +308,7 @@ public class AddDetailFoc extends AppCompatActivity {
                         for (int ad = 0; ad < addFoclistreq.size(); ++ad) {
                             if (addFoclistreq.get(ad).getStockOnHand().equals("?")){
                                 stockhandcek = false;
-                                Toast.makeText(AddDetailFoc.this, getString(R.string.title_stockhandrequired),Toast.LENGTH_SHORT).show();
+
                             }else {
 
                             }
@@ -321,6 +321,7 @@ public class AddDetailFoc extends AppCompatActivity {
                                 }
 
                         }else {
+                            Toast.makeText(AddDetailFoc.this, getString(R.string.title_stockhandrequired),Toast.LENGTH_SHORT).show();
                             stockhandcek = true;
                         }
                     }

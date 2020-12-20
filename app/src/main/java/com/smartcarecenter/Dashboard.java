@@ -29,14 +29,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.menuhome.ChatAdapter;
+import com.smartcarecenter.menuhome.ChatItem;
 import com.smartcarecenter.menuhome.MenuAdapter;
 import com.smartcarecenter.menuhome.MenuItem;
 import com.smartcarecenter.messagecloud.check;
+import com.smartcarecenter.supportservice.AddFormAdapter;
+import com.smartcarecenter.supportservice.AddFromItem;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -46,6 +54,11 @@ import retrofit2.Response;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 import static com.smartcarecenter.AddRequest.requestby;
+import static com.smartcarecenter.AddDetailFocView.Nowfoc;
+import static com.smartcarecenter.AddDetailsPoView.Nowpo;
+import static com.smartcarecenter.DetailsFormActivity.Nowaform;
+import static com.smartcarecenter.menuhome.MenuAdapter.mchatdialog;
+
 public class Dashboard extends AppCompatActivity {
     public static boolean installed = true;
     public static String mshowFormRequest = "";
@@ -60,6 +73,9 @@ public class Dashboard extends AppCompatActivity {
     public static String showaddform = "";
     public static String showaddfoc = "";
     public static String showaddpo = "";
+    public static ArrayList<ChatItem> list2;
+    JsonArray listformreq;
+    public static ChatAdapter addFormAdapterAdapter;
     int tax = 0;
     String taxename = "";
     String MhaveToUpdate = "";
@@ -221,6 +237,19 @@ public class Dashboard extends AppCompatActivity {
                     mtermandcondition.setVisibility(View.VISIBLE);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    // Chat List
+                    listformreq = data.getAsJsonArray("liveChatHome");
+                    Nowfoc = data.get("liveChatFOC").getAsString();
+                    Nowpo = data.get("liveChatChargeable").getAsString();
+                    Nowaform = data.get("liveChatServiceSupport").getAsString();
+                    list2 = new ArrayList<ChatItem>();
+                    Gson gson = new Gson();
+                    Type listType = new TypeToken<ArrayList<ChatItem>>() {
+                    }.getType();
+                    list2 = gson.fromJson(listformreq.toString(), listType);
+//                    Toast.makeText(Dashboard.this, list2.toString(), Toast.LENGTH_SHORT).show();
+
+
                     //alertnotes
                     notes = data.get("showHomeNotes").getAsBoolean();
                     notifications_new = String.valueOf(data.get("newNotification").getAsInt());

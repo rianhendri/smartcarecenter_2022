@@ -184,6 +184,7 @@ public class NewsActivity extends AppCompatActivity {
                     ArrayList<NewsItem> list;
                     list=new ArrayList<>();
                     list = gson.fromJson(listnews.toString(), listType);
+
                     list2.addAll(list);
                     newsAdapter = new NewsAdapter(NewsActivity.this, list2);
                     layoutnews.setAdapter(newsAdapter);
@@ -246,6 +247,7 @@ public class NewsActivity extends AppCompatActivity {
                     Type listType = new TypeToken<ArrayList<NewsItem>>() {
                     }.getType();
                     list2 = gson.fromJson(listnews.toString(), listType);
+//                    Toast.makeText(NewsActivity.this, list2.toString(), Toast.LENGTH_SHORT).show();
                     newsAdapter = new NewsAdapter(NewsActivity.this, list2);
                     layoutnews.setAdapter(newsAdapter);
                     layoutnews.setVisibility(View.VISIBLE);

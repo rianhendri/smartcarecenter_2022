@@ -116,6 +116,7 @@ public class AddDetailFocView extends AppCompatActivity {
     ImageView mimgbanner,mimgpopup;
     public static String username = "";
     String guid = "";
+    public static String Nowfoc = "0";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,14 +199,10 @@ public class AddDetailFocView extends AppCompatActivity {
             public void onClick(View view) {
                 appInstalledOrNot("com.whatsapp");
                 if (installed) {
+                    String message = "Hi Support, "+getString(R.string.title_tanyafoc)+noOrder;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("http://api.whatsapp.com/send?phone=+628111930199&text=Hi Support,  ");
-                    stringBuilder.append(getString(R.string.title_tanyafoc));
-//                    stringBuilder.append(" #");
-                    stringBuilder.append(noOrder);
-                    String message =stringBuilder.toString();
-                    intent.setData(android.net.Uri.parse(message));
+                    intent.setData(android.net.Uri.parse(
+                            String.format("https://api.whatsapp.com/send?phone=%s&text=%s", Nowfoc, message)));
                     startActivity(intent);
                 }else {
                     Toast.makeText(AddDetailFocView.this,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
@@ -348,7 +345,7 @@ public class AddDetailFocView extends AppCompatActivity {
                     String cancelshow = data.get("allowToCancel").toString();
                     if (cancelshow.equals("true")){
                         msend.setVisibility(View.VISIBLE);
-                        mchat.setVisibility(View.GONE);
+                        mchat.setVisibility(View.VISIBLE);
 
                     }else {
                         msend.setVisibility(View.GONE);

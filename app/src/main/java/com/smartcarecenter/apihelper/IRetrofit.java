@@ -140,9 +140,9 @@ public interface IRetrofit {
                                         @Part("rating") RequestBody rating,
                                         @Part("comments") RequestBody comments,
                                         @Part("isApprove") RequestBody isApprove,
-                                        @Part("monitorCase ") RequestBody monitorCase ,
-                                        @Part("monitorDays ") RequestBody monitorDays ,
-                                        @Part("ver") RequestBody ver);
+                                        @Part("ver") RequestBody ver,
+                                        @Part("monitorCase") RequestBody monitorCase ,
+                                        @Part("monitorDays") RequestBody monitorDays);
 
     @Multipart
     @POST("api/FOCOrder/AddWithInformation")

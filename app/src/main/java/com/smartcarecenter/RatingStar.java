@@ -513,16 +513,17 @@ public class RatingStar extends AppCompatActivity {
         loading = ProgressDialog.show(RatingStar.this, "", getString(R.string.title_loading), true);
         if (imagefile==null){
             IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-            jsonPostService.uploadRating(MultipartBody.Part.createFormData((String)"",
+            jsonPostService.uploadRating(
+                    MultipartBody.Part.createFormData((String)"",
                     ""),
                     RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),
                     RequestBody.create((MediaType)MultipartBody.FORM,noreq),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)),
                     RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,ver),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(cekmonitor)),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days)),
-                    RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days))).enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     String errornya = "";
@@ -568,9 +569,10 @@ public class RatingStar extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)),
                     RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,ver),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(cekmonitor)),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days)),
-                    RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days))
+            ).enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     String errornya = "";

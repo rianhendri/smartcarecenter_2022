@@ -42,7 +42,7 @@
     <string name="title_contactCS">Chat With Support</string>
     <string name="title_comment">Comment:</string>
     <string name="title_require_rate">Rating is require</string>
-    <string name="title_tanyacs">I want to ask about the Request Form:</string>
+    <string name="title_tanyacs">" I want to ask about the Service Support:"</string>
     <string name="title_uploadphoto">Upload Photo</string>
     <string name="title_newrequest">New Request</string>
     <string name="title_bracnh">Branch</string>
@@ -148,7 +148,7 @@
     <string name="title_choosefile">Choose File (.pdf)</string>
     <string name="title_attachfilepdf">PO Attachment</string>
     <string name="title_bigfile">the file size is too big</string>
-    <string name="title_reqpdf">PO attachment is require</string>
+    <string name="title_reqpdf">PO attachment is required</string>
     <string name="title_undermonitoring">Do you want to set this case to be Under Monitoring?</string>
     <string name="title_followupwithin">Follow up within:</string>
     <string name="title_3hari">3 Days</string>

@@ -23,10 +23,15 @@
  */
 package com.smartcarecenter.menuhome;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +43,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartcarecenter.Dashboard;
@@ -54,6 +61,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import java.util.ArrayList;
 
+import static com.smartcarecenter.Dashboard.addFormAdapterAdapter;
 import static com.smartcarecenter.Dashboard.installed;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
@@ -61,13 +69,14 @@ import static com.smartcarecenter.Dashboard.news_new;
 import static com.smartcarecenter.Dashboard.showaddfoc;
 import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
+import static com.smartcarecenter.Dashboard.list2;
 
 public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder> {
-
+    private LinearLayoutManager linearLayoutManager;
     Context context;
     ArrayList<MenuItem> myItem;
     public static int positem = 0;
-
+    public static RecyclerView mchatdialog;
     public MenuAdapter(Context c, ArrayList<MenuItem> p){
         context = c;
         myItem = p;
@@ -96,6 +105,7 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
         Picasso.with(context).load(myItem.get(i).getImg()).into(myviewholder.mimg_menu);
         myviewholder.mnama_menu.setText(myItem.get(i).getMenuname());
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onClick(View v) {
                 String namemenu = myItem.get(i).getMenuname();
@@ -129,9 +139,25 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 }
                 if (namemenu.equals(context.getString(R.string.title_live_chat))){
                     if (installed) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse("http://api.whatsapp.com/send?phone=+628111930199&text= "));
-                        context.startActivity(intent);
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("Live Chat:");
+                        // set the custom layout
+                        final View customLayout = LayoutInflater.from(context).inflate(R.layout.chatdialoghome, null);
+                        mchatdialog = (RecyclerView) customLayout.findViewById(R.id.chatdialog);
+                        linearLayoutManager = new LinearLayoutManager(context, LinearLayout.VERTICAL,false);
+//        linearLayoutManager.setReverseLayout(true);
+//        linearLayoutManager.setStackFromEnd(true);
+                        mchatdialog.setLayoutManager(linearLayoutManager);
+                        mchatdialog.setHasFixedSize(true);
+                        addFormAdapterAdapter = new ChatAdapter(context, list2);
+                        mchatdialog.setAdapter(addFormAdapterAdapter);
+                        builder.setView(customLayout);
+                        // add a button
+
+                        // create and show the alert dialog
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     }else {
                         Toast.makeText(context,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
                     }
