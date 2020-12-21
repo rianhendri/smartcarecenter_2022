@@ -298,15 +298,22 @@ public class AddDetailsPo extends AppCompatActivity {
                     }else {
                         message = getString(R.string.title_tanpanopo);
                     }
-                    if (mmustUpload){
-                        if (imagefile==null){
-                            Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
-                        }else {
+                    if (muploadPOPdf){
+                        if (mmustUpload){
+                            showDialog();
+                            if (imagefile==null){
+                                Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
+                            }else {
+                                showDialog();
+                            }
+                        }
+                        else {
                             showDialog();
                         }
                     }else {
                         showDialog();
                     }
+
 
                 }
             }
