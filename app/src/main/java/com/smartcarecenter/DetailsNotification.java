@@ -93,7 +93,7 @@ public class DetailsNotification extends AppCompatActivity {
     public void loadNotif(){
         cekInternet();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("guid", id);
+        jsonObject.addProperty("guid", guid);
         jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetnotifget(jsonObject);
@@ -228,6 +228,7 @@ public class DetailsNotification extends AppCompatActivity {
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 sesionid();
                 if (statusnya.equals("OK")){
+                    sesionid();
                     loadNotif();
                     JsonObject data = homedata.getAsJsonObject("data");
 //                    String message = data.get("message").getAsString();
