@@ -167,14 +167,16 @@
                                     android:id="@+id/previmpres"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/segoeuib"
+                                    android:fontFamily="@font/segoeui"
                                     android:text="-"
                                     android:layout_marginLeft="4dp"
                                     android:textColor="@color/black"
                                     android:textSize="10sp" />
                             </LinearLayout>
+
                             <LinearLayout
-                                android:visibility="gone"
+                                android:id="@+id/lifespanlay"
+                                android:visibility="visible"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="0dp"
@@ -183,9 +185,9 @@
 
                                 <TextView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="match_parent"
                                     android:fontFamily="@font/segoeui"
-                                    android:text="Life Span"
+                                    android:text="Life Span: "
                                     android:textColor="@color/black"
                                     android:textSize="10sp" />
 
@@ -193,9 +195,9 @@
                                     android:id="@+id/lifespan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/segoeuib"
-                                    android:text="-"
                                     android:layout_marginLeft="4dp"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="-"
                                     android:textColor="@color/black"
                                     android:textSize="10sp" />
                             </LinearLayout>

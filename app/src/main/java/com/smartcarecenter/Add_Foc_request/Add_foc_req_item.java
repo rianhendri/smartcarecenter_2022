@@ -21,8 +21,9 @@ public class Add_foc_req_item {
 
 
     public Add_foc_req_item(String itemcd, Integer position, Integer qty, String imgpic,
-                            String imgban, String nameitem, String category, String unitName, Integer matrixLifeSpanPcs,
-                            boolean usingMatrix, Integer lastImpression, String matrix, String stockOnHand) {
+                            String imgban, String nameitem, String category, String unitName,
+                            Integer matrixLifeSpanPcs, boolean usingMatrix, Integer lastImpression, String matrix,
+                            String stockOnHand, boolean matrixFloor, Double matrixCount, String lifeSpan) {
         this.itemcd = itemcd;
         this.position = position;
         this.qty = qty;
@@ -36,6 +37,9 @@ public class Add_foc_req_item {
         LastImpression = lastImpression;
         Matrix = matrix;
         this.stockOnHand = stockOnHand;
+        MatrixFloor = matrixFloor;
+        MatrixCount = matrixCount;
+        LifeSpan = lifeSpan;
     }
 
     public String getItemcd() {
@@ -142,6 +146,30 @@ public class Add_foc_req_item {
         this.stockOnHand = stockOnHand;
     }
 
+    public boolean isMatrixFloor() {
+        return MatrixFloor;
+    }
+
+    public void setMatrixFloor(boolean matrixFloor) {
+        MatrixFloor = matrixFloor;
+    }
+
+    public Double getMatrixCount() {
+        return MatrixCount;
+    }
+
+    public void setMatrixCount(Double matrixCount) {
+        MatrixCount = matrixCount;
+    }
+
+    public String getLifeSpan() {
+        return LifeSpan;
+    }
+
+    public void setLifeSpan(String lifeSpan) {
+        LifeSpan = lifeSpan;
+    }
+
     @SerializedName("itemcd")
     private String itemcd;
     @Expose
@@ -182,6 +210,17 @@ public class Add_foc_req_item {
     @SerializedName("stockOnHand")
     private String stockOnHand;
 
+    @Expose
+    @SerializedName("MatrixFloor")
+    private boolean MatrixFloor;
+
+    @Expose
+    @SerializedName("MatrixCount")
+    private Double MatrixCount;
+
+    @Expose
+    @SerializedName("LifeSpan")
+    private String LifeSpan;
 
 
 }

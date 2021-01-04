@@ -43,6 +43,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +75,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
     public static ArrayList<Add_foc_req_item> listpoact = new ArrayList<Add_foc_req_item>();
     Add_foc_req_item tambahitem;
     boolean stsS = true;
+    boolean usingMatrix = true;
     public Add_foc_list_adapter(Context context, ArrayList<Add_foc_list_item> addFoclistitem) {
         this.context = context;
         this.addFoclistitem = addFoclistitem;
@@ -96,6 +98,14 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         myviewholder.xcode.setText(addFoclistitem.get(i).getItemCd());
         myviewholder.xcategory.setText(addFoclistitem.get(i).getCategoryName());
         myviewholder.xunit.setText(addFoclistitem.get(i).getUnitName());
+        usingMatrix = addFoclistitem.get(i).isUsingMatrix();
+        if (usingMatrix){
+            myviewholder.maylifespan.setVisibility(View.VISIBLE);
+            myviewholder.mlifespan.setText(addFoclistitem.get(i).getLifeSpan());
+        }else {
+            myviewholder.maylifespan.setVisibility(View.GONE);
+            myviewholder.mlifespan.setText(addFoclistitem.get(i).getLifeSpan());
+        }
         if (addFoclistitem.get(i).getLastImpression()==0){
             myviewholder.xprevimpresion.setText("-");
         }else {
@@ -150,6 +160,8 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
                     tambahitem.setLastImpression(addFoclistitem.get(i).getLastImpression());
                     tambahitem.setMatrixLifeSpanPcs(addFoclistitem.get(i).getMatrixLifeSpanPcs());
                     tambahitem.setUsingMatrix(addFoclistitem.get(i).isUsingMatrix());
+                    tambahitem.setMatrixFloor(addFoclistitem.get(i).isMatrixFloor());
+                    tambahitem.setLifeSpan(addFoclistitem.get(i).getLifeSpan());
                     tambahitem.setMatrix("-");
                     tambahitem.setStockOnHand("?");
                     tambahitem.setQty(1);
@@ -184,7 +196,8 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         ImageView xgambar_item,xadd;
         TextView xid;
         TextView xstatus;
-        TextView xname,xcode,xcategory,xunit, xprevimpresion;
+        TextView xname,xcode,xcategory,xunit, xprevimpresion, mlifespan;
+        LinearLayout maylifespan;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -196,6 +209,8 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
             xadd = itemView.findViewById(R.id.addpoitem);
             xcategory = itemView.findViewById(R.id.categoryfoclist);
             xprevimpresion = itemView.findViewById(R.id.previmpres);
+            mlifespan = itemView.findViewById(R.id.lifespan);
+            maylifespan = itemView.findViewById(R.id.lifespanlay);
 
 
         }

@@ -46,6 +46,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,7 +89,8 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
     Add_foc_req_item modelqty;
     Context context;
     ImageView mimgpopup;
-
+    boolean floor = true;
+    int deservqty = 0;
     public static int totalqty = 0;
     public Add_foc_req_adapter(Context context, ArrayList<Add_foc_req_item> addFoclistitem) {
         this.context = context;
@@ -107,6 +109,13 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
         usingmatrix = addFoclistreq.get(i).isUsingMatrix();
+        floor = addFoclistreq.get(i).isMatrixFloor();
+        if (usingmatrix){
+            myviewholder.mlaylife.setVisibility(View.VISIBLE);
+            myviewholder.mlifespan.setText(addFoclistreq.get(i).getLifeSpan());
+        }else {
+            myviewholder.mlaylife.setVisibility(View.GONE);
+        }
         if (addFoclistreq.get(i).getLastImpression()==0){
             myviewholder.mmatrix.setText("-");
         }else if (!usingmatrix){
@@ -124,14 +133,23 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();
             DecimalFormat form = new DecimalFormat("0.00");
             double test = 0.04;
-            matrixcount = (selisih/spanmax)*matrixmeter;
+            addFoclistreq.get(i).setMatrixCount(matrixcount = (selisih/spanmax)*matrixmeter);
 //                    Toast.makeText(context, String.valueOf(form.format(matrixcount)),Toast.LENGTH_LONG).show();
-
-            if ((long)Math.ceil(matrixcount)<=0){
-                myviewholder.mmatrix.setText("0");
+            //udah foor
+            if (floor){
+                if ((long)Math.floor(addFoclistreq.get(i).getMatrixCount())<=0){
+                    myviewholder.mmatrix.setText("0");
+                }else {
+                    myviewholder.mmatrix.setText(String.valueOf((long) Math.floor(addFoclistreq.get(i).getMatrixCount())));
+                }
             }else {
-                myviewholder.mmatrix.setText(String.valueOf((long) Math.ceil(matrixcount)));
+                if ((long)Math.ceil(addFoclistreq.get(i).getMatrixCount())<=0){
+                    myviewholder.mmatrix.setText("0");
+                }else {
+                    myviewholder.mmatrix.setText(String.valueOf((long) Math.ceil(addFoclistreq.get(i).getMatrixCount())));
+                }
             }
+
         }
         myviewholder.mmatrixlabel.setText(matrixlabel);
         Picasso.with(context).load(addFoclistreq.get(i).getImgpic()).into(myviewholder.mimg);
@@ -275,6 +293,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                floor = addFoclistreq.get(i).isMatrixFloor();
                 if (addFoclistreq.size()==0){
 
                 }else {
@@ -293,29 +312,57 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                         }
                         selisih = lastimpresivalue-addFoclistreq.get(i).getLastImpression();
                         spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();
-                        matrixcount = (selisih/spanmax)*matrixmeter;
+                        addFoclistreq.get(i).setMatrixCount(matrixcount = (selisih/spanmax)*matrixmeter);
 
 //                    Toast.makeText(context, String.valueOf(form.format(matrixcount)),Toast.LENGTH_LONG).show();
-                        if ((int)Math.ceil(matrixcount)<=0){
-                            myviewholder.mmatrix.setText("0");
-                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                        }else {
-                            if (myviewholder.mstockhand.length()==0){
-                                myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(matrixcount)));
+                        //udah foor
+                        if (floor){
+                            if ((int)Math.floor(addFoclistreq.get(i).getMatrixCount())<=0){
+                                myviewholder.mmatrix.setText("0");
                                 addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                            }else {
-                                int deservqty = (int)Math.ceil(matrixcount);
-                                int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
-                                if (deservqty-stockhand<=0){
-                                    myviewholder.mmatrix.setText("0");
+                            }
+                            else {
+                                if (myviewholder.mstockhand.length()==0){
+                                    myviewholder.mmatrix.setText(String.valueOf((int)Math.floor(addFoclistreq.get(i).getMatrixCount())));
                                     addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
                                 }else {
-                                    myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
-                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                    int deservqty = (int)Math.floor(addFoclistreq.get(i).getMatrixCount());
+                                    int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
+                                    if (deservqty-stockhand<=0){
+                                        myviewholder.mmatrix.setText("0");
+                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                    }else {
+                                        myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
+                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                    }
                                 }
-                            }
 
+                            }
                         }
+                        else {
+                            if ((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())<=0){
+                                myviewholder.mmatrix.setText("0");
+                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                            }
+                            else {
+                                if (myviewholder.mstockhand.length()==0){
+                                    myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())));
+                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }else {
+                                    int deservqty = (int)Math.ceil(addFoclistreq.get(i).getMatrixCount());
+                                    int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
+                                    if (deservqty-stockhand<=0){
+                                        myviewholder.mmatrix.setText("0");
+                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                    }else {
+                                        myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
+                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                    }
+                                }
+
+                            }
+                        }
+
                     }
                 }
 
@@ -344,10 +391,12 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
             @Override
             public void afterTextChanged(Editable s) {
+
                 for (int x = 0 ; x < addFoclistreq.size(); x++) {
 
                 }
                 if (cekdel){
+                    floor = addFoclistreq.get(i).isMatrixFloor();
                     if (myviewholder.mstockhand.length()==0){
                     addFoclistreq.get(i).setStockOnHand("?");
                 }else{
@@ -363,13 +412,29 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                     }
                     if (myviewholder.mstockhand.length()==0){
                         addFoclistreq.get(i).setStockOnHand("?");
-                        if ((int)Math.ceil(matrixcount)<=0){
-                            myviewholder.mmatrix.setText("0");
-                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                        }else {
-                            myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(matrixcount)));
-                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                        //udah foor
+                        if (floor){
+                            if ((int)Math.floor(addFoclistreq.get(i).getMatrixCount())<=0){
+                                myviewholder.mmatrix.setText("0");
+                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                            }
+                            else {
+                                myviewholder.mmatrix.setText(String.valueOf((int)Math.floor(addFoclistreq.get(i).getMatrixCount())));
+                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                            }
                         }
+                        else {
+
+                            if ((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())<=0){
+                                myviewholder.mmatrix.setText("0");
+                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                            }
+                            else {
+                                myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())));
+                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                            }
+                        }
+
                         myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
                     }else {
                         addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
@@ -377,7 +442,16 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                         if (myviewholder.mmatrix.equals("0")){
 
                         }else {
-                            int deservqty = (int)Math.ceil(matrixcount);
+                            //udahfloor
+                            if (floor){
+
+                                deservqty = (int)Math.floor(addFoclistreq.get(i).getMatrixCount());
+                            }
+                            else {
+
+                                deservqty = (int)Math.ceil(addFoclistreq.get(i).getMatrixCount());
+                            }
+
                             int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
                             if (deservqty-stockhand<=0){
                                 myviewholder.mmatrix.setText("0");
@@ -391,7 +465,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                     }
                 }
                 }else {
-
+                    
                 }
 //
 
@@ -416,6 +490,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
         TextView mcode, mname, mcategory, mqty, mpos, munit, mprevimpress,mmatrix, mmatrixlabel, mlifespan;
         ImageView mimg, mminus, mplus,mdelete;
         EditText mstockhand;
+        LinearLayout mlaylife;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -435,6 +510,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             mmatrixlabel = itemView.findViewById(R.id.matrixlabel);
             mstockhand = itemView.findViewById(R.id.stockhanda);
             mlifespan = itemView.findViewById(R.id.lifespan);
+            mlaylife = itemView.findViewById(R.id.lifespanlay);
 
 
         }
