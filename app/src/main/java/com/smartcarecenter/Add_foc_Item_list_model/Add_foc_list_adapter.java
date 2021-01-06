@@ -58,6 +58,7 @@ import com.smartcarecenter.DetailsFormActivity;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -101,7 +102,9 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         usingMatrix = addFoclistitem.get(i).isUsingMatrix();
         if (usingMatrix){
             myviewholder.maylifespan.setVisibility(View.VISIBLE);
-            myviewholder.mlifespan.setText(addFoclistitem.get(i).getLifeSpan());
+            Locale localeID = new Locale("in", "ID");
+            final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###");
+            myviewholder.mlifespan.setText(String.valueOf(formatRupiah.format(addFoclistitem.get(i).getMatrixLifeSpanPcs())));
         }else {
             myviewholder.maylifespan.setVisibility(View.GONE);
             myviewholder.mlifespan.setText(addFoclistitem.get(i).getLifeSpan());

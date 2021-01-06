@@ -464,14 +464,24 @@ public class AddDetailsPoView extends AppCompatActivity {
                     }
                     mdate.setText(newdate);
                     moperator.setText(operator);
-                    myCustomArray = data.getAsJsonArray("itemList");
-                    Gson gson = new Gson();
-                    Type listType = new TypeToken<ArrayList<Add_po_req_itemView>>() {
-                    }.getType();
-                    reitem = gson.fromJson(myCustomArray.toString(), listType);
-                    req_adapter = new Add_po_req_adapterView(AddDetailsPoView.this, reitem);
-                    mlistitem_foc.setAdapter(req_adapter);
-                    mlistitem_foc.setVisibility(View.VISIBLE);
+                    if (data.get("itemList").toString().equals("null")){
+                        madd_item.setVisibility(GONE);
+                        mlaytotal.setVisibility(GONE);
+                    }else {
+
+                        myCustomArray = data.getAsJsonArray("itemList");
+                        madd_item.setVisibility(VISIBLE);
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<ArrayList<Add_po_req_itemView>>() {
+                        }.getType();
+                        reitem = gson.fromJson(myCustomArray.toString(), listType);
+                        req_adapter = new Add_po_req_adapterView(AddDetailsPoView.this, reitem);
+                        mlistitem_foc.setAdapter(req_adapter);
+                        mlistitem_foc.setVisibility(View.VISIBLE);
+                        mlaytotal.setVisibility(VISIBLE);
+                    }
+
+
                 }else {
                     cekInternet();
                     sesionid();

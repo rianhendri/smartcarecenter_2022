@@ -19,10 +19,7 @@ public class Add_foc_req_item {
     public Add_foc_req_item() {
     }
 
-
-    public Add_foc_req_item(String itemcd, Integer position, Integer qty, String imgpic,
-                            String imgban, String nameitem, String category, String unitName,
-                            Integer matrixLifeSpanPcs, boolean usingMatrix, Integer lastImpression, String matrix,
+    public Add_foc_req_item(String itemcd, Integer position, Integer qty, String imgpic, String imgban, String nameitem, String category, String unitName, double matrixLifeSpanPcs, boolean usingMatrix, Integer lastImpression, String matrix,
                             String stockOnHand, boolean matrixFloor, Double matrixCount, String lifeSpan) {
         this.itemcd = itemcd;
         this.position = position;
@@ -106,11 +103,11 @@ public class Add_foc_req_item {
         UnitName = unitName;
     }
 
-    public Integer getMatrixLifeSpanPcs() {
+    public double getMatrixLifeSpanPcs() {
         return MatrixLifeSpanPcs;
     }
 
-    public void setMatrixLifeSpanPcs(Integer matrixLifeSpanPcs) {
+    public void setMatrixLifeSpanPcs(double matrixLifeSpanPcs) {
         MatrixLifeSpanPcs = matrixLifeSpanPcs;
     }
 
@@ -195,7 +192,7 @@ public class Add_foc_req_item {
     private String UnitName;
     @Expose
     @SerializedName("MatrixLifeSpanPcs")
-    private Integer MatrixLifeSpanPcs;
+    private double MatrixLifeSpanPcs;
     @Expose
     @SerializedName("UsingMatrix")
     private boolean UsingMatrix;

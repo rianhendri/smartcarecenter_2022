@@ -18,11 +18,7 @@ public class Add_foc_list_item {
     }
 
 
-    public Add_foc_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, boolean usingMatrix,
-                             String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks,
-                             boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL,
-                             Integer lastImpression, String stsActiveInfo, String unitName, Integer matrixLifeSpanPcs,
-                             boolean matrixFloor) {
+    public Add_foc_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, boolean usingMatrix, String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks, boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL, Integer lastImpression, String stsActiveInfo, String unitName, double matrixLifeSpanPcs, boolean matrixFloor) {
         ItemCd = itemCd;
         Name = name;
         ItemTypeCd = itemTypeCd;
@@ -180,11 +176,11 @@ public class Add_foc_list_item {
         UnitName = unitName;
     }
 
-    public Integer getMatrixLifeSpanPcs() {
+    public double getMatrixLifeSpanPcs() {
         return MatrixLifeSpanPcs;
     }
 
-    public void setMatrixLifeSpanPcs(Integer matrixLifeSpanPcs) {
+    public void setMatrixLifeSpanPcs(double matrixLifeSpanPcs) {
         MatrixLifeSpanPcs = matrixLifeSpanPcs;
     }
 
@@ -250,7 +246,7 @@ public class Add_foc_list_item {
 
     @Expose
     @SerializedName("MatrixLifeSpanPcs")
-    private Integer MatrixLifeSpanPcs;
+    private double MatrixLifeSpanPcs;
     @Expose
     @SerializedName("MatrixFloor")
     private boolean MatrixFloor;

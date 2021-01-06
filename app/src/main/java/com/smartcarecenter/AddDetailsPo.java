@@ -95,7 +95,7 @@ public class AddDetailsPo extends AppCompatActivity {
     LinearLayout mback, mbtnchose;
     int pos = 0;
     public static LinearLayout mlaytotal;
-    public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,mnoitem,mtotaltax,mgrantotalpo
+    public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,msend2,mtotalqty,mnoitem,mtotaltax,mgrantotalpo
             ,mtotalpricepo,mLabeltax;
     EditText mnopo, mnotes;
     public static String pono="";
@@ -140,6 +140,7 @@ public class AddDetailsPo extends AppCompatActivity {
         mno_order = findViewById(R.id.noorder);
         mnoitem = findViewById(R.id.noitem);
         msend = findViewById(R.id.submit);
+        msend2 = findViewById(R.id.submit2);
         msn = findViewById(R.id.sn);
         moperator = findViewById(R.id.operator);
         mnopo = findViewById(R.id.lastimprsi);
@@ -185,9 +186,11 @@ public class AddDetailsPo extends AppCompatActivity {
             mlistitem_foc.setVisibility(View.GONE);
         }else {
             mlaytotal.setVisibility(View.VISIBLE);
+            msend2.setVisibility(GONE);
             mnoitem.setVisibility(View.GONE);
             mlistitem_foc.setVisibility(View.VISIBLE);
         }
+
         ////////////////// kalo item sama quatity di replace////
         for (int i = 0; i < listpoact.size(); i++) {
             for (int j = i + 1; j < listpoact.size(); j++) {
@@ -289,6 +292,36 @@ public class AddDetailsPo extends AppCompatActivity {
             }
         });
         msend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                mnotes.setText(mpressId+myCustomArray.toString());
+                if (internet){
+                    if (mnopo.getText().toString().length()!=0){
+                        message = getString(R.string.title_submitorder);
+                    }else {
+                        message = getString(R.string.title_tanpanopo);
+                    }
+                    if (muploadPOPdf){
+                        if (mmustUpload){
+                            showDialog();
+                            if (imagefile==null){
+                                Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
+                            }else {
+                                showDialog();
+                            }
+                        }
+                        else {
+                            showDialog();
+                        }
+                    }else {
+                        showDialog();
+                    }
+
+
+                }
+            }
+        });
+        msend2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                mnotes.setText(mpressId+myCustomArray.toString());
@@ -570,9 +603,21 @@ public class AddDetailsPo extends AppCompatActivity {
                             mchosepdf.setText(getString(R.string.title_choosefile)+"Max: "+String.valueOf(sizeflekb)+"KB");
                         }
                         if (mmustUpload){
-                            mrequpload = true;
+                            //UPDATE
+                            if (muploadPOPdf){
+                                madd_item.setEnabled(false);
+                                msend2.setVisibility(VISIBLE);
+                                mnoitem.setVisibility(GONE);
+                                madd_item.setVisibility(GONE);
+                            }
+                                                        mrequpload = true;
                             mrequiredpdf.setVisibility(VISIBLE);
                         }else {
+                            //UPDATE
+                            madd_item.setEnabled(true);
+                            msend2.setVisibility(GONE);
+                            mnoitem.setVisibility(VISIBLE);
+                            madd_item.setVisibility(VISIBLE);
                             mrequpload = false;
                             mrequiredpdf.setVisibility(GONE);
                         }
@@ -690,6 +735,7 @@ public class AddDetailsPo extends AppCompatActivity {
 
                             }else {
                                 Toast.makeText((Context)AddDetailsPo.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
+
                                 loading.dismiss();
                             }
                         }
@@ -742,6 +788,7 @@ public class AddDetailsPo extends AppCompatActivity {
                             }else {
                                 Toast.makeText((Context)AddDetailsPo.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
                                 loading.dismiss();
+//                                Toast.makeText((Context)AddDetailsPo.this, "apinya",Toast.LENGTH_SHORT).show();
                             }
                         }
 

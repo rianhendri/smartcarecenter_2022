@@ -104,7 +104,7 @@
                                     android:fontFamily="@font/segoeui"
                                     android:text="@string/title_category"
                                     android:textColor="@color/black"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
 
                                 <TextView
                                     android:id="@+id/categorypolist"
@@ -119,7 +119,6 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
@@ -129,7 +128,7 @@
                                     android:fontFamily="@font/segoeui"
                                     android:text="Unit:"
                                     android:textColor="@color/black"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
 
                                 <TextView
                                     android:id="@+id/unitname"
@@ -144,7 +143,6 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
@@ -154,7 +152,7 @@
                                     android:fontFamily="@font/segoeui"
                                     android:text="@string/title_startimpesi"
                                     android:textColor="@color/black"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
 
                                 <TextView
                                     android:id="@+id/previmpres"
@@ -165,6 +163,33 @@
                                     android:layout_marginLeft="4dp"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/lifespanlay"
+                                android:visibility="visible"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="Life Span: "
+                                    android:textColor="@color/black"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/lifespan"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="4dp"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="-"
+                                    android:textColor="@color/black"
+                                    android:textSize="10sp" />
                             </LinearLayout>
                         </LinearLayout>
 

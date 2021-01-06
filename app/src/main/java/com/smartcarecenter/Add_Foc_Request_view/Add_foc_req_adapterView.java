@@ -38,6 +38,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,7 +47,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static com.smartcarecenter.AddDetailFoc.reitem;
 import static com.smartcarecenter.AddDetailFocView.matrixlabel;
@@ -67,6 +70,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
     public static int totalqty = 0;
     int qtynya = 1;
     public static int totalapproved =0;
+    boolean usingmatrix = true;
     public Add_foc_req_adapterView(Context context, ArrayList<Add_foc_req_itemView> addFoclistitem) {
         this.context = context;
         this.addFoclistreq = addFoclistitem;
@@ -94,7 +98,15 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
         myviewholder.mapprove.setText(String.valueOf(addFoclistreq.get(i).getQtyApproved()));
         myviewholder.mprevimpress.setText(String.valueOf(addFoclistreq.get(i).getPreviousImpression()));
         myviewholder.mstockhand.setText(addFoclistreq.get(i).getStockOnHand());
-
+        usingmatrix = addFoclistreq.get(i).isUsingMatrix();
+        if (usingmatrix){
+            myviewholder.mlaylife.setVisibility(View.VISIBLE);
+            Locale localeID = new Locale("in", "ID");
+            final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###");
+            myviewholder.mlifespan.setText(String.valueOf(formatRupiah.format(addFoclistreq.get(i).getMatrixLifeSpanPcs())));
+        }else {
+            myviewholder.mlaylife.setVisibility(View.GONE);
+        }
         if (addFoclistreq.get(i).getDeserveQty()==null){
             myviewholder.mmatrix.setText("-");
         }else {
@@ -137,9 +149,9 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mcode, mname, mcategory, mqty, mpos,munit, mapprove, mprevimpress, mmatrix, mmatrixlabel, mstockhand;
+        TextView mcode, mname, mcategory, mqty, mpos,munit, mapprove, mprevimpress, mmatrix, mmatrixlabel, mstockhand,mlifespan;
         ImageView mimg, mminus, mplus,mdelete;
-
+        LinearLayout mlaylife;
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -158,7 +170,8 @@ extends RecyclerView.Adapter<Add_foc_req_adapterView.Myviewholder> {
             mmatrix = itemView.findViewById(R.id.matrix);
             mmatrixlabel = itemView.findViewById(R.id.matrixlabel);
             mstockhand = itemView.findViewById(R.id.stockhandview);
-
+            mlifespan = itemView.findViewById(R.id.lifespan);
+            mlaylife = itemView.findViewById(R.id.lifespanlay);
 
 
         }

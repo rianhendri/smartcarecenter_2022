@@ -17,9 +17,8 @@ public class Add_foc_req_itemView {
     public Add_foc_req_itemView() {
     }
 
-    public Add_foc_req_itemView(String itemCd, Integer position, Integer qty, String itemName, String categoryName,
-                                String imageThumbFullURL, String imageFullURL, String unitName, int qtyApproved,
-                                String deserveQty, int previousImpression, String stockOnHand) {
+    public Add_foc_req_itemView(String itemCd, Integer position, Integer qty, String itemName, String categoryName, String imageThumbFullURL, String imageFullURL, String unitName, int qtyApproved, String deserveQty, int previousImpression,
+                                String stockOnHand, double matrixLifeSpanPcs, boolean usingMatrix) {
         ItemCd = itemCd;
         Position = position;
         Qty = qty;
@@ -32,6 +31,8 @@ public class Add_foc_req_itemView {
         DeserveQty = deserveQty;
         PreviousImpression = previousImpression;
         StockOnHand = stockOnHand;
+        MatrixLifeSpanPcs = matrixLifeSpanPcs;
+        UsingMatrix = usingMatrix;
     }
 
     public String getItemCd() {
@@ -130,6 +131,22 @@ public class Add_foc_req_itemView {
         StockOnHand = stockOnHand;
     }
 
+    public double getMatrixLifeSpanPcs() {
+        return MatrixLifeSpanPcs;
+    }
+
+    public void setMatrixLifeSpanPcs(double matrixLifeSpanPcs) {
+        MatrixLifeSpanPcs = matrixLifeSpanPcs;
+    }
+
+    public boolean isUsingMatrix() {
+        return UsingMatrix;
+    }
+
+    public void setUsingMatrix(boolean usingMatrix) {
+        UsingMatrix = usingMatrix;
+    }
+
     @SerializedName("ItemCd")
     private String ItemCd;
     @Expose
@@ -150,11 +167,9 @@ public class Add_foc_req_itemView {
     @Expose
     @SerializedName("ImageFullURL")
     private String ImageFullURL;
-
     @Expose
     @SerializedName("UnitName")
     private String UnitName;
-
     @Expose
     @SerializedName("QtyApproved")
     private int QtyApproved;
@@ -164,11 +179,15 @@ public class Add_foc_req_itemView {
     @Expose
     @SerializedName("PreviousImpression")
     private int PreviousImpression;
-
     @Expose
     @SerializedName("StockOnHand")
     private String StockOnHand;
-
+    @Expose
+    @SerializedName("MatrixLifeSpanPcs")
+    private double MatrixLifeSpanPcs;
+    @Expose
+    @SerializedName("UsingMatrix")
+    private boolean UsingMatrix;
 }
 
 

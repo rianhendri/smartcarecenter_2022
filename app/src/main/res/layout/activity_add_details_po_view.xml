@@ -688,53 +688,53 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:orientation="vertical" >
 
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/submit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:background="@drawable/bg_yellow_borderradius"
-                        android:fontFamily="@font/seguisb"
-                        android:gravity="center"
-                        android:padding="14dp"
-                        android:text="@string/title_cancle"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/chatcspo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingBottom="22dp"
-                    android:paddingTop="22dp" >
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="14dp"
-                        android:layout_marginRight="4dp"
-                        android:src="@drawable/wa" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/segoeui"
-                        android:text="@string/title_contactCS"
-                        android:textColor="@color/green"
-                        android:textSize="12sp" />
-                </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="vertical" >
 
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/bg_yellow_borderradius"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:text="@string/title_cancle"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/chatcspo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="22dp"
+                android:paddingTop="22dp" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/wa" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoeui"
+                    android:text="@string/title_contactCS"
+                    android:textColor="@color/green"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

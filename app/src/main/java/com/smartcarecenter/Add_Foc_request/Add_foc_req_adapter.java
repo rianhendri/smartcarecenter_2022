@@ -61,7 +61,9 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
+import static com.smartcarecenter.AddDetailFoc.imagefile;
 import static com.smartcarecenter.AddDetailFoc.lastimpresi;
 import static com.smartcarecenter.AddDetailFoc.matrixlabel;
 import static com.smartcarecenter.AddDetailFoc.mlastimpresi;
@@ -112,7 +114,9 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
         floor = addFoclistreq.get(i).isMatrixFloor();
         if (usingmatrix){
             myviewholder.mlaylife.setVisibility(View.VISIBLE);
-            myviewholder.mlifespan.setText(addFoclistreq.get(i).getLifeSpan());
+            Locale localeID = new Locale("in", "ID");
+            final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###");
+            myviewholder.mlifespan.setText(String.valueOf(formatRupiah.format(addFoclistreq.get(i).getMatrixLifeSpanPcs())));
         }else {
             myviewholder.mlaylife.setVisibility(View.GONE);
         }
@@ -235,7 +239,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
                 }
                 Gson gson = new GsonBuilder().create();
-                myCustomArray = gson.toJsonTree(reitem).getAsJsonArray();
+                myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
                 jsonarayitem = myCustomArray.toString();
                 mtotalitem.setText(String.valueOf(addFoclistreq.size()));
             }
