@@ -114,7 +114,7 @@ public class AddDetailFoc extends AppCompatActivity {
     List<Integer> previmpression = new ArrayList();
     //list item add
     public static ArrayList<Add_foc_req_item> reitem;
-    Add_foc_req_adapter req_adapter;
+    public static Add_foc_req_adapter req_adapter;
     private LinearLayoutManager linearLayoutManager;
     public static String jsonarayitem = "";
     public static JsonArray myCustomArray;

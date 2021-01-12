@@ -76,6 +76,7 @@ import static com.smartcarecenter.AddDetailFoc.mtotalqty;
 import static com.smartcarecenter.AddDetailFoc.myCustomArray;
 import static com.smartcarecenter.AddDetailFoc.jsonarayitem;
 import static com.smartcarecenter.AddDetailFoc.reitem;
+import static com.smartcarecenter.AddDetailFoc.req_adapter;
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
 
 public class Add_foc_req_adapter
@@ -94,6 +95,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
     boolean floor = true;
     int deservqty = 0;
     public static int totalqty = 0;
+    int x;
     public Add_foc_req_adapter(Context context, ArrayList<Add_foc_req_item> addFoclistitem) {
         this.context = context;
         this.addFoclistreq = addFoclistitem;
@@ -199,6 +201,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                 dialog.show();
             }
         });
+
         // delete button
         myviewholder.mdelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,10 +243,13 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                     mno_order.setVisibility(View.VISIBLE);
 
                 }
+                req_adapter = new Add_foc_req_adapter(context, reitem);
+                mlistitem_foc.setAdapter(req_adapter);
                 Gson gson = new GsonBuilder().create();
                 myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
                 jsonarayitem = myCustomArray.toString();
                 mtotalitem.setText(String.valueOf(addFoclistreq.size()));
+
             }
         });
         //button plus minus qty
@@ -299,83 +305,91 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                floor = addFoclistreq.get(i).isMatrixFloor();
+                for (int x = 0 ; x < addFoclistreq.size(); x++) {
+
+                }
                 if (addFoclistreq.size()==0){
 
                 }else {
-                    if (addFoclistreq.get(i).getLastImpression()==0) {
-                        myviewholder.mmatrix.setText("-");
-                    }else if (!usingmatrix){
-                        myviewholder.mmatrix.setText("-");
+                    floor = addFoclistreq.get(i).isMatrixFloor();
+                    if (addFoclistreq.size()==0){
+
                     }else {
-                        if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                        if (addFoclistreq.get(i).getLastImpression()==0) {
                             myviewholder.mmatrix.setText("-");
-                        }
-                        if (mlastimpresi.length()==0){
-                            lastimpresivalue=0;
+                        }else if (!usingmatrix){
+                            myviewholder.mmatrix.setText("-");
                         }else {
-                            
-                            lastimpresivalue = Long.parseLong(mlastimpresi.getText().toString());
-                        }
-                        selisih = lastimpresivalue-addFoclistreq.get(i).getLastImpression();
-                        spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();
-                        addFoclistreq.get(i).setMatrixCount(matrixcount = (selisih/spanmax)*matrixmeter);
+                            if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                                myviewholder.mmatrix.setText("-");
+                            }
+                            if (mlastimpresi.length()==0){
+                                lastimpresivalue=0;
+                            }else {
+
+                                lastimpresivalue = Long.parseLong(mlastimpresi.getText().toString());
+                            }
+                            selisih = lastimpresivalue-addFoclistreq.get(i).getLastImpression();
+                            spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();
+                            addFoclistreq.get(i).setMatrixCount(matrixcount = (selisih/spanmax)*matrixmeter);
 
 //                    Toast.makeText(context, String.valueOf(form.format(matrixcount)),Toast.LENGTH_LONG).show();
-                        //udah foor
-                        if (floor){
-                            if ((int)Math.floor(addFoclistreq.get(i).getMatrixCount())<=0){
-                                myviewholder.mmatrix.setText("0");
-                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                            }
-                            else {
-                                if (myviewholder.mstockhand.length()==0){
-                                    myviewholder.mmatrix.setText(String.valueOf((int)Math.floor(addFoclistreq.get(i).getMatrixCount())));
+                            //udah foor
+                            if (floor){
+                                if ((int)Math.floor(addFoclistreq.get(i).getMatrixCount())<=0){
+                                    myviewholder.mmatrix.setText("0");
                                     addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                                }else {
-                                    int deservqty = (int)Math.floor(addFoclistreq.get(i).getMatrixCount());
-                                    int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
-                                    if (deservqty-stockhand<=0){
-                                        myviewholder.mmatrix.setText("0");
+                                }
+                                else {
+                                    if (myviewholder.mstockhand.length()==0){
+                                        myviewholder.mmatrix.setText(String.valueOf((int)Math.floor(addFoclistreq.get(i).getMatrixCount())));
                                         addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
                                     }else {
-                                        myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
-                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                        int deservqty = (int)Math.floor(addFoclistreq.get(i).getMatrixCount());
+                                        int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
+                                        if (deservqty-stockhand<=0){
+                                            myviewholder.mmatrix.setText("0");
+                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                        }else {
+                                            myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
+                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                        }
                                     }
-                                }
 
-                            }
-                        }
-                        else {
-                            if ((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())<=0){
-                                myviewholder.mmatrix.setText("0");
-                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }
                             }
                             else {
-                                if (myviewholder.mstockhand.length()==0){
-                                    myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())));
+                                if ((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())<=0){
+                                    myviewholder.mmatrix.setText("0");
                                     addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                                }else {
-                                    int deservqty = (int)Math.ceil(addFoclistreq.get(i).getMatrixCount());
-                                    int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
-                                    if (deservqty-stockhand<=0){
-                                        myviewholder.mmatrix.setText("0");
+                                }
+                                else {
+                                    if (myviewholder.mstockhand.length()==0){
+                                        myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())));
                                         addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
                                     }else {
-                                        myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
-                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                        int deservqty = (int)Math.ceil(addFoclistreq.get(i).getMatrixCount());
+                                        int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
+                                        if (deservqty-stockhand<=0){
+                                            myviewholder.mmatrix.setText("0");
+                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                        }else {
+                                            myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
+                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                        }
                                     }
+
                                 }
-
                             }
-                        }
 
+                        }
                     }
+
+                    Gson gson = new GsonBuilder().create();
+                    myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
+//                Toast.makeText(context, myCustomArray.toString(),Toast.LENGTH_LONG).show();
                 }
 
-                Gson gson = new GsonBuilder().create();
-                myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
-//                Toast.makeText(context, myCustomArray.toString(),Toast.LENGTH_LONG).show();
 
             }
 
@@ -399,85 +413,85 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             @Override
             public void afterTextChanged(Editable s) {
 
-                for (int x = 0 ; x < addFoclistreq.size(); x++) {
+                for (x = 0 ; x < addFoclistreq.size(); x++) {
 
                 }
                 if (cekdel){
                     floor = addFoclistreq.get(i).isMatrixFloor();
                     if (myviewholder.mstockhand.length()==0){
-                    addFoclistreq.get(i).setStockOnHand("?");
-                }else{
-                    addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
-                }
-                if (addFoclistreq.get(i).getLastImpression()==0){
-                    myviewholder.mmatrix.setText("-");
-                }else if (!usingmatrix){
-                    myviewholder.mmatrix.setText("-");
-                }else{
-                    if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
-                        myviewholder.mmatrix.setText("-");
-                    }
-                    if (myviewholder.mstockhand.length()==0){
                         addFoclistreq.get(i).setStockOnHand("?");
-                        //udah foor
-                        if (floor){
-                            if ((int)Math.floor(addFoclistreq.get(i).getMatrixCount())<=0){
-                                myviewholder.mmatrix.setText("0");
-                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                            }
-                            else {
-                                myviewholder.mmatrix.setText(String.valueOf((int)Math.floor(addFoclistreq.get(i).getMatrixCount())));
-                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                            }
-                        }
-                        else {
-
-                            if ((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())<=0){
-                                myviewholder.mmatrix.setText("0");
-                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                            }
-                            else {
-                                myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())));
-                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                            }
-                        }
-
-                        myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
-                    }else {
+                    }else{
                         addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
-                        myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
-                        if (myviewholder.mmatrix.equals("0")){
-
-                        }else {
-                            //udahfloor
+                    }
+                    if (addFoclistreq.get(i).getLastImpression()==0){
+                        myviewholder.mmatrix.setText("-");
+                    }else if (!usingmatrix){
+                        myviewholder.mmatrix.setText("-");
+                    }else{
+                        if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                            myviewholder.mmatrix.setText("-");
+                        }
+                        if (myviewholder.mstockhand.length()==0){
+                            addFoclistreq.get(i).setStockOnHand("?");
+                            //udah foor
                             if (floor){
-
-                                deservqty = (int)Math.floor(addFoclistreq.get(i).getMatrixCount());
+                                if ((int)Math.floor(addFoclistreq.get(i).getMatrixCount())<=0){
+                                    myviewholder.mmatrix.setText("0");
+                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }
+                                else {
+                                    myviewholder.mmatrix.setText(String.valueOf((int)Math.floor(addFoclistreq.get(i).getMatrixCount())));
+                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }
                             }
                             else {
 
-                                deservqty = (int)Math.ceil(addFoclistreq.get(i).getMatrixCount());
+                                if ((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())<=0){
+                                    myviewholder.mmatrix.setText("0");
+                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }
+                                else {
+                                    myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())));
+                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }
                             }
 
-                            int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
-                            if (deservqty-stockhand<=0){
-                                myviewholder.mmatrix.setText("0");
-                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                            myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+                        }else {
+                            addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
+                            myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
+                            if (myviewholder.mmatrix.equals("0")){
+
                             }else {
-                                myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
-                                addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-                            }
+                                //udahfloor
+                                if (floor){
 
+                                    deservqty = (int)Math.floor(addFoclistreq.get(i).getMatrixCount());
+                                }
+                                else {
+
+                                    deservqty = (int)Math.ceil(addFoclistreq.get(i).getMatrixCount());
+                                }
+
+                                int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
+                                if (deservqty-stockhand<=0){
+                                    myviewholder.mmatrix.setText("0");
+                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }else {
+                                    myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
+                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                }
+
+                            }
                         }
                     }
-                }
                 }else {
-                    
+
                 }
 //
 
-                    Gson gson = new GsonBuilder().create();
-                    myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
+                Gson gson = new GsonBuilder().create();
+                myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
 //                Toast.makeText(context, myCustomArray.toString(),Toast.LENGTH_LONG).show();
             }
         });
