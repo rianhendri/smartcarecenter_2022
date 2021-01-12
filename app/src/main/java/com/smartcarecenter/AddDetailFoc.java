@@ -305,6 +305,7 @@ public class AddDetailFoc extends AppCompatActivity {
                         Toast.makeText(AddDetailFoc.this, getString(R.string.title_requiredimpressi),Toast.LENGTH_SHORT).show();
 
                     }else {
+//
                         for (int ad = 0; ad < addFoclistreq.size(); ++ad) {
                             if (addFoclistreq.get(ad).getStockOnHand().equals("?")){
                                 stockhandcek = false;

@@ -155,6 +155,9 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
             }
 
         }
+        cekdel=true;
+        addFoclistreq.get(i).setPosition(i+1);
+        floor = addFoclistreq.get(i).isMatrixFloor();
         myviewholder.mmatrixlabel.setText(matrixlabel);
         Picasso.with(context).load(addFoclistreq.get(i).getImgpic()).into(myviewholder.mimg);
         myviewholder.mname.setText(addFoclistreq.get(i).getNameitem());
@@ -210,16 +213,15 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                     for (int x = 0 ; x < addFoclistreq.size(); x++) {
                         totalqty += addFoclistreq.get(x).getQty();
                         mtotalqty.setText(String.valueOf(totalqty));
-
-                        Picasso.with(context).load(addFoclistreq.get(x).getImgpic()).into(myviewholder.mimg);
-                        myviewholder.mname.setText(addFoclistreq.get(x).getNameitem());
-                        myviewholder.mcode.setText(addFoclistreq.get(x).getItemcd());
-                        myviewholder.mcategory.setText(addFoclistreq.get(x).getCategory());
-                        myviewholder.mqty.setText(String.valueOf(addFoclistreq.get(x).getQty()));
-                        myviewholder.mpos.setText(String.valueOf(addFoclistreq.get(x).getPosition()));
-                        myviewholder.munit.setText(addFoclistreq.get(x).getUnitName());
-                        myviewholder.mprevimpress.setText(String.valueOf(addFoclistreq.get(x).getLastImpression()));
-                        myviewholder.mstockhand.setText(String.valueOf(addFoclistreq.get(x).getStockOnHand()));
+//                        Picasso.with(context).load(addFoclistreq.get(x).getImgpic()).into(myviewholder.mimg);
+//                        myviewholder.mname.setText(addFoclistreq.get(x).getNameitem());
+//                        myviewholder.mcode.setText(addFoclistreq.get(x).getItemcd());
+//                        myviewholder.mcategory.setText(addFoclistreq.get(x).getCategory());
+//                        myviewholder.mqty.setText(String.valueOf(addFoclistreq.get(x).getQty()));
+//                        myviewholder.mpos.setText(String.valueOf(addFoclistreq.get(x).getPosition()));
+//                        myviewholder.munit.setText(addFoclistreq.get(x).getUnitName());
+//                        myviewholder.mprevimpress.setText(String.valueOf(addFoclistreq.get(x).getLastImpression()));
+//                        myviewholder.mstockhand.setText(String.valueOf(addFoclistreq.get(x).getStockOnHand()));
                     }
 //                    grandTotalplus = 0;
 //                    intSum = 0;
@@ -312,7 +314,8 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                         if (mlastimpresi.length()==0){
                             lastimpresivalue=0;
                         }else {
-                            lastimpresivalue = Integer.parseInt(mlastimpresi.getText().toString());
+                            
+                            lastimpresivalue = Long.parseLong(mlastimpresi.getText().toString());
                         }
                         selisih = lastimpresivalue-addFoclistreq.get(i).getLastImpression();
                         spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();

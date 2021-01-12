@@ -12,6 +12,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -92,7 +94,7 @@ public class AddDetailsPo extends AppCompatActivity {
     public static int tax = 0;
     public static String taxname = "";
     ProgressDialog loading;
-    LinearLayout mback, mbtnchose;
+    LinearLayout mback, mbtnchose, mcopy;
     int pos = 0;
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,msend2,mtotalqty,mnoitem,mtotaltax,mgrantotalpo
@@ -103,7 +105,7 @@ public class AddDetailsPo extends AppCompatActivity {
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item, mbgalert;
-    TextView mtextalert, mnamafile, mrequiredpdf, mchosepdf;
+    TextView mtextalert, mnamafile, mrequiredpdf, mchosepdf, mlinktext;
     Spinner msn;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
@@ -130,6 +132,8 @@ public class AddDetailsPo extends AppCompatActivity {
     double sizeflemb = 0.0;
     double sizereq = 0.0;
     public static String notes1 = "";
+    private ClipboardManager myClipboard;
+    private ClipData myClip;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +165,8 @@ public class AddDetailsPo extends AppCompatActivity {
         mnamafile = findViewById(R.id.namafile);
         mrequiredpdf = findViewById(R.id.requiredpdf);
         mchosepdf = findViewById(R.id.chosepdf);
+        mcopy = findViewById(R.id.copylink);
+        mlinktext = findViewById(R.id.textlink);
         cekInternet();
         getSessionId();
         //setlayout recyler
@@ -361,7 +367,19 @@ public class AddDetailsPo extends AppCompatActivity {
                 launchPicker();
             }
         });
+        mcopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                String text;
+                text = mlinktext.getText().toString();
 
+                myClip = ClipData.newPlainText("text", text);
+                myClipboard.setPrimaryClip(myClip);
+
+                Toast.makeText(getApplicationContext(), "Link Copied",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak

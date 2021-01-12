@@ -353,6 +353,58 @@
                     android:background="@color/softgrey" />
             </LinearLayout>
             <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/copylink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/seguisb"
+                        android:padding="4dp"
+                        android:text="Link Upload"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="end"
+                    android:background="@drawable/bgwhite_cornerblack">
+                    <TextView
+                        android:id="@+id/textlink"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/seguisb"
+                        android:paddingLeft="4dp"
+                        android:text="https://stackoverflow.com/questions/42851810/how-to-add-copy-to-clipboard-button-in-android"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp"
+                        android:paddingRight="4dp"
+                        />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_copy"
+                        android:layout_margin="10dp"/>
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="4dp"
+                    android:background="@color/softgrey" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
@@ -464,7 +516,6 @@
                 android:textSize="13sp"
                 android:gravity="center"
                 android:text="@string/title_noitem"/>
-
             <TextView
                 android:id="@+id/submit2"
                 android:layout_width="match_parent"
