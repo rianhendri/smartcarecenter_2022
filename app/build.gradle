@@ -9,8 +9,8 @@ android {
         applicationId "com.smartcarecenter"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 25
-        versionName "1.2.4"
+        versionCode 26
+        versionName "1.2.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
