@@ -79,14 +79,15 @@ public class DetailsNotification extends AppCompatActivity {
         mback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.length()==0){
-                    startActivity(new Intent(DetailsNotification.this, Dashboard.class));
-                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
-                    finish();
-                }else {
-                    onBackPressed();
-
-                }
+                onBackPressed();
+//                if (username.length()==0){
+//                    startActivity(new Intent(DetailsNotification.this, Dashboard.class));
+//                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+//                    finish();
+//                }else {
+//                    onBackPressed();
+//
+//                }
             }
         });
     }

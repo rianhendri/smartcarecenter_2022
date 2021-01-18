@@ -104,7 +104,7 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
 //            myviewholder.mnoteslay.setVisibility(View.VISIBLE);
 //            myviewholder.mnotes.setText(focItem.get(i).getNotes());
 //        }
-
+        myviewholder.mpressname.setText(focItem.get(i).getPressName());
         myviewholder.mstatus.setText(focItem.get(i).getStatusName());
         myviewholder.mstatus.setTextColor(Color.parseColor("#"+ focItem.get(i).getStatusColorCode()));
         myviewholder.mpos.setText(String.valueOf(i+1));
@@ -131,7 +131,7 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mnofoc,mstatus,mdate,mpos,mnotes;
+        TextView mnofoc,mstatus,mdate,mpos,mnotes, mpressname;
         LinearLayout mnoteslay;
 
 
@@ -143,6 +143,7 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
             mpos = itemView.findViewById(R.id.nolist);
             mnotes = itemView.findViewById(R.id.notes);
             mnoteslay = itemView.findViewById(R.id.noteslay);
+            mpressname = itemView.findViewById(R.id.pressName);
         }
     }
 }

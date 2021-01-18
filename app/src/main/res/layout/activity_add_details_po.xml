@@ -288,7 +288,7 @@
                     android:background="@color/softgrey" />
             </LinearLayout>
             <LinearLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/btnchose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -359,45 +359,67 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/seguisb"
                         android:padding="4dp"
-                        android:text="Link Upload"
+                        android:text="PO Attachment Link Upload"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:gravity="end"
+                    android:visibility="gone"
                     android:background="@drawable/bgwhite_cornerblack">
+
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/textlink"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:fontFamily="@font/seguisb"
-                        android:paddingLeft="4dp"
-                        android:text="https://stackoverflow.com/questions/42851810/how-to-add-copy-to-clipboard-button-in-android"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="12sp"
+                        android:fontFamily="@font/segoeuib"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="6dp"
                         android:paddingRight="4dp"
-                        />
+                        android:text=""
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:visibility="gone"
+                        android:layout_width="11dp"
+                        android:layout_height="11dp"
+                        android:layout_margin="10dp"
+                        android:layout_marginEnd="16dp"
                         android:src="@drawable/ic_copy"
-                        android:layout_margin="10dp"/>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/textlink"
+                         />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoeuii"
+                    android:padding="4dp"
+                    android:gravity="center"
+                    android:text="@string/title_linkpdfakanmuncul"
+                    android:textColor="@color/darkgrey2"
+                    android:textSize="12sp" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

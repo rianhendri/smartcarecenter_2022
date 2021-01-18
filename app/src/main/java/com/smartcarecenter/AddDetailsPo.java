@@ -84,6 +84,7 @@ public class AddDetailsPo extends AppCompatActivity {
     String textprep="";
     String bgprep = "";
     String message = "";
+    String noOrder = "";
     public static JsonArray listsn;
     public static  String username = "";
     public static String matrixlabel = "";
@@ -310,11 +311,11 @@ public class AddDetailsPo extends AppCompatActivity {
                     if (muploadPOPdf){
                         if (mmustUpload){
                             showDialog();
-                            if (imagefile==null){
-                                Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
-                            }else {
-                                showDialog();
-                            }
+//                            if (imagefile==null){
+//                                Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
+//                            }else {
+//                                showDialog();
+//                            }
                         }
                         else {
                             showDialog();
@@ -340,11 +341,11 @@ public class AddDetailsPo extends AppCompatActivity {
                     if (muploadPOPdf){
                         if (mmustUpload){
                             showDialog();
-                            if (imagefile==null){
-                                Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
-                            }else {
-                                showDialog();
-                            }
+//                            if (imagefile==null){
+//                                Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
+//                            }else {
+//                                showDialog();
+//                            }
                         }
                         else {
                             showDialog();
@@ -367,19 +368,7 @@ public class AddDetailsPo extends AppCompatActivity {
                 launchPicker();
             }
         });
-        mcopy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                String text;
-                text = mlinktext.getText().toString();
 
-                myClip = ClipData.newPlainText("text", text);
-                myClipboard.setPrimaryClip(myClip);
-
-                Toast.makeText(getApplicationContext(), "Link Copied",Toast.LENGTH_SHORT).show();
-            }
-        });
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak
@@ -437,6 +426,14 @@ public class AddDetailsPo extends AppCompatActivity {
         startActivity(back);
         finish();
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
+    }
+    public void goGet() {
+        Intent back = new Intent(AddDetailsPo.this,AddDetailsPoView.class);
+        back.putExtra("id",noOrder);
+        back.putExtra("pdfyes","yes");
+        startActivity(back);
+        finish();
+        overridePendingTransition(0, 0);
     }
     public void LoadPress(){
         loading = ProgressDialog.show(AddDetailsPo.this, "", getString(R.string.title_loading), true);
@@ -611,7 +608,7 @@ public class AddDetailsPo extends AppCompatActivity {
                     muploadPOPdf = data.get("uploadPOPdf").getAsBoolean();
                     mmustUpload = data.get("mustUpload").getAsBoolean();
                     if (muploadPOPdf){
-                        mbtnchose.setVisibility(VISIBLE);
+                        mcopy.setVisibility(VISIBLE);
                         sizereq = (double) data.get("maxFileSize").getAsInt();
                         if (sizereq>1000.0){
                             sizeflekb = Double.parseDouble(String.valueOf(sizereq/1000));
@@ -640,7 +637,7 @@ public class AddDetailsPo extends AppCompatActivity {
                             mrequiredpdf.setVisibility(GONE);
                         }
                     }else {
-                        mbtnchose.setVisibility(GONE);
+                        mcopy.setVisibility(GONE);
                     }
                     if (showprep){
                         colortextrep = data.get("messageTextColor").getAsString();
@@ -747,9 +744,16 @@ public class AddDetailsPo extends AppCompatActivity {
                             sesionid();
                             if (statusnya.equals((Object)"OK")) {
                                 String string4 = jsonObject.getAsJsonObject("data").get("message").getAsString();
+                                JsonObject data = jsonObject.getAsJsonObject("data");
+                                noOrder = data.get("orderNo").getAsString();
                                 loading.dismiss();
                                 Toast.makeText((Context)AddDetailsPo.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
-                                onBackPressed();
+                                if (mmustUpload){
+                                        goGet();
+                                }else {
+                                    onBackPressed();
+                                }
+
 
                             }else {
                                 Toast.makeText((Context)AddDetailsPo.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
@@ -800,8 +804,14 @@ public class AddDetailsPo extends AppCompatActivity {
                             if (statusnya.equals((Object)"OK")) {
                                 String string4 = jsonObject.getAsJsonObject("data").get("message").getAsString();
                                 loading.dismiss();
+                                JsonObject data = jsonObject.getAsJsonObject("data");
+                                noOrder = data.get("orderNo").getAsString();
                                 Toast.makeText((Context)AddDetailsPo.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
-                                onBackPressed();
+                                if (mmustUpload){
+                                    goGet();
+                                }else {
+                                    onBackPressed();
+                                }
 
                             }else {
                                 Toast.makeText((Context)AddDetailsPo.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();

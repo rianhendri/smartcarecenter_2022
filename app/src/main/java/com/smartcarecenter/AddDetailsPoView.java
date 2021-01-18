@@ -13,6 +13,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -96,8 +98,8 @@ public class AddDetailsPoView extends AppCompatActivity {
     String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
-    LinearLayout madd_item,mchat;
-    TextView msn,mtextalert, mdeskrip;
+    LinearLayout madd_item,mchat, mcopy;
+    TextView msn,mtextalert, mdeskrip, mlinktext;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
     String sesionid_new = "";
@@ -116,6 +118,10 @@ public class AddDetailsPoView extends AppCompatActivity {
     String guid = "";
     String username = "";
     public static String Nowpo = "0";
+    private ClipboardManager myClipboard;
+    private ClipData myClip;
+    Boolean showlinkdownload = true;
+    String mmustUpload = "yes";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,12 +155,15 @@ public class AddDetailsPoView extends AppCompatActivity {
         mlayinv = findViewById(R.id.downloadinvoice);
         mlaypo = findViewById(R.id.downloadpo);
         mdeskrip = findViewById(R.id.descrip);
+        mcopy =findViewById(R.id.copylink);
+        mlinktext = findViewById(R.id.textlink);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             noOrder = bundle2.getString("id");
             valuefilter = bundle2.getString("pos");
             guid = bundle2.getString("guid");
             username = bundle2.getString("username");
+            mmustUpload = bundle2.getString("pdfyes");
         }
         mtitle.setText("View Chargeable #"+noOrder);
         cekInternet();
@@ -199,7 +208,16 @@ public class AddDetailsPoView extends AppCompatActivity {
         mback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                if (mmustUpload.equals("yes")){
+                    Intent back = new Intent(AddDetailsPoView.this,ChargeableActivity.class);
+                    back.putExtra("pos",valuefilter);
+                    startActivity(back);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    finish();
+                }else {
+                    onBackPressed();
+                }
+
             }
         });
         mchat.setOnClickListener(new View.OnClickListener() {
@@ -216,6 +234,19 @@ public class AddDetailsPoView extends AppCompatActivity {
                 }else {
                     Toast.makeText(AddDetailsPoView.this,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        mcopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                String text;
+                text = mlinktext.getText().toString();
+
+                myClip = ClipData.newPlainText("text", text);
+                myClipboard.setPrimaryClip(myClip);
+
+                Toast.makeText(getApplicationContext(), "Link Copied",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -267,31 +298,40 @@ public class AddDetailsPoView extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        if (check.checknotif==1){
-            if (username==null){
-                if (check.checklistform==1){
-                    list2.clear();
-                    refresh=true;
-                }
-                super.onBackPressed();
-                finish();
+        if (mmustUpload.equals("yes")){
+            Intent back = new Intent(AddDetailsPoView.this,ChargeableActivity.class);
+            back.putExtra("pos",valuefilter);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }else {
+            if (check.checknotif==1){
+                if (username==null){
+                    if (check.checklistform==1){
+                        list2.clear();
+                        refresh=true;
+                    }
+                    super.onBackPressed();
+                    finish();
 
-            }else {
-                super.onBackPressed();
+                }else {
+                    super.onBackPressed();
 //              refresh=true;
-                Intent back = new Intent(AddDetailsPoView.this,ChargeableActivity.class);
+                    Intent back = new Intent(AddDetailsPoView.this,ChargeableActivity.class);
+                    back.putExtra("pos",valuefilter);
+                    startActivity(back);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    finish();
+                }
+            }else {
+                Intent back = new Intent(AddDetailsPoView.this,Dashboard.class);
                 back.putExtra("pos",valuefilter);
                 startActivity(back);
                 overridePendingTransition(R.anim.left_in, R.anim.right_out);
                 finish();
             }
-        }else {
-            Intent back = new Intent(AddDetailsPoView.this,Dashboard.class);
-            back.putExtra("pos",valuefilter);
-            startActivity(back);
-            overridePendingTransition(R.anim.left_in, R.anim.right_out);
-            finish();
         }
+
 
 
     }
@@ -376,6 +416,15 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+
+                    showlinkdownload = data.get("showUploadPOLink").getAsBoolean();
+                    if (showlinkdownload){
+                        mcopy.setVisibility(VISIBLE);
+                        String linkpdf = data.get("uploadPOLink").getAsString();
+                        mlinktext.setText(linkpdf);
+                    }else {
+                        mcopy.setVisibility(GONE);
+                    }
                     mdeskrip.setText(data.get("custNotes").getAsString());
                     //laydownloadpoinv
                     if (data.get("poDownloadURL").toString().equals("null")){

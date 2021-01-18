@@ -155,4 +155,6 @@
     <string name="title_3hari">3 Hari</string>
     <string name="title_7hari">7 Hari</string>
     <string name="title_14hari">14 Hari</string>
+    <string name="title_copyclipboard">Klik link untuk copy ke clipboard</string>
+    <string name="title_linkpdfakanmuncul">Link upload PO akan diberikan setelah request disubmit.</string>
 </resources>
