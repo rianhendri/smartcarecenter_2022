@@ -594,7 +594,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/segoeui"
-                            android:text="Total Qty (ordered):"
+                            android:text="Total Qty Ordered:"
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 
@@ -619,7 +619,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/segoeui"
-                            android:text="Total Qty (approved):"
+                            android:text="Total Qty Approved:"
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 

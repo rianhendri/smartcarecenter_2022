@@ -67,6 +67,7 @@ import retrofit2.Response;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.smartcarecenter.Dashboard.installed2;
 import static com.smartcarecenter.FormActivity.refresh;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.ChargeableActivity.list2;
@@ -224,6 +225,7 @@ public class AddDetailsPoView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 appInstalledOrNot("com.whatsapp");
+                appInstalledOrNot2("com.whatsapp.w4b");
                 if (installed) {
                     String message = "Hi Support, "+getString(R.string.title_tanyafoc)+noOrder;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -232,6 +234,13 @@ public class AddDetailsPoView extends AppCompatActivity {
                     startActivity(intent);
 
                 }else {
+                    if (installed2){
+                        String message = "Hi Support, "+getString(R.string.title_tanyafoc)+noOrder;
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(android.net.Uri.parse(
+                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s", Nowpo, message)));
+                        startActivity(intent);
+                    }
                     Toast.makeText(AddDetailsPoView.this,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -637,6 +646,19 @@ public class AddDetailsPoView extends AppCompatActivity {
 
         }
         return installed;
+    }
+    public boolean appInstalledOrNot2(String string2) {
+        PackageManager packageManager = this.getPackageManager();
+
+        try {
+            packageManager.getPackageInfo(string2, packageManager.GET_ACTIVITIES);
+            installed2 = true;
+        }
+        catch (PackageManager.NameNotFoundException nameNotFoundException) {
+            installed2 = false;
+
+        }
+        return installed2;
     }
     public void prepform(){
 //        JsonObject jsonObject = new JsonObject();

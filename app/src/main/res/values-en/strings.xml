@@ -69,11 +69,11 @@
     <string name="title_nameproduct">Product Name</string>
     <string name="title_categoryproduct">Product Category</string>
     <string name="title_additem">S</string>
-    <string name="title_qty">"Qty: "</string>
+    <string name="title_qty">"Qty Ordered: "</string>
     <string name="title_additemfoc">Add New FOC Order</string>
     <string name="title_submit">Submit</string>
     <string name="title_totalbarang">"Total Product: "</string>
-    <string name="title_totalitem">Total Item:</string>
+    <string name="title_totalitem">"Total Item Ordered: "</string>
     <string name="title_Summary">Summary</string>
     <string name="additemlist">Add Item</string>
     <string name="title_date">Date</string>
@@ -82,7 +82,7 @@
     <string name="title_NoFoc">No Foc</string>
     <string name="title_startimpesi">"Previous Impression: "</string>
     <string name="title_endimpresi">Present Impression</string>
-    <string name="title_totalqty">Total Qty:</string>
+    <string name="title_totalqty">Total Qty Ordered:</string>
     <string name="title_noitem">No Item</string>
     <string name="title_category">"Category: "</string>
     <string name="title_requiredimpressi">Present Impression Required</string>
@@ -136,7 +136,7 @@
     <string name="title_totalapproved">Total Approved:</string>
     <string name="title_reasoncancel">"Cancellation Reason: "</string>
     <string name="title_reasonrequired">please input the cancellation reason</string>
-    <string name="title_stockhand">"Stock On-hand: "</string>
+    <string name="title_stockhand">"SOH: "</string>
     <string name="title_unduhan">Download File</string>
     <string name="title_stockhandrequired">Stock On Hand Required</string>
     <string name="title_readAll">Mark all as read</string>

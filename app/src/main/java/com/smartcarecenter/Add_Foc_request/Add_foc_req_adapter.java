@@ -30,8 +30,10 @@
  */
 package com.smartcarecenter.Add_Foc_request;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -56,6 +58,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.smartcarecenter.AddDetailFoc;
+import com.smartcarecenter.AddDetailsPo;
+import com.smartcarecenter.AddDetailsPoView;
+import com.smartcarecenter.Add_Foc_Item_List;
 import com.smartcarecenter.R;
 import com.squareup.picasso.Picasso;
 
@@ -71,17 +76,22 @@ import static com.smartcarecenter.AddDetailFoc.mlaytotal;
 import static com.smartcarecenter.AddDetailFoc.mlistitem_foc;
 import static com.smartcarecenter.AddDetailFoc.mno_order;
 import static com.smartcarecenter.AddDetailFoc.mnoitem;
+import static com.smartcarecenter.AddDetailFoc.mnotes;
+import static com.smartcarecenter.AddDetailFoc.mpressId;
 import static com.smartcarecenter.AddDetailFoc.mtotalitem;
 import static com.smartcarecenter.AddDetailFoc.mtotalqty;
 import static com.smartcarecenter.AddDetailFoc.myCustomArray;
 import static com.smartcarecenter.AddDetailFoc.jsonarayitem;
+import static com.smartcarecenter.AddDetailFoc.notes1;
 import static com.smartcarecenter.AddDetailFoc.reitem;
+import static com.smartcarecenter.AddDetailFoc.photo_location;
 import static com.smartcarecenter.AddDetailFoc.req_adapter;
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
 
 public class Add_foc_req_adapter
 extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
     public static ArrayList<Add_foc_req_item> addFoclistreq;
+    ArrayList<Add_foc_req_item> addFoclistreq2 = new ArrayList<Add_foc_req_item>();
     public static long lastimpresivalue = 0;
     public static Double matrixcount = 0.00;
     public static double matrixmeter = 0.00;
@@ -95,7 +105,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
     boolean floor = true;
     int deservqty = 0;
     public static int totalqty = 0;
-    int x;
+    int x=0;
     public Add_foc_req_adapter(Context context, ArrayList<Add_foc_req_item> addFoclistitem) {
         this.context = context;
         this.addFoclistreq = addFoclistitem;
@@ -209,13 +219,21 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                 cekdel=false;
 //                myviewholder.mstockhand.clearFocus();
                 if (addFoclistreq.size() >= 0) {
-                    addFoclistreq.remove(i);
+                    addFoclistreq.remove(addFoclistreq.get(i));
+                    notifyDataSetChanged();
                     notifyItemRemoved(i);
                     notifyItemRangeChanged(i, addFoclistreq.size());
+
                     totalqty = 0;
                     for (int x = 0 ; x < addFoclistreq.size(); x++) {
                         totalqty += addFoclistreq.get(x).getQty();
                         mtotalqty.setText(String.valueOf(totalqty));
+//                        addFoclistreq2.addAll(addFoclistreq);
+//                        addFoclistreq.clear();
+//                        addFoclistreq =new ArrayList<Add_foc_req_item>();
+//                        addFoclistreq.addAll(addFoclistreq2);
+
+
 //                        Picasso.with(context).load(addFoclistreq.get(x).getImgpic()).into(myviewholder.mimg);
 //                        myviewholder.mname.setText(addFoclistreq.get(x).getNameitem());
 //                        myviewholder.mcode.setText(addFoclistreq.get(x).getItemcd());
@@ -243,6 +261,35 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                     mno_order.setVisibility(View.VISIBLE);
 
                 }
+
+//                notes1=mnotes.getText().toString();
+//                lastimpresi = mlastimpresi.getText().toString();
+//                if (imagefile!=null){
+//
+//                    Intent gotoaddfoc = new Intent(context, AddDetailFoc.class);
+//                    gotoaddfoc.putExtra("pressId",mpressId);
+//                    gotoaddfoc.putExtra("lastImpres",lastimpresi);
+//                    gotoaddfoc.putExtra("foto",imagefile);
+//                    gotoaddfoc.putExtra("uri",photo_location);
+//                    gotoaddfoc.putExtra("notesa",notes1);
+////                    Toast.makeText(AddDetailFoc.this, imagefile.toString(),Toast.LENGTH_LONG).show();
+////                    Toast.makeText(AddDetailFoc.this, photo_location.toString(),Toast.LENGTH_LONG).show();
+//                    context.startActivity(gotoaddfoc);
+//                    ((Activity)context).overridePendingTransition(0, 0);
+//                    ((Activity)context).finish();
+//                    listpoact.addAll(reitem);
+//                }else {
+//                    Intent gotoaddfoc = new Intent(context, AddDetailFoc.class);
+//                    gotoaddfoc.putExtra("pressId",mpressId);
+//                    gotoaddfoc.putExtra("lastImpres",lastimpresi);
+//                    gotoaddfoc.putExtra("notesa",notes1);
+//                    context.startActivity(gotoaddfoc);
+//                    ((Activity)context).overridePendingTransition(0, 0);
+//                    ((Activity)context).finish();
+//                    listpoact.addAll(reitem);
+//                }
+
+
                 req_adapter = new Add_foc_req_adapter(context, reitem);
                 mlistitem_foc.setAdapter(req_adapter);
                 Gson gson = new GsonBuilder().create();
@@ -250,6 +297,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
                 jsonarayitem = myCustomArray.toString();
                 mtotalitem.setText(String.valueOf(addFoclistreq.size()));
 
+                return;
             }
         });
         //button plus minus qty
@@ -305,22 +353,31 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                for (int x = 0 ; x < addFoclistreq.size(); x++) {
 
-                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
                 if (addFoclistreq.size()==0){
 
                 }else {
-                    floor = addFoclistreq.get(i).isMatrixFloor();
+               for (int f = 0 ; f < addFoclistreq.size(); f++) {
+
+
+                    Toast.makeText(context, String.valueOf(f), Toast.LENGTH_SHORT).show();
+                    floor = addFoclistreq.get(f).isMatrixFloor();
                     if (addFoclistreq.size()==0){
 
                     }else {
-                        if (addFoclistreq.get(i).getLastImpression()==0) {
+                        if (addFoclistreq.get(f).getLastImpression()==0) {
                             myviewholder.mmatrix.setText("-");
                         }else if (!usingmatrix){
                             myviewholder.mmatrix.setText("-");
                         }else {
-                            if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
+                            if (addFoclistreq.get(f).getMatrixLifeSpanPcs()==0){
                                 myviewholder.mmatrix.setText("-");
                             }
                             if (mlastimpresi.length()==0){
@@ -329,53 +386,53 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
                                 lastimpresivalue = Long.parseLong(mlastimpresi.getText().toString());
                             }
-                            selisih = lastimpresivalue-addFoclistreq.get(i).getLastImpression();
-                            spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();
-                            addFoclistreq.get(i).setMatrixCount(matrixcount = (selisih/spanmax)*matrixmeter);
+                            selisih = lastimpresivalue-addFoclistreq.get(f).getLastImpression();
+                            spanmax = addFoclistreq.get(f).getMatrixLifeSpanPcs();
+                            addFoclistreq.get(f).setMatrixCount(matrixcount = (selisih/spanmax)*matrixmeter);
 
 //                    Toast.makeText(context, String.valueOf(form.format(matrixcount)),Toast.LENGTH_LONG).show();
                             //udah foor
                             if (floor){
-                                if ((int)Math.floor(addFoclistreq.get(i).getMatrixCount())<=0){
+                                if ((int)Math.floor(addFoclistreq.get(f).getMatrixCount())<=0){
                                     myviewholder.mmatrix.setText("0");
-                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                    addFoclistreq.get(f).setMatrix(myviewholder.mmatrix.getText().toString());
                                 }
                                 else {
                                     if (myviewholder.mstockhand.length()==0){
-                                        myviewholder.mmatrix.setText(String.valueOf((int)Math.floor(addFoclistreq.get(i).getMatrixCount())));
-                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                        myviewholder.mmatrix.setText(String.valueOf((int)Math.floor(addFoclistreq.get(f).getMatrixCount())));
+                                        addFoclistreq.get(f).setMatrix(myviewholder.mmatrix.getText().toString());
                                     }else {
-                                        int deservqty = (int)Math.floor(addFoclistreq.get(i).getMatrixCount());
+                                        int deservqty = (int)Math.floor(addFoclistreq.get(f).getMatrixCount());
                                         int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
                                         if (deservqty-stockhand<=0){
                                             myviewholder.mmatrix.setText("0");
-                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                            addFoclistreq.get(f).setMatrix(myviewholder.mmatrix.getText().toString());
                                         }else {
                                             myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
-                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                            addFoclistreq.get(f).setMatrix(myviewholder.mmatrix.getText().toString());
                                         }
                                     }
 
                                 }
                             }
                             else {
-                                if ((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())<=0){
+                                if ((int)Math.ceil(addFoclistreq.get(f).getMatrixCount())<=0){
                                     myviewholder.mmatrix.setText("0");
-                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                    addFoclistreq.get(f).setMatrix(myviewholder.mmatrix.getText().toString());
                                 }
                                 else {
                                     if (myviewholder.mstockhand.length()==0){
-                                        myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())));
-                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                        myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(addFoclistreq.get(f).getMatrixCount())));
+                                        addFoclistreq.get(f).setMatrix(myviewholder.mmatrix.getText().toString());
                                     }else {
-                                        int deservqty = (int)Math.ceil(addFoclistreq.get(i).getMatrixCount());
+                                        int deservqty = (int)Math.ceil(addFoclistreq.get(f).getMatrixCount());
                                         int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
                                         if (deservqty-stockhand<=0){
                                             myviewholder.mmatrix.setText("0");
-                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                            addFoclistreq.get(f).setMatrix(myviewholder.mmatrix.getText().toString());
                                         }else {
                                             myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
-                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
+                                            addFoclistreq.get(f).setMatrix(myviewholder.mmatrix.getText().toString());
                                         }
                                     }
 
@@ -384,17 +441,11 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
                         }
                     }
-
+               }
                     Gson gson = new GsonBuilder().create();
                     myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
 //                Toast.makeText(context, myCustomArray.toString(),Toast.LENGTH_LONG).show();
                 }
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
 
             }
         });
@@ -417,6 +468,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
                 }
                 if (cekdel){
+                    Toast.makeText(context, String.valueOf(i), Toast.LENGTH_SHORT).show();
                     floor = addFoclistreq.get(i).isMatrixFloor();
                     if (myviewholder.mstockhand.length()==0){
                         addFoclistreq.get(i).setStockOnHand("?");

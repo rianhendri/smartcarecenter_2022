@@ -63,6 +63,7 @@ import java.util.ArrayList;
 
 import static com.smartcarecenter.Dashboard.addFormAdapterAdapter;
 import static com.smartcarecenter.Dashboard.installed;
+import static com.smartcarecenter.Dashboard.installed2;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
 import static com.smartcarecenter.Dashboard.news_new;
@@ -139,7 +140,6 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 }
                 if (namemenu.equals(context.getString(R.string.title_live_chat))){
                     if (installed) {
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                         builder.setTitle("Live Chat:");
                         // set the custom layout
@@ -159,7 +159,29 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                         AlertDialog dialog = builder.create();
                         dialog.show();
                     }else {
-                        Toast.makeText(context,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
+                        if (installed2){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                            builder.setTitle("Live Chat:");
+                            // set the custom layout
+                            final View customLayout = LayoutInflater.from(context).inflate(R.layout.chatdialoghome, null);
+                            mchatdialog = (RecyclerView) customLayout.findViewById(R.id.chatdialog);
+                            linearLayoutManager = new LinearLayoutManager(context, LinearLayout.VERTICAL,false);
+//        linearLayoutManager.setReverseLayout(true);
+//        linearLayoutManager.setStackFromEnd(true);
+                            mchatdialog.setLayoutManager(linearLayoutManager);
+                            mchatdialog.setHasFixedSize(true);
+                            addFormAdapterAdapter = new ChatAdapter(context, list2);
+                            mchatdialog.setAdapter(addFormAdapterAdapter);
+                            builder.setView(customLayout);
+                            // add a button
+
+                            // create and show the alert dialog
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }else {
+                            Toast.makeText(context,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
 
                 }

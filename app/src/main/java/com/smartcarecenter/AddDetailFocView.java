@@ -69,6 +69,7 @@ import retrofit2.Response;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.smartcarecenter.Add_foc_Item_list_model.Add_foc_list_adapter.listpoact;
+import static com.smartcarecenter.Dashboard.installed2;
 import static com.smartcarecenter.DetailsFormActivity.username;
 import static com.smartcarecenter.FreeofchargeActivity.list2;
 import static com.smartcarecenter.FormActivity.refresh;
@@ -198,6 +199,7 @@ public class AddDetailFocView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 appInstalledOrNot("com.whatsapp");
+                appInstalledOrNot2("com.whatsapp.w4b");
                 if (installed) {
                     String message = "Hi Support, "+getString(R.string.title_tanyafoc)+noOrder;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -205,7 +207,16 @@ public class AddDetailFocView extends AppCompatActivity {
                             String.format("https://api.whatsapp.com/send?phone=%s&text=%s", Nowfoc, message)));
                     startActivity(intent);
                 }else {
-                    Toast.makeText(AddDetailFocView.this,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
+                    if (installed2){
+                        String message = "Hi Support, "+getString(R.string.title_tanyafoc)+noOrder;
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(android.net.Uri.parse(
+                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s", Nowfoc, message)));
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(AddDetailFocView.this,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -478,6 +489,19 @@ public class AddDetailFocView extends AppCompatActivity {
 
         }
         return installed;
+    }
+    public boolean appInstalledOrNot2(String string2) {
+        PackageManager packageManager = this.getPackageManager();
+
+        try {
+            packageManager.getPackageInfo(string2, packageManager.GET_ACTIVITIES);
+            installed2 = true;
+        }
+        catch (PackageManager.NameNotFoundException nameNotFoundException) {
+            installed2 = false;
+
+        }
+        return installed2;
     }
     public void prepform(){
 //        JsonObject jsonObject = new JsonObject();

@@ -61,6 +61,7 @@ import static com.smartcarecenter.menuhome.MenuAdapter.mchatdialog;
 
 public class Dashboard extends AppCompatActivity {
     public static boolean installed = true;
+    public static boolean installed2 = true;
     public static String mshowFormRequest = "";
     public static String mshowLiveChat = "";
     public static String mshowNews = "";
@@ -133,6 +134,7 @@ public class Dashboard extends AppCompatActivity {
         if (internet){
             reqApi();
             appInstalledOrNot("com.whatsapp");
+            appInstalledOrNot2("com.whatsapp.w4b");
         }else {
 
         }
@@ -168,6 +170,18 @@ public class Dashboard extends AppCompatActivity {
 
         }
         return installed;
+    }
+    public boolean appInstalledOrNot2(String bisnis) {
+        PackageManager packageManager = this.getPackageManager();
+        try {
+            packageManager.getPackageInfo(bisnis, packageManager.GET_ACTIVITIES);
+            installed2 = true;
+        }
+        catch (PackageManager.NameNotFoundException nameNotFoundException) {
+            installed2 = false;
+
+        }
+        return installed2;
     }
     public void sesionid() {
         if (MsessionExpired.equals("false")) {

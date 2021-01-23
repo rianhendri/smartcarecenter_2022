@@ -69,11 +69,11 @@
     <string name="title_nameproduct">Nama Produk</string>
     <string name="title_categoryproduct">Kategori Prouk</string>
     <string name="title_additem">Submit</string>
-    <string name="title_qty">"Qty: "</string>
+    <string name="title_qty">"Qty Ordered: "</string>
     <string name="title_additemfoc">" Tambahkan Pesanan FOC Baru"</string>
     <string name="title_submit">Submit</string>
     <string name="title_totalbarang">Jumlah Produk:</string>
-    <string name="title_totalitem">Jumlah Item:</string>
+    <string name="title_totalitem">Jumlah Order Item:</string>
     <string name="title_Summary">Ringkasan</string>
     <string name="additemlist">Tambah Item</string>
     <string name="title_date">Tanggal</string>
@@ -82,7 +82,7 @@
     <string name="title_NoFoc">No Foc</string>
     <string name="title_startimpesi">"Impresi Sebelumnya: "</string>
     <string name="title_endimpresi">Impresi Terakhir</string>
-    <string name="title_totalqty">Jumlah Qty:</string>
+    <string name="title_totalqty">Jumlah Order Qty:</string>
     <string name="title_noitem">Tidak ada item</string>
     <string name="title_category">"Kategori: "</string>
     <string name="title_requiredimpressi">Impresi terakhir wajib diisi</string>
@@ -136,7 +136,7 @@
     <string name="title_totalapproved">Jumlah Approved:</string>
     <string name="title_reasoncancel">Alasan Pembatalan:</string>
     <string name="title_reasonrequired">mohon masukkan alasan pembatalan</string>
-    <string name="title_stockhand">"Stock On-hand: "</string>
+    <string name="title_stockhand">"SOH: "</string>
     <string name="title_unduhan">Unduh Flile</string>
     <string name="title_stockhandrequired">Stock On Hand Required</string>
     <string name="title_readAll">Tandai semua sudah terbaca</string>
