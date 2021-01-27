@@ -157,4 +157,7 @@
     <string name="title_14hari">14 Hari</string>
     <string name="title_copyclipboard">Klik link untuk copy ke clipboard</string>
     <string name="title_linkpdfakanmuncul">Link upload PO akan diberikan setelah request disubmit.</string>
+    <string name="title_Answere">"Jawaban: "</string>
+    <string name="Title_kirimsurvey">Kirim Survey</string>
+    <string name="title_kirimsekarang">Kirim Sekarang?</string>
 </resources>

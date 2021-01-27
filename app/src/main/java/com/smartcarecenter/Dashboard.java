@@ -112,6 +112,7 @@ public class Dashboard extends AppCompatActivity {
     String notifications_new = "";
     public static String news_new = "";
     boolean notes = true;
+    boolean survey = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -251,6 +252,16 @@ public class Dashboard extends AppCompatActivity {
                     mtermandcondition.setVisibility(View.VISIBLE);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    survey = data.get("showSurvey").getAsBoolean();
+                    if (survey){
+                        Intent gotonews = new Intent(Dashboard.this, SurveyActivity.class);
+                        startActivity(gotonews);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
+                    }else {
+
+                    }
+
                     // Chat List
                     listformreq = data.getAsJsonArray("liveChatHome");
                     Nowfoc = data.get("liveChatFOC").getAsString();

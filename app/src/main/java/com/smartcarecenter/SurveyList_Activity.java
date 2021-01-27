@@ -17,12 +17,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +27,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.smartcarecenter.Freeofcharge.FocAdapter;
-import com.smartcarecenter.Freeofcharge.FocItem;
+import com.smartcarecenter.SurveyList.SurveyListItem;
+import com.smartcarecenter.SurveyList.SurveylistAdapter;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.listnews.NewsAdapter;
@@ -40,23 +36,23 @@ import com.smartcarecenter.listnews.NewsItem;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.widget.LinearLayout.VERTICAL;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
-public class NewsActivity extends AppCompatActivity {
+public class SurveyList_Activity extends AppCompatActivity {
     String MhaveToUpdate = "";
     String MsessionExpired = "";
     boolean internet = true;
-    RecyclerView layoutnews;
+    RecyclerView layoutsurvey;
     private LinearLayoutManager linearLayoutManager;
-    ArrayList<NewsItem> list2;
-    JsonArray listnews;
+    ArrayList<SurveyListItem> list2;
+    public static JsonArray listnews;
     JsonArray liststatus;
     LinearLayout mback;
     DatabaseReference mbannerlink;
@@ -65,39 +61,32 @@ public class NewsActivity extends AppCompatActivity {
     DatabaseReference mlist_news;
     NestedScrollView mnested;
     TextView mnonews;
-    NewsAdapter newsAdapter;
+    SurveylistAdapter newsAdapter;
     ProgressDialog loading;
     int page = 1;
-    int pos = 0;
     boolean refreshscroll = true;
     String sesionid_new = "";
     int totalpage = 0;
-    Spinner mstatus_spin;
-    public static String valuefilter = "-";
-    List<String> listvalue = new ArrayList();
-    List<String> listnamestatus = new ArrayList();
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.activity_survey_list_);
         mfooterload = findViewById(R.id.loadingfooter);
         mback = findViewById(R.id.backbtn);
-        layoutnews = findViewById(R.id.newscontentlist);
+        layoutsurvey = findViewById(R.id.surveylist);
         mnonews = findViewById(R.id.nonews);
         mnested = findViewById(R.id.nested);
-        mstatus_spin = findViewById(R.id.spinstatus);
         //setlayout recyler
-        linearLayoutManager = new LinearLayoutManager(NewsActivity.this, LinearLayout.VERTICAL,false);
+        linearLayoutManager = new LinearLayoutManager(SurveyList_Activity.this, VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
 //        linearLayoutManager.setStackFromEnd(true);
-        layoutnews.setLayoutManager(linearLayoutManager);
-        layoutnews.setHasFixedSize(true);
-        list2 = new ArrayList<NewsItem>();
+        layoutsurvey.setLayoutManager(linearLayoutManager);
+        layoutsurvey.setHasFixedSize(true);
+        list2 = new ArrayList<SurveyListItem>();
         getSessionId();
         cekInternet();
         if (internet){
-            loadSpin();
             loadnews();
         }else {
 
@@ -116,7 +105,7 @@ public class NewsActivity extends AppCompatActivity {
                         if (internet){
                             if (refreshscroll){
                                 page++;
-//                                loading = ProgressDialog.show(NewsActivity.this, "", getString(R.string.title_loading), true);
+                                loading = ProgressDialog.show(SurveyList_Activity.this, "", getString(R.string.title_loading), true);
                                 refreshscroll=false;
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable()
@@ -124,11 +113,11 @@ public class NewsActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         if (page <=totalpage){
-                                            layoutnews.setLayoutFrozen(true);
+                                            layoutsurvey.setLayoutFrozen(true);
                                             pagination();
-//                                            loading.dismiss();
+                                            loading.dismiss();
                                         }else {
-//                                            loading.dismiss();
+                                            loading.dismiss();
                                             refreshscroll=false;
                                         }
                                     }
@@ -137,7 +126,7 @@ public class NewsActivity extends AppCompatActivity {
                             }
 
                         }else {
-//                            loading.dismiss();
+                            loading.dismiss();
 //                                    Toast.makeText(getActivity(), String.valueOf(page), Toast.LENGTH_SHORT).show();
 //                                    mfooterload.setVisibility(View.GONE);
 //                                    mdatahabis.setVisibility(View.GONE);
@@ -154,28 +143,6 @@ public class NewsActivity extends AppCompatActivity {
 
             }
         });
-        mstatus_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                refreshscroll = true;
-                page=1;
-                cekInternet();
-                for (int i = 0; i < listvalue.size(); ++i) {
-                    valuefilter = listvalue.get(position);
-                    if (internet) {
-                        loadnews();
-                    }else {
-
-                    }
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         mback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,11 +154,9 @@ public class NewsActivity extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
-        jsonObject.addProperty("categoryCd",valuefilter);
-        jsonObject.addProperty("status","-");
         jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONnews(jsonObject);
+        Call<JsonObject> panggilkomplek = jsonPostService.listsurveyapi(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -210,20 +175,20 @@ public class NewsActivity extends AppCompatActivity {
                 if (statusnya.equals("OK")){
                     JsonObject data = homedata.getAsJsonObject("data");
                     totalpage = data.get("totalPage").getAsInt();
-                    listnews = data.getAsJsonArray("frList");
+                    listnews = data.getAsJsonArray("surveyFeedbackList");
 //                    totalrec = data.get("totalRec").toString();
 //                    mrecord.setText("Record: "+totalrec);
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<ArrayList<NewsItem>>() {
+                    Type listType = new TypeToken<ArrayList<SurveyListItem>>() {
                     }.getType();
-                    ArrayList<NewsItem> list;
+                    ArrayList<SurveyListItem> list;
                     list=new ArrayList<>();
                     list = gson.fromJson(listnews.toString(), listType);
 
                     list2.addAll(list);
-                    newsAdapter = new NewsAdapter(NewsActivity.this, list2);
-                    layoutnews.setAdapter(newsAdapter);
-                    layoutnews.setVisibility(View.VISIBLE);
+                    newsAdapter = new SurveylistAdapter(SurveyList_Activity.this, list2);
+                    layoutsurvey.setAdapter(newsAdapter);
+                    layoutsurvey.setVisibility(View.VISIBLE);
                     loading.dismiss();
                     if (totalpage == 1) {
                         loading.dismiss();
@@ -234,39 +199,35 @@ public class NewsActivity extends AppCompatActivity {
                         list2.size();
                         loading.dismiss();
                     }
-//                    loading.dismiss();
+                    loading.dismiss();
 //                    page++;
                     refreshscroll=true;
                 }else {
                     sesionid();
-//                    loading.dismiss();
-                    Toast.makeText(NewsActivity.this, errornya,Toast.LENGTH_LONG).show();
+                    loading.dismiss();
+                    Toast.makeText(SurveyList_Activity.this, errornya,Toast.LENGTH_LONG).show();
                 }
 
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(NewsActivity.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                Toast.makeText(SurveyList_Activity.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
-//                loading.dismiss();
+                loading.dismiss();
 
             }
         });
     }
 
     public void loadnews(){
-        page=1;
-        mfooterload.setVisibility(View.VISIBLE);
-//        loading = ProgressDialog.show(this, "", getString(R.string.title_loading), true);
+        loading = ProgressDialog.show(this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
-        jsonObject.addProperty("categoryCd",valuefilter);
-        jsonObject.addProperty("status","-");
         jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONnews(jsonObject);
+        Call<JsonObject> panggilkomplek = jsonPostService.listsurveyapi(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -281,15 +242,15 @@ public class NewsActivity extends AppCompatActivity {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     totalpage = data.get("totalPage").getAsInt();
-                    listnews = data.getAsJsonArray("frList");
+                    listnews = data.getAsJsonArray("surveyFeedbackList");
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<ArrayList<NewsItem>>() {
+                    Type listType = new TypeToken<ArrayList<SurveyListItem>>() {
                     }.getType();
                     list2 = gson.fromJson(listnews.toString(), listType);
 //                    Toast.makeText(NewsActivity.this, list2.toString(), Toast.LENGTH_SHORT).show();
-                    newsAdapter = new NewsAdapter(NewsActivity.this, list2);
-                    layoutnews.setAdapter(newsAdapter);
-                    layoutnews.setVisibility(View.VISIBLE);
+                    newsAdapter = new SurveylistAdapter(SurveyList_Activity.this, list2);
+                    layoutsurvey.setAdapter(newsAdapter);
+                    layoutsurvey.setVisibility(View.VISIBLE);
                     mfooterload.setVisibility(View.GONE);
                     if (totalpage == 1) {
                         mfooterload.setVisibility(View.GONE);
@@ -301,35 +262,35 @@ public class NewsActivity extends AppCompatActivity {
                     }
                     if (listnews.size() == 0) {
                         mnonews.setVisibility(View.VISIBLE);
-                        layoutnews.setVisibility(View.GONE);
+                        layoutsurvey.setVisibility(View.GONE);
 
                     }else {
                         mnonews.setVisibility(View.GONE);
-                        layoutnews.setVisibility(View.VISIBLE);
+                        layoutsurvey.setVisibility(View.VISIBLE);
                     }
-//                    loading.dismiss();
+                    loading.dismiss();
 
                 }else {
-//                    loading.dismiss();
+                    loading.dismiss();
                     sesionid();
                     mfooterload.setVisibility(View.GONE);
-                    Toast.makeText(NewsActivity.this, errornya,Toast.LENGTH_LONG).show();
+                    Toast.makeText(SurveyList_Activity.this, errornya,Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(NewsActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                Toast.makeText(SurveyList_Activity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 mfooterload.setVisibility(View.GONE);
-//                loading.dismiss();
+                loading.dismiss();
 
             }
         });
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak
-        ConnectivityManager connectivityManager = (ConnectivityManager) NewsActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) SurveyList_Activity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)
         {
@@ -338,7 +299,7 @@ public class NewsActivity extends AppCompatActivity {
 
         }else {
             internet=false;
-            Intent noconnection = new Intent(NewsActivity.this, NoInternet.class);
+            Intent noconnection = new Intent(SurveyList_Activity.this, NoInternet.class);
             startActivity(noconnection);
             finish();
         }
@@ -357,79 +318,17 @@ public class NewsActivity extends AppCompatActivity {
 
 
             }else {
-                Intent gotoupdate = new Intent(NewsActivity.this, UpdateActivity.class);
+                Intent gotoupdate = new Intent(SurveyList_Activity.this, UpdateActivity.class);
                 startActivity(gotoupdate);
                 finish();
             }
 
         }else {
-            startActivity(new Intent(NewsActivity.this, LoginActivity.class));
+            startActivity(new Intent(SurveyList_Activity.this, LoginActivity.class));
             finish();
-            Toast.makeText(NewsActivity.this, getString(R.string.title_session_Expired),Toast.LENGTH_LONG).show();
+            Toast.makeText(SurveyList_Activity.this, getString(R.string.title_session_Expired),Toast.LENGTH_LONG).show();
         }
 
-    }
-    public void loadSpin(){
-        mfooterload.setVisibility(View.VISIBLE);
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("page",page);
-        jsonObject.addProperty("categoryCd",valuefilter);
-        jsonObject.addProperty("status","-");
-        jsonObject.addProperty("ver",ver);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONnews(jsonObject);
-        panggilkomplek.enqueue(new Callback<JsonObject>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                String errornya = "";
-                JsonObject homedata=response.body();
-                String statusnya = homedata.get("status").getAsString();
-                if (homedata.get("errorMessage").toString().equals("null")) {
-
-                }else {
-                    errornya = homedata.get("errorMessage").getAsString();
-                }
-                MhaveToUpdate = homedata.get("haveToUpdate").toString();
-                MsessionExpired = homedata.get("sessionExpired").toString();
-                if (statusnya.equals("OK")){
-                    JsonObject data = homedata.getAsJsonObject("data");
-                    liststatus = data.getAsJsonArray("categoryList");
-                    for (int i = 0; i < liststatus.size(); ++i) {
-                        JsonObject jsonObject3 = (JsonObject)liststatus.get(i);
-                        String string3 = jsonObject3.getAsJsonObject().get("Value").getAsString();
-                        String string4 = jsonObject3.getAsJsonObject().get("Text").getAsString();
-                        listvalue.add(string3);
-                        listnamestatus.add(string4);
-                        for (int j = 0; j < listvalue.size(); ++j) {
-                            if (listvalue.get(i).equals(valuefilter)){
-                                pos=j;
-                            }
-                        }
-                        final ArrayAdapter<String> kategori = new ArrayAdapter<String>(NewsActivity.this, R.layout.spinstatus_layout,
-                                listnamestatus);
-                        kategori.setDropDownViewResource(R.layout.spinkategori);
-                        kategori.notifyDataSetChanged();
-                        mstatus_spin.setAdapter(kategori);
-                        mstatus_spin.setSelection(pos);
-                        mfooterload.setVisibility(View.GONE);
-                    }
-                } else {
-                    Toast.makeText(NewsActivity.this, errornya,Toast.LENGTH_LONG).show();
-                    mfooterload.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(NewsActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
-                cekInternet();
-                mfooterload.setVisibility(View.GONE);
-
-            }
-        });
     }
     @Override
     public void onBackPressed() {

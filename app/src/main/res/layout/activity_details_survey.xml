@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Langueage"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:background="@color/dwhite">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/backbtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:visibility="visible"
+                android:layout_width="20dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:src="@drawable/back_white" />
+            <TextView
+                android:id="@+id/titlesurvey"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="24dp"
+                android:text=" "
+                android:fontFamily="@font/seguisb" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/gagalload"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text=""/>
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recylersurvey"
+                android:nestedScrollingEnabled="true"
+                android:layout_marginBottom="24dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:background="@drawable/bg_cornerblue"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="@string/title_submit"
+                android:textColor="@color/dwhite"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

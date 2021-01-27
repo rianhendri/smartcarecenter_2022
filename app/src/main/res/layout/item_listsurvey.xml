@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/dwhite"
+	android:orientation="vertical">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="2dp"
+		android:layout_marginTop="2dp"
+		android:orientation="horizontal"
+		android:paddingLeft="14dp"
+		android:paddingRight="14dp" >
+		<TextView
+			android:id="@+id/no"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:fontFamily="@font/seguisb"
+			android:maxLength="70"
+			android:maxLines="1"
+			android:text="1. "
+			android:textColor="@color/black"
+			android:textSize="17sp" />
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical" >
+
+			<TextView
+				android:id="@+id/titlenews"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:fontFamily="@font/seguisb"
+				android:maxLength="70"
+				android:maxLines="1"
+				android:text="Title Survey"
+				android:textColor="@color/black"
+				android:textSize="17sp" />
+			<TextView
+				android:id="@+id/datenews"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/segoeui"
+				android:gravity="bottom"
+				android:text="12 Desember 2021"
+				android:textColor="@color/black"
+				android:textSize="12sp" />
+			<TextView
+				android:visibility="gone"
+				android:id="@+id/contentview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:fontFamily="@font/segoeui"
+				android:maxLength="70"
+				android:maxLines="2"
+				android:text=""
+				android:textColor="@color/black"
+				android:textSize="13sp" />
+		</LinearLayout>
+	</LinearLayout>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginRight="12dp"
+		android:layout_marginLeft="12dp"
+		android:background="@color/darkgrey2"/>
+</LinearLayout>

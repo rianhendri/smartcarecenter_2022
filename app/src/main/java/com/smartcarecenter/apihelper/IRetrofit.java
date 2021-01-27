@@ -78,6 +78,9 @@ public interface IRetrofit {
     @POST("api/news/List")
     public Call<JsonObject> postRawJSONnews(@Body JsonObject var1);
 
+    @POST("api/survey/List")
+    public Call<JsonObject> listsurveyapi(@Body JsonObject var1);
+
     @POST("api/Account/Ping")
     public Call<JsonObject> postRawJSONping(@Body JsonObject var1);
 
@@ -120,6 +123,9 @@ public interface IRetrofit {
 
     @POST("api/Chargeable/PrepareNew")
     Call<JsonObject> prepcharge(@Body JsonObject locationPost);
+
+    @POST("api/survey/Submit")
+    Call<JsonObject> sendsurvey(@Body JsonObject locationPost);
 
     @Multipart
     @POST("api/FormRequest/Add")

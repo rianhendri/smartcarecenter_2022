@@ -54,6 +54,7 @@ import com.smartcarecenter.NewsActivity;
 import com.smartcarecenter.PurchaseMenu;
 import com.smartcarecenter.R;
 import com.smartcarecenter.SettingActivity;
+import com.smartcarecenter.SurveyList_Activity;
 import com.smartcarecenter.menuhome.MenuAdapter;
 import com.smartcarecenter.menuhome.MenuItem;
 import com.squareup.picasso.Callback;
@@ -128,9 +129,12 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                     ((Activity)context).finish();
 
                 }
-//                if (namemenu.equals(context.getString(R.string.title_survei))){
-//
-//                }
+                if (namemenu.equals(context.getString(R.string.title_survei))){
+                    Intent gotosurvey = new Intent(context, SurveyList_Activity.class);
+                    context.startActivity(gotosurvey);
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    ((Activity)context).finish();
+                }
                 if (namemenu.equals(context.getString(R.string.title_News))){
                     Intent gotonews = new Intent(context, NewsActivity.class);
                     context.startActivity(gotonews);

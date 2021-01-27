@@ -156,4 +156,7 @@
     <string name="title_14hari">14 Days</string>
     <string name="title_copyclipboard">Click the link to copy the URL</string>
     <string name="title_linkpdfakanmuncul">The PO upload link will be provided after this request submitted.</string>
+    <string name="title_Answere">"Answer: "</string>
+    <string name="Title_kirimsurvey">Send Survey</string>
+    <string name="title_kirimsekarang">Send Now?</string>
 </resources>

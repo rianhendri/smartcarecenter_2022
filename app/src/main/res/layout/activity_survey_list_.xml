@@ -26,64 +26,18 @@
                 android:gravity="center_vertical"
                 android:src="@drawable/back_white" />
             <TextView
+                android:id="@+id/titlesurveylist"
                 android:textSize="15sp"
                 android:textColor="#ffffff"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="4dp"
-                android:text="@string/title_News"
+                android:text="Survey"
                 android:fontFamily="@font/seguisb" />
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/dwhite"
-        android:orientation="horizontal"
-        android:padding="12dp" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/segoeui"
-            android:paddingLeft="4dp"
-            android:text="Category:"
-            android:gravity="center_vertical"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-        <Spinner
-            android:id="@+id/spinstatus"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:fontFamily="@font/seguisb"
-            android:gravity="start"
-            android:spinnerMode="dialog"
-            android:text="Semua"
-            android:textColor="@color/black" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:visibility="gone"
-                android:gravity="center"
-                android:id="@+id/totalorder"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/segoeui"
-                android:text="Record:-"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="13sp" />
-        </LinearLayout>
-
-
-
-    </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -102,8 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <androidx.recyclerview.widget.RecyclerView
-
-                        android:id="@+id/newscontentlist"
+                        android:id="@+id/surveylist"
                         android:paddingBottom="50dp"
                         android:scrollbars="none"
                         android:nestedScrollingEnabled="false"
