@@ -32,6 +32,7 @@ package com.smartcarecenter.ListSurvey.ListSurvey;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,7 @@ extends RecyclerView.Adapter<ListSurveyAnswer_adapter.Myviewholder> {
     boolean required = true;
     private int selected_position = -1;
     public static int pos = 0;
+    int anspos = 0;
     public ListSurveyAnswer_adapter(Context context, ArrayList<ListSurveyAnswer_tem> ListSurveyAnswer) {
         this.context = context;
         this.listsurveyanswer = ListSurveyAnswer;
@@ -105,12 +107,16 @@ extends RecyclerView.Adapter<ListSurveyAnswer_adapter.Myviewholder> {
            @Override
            public void onClick(View v) {
                pos = listsurveyanswer.get(i).getPosition();
-               for(int x=0;x<listAnswer.size();x++){
-                   listAnswer.get(pos-1).setAnswerPosition(i+1);
-                   Gson gson = new GsonBuilder().create();
-                   AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
-//                   Toast.makeText(context, AnswersArray.toString(),Toast.LENGTH_LONG).show();
-               }
+                if (listAnswer.get(pos-1).getAnswerPosition()==i+1){
+                    listAnswer.get(pos-1).setAnswerPosition(0);
+                }else {
+                    listAnswer.get(pos-1).setAnswerPosition(i+1);
+                }
+
+               Gson gson = new GsonBuilder().create();
+               AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+//               Toast.makeText(context, String.valueOf(pos),Toast.LENGTH_LONG).show();
+               Log.d("jawaban",AnswersArray.toString());
                if(selected_position==i+1){
                    selected_position=-1;
                    notifyDataSetChanged();

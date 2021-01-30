@@ -103,12 +103,13 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
         myviewholder.mmultiplerecyler.setHasFixedSize(true);
         imglist = new ArrayList<ListSurveyAnswer_tem>();
         ////load
-        for(int x=0;x<listformreq.size();x++){
-            JsonObject movie = listformreq.get(x).getAsJsonObject();
+        for(int x=0;x<listformreq.size();x++){}
+            JsonObject movie = listformreq.get(i).getAsJsonObject();
             if (movie.get("Answers").toString().equals("null")){
 
             }else {
                 listanwermulti = movie.getAsJsonArray("Answers");
+
 //                Toast.makeText(context, listanwermulti.toString(), Toast.LENGTH_SHORT).show();
             }
 
@@ -117,11 +118,13 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
 //                        }
 
 //                        Toast.makeText(SubMenuHome.this, characters.toString(), Toast.LENGTH_LONG).show();
-        }
+//        }
         Gson gson2 = new Gson();
         Type listType2 = new TypeToken<ArrayList<ListSurveyAnswer_tem>>() {
         }.getType();
+
         imglist = gson2.fromJson(listanwermulti.toString(),listType2);
+//        Toast.makeText(context, listanwermulti.toString(), Toast.LENGTH_SHORT).show();
         if(imglist!=null && imglist.size()!=0){
             if (imgAdapter!=null){
 //                                imgAdapter.clear();
@@ -187,7 +190,7 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
                 listAnswer.get(i).setAnswerPosition(i);
                 Gson gson = new GsonBuilder().create();
                 AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
-                Toast.makeText(context, AnswersArray.toString(),Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, AnswersArray.toString(),Toast.LENGTH_LONG).show();
             }
         });
 

@@ -109,12 +109,13 @@ public class SurveyActivity extends AppCompatActivity {
         }else {
 
         }
+        listAnswer.clear();
         msend.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 for(int x=0;x<listAnswer.size();x++){
-                    if (listAnswer.get(x).getQuestionType().toString().equals("Text")){
-                        if (listAnswer.get(x).isOptional()){
+                        if (listAnswer.get(x).getQuestionType().toString().equals("Text")){
+                            if (listAnswer.get(x).isOptional()){
 
                         }else {
                             if (listAnswer.get(x).getAnswerText().equals("")){

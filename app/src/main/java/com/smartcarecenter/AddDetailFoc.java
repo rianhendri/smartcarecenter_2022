@@ -338,108 +338,28 @@ public class AddDetailFoc extends AppCompatActivity {
                 setRequestImage();
             }
         });
-//        mlastimpresi.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//                if (addFoclistreq.size()==0){
-//
-//                }else {
-//                    for (int x = 0 ; x < addFoclistreq.size(); x++) {
-//                    Toast.makeText(AddDetailFoc.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
-//                    floor = addFoclistreq.get(i).isMatrixFloor();
-//                    if (addFoclistreq.size()==0){
-//
-//                    }else {
-//                        if (addFoclistreq.get(i).getLastImpression()==0) {
-//                            myviewholder.mmatrix.setText("-");
-//                        }else if (!usingmatrix){
-//                            myviewholder.mmatrix.setText("-");
-//                        }else {
-//                            if (addFoclistreq.get(i).getMatrixLifeSpanPcs()==0){
-//                                myviewholder.mmatrix.setText("-");
-//                            }
-//                            if (mlastimpresi.length()==0){
-//                                lastimpresivalue=0;
-//                            }else {
-//
-//                                lastimpresivalue = Long.parseLong(mlastimpresi.getText().toString());
-//                            }
-//                            selisih = lastimpresivalue-addFoclistreq.get(i).getLastImpression();
-//                            spanmax = addFoclistreq.get(i).getMatrixLifeSpanPcs();
-//                            addFoclistreq.get(i).setMatrixCount(matrixcount = (selisih/spanmax)*matrixmeter);
-//
-////                    Toast.makeText(context, String.valueOf(form.format(matrixcount)),Toast.LENGTH_LONG).show();
-//                            //udah foor
-//                            if (floor){
-//                                if ((int)Math.floor(addFoclistreq.get(i).getMatrixCount())<=0){
-//                                    myviewholder.mmatrix.setText("0");
-//                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-//                                }
-//                                else {
-//                                    if (myviewholder.mstockhand.length()==0){
-//                                        myviewholder.mmatrix.setText(String.valueOf((int)Math.floor(addFoclistreq.get(i).getMatrixCount())));
-//                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-//                                    }else {
-//                                        int deservqty = (int)Math.floor(addFoclistreq.get(i).getMatrixCount());
-//                                        int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
-//                                        if (deservqty-stockhand<=0){
-//                                            myviewholder.mmatrix.setText("0");
-//                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-//                                        }else {
-//                                            myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
-//                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-//                                        }
-//                                    }
-//
-//                                }
-//                            }
-//                            else {
-//                                if ((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())<=0){
-//                                    myviewholder.mmatrix.setText("0");
-//                                    addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-//                                }
-//                                else {
-//                                    if (myviewholder.mstockhand.length()==0){
-//                                        myviewholder.mmatrix.setText(String.valueOf((int)Math.ceil(addFoclistreq.get(i).getMatrixCount())));
-//                                        addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-//                                    }else {
-//                                        int deservqty = (int)Math.ceil(addFoclistreq.get(i).getMatrixCount());
-//                                        int stockhand = Integer.parseInt(myviewholder.mstockhand.getText().toString());
-//                                        if (deservqty-stockhand<=0){
-//                                            myviewholder.mmatrix.setText("0");
-//                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-//                                        }else {
-//                                            myviewholder.mmatrix.setText(String.valueOf(deservqty-stockhand));
-//                                            addFoclistreq.get(i).setMatrix(myviewholder.mmatrix.getText().toString());
-//                                        }
-//                                    }
-//
-//                                }
-//                            }
-//
-//                        }
-//                    }
-//                    }
-//                    Gson gson = new GsonBuilder().create();
-//                    myCustomArray = gson.toJsonTree(addFoclistreq).getAsJsonArray();
-////                Toast.makeText(context, myCustomArray.toString(),Toast.LENGTH_LONG).show();
-//                }
-//
-//            }
-//        });
+        mlastimpresi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (mlastimpresi.length()==0){
+                    lastimpresi="";
+                }else {
+                    lastimpresi=mlastimpresi.getText().toString();
+                }
+            }
+        });
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak

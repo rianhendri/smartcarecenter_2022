@@ -253,14 +253,15 @@ public class Dashboard extends AppCompatActivity {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     survey = data.get("showSurvey").getAsBoolean();
-                    if (survey){
-                        Intent gotonews = new Intent(Dashboard.this, SurveyActivity.class);
-                        startActivity(gotonews);
-                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                        finish();
-                    }else {
-
-                    }
+                    //Survey
+//                    if (survey){
+//                        Intent gotonews = new Intent(Dashboard.this, SurveyActivity.class);
+//                        startActivity(gotonews);
+//                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//                        finish();
+//                    }else {
+//
+//                    }
 
                     // Chat List
                     listformreq = data.getAsJsonArray("liveChatHome");

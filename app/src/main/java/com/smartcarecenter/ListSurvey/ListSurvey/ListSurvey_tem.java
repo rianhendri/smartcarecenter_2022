@@ -12,17 +12,21 @@ package com.smartcarecenter.ListSurvey.ListSurvey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class ListSurvey_tem {
 
     public ListSurvey_tem() {
     }
 
-    public ListSurvey_tem(String surveyCd, Integer position, String question, String questionType, boolean optional) {
+    public ListSurvey_tem(String surveyCd, Integer position, String question, String questionType,
+                          boolean optional, ArrayList<ListSurveyAnswer_tem> answers) {
         SurveyCd = surveyCd;
         Position = position;
         Question = question;
         QuestionType = questionType;
         Optional = optional;
+        Answers = answers;
     }
 
     public String getSurveyCd() {
@@ -65,6 +69,14 @@ public class ListSurvey_tem {
         Optional = optional;
     }
 
+    public ArrayList<ListSurveyAnswer_tem> getAnswer() {
+        return Answers;
+    }
+
+    public void setAnswer(ArrayList<ListSurveyAnswer_tem> answer) {
+        Answers = answer;
+    }
+
     @SerializedName("SurveyCd")
     private String SurveyCd;
     @Expose
@@ -79,6 +91,9 @@ public class ListSurvey_tem {
     @Expose
     @SerializedName("Optional")
     private boolean Optional;
+    @Expose
+    @SerializedName("Answers")
+    private ArrayList<ListSurveyAnswer_tem> Answers;
 
 }
 
