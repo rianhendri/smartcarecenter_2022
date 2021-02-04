@@ -62,7 +62,7 @@ import static com.smartcarecenter.SurveyActivity.listformreq;
 
 public class ListSurveyAnswer_adapter
 extends RecyclerView.Adapter<ListSurveyAnswer_adapter.Myviewholder> {
-    public static ArrayList<ListSurveyAnswer_tem> listsurveyanswer;
+    public static ArrayList<ListSurvey_tem> listsurveyanswer;
     public static JsonArray listanwermulti;
     ListSurvey_tem modelqty;
     Context context;
@@ -74,7 +74,7 @@ extends RecyclerView.Adapter<ListSurveyAnswer_adapter.Myviewholder> {
     private int selected_position = -1;
     public static int pos = 0;
     int anspos = 0;
-    public ListSurveyAnswer_adapter(Context context, ArrayList<ListSurveyAnswer_tem> ListSurveyAnswer) {
+    public ListSurveyAnswer_adapter(Context context, ArrayList<ListSurvey_tem> ListSurveyAnswer) {
         this.context = context;
         this.listsurveyanswer = ListSurveyAnswer;
     }
@@ -90,44 +90,49 @@ extends RecyclerView.Adapter<ListSurveyAnswer_adapter.Myviewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
-        if (selected_position ==  listsurveyanswer.get(i).getAnswerPosition()) {
-            // do your stuff here like
-            //Change selected item background color and Show sub item views
-            myviewholder.mbgselect.setBackgroundColor(Color.parseColor("#F6EAC0"));
-            myviewholder.mselect.setChecked(true);
+        if (listsurveyanswer.get(i).getAnswers()==null){
 
-        } else {
-            // do your stuff here like
-            //Change  unselected item background color and Hide sub item views
-            myviewholder.mbgselect.setBackgroundColor(Color.parseColor("#ffffff"));
-            myviewholder.mselect.setChecked(false);
-        }
-        myviewholder.mmultianswer.setText(listsurveyanswer.get(i).getAnswer());
-        myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               pos = listsurveyanswer.get(i).getPosition();
-                if (listAnswer.get(pos-1).getAnswerPosition()==i+1){
-                    listAnswer.get(pos-1).setAnswerPosition(0);
-                }else {
-                    listAnswer.get(pos-1).setAnswerPosition(i+1);
-                }
+        }else {
+            if (selected_position ==  listsurveyanswer.get(i).getAnswers().get(i).getAnswerPosition()) {
+                // do your stuff here like
+                //Change selected item background color and Show sub item views
+                myviewholder.mbgselect.setBackgroundColor(Color.parseColor("#F6EAC0"));
+                myviewholder.mselect.setChecked(true);
 
-               Gson gson = new GsonBuilder().create();
-               AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            } else {
+                // do your stuff here like
+                //Change  unselected item background color and Hide sub item views
+                myviewholder.mbgselect.setBackgroundColor(Color.parseColor("#ffffff"));
+                myviewholder.mselect.setChecked(false);
+            }
+            myviewholder.mmultianswer.setText(listsurveyanswer.get(i).getAnswers().get(i).getAnswer());
+            myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pos = listsurveyanswer.get(i).getPosition();
+                    if (listAnswer.get(pos-1).getAnswerPosition()==i+1){
+                        listAnswer.get(pos-1).setAnswerPosition(0);
+                    }else {
+                        listAnswer.get(pos-1).setAnswerPosition(i+1);
+                    }
+
+                    Gson gson = new GsonBuilder().create();
+                    AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
 //               Toast.makeText(context, String.valueOf(pos),Toast.LENGTH_LONG).show();
-               Log.d("jawaban",AnswersArray.toString());
-               if(selected_position==i+1){
-                   selected_position=-1;
-                   notifyDataSetChanged();
-                   return;
-               }
-               selected_position = i+1;
-               notifyDataSetChanged();
+                    Log.d("jawaban",AnswersArray.toString());
+                    if(selected_position==i+1){
+                        selected_position=-1;
+                        notifyDataSetChanged();
+                        return;
+                    }
+                    selected_position = i+1;
+                    notifyDataSetChanged();
 
 
-           }
-       });
+                }
+            });
+        }
+
     }
 
     @Override

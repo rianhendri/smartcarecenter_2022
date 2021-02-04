@@ -19,10 +19,10 @@ public class ListSurvey_tem {
     public ListSurvey_tem() {
     }
 
-    public ListSurvey_tem(String surveyCd, Integer position, String question, String questionType,
-                          boolean optional, ArrayList<ListSurveyAnswer_tem> answers) {
+    public ListSurvey_tem(String surveyCd, Integer position, Integer maxTextLength, String question, String questionType, boolean optional, ArrayList<ListSurveyAnswer_tem> answers) {
         SurveyCd = surveyCd;
         Position = position;
+        MaxTextLength = maxTextLength;
         Question = question;
         QuestionType = questionType;
         Optional = optional;
@@ -43,6 +43,14 @@ public class ListSurvey_tem {
 
     public void setPosition(Integer position) {
         Position = position;
+    }
+
+    public Integer getMaxTextLength() {
+        return MaxTextLength;
+    }
+
+    public void setMaxTextLength(Integer maxTextLength) {
+        MaxTextLength = maxTextLength;
     }
 
     public String getQuestion() {
@@ -69,12 +77,12 @@ public class ListSurvey_tem {
         Optional = optional;
     }
 
-    public ArrayList<ListSurveyAnswer_tem> getAnswer() {
+    public ArrayList<ListSurveyAnswer_tem> getAnswers() {
         return Answers;
     }
 
-    public void setAnswer(ArrayList<ListSurveyAnswer_tem> answer) {
-        Answers = answer;
+    public void setAnswers(ArrayList<ListSurveyAnswer_tem> answers) {
+        Answers = answers;
     }
 
     @SerializedName("SurveyCd")
@@ -82,6 +90,9 @@ public class ListSurvey_tem {
     @Expose
     @SerializedName("Position")
     private Integer Position;
+    @Expose
+    @SerializedName("MaxTextLength")
+    private Integer MaxTextLength;
     @Expose
     @SerializedName("Question")
     private String Question;
@@ -93,7 +104,7 @@ public class ListSurvey_tem {
     private boolean Optional;
     @Expose
     @SerializedName("Answers")
-    private ArrayList<ListSurveyAnswer_tem> Answers;
+    private ArrayList<ListSurveyAnswer_tem> Answers = null;
 
 }
 

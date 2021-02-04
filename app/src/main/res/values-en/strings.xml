@@ -160,4 +160,5 @@
     <string name="title_Answere">"Answer: "</string>
     <string name="Title_kirimsurvey">Send Survey</string>
     <string name="title_kirimsekarang">Send Now?</string>
+    <string name="title_datesurvvey">"Submit Date: "</string>
 </resources>

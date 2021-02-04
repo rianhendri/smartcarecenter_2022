@@ -37,10 +37,12 @@ public class DetailsSurvey extends AppCompatActivity {
     public  static ArrayList<SurveyListAnswerItem> answerlist;
     SurveylistAnswerAdapter imgAdapter;
     private LinearLayoutManager linearLayoutManager;
-    RecyclerView mrecylersurvey;
+    public  static RecyclerView mrecylersurvey;
     String titlesurvey = "";
     TextView mtitlesurvey;
     LinearLayout mback;
+    TextView mheader;
+    LinearLayout mbackground;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,8 @@ public class DetailsSurvey extends AppCompatActivity {
         mrecylersurvey = findViewById(R.id.recylersurvey);
         mback = findViewById(R.id.backbtn);
         mtitlesurvey = findViewById(R.id.titlesurvey);
+        mheader = findViewById(R.id.headaertext);
+        mbackground = findViewById(R.id.backgroundalert);
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 == null) {
 

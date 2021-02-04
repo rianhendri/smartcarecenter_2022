@@ -14,15 +14,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class ListSurveyAnswer_tem {
 
-    public ListSurveyAnswer_tem() {
-    }
-
-
-    public ListSurveyAnswer_tem(String answer, int position, int answerPosition) {
-        Answer = answer;
-        Position = position;
-        AnswerPosition = answerPosition;
-    }
 
     public String getAnswer() {
         return Answer;

@@ -54,6 +54,7 @@
 					android:text="@string/title_Answere"
 					android:fontFamily="@font/seguisb"
 					android:textSize="13sp"
+					android:layout_marginLeft="12dp"
 					android:textColor="@color/black"/>
 				<TextView
 					android:id="@+id/requiredanswer"
@@ -69,11 +70,102 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:id="@+id/multiplerecyler"
-				android:visibility="visible"
+				android:visibility="gone"
 				android:nestedScrollingEnabled="false"
 				>
 
 			</androidx.recyclerview.widget.RecyclerView>
+			<RadioGroup
+				android:id="@+id/ansgr"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:padding="10dp">
+
+				<RadioButton
+					android:id="@+id/ans1"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:elevation="0dp"
+					android:buttonTint="@color/black"
+					android:textColor="@color/radiobuttonstate" />
+
+				<RadioButton
+					android:id="@+id/ans2"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:buttonTint="@color/black"
+					android:elevation="0dp"
+					android:textColor="@color/radiobuttonstate" />
+
+				<RadioButton
+					android:id="@+id/ans3"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:buttonTint="@color/black"
+					android:elevation="0dp"
+					android:textColor="@color/radiobuttonstate" />
+
+				<RadioButton
+					android:id="@+id/ans4"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:buttonTint="@color/black"
+					android:elevation="0dp"
+					android:textColor="@color/radiobuttonstate" />
+				<RadioButton
+					android:id="@+id/ans5"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:buttonTint="@color/black"
+					android:elevation="0dp"
+					android:textColor="@color/radiobuttonstate" />
+				<RadioButton
+					android:id="@+id/ans6"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:buttonTint="@color/black"
+					android:elevation="0dp"
+					android:textColor="@color/radiobuttonstate" />
+				<RadioButton
+					android:id="@+id/ans7"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:buttonTint="@color/black"
+					android:elevation="0dp"
+					android:textColor="@color/radiobuttonstate" />
+				<RadioButton
+					android:id="@+id/ans8"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:buttonTint="@color/black"
+					android:elevation="0dp"
+					android:textColor="@color/radiobuttonstate" />
+				<RadioButton
+					android:id="@+id/ans9"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:buttonTint="@color/black"
+					android:elevation="0dp"
+					android:textColor="@color/radiobuttonstate" />
+				<RadioButton
+					android:id="@+id/ans10"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/custom_radio"
+					android:buttonTint="@color/black"
+					android:elevation="0dp"
+					android:textColor="@color/radiobuttonstate" />
+			</RadioGroup>
 			<EditText
 				android:id="@+id/anstext"
 				android:layout_width="match_parent"
@@ -85,6 +177,8 @@
 				android:lines="3"
 				android:overScrollMode="always"
 				android:padding="8dp"
+				android:layout_marginLeft="12dp"
+				android:layout_marginRight="12dp"
 				android:scrollHorizontally="false"
 				android:scrollbarStyle="insideInset"
 				android:scrollbars="vertical"

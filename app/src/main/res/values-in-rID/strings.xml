@@ -160,4 +160,5 @@
     <string name="title_Answere">"Jawaban: "</string>
     <string name="Title_kirimsurvey">Kirim Survey</string>
     <string name="title_kirimsekarang">Kirim Sekarang?</string>
+    <string name="title_datesurvvey">"Tanggal Survey: "</string>
 </resources>

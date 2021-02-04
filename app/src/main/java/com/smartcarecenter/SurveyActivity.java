@@ -2,6 +2,7 @@ package com.smartcarecenter;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -63,6 +65,8 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class SurveyActivity extends AppCompatActivity {
+    TextView mheader;
+    LinearLayout mbackground;
     String surveycd="";
     Boolean exit = false;
     Boolean internet = false;
@@ -74,11 +78,12 @@ public class SurveyActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     public static ArrayList<ListSurvey_tem> listsurvey;
     public static JsonArray listformreq;
-    RecyclerView MrecylerSurvey;
+    public static RecyclerView MrecylerSurvey;
     LinearLayout mback;
     LinearLayout mprogress;
     ProgressBar mloading;
     TextView mgagalload;
+    NestedScrollView mnested;
     boolean multichose=true;
     boolean text = true;
     public static JsonArray AnswersArray;
@@ -87,13 +92,17 @@ public class SurveyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
+        mheader = findViewById(R.id.headaertext);
+        mbackground = findViewById(R.id.backgroundalert);
         MrecylerSurvey = findViewById(R.id.recylersurvey);
         mback = findViewById(R.id.backbtn);
+        mnested = findViewById(R.id.scrollrecy);
         mtitlesurvey = findViewById(R.id.titlesurvey);
         mprogress = findViewById(R.id.progressbar);
         mloading = findViewById(R.id.loading);
         mgagalload = findViewById(R.id.gagalload);
         msend = findViewById(R.id.send);
+
         //setlayout recyler;
         linearLayoutManager = new LinearLayoutManager(SurveyActivity.this, LinearLayoutManager.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -109,6 +118,32 @@ public class SurveyActivity extends AppCompatActivity {
         }else {
 
         }
+//        mnested.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
+//
+//                if(nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1) != null)
+//                {
+//                    if ((i1 >= (nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1)
+//                            .getMeasuredHeight() - nestedScrollView.getMeasuredHeight()))
+//                            && i1 > i3)
+//                    {
+//
+//
+//                        }else {
+//                        MrecylerSurvey.setNestedScrollingEnabled(true);
+//
+//                        }
+//
+//
+//
+//
+//
+//                    }
+//                }
+//
+//
+//        });
         listAnswer.clear();
         msend.setOnClickListener(new OnClickListener() {
             @Override
@@ -148,6 +183,20 @@ public class SurveyActivity extends AppCompatActivity {
                 }
             }
         });
+        MrecylerSurvey.addOnLayoutChangeListener(new View.OnLayoutChangeListener()
+        {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
+            {
+                if (addSurveyAdapter != null)
+                {
+                    if (bottom < oldBottom)
+                    {
+                        MrecylerSurvey.smoothScrollToPosition(addSurveyAdapter.getItemCount() - 1);
+                    }
+                }
+            }
+        });
     }
 
     private void sendSurvey() {
@@ -183,9 +232,10 @@ public class SurveyActivity extends AppCompatActivity {
                     Toast.makeText(SurveyActivity.this, "Terimakasih Atas Jawaban Anda", Toast.LENGTH_SHORT).show();
                 }else {
                     sesionid();
-                    Toast.makeText(SurveyActivity.this, errornya,Toast.LENGTH_LONG).show();
+                    Toast.makeText(SurveyActivity.this, "ststaus NOK",Toast.LENGTH_LONG).show();
                     mloading.setVisibility(GONE);
                     mgagalload.setText(errornya);
+                    Log.e("NOK",AnswersArray.toString());
                 }
 
             }
@@ -260,6 +310,13 @@ public class SurveyActivity extends AppCompatActivity {
                     mgagalload.setVisibility(GONE);
                     mprogress.setVisibility(GONE);
                     JsonObject data = homedata.getAsJsonObject("data");
+                    if (data.get("surveyDescription").toString().equals("null")){
+                        mbackground.setVisibility(GONE);
+                    }else {
+                        mbackground.setVisibility(VISIBLE);
+                        mheader.setText(data.get("surveyDescription").getAsString());
+                    }
+
                     mtitlesurvey.setText(data.get("surveyTitle").getAsString());
                     surveycd=data.get("surveyCd").getAsString();
                     listformreq = data.getAsJsonArray("surveyQuestions");
