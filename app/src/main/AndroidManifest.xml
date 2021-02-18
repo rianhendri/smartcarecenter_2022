@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailsSurvey"></activity>
+        <activity android:name=".SubCategoryNews" />
+        <activity android:name=".CategoryNews" />
+        <activity android:name=".DetailsSurvey" />
         <activity android:name=".SurveyList_Activity" />
         <activity android:name=".SurveyActivity" />
         <activity android:name=".TermActivity" />

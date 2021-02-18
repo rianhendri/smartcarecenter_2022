@@ -91,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         mlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("token1",token);
 //                Toast.makeText(LoginActivity.this, osHp+"-"+ModelHp, Toast.LENGTH_SHORT).show();
             if (internet){
                 loginApi();

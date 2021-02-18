@@ -161,4 +161,6 @@
     <string name="Title_kirimsurvey">Kirim Survey</string>
     <string name="title_kirimsekarang">Kirim Sekarang?</string>
     <string name="title_datesurvvey">"Tanggal Survey: "</string>
+    <string name="title_newscategory">Kategori News</string>
+    <string name="title_subnews">Sub Kategori News</string>
 </resources>

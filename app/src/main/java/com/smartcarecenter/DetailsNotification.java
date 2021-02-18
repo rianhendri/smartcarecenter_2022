@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -64,6 +65,7 @@ public class DetailsNotification extends AppCompatActivity {
             username = bundle2.getString("username");
             Title = bundle2.getString("title");
             Content = bundle2.getString("body");
+            Log.d("guide",guid);
 //            Toast.makeText(DetailsNotification.this, guid,Toast.LENGTH_LONG).show();
         }
         getSessionId();

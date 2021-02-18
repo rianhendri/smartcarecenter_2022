@@ -538,12 +538,17 @@ public class DetailsFormActivity extends AppCompatActivity {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                         String string5 = null;
+                        String string6="";
                         try {
-                            string5 = simpleDateFormat2.format(simpleDateFormat.parse(string7));
+                            string6 = simpleDateFormat2.format(simpleDateFormat.parse(string7));
+                            string5 = simpleDateFormat.format(simpleDateFormat.parse(string7));
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        mcreatedate.setText(string5);
+                        String[] separated = string5.split("T");
+                        separated[0].trim();; // this will contain "Fruit"
+                        separated[1].trim();;
+                        mcreatedate.setText(separated[0]+" "+ separated[1]);
                     }
                     if (data.get("unitCategoryName") == null) {
                         mlayoutunit2.setVisibility(View.GONE);

@@ -47,6 +47,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.smartcarecenter.CategoryNews;
 import com.smartcarecenter.Dashboard;
 import com.smartcarecenter.FormActivity;
 import com.smartcarecenter.LoginActivity;
@@ -136,7 +137,7 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                     ((Activity)context).finish();
                 }
                 if (namemenu.equals(context.getString(R.string.title_News))){
-                    Intent gotonews = new Intent(context, NewsActivity.class);
+                    Intent gotonews = new Intent(context, CategoryNews.class);
                     context.startActivity(gotonews);
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     ((Activity)context).finish();

@@ -115,6 +115,9 @@ public interface IRetrofit {
     @POST("api/store/getdaftarkota")
     Call<JsonObject> postRawJSON(@Body JsonObject locationPost);
 
+    @POST("api/news/GetCategoryList")
+    Call<JsonObject> newscategory(@Body JsonObject locationPost);
+
     @POST("api/FOCOrder/PrepareNew")
     Call<JsonObject> prepfoc(@Body JsonObject locationPost);
 

@@ -38,6 +38,10 @@ import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.listnews.NewsAdapter;
 import com.smartcarecenter.listnews.NewsItem;
 
+import static com.smartcarecenter.SubCategoryNews.titlecategory;
+import static com.smartcarecenter.SubCategoryNews.title;
+
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +68,12 @@ public class NewsActivity extends AppCompatActivity {
     private LinearLayoutManager mlinear;
     DatabaseReference mlist_news;
     NestedScrollView mnested;
-    TextView mnonews;
+    TextView mnonews, mcategory,msubcategory;
     NewsAdapter newsAdapter;
     ProgressDialog loading;
     int page = 1;
     int pos = 0;
+    public static String sbtitle="";
     boolean refreshscroll = true;
     String sesionid_new = "";
     int totalpage = 0;
@@ -76,6 +81,7 @@ public class NewsActivity extends AppCompatActivity {
     public static String valuefilter = "-";
     List<String> listvalue = new ArrayList();
     List<String> listnamestatus = new ArrayList();
+    String cdsub = "";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +93,16 @@ public class NewsActivity extends AppCompatActivity {
         mnonews = findViewById(R.id.nonews);
         mnested = findViewById(R.id.nested);
         mstatus_spin = findViewById(R.id.spinstatus);
+        mcategory = findViewById(R.id.category);
+        msubcategory = findViewById(R.id.subcategory);
+        Bundle bundle2 = getIntent().getExtras();
+        if (bundle2 != null) {
+            mcategory.setText(bundle2.getString("title"));
+            msubcategory.setText(bundle2.getString("subtitle"));
+            cdsub = bundle2.getString("subcd");
+            titlecategory=bundle2.getString("subtitle");
+
+        }
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(NewsActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -182,13 +198,33 @@ public class NewsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        msubcategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goton= new Intent(NewsActivity.this, SubCategoryNews.class);
+                goton.putExtra("title",sbtitle);
+                startActivity(goton);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                finish();
+            }
+        });
+        mcategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goton= new Intent(NewsActivity.this, CategoryNews.class);
+                goton.putExtra("title",sbtitle);
+                startActivity(goton);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                finish();
+            }
+        });
     }
     public void pagination(){
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
-        jsonObject.addProperty("categoryCd",valuefilter);
-        jsonObject.addProperty("status","-");
+        jsonObject.addProperty("subCategoryCd",cdsub);
+//        jsonObject.addProperty("status","-");
         jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONnews(jsonObject);
@@ -434,7 +470,10 @@ public class NewsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent((Context)this, Dashboard.class));
+        Intent goton= new Intent(NewsActivity.this, SubCategoryNews.class);
+        goton.putExtra("title",title);
+        goton.putExtra("subtitle",titlecategory);
+        startActivity(goton);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
     }
