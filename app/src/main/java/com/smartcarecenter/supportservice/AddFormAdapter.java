@@ -82,20 +82,23 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
         String newdate = "";
         Picasso.with(context).load(addFromItem.get(i).getPhotoThumbURL()).into(myviewholder.xgambar_item);
         myviewholder.xtitlenews.setText("#"+ addFromItem.get(i).getFormRequestCd());
-        String oldadate = addFromItem.get(i).getDate();
+        String oldadate = addFromItem.get(i).getRequestedDateTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         try {
-            newdate = simpleDateFormat2.format(simpleDateFormat.parse(oldadate));
+            newdate = simpleDateFormat.format(simpleDateFormat.parse(oldadate));
             System.out.println(newdate);
             Log.e((String)"Date", (String)newdate);
         }
         catch (ParseException parseException) {
             parseException.printStackTrace();
         }
+        String[] separated = newdate.split("T");
+        separated[0].trim();; // this will contain "Fruit"
+        separated[1].trim();;
         myviewholder.xby.setText(addFromItem.get(i).getDescription());
         myviewholder.xpress.setText(addFromItem.get(i).getPressName());
-        myviewholder.xdate_news.setText(newdate);
+        myviewholder.xdate_news.setText(separated[0]+" "+ separated[1]);
         myviewholder.xstatus.setText(addFromItem.get(i).getStatusName());
         myviewholder.xstatus.setTextColor(Color.parseColor("#"+addFromItem.get(i).getStatusColorCode()));
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {

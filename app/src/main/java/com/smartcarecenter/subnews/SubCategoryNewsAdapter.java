@@ -86,7 +86,7 @@ public class SubCategoryNewsAdapter extends RecyclerView.Adapter<SubCategoryNews
                         Intent gotonews = new Intent(context, NewsActivity.class);
                         gotonews.putExtra("subtitle",myItem.get(i).getName());
                         gotonews.putExtra("title",title);
-                        gotonews.putExtra("subcd",myItem.get(i).getCategoryCd());
+                        gotonews.putExtra("subcd",myItem.get(i).getSubCategoryCd());
                         context.startActivity(gotonews);
                         ((Activity)context).finish();
                         ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);

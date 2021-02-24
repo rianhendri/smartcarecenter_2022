@@ -347,7 +347,7 @@ public class AddDetailFocView extends AppCompatActivity {
 //                    }
                     msn.setText(pressname);
                     String orderno = data.get("orderNo").getAsString();
-                    String date = data.get("date").getAsString();
+                    String date = data.get("createdDateTime").getAsString();
                     String pressstart = data.get("previousImpression").getAsString();
                     String presimpres = data.get("presentImpression").getAsString();
                     String status = data.get("statusName").getAsString();
@@ -368,17 +368,20 @@ public class AddDetailFocView extends AppCompatActivity {
                     mstatus.setText(status);
                     mstatus.setTextColor(Color.parseColor("#"+statuscolor));
                     String newdate = "";
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                     SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                     try {
-                        newdate = simpleDateFormat2.format(simpleDateFormat.parse(date));
+                        newdate = simpleDateFormat.format(simpleDateFormat.parse(date));
                         System.out.println(newdate);
                         Log.e((String)"Date", (String)newdate);
                     }
                     catch (ParseException parseException) {
                         parseException.printStackTrace();
                     }
-                    mdate.setText(newdate);
+                    String[] separated = newdate.split("T");
+                    separated[0].trim();; // this will contain "Fruit"
+                    separated[1].trim();;
+                    mdate.setText(separated[0]+" "+ separated[1]);
                     moperator.setText(operator);
                     myCustomArray = data.getAsJsonArray("itemList");
                     Gson gson = new Gson();

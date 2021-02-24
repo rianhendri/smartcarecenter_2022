@@ -492,7 +492,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                         mreopenbtn.setVisibility(View.GONE);
                     }
                     mserviceTicketCd = data.get("serviceTicketCd").toString();
-                    mdateapi = data.get("date").getAsString();
+                    mdateapi = data.get("requestedDateTime").getAsString();
                     mpressGuid = data.get("pressGuid").getAsString();
                     mpressName = data.get("pressName").getAsString();
                     mphotoURL = data.get("photoURL").getAsString();
@@ -588,14 +588,17 @@ public class DetailsFormActivity extends AppCompatActivity {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                     SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                     try {
-                        datenew = simpleDateFormat3.format(simpleDateFormat.parse(mdateapi));
+                        datenew = simpleDateFormat.format(simpleDateFormat.parse(mdateapi));
                         System.out.println(datenew);
                         Log.e((String)"Date",datenew);
                     }
                     catch (ParseException parseException) {
                         parseException.printStackTrace();
                     }
-                    mdate.setText((CharSequence)datenew);
+                    String[] separated = datenew.split("T");
+                    separated[0].trim();; // this will contain "Fruit"
+                    separated[1].trim();;
+                    mdate.setText(separated[0]+" "+ separated[1]);
                     msn.setText(mpressName);
 
                     mdeskription.setText(mdeskriptionapi);

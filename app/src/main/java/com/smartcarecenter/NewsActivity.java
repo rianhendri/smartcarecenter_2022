@@ -170,28 +170,28 @@ public class NewsActivity extends AppCompatActivity {
 
             }
         });
-        mstatus_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                refreshscroll = true;
-                page=1;
-                cekInternet();
-                for (int i = 0; i < listvalue.size(); ++i) {
-                    valuefilter = listvalue.get(position);
-                    if (internet) {
-                        loadnews();
-                    }else {
-
-                    }
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        mstatus_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                refreshscroll = true;
+//                page=1;
+//                cekInternet();
+//                for (int i = 0; i < listvalue.size(); ++i) {
+//                    valuefilter = listvalue.get(position);
+//                    if (internet) {
+//                        loadnews();
+//                    }else {
+//
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
         mback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -298,7 +298,7 @@ public class NewsActivity extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
-        jsonObject.addProperty("categoryCd",valuefilter);
+        jsonObject.addProperty("subCategoryCd",cdsub);
         jsonObject.addProperty("status","-");
         jsonObject.addProperty("ver",ver);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);

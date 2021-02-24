@@ -82,17 +82,17 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
         String newdate = "";
         laypo = chargeableItem.get(i).isShowIconPO();
-        if (laypo){
+        if (chargeableItem.get(i).isShowIconPO()){
             myviewholder.mlaypo.setVisibility(View.VISIBLE);
         }else {
             myviewholder.mlaypo.setVisibility(View.GONE);
         }
         myviewholder.mnofoc.setText("Ref: "+"#"+ chargeableItem.get(i).getOrderNo());
-        String oldadate = chargeableItem.get(i).getDate();
+        String oldadate = chargeableItem.get(i).getCreatedDateTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         try {
-            newdate = simpleDateFormat2.format(simpleDateFormat.parse(oldadate));
+            newdate = simpleDateFormat.format(simpleDateFormat.parse(oldadate));
             System.out.println(newdate);
             Log.e((String)"Date", (String)newdate);
         }
@@ -101,7 +101,10 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
         }
         final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###.00");
         myviewholder.mgrand.setText(context.getString(R.string.title_grandtotal)+" Rp. "+String.valueOf(formatRupiah.format(chargeableItem.get(i).getGrandTotal())));
-        myviewholder.mdate.setText(newdate);
+        String[] separated = newdate.split("T");
+        separated[0].trim();; // this will contain "Fruit"
+        separated[1].trim();;
+        myviewholder.mdate.setText(separated[0]+" "+ separated[1]);
         myviewholder.mstatus.setText(chargeableItem.get(i).getStatusName());
         myviewholder.mstatus.setTextColor(Color.parseColor("#"+ chargeableItem.get(i).getStatusColorCode()));
         myviewholder.mpos.setText(String.valueOf(i+1));

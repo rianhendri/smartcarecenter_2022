@@ -85,18 +85,21 @@ extends RecyclerView.Adapter<FocAdapter.Myviewholder> {
         String newdate = "";
 
         myviewholder.mnofoc.setText("#"+ focItem.get(i).getOrderNo());
-        String oldadate = focItem.get(i).getDate();
+        String oldadate = focItem.get(i).getCreatedDateTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         try {
-            newdate = simpleDateFormat2.format(simpleDateFormat.parse(oldadate));
+            newdate = simpleDateFormat.format(simpleDateFormat.parse(oldadate));
             System.out.println(newdate);
             Log.e((String)"Date", (String)newdate);
         }
         catch (ParseException parseException) {
             parseException.printStackTrace();
         }
-        myviewholder.mdate.setText(newdate);
+        String[] separated = newdate.split("T");
+        separated[0].trim();; // this will contain "Fruit"
+        separated[1].trim();;
+        myviewholder.mdate.setText(separated[0]+" "+ separated[1]);
         // layout list notes foc
 //        if (focItem.get(i).getNotes().equals("")){
 //            myviewholder.mnoteslay.setVisibility(View.GONE);

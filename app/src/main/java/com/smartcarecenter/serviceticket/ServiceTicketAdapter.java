@@ -59,6 +59,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonObject;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.smartcarecenter.DetailsFormActivity;
 import com.smartcarecenter.FormActivity;
 import com.smartcarecenter.LoginActivity;
@@ -102,6 +103,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
     long TimeBuff = seconds ;
     Handler handler;
     int Seconds, Minutes, MilliSeconds, Jam ;
+    boolean showmore = true;
     public ServiceTicketAdapter(Context c, ArrayList<ServicesTicketItem> p){
         context = c;
         myItem = p;
@@ -222,6 +224,23 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             myviewholder.massigndate.setText(assigndate);
         }
 
+        if (myItem.get(i).getWaitingEstimationDate()!=null){
+            myviewholder.mlayestima.setVisibility(View.VISIBLE);
+            SimpleDateFormat datefor = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String estima = myItem.get(i).getWaitingEstimationDate();
+            String estimadate = "";
+            try {
+                estimadate = datefor.format(simpleDateFormat.parse(estima));
+                System.out.println(estimadate);
+                Log.e((String)"Date", (String)estimadate);
+            }
+            catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+            myviewholder.mestima.setText(estimadate);
+        }else {
+            myviewholder.mlayestima.setVisibility(View.GONE);
+        }
 
         if (myItem.get(i).getFeedbackRating()==0){
             myviewholder.mlayoutstart.setAlpha(0);
@@ -325,6 +344,34 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             myviewholder.mlayoutnotes.setVisibility(View.VISIBLE);
             myviewholder.mnotes.setText(myItem.get(i).getDescription());
         }
+        int sizenya = myItem.size();
+        if (myItem.get(i).getPosition()==sizenya){
+
+        }
+//        myviewholder.mnotes.setOnExpandStateChangeListener(new ExpandableTextView.OnExpandStateChangeListener() {
+//            @Override
+//            public void onExpandStateChanged(TextView textView, boolean isExpanded) {
+//                if (!isExpanded){
+//                    myviewholder.mreadmore.setText("Read more");
+//
+//                }else {
+//                    myviewholder.mreadmore.setText("show less");
+//
+//                }
+//            }
+//        });
+//        myviewholder.mnotes.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!showmore){
+//                    myviewholder.mreadmore.setText("Read more");
+//                    showmore = true;
+//                }else {
+//                    myviewholder.mreadmore.setText("show less");
+//                    showmore = false;
+//                }
+//            }
+//        });
 
     }
 
@@ -339,14 +386,15 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         TextView massigndate;
         TextView mbar1,mbar2,mbar3,mbar4,mcomment,mendtime,mengineer,mservicetype,mstarttime
                 ,mstatusservice,mstatustik;
-        TextView mtimer,msupport,massengineer,mlastimpresi,mnotes, mactionprogress, mfeedbackfoto;
-
+        TextView mtimer,msupport,massengineer,mlastimpresi, mactionprogress, mfeedbackfoto, mestima, mreadmore, mnotes;
+//        ExpandableTextView mnotes;
         ImageView mposbar;
         RatingBar mrating;
-        LinearLayout mlayoutstart,mlasyass,mlayimpres,mlayoutnotes,mlayac, murlfoto;
+        LinearLayout mlayoutstart,mlasyass,mlayimpres,mlayoutnotes,mlayac, murlfoto, mlayestima, mread;
         public Myviewholder(@NonNull View view) {
             super(view);
 
+            mread = view.findViewById(R.id.read);
             massigndate = (TextView)view.findViewById(R.id.assigndate);
             mengineer = (TextView)view.findViewById(R.id.engineer);
             mstarttime = (TextView)view.findViewById(R.id.starttime);
@@ -367,11 +415,14 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
             mlastimpresi = view.findViewById(R.id.lastimpression);
             mlayimpres = view.findViewById(R.id.layimpress);
             mlayoutnotes = view.findViewById(R.id.layoutnotes);
-            mnotes = view.findViewById(R.id.engineernote);
+            mnotes = view.findViewById(R.id.noteseng);
             mactionprogress = view.findViewById(R.id.actionprogress);
             mlayac = view.findViewById(R.id.layaction);
             mfeedbackfoto = view.findViewById(R.id.feedbackfoto);
             murlfoto = view.findViewById(R.id.urlfeedback);
+            mlayestima = view.findViewById(R.id.layEstima);
+            mestima = view.findViewById(R.id.estimasi);
+            mreadmore = view.findViewById(R.id.readmore);
 
         }
     }

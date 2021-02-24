@@ -9,8 +9,8 @@ android {
         applicationId "com.smartcarecenter"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 29
-        versionName "1.2.8"
+        versionCode 30
+        versionName "1.2.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -85,6 +85,8 @@ dependencies {
 
     //filepicke
     implementation 'com.nbsp:materialfilepicker:1.9.1'
-
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.ms-square:expandableTextView:0.1.4'
 
 }

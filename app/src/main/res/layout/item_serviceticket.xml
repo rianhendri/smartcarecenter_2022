@@ -41,7 +41,7 @@
 					android:text="Asign"
 					android:textColor="@color/colorPrimaryDark"
 					android:textSize="12sp" />
-				>
+
 			</LinearLayout>
 
 			<LinearLayout
@@ -348,6 +348,7 @@
 		</LinearLayout>
 
 		<LinearLayout
+			android:id="@+id/read"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="12dp"
@@ -371,13 +372,37 @@
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
+						android:fontFamily="@font/segoeuib"
 						android:text="Action: "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
 
 					<TextView
 						android:id="@+id/actionprogress"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:fontFamily="@font/seguisb"
+						android:text="-"
+						android:textColor="@color/colorPrimaryDark"
+						android:textSize="11sp" />
+				</LinearLayout>
+				<LinearLayout
+					android:id="@+id/layEstima"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="start"
+					android:orientation="vertical" >
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/segoeuib"
+						android:text="Estimated Date: "
+						android:textColor="@color/black"
+						android:textSize="11sp" />
+
+					<TextView
+						android:id="@+id/estimasi"
 						android:layout_width="wrap_content"
 						android:layout_height="match_parent"
 						android:fontFamily="@font/seguisb"
@@ -394,7 +419,7 @@
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
+						android:fontFamily="@font/segoeuib"
 						android:text="Support start: "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
@@ -418,7 +443,7 @@
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
+						android:fontFamily="@font/segoeuib"
 						android:text="Support Finish: "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
@@ -442,7 +467,7 @@
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
+						android:fontFamily="@font/segoeuib"
 						android:text="@string/title_lastiimpressi"
 						android:textColor="@color/black"
 						android:textSize="11sp" />
@@ -475,7 +500,7 @@
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
+						android:fontFamily="@font/segoeuib"
 						android:text="Assigned: "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
@@ -498,7 +523,7 @@
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
+						android:fontFamily="@font/segoeuib"
 						android:text="Engineer: "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
@@ -523,7 +548,7 @@
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
+						android:fontFamily="@font/segoeuib"
 						android:text="Assist: "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
@@ -556,23 +581,64 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:fontFamily="@font/segoeui"
+					android:fontFamily="@font/segoeuib"
 					android:text="@string/title_engineernote"
 					android:textColor="@color/black"
 					android:textSize="11sp" />
-
 				<TextView
-					android:id="@+id/engineernote"
+					android:id="@+id/noteseng"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/segoeui"
 					android:text="-ASDASD"
 					android:textColor="@color/black"
 					android:textSize="11sp" />
+				<com.ms.square.android.expandabletextview.ExpandableTextView
+					xmlns:android="http://schemas.android.com/apk/res/android"
+					xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+					android:id="@+id/expand_text_view"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					expandableTextView:maxCollapsedLines="4"
+					expandableTextView:animDuration="200"
+
+					android:paddingTop="2dp">
+					<TextView
+						android:id="@+id/expandable_text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/segoeui"
+						android:text="-ASDASD"
+						android:textColor="@color/black"
+						android:textSize="11sp" />
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:gravity="end">
+						<TextView
+							android:id="@+id/readmore"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Read more"
+							android:paddingTop="16dp"
+							android:paddingBottom="16dp"
+							android:textSize="11sp"/>
+						<ImageButton
+							android:id="@id/expand_collapse"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:padding="16dp"
+							android:layout_gravity="right|bottom"
+							android:background="@android:color/transparent"/>
+					</LinearLayout>
+
+				</com.ms.square.android.expandabletextview.ExpandableTextView>
 			</LinearLayout>
 
 		</LinearLayout>
 		<LinearLayout
+			android:visibility="gone"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
