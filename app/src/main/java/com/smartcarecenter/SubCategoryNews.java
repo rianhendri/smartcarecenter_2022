@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,10 +42,12 @@ public class SubCategoryNews extends AppCompatActivity {
     public static String titlecategory = "";
     public static String title = "";
     public static JsonArray listnews2;
+    LinearLayout mback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_category_news);
+        mback=findViewById(R.id.backbtn);
         mymenu = findViewById(R.id.newscontentlist);
         mtitle = findViewById(R.id.title);
         Bundle bundle2 = getIntent().getExtras();
@@ -81,6 +84,12 @@ public class SubCategoryNews extends AppCompatActivity {
 
 //        menuItem3.setMenuname("Others");
 //        menuItemlist.add(menuItem3);
+        mback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     @Override
     public void onBackPressed() {

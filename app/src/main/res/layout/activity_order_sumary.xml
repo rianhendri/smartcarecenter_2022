@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/dwhite"
+    tools:context=".FormActivity"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dwhite"
+        android:orientation="horizontal" >
+        <LinearLayout
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="0dp"
+                android:gravity="left"
+                android:src="@drawable/ic_baseline_arrow_back_ios" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/title_language"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginRight="64dp"-->
+<!--                android:fontFamily="@font/seguisb"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="@string/title_ServiceSupport"-->
+<!--                android:textColor="@color/dwhite"-->
+<!--                android:textSize="15sp" />-->
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:id="@+id/orderno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/segoeuib"
+            android:text="SO219838QW"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/waiting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/seguisb"
+            android:text="Rp.123.000.000"
+            android:textColor="@color/darkgrey2"
+            android:textSize="13sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/orderno"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/noponya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/segoeuii"
+            android:text="SO219838QW"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginTop="29dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiprefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedscrol"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:id="@+id/contentinbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/summarylist"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toTopOf="@+id/addform"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        android:scrollbars="none" >
+                    </androidx.recyclerview.widget.RecyclerView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/norequest"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:fontFamily="@font/segoeui"-->
+<!--                        android:textSize="13sp"-->
+<!--                        android:text="@string/title_RequestNone"-->
+<!--                        android:gravity="center"/>-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/seguisb"
+                                android:text="Service Charge"
+                                android:textColor="@color/black"
+                                android:textSize="13sp"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/seguisb"
+                                android:gravity="end"
+                                android:text="Rp. 2.500.000"
+                                android:textSize="13sp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                               >
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/seguisb"
+                                    android:gravity="center_vertical"
+                                    android:text="Credit Card (Visa/Master)"
+
+                                    android:textColor="@color/black"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/segoeuii"
+                                    android:text="Additional Service Charge 3%"
+                                    android:textColor="@color/darkgrey2"
+                                    android:textSize="11sp"
+                                    android:layout_marginTop="16dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/seguisb"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text="Rp. 300.000"
+                                android:textSize="13sp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="12dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/segoeuib"
+                                android:text="Grand Total"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/segoeuib"
+                                android:id="@+id/totalharga"
+                                android:text="Rp.2.800.000"
+                                android:textSize="22sp"
+                                android:gravity="end"
+                                android:textColor="@color/black"
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="12dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/segoeuib"
+                                android:text="Address"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="Rp.2.800.000sadsfsdfsdfsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsfsdfsdfsdfsdfsdfsdfsdfsdfsdf sfsdfs dfs df sdfs d"
+                                    android:textSize="13sp"
+                                    android:gravity="start"
+                                    android:textColor="@color/black"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="Change"
+                                    android:textSize="13sp"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="12dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/segoeuib"
+                                android:text="Payment"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/paychan_mastercard"/>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="xxxxxxxxx-9844 -88494"
+                                    android:textSize="13sp"
+                                    android:gravity="start"
+                                    android:textColor="@color/black"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/segoeui"
+                                    android:text="Change"
+                                    android:textSize="13sp"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <ProgressBar
+                android:id="@+id/footerload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/addform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/nestedscrol"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/addform"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/yellowdark"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="0dp"
+                android:paddingRight="14dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginRight="12dp"-->
+<!--                        android:src="@drawable/ic_plus2"-->
+<!--                        android:rotation="-90"/>-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/segoeuib"
+                        android:gravity="center"
+                        android:text="@string/title_submit_order"
+                        android:textColor="@color/dwhite"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

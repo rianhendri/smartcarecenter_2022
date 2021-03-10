@@ -162,4 +162,9 @@
     <string name="title_datesurvvey">"Submit Date: "</string>
     <string name="title_newscategory">News Category</string>
     <string name="title_subnews">Sub Category News</string>
+    <string name="title_checkout">Payment Process</string>
+    <string name="title_waitingpayment">Waiting for Payment</string>
+    <string name="title_choseepymnt">"Choose Payment: "</string>
+    <string name="title_back">Back</string>
+    <string name="title_submit_order">Submit Order</string>
 </resources>

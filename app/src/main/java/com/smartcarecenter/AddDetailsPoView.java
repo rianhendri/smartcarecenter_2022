@@ -95,12 +95,13 @@ public class AddDetailsPoView extends AppCompatActivity {
     public static LinearLayout mlaytotal;
     public static TextView mdate,mstartimpresi,moperator,mno_order,mtotalitem,msend,mtotalqty,
             mnoitem,mpono,mstatus, mtotalprice,mtax,mgrandtotal,mtitle,mlabeltax, mnotes;
-
+    String grandtotal="";
+    String nopo = "";
     String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item,mchat, mcopy;
-    TextView msn,mtextalert, mdeskrip, mlinktext;
+    TextView msn,mtextalert, mdeskrip, mlinktext, mpayment;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
     String sesionid_new = "";
@@ -128,6 +129,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_details_po_view);
+        mpayment = findViewById(R.id.payment);
         mlistitem_foc = findViewById(R.id.listitemfoc);
         mdate = findViewById(R.id.datefoc);
         mno_order = findViewById(R.id.noorder);
@@ -256,6 +258,27 @@ public class AddDetailsPoView extends AppCompatActivity {
                 myClipboard.setPrimaryClip(myClip);
 
                 Toast.makeText(getApplicationContext(), "Link Copied",Toast.LENGTH_SHORT).show();
+            }
+        });
+        mpayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                noOrder = bundle2.getString("id");
+                valuefilter = bundle2.getString("pos");
+                guid = bundle2.getString("guid");
+                username = bundle2.getString("username");
+                mmustUpload = bundle2.getString("pdfyes");
+                Intent gotoaddfoc = new Intent(AddDetailsPoView.this, PaymentAct.class);
+                gotoaddfoc.putExtra("grandtotal",grandtotal);
+                gotoaddfoc.putExtra("id",noOrder);
+                gotoaddfoc.putExtra("guid",guid);
+                gotoaddfoc.putExtra("username",username);
+                gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                gotoaddfoc.putExtra("pos",valuefilter);
+                gotoaddfoc.putExtra("nopo",nopo);
+                startActivity(gotoaddfoc);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
             }
         });
     }
@@ -425,7 +448,13 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    if (data.get("showProcessPaymentButton").getAsBoolean()){
+                        mpayment.setVisibility(VISIBLE);
+                        mpayment.setText(data.get("ProcessPaymentButtonText").getAsString());
+                    }else{
+                        mpayment.setVisibility(GONE);
 
+                    }
                     showlinkdownload = data.get("showUploadPOLink").getAsBoolean();
                     if (showlinkdownload){
                         mcopy.setVisibility(VISIBLE);
@@ -484,8 +513,9 @@ public class AddDetailsPoView extends AppCompatActivity {
                     mlabeltax.setText(taxname+":");
                     mtotalprice.setText("Rp. "+String.valueOf(formatRupiah.format(data.get("totalPrice").getAsDouble())));
                     mgrandtotal.setText("Rp. "+String.valueOf(formatRupiah.format(data.get("grandTotal").getAsDouble())));
+                    grandtotal = "Rp. "+String.valueOf(formatRupiah.format(data.get("grandTotal").getAsDouble()));
                     pressid = data.get("pressGuid").getAsString();
-                    String nopo = data.get("poNo").getAsString();
+                    nopo = data.get("poNo").getAsString();
                     mpono.setText(nopo);
 
                     String orderno = data.get("orderNo").getAsString();

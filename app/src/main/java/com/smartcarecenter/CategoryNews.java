@@ -15,6 +15,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -50,10 +51,12 @@ public class CategoryNews extends AppCompatActivity {
    public static ArrayList<CategoryNewsItem> menuItemlist;
     CategoryNewsAdapter addmenu;
     public static JsonArray listnews;
+    LinearLayout mback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_news);
+        mback = findViewById(R.id.backbtn);
         mymenu = findViewById(R.id.newscontentlist);
         linearLayoutManager = new GridLayoutManager(CategoryNews.this, 2);
         mymenu.setLayoutManager(linearLayoutManager);
@@ -67,7 +70,12 @@ public class CategoryNews extends AppCompatActivity {
         }else {
 
         }
-
+        mback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     @Override
     public void onBackPressed() {

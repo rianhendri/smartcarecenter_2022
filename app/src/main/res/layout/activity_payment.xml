@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dwhite"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal" >
+        <LinearLayout
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="0dp"
+                android:gravity="left"
+                android:src="@drawable/back_white" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="64dp"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center_vertical"
+                android:text="@string/title_detailchargeable"
+                android:textColor="@color/dwhite"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="54dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="14dp" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="start"
+
+               >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/orderno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/segoeuib"
+                        android:text="-"
+                        android:textColor="@color/black"
+                        android:textSize="23sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/waiting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:fontFamily="@font/seguisb"
+                        android:text="-"
+                        android:textColor="@color/darkgrey2"
+                        android:textSize="13sp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintEnd_toEndOf="@+id/orderno"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/noponya"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuii"
+                        android:text="-"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:layout_marginTop="29dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoeuib"
+                    android:id="@+id/totalharga"
+                    android:text="Rp.-"
+                    android:textSize="25sp"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/seguisb"
+                android:textColor="@color/black"
+                android:text="@string/title_choseepymnt"/>
+            <LinearLayout
+                android:id="@+id/creditcardbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/main_button"
+                android:gravity="left|center_vertical"
+                android:padding="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/cc"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/seguisb"
+                        android:gravity="center_vertical"
+                        android:text="Credit Card (Visa/Master)"
+
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/segoeuii"
+                        android:text="Additional Service Charge 3%"
+                        android:textColor="@color/darkgrey2"
+                        android:textSize="11sp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ico_arrow_left"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/vabtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/main_button"
+                android:gravity="left|center_vertical"
+                android:padding="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/bca"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="12dp"
+                    android:text="BCA Virtual Account"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ico_arrow_left"/>
+
+            </LinearLayout>
+            <TextView
+                android:visibility="visible"
+                android:id="@+id/backin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="54dp"
+                android:background="@drawable/bg_cornergrey"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="@string/title_back"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

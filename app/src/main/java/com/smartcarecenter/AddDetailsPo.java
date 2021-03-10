@@ -53,6 +53,7 @@ import com.smartcarecenter.Add_Po_Request.Add_po_req_adapter;
 import com.smartcarecenter.Add_Po_Request.Add_po_req_item;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.net.URI;
@@ -114,6 +115,7 @@ public class AddDetailsPo extends AppCompatActivity {
     List<String> snid = new ArrayList();
     List<String> snname = new ArrayList();
     List<Integer> previmpression = new ArrayList();
+    ImageView mlogopay;
     //list item add
     public static ArrayList<Add_po_req_item> reitem;
     public static Add_po_req_adapter req_adapter;
@@ -135,6 +137,12 @@ public class AddDetailsPo extends AppCompatActivity {
     public static String notes1 = "";
     private ClipboardManager myClipboard;
     private ClipData myClip;
+    JsonArray liststatus;
+    List<String> listvalue = new ArrayList();
+    List<String> listnamestatus = new ArrayList();
+    List<String> listfoto = new ArrayList();
+    Spinner mstatus_spin;
+    String PaymentTypeCd = "-";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +176,8 @@ public class AddDetailsPo extends AppCompatActivity {
         mchosepdf = findViewById(R.id.chosepdf);
         mcopy = findViewById(R.id.copylink);
         mlinktext = findViewById(R.id.textlink);
+        mstatus_spin = findViewById(R.id.spinstatus);
+        mlogopay = findViewById(R.id.logopay);
         cekInternet();
         getSessionId();
         //setlayout recyler
@@ -296,6 +306,27 @@ public class AddDetailsPo extends AppCompatActivity {
                 finish();
 
                 listpoact.addAll(reitem);
+            }
+        });
+        mstatus_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cekInternet();
+                for (int i = 0; i < listfoto.size(); ++i) {
+                    String valuefilter = listfoto.get(position);
+                    if (valuefilter.equals("null")) {
+                       mlogopay.setVisibility(GONE);
+                    }else {
+                        mlogopay.setVisibility(VISIBLE);
+                        Picasso.with(AddDetailsPo.this).load(valuefilter).into(mlogopay);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
         msend.setOnClickListener(new View.OnClickListener() {
@@ -603,7 +634,38 @@ public class AddDetailsPo extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
+                    listvalue.add("null");
+                    listnamestatus.add("-pilih-");
+                    listfoto.add("null");
                     JsonObject data = homedata.getAsJsonObject("data");
+                    liststatus = data.getAsJsonArray("paymentTypeList");
+                    for (int i = 0; i < liststatus.size(); ++i) {
+                        JsonObject jsonObject3 = (JsonObject)liststatus.get(i);
+                        String string3 = jsonObject3.getAsJsonObject().get("PaymentTypeCd").getAsString();
+                        String string4 ="-pilih-";
+                        string4 = jsonObject3.getAsJsonObject().get("Name").getAsString();
+                        String string5 = "";
+                        if (jsonObject3.getAsJsonObject().get("ImageURL").toString().equals("null")){
+                            string5="null";
+                        }else {
+                            string5 = jsonObject3.getAsJsonObject().get("ImageURL").getAsString();
+                        }
+
+                        listvalue.add(string3);
+                        listnamestatus.add(string4);
+                        listfoto.add(string5);
+                        for (int j = 0; j < listvalue.size(); ++j) {
+                            if (listvalue.get(i).equals(PaymentTypeCd)){
+                                pos=j;
+                            }
+                        }
+                        final ArrayAdapter<String> kategori = new ArrayAdapter<String>(AddDetailsPo.this, R.layout.spinstatus_layout,
+                                listnamestatus);
+                        kategori.setDropDownViewResource(R.layout.spinkategori);
+                        kategori.notifyDataSetChanged();
+                        mstatus_spin.setAdapter(kategori);
+                        mstatus_spin.setSelection(pos);
+                    }
                     showprep = data.get("showMessage").getAsBoolean();
                     muploadPOPdf = data.get("uploadPOPdf").getAsBoolean();
                     mmustUpload = data.get("mustUpload").getAsBoolean();

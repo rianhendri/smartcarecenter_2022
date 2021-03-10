@@ -163,4 +163,9 @@
     <string name="title_datesurvvey">"Tanggal Survey: "</string>
     <string name="title_newscategory">Kategori News</string>
     <string name="title_subnews">Sub Kategori News</string>
+    <string name="title_checkout">Proses Pembayaran</string>
+    <string name="title_waitingpayment">Menunggu Pembayaran</string>
+    <string name="title_choseepymnt">"Pilihan Pembayaran: "</string>
+    <string name="title_back">Kembali</string>
+    <string name="title_submit_order">Submit Order</string>
 </resources>
