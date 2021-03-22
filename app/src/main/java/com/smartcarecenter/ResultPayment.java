@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import javax.xml.transform.Result;
 
 public class ResultPayment extends AppCompatActivity {
-    TextView mresult, mback, mtitle;
+    TextView mresult, mback, mtitle, mketerangan;
     ImageView micon;
     String nopo = "";
     String Grandtotal= "";
@@ -24,6 +25,7 @@ public class ResultPayment extends AppCompatActivity {
     String username = "";
     String mmustUpload = "";
     String mcc= "";
+    EditText mtoken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,8 @@ public class ResultPayment extends AppCompatActivity {
         mback = findViewById(R.id.btnSubmit);
         mtitle = findViewById(R.id.title);
         micon = findViewById(R.id.imageVar);
+        mketerangan = findViewById(R.id.suces);
+        mtoken = findViewById(R.id.token);
 
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
@@ -47,8 +51,13 @@ public class ResultPayment extends AppCompatActivity {
             mresult.setText(bundle2.getString("ss"));
             if (mcc.equals("Success")){
                 Picasso.with(ResultPayment.this).load(R.drawable.ico_payment_success).into(micon);
+                mketerangan.setText("barang yg diminta akan di antar sesuai jadwal delivery");
+                mback.setText(getString(R.string.title_back));
             }else{
+                mketerangan.setText("Pembayaran gagal mohon periksa kembali data anda dengan benar!");
+                mback.setText(getString(R.string.title_btngagal));
                 Picasso.with(ResultPayment.this).load(R.drawable.ico_payment_failed).into(micon);
+                mtoken.setText(bundle2.getString("tokennya"));
             }
         }
         mback.setOnClickListener(new View.OnClickListener() {

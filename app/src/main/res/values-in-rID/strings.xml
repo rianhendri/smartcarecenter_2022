@@ -37,7 +37,7 @@
     <string name="title_daterequest">Tanggal Request</string>
     <string name="title_descriptionproblem">Penjelasan Masalah</string>
     <string name="title_cancle">Batal</string>
-    <string name="title_serviceticket">Ticket Service</string>
+    <string name="title_serviceticket">Service Ticket</string>
     <string name="title_location">Lokasi</string>
     <string name="title_confirm">Konfirmasi</string>
     <string name="title_contactCS">Chat dengan Support</string>
@@ -168,4 +168,5 @@
     <string name="title_choseepymnt">"Pilihan Pembayaran: "</string>
     <string name="title_back">Kembali</string>
     <string name="title_submit_order">Submit Order</string>
+    <string name="title_btngagal">Coba Ulang Pembayaran</string>
 </resources>

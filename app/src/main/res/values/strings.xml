@@ -167,4 +167,5 @@
     <string name="title_choseepymnt">"Choose Payment: "</string>
     <string name="title_back">Back</string>
     <string name="title_submit_order">Submit Order</string>
+    <string name="title_btngagal">Retry Payment</string>
 </resources>

@@ -133,6 +133,8 @@ public interface IRetrofit {
     @POST("api/Chargeable/PreparePaygate")
     Call<JsonObject> preparpayget(@Body JsonObject locationPost);
 
+    @POST("api/chargeable/orderSummary")
+    Call<JsonObject> ordersumary(@Body JsonObject locationPost);
     @Multipart
     @POST("api/FormRequest/Add")
     public Call<JsonObject> uploadImage(@Part MultipartBody.Part multipart,

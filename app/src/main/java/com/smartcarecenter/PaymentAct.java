@@ -78,6 +78,7 @@ public class PaymentAct extends AppCompatActivity {
     int PayChanChoosed = 0;
     DirectSDK directSDK;
     ProgressDialog loading;
+    long totalnya = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +101,7 @@ public class PaymentAct extends AppCompatActivity {
         if (bundle2 != null) {
             nopo = bundle2.getString("nopo");
             Grandtotal = bundle2.getString("grandtotal");
+
             noOrder=bundle2.getString("id");;
             valuefilter= bundle2.getString("pos");;
             guid = bundle2.getString("guid");;
@@ -156,92 +158,21 @@ public class PaymentAct extends AppCompatActivity {
         mcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int permissionCheck = ContextCompat.checkSelfPermission(PaymentAct.this, Manifest.permission.READ_PHONE_STATE);
 
-                if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-                    getPermissionFirst(1);
-//                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
-                } else {
-//                    Toast.makeText(PaymentAct.this, String.valueOf(AppsUtil.SHA1(AppsUtil.generateMoneyFormat2("15000") + "8878" +
-//                            "f599rtEZtH5A" + invoiceNumber + 360 +
-//                            telephonyManager.getDeviceId())), Toast.LENGTH_SHORT).show();
-                    telephonyManager.getDeviceId();
-                    PaymentItems paymentItems = new PaymentItems();
-                    paymentItems.setDataAmount(AppsUtil.generateMoneyFormat("15000"));
-                    paymentItems.setDataBasket("[{\"name\":\"sayur\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":\"10000.00\"},{\"name\":\"buah\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":,\"10000.00\"}]");
-                    paymentItems.setDataCurrency("360");
-                    paymentItems.setDataWords(AppsUtil.SHA1(AppsUtil.generateMoneyFormat("15000") + "8878" +
-                            "f599rtEZtH5A" + invoiceNumber + 360 +
-                            telephonyManager.getDeviceId()));
-                    paymentItems.setDataMerchantChain("NA");
-                    paymentItems.setDataSessionID(String.valueOf(AppsUtil.nDigitRandomNo(9)));
-                    paymentItems.setDataTransactionID(invoiceNumber);
-                    paymentItems.setDataMerchantCode("8878");
-                    paymentItems.setDataImei(telephonyManager.getDeviceId());
-                    paymentItems.setMobilePhone("");
-                    paymentItems.isProduction(false); //set ‘true’ for production and ‘false’ for
-                    paymentItems.setPublicKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBkd2EipFMMn3hy/rgQ3UBYs0WFPiei2RFSU0r/ClJXgyh88Eq+BpKtSCivbCjCZE7YOhcdbtYonFIi+isheNv00zqo5msQNCvhT45uYZ2Arvh8+F9xGE+y1KTS7ruYnzsDHYTBv+MHOJxs0Yn1mi3+y0KSMIBhz5iSIPzQgnLdNww0VnhwNdCwlm1EeBBE4ijWAm7IWxrFAsmMynUVCZRzZ5tTU4mb8BEDc854Pu94m1YAugw74f7JzMol7tPf5MO79moXdvDmPKVzNrEvMVFDLk+KnvI/yYe4uReQA4H2glNB+hGRPjqDXztY/6EJBHDo79cjKSBmuU5WGYReRiwIDAQAB"); //PublicKey c
-                    directSDK.setCart_details(paymentItems);
-                    directSDK.setPaymentChannel(1);
-                    directSDK.getResponse(new iPaymentCallback() {
-                        @Override
-                        public void onSuccess(final String text) {
-                            Log.d("dddd",text);
-//                            Toast.makeText(DokuAct.this, respongetTokenSDK.toString(), Toast.LENGTH_SHORT).show();
-                            try {
-                                respongetTokenSDK = new JSONObject(text);
-                                if (respongetTokenSDK.getString("res_response_code").equalsIgnoreCase("0000")) {
-                                    Log.d("brs",text);
-//                                    tokenid = respongetTokenSDK.getString("res_token_id");
-//                                    pairingcode = respongetTokenSDK.getString("res_pairing_code");
-//                                    jsonRespon = text;
-//                                    new RequestPayment().execute();
-//                                    Toast.makeText(DokuAct.this, text, Toast.LENGTH_SHORT).show();
-                                    Intent gotoa = new Intent(PaymentAct.this,ResultPayment.class);
-                                    gotoa.putExtra("grandtotal",Grandtotal);
-                                    gotoa.putExtra("id",noOrder);
-                                    gotoa.putExtra("guid",guid);
-                                    gotoa.putExtra("username",username);
-                                    gotoa.putExtra("pdfyes",mmustUpload);
-                                    gotoa.putExtra("pos",valuefilter);
-                                    gotoa.putExtra("nopo",nopo);
-                                    gotoa.putExtra("ss","Payment Success");
-                                    gotoa.putExtra("cc","Success");
-                                    startActivity(gotoa);
-                                    finish();
-                                }
-                            } catch (JSONException e)
-                            { e.printStackTrace();
-//                                Toast.makeText(PaymentAct.this, e.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        @Override
-                        public void onError(final String text) {
-                            Log.e("liateror",text);
-//                            Log.d("brs",jsonRespon);
-//error handling here                                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onException(Exception eSDK) {
-                            eSDK.printStackTrace();
-//                            Toast.makeText(PaymentAct.this, eSDK.toString(), Toast.LENGTH_SHORT).show();
-
-                        }
-                    }, getApplicationContext());
-                }
-//                Intent gotoaddfoc = new Intent(PaymentAct.this, ResultPayment.class);
-//                gotoaddfoc.putExtra("grandtotal",Grandtotal);
-//                gotoaddfoc.putExtra("id",noOrder);
-//                gotoaddfoc.putExtra("guid",guid);
-//                gotoaddfoc.putExtra("username",username);
-//                gotoaddfoc.putExtra("pdfyes",mmustUpload);
-//                gotoaddfoc.putExtra("pos",valuefilter);
-//                gotoaddfoc.putExtra("nopo",nopo);
-//                gotoaddfoc.putExtra("ss","Payment Failed");
-//                gotoaddfoc.putExtra("cc","Failed");
-//                startActivity(gotoaddfoc);
-//                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-//                finish();
+                Intent gotoaddfoc = new Intent(PaymentAct.this, OrderSumary.class);
+                gotoaddfoc.putExtra("grandtotal",Grandtotal);
+                gotoaddfoc.putExtra("id",noOrder);
+                gotoaddfoc.putExtra("guid",guid);
+                gotoaddfoc.putExtra("username",username);
+                gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                gotoaddfoc.putExtra("pos",valuefilter);
+                gotoaddfoc.putExtra("nopo",nopo);
+                gotoaddfoc.putExtra("ss","Payment Failed");
+                gotoaddfoc.putExtra("paycd","CREDITCARD");
+                gotoaddfoc.putExtra("method","Credit Card");
+                startActivity(gotoaddfoc);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
             }
         });
     }
@@ -323,6 +254,7 @@ public class PaymentAct extends AppCompatActivity {
                     mnoponya.setText("PO: "+data.get("poNo").getAsString());
                     mwaiting.setText(data.get("paymentStatusName").getAsString());
                     mharganya.setText("Rp. "+String.valueOf(formatRupiah.format(data.get("grandTotal").getAsDouble())));
+                    totalnya = (long)data.get("grandTotal").getAsDouble();
                     loading.dismiss();
                 }else {
                     loading.dismiss();

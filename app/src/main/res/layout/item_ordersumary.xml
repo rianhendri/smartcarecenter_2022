@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:background="@color/dwhite">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:id="@+id/marginbutom">
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical"
+			>
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:fontFamily="@font/seguisb"
+				android:gravity="center_vertical"
+				android:text=" "
+				android:id="@+id/titlename"
+				android:textColor="@color/black"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/segoeuii"
+				android:text=" "
+				android:textColor="@color/darkgrey2"
+				android:textSize="11sp"
+				android:id="@+id/deskripsinya"
+				android:layout_marginTop="16dp"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+		</androidx.constraintlayout.widget.ConstraintLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:layout_weight="1"
+			android:gravity="end">
+			<TextView
+				android:id="@+id/strike"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/seguisb"
+				android:gravity="end"
+				android:layout_marginRight="8dp"
+				android:text=""
+				android:textSize="11sp"/>
+			<TextView
+				android:id="@+id/nominal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/seguisb"
+				android:gravity="end"
+				android:text=""
+				android:textSize="13sp"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

@@ -2,17 +2,21 @@ package com.smartcarecenter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -51,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
     Boolean internet = true;
     String ModelHp= "";
     String osHp = "";
+    TelephonyManager telephonyManager;
+    String imeiHp = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +68,17 @@ public class LoginActivity extends AppCompatActivity {
         mforgotpassword = findViewById(R.id.forgotpassword);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        if (ActivityCompat.checkSelfPermission(LoginActivity.this,
+                Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            telephonyManager = (TelephonyManager) getSystemService(LoginActivity.this.TELEPHONY_SERVICE);
+            imeiHp=telephonyManager.getDeviceId();
+            Log.d("imei",imeiHp);
+        }else {
+            ActivityCompat.requestPermissions(LoginActivity.this
+                    , new String[]{Manifest.permission.READ_PHONE_STATE},100);
+        }
+
+
         getVersionHp();
         cekInternet();
         //generate token notifikasi
@@ -91,13 +108,23 @@ public class LoginActivity extends AppCompatActivity {
         mlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (ActivityCompat.checkSelfPermission(LoginActivity.this,
+                        Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                    telephonyManager = (TelephonyManager) getSystemService(LoginActivity.this.TELEPHONY_SERVICE);
+                    imeiHp=telephonyManager.getDeviceId();
+                    Log.d("imei",imeiHp);
+                    if (internet){
+                        loginApi();
+                    }else {
+                        cekInternet();
+                    }
+                }else {
+                    ActivityCompat.requestPermissions(LoginActivity.this
+                            , new String[]{Manifest.permission.READ_PHONE_STATE},100);
+                }
                 Log.d("token1",token);
 //                Toast.makeText(LoginActivity.this, osHp+"-"+ModelHp, Toast.LENGTH_SHORT).show();
-            if (internet){
-                loginApi();
-            }else {
-                cekInternet();
-            }
+
             }
         });
         String versionName = BuildConfig.VERSION_NAME;
@@ -112,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
         jsonObject.addProperty("ver",ver);
         jsonObject.addProperty("model",ModelHp);
         jsonObject.addProperty("osversion",osHp);
+        jsonObject.addProperty("imei",imeiHp);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> call = jsonPostService.postRawJSONlogin(jsonObject);
         call.enqueue(new Callback<JsonObject>() {
@@ -168,6 +196,20 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == 100 && grantResults.length>0 && (grantResults[0]
+                == PackageManager.PERMISSION_GRANTED)){
+
+
+
+        }else {
+            Toast.makeText(this, "Akese Telpon Wajib", Toast.LENGTH_LONG).show();
+
+        }
+    }
+
     public void cekInternet(){
             /// cek internet apakah internet terhubung atau tidak
             ConnectivityManager connectivityManager = (ConnectivityManager)LoginActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
