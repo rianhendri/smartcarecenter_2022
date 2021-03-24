@@ -91,7 +91,7 @@ public class PaymentAct extends AppCompatActivity {
         mno = findViewById(R.id.orderno);
         mbackbtn =findViewById(R.id.backin);
         mcc = findViewById(R.id.creditcardbtn);
-        mva = findViewById(R.id.vabtn);
+//        mva = findViewById(R.id.vabtn);
 
         telephonyManager = (TelephonyManager) getSystemService(PaymentAct.this.TELEPHONY_SERVICE);
 

@@ -34,7 +34,7 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class SettingActivity extends AppCompatActivity {
-    LinearLayout mmyprofile, mchangepass, mlanguage, mlogout;
+    LinearLayout mmyprofile, mchangepass, mlanguage, mlogout, mcontactus;
     LinearLayout mback;
     boolean internet = true;
     String MhaveToUpdate = "";
@@ -50,6 +50,7 @@ public class SettingActivity extends AppCompatActivity {
         mlanguage = findViewById(R.id.multilanguage);
         mlogout = findViewById(R.id.logout);
         mback = findViewById(R.id.backbtn);
+        mcontactus = findViewById(R.id.contact);
 
         //get Session Id
         getSessionId();
@@ -61,6 +62,19 @@ public class SettingActivity extends AppCompatActivity {
                         Intent gototoprofile = new Intent(SettingActivity.this,Myprofile.class);
                         startActivity(gototoprofile);
                         finish();
+                }else {
+
+                }
+            }
+        });
+        mcontactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cekInternet();
+                if (internet){
+                    Intent gototoprofile = new Intent(SettingActivity.this,ContactUs.class);
+                    startActivity(gototoprofile);
+                    finish();
                 }else {
 
                 }

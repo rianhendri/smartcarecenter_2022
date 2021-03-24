@@ -74,6 +74,7 @@ import retrofit2.Response;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.smartcarecenter.Add_Po_Item_List.PaymentTypeCd2;
 import static com.smartcarecenter.Add_Po_Item_list_model.Add_po_list_adapter.listpoact;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
@@ -142,7 +143,7 @@ public class AddDetailsPo extends AppCompatActivity {
     List<String> listnamestatus = new ArrayList();
     List<String> listfoto = new ArrayList();
     Spinner mstatus_spin;
-    String PaymentTypeCd = "-";
+    public  static String PaymentTypeCd = "null";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +181,13 @@ public class AddDetailsPo extends AppCompatActivity {
         mlogopay = findViewById(R.id.logopay);
         cekInternet();
         getSessionId();
+        Bundle bundle2 = getIntent().getExtras();
+//        PaymentTypeCd =PaymentTypeCd2;
+//        if (bundle2 != null) {
+//            PaymentTypeCd = bundle2.getString("pay");
+//        }else {
+//            PaymentTypeCd ="null";
+//        }
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(AddDetailsPo.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -300,6 +308,7 @@ public class AddDetailsPo extends AppCompatActivity {
                 gotoaddfoc.putExtra("pressId",mpressId);
                 gotoaddfoc.putExtra("nopo",pono);
                 gotoaddfoc.putExtra("notesa",notes1);
+                gotoaddfoc.putExtra("pay",PaymentTypeCd);
                 gotoaddfoc.putExtra("file",imagefile);
                 startActivity(gotoaddfoc);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
@@ -311,6 +320,9 @@ public class AddDetailsPo extends AppCompatActivity {
         mstatus_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("pos",String.valueOf(position));
+                PaymentTypeCd = listvalue.get(position);
+                Log.d("spin",PaymentTypeCd+String.valueOf(position));
                 cekInternet();
                 for (int i = 0; i < listfoto.size(); ++i) {
                     String valuefilter = listfoto.get(position);
@@ -322,6 +334,7 @@ public class AddDetailsPo extends AppCompatActivity {
                     }
 
                 }
+
             }
 
             @Override
@@ -341,7 +354,14 @@ public class AddDetailsPo extends AppCompatActivity {
                     }
                     if (muploadPOPdf){
                         if (mmustUpload){
-                            showDialog();
+                            if (PaymentTypeCd.equals("null")){
+                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+
+
+                            }else {
+                                showDialog();
+                            }
+
 //                            if (imagefile==null){
 //                                Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
 //                            }else {
@@ -349,10 +369,22 @@ public class AddDetailsPo extends AppCompatActivity {
 //                            }
                         }
                         else {
-                            showDialog();
+                            if (PaymentTypeCd.equals("null")){
+                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+
+
+                            }else {
+                                showDialog();
+                            }
                         }
                     }else {
-                        showDialog();
+                        if (PaymentTypeCd.equals("null")){
+                            Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+
+
+                        }else {
+                            showDialog();
+                        }
                     }
 
 
@@ -371,7 +403,13 @@ public class AddDetailsPo extends AppCompatActivity {
                     }
                     if (muploadPOPdf){
                         if (mmustUpload){
-                            showDialog();
+                            if (PaymentTypeCd.equals("null")){
+                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+
+
+                            }else {
+                                showDialog();
+                            }
 //                            if (imagefile==null){
 //                                Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
 //                            }else {
@@ -379,10 +417,22 @@ public class AddDetailsPo extends AppCompatActivity {
 //                            }
                         }
                         else {
-                            showDialog();
+                            if (PaymentTypeCd.equals("null")){
+                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+
+
+                            }else {
+                                showDialog();
+                            }
                         }
                     }else {
-                        showDialog();
+                        if (PaymentTypeCd.equals("null")){
+                            Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+
+
+                        }else {
+                            showDialog();
+                        }
                     }
 
 
@@ -655,7 +705,7 @@ public class AddDetailsPo extends AppCompatActivity {
                         listnamestatus.add(string4);
                         listfoto.add(string5);
                         for (int j = 0; j < listvalue.size(); ++j) {
-                            if (listvalue.get(i).equals(PaymentTypeCd)){
+                            if (listvalue.get(j).equals(PaymentTypeCd)){
                                 pos=j;
                             }
                         }
@@ -788,6 +838,7 @@ public class AddDetailsPo extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,mnopo.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,mnotes.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(myCustomArray)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,PaymentTypeCd),
                     RequestBody.create((MediaType)MultipartBody.FORM,ver))
                     .enqueue(new Callback<JsonObject>() {
                         @Override
@@ -847,6 +898,7 @@ public class AddDetailsPo extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,mnopo.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,mnotes.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(myCustomArray)),
+                    RequestBody.create((MediaType)MultipartBody.FORM,PaymentTypeCd),
                     RequestBody.create((MediaType)MultipartBody.FORM,ver))
                     .enqueue(new Callback<JsonObject>() {
                         @Override

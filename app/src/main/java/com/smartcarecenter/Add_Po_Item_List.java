@@ -43,6 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.smartcarecenter.AddDetailsPo.PaymentTypeCd;
 import static com.smartcarecenter.AddDetailsPo.imagefile;
 import static com.smartcarecenter.AddDetailsPo.mpressId;
 import static com.smartcarecenter.AddDetailsPo.notes1;
@@ -77,6 +78,7 @@ public class Add_Po_Item_List extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     Add_po_list_adapter addpoitemadapter;
     public static String stsinac="";
+    public static String PaymentTypeCd2 = "";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class Add_Po_Item_List extends AppCompatActivity {
             mpressId = bundle2.getString("pressId");
             pono = bundle2.getString("nopo");
             notes1 = bundle2.getString("notesa");
+            PaymentTypeCd2 = bundle2.getString("pay");
             imagefile = (File) bundle2.get("file");
 
         }
@@ -172,10 +175,12 @@ public class Add_Po_Item_List extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        PaymentTypeCd = PaymentTypeCd2;
         Intent back = new Intent(Add_Po_Item_List.this,AddDetailsPo.class);
         back.putExtra("pos",valuefilter);
         back.putExtra("pressId",mpressId);
         back.putExtra("nopo",pono);
+        back.putExtra("pay",PaymentTypeCd2);
         startActivity(back);
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();

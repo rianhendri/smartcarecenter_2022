@@ -58,7 +58,10 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.smartcarecenter.AddDetailsPo.PaymentTypeCd;
 import static com.smartcarecenter.Add_Foc_Item_List.stsinac;
+//import static com.smartcarecenter.Add_Po_Item_List.PaymentTypeCd;
+import static com.smartcarecenter.Add_Po_Item_List.PaymentTypeCd2;
 import static com.smartcarecenter.Add_Po_Request.Add_po_req_adapter.addFoclistreq;
 
 public class Add_po_list_adapter
@@ -136,6 +139,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
                 boolean status = true;
                 status = addPolistitem.get(i).getStsActive();
                 if (status){
+                    PaymentTypeCd = PaymentTypeCd2;
                     tambahitem = new Add_po_req_item();
                     tambahitem.setItemcd(addPolistitem.get(i).getItemCd());
                     tambahitem.setCategory(addPolistitem.get(i).getCategoryName());
@@ -149,6 +153,7 @@ extends RecyclerView.Adapter<Add_po_list_adapter.Myviewholder> {
                     tambahitem.setMps(addPolistitem.get(i).getMps());
                     listpoact.add(tambahitem);
                     Intent intent = new Intent(context, AddDetailsPo.class);
+                    intent.putExtra("pay",PaymentTypeCd2);
                     context.startActivity(intent);
                     ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.left_in, R.anim.right_out);

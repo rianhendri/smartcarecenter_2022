@@ -176,6 +176,7 @@ public interface IRetrofit {
                                       @Part("poNo") RequestBody currentImpression,
                                       @Part("custNotes") RequestBody custNotes,
                                       @Part("items") RequestBody items,
+                                      @Part("PaymentTypeCd") RequestBody PaymentTypeCd,
                                       @Part("ver") RequestBody ver);
 
     @Multipart

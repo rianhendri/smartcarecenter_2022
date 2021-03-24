@@ -148,6 +148,44 @@
     <LinearLayout
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:id="@+id/contact"
+        android:background="@drawable/bgwhitecorner"
+        android:elevation="5dp"
+        android:paddingLeft="14dp"
+        android:paddingTop="7dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="14dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="14dp"
+            android:src="@drawable/building" />
+        <TextView
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:fontFamily="@font/seguisb" />
+        <LinearLayout
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="14dp"
+                android:src="@drawable/ic_next" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:id="@+id/logout"
         android:background="@drawable/bgwhitecorner"
         android:elevation="5dp"

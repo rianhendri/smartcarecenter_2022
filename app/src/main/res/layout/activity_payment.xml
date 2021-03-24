@@ -173,7 +173,35 @@
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/vabtn"
+                android:id="@+id/vabtnmand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/main_button"
+                android:gravity="left|center_vertical"
+                android:padding="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/mandiri"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="12dp"
+                    android:text="88899856 - Mandiri VA"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ico_arrow_left"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/vabtnbca"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
