@@ -192,6 +192,7 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
         if (addFoclistreq.get(i).getStockOnHand().equals("?")){
             myviewholder.mstockhand.setText("");
         }else {
+
             myviewholder.mstockhand.setText(String.valueOf(addFoclistreq.get(i).getStockOnHand()));
         }
         if (selected_position ==  1) {
@@ -661,7 +662,13 @@ extends RecyclerView.Adapter<Add_foc_req_adapter.Myviewholder> {
 
                             myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
                         }else {
-                            addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
+                            if (addFoclistreq.get(i).getMaxSOH()<Integer.parseInt(myviewholder.mstockhand.getText().toString())){
+                                myviewholder.mstockhand.setText(String.valueOf(addFoclistreq.get(i).getMaxSOH()));
+                                addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
+                                Toast.makeText(context, "Max "+String.valueOf(addFoclistreq.get(i).getMaxSOH()), Toast.LENGTH_SHORT).show();
+                            }else{
+                                addFoclistreq.get(i).setStockOnHand(myviewholder.mstockhand.getText().toString());
+                            }
                             myviewholder.mstockhand.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
                             if (myviewholder.mmatrix.getText().toString().equals("0")){
 

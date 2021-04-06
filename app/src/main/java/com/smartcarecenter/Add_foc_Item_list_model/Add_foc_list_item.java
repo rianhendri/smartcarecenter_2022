@@ -17,8 +17,7 @@ public class Add_foc_list_item {
     public Add_foc_list_item() {
     }
 
-
-    public Add_foc_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, boolean usingMatrix, String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks, boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL, Integer lastImpression, String stsActiveInfo, String unitName, double matrixLifeSpanPcs, boolean matrixFloor) {
+    public Add_foc_list_item(String itemCd, String name, String itemTypeCd, String categoryCd, boolean usingMatrix, String mps, String itemsPerPress, Integer shelfLife, String lifeSpan, String remarks, boolean stsActive, String categoryName, String imageFullURL, String imageThumbFullURL, Integer lastImpression, String stsActiveInfo, String unitName, int maxSOH, double matrixLifeSpanPcs, boolean matrixFloor) {
         ItemCd = itemCd;
         Name = name;
         ItemTypeCd = itemTypeCd;
@@ -36,6 +35,7 @@ public class Add_foc_list_item {
         LastImpression = lastImpression;
         StsActiveInfo = stsActiveInfo;
         UnitName = unitName;
+        MaxSOH = maxSOH;
         MatrixLifeSpanPcs = matrixLifeSpanPcs;
         MatrixFloor = matrixFloor;
     }
@@ -176,6 +176,14 @@ public class Add_foc_list_item {
         UnitName = unitName;
     }
 
+    public int getMaxSOH() {
+        return MaxSOH;
+    }
+
+    public void setMaxSOH(int maxSOH) {
+        MaxSOH = maxSOH;
+    }
+
     public double getMatrixLifeSpanPcs() {
         return MatrixLifeSpanPcs;
     }
@@ -243,7 +251,9 @@ public class Add_foc_list_item {
     @Expose
     @SerializedName("UnitName")
     private String UnitName;
-
+    @Expose
+    @SerializedName("MaxSOH")
+    private int MaxSOH;
     @Expose
     @SerializedName("MatrixLifeSpanPcs")
     private double MatrixLifeSpanPcs;

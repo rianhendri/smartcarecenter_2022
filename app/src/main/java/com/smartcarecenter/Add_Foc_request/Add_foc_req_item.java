@@ -19,8 +19,8 @@ public class Add_foc_req_item {
     public Add_foc_req_item() {
     }
 
-    public Add_foc_req_item(String itemcd, Integer position, Integer qty, String imgpic, String imgban, String nameitem, String category, String unitName, double matrixLifeSpanPcs, boolean usingMatrix, Integer lastImpression, String matrix,
-                            String stockOnHand, boolean matrixFloor, Double matrixCount, String lifeSpan) {
+
+    public Add_foc_req_item(String itemcd, Integer position, Integer qty, String imgpic, String imgban, String nameitem, String category, String unitName, double matrixLifeSpanPcs, boolean usingMatrix, Integer lastImpression, String matrix, String stockOnHand, boolean matrixFloor, Double matrixCount, String lifeSpan, int maxSOH) {
         this.itemcd = itemcd;
         this.position = position;
         this.qty = qty;
@@ -37,6 +37,7 @@ public class Add_foc_req_item {
         MatrixFloor = matrixFloor;
         MatrixCount = matrixCount;
         LifeSpan = lifeSpan;
+        MaxSOH = maxSOH;
     }
 
     public String getItemcd() {
@@ -167,6 +168,14 @@ public class Add_foc_req_item {
         LifeSpan = lifeSpan;
     }
 
+    public int getMaxSOH() {
+        return MaxSOH;
+    }
+
+    public void setMaxSOH(int maxSOH) {
+        MaxSOH = maxSOH;
+    }
+
     @SerializedName("itemcd")
     private String itemcd;
     @Expose
@@ -219,7 +228,9 @@ public class Add_foc_req_item {
     @SerializedName("LifeSpan")
     private String LifeSpan;
 
-
+    @Expose
+    @SerializedName("MaxSOH")
+    private int MaxSOH;
 }
 
 

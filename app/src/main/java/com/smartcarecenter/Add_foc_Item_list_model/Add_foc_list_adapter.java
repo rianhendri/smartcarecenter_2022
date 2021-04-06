@@ -168,6 +168,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
                     tambahitem.setMatrix("-");
                     tambahitem.setStockOnHand("?");
                     tambahitem.setQty(1);
+                    tambahitem.setMaxSOH(addFoclistitem.get(i).getMaxSOH());
                     tambahitem.setPosition(addFoclistreq.size()+1);
                     listpoact.add(tambahitem);
                     Intent intent = new Intent(context, AddDetailFoc.class);
