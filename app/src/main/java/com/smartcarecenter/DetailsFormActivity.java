@@ -406,7 +406,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("formRequestCd",noreq);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
 //        Toast.makeText(DetailsFormActivity.this,jsonObject.toString(), Toast.LENGTH_SHORT).show();
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetform(jsonObject);
@@ -626,7 +626,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("formRequestCd",noreq);
         jsonObject.addProperty("reason",mreason);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONcancelform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -671,7 +671,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("formRequestCd",noreq);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONreopen(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

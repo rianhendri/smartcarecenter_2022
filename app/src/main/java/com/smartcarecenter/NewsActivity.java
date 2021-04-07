@@ -225,7 +225,7 @@ public class NewsActivity extends AppCompatActivity {
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("subCategoryCd",cdsub);
 //        jsonObject.addProperty("status","-");
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONnews(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -300,7 +300,7 @@ public class NewsActivity extends AppCompatActivity {
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("subCategoryCd",cdsub);
         jsonObject.addProperty("status","-");
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONnews(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -412,7 +412,7 @@ public class NewsActivity extends AppCompatActivity {
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("categoryCd",valuefilter);
         jsonObject.addProperty("status","-");
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONnews(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

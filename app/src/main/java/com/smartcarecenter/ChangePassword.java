@@ -164,7 +164,7 @@ public class ChangePassword extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("oldPassword", moldpassword.getText().toString());
         jsonObject.addProperty("newPassword", mnewpassword.getText().toString());
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONchangepassword(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

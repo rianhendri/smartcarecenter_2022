@@ -258,7 +258,7 @@ public class OrderSumary extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("orderNo",noOrder);
         jsonObject.addProperty("paymentGatewayCd",payCd);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.ordersumary(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

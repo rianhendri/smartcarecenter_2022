@@ -277,7 +277,7 @@ public class RatingStar extends AppCompatActivity {
         jsonObject.addProperty("rating", ratvalue);
         jsonObject.addProperty("comments", mcomment.getText().toString());
         jsonObject.addProperty("isApprove",value);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
 //        Toast.makeText(RatingStar.this,  String.valueOf(jsonObject),Toast.LENGTH_LONG).show();
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONconfirm(jsonObject);
@@ -521,7 +521,7 @@ public class RatingStar extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)),
                     RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
-                    RequestBody.create((MediaType)MultipartBody.FORM,ver),
+                    RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(cekmonitor)),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days))).enqueue(new Callback<JsonObject>() {
                 @Override
@@ -569,7 +569,7 @@ public class RatingStar extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)),
                     RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
-                    RequestBody.create((MediaType)MultipartBody.FORM,ver),
+                    RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(cekmonitor)),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days))
             ).enqueue(new Callback<JsonObject>() {

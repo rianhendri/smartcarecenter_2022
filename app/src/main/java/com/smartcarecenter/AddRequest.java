@@ -425,7 +425,7 @@ public class AddRequest extends AppCompatActivity {
         loading = ProgressDialog.show(AddRequest.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -486,7 +486,7 @@ public class AddRequest extends AppCompatActivity {
                         imagefile.getName(),requestBody), RequestBody.create(MultipartBody.FORM,sesionid_new), RequestBody.create((MediaType)MultipartBody.FORM,
                 mpressId), RequestBody.create((MediaType)MultipartBody.FORM,
                 mdescrip.getText().toString()),RequestBody.create((MediaType)MultipartBody.FORM,
-                moperatorcd),RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
+                moperatorcd),RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME)).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 String errornya = "";
@@ -570,7 +570,7 @@ public class AddRequest extends AppCompatActivity {
     public void prepform(){
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.prepform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

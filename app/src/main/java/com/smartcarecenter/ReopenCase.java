@@ -326,7 +326,7 @@ public class ReopenCase extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),
                     RequestBody.create((MediaType)MultipartBody.FORM,noreq),
                     RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
-                    RequestBody.create((MediaType)MultipartBody.FORM,ver)).enqueue(new Callback<JsonObject>() {
+                    RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME)).enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     String errornya = "";

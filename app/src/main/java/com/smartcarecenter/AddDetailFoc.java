@@ -420,7 +420,7 @@ public class AddDetailFoc extends AppCompatActivity {
         loading = ProgressDialog.show(AddDetailFoc.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -488,7 +488,7 @@ public class AddDetailFoc extends AppCompatActivity {
         jsonObject.addProperty("currentImpression",mlastimpresi.getText().toString());
         jsonObject.addProperty("notes",mnotes.getText().toString());
         jsonObject.add("items", myCustomArray);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.sendData(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -678,7 +678,7 @@ public class AddDetailFoc extends AppCompatActivity {
                 RequestBody.create((MediaType)MultipartBody.FORM,mlastimpresi.getText().toString()),
                 RequestBody.create((MediaType)MultipartBody.FORM,mnotes.getText().toString()),
                 RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(myCustomArray)),
-                RequestBody.create((MediaType)MultipartBody.FORM,ver))
+                RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME))
                 .enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -752,7 +752,7 @@ public class AddDetailFoc extends AppCompatActivity {
     public void prepform(){
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.prepfoc(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

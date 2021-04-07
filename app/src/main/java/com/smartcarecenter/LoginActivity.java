@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
         jsonObject.addProperty("username",musername.getText().toString());
         jsonObject.addProperty("password",mpassword.getText().toString());
         jsonObject.addProperty("firebaseToken",token);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         jsonObject.addProperty("model",ModelHp);
         jsonObject.addProperty("osversion",osHp);
         jsonObject.addProperty("imei",imeiHp);

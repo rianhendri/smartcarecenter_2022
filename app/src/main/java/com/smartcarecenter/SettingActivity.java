@@ -146,7 +146,7 @@ public class SettingActivity extends AppCompatActivity {
         loading = ProgressDialog.show(SettingActivity.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlogout(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

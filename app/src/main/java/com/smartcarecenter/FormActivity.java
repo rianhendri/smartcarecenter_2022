@@ -253,7 +253,7 @@ public class FormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -326,7 +326,7 @@ public class FormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status","-");
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -386,7 +386,7 @@ public class FormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {

@@ -520,7 +520,7 @@ public class AddDetailsPo extends AppCompatActivity {
         loading = ProgressDialog.show(AddDetailsPo.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONpresslist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -665,7 +665,7 @@ public class AddDetailsPo extends AppCompatActivity {
     public void prepform(){
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("ver",ver);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.prepcharge(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
@@ -839,7 +839,7 @@ public class AddDetailsPo extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,mnotes.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(myCustomArray)),
                     RequestBody.create((MediaType)MultipartBody.FORM,PaymentTypeCd),
-                    RequestBody.create((MediaType)MultipartBody.FORM,ver))
+                    RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME))
                     .enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -899,7 +899,7 @@ public class AddDetailsPo extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,mnotes.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(myCustomArray)),
                     RequestBody.create((MediaType)MultipartBody.FORM,PaymentTypeCd),
-                    RequestBody.create((MediaType)MultipartBody.FORM,ver))
+                    RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME))
                     .enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
