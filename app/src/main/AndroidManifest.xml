@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ContactUs"></activity>
+        <activity android:name=".VirtualAccount"></activity>
+        <activity android:name=".ContactUs" />
         <activity android:name=".OrderSumary" />
         <activity android:name=".ResultPayment" />
         <activity android:name=".PaymentAct" />

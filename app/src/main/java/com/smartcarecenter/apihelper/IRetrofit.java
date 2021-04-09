@@ -135,6 +135,8 @@ public interface IRetrofit {
 
     @POST("api/chargeable/orderSummary")
     Call<JsonObject> ordersumary(@Body JsonObject locationPost);
+    @POST("api/doku/requestvanumber")
+    Call<JsonObject> varequest(@Body JsonObject locationPost);
     @Multipart
     @POST("api/FormRequest/Add")
     public Call<JsonObject> uploadImage(@Part MultipartBody.Part multipart,

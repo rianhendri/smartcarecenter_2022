@@ -124,7 +124,15 @@
                 android:fontFamily="@font/seguisb"
                 android:textColor="@color/black"
                 android:text="@string/title_choseepymnt"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menubank"
+                android:scrollbars="vertical"
+                android:nestedScrollingEnabled="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/creditcardbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,6 +181,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/vabtnmand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -201,6 +210,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/vabtnbca"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

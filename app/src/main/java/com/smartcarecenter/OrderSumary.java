@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.ordersumary.OrderSumaryAdapter;
 import com.smartcarecenter.ordersumary.OrderSumaryItem;
+import com.squareup.picasso.Picasso;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -83,7 +85,7 @@ public class OrderSumary extends AppCompatActivity {
     int PayChanChoosed = 0;
     DirectSDK directSDK;
     ProgressDialog loading;
-    String payCd = "";
+    public static String payCd = "";
     RecyclerView mordrSumarylist;
     TextView mpaymentMethod, maddress, mtotalharga;
     LinearLayout mchangepayment, mchangeadress, msubmit;
@@ -92,12 +94,14 @@ public class OrderSumary extends AppCompatActivity {
     OrderSumaryAdapter orderSumaryAdapter;
     private LinearLayoutManager linearLayoutManager;
     long totalnya = 0;
+    ImageView mlogoorder;
 
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_sumary);
+        mlogoorder = findViewById(R.id.logoorder);
         mback = findViewById(R.id.backbtn);
         mordrSumarylist = findViewById(R.id.ordersumarylist);
         mpaymentMethod = findViewById(R.id.paymentmethod);
@@ -106,9 +110,7 @@ public class OrderSumary extends AppCompatActivity {
         mchangeadress = findViewById(R.id.changeadress);
         mtotalharga = findViewById(R.id.totalharga);
         msubmit = findViewById(R.id.submit);
-
         telephonyManager = (TelephonyManager) getSystemService(OrderSumary.this.TELEPHONY_SERVICE);
-
         invoiceNumber = String.valueOf(AppsUtil.nDigitRandomNo(10));
         directSDK = new DirectSDK();
         Bundle bundle2 = getIntent().getExtras();
@@ -124,6 +126,13 @@ public class OrderSumary extends AppCompatActivity {
             Log.d("noorder",noOrder);
             String paymentmethod = bundle2.getString("method");
             mpaymentMethod.setText(paymentmethod);
+            if (payCd.equals("VAMANDIRI")){
+                Picasso.with(OrderSumary.this).load(R.drawable.mandiri).into(mlogoorder);
+            }
+            if (payCd.equals("CREDITCARD")){
+                Picasso.with(OrderSumary.this).load(R.drawable.cc).into(mlogoorder);
+
+            }
 
         }
         linearLayoutManager = new LinearLayoutManager(OrderSumary.this, LinearLayout.VERTICAL,false);
@@ -150,92 +159,111 @@ public class OrderSumary extends AppCompatActivity {
         msubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int permissionCheck = ContextCompat.checkSelfPermission(OrderSumary.this, Manifest.permission.READ_PHONE_STATE);
+                if (payCd.equals("CREDITCARD")){
+                    int permissionCheck = ContextCompat.checkSelfPermission(OrderSumary.this, Manifest.permission.READ_PHONE_STATE);
 
-                if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-                    getPermissionFirst(1);
+                    if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                        getPermissionFirst(1);
 //                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
-                } else {
+                    } else {
 //                    Toast.makeText(PaymentAct.this, String.valueOf(AppsUtil.SHA1(AppsUtil.generateMoneyFormat2("15000") + "8878" +
 //                            "f599rtEZtH5A" + invoiceNumber + 360 +
 //                            telephonyManager.getDeviceId())), Toast.LENGTH_SHORT).show();
-                    telephonyManager.getDeviceId();
-                    PaymentItems paymentItems = new PaymentItems();
-                    paymentItems.setDataAmount(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)));
-                    paymentItems.setDataBasket("[{\"name\":\"sayur\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":\"10000.00\"},{\"name\":\"buah\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":,\"10000.00\"}]");
-                    paymentItems.setDataCurrency("360");
-                    paymentItems.setDataWords(AppsUtil.SHA1(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)) + "8878" +
-                            "f599rtEZtH5A" + noOrder + 360 +
-                            telephonyManager.getDeviceId()));
-                    paymentItems.setDataMerchantChain("NA");
-                    paymentItems.setDataSessionID(String.valueOf(AppsUtil.nDigitRandomNo(9)));
-                    paymentItems.setDataTransactionID(noOrder);
-                    paymentItems.setDataMerchantCode("8878");
-                    paymentItems.setDataImei(telephonyManager.getDeviceId());
-                    paymentItems.setMobilePhone("");
-                    paymentItems.isProduction(false); //set ‘true’ for production and ‘false’ for
-                    paymentItems.setPublicKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBkd2EipFMMn3hy/rgQ3UBYs0WFPiei2RFSU0r/ClJXgyh88Eq+BpKtSCivbCjCZE7YOhcdbtYonFIi+isheNv00zqo5msQNCvhT45uYZ2Arvh8+F9xGE+y1KTS7ruYnzsDHYTBv+MHOJxs0Yn1mi3+y0KSMIBhz5iSIPzQgnLdNww0VnhwNdCwlm1EeBBE4ijWAm7IWxrFAsmMynUVCZRzZ5tTU4mb8BEDc854Pu94m1YAugw74f7JzMol7tPf5MO79moXdvDmPKVzNrEvMVFDLk+KnvI/yYe4uReQA4H2glNB+hGRPjqDXztY/6EJBHDo79cjKSBmuU5WGYReRiwIDAQAB"); //PublicKey c
-                    directSDK.setCart_details(paymentItems);
-                    directSDK.setPaymentChannel(1);
-                    directSDK.getResponse(new iPaymentCallback() {
-                        @Override
-                        public void onSuccess(final String text) {
-                            Log.d("dddd",text);
-                            JsonObject test = new JsonObject();
-                            test.addProperty("sessionId",sesionid_new);
-                            String textnya = text.replace("}","");
+                        telephonyManager.getDeviceId();
+                        PaymentItems paymentItems = new PaymentItems();
+                        paymentItems.setDataAmount(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)));
+                        paymentItems.setDataBasket("[{\"name\":\"sayur\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":\"10000.00\"},{\"name\":\"buah\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":,\"10000.00\"}]");
+                        paymentItems.setDataCurrency("360");
+                        paymentItems.setDataWords(AppsUtil.SHA1(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)) + "8878" +
+                                "f599rtEZtH5A" + noOrder + 360 +
+                                telephonyManager.getDeviceId()));
+                        paymentItems.setDataMerchantChain("NA");
+                        paymentItems.setDataSessionID(String.valueOf(AppsUtil.nDigitRandomNo(9)));
+                        paymentItems.setDataTransactionID(noOrder);
+                        paymentItems.setDataMerchantCode("8878");
+                        paymentItems.setDataImei(telephonyManager.getDeviceId());
+                        paymentItems.setMobilePhone("");
+                        paymentItems.isProduction(false); //set ‘true’ for production and ‘false’ for
+                        paymentItems.setPublicKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBkd2EipFMMn3hy/rgQ3UBYs0WFPiei2RFSU0r/ClJXgyh88Eq+BpKtSCivbCjCZE7YOhcdbtYonFIi+isheNv00zqo5msQNCvhT45uYZ2Arvh8+F9xGE+y1KTS7ruYnzsDHYTBv+MHOJxs0Yn1mi3+y0KSMIBhz5iSIPzQgnLdNww0VnhwNdCwlm1EeBBE4ijWAm7IWxrFAsmMynUVCZRzZ5tTU4mb8BEDc854Pu94m1YAugw74f7JzMol7tPf5MO79moXdvDmPKVzNrEvMVFDLk+KnvI/yYe4uReQA4H2glNB+hGRPjqDXztY/6EJBHDo79cjKSBmuU5WGYReRiwIDAQAB"); //PublicKey c
+                        directSDK.setCart_details(paymentItems);
+                        directSDK.setPaymentChannel(1);
+                        directSDK.getResponse(new iPaymentCallback() {
+                            @Override
+                            public void onSuccess(final String text) {
+                                Log.d("dddd",text);
+                                JsonObject test = new JsonObject();
+                                test.addProperty("sessionId",sesionid_new);
+                                String textnya = text.replace("}","");
 
-                            String sesion=test.toString().replace("{","");
-                            String textnya2 = textnya+","+sesion;
-                            Log.d("testq",textnya2);
+                                String sesion=test.toString().replace("{","");
+                                String textnya2 = textnya+","+sesion;
+                                Log.d("testq",textnya2);
 //                            Toast.makeText(DokuAct.this, respongetTokenSDK.toString(), Toast.LENGTH_SHORT).show();
-                            try {
-                                respongetTokenSDK = new JSONObject(text);
+                                try {
+                                    respongetTokenSDK = new JSONObject(text);
 
-                                if (respongetTokenSDK.getString("res_response_code").equalsIgnoreCase("0000")) {
+                                    if (respongetTokenSDK.getString("res_response_code").equalsIgnoreCase("0000")) {
 
-                                    Log.d("brs",text);
+                                        Log.d("brs",text);
 //                                    tokenid = respongetTokenSDK.getString("res_token_id");
 //                                    pairingcode = respongetTokenSDK.getString("res_pairing_code");
 //                                    jsonRespon = text;
 //                                    new RequestPayment().execute();
 //                                    Toast.makeText(DokuAct.this, text, Toast.LENGTH_SHORT).show();
-                                    Intent gotoa = new Intent(OrderSumary.this,ResultPayment.class);
-                                    gotoa.putExtra("grandtotal",Grandtotal);
-                                    gotoa.putExtra("id",noOrder);
-                                    gotoa.putExtra("guid",guid);
-                                    gotoa.putExtra("username",username);
-                                    gotoa.putExtra("pdfyes",mmustUpload);
-                                    gotoa.putExtra("pos",valuefilter);
-                                    gotoa.putExtra("nopo",nopo);
-                                    gotoa.putExtra("ss","Payment Failed");
-                                    gotoa.putExtra("cc","Failed");
-                                    gotoa.putExtra("tokennya",textnya2);
-                                    startActivity(gotoa);
-                                    finish();
-                                }
-                            } catch (JSONException e)
-                            {
-                                e.printStackTrace();
-                                Log.e("liateror2",e.toString());
+                                        Intent gotoa = new Intent(OrderSumary.this,ResultPayment.class);
+                                        gotoa.putExtra("grandtotal",Grandtotal);
+                                        gotoa.putExtra("id",noOrder);
+                                        gotoa.putExtra("guid",guid);
+                                        gotoa.putExtra("username",username);
+                                        gotoa.putExtra("pdfyes",mmustUpload);
+                                        gotoa.putExtra("pos",valuefilter);
+                                        gotoa.putExtra("nopo",nopo);
+                                        gotoa.putExtra("ss","Payment Failed");
+                                        gotoa.putExtra("cc","Failed");
+                                        gotoa.putExtra("tokennya",textnya2);
+                                        startActivity(gotoa);
+                                        finish();
+                                    }
+                                } catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                    Log.e("liateror2",e.toString());
 //                                Toast.makeText(PaymentAct.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                        @Override
-                        public void onError(final String text) {
-                            Log.e("liateror",text);
+                            @Override
+                            public void onError(final String text) {
+                                Log.e("liateror",text);
 //                            Log.d("brs",jsonRespon);
 //error handling here                                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onException(Exception eSDK) {
-                            eSDK.printStackTrace();
-                            Log.e("liateror1",eSDK.toString());
+                            }
+                            @Override
+                            public void onException(Exception eSDK) {
+                                eSDK.printStackTrace();
+                                Log.e("liateror1",eSDK.toString());
 //                            Toast.makeText(PaymentAct.this, eSDK.toString(), Toast.LENGTH_SHORT).show();
 
-                        }
-                    }, getApplicationContext());
+                            }
+                        }, getApplicationContext());
+                    }
                 }
+                if (payCd.equals("VAMANDIRI")){
+                    Intent gotoa = new Intent(OrderSumary.this,VirtualAccount.class);
+                    gotoa.putExtra("grandtotal",Grandtotal);
+                    gotoa.putExtra("id",noOrder);
+                    gotoa.putExtra("guid",guid);
+                    gotoa.putExtra("username",username);
+                    gotoa.putExtra("pdfyes",mmustUpload);
+                    gotoa.putExtra("pos",valuefilter);
+                    gotoa.putExtra("nopo",nopo);
+                    gotoa.putExtra("ss","Payment Failed");
+                    gotoa.putExtra("cc","Failed");
+                    gotoa.putExtra("tokennya","");
+                    gotoa.putExtra("paycd",payCd);
+                    startActivity(gotoa);
+                    finish();
+                }
+
             }
         });
         mchangepayment.setOnClickListener(new View.OnClickListener() {

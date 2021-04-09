@@ -4,8 +4,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -29,16 +32,23 @@ import com.doku.sdkocov2.DirectSDK;
 import com.doku.sdkocov2.interfaces.iPaymentCallback;
 import com.doku.sdkocov2.model.PaymentItems;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.messagecloud.check;
+import com.smartcarecenter.paymentbank.PaybankAdapter;
+import com.smartcarecenter.paymentbank.PaybankItem;
+import com.smartcarecenter.supportservice.AddFormAdapter;
+import com.smartcarecenter.supportservice.AddFromItem;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,14 +66,14 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
 
 public class PaymentAct extends AppCompatActivity {
     TextView mtitle;
-    String nopo = "";
-    String Grandtotal= "";
+    public static  String nopo = "";
+    public static String Grandtotal= "";
     TextView mnoponya, mharganya, mno, mbackbtn, mwaiting;
-    String noOrder="";
-    String valuefilter= "";
-    String guid = "";
-    String username = "";
-    String mmustUpload = "";
+    public static String noOrder="";
+    public static String valuefilter= "";
+    public static String guid = "";
+    public static  String username = "";
+    public static String mmustUpload = "";
     LinearLayout mback, mcc, mva;
     String MhaveToUpdate = "";
     String MsessionExpired = "";
@@ -79,10 +89,17 @@ public class PaymentAct extends AppCompatActivity {
     DirectSDK directSDK;
     ProgressDialog loading;
     long totalnya = 0;
+    PaybankAdapter addFormAdapterAdapter;
+    RecyclerView myitem_place;
+    private LinearLayoutManager linearLayoutManager;
+    public static ArrayList<PaybankItem> list2;
+    JsonArray listformreq;
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        myitem_place = findViewById(R.id.menubank);
         mtitle = findViewById(R.id.title);
         mwaiting = findViewById(R.id.waiting);
         mharganya = findViewById(R.id.totalharga);
@@ -92,7 +109,12 @@ public class PaymentAct extends AppCompatActivity {
         mbackbtn =findViewById(R.id.backin);
         mcc = findViewById(R.id.creditcardbtn);
 //        mva = findViewById(R.id.vabtn);
-
+        linearLayoutManager = new LinearLayoutManager(PaymentAct.this, LinearLayout.VERTICAL,false);
+//        linearLayoutManager.setReverseLayout(true);
+//        linearLayoutManager.setStackFromEnd(true);
+        myitem_place.setLayoutManager(linearLayoutManager);
+        myitem_place.setHasFixedSize(true);
+        list2 = new ArrayList<PaybankItem>();
         telephonyManager = (TelephonyManager) getSystemService(PaymentAct.this.TELEPHONY_SERVICE);
 
         invoiceNumber = String.valueOf(AppsUtil.nDigitRandomNo(10));
@@ -137,24 +159,24 @@ public class PaymentAct extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        mva.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent gotoaddfoc = new Intent(PaymentAct.this, ResultPayment.class);
-                gotoaddfoc.putExtra("grandtotal",Grandtotal);
-                gotoaddfoc.putExtra("id",noOrder);
-                gotoaddfoc.putExtra("guid",guid);
-                gotoaddfoc.putExtra("username",username);
-                gotoaddfoc.putExtra("pdfyes",mmustUpload);
-                gotoaddfoc.putExtra("pos",valuefilter);
-                gotoaddfoc.putExtra("nopo",nopo);
-                gotoaddfoc.putExtra("ss","Payment Failed");
-                gotoaddfoc.putExtra("cc","Failed");
-                startActivity(gotoaddfoc);
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                finish();
-            }
-        });
+//        mva.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent gotoaddfoc = new Intent(PaymentAct.this, ResultPayment.class);
+//                gotoaddfoc.putExtra("grandtotal",Grandtotal);
+//                gotoaddfoc.putExtra("id",noOrder);
+//                gotoaddfoc.putExtra("guid",guid);
+//                gotoaddfoc.putExtra("username",username);
+//                gotoaddfoc.putExtra("pdfyes",mmustUpload);
+//                gotoaddfoc.putExtra("pos",valuefilter);
+//                gotoaddfoc.putExtra("nopo",nopo);
+//                gotoaddfoc.putExtra("ss","Payment Failed");
+//                gotoaddfoc.putExtra("cc","Failed");
+//                startActivity(gotoaddfoc);
+//                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//                finish();
+//            }
+//        });
         mcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,6 +269,15 @@ public class PaymentAct extends AppCompatActivity {
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
                     JsonObject data = homedata.getAsJsonObject("data");
+                    listformreq = data.getAsJsonArray("channelList");
+                    Gson gson = new Gson();
+                    Type listType = new TypeToken<ArrayList<PaybankItem>>() {
+                    }.getType();
+                    list2 = gson.fromJson(listformreq.toString(), listType);
+                    addFormAdapterAdapter = new PaybankAdapter(PaymentAct.this, list2);
+//                    addFormAdapterAdapter.notifyDataSetChanged();
+                    myitem_place.setAdapter(addFormAdapterAdapter);
+
                     Locale localeID = new Locale("in", "ID");
                     final DecimalFormat formatRupiah = new DecimalFormat("###,###,###,###,###.00");
                     mno.setText(data.get("orderNo").getAsString());
@@ -274,7 +305,6 @@ public class PaymentAct extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-
             Intent back = new Intent(PaymentAct.this,AddDetailsPoView.class);
             back.putExtra("id",noOrder);
             back.putExtra("guid",guid);
@@ -284,11 +314,6 @@ public class PaymentAct extends AppCompatActivity {
             startActivity(back);
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
             finish();
-
-
-
-
-
     }
     @TargetApi(Build.VERSION_CODES.M)
     private void getPermissionFirst(int paymentChanel) {
