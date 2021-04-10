@@ -120,7 +120,7 @@ public class VirtualAccount extends AppCompatActivity {
                 myClip = ClipData.newPlainText("text", text);
                 myClipboard.setPrimaryClip(myClip);
 
-                Toast.makeText(getApplicationContext(), "Link Copied",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Code Copied",Toast.LENGTH_SHORT).show();
             }
         });
     }

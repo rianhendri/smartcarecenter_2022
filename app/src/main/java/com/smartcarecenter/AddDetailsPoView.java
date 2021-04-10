@@ -101,7 +101,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item,mchat, mcopy;
-    TextView msn,mtextalert, mdeskrip, mlinktext, mpayment;
+    TextView msn,mtextalert, mdeskrip, mlinktext, mpayment,mpayment2;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
     String sesionid_new = "";
@@ -130,6 +130,7 @@ public class AddDetailsPoView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_details_po_view);
         mpayment = findViewById(R.id.payment);
+        mpayment2 = findViewById(R.id.payment2);
         mlistitem_foc = findViewById(R.id.listitemfoc);
         mdate = findViewById(R.id.datefoc);
         mno_order = findViewById(R.id.noorder);
@@ -269,6 +270,27 @@ public class AddDetailsPoView extends AppCompatActivity {
                 username = bundle2.getString("username");
                 mmustUpload = bundle2.getString("pdfyes");
                 Intent gotoaddfoc = new Intent(AddDetailsPoView.this, PaymentAct.class);
+                gotoaddfoc.putExtra("grandtotal",grandtotal);
+                gotoaddfoc.putExtra("id",noOrder);
+                gotoaddfoc.putExtra("guid",guid);
+                gotoaddfoc.putExtra("username",username);
+                gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                gotoaddfoc.putExtra("pos",valuefilter);
+                gotoaddfoc.putExtra("nopo",nopo);
+                startActivity(gotoaddfoc);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+            }
+        });
+        mpayment2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                noOrder = bundle2.getString("id");
+                valuefilter = bundle2.getString("pos");
+                guid = bundle2.getString("guid");
+                username = bundle2.getString("username");
+                mmustUpload = bundle2.getString("pdfyes");
+                Intent gotoaddfoc = new Intent(AddDetailsPoView.this, HistoryPayment.class);
                 gotoaddfoc.putExtra("grandtotal",grandtotal);
                 gotoaddfoc.putExtra("id",noOrder);
                 gotoaddfoc.putExtra("guid",guid);
@@ -453,6 +475,13 @@ public class AddDetailsPoView extends AppCompatActivity {
                         mpayment.setText(data.get("ProcessPaymentButtonText").getAsString());
                     }else{
                         mpayment.setVisibility(GONE);
+
+                    }
+                    if (data.get("showPaymentHistoryButton").getAsBoolean()){
+                        mpayment2.setVisibility(VISIBLE);
+                        mpayment2.setText(data.get("paymentHistoryButtonText").getAsString());
+                    }else{
+                        mpayment2.setVisibility(GONE);
 
                     }
                     showlinkdownload = data.get("showUploadPOLink").getAsBoolean();

@@ -781,6 +781,19 @@
                     android:text="Payment"
                     android:textColor="@color/dwhite"
                     android:textSize="15sp" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/payment2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/bg_cornerblue"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:text="Payment"
+                    android:textColor="@color/dwhite"
+                    android:textSize="15sp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

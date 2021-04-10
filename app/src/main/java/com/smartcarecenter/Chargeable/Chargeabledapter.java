@@ -80,12 +80,20 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
+        if (chargeableItem.get(i).getPaymentStatusName().equals("")){
+            myviewholder.mlaypay.setVisibility(View.GONE);
+        }else {
+            myviewholder.mlaypay.setVisibility(View.VISIBLE);
+            myviewholder.mpaystatus.setText(chargeableItem.get(i).getPaymentStatusName());
+            myviewholder.mpaystatus.setTextColor(Color.parseColor("#"+ chargeableItem.get(i).getPaymentStatusColorCode()));
+        }
         String newdate = "";
         laypo = chargeableItem.get(i).isShowIconPO();
         if (chargeableItem.get(i).isShowIconPO()){
             myviewholder.mlaypo.setVisibility(View.VISIBLE);
         }else {
             myviewholder.mlaypo.setVisibility(View.GONE);
+
         }
         myviewholder.mnofoc.setText("Ref: "+"#"+ chargeableItem.get(i).getOrderNo());
         String oldadate = chargeableItem.get(i).getCreatedDateTime();
@@ -133,11 +141,13 @@ extends RecyclerView.Adapter<Chargeabledapter.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mnofoc,mstatus,mdate,mpos,mNoPo,mgrand;
-        LinearLayout mlaypo;
+        TextView mnofoc,mstatus,mdate,mpos,mNoPo,mgrand,mpaystatus;
+        LinearLayout mlaypo,mlaypay;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
+            mlaypay= itemView.findViewById(R.id.laypay);
+            mpaystatus = itemView.findViewById(R.id.paystatus);
             mnofoc = itemView.findViewById(R.id.nopolist);
             mstatus = itemView.findViewById(R.id.statusfoc);
             mdate = itemView.findViewById(R.id.tanggallistpo);

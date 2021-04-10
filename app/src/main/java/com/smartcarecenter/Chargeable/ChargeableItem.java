@@ -14,9 +14,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class ChargeableItem {
 
-    public ChargeableItem(String orderNo, String date, String pressGuid, String pressName,
-                          String status, String statusName, String statusColorCode, String createdBy, String poNo,
-                          String createdDateTime, double grandTotal, boolean showIconPO) {
+
+    public ChargeableItem(String orderNo, String date, String pressGuid, String pressName, String status, String statusName, String statusColorCode, String createdBy, String poNo, String createdDateTime, String paymentStatusName, String paymentStatusColorCode, double grandTotal, boolean showIconPO) {
         this.orderNo = orderNo;
         this.date = date;
         this.pressGuid = pressGuid;
@@ -27,6 +26,8 @@ public class ChargeableItem {
         this.createdBy = createdBy;
         this.poNo = poNo;
         this.createdDateTime = createdDateTime;
+        this.paymentStatusName = paymentStatusName;
+        this.paymentStatusColorCode = paymentStatusColorCode;
         this.grandTotal = grandTotal;
         this.showIconPO = showIconPO;
     }
@@ -111,6 +112,22 @@ public class ChargeableItem {
         this.createdDateTime = createdDateTime;
     }
 
+    public String getPaymentStatusName() {
+        return paymentStatusName;
+    }
+
+    public void setPaymentStatusName(String paymentStatusName) {
+        this.paymentStatusName = paymentStatusName;
+    }
+
+    public String getPaymentStatusColorCode() {
+        return paymentStatusColorCode;
+    }
+
+    public void setPaymentStatusColorCode(String paymentStatusColorCode) {
+        this.paymentStatusColorCode = paymentStatusColorCode;
+    }
+
     public double getGrandTotal() {
         return grandTotal;
     }
@@ -158,11 +175,18 @@ public class ChargeableItem {
     @SerializedName("createdDateTime")
     private String createdDateTime;
     @Expose
+    @SerializedName("paymentStatusName")
+    private String paymentStatusName;
+    @Expose
+    @SerializedName("paymentStatusColorCode")
+    private String paymentStatusColorCode;
+    @Expose
     @SerializedName("grandTotal")
     private double grandTotal;
     @Expose
     @SerializedName("showIconPO")
     private boolean showIconPO;
+
     public ChargeableItem() {
     }
 
