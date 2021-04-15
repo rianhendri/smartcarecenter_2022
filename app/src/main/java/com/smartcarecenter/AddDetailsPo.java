@@ -107,7 +107,7 @@ public class AddDetailsPo extends AppCompatActivity {
     public static String mpressId = "";
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
-    LinearLayout madd_item, mbgalert;
+    LinearLayout madd_item, mbgalert, mlaypembayaran;
     TextView mtextalert, mnamafile, mrequiredpdf, mchosepdf, mlinktext;
     Spinner msn;
     DatabaseReference reference;
@@ -149,6 +149,7 @@ public class AddDetailsPo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_details_po);
+        mlaypembayaran = findViewById(R.id.pembayaranlay);
         mlistitem_foc = findViewById(R.id.listitemfoc);
         mdate = findViewById(R.id.datefoc);
         mno_order = findViewById(R.id.noorder);
@@ -684,38 +685,47 @@ public class AddDetailsPo extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")) {
+
                     listvalue.add("null");
                     listnamestatus.add("-pilih-");
                     listfoto.add("null");
                     JsonObject data = homedata.getAsJsonObject("data");
-                    liststatus = data.getAsJsonArray("paymentTypeList");
-                    for (int i = 0; i < liststatus.size(); ++i) {
-                        JsonObject jsonObject3 = (JsonObject)liststatus.get(i);
-                        String string3 = jsonObject3.getAsJsonObject().get("PaymentTypeCd").getAsString();
-                        String string4 ="-pilih-";
-                        string4 = jsonObject3.getAsJsonObject().get("Name").getAsString();
-                        String string5 = "";
-                        if (jsonObject3.getAsJsonObject().get("ImageURL").toString().equals("null")){
-                            string5="null";
-                        }else {
-                            string5 = jsonObject3.getAsJsonObject().get("ImageURL").getAsString();
-                        }
-
-                        listvalue.add(string3);
-                        listnamestatus.add(string4);
-                        listfoto.add(string5);
-                        for (int j = 0; j < listvalue.size(); ++j) {
-                            if (listvalue.get(j).equals(PaymentTypeCd)){
-                                pos=j;
+                    if (data.get("showPaymentType").getAsBoolean()){
+                        liststatus = data.getAsJsonArray("paymentTypeList");
+                        for (int i = 0; i < liststatus.size(); ++i) {
+                            JsonObject jsonObject3 = (JsonObject)liststatus.get(i);
+                            String string3 = jsonObject3.getAsJsonObject().get("PaymentTypeCd").getAsString();
+                            String string4 ="-pilih-";
+                            string4 = jsonObject3.getAsJsonObject().get("Name").getAsString();
+                            String string5 = "";
+                            if (jsonObject3.getAsJsonObject().get("ImageURL").toString().equals("null")){
+                                string5="null";
+                            }else {
+                                string5 = jsonObject3.getAsJsonObject().get("ImageURL").getAsString();
                             }
+
+                            listvalue.add(string3);
+                            listnamestatus.add(string4);
+                            listfoto.add(string5);
+                            for (int j = 0; j < listvalue.size(); ++j) {
+                                if (listvalue.get(j).equals(PaymentTypeCd)){
+                                    pos=j;
+                                }
+                            }
+                            final ArrayAdapter<String> kategori = new ArrayAdapter<String>(AddDetailsPo.this, R.layout.spinstatus_layout,
+                                    listnamestatus);
+                            kategori.setDropDownViewResource(R.layout.spinkategori);
+                            kategori.notifyDataSetChanged();
+                            mstatus_spin.setAdapter(kategori);
+                            mstatus_spin.setSelection(pos);
                         }
-                        final ArrayAdapter<String> kategori = new ArrayAdapter<String>(AddDetailsPo.this, R.layout.spinstatus_layout,
-                                listnamestatus);
-                        kategori.setDropDownViewResource(R.layout.spinkategori);
-                        kategori.notifyDataSetChanged();
-                        mstatus_spin.setAdapter(kategori);
-                        mstatus_spin.setSelection(pos);
+                        mlaypembayaran.setVisibility(VISIBLE);
+                    }else {
+                        mlaypembayaran.setVisibility(GONE);
                     }
+
+
+
                     showprep = data.get("showMessage").getAsBoolean();
                     muploadPOPdf = data.get("uploadPOPdf").getAsBoolean();
                     mmustUpload = data.get("mustUpload").getAsBoolean();

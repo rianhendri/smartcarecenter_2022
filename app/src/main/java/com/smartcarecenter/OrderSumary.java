@@ -133,7 +133,24 @@ public class OrderSumary extends AppCompatActivity {
                 Picasso.with(OrderSumary.this).load(R.drawable.cc).into(mlogoorder);
 
             }
-
+            if (payCd.equals("VABCA")){
+                Picasso.with(OrderSumary.this).load(R.drawable.bca).into(mlogoorder);
+            }
+            if (payCd.equals("VADANAMON")){
+                Picasso.with(OrderSumary.this).load(R.drawable.danamon).into(mlogoorder);
+            }
+            if (payCd.equals("VAPERMATA")){
+                Picasso.with(OrderSumary.this).load(R.drawable.permata).into(mlogoorder);
+            }
+            if (payCd.equals("VABNI")){
+                Picasso.with(OrderSumary.this).load(R.drawable.bni).into(mlogoorder);
+            }
+            if (payCd.equals("VACIMB")){
+                Picasso.with(OrderSumary.this).load(R.drawable.cimb).into(mlogoorder);
+            }
+            if (payCd.equals("VAMAYBANK")){
+                Picasso.with(OrderSumary.this).load(R.drawable.mybank).into(mlogoorder);
+            }
         }
         linearLayoutManager = new LinearLayoutManager(OrderSumary.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
@@ -263,7 +280,102 @@ public class OrderSumary extends AppCompatActivity {
                     startActivity(gotoa);
                     finish();
                 }
-
+                if (payCd.equals("VABCA")){
+                    Intent gotoa = new Intent(OrderSumary.this,VirtualAccount.class);
+                    gotoa.putExtra("grandtotal",Grandtotal);
+                    gotoa.putExtra("id",noOrder);
+                    gotoa.putExtra("guid",guid);
+                    gotoa.putExtra("username",username);
+                    gotoa.putExtra("pdfyes",mmustUpload);
+                    gotoa.putExtra("pos",valuefilter);
+                    gotoa.putExtra("nopo",nopo);
+                    gotoa.putExtra("ss","Payment Failed");
+                    gotoa.putExtra("cc","Failed");
+                    gotoa.putExtra("tokennya","");
+                    gotoa.putExtra("paycd",payCd);
+                    startActivity(gotoa);
+                    finish();
+                }
+                if (payCd.equals("VADANAMON")){
+                    Intent gotoa = new Intent(OrderSumary.this,VirtualAccount.class);
+                    gotoa.putExtra("grandtotal",Grandtotal);
+                    gotoa.putExtra("id",noOrder);
+                    gotoa.putExtra("guid",guid);
+                    gotoa.putExtra("username",username);
+                    gotoa.putExtra("pdfyes",mmustUpload);
+                    gotoa.putExtra("pos",valuefilter);
+                    gotoa.putExtra("nopo",nopo);
+                    gotoa.putExtra("ss","Payment Failed");
+                    gotoa.putExtra("cc","Failed");
+                    gotoa.putExtra("tokennya","");
+                    gotoa.putExtra("paycd",payCd);
+                    startActivity(gotoa);
+                    finish();
+                }
+                if (payCd.equals("VAPERMATA")){
+                    Intent gotoa = new Intent(OrderSumary.this,VirtualAccount.class);
+                    gotoa.putExtra("grandtotal",Grandtotal);
+                    gotoa.putExtra("id",noOrder);
+                    gotoa.putExtra("guid",guid);
+                    gotoa.putExtra("username",username);
+                    gotoa.putExtra("pdfyes",mmustUpload);
+                    gotoa.putExtra("pos",valuefilter);
+                    gotoa.putExtra("nopo",nopo);
+                    gotoa.putExtra("ss","Payment Failed");
+                    gotoa.putExtra("cc","Failed");
+                    gotoa.putExtra("tokennya","");
+                    gotoa.putExtra("paycd",payCd);
+                    startActivity(gotoa);
+                    finish();
+                }
+                if (payCd.equals("VABNI")){
+                    Intent gotoa = new Intent(OrderSumary.this,VirtualAccount.class);
+                    gotoa.putExtra("grandtotal",Grandtotal);
+                    gotoa.putExtra("id",noOrder);
+                    gotoa.putExtra("guid",guid);
+                    gotoa.putExtra("username",username);
+                    gotoa.putExtra("pdfyes",mmustUpload);
+                    gotoa.putExtra("pos",valuefilter);
+                    gotoa.putExtra("nopo",nopo);
+                    gotoa.putExtra("ss","Payment Failed");
+                    gotoa.putExtra("cc","Failed");
+                    gotoa.putExtra("tokennya","");
+                    gotoa.putExtra("paycd",payCd);
+                    startActivity(gotoa);
+                    finish();
+                }
+                if (payCd.equals("VACIMB")){
+                    Intent gotoa = new Intent(OrderSumary.this,VirtualAccount.class);
+                    gotoa.putExtra("grandtotal",Grandtotal);
+                    gotoa.putExtra("id",noOrder);
+                    gotoa.putExtra("guid",guid);
+                    gotoa.putExtra("username",username);
+                    gotoa.putExtra("pdfyes",mmustUpload);
+                    gotoa.putExtra("pos",valuefilter);
+                    gotoa.putExtra("nopo",nopo);
+                    gotoa.putExtra("ss","Payment Failed");
+                    gotoa.putExtra("cc","Failed");
+                    gotoa.putExtra("tokennya","");
+                    gotoa.putExtra("paycd",payCd);
+                    startActivity(gotoa);
+                    finish();
+                }
+                if (payCd.equals("VAMAYBANK")){
+                    Intent gotoa = new Intent(OrderSumary.this,VirtualAccount.class);
+                    gotoa.putExtra("grandtotal",Grandtotal);
+                    gotoa.putExtra("id",noOrder);
+                    gotoa.putExtra("guid",guid);
+                    gotoa.putExtra("username",username);
+                    gotoa.putExtra("pdfyes",mmustUpload);
+                    gotoa.putExtra("pos",valuefilter);
+                    gotoa.putExtra("nopo",nopo);
+                    gotoa.putExtra("ss","Payment Failed");
+                    gotoa.putExtra("cc","Failed");
+                    gotoa.putExtra("tokennya","");
+                    gotoa.putExtra("paycd",payCd);
+                    startActivity(gotoa);
+                    finish();
+                }
             }
         });
         mchangepayment.setOnClickListener(new View.OnClickListener() {

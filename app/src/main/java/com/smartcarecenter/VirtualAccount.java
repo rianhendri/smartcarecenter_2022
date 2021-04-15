@@ -186,6 +186,7 @@ public class VirtualAccount extends AppCompatActivity {
 
             }
         });
+        Log.d("jsonbank",jsonObject.toString());
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak

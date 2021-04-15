@@ -85,8 +85,24 @@ extends RecyclerView.Adapter<PaybankAdapter.Myviewholder> {
         }
         if (myItem.get(i).getPaymentGatewayCd().equals("VAMANDIRI")){
             myItem.get(i).setImg(R.drawable.mandiri);
-        } if ((myItem.get(i).getPaymentGatewayCd().equals("VABCA"))){
+        }
+        if ((myItem.get(i).getPaymentGatewayCd().equals("VABCA"))){
             myItem.get(i).setImg(R.drawable.bca);
+        }
+        if ((myItem.get(i).getPaymentGatewayCd().equals("VADANAMON"))){
+            myItem.get(i).setImg(R.drawable.danamon);
+        }
+        if ((myItem.get(i).getPaymentGatewayCd().equals("VAPERMATA"))){
+            myItem.get(i).setImg(R.drawable.permata);
+        }
+        if ((myItem.get(i).getPaymentGatewayCd().equals("VABNI"))){
+            myItem.get(i).setImg(R.drawable.bni);
+        }
+        if ((myItem.get(i).getPaymentGatewayCd().equals("VACIMB"))){
+            myItem.get(i).setImg(R.drawable.cimb);
+        }
+        if ((myItem.get(i).getPaymentGatewayCd().equals("VAMAYBANK"))){
+            myItem.get(i).setImg(R.drawable.mybank);
         }
         Picasso.with(context).load(myItem.get(i).getImg()).into(myviewholder.mlogobank);
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -122,8 +138,96 @@ extends RecyclerView.Adapter<PaybankAdapter.Myviewholder> {
                     context.startActivity(gotoaddfoc);
                     ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                } if ((myItem.get(i).getPaymentGatewayCd().equals("VABCA"))){
-
+                }
+                if ((myItem.get(i).getPaymentGatewayCd().equals("VABCA"))){
+                    Intent gotoaddfoc = new Intent(context, OrderSumary.class);
+                    gotoaddfoc.putExtra("grandtotal",Grandtotal);
+                    gotoaddfoc.putExtra("id",noOrder);
+                    gotoaddfoc.putExtra("guid",guid);
+                    gotoaddfoc.putExtra("username",username);
+                    gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                    gotoaddfoc.putExtra("pos",valuefilter);
+                    gotoaddfoc.putExtra("nopo",nopo);
+                    gotoaddfoc.putExtra("paycd","VABCA");
+                    gotoaddfoc.putExtra("method",myItem.get(i).getName());
+                    context.startActivity(gotoaddfoc);
+                    ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                }
+                if ((myItem.get(i).getPaymentGatewayCd().equals("VADANAMON"))){
+                    Intent gotoaddfoc = new Intent(context, OrderSumary.class);
+                    gotoaddfoc.putExtra("grandtotal",Grandtotal);
+                    gotoaddfoc.putExtra("id",noOrder);
+                    gotoaddfoc.putExtra("guid",guid);
+                    gotoaddfoc.putExtra("username",username);
+                    gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                    gotoaddfoc.putExtra("pos",valuefilter);
+                    gotoaddfoc.putExtra("nopo",nopo);
+                    gotoaddfoc.putExtra("paycd","VADANAMON");
+                    gotoaddfoc.putExtra("method",myItem.get(i).getName());
+                    context.startActivity(gotoaddfoc);
+                    ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                }
+                if ((myItem.get(i).getPaymentGatewayCd().equals("VAPERMATA"))){
+                    Intent gotoaddfoc = new Intent(context, OrderSumary.class);
+                    gotoaddfoc.putExtra("grandtotal",Grandtotal);
+                    gotoaddfoc.putExtra("id",noOrder);
+                    gotoaddfoc.putExtra("guid",guid);
+                    gotoaddfoc.putExtra("username",username);
+                    gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                    gotoaddfoc.putExtra("pos",valuefilter);
+                    gotoaddfoc.putExtra("nopo",nopo);
+                    gotoaddfoc.putExtra("paycd","VAPERMATA");
+                    gotoaddfoc.putExtra("method",myItem.get(i).getName());
+                    context.startActivity(gotoaddfoc);
+                    ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                }
+                if ((myItem.get(i).getPaymentGatewayCd().equals("VABNI"))){
+                    Intent gotoaddfoc = new Intent(context, OrderSumary.class);
+                    gotoaddfoc.putExtra("grandtotal",Grandtotal);
+                    gotoaddfoc.putExtra("id",noOrder);
+                    gotoaddfoc.putExtra("guid",guid);
+                    gotoaddfoc.putExtra("username",username);
+                    gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                    gotoaddfoc.putExtra("pos",valuefilter);
+                    gotoaddfoc.putExtra("nopo",nopo);
+                    gotoaddfoc.putExtra("paycd","VABNI");
+                    gotoaddfoc.putExtra("method",myItem.get(i).getName());
+                    context.startActivity(gotoaddfoc);
+                    ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                }
+                if ((myItem.get(i).getPaymentGatewayCd().equals("VACIMB"))){
+                    Intent gotoaddfoc = new Intent(context, OrderSumary.class);
+                    gotoaddfoc.putExtra("grandtotal",Grandtotal);
+                    gotoaddfoc.putExtra("id",noOrder);
+                    gotoaddfoc.putExtra("guid",guid);
+                    gotoaddfoc.putExtra("username",username);
+                    gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                    gotoaddfoc.putExtra("pos",valuefilter);
+                    gotoaddfoc.putExtra("nopo",nopo);
+                    gotoaddfoc.putExtra("paycd","VACIMB");
+                    gotoaddfoc.putExtra("method",myItem.get(i).getName());
+                    context.startActivity(gotoaddfoc);
+                    ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                }
+                if ((myItem.get(i).getPaymentGatewayCd().equals("VAMAYBANK"))){
+                    Intent gotoaddfoc = new Intent(context, OrderSumary.class);
+                    gotoaddfoc.putExtra("grandtotal",Grandtotal);
+                    gotoaddfoc.putExtra("id",noOrder);
+                    gotoaddfoc.putExtra("guid",guid);
+                    gotoaddfoc.putExtra("username",username);
+                    gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                    gotoaddfoc.putExtra("pos",valuefilter);
+                    gotoaddfoc.putExtra("nopo",nopo);
+                    gotoaddfoc.putExtra("paycd","VAMAYBANK");
+                    gotoaddfoc.putExtra("method",myItem.get(i).getName());
+                    context.startActivity(gotoaddfoc);
+                    ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 }
             }
         });
