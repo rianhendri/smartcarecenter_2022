@@ -111,8 +111,15 @@ public class LoginActivity extends AppCompatActivity {
                 if (ActivityCompat.checkSelfPermission(LoginActivity.this,
                         Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
                     telephonyManager = (TelephonyManager) getSystemService(LoginActivity.this.TELEPHONY_SERVICE);
-                    imeiHp=telephonyManager.getDeviceId();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        imeiHp = android.provider.Settings.Secure.getString(
+                                LoginActivity.this.getContentResolver(),
+                                android.provider.Settings.Secure.ANDROID_ID);
+                    } else {
+                        imeiHp = telephonyManager.getDeviceId();
+                    }
                     Log.d("imei",imeiHp);
+                    Log.d("token1",token);
                     if (internet){
                         loginApi();
                     }else {
@@ -122,7 +129,6 @@ public class LoginActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions(LoginActivity.this
                             , new String[]{Manifest.permission.READ_PHONE_STATE},100);
                 }
-                Log.d("token1",token);
 //                Toast.makeText(LoginActivity.this, osHp+"-"+ModelHp, Toast.LENGTH_SHORT).show();
 
             }

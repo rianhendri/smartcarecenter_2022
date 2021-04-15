@@ -95,6 +95,7 @@ public class OrderSumary extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     long totalnya = 0;
     ImageView mlogoorder;
+    String imeiHp = "";
 
     @SuppressLint("WrongConstant")
     @Override
@@ -186,7 +187,13 @@ public class OrderSumary extends AppCompatActivity {
 //                    Toast.makeText(PaymentAct.this, String.valueOf(AppsUtil.SHA1(AppsUtil.generateMoneyFormat2("15000") + "8878" +
 //                            "f599rtEZtH5A" + invoiceNumber + 360 +
 //                            telephonyManager.getDeviceId())), Toast.LENGTH_SHORT).show();
-                        telephonyManager.getDeviceId();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            imeiHp = android.provider.Settings.Secure.getString(
+                                    OrderSumary.this.getContentResolver(),
+                                    android.provider.Settings.Secure.ANDROID_ID);
+                        } else {
+                            imeiHp = telephonyManager.getDeviceId();
+                        }
                         PaymentItems paymentItems = new PaymentItems();
                         paymentItems.setDataAmount(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)));
                         paymentItems.setDataBasket("[{\"name\":\"sayur\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":\"10000.00\"},{\"name\":\"buah\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":,\"10000.00\"}]");
@@ -198,7 +205,7 @@ public class OrderSumary extends AppCompatActivity {
                         paymentItems.setDataSessionID(String.valueOf(AppsUtil.nDigitRandomNo(9)));
                         paymentItems.setDataTransactionID(noOrder);
                         paymentItems.setDataMerchantCode("8878");
-                        paymentItems.setDataImei(telephonyManager.getDeviceId());
+                        paymentItems.setDataImei(imeiHp);
                         paymentItems.setMobilePhone("");
                         paymentItems.isProduction(false); //set ‘true’ for production and ‘false’ for
                         paymentItems.setPublicKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBkd2EipFMMn3hy/rgQ3UBYs0WFPiei2RFSU0r/ClJXgyh88Eq+BpKtSCivbCjCZE7YOhcdbtYonFIi+isheNv00zqo5msQNCvhT45uYZ2Arvh8+F9xGE+y1KTS7ruYnzsDHYTBv+MHOJxs0Yn1mi3+y0KSMIBhz5iSIPzQgnLdNww0VnhwNdCwlm1EeBBE4ijWAm7IWxrFAsmMynUVCZRzZ5tTU4mb8BEDc854Pu94m1YAugw74f7JzMol7tPf5MO79moXdvDmPKVzNrEvMVFDLk+KnvI/yYe4uReQA4H2glNB+hGRPjqDXztY/6EJBHDo79cjKSBmuU5WGYReRiwIDAQAB"); //PublicKey c
