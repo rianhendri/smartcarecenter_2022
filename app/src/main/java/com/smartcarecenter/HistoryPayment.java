@@ -177,6 +177,7 @@ public class HistoryPayment extends AppCompatActivity {
                 String errornya = "";
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
+                Log.d("history2",homedata.toString());
                 if (homedata.get("errorMessage").toString().equals("null")) {
 
                 }else {
@@ -228,6 +229,7 @@ public class HistoryPayment extends AppCompatActivity {
                     loading.dismiss();
                     Toast.makeText(HistoryPayment.this, errornya,Toast.LENGTH_LONG).show();
                 }
+
             }
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
@@ -244,6 +246,7 @@ public class HistoryPayment extends AppCompatActivity {
 
             }
         });
+        Log.d("history3",jsonObject.toString());
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak

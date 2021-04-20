@@ -60,6 +60,9 @@ public interface IRetrofit {
     @POST("api/Notification/Get")
     public Call<JsonObject> postRawJSONgetnotifget(@Body JsonObject var1);
 
+    @POST("api/FormRequest/PrepareFeedback")
+    public Call<JsonObject> preffeddback(@Body JsonObject var1);
+
     @POST("api/Notification/List")
     public Call<JsonObject> postRawJSONgetnotiflist(@Body JsonObject var1);
 

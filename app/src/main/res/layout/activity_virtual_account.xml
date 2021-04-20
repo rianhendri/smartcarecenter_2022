@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:fontFamily="@font/seguisb"
-            android:text="Salin Code VA"
+            android:text="Salin Kode VA"
             android:gravity="center"
             android:paddingRight="12dp"
             android:paddingLeft="12dp"

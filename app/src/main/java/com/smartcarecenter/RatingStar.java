@@ -89,6 +89,8 @@ public class RatingStar extends AppCompatActivity {
     ConstraintLayout mlayoutimg;
     ImageView mimage;
     String noreq = "";
+    String guid = "";
+    String page2 = "";
     String noticket = "";
     int ratvalue = 0;
     String sesionid_new = "";
@@ -136,7 +138,9 @@ public class RatingStar extends AppCompatActivity {
         msn.setAdapter(arrayAdapter);
         Bundle extras = this.getIntent().getExtras();
         if (extras != null) {
+            page2 = extras.getString("page");
             noreq = extras.getString("id");
+            guid = extras.getString("guid");
             noticket = extras.getString("noticket");
             valuefilter = extras.getString("pos");
         }
@@ -501,13 +505,24 @@ public class RatingStar extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(RatingStar.this,DetailsFormActivity.class);
-        back.putExtra("id",noreq);
-        back.putExtra("pos",valuefilter);
-        back.putExtra("user", DetailsFormActivity.username);
-        startActivity(back);
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-        finish();
+        if (page2.equals("")){
+            Intent back = new Intent(RatingStar.this,DetailsFormActivity.class);
+            back.putExtra("id",noreq);
+            back.putExtra("pos",valuefilter);
+            back.putExtra("user", DetailsFormActivity.username);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }else {
+            Intent back = new Intent(RatingStar.this,DetailsNotification.class);
+            back.putExtra("id",noreq);
+            back.putExtra("guid",guid);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+
+        }
+
     }
     public void uploadData(){
         loading = ProgressDialog.show(RatingStar.this, "", getString(R.string.title_loading), true);
@@ -542,7 +557,14 @@ public class RatingStar extends AppCompatActivity {
                         String string4 = jsonObject.getAsJsonObject("data").get("message").getAsString();
                         loading.dismiss();
                         Toast.makeText((Context)RatingStar.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
-                        onBackPressed();
+                        if (page2.equals("notif")){
+                            Intent back = new Intent(RatingStar.this,Dashboard.class);
+                            startActivity(back);
+                            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                            finish();
+                        }else {
+                            onBackPressed();
+                        }
 
                     }else {
                         Toast.makeText((Context)RatingStar.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
@@ -591,7 +613,15 @@ public class RatingStar extends AppCompatActivity {
                         String string4 = jsonObject.getAsJsonObject("data").get("message").getAsString();
                         loading.dismiss();
                         Toast.makeText((Context)RatingStar.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
-                        onBackPressed();
+                        if (page2.equals("notif")){
+                            Intent back = new Intent(RatingStar.this,Dashboard.class);
+                            startActivity(back);
+                            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                            finish();
+                        }else {
+                            onBackPressed();
+                        }
+
 
                     }else {
                         Toast.makeText((Context)RatingStar.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();

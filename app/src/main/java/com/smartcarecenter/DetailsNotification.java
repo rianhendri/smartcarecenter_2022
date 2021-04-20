@@ -42,19 +42,24 @@ public class DetailsNotification extends AppCompatActivity {
     String guid = "";
     boolean internet = true;
     private LinearLayoutManager linearLayoutManager;
-    LinearLayout mback;
+    LinearLayout mback,mbtn;
     TextView mcontent;
     private LinearLayoutManager mlinear;
     RecyclerView mlistnotif;
-    TextView mtitle;
+    TextView mtitle,mtextbtn;
     String sesionid_new = "";
     String username = "";
     String Title = "";
     String Content = "";
+    String module = "";
+    String moduleid ="";
+    ProgressDialog loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_notification);
+        mbtn = findViewById(R.id.solved);
+        mtextbtn = findViewById(R.id.textbtn);
         mback = findViewById(R.id.backbtn);
         mtitle = (TextView)this.findViewById(R.id.title);
         mcontent = (TextView)this.findViewById(R.id.content);
@@ -72,8 +77,8 @@ public class DetailsNotification extends AppCompatActivity {
         cekInternet();
         if (internet){
            ReadNotif();
-           mtitle.setText(Title);
-           mcontent.setText(Content);
+//           mtitle.setText(Title);
+//           mcontent.setText(Content);
         }
         else {
 
@@ -92,10 +97,23 @@ public class DetailsNotification extends AppCompatActivity {
 //                }
             }
         });
+        mbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (module.equals("SSFeedback")){
+                    prefFeedback();
+                }else {
+
+                }
+
+            }
+        });
     }
     public void loadNotif(){
+        loading = ProgressDialog.show(DetailsNotification.this, "", getString(R.string.title_loading), true);
         cekInternet();
         JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId", sesionid_new);
         jsonObject.addProperty("guid", guid);
         jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
@@ -107,6 +125,7 @@ public class DetailsNotification extends AppCompatActivity {
                 String errornya = "";
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
+                Log.d("getnotifnya",homedata.toString());
                 if (homedata.get("errorMessage").toString().equals("null")) {
 
                 }else {
@@ -115,15 +134,27 @@ public class DetailsNotification extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")){
+                    loading.dismiss();
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
                     //HEADER
+                    if (data.get("showProcessButton").getAsBoolean()){
+                        module = data.get("module").getAsString();
+                        moduleid = data.get("moduleId").getAsString();
+                        mbtn.setVisibility(View.VISIBLE);
+                        mtextbtn.setText(data.get("processButtonText").getAsString());
+
+                    }else {
+                        mbtn.setVisibility(View.GONE);
+                    }
+
                     String string3 = data.get("title").getAsString();
                     String string4 = data.get("message").getAsString();
                     mtitle.setText((CharSequence)string3);
                     mcontent.setText((CharSequence)string4);
 
                 }else {
+                    loading.dismiss();
                     sesionid();
                     Toast.makeText(DetailsNotification.this, errornya,Toast.LENGTH_LONG).show();
                 }
@@ -133,10 +164,66 @@ public class DetailsNotification extends AppCompatActivity {
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(DetailsNotification.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
+                loading.dismiss();
 
 
             }
         });
+    }
+    public void prefFeedback(){
+        cekInternet();
+        loading = ProgressDialog.show(DetailsNotification.this, "", getString(R.string.title_loading), true);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId", sesionid_new);
+        jsonObject.addProperty("formRequestCd", moduleid);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.preffeddback(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                Log.d("getnotifnya2",homedata.toString());
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                if (statusnya.equals("OK")){
+                    loading.dismiss();
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    //HEADER
+                    Intent gotorating = new Intent(DetailsNotification.this, RatingStar.class);
+                    gotorating.putExtra("id", moduleid);
+                    gotorating.putExtra("page", "notif");
+                    gotorating.putExtra("guid", guid);
+
+                    startActivity(gotorating);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
+                }else {
+                    loading.dismiss();
+                    sesionid();
+                    Toast.makeText(DetailsNotification.this, errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(DetailsNotification.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+
+
+            }
+        });
+        Log.d("senpref",jsonObject.toString());
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak
