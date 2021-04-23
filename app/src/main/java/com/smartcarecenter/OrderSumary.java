@@ -200,7 +200,7 @@ public class OrderSumary extends AppCompatActivity {
                         paymentItems.setDataCurrency("360");
                         paymentItems.setDataWords(AppsUtil.SHA1(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)) + "8878" +
                                 "f599rtEZtH5A" + noOrder + 360 +
-                                telephonyManager.getDeviceId()));
+                                imeiHp));
                         paymentItems.setDataMerchantChain("NA");
                         paymentItems.setDataSessionID(String.valueOf(AppsUtil.nDigitRandomNo(9)));
                         paymentItems.setDataTransactionID(noOrder);

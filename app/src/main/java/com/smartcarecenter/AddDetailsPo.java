@@ -144,6 +144,7 @@ public class AddDetailsPo extends AppCompatActivity {
     List<String> listfoto = new ArrayList();
     Spinner mstatus_spin;
     public  static String PaymentTypeCd = "null";
+    boolean payment = false;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -355,13 +356,20 @@ public class AddDetailsPo extends AppCompatActivity {
                     }
                     if (muploadPOPdf){
                         if (mmustUpload){
-                            if (PaymentTypeCd.equals("null")){
-                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+                            if (payment){
+                                if (PaymentTypeCd.equals("null")){
+
+                                    Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
 
 
+                                }else {
+                                    showDialog();
+
+                                }
                             }else {
                                 showDialog();
                             }
+
 
 //                            if (imagefile==null){
 //                                Toast.makeText((Context)AddDetailsPo.this, getString(R.string.title_reqpdf),Toast.LENGTH_SHORT).show();
@@ -370,19 +378,31 @@ public class AddDetailsPo extends AppCompatActivity {
 //                            }
                         }
                         else {
-                            if (PaymentTypeCd.equals("null")){
-                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+                            if (payment){
+                                if (PaymentTypeCd.equals("null")){
+
+                                    Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
 
 
+                                }else {
+                                    showDialog();
+
+                                }
                             }else {
                                 showDialog();
                             }
                         }
                     }else {
-                        if (PaymentTypeCd.equals("null")){
-                            Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+                        if (payment){
+                            if (PaymentTypeCd.equals("null")){
+
+                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
 
 
+                            }else {
+                                showDialog();
+
+                            }
                         }else {
                             showDialog();
                         }
@@ -404,10 +424,16 @@ public class AddDetailsPo extends AppCompatActivity {
                     }
                     if (muploadPOPdf){
                         if (mmustUpload){
-                            if (PaymentTypeCd.equals("null")){
-                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+                            if (payment){
+                                if (PaymentTypeCd.equals("null")){
+
+                                    Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
 
 
+                                }else {
+                                    showDialog();
+
+                                }
                             }else {
                                 showDialog();
                             }
@@ -418,19 +444,31 @@ public class AddDetailsPo extends AppCompatActivity {
 //                            }
                         }
                         else {
-                            if (PaymentTypeCd.equals("null")){
-                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+                            if (payment){
+                                if (PaymentTypeCd.equals("null")){
+
+                                    Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
 
 
+                                }else {
+                                    showDialog();
+
+                                }
                             }else {
                                 showDialog();
                             }
                         }
                     }else {
-                        if (PaymentTypeCd.equals("null")){
-                            Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
+                        if (payment){
+                            if (PaymentTypeCd.equals("null")){
+
+                                Toast.makeText(AddDetailsPo.this, "Pembayaran Wajib di pilih", Toast.LENGTH_SHORT).show();
 
 
+                            }else {
+                                showDialog();
+
+                            }
                         }else {
                             showDialog();
                         }
@@ -691,6 +729,7 @@ public class AddDetailsPo extends AppCompatActivity {
                     listfoto.add("null");
                     JsonObject data = homedata.getAsJsonObject("data");
                     if (data.get("showPaymentType").getAsBoolean()){
+                        payment = true;
                         liststatus = data.getAsJsonArray("paymentTypeList");
                         for (int i = 0; i < liststatus.size(); ++i) {
                             JsonObject jsonObject3 = (JsonObject)liststatus.get(i);
@@ -721,6 +760,7 @@ public class AddDetailsPo extends AppCompatActivity {
                         }
                         mlaypembayaran.setVisibility(VISIBLE);
                     }else {
+                        payment = false;
                         mlaypembayaran.setVisibility(GONE);
                     }
 
