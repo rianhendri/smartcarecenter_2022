@@ -84,7 +84,6 @@ extends RecyclerView.Adapter<Add_po_req_adapterView.Myviewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
-
         Picasso.with(context).load(addFoclistreq.get(i).getImageThumbFullURL()).into(myviewholder.mimg);
         myviewholder.mname.setText(addFoclistreq.get(i).getItemName());
         myviewholder.mcode.setText(addFoclistreq.get(i).getItemCd());

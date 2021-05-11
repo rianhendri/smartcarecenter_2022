@@ -103,7 +103,7 @@ public class RatingStar extends AppCompatActivity {
     ConstraintLayout muploadlay;
     Integer solve = null;
     RadioButton myes,mno, mtiga, mpatbelas, mtujuh;
-    boolean cekmonitor = false;
+    boolean cekmonitor = true;
     Integer days = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

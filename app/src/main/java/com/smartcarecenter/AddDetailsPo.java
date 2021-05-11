@@ -893,8 +893,10 @@ public class AddDetailsPo extends AppCompatActivity {
                     .enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
                             String errornya = "";
                             JsonObject jsonObject=response.body();
+                            Log.d("callnya",jsonObject.toString());
 //                Toast.makeText((Context)AddDetailFoc.this, jsonObject.toString(),Toast.LENGTH_SHORT).show();
                             String statusnya = jsonObject.get("status").getAsString();
                             if (jsonObject.get("errorMessage").toString().equals("null")) {
@@ -934,6 +936,7 @@ public class AddDetailsPo extends AppCompatActivity {
                         }
                     });
 
+
         }else{
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/pdf"), imagefile);
             String imgreq = String.valueOf(imagefile.getName());
@@ -941,6 +944,7 @@ public class AddDetailsPo extends AppCompatActivity {
             IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
 //        mnotes.setText(myCustomArray.toString()+mpressId);
             //
+
             jsonPostService.uploadcharge(MultipartBody.Part.createFormData((String)"",
                     imgreq,requestBody),
                     RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),
@@ -953,8 +957,11 @@ public class AddDetailsPo extends AppCompatActivity {
                     .enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
                             String errornya = "";
                             JsonObject jsonObject=response.body();
+
+                            Log.d("callnya",jsonObject.toString());
 //                Toast.makeText((Context)AddDetailFoc.this, jsonObject.toString(),Toast.LENGTH_SHORT).show();
                             String statusnya = jsonObject.get("status").getAsString();
                             if (jsonObject.get("errorMessage").toString().equals("null")) {
