@@ -81,7 +81,13 @@ extends RecyclerView.Adapter<SurveylistAnswerAdapter.Myviewholder> {
     public static boolean download = true;
     public static String textdownload = "";
     public static String linkdownload = "";
-
+    int posia = 0;
+    int posib = 0;
+    int posic = 0;
+    int posid = 0;
+    int posie = 0;
+    int posif = 0;
+    int posig = 0;
     public SurveylistAnswerAdapter(Context c, ArrayList<SurveyListAnswerItem> p){
         context = c;
         myItem = p;
@@ -108,15 +114,82 @@ extends RecyclerView.Adapter<SurveylistAnswerAdapter.Myviewholder> {
 //            Log.e("liat", i + " :posisi: " + String.valueOf(liat));
 //            mrecylersurvey.setNestedScrollingEnabled(false);
 //        }
+        if (myItem.get(i).getAnswerText()!=null) {
+            myviewholder.Manstext.setText(myItem.get(i).getAnswerText());
+        }
+
         if (myItem.get(i).getQuestionType().equals("Text")){
             myviewholder.mansgr.setVisibility(View.GONE);
-            myviewholder.Manstext.setVisibility(View.VISIBLE);
-            myviewholder.Manstext.setText(myItem.get(i).getAnswerText());
+//            myviewholder.Manstext.setVisibility(View.VISIBLE);
+
 
         }else {
             myviewholder.mansgr.setVisibility(View.VISIBLE);
-            myviewholder.Manstext.setVisibility(View.GONE);
+//            myviewholder.Manstext.setVisibility(View.GONE);
             String ada = "";
+            if (myItem.get(i).getQuestionGroupCd().equals("A")){
+                int posi1 = myItem.get(i).getQuestionPosition()-1;
+                posia +=1;
+                Log.d("posii",String.valueOf(posia));
+                if (posia>1){
+                    myItem.get(posi1).setQuestionGroupName("");
+                }
+            }
+            if (myItem.get(i).getQuestionGroupCd().equals("B")){
+                int posi1 = myItem.get(i).getQuestionPosition()-1;
+                posib +=1;
+                Log.d("posii",String.valueOf(posib));
+                if (posib>1){
+                    myItem.get(posi1).setQuestionGroupName("");
+                }
+            }
+            if (myItem.get(i).getQuestionGroupCd().equals("C")){
+                int posi1 = myItem.get(i).getQuestionPosition()-1;
+                posic +=1;
+                Log.d("posii",String.valueOf(posic));
+                if (posic>1){
+                    myItem.get(posi1).setQuestionGroupName("");
+                }
+            }
+            if (myItem.get(i).getQuestionGroupCd().equals("D")){
+                int posi1 = myItem.get(i).getQuestionPosition()-1;
+                posid +=1;
+                Log.d("posii",String.valueOf(posid));
+                if (posid>1){
+                    myItem.get(posi1).setQuestionGroupName("");
+                }
+            }
+            if (myItem.get(i).getQuestionGroupCd().equals("E")){
+                int posi1 = myItem.get(i).getQuestionPosition()-1;
+                posie +=1;
+                Log.d("posii",String.valueOf(posie));
+                if (posie>1){
+                    myItem.get(posi1).setQuestionGroupName("");
+                }
+            }
+            if (myItem.get(i).getQuestionGroupCd().equals("F")){
+                int posi1 = myItem.get(i).getQuestionPosition()-1;
+                posif +=1;
+                Log.d("posii",String.valueOf(posif));
+                if (posif>1){
+                    myItem.get(posi1).setQuestionGroupName("");
+                }
+            }
+            if (myItem.get(i).getQuestionGroupCd().equals("G")){
+                int posi1 = myItem.get(i).getQuestionPosition()-1;
+                posig +=1;
+                Log.d("posii",String.valueOf(posig));
+                if (posig>1){
+                    myItem.get(posi1).setQuestionGroupName("");
+                }
+            }
+            if (myItem.get(i).getQuestionGroupName().equals("")){
+                myviewholder.mgroupname.setVisibility(View.GONE);
+
+            }else {
+                myviewholder.mgroupname.setText(myItem.get(i).getQuestionGroupName());
+            }
+
             if (myItem.get(i).getQuestionAnswerOptions()!=null){
                 Log.e("liat", i + " :posisi: " + String.valueOf(myItem.get(i).getQuestionAnswerOptions().size()));
 
@@ -484,7 +557,7 @@ extends RecyclerView.Adapter<SurveylistAnswerAdapter.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView  mnoSurvey,MtitleAnswer,Manstext,mrequiredanswer;
+        TextView  mnoSurvey,MtitleAnswer,Manstext,mrequiredanswer,mgroupname;
         ImageView mpic;
         ProgressBar mporg;
         RecyclerView Mmultiplerecyler;
@@ -497,6 +570,7 @@ extends RecyclerView.Adapter<SurveylistAnswerAdapter.Myviewholder> {
             Mmultiplerecyler = itemView.findViewById(R.id.multiplerecyler);
             Manstext = itemView.findViewById(R.id.anstext);
             mrequiredanswer=itemView.findViewById(R.id.requiredanswer);
+            mgroupname = itemView.findViewById(R.id.groupname);
             mans1 = itemView.findViewById(R.id.ans1);
             mans2 = itemView.findViewById(R.id.ans2);
             mans3 = itemView.findViewById(R.id.ans3);

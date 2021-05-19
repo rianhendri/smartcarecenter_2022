@@ -84,6 +84,13 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
     ListSurvey_tem modelqty;
     Context context;
     ImageView mimgpopup;
+    int posia = 0;
+    int posib = 0;
+    int posic = 0;
+    int posid = 0;
+    int posie = 0;
+    int posif = 0;
+    int posig = 0;
     double subharga = 0.0;
     public static int totalqty = 0;
     public static double totalprice = 0.0;
@@ -158,14 +165,78 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
         myviewholder.mnosur.setText(String.valueOf(i+1)+".");
         myviewholder.mtitleAnswer.setText(listsurvey.get(i).getQuestion());
 
+        if (listsurvey.get(i).getGroupCd().equals("A")){
+            int posi1 = listsurvey.get(i).getPosition()-1;
+            posia +=1;
+            Log.d("posii",String.valueOf(posia));
+            if (posia>1){
+                listsurvey.get(posi1).setGroupName("");
+            }
+        }
+        if (listsurvey.get(i).getGroupCd().equals("B")){
+            int posi1 = listsurvey.get(i).getPosition()-1;
+            posib +=1;
+            Log.d("posii",String.valueOf(posib));
+            if (posib>1){
+                listsurvey.get(posi1).setGroupName("");
+            }
+        }
+        if (listsurvey.get(i).getGroupCd().equals("C")){
+            int posi1 = listsurvey.get(i).getPosition()-1;
+            posic +=1;
+            Log.d("posii",String.valueOf(posic));
+            if (posic>1){
+                listsurvey.get(posi1).setGroupName("");
+            }
+        }
+        if (listsurvey.get(i).getGroupCd().equals("D")){
+            int posi1 = listsurvey.get(i).getPosition()-1;
+            posid +=1;
+            Log.d("posii",String.valueOf(posid));
+            if (posid>1){
+                listsurvey.get(posi1).setGroupName("");
+            }
+        }
+        if (listsurvey.get(i).getGroupCd().equals("E")){
+            int posi1 = listsurvey.get(i).getPosition()-1;
+            posie +=1;
+            Log.d("posii",String.valueOf(posie));
+            if (posie>1){
+                listsurvey.get(posi1).setGroupName("");
+            }
+        }
+        if (listsurvey.get(i).getGroupCd().equals("F")){
+            int posi1 = listsurvey.get(i).getPosition()-1;
+            posif +=1;
+            Log.d("posii",String.valueOf(posif));
+            if (posif>1){
+                listsurvey.get(posi1).setGroupName("");
+            }
+        }
+        if (listsurvey.get(i).getGroupCd().equals("G")){
+            int posi1 = listsurvey.get(i).getPosition()-1;
+            posig +=1;
+            Log.d("posii",String.valueOf(posig));
+            if (posig>1){
+                listsurvey.get(posi1).setGroupName("");
+            }
+        }
+        if (listsurvey.get(i).getGroupName().equals("")){
+            myviewholder.mgroupname.setVisibility(View.GONE);
+
+        }else {
+            myviewholder.mgroupname.setText(listsurvey.get(i).getGroupName());
+        }
+
+
         if (listsurvey.get(i).getQuestionType().equals("Text")){
             myviewholder.mansgr.setVisibility(View.GONE);
-            myviewholder.manstext.setVisibility(View.VISIBLE);
+//            myviewholder.manstext.setVisibility(View.VISIBLE);
             myviewholder.manstext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(listsurvey.get(i).getMaxTextLength())});
 
         }else {
             myviewholder.mansgr.setVisibility(View.VISIBLE);
-            myviewholder.manstext.setVisibility(View.GONE);
+//            myviewholder.manstext.setVisibility(View.GONE);
             String ada = "";
             if (listsurvey.get(i).getAnswers()!=null){
                 ada = String.valueOf(listsurvey.get(i).getAnswers().size());
@@ -241,6 +312,33 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
                     myviewholder.mans8.setText(listsurvey.get(i).getAnswers().get(7).getAnswer());
                     myviewholder.mans9.setText(listsurvey.get(i).getAnswers().get(8).getAnswer());
                     myviewholder.mans10.setText(listsurvey.get(i).getAnswers().get(9).getAnswer());
+                }
+                if (listsurvey.get(i).getAnswers().size()==11){
+                    myviewholder.mans1.setText(listsurvey.get(i).getAnswers().get(0).getAnswer());
+                    myviewholder.mans2.setText(listsurvey.get(i).getAnswers().get(1).getAnswer());
+                    myviewholder.mans3.setText(listsurvey.get(i).getAnswers().get(2).getAnswer());
+                    myviewholder.mans4.setText(listsurvey.get(i).getAnswers().get(3).getAnswer());
+                    myviewholder.mans5.setText(listsurvey.get(i).getAnswers().get(4).getAnswer());
+                    myviewholder.mans6.setText(listsurvey.get(i).getAnswers().get(5).getAnswer());
+                    myviewholder.mans7.setText(listsurvey.get(i).getAnswers().get(6).getAnswer());
+                    myviewholder.mans8.setText(listsurvey.get(i).getAnswers().get(7).getAnswer());
+                    myviewholder.mans9.setText(listsurvey.get(i).getAnswers().get(8).getAnswer());
+                    myviewholder.mans10.setText(listsurvey.get(i).getAnswers().get(9).getAnswer());
+                    myviewholder.mans10.setText(listsurvey.get(i).getAnswers().get(10).getAnswer());
+                }
+                if (listsurvey.get(i).getAnswers().size()==12){
+                    myviewholder.mans1.setText(listsurvey.get(i).getAnswers().get(0).getAnswer());
+                    myviewholder.mans2.setText(listsurvey.get(i).getAnswers().get(1).getAnswer());
+                    myviewholder.mans3.setText(listsurvey.get(i).getAnswers().get(2).getAnswer());
+                    myviewholder.mans4.setText(listsurvey.get(i).getAnswers().get(3).getAnswer());
+                    myviewholder.mans5.setText(listsurvey.get(i).getAnswers().get(4).getAnswer());
+                    myviewholder.mans6.setText(listsurvey.get(i).getAnswers().get(5).getAnswer());
+                    myviewholder.mans7.setText(listsurvey.get(i).getAnswers().get(6).getAnswer());
+                    myviewholder.mans8.setText(listsurvey.get(i).getAnswers().get(7).getAnswer());
+                    myviewholder.mans9.setText(listsurvey.get(i).getAnswers().get(8).getAnswer());
+                    myviewholder.mans10.setText(listsurvey.get(i).getAnswers().get(9).getAnswer());
+                    myviewholder.mans10.setText(listsurvey.get(i).getAnswers().get(10).getAnswer());
+                    myviewholder.mans10.setText(listsurvey.get(i).getAnswers().get(11).getAnswer());
                 }
             }
             Log.d("test", ada);
@@ -364,7 +462,7 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mnosur, mtitleAnswer,mrequired;
+        TextView mnosur, mtitleAnswer,mrequired, mgroupname;
         EditText manstext;
         RecyclerView mmultiplerecyler;
         private RadioGroup mansgr;
@@ -372,7 +470,7 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
 
-
+            mgroupname = itemView.findViewById(R.id.groupname);
             mnosur = itemView.findViewById(R.id.noSurvey);
             mtitleAnswer = itemView.findViewById(R.id.titleAnswer);
             manstext = itemView.findViewById(R.id.anstext);

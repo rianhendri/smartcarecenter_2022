@@ -19,8 +19,14 @@ public class ListSurvey_tem {
     public ListSurvey_tem() {
     }
 
-    public ListSurvey_tem(String surveyCd, Integer position, Integer maxTextLength, String question, String questionType, boolean optional, ArrayList<ListSurveyAnswer_tem> answers) {
+
+    @SerializedName("SurveyCd")
+    private String SurveyCd;
+
+    public ListSurvey_tem(String surveyCd, String groupCd, String groupName, Integer position, Integer maxTextLength, String question, String questionType, boolean optional, ArrayList<ListSurveyAnswer_tem> answers) {
         SurveyCd = surveyCd;
+        GroupCd = groupCd;
+        GroupName = groupName;
         Position = position;
         MaxTextLength = maxTextLength;
         Question = question;
@@ -35,6 +41,22 @@ public class ListSurvey_tem {
 
     public void setSurveyCd(String surveyCd) {
         SurveyCd = surveyCd;
+    }
+
+    public String getGroupCd() {
+        return GroupCd;
+    }
+
+    public void setGroupCd(String groupCd) {
+        GroupCd = groupCd;
+    }
+
+    public String getGroupName() {
+        return GroupName;
+    }
+
+    public void setGroupName(String groupName) {
+        GroupName = groupName;
     }
 
     public Integer getPosition() {
@@ -84,9 +106,10 @@ public class ListSurvey_tem {
     public void setAnswers(ArrayList<ListSurveyAnswer_tem> answers) {
         Answers = answers;
     }
-
-    @SerializedName("SurveyCd")
-    private String SurveyCd;
+    @SerializedName("GroupCd")
+    private String GroupCd;
+    @SerializedName("GroupName")
+    private String GroupName;
     @Expose
     @SerializedName("Position")
     private Integer Position;
@@ -96,6 +119,7 @@ public class ListSurvey_tem {
     @Expose
     @SerializedName("Question")
     private String Question;
+
     @Expose
     @SerializedName("QuestionType")
     private String QuestionType;

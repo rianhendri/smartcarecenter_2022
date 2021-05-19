@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -240,6 +241,7 @@ public class Dashboard extends AppCompatActivity {
                 String errornya = "";
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
+                Log.d("confignya",homedata.toString());
                 if (homedata.get("errorMessage").toString().equals("null")) {
 
                 }else {

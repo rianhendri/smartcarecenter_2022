@@ -169,4 +169,5 @@
     <string name="title_back">Kembali</string>
     <string name="title_submit_order">Submit Order</string>
     <string name="title_btngagal">Coba Ulang Pembayaran</string>
+    <string name="title_optionaltext">"Keterangan (opsional): "</string>
 </resources>

@@ -16,6 +16,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -176,6 +177,7 @@ public class SurveyList_Activity extends AppCompatActivity {
                     JsonObject data = homedata.getAsJsonObject("data");
                     totalpage = data.get("totalPage").getAsInt();
                     listnews = data.getAsJsonArray("surveyFeedbackList");
+                    Log.d("listanswerdetail",listnews.toString());
 //                    totalrec = data.get("totalRec").toString();
 //                    mrecord.setText("Record: "+totalrec);
                     Gson gson = new Gson();
@@ -234,6 +236,7 @@ public class SurveyList_Activity extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
                 JsonObject homedata=response.body();
+                Log.d("answer",homedata.toString());
                 String statusnya = homedata.get("status").getAsString();
                 String errornya = homedata.get("errorMessage").toString();
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
@@ -243,6 +246,7 @@ public class SurveyList_Activity extends AppCompatActivity {
                     JsonObject data = homedata.getAsJsonObject("data");
                     totalpage = data.get("totalPage").getAsInt();
                     listnews = data.getAsJsonArray("surveyFeedbackList");
+                    Log.d("listanswerdetail",jsonObject.toString());
                     Gson gson = new Gson();
                     Type listType = new TypeToken<ArrayList<SurveyListItem>>() {
                     }.getType();
