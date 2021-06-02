@@ -118,7 +118,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
 //        myviewholder.xstatus.setText(addFoclistitem.get(i).getStsActiveInfo());
 
          stsS = addFoclistitem.get(i).isStsActive();
-        if (stsS){
+        if (addFoclistitem.get(i).isStsActive()){
             myviewholder.xadd.setVisibility(View.VISIBLE);
             myviewholder.xstatus.setVisibility(View.GONE);
 
@@ -152,7 +152,8 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
         myviewholder.xadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (stsS){
+//                Toast.makeText(context, "ada", Toast.LENGTH_SHORT).show();
+                if (addFoclistitem.get(i).isStsActive()){
                     tambahitem = new Add_foc_req_item();
                     tambahitem.setItemcd(addFoclistitem.get(i).getItemCd());
                     tambahitem.setCategory(addFoclistitem.get(i).getCategoryName());

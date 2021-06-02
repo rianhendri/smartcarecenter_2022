@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -217,6 +218,7 @@ public class Add_Foc_Item_List extends AppCompatActivity {
 //                    Toast.makeText(Add_Foc_Item_List.this, String.valueOf(Add_foc_req_adapter.matrixmeter),Toast.LENGTH_LONG).show();
                     getArrayItem = data.getAsJsonArray("list");
                     stsinac = data.get("inactiveStatusName").getAsString();
+                    Log.d("listfoc",getArrayItem.toString());
                     Gson gson = new Gson();
                     Type listType = new TypeToken<ArrayList<Add_foc_list_item>>() {
                     }.getType();
@@ -238,6 +240,7 @@ public class Add_Foc_Item_List extends AppCompatActivity {
 
             }
         });
+        Log.d("focjson",jsonObject.toString());
     }
     private void filter(String text) {
         ArrayList<Add_foc_list_item> filteredList = new ArrayList<>();
