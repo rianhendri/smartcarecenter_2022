@@ -1,5 +1,6 @@
 package com.smartcarecenter;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -86,6 +87,7 @@ public class AddRequest extends AppCompatActivity {
     String textprep="";
     String bgprep = "";
     private static final int PERMISSION_CODE = 1000;
+    private static final int PERMISSION_CODE2 = 100;
     public static JsonArray listsn;
     public static JsonArray listoperator;
     public static String requestby="";
@@ -331,45 +333,127 @@ public class AddRequest extends AppCompatActivity {
     }
     private void setRequestImage() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this, Manifest.permission.CAMERA)
-                    && ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.CAMERA}, PERMISSION_CODE);
+            return;
+        }  else {
+            if ((ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
 
-                //Show permission dialog
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE);
+                ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE);
+
+            }else {
+                CharSequence[] arrcharSequence = new CharSequence[]{"Kamera", "Galeri"};
+                AlertDialog.Builder builder = new AlertDialog.Builder((Context) this).setTitle((CharSequence) "Add Image")
+                        .setItems(arrcharSequence,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogInterface, int n) {
+                                        if (n != 0) {
+                                            if (n != 1) {
+                                                return;
+                                            }
+                                            Intent imageIntentGallery = new Intent(Intent.ACTION_PICK,
+                                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                            startActivityForResult(imageIntentGallery, REQUEST_IMAGE_GALLERY);
+                                            photo_location = imageIntentGallery.getData();
+
+
+                                        } else {
+                                            openCamera();
+                                        }
+
+                                    }
+                                });
+                builder.create();
+                builder.show();
+            }
 
         }
 
-        }
-        CharSequence[] arrcharSequence = new CharSequence[]{"Kamera", "Galeri"};
-        AlertDialog.Builder builder = new AlertDialog.Builder((Context)this).setTitle((CharSequence)"Add Image")
-                .setItems(arrcharSequence,
-                new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialogInterface, int n) {
-                        if (n != 0) {
-                            if (n != 1) {
-                                return;
-                            }
-                            Intent imageIntentGallery = new Intent(Intent.ACTION_PICK,
-                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(imageIntentGallery, REQUEST_IMAGE_GALLERY);
-                            photo_location=imageIntentGallery.getData();
 
-
-                        }else {
-                            openCamera();
-                        }
-
-                    }
-                });
-        builder.create();
-        builder.show();
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == 1000 && grantResults.length>0 && (grantResults[0]
+                == PackageManager.PERMISSION_GRANTED)){
+            if ((ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+
+                ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE);
+
+            }else {
+                CharSequence[] arrcharSequence = new CharSequence[]{"Kamera", "Galeri"};
+                AlertDialog.Builder builder = new AlertDialog.Builder((Context) this).setTitle((CharSequence) "Add Image")
+                        .setItems(arrcharSequence,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogInterface, int n) {
+                                        if (n != 0) {
+                                            if (n != 1) {
+                                                return;
+                                            }
+                                            Intent imageIntentGallery = new Intent(Intent.ACTION_PICK,
+                                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                            startActivityForResult(imageIntentGallery, REQUEST_IMAGE_GALLERY);
+                                            photo_location = imageIntentGallery.getData();
+
+
+                                        } else {
+                                            openCamera();
+                                        }
+
+                                    }
+                                });
+                builder.create();
+                builder.show();
+            }
+
+        }else {
+            Toast.makeText(this, "Akses Photo & Storage Wajib", Toast.LENGTH_LONG).show();
+
+        }
+    }
+//    private void setRequestImage() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+//                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this, Manifest.permission.CAMERA)
+//                    && ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//
+//                //Show permission dialog
+//            } else {
+//                // No explanation needed, we can request the permission.
+//                ActivityCompat.requestPermissions((Activity)this, new String[]{Manifest.permission.CAMERA,
+//                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE);
+//
+//        }
+//
+//        }
+//        CharSequence[] arrcharSequence = new CharSequence[]{"Kamera", "Galeri"};
+//        AlertDialog.Builder builder = new AlertDialog.Builder((Context)this).setTitle((CharSequence)"Add Image")
+//                .setItems(arrcharSequence,
+//                new DialogInterface.OnClickListener(){
+//                    public void onClick(DialogInterface dialogInterface, int n) {
+//                        if (n != 0) {
+//                            if (n != 1) {
+//                                return;
+//                            }
+//                            Intent imageIntentGallery = new Intent(Intent.ACTION_PICK,
+//                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                            startActivityForResult(imageIntentGallery, REQUEST_IMAGE_GALLERY);
+//                            photo_location=imageIntentGallery.getData();
+//
+//
+//                        }else {
+//                            openCamera();
+//                        }
+//
+//                    }
+//                });
+//        builder.create();
+//        builder.show();
+//    }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak
         ConnectivityManager connectivityManager = (ConnectivityManager) AddRequest.this.getSystemService(Context.CONNECTIVITY_SERVICE);
