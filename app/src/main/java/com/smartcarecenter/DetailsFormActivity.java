@@ -619,6 +619,7 @@ public class DetailsFormActivity extends AppCompatActivity {
 
             }
         });
+        Log.d("requestSTdetails",jsonObject.toString());
     }
     public void cancelreq(){
         loading = ProgressDialog.show(DetailsFormActivity.this, "", getString(R.string.title_loading), true);
