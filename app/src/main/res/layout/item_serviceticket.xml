@@ -239,22 +239,64 @@
 					android:id="@+id/timer"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginRight="40dp"
 					android:fontFamily="@font/segoeuib"
 					android:gravity="center"
 					android:text="Support"
+					android:layout_weight="1"
 					android:textColor="@color/black"
 					android:textSize="17sp" />
 				<TextView
 					android:id="@+id/support"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginRight="40dp"
+
 					android:fontFamily="@font/segoeuib"
 					android:gravity="center"
 					android:text="Support"
+					android:layout_weight="1"
 					android:textColor="@color/black"
-					android:textSize="17sp" />
+					android:textSize="17sp"/>
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:id="@+id/chatclik"
+					android:layout_width="30dp"
+					android:layout_height="30dp">
+					<ImageView
+						android:id="@+id/waa"
+						android:layout_width="30dp"
+						android:layout_height="30dp"
+						android:src="@drawable/chat"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toTopOf="parent" />
+					<LinearLayout
+
+						android:id="@+id/dot"
+						android:layout_width="15dp"
+						android:layout_height="15dp"
+						android:background="@drawable/notification_red_dot2"
+						android:orientation="vertical"
+						android:visibility="gone"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintHorizontal_bias="1.0"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toTopOf="parent"
+						app:layout_constraintVertical_bias="0.0">
+
+						<TextView
+							android:id="@+id/newnotif"
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:fontFamily="@font/seguisb"
+							android:gravity="center"
+							android:text="-"
+							android:textColor="@color/dwhite"
+							android:textSize="8dp"
+							android:visibility="visible" />
+					</LinearLayout>
+				</androidx.constraintlayout.widget.ConstraintLayout>
+
 			</LinearLayout>
 
 			<ImageView
@@ -582,7 +624,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/segoeuib"
-					android:text="@string/title_engineernote"
+					android:text="Actions: "
 					android:textColor="@color/black"
 					android:textSize="11sp" />
 				<TextView
@@ -592,7 +634,8 @@
 					android:fontFamily="@font/segoeui"
 					android:text="-ASDASD"
 					android:textColor="@color/black"
-					android:textSize="11sp" />
+					android:textSize="11sp"
+					android:layout_marginBottom="8dp"/>
 				<com.ms.square.android.expandabletextview.ExpandableTextView
 					xmlns:android="http://schemas.android.com/apk/res/android"
 					xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
@@ -638,7 +681,7 @@
 
 		</LinearLayout>
 		<LinearLayout
-			android:visibility="gone"
+			android:visibility="visible"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
@@ -651,7 +694,7 @@
 				android:layout_height="match_parent"
 				android:layout_weight="1"
 				android:gravity="bottom"
-				android:alpha="0"
+				android:alpha="1"
 				android:orientation="vertical" >
 
 				<LinearLayout

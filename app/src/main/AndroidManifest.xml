@@ -27,7 +27,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HistoryPayment"></activity>
+        <receiver android:name=".DownloadBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            </intent-filter>
+        </receiver>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity android:name=".ListChat">
+
+        </activity>
+        <activity android:name=".HistoryPayment" />
         <activity android:name=".VirtualAccount" />
         <activity android:name=".ContactUs" />
         <activity android:name=".OrderSumary" />

@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -59,6 +60,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Part;
 
 import static android.view.View.GONE;
 import static com.smartcarecenter.FormActivity.valuefilter;
@@ -281,6 +283,8 @@ public class RatingStar extends AppCompatActivity {
         jsonObject.addProperty("rating", ratvalue);
         jsonObject.addProperty("comments", mcomment.getText().toString());
         jsonObject.addProperty("isApprove",value);
+        jsonObject.addProperty("monitorCase",String.valueOf(cekmonitor));
+        jsonObject.addProperty("monitorDays",String.valueOf(days));
         jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
 //        Toast.makeText(RatingStar.this,  String.valueOf(jsonObject),Toast.LENGTH_LONG).show();
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
@@ -326,6 +330,7 @@ public class RatingStar extends AppCompatActivity {
 
             }
         });
+        Log.d("sendrat",jsonObject.toString());
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,  resultCode,  data);
@@ -505,7 +510,7 @@ public class RatingStar extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (page2.equals("")){
+        if (page2==null){
             Intent back = new Intent(RatingStar.this,DetailsFormActivity.class);
             back.putExtra("id",noreq);
             back.putExtra("pos",valuefilter);
@@ -543,6 +548,7 @@ public class RatingStar extends AppCompatActivity {
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     String errornya = "";
                     JsonObject jsonObject=response.body();
+                    Log.d("respone",jsonObject.toString());
 //                    Toast.makeText((Context)RatingStar.this,jsonObject.toString(),Toast.LENGTH_SHORT).show();
                     String statusnya = jsonObject.get("status").getAsString();
                     if (jsonObject.get("errorMessage").toString().equals("null")) {
@@ -557,14 +563,25 @@ public class RatingStar extends AppCompatActivity {
                         String string4 = jsonObject.getAsJsonObject("data").get("message").getAsString();
                         loading.dismiss();
                         Toast.makeText((Context)RatingStar.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
-                        if (page2.equals("notif")){
+
+                        if (page2==null){
+                            onBackPressed();
+                        }else {
                             Intent back = new Intent(RatingStar.this,Dashboard.class);
                             startActivity(back);
                             overridePendingTransition(R.anim.left_in, R.anim.right_out);
                             finish();
-                        }else {
-                            onBackPressed();
                         }
+
+
+//                        if (page2.equals("notif")){
+//                            Intent back = new Intent(RatingStar.this,Dashboard.class);
+//                            startActivity(back);
+//                            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+//                            finish();
+//                        }else {
+//
+//                        }
 
                     }else {
                         Toast.makeText((Context)RatingStar.this, (CharSequence)errornya,Toast.LENGTH_SHORT).show();
@@ -592,7 +609,7 @@ public class RatingStar extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
                     RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(cekmonitor)),
+                    RequestBody.create((MediaType)MultipartBody.FORM, String.valueOf(cekmonitor)),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days))
             ).enqueue(new Callback<JsonObject>() {
                 @Override
@@ -613,14 +630,22 @@ public class RatingStar extends AppCompatActivity {
                         String string4 = jsonObject.getAsJsonObject("data").get("message").getAsString();
                         loading.dismiss();
                         Toast.makeText((Context)RatingStar.this, (CharSequence)string4,Toast.LENGTH_SHORT).show();
-                        if (page2.equals("notif")){
+                        if (page2==null){
+                            onBackPressed();
+                        }else {
                             Intent back = new Intent(RatingStar.this,Dashboard.class);
                             startActivity(back);
                             overridePendingTransition(R.anim.left_in, R.anim.right_out);
                             finish();
-                        }else {
-                            onBackPressed();
                         }
+//                        if (page2.equals("notif")){
+//                            Intent back = new Intent(RatingStar.this,Dashboard.class);
+//                            startActivity(back);
+//                            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+//                            finish();
+//                        }else {
+//                            onBackPressed();
+//                        }
 
 
                     }else {

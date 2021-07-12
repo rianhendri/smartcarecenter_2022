@@ -170,4 +170,7 @@
     <string name="title_submit_order">Submit Order</string>
     <string name="title_btngagal">Retry Payment</string>
     <string name="title_optionaltext">"Notes (optional): "</string>
+    <string name="title_phone">Phone:</string>
+    <string name="title_jobtitle">Job Title:</string>
+    <string name="title_pleasecomple">Please complete your data below:</string>
 </resources>

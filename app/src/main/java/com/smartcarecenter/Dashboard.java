@@ -133,6 +133,8 @@ public class Dashboard extends AppCompatActivity {
         cekInternet();
         getSessionId();
         check.checknotif=1;
+        check.checkhome = 0;
+
         if (internet){
             reqApi();
             appInstalledOrNot("com.whatsapp");
@@ -254,6 +256,17 @@ public class Dashboard extends AppCompatActivity {
                     mtermandcondition.setVisibility(View.VISIBLE);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    //cek profile
+                    if (data.get("showUpdateProfile").getAsBoolean()){
+                        Intent gototoprofile = new Intent(Dashboard.this,Myprofile.class);
+                        gototoprofile.putExtra("notifnya","yes");
+                        gototoprofile.putExtra("homes","yes");
+
+                        startActivity(gototoprofile);
+                        finish();
+                    }else {
+
+                    }
                     survey = data.get("showSurvey").getAsBoolean();
                     //Survey
                     if (survey){
@@ -455,7 +468,7 @@ public class Dashboard extends AppCompatActivity {
     public void onBackPressed(){
             if (exit) {
                 this.finish();
-
+                check.checkhome = 1;
             } else {
                 Toast.makeText(this, getString(R.string.title_exit),
                         Toast.LENGTH_SHORT).show();

@@ -2,6 +2,7 @@ package com.smartcarecenter;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,7 +106,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     String mstatus = "";
     String mstatusColorCode = "";
     String mstatusName = "";
-    String noticket = "";
+    public  static String noticket = "";
     String sesionid_new = "";
     String guid = "";
     String mreason="";
@@ -121,11 +123,16 @@ public class DetailsFormActivity extends AppCompatActivity {
     private CountDownTimer mCountDownTimer;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     public static String Nowaform = "0";
+    NestedScrollView mscroll;
+    String scrollnya = "no";
+    public static int yverti=0;
+    public static int xhori=0;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_form);
+        mscroll = findViewById(R.id.scrollnya);
         missu = findViewById(R.id.issucategroy);
         mservicetype = findViewById(R.id.servicetype);
         mcreatedate =findViewById(R.id.createdate);
@@ -173,6 +180,10 @@ public class DetailsFormActivity extends AppCompatActivity {
             username = bundle2.getString("user");
             noticket = bundle2.getString("noticket");
             valuefilter = bundle2.getString("pos");
+            scrollnya =   bundle2.getString("scrolbawah");
+            xhori=bundle2.getInt("xhori");
+            yverti=bundle2.getInt("yverti");
+            Log.d("scrolnya",scrollnya+"/"+xhori+"/"+yverti);
 
         }
         getSessionId();
@@ -267,7 +278,17 @@ public class DetailsFormActivity extends AppCompatActivity {
             }
         });
         updateCountDownText();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mscroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    yverti = scrollY;
+                    xhori = scrollX;
+                    Log.d("scrollabe", String.valueOf(scrollX)+"/"+String.valueOf(scrollY)+"/");
+                }
+            });
 
+        }
     }
     private void showDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -604,6 +625,11 @@ public class DetailsFormActivity extends AppCompatActivity {
                     mdeskription.setText(mdeskriptionapi);
                     mstatusdetail.setText(mstatusName);
                     mstatusdetail.setTextColor(Color.parseColor("#"+mstatusColorCode));
+                    if (scrollnya==null){
+                        mscroll.scrollTo(0,1900);
+                    }else {
+                        mscroll.scrollTo(xhori,yverti);
+                    }
                 }else {
                     sesionid();
                     loading.dismiss();
@@ -743,12 +769,25 @@ public class DetailsFormActivity extends AppCompatActivity {
 //        super.onBackPressed();
         if (check.checknotif==1){
             if (username==null){
-                if (check.checklistform==1){
-                    list2.clear();
-                    refresh=true;
+                if (check.checkhome==0){
+                    if (check.checklistform==1){
+                        list2.clear();
+                        refresh=true;
+                    }
+//                    Intent back = new Intent(DetailsST.this,Home.class);
+//                    back.putExtra("pos",valuefilter);
+//                    startActivity(back);
+//                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+//                    finish();
+                    super.onBackPressed();
+                    finish();
+                }else {
+                    Intent back = new Intent(DetailsFormActivity.this,Dashboard.class);
+                    back.putExtra("pos",valuefilter);
+                    startActivity(back);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    finish();
                 }
-                super.onBackPressed();
-                finish();
 
             }else {
                 super.onBackPressed();

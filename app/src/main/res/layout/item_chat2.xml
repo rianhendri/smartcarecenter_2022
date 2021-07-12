@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp">
+    <LinearLayout
+        android:id="@+id/datelay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="12dp">
+        <LinearLayout
+
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="4dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="hari ini"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/darkgrey2"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="start"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="1dp">
+        <LinearLayout
+            android:id="@+id/layyou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginRight="40dp"
+            android:orientation="vertical"
+            android:background="@drawable/bgwhite_cornerblack">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/name1"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rian1"
+                    android:fontFamily="@font/seguisb"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:id="@+id/lvl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Engineer"
+                    android:gravity="end"
+                    android:fontFamily="@font/segoeuii"
+                    android:layout_marginRight="8dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </LinearLayout>
+            <View
+                android:id="@+id/garisatasyou"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/darkgrey"/>
+            <LinearLayout
+                android:id="@+id/layimgyou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dwhite">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/loadimgyou"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/loadimgyou2"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imgyou"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxHeight="350dp"
+                        android:scaleType="centerCrop"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ProgressBar
+                        android:visibility="visible"
+                        android:id="@+id/loadingimgyou"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/loadimgyou"
+                        app:layout_constraintStart_toStartOf="@+id/loadimgyou"
+                        app:layout_constraintTop_toTopOf="@+id/loadimgyou" />
+                    <ProgressBar
+                        android:visibility="visible"
+                        android:id="@+id/loadingimgyou2"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/loadimgyou2"
+                        app:layout_constraintStart_toStartOf="@+id/loadimgyou2"
+                        app:layout_constraintTop_toTopOf="@+id/loadimgyou2" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/playbtnyou"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/play"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgyou"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/imgyou" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layfileyou"
+                android:visibility="visible"
+                android:layout_width="250dp"
+                android:layout_marginTop="12dp"
+                android:paddingRight="8dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#ECE9E9"
+                android:gravity="bottom">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_marginBottom="12dp">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="40dp"
+                        android:layout_height="35dp">
+
+                        <ImageView
+                            android:id="@+id/fileyour"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_file2"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/extc2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:maxLength="4"
+                            android:text="JPEg"
+                            android:textColor="@color/black"
+                            android:textSize="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/fileyour"
+                            app:layout_constraintHorizontal_bias="0.578"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/fileyour"
+                            app:layout_constraintVertical_bias="0.571" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/yourfiletext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textIsSelectable="true"
+                        android:ellipsize="marquee"
+                        android:layout_weight="1"
+                        android:text="asdas dsadasdasdasd as dasdasd"
+                        android:singleLine="true" />
+                    <ImageView
+                        android:id="@+id/downloadyou"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:src="@drawable/down_arrow_black"
+                        />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/progressyou">
+                        <ProgressBar
+                            android:id="@+id/progress_baryou"
+                            style="@style/CircularDeterminateProgressBar2"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:progress="10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="X"
+                            android:textColor="@color/black"
+                            app:layout_constraintBottom_toBottomOf="@+id/progress_baryou"
+                            app:layout_constraintEnd_toEndOf="@+id/progress_baryou"
+                            app:layout_constraintStart_toStartOf="@+id/progress_baryou"
+                            app:layout_constraintTop_toTopOf="@+id/progress_baryou" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp">
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/your"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:text="p"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+                    <TextView
+                        android:id="@+id/dateyou"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="@color/darkgrey2"
+                        android:text="23:59"/>
+                    <TextView
+                        android:id="@+id/openile2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Open File"
+                        android:gravity="end"
+                        android:textSize="10sp"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp">
+        <LinearLayout
+            android:id="@+id/layme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_marginLeft="40dp"
+            android:orientation="vertical"
+            android:gravity="end"
+            android:background="@drawable/bg_cornerblue">
+            <View
+                android:id="@+id/garisatasme"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/darkgrey"/>
+            <LinearLayout
+                android:id="@+id/layimgme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dwhite">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+
+                        android:id="@+id/loadimg"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+
+                        android:id="@+id/loadimg2"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+
+                        android:id="@+id/imgme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxHeight="350dp"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ProgressBar
+                        android:visibility="visible"
+                        android:id="@+id/loadingimg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/loadimg"
+                        app:layout_constraintStart_toStartOf="@+id/loadimg"
+                        app:layout_constraintTop_toTopOf="@+id/loadimg" />
+                    <ProgressBar
+                        android:visibility="visible"
+                        android:id="@+id/loadingimg2"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/loadimg2"
+                        app:layout_constraintStart_toStartOf="@+id/loadimg2"
+                        app:layout_constraintTop_toTopOf="@+id/loadimg2" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/playbtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/play"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgme"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/imgme" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layfileme"
+                android:visibility="visible"
+                android:layout_width="250dp"
+                android:paddingTop="6dp"
+                android:paddingRight="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="6dp"
+                android:paddingBottom="6dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#087BAE"
+                android:gravity="bottom">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="bottom">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="40dp"
+                        android:layout_height="35dp">
+
+                        <ImageView
+                            android:id="@+id/fileme"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_file"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/extc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:maxLength="4"
+                            android:text="JPEg"
+                            android:textColor="@color/dwhite"
+                            android:textSize="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/fileme"
+                            app:layout_constraintHorizontal_bias="0.578"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/fileme"
+                            app:layout_constraintVertical_bias="0.571" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/mefile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:textColor="@color/dwhite"
+                        android:textSize="16sp"
+                        android:ellipsize="marquee"
+                        android:textIsSelectable="true"
+                        android:layout_weight="1"
+                        android:text=".jpeg"
+                        android:singleLine="true" />
+                    <ImageView
+                        android:id="@+id/download"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:src="@drawable/down_arrow_white"
+                        />
+                    <ImageView
+                        android:id="@+id/upload"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:rotation="180"
+                        android:src="@drawable/down_arrow_white"
+                        />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/progressme">
+                        <ProgressBar
+                            android:id="@+id/progress_bar"
+                            style="@style/CircularDeterminateProgressBar"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:progress="10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="X"
+                            android:textColor="@color/dwhite"
+                            app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
+                            app:layout_constraintEnd_toEndOf="@+id/progress_bar"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/progress_bar" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
+                android:gravity="end"
+                android:paddingLeft="8dp">
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:textColor="@color/dwhite"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="8dp"
+                    android:textIsSelectable="true"
+                    android:text="p"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+                    <TextView
+                        android:id="@+id/openile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Open File"
+                        android:textSize="10sp"
+                        android:textColor="@color/dwhite"/>
+                    <TextView
+                        android:id="@+id/dateme"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:gravity="end"
+                        android:textColor="@color/dwhite"
+                        android:text="23:00"/>
+                    <ImageView
+                        android:id="@+id/read"
+                        android:layout_marginLeft="4dp"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:textSize="10sp"
+                        android:textColor="@color/dwhite"
+                        android:src="@drawable/ic_doublecheckingwhite"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

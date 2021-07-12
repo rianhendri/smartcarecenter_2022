@@ -48,6 +48,11 @@ public interface IRetrofit {
     @POST("api/Account/Config")
     public Call<JsonObject> postRawJSONconfig(@Body JsonObject var1);
 
+    @POST("api/account/get")
+    public Call<JsonObject> getprofil(@Body JsonObject var1);
+
+    @POST("api/account/update")
+    public Call<JsonObject> updateprofil(@Body JsonObject var1);
     @POST("api/FormRequest/Confirm")
     public Call<JsonObject> postRawJSONconfirm(@Body JsonObject var1);
 

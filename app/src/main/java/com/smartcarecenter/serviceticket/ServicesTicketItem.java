@@ -12,13 +12,15 @@ package com.smartcarecenter.serviceticket;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class ServicesTicketItem {
 
     public ServicesTicketItem() {
     }
 
 
-    public ServicesTicketItem(String assignedDateTime, String bar1Text, String bar2Text, String bar3Text, boolean bar4Red, String bar4Text, int barPosition, String engineerName, String feedbackComments, int feedbackRating, String issueCategoryName, int position, String serviceTypeName, String statusName, String supportEndDateTime, String supportStartDateTime, String unitCategoryName, String assist, int lastImpression, String description, boolean showOnProgressAction, String onProgressActionName, String feedbackPhotoFullURL, String waitingEstimationDate) {
+    public ServicesTicketItem(String assignedDateTime, String bar1Text, String bar2Text, String bar3Text, boolean bar4Red, String bar4Text, int barPosition, String engineerName, String feedbackComments, int feedbackRating, String issueCategoryName, int position, String serviceTypeName, String statusName, String serviceTicketCd, String supportEndDateTime, String supportStartDateTime, String unitCategoryName, String assist, int lastImpression, String description, boolean showOnProgressAction, String onProgressActionName, String feedbackPhotoFullURL, String waitingEstimationDate, boolean showLiveChat, String liveChatName, String guid, boolean liveChatAllowChat, ArrayList<TokenList> liveChatFirebaseToken) {
         AssignedDateTime = assignedDateTime;
         Bar1Text = bar1Text;
         Bar2Text = bar2Text;
@@ -33,6 +35,7 @@ public class ServicesTicketItem {
         Position = position;
         ServiceTypeName = serviceTypeName;
         StatusName = statusName;
+        ServiceTicketCd = serviceTicketCd;
         SupportEndDateTime = supportEndDateTime;
         SupportStartDateTime = supportStartDateTime;
         UnitCategoryName = unitCategoryName;
@@ -43,6 +46,11 @@ public class ServicesTicketItem {
         OnProgressActionName = onProgressActionName;
         FeedbackPhotoFullURL = feedbackPhotoFullURL;
         WaitingEstimationDate = waitingEstimationDate;
+        ShowLiveChat = showLiveChat;
+        LiveChatName = liveChatName;
+        Guid = guid;
+        LiveChatAllowChat = liveChatAllowChat;
+        LiveChatFirebaseToken = liveChatFirebaseToken;
     }
 
     public String getAssignedDateTime() {
@@ -157,6 +165,14 @@ public class ServicesTicketItem {
         StatusName = statusName;
     }
 
+    public String getServiceTicketCd() {
+        return ServiceTicketCd;
+    }
+
+    public void setServiceTicketCd(String serviceTicketCd) {
+        ServiceTicketCd = serviceTicketCd;
+    }
+
     public String getSupportEndDateTime() {
         return SupportEndDateTime;
     }
@@ -237,6 +253,47 @@ public class ServicesTicketItem {
         WaitingEstimationDate = waitingEstimationDate;
     }
 
+    public boolean isShowLiveChat() {
+        return ShowLiveChat;
+    }
+
+    public void setShowLiveChat(boolean showLiveChat) {
+        ShowLiveChat = showLiveChat;
+    }
+
+    public String getLiveChatName() {
+        return LiveChatName;
+    }
+
+    public void setLiveChatName(String liveChatName) {
+        LiveChatName = liveChatName;
+    }
+
+    public String getGuid() {
+        return Guid;
+    }
+
+    public void setGuid(String guid) {
+        Guid = guid;
+    }
+
+    public boolean isLiveChatAllowChat() {
+        return LiveChatAllowChat;
+    }
+
+    public void setLiveChatAllowChat(boolean liveChatAllowChat) {
+        LiveChatAllowChat = liveChatAllowChat;
+    }
+
+    public ArrayList<TokenList> getLiveChatFirebaseToken() {
+        return LiveChatFirebaseToken;
+    }
+
+    public void setLiveChatFirebaseToken(ArrayList<TokenList> liveChatFirebaseToken) {
+        LiveChatFirebaseToken = liveChatFirebaseToken;
+    }
+
+    //
     @Expose
     @SerializedName("AssignedDateTime")
     private String AssignedDateTime;
@@ -280,6 +337,9 @@ public class ServicesTicketItem {
     @SerializedName("StatusName")
     private String StatusName;
     @Expose
+    @SerializedName("ServiceTicketCd")
+    private String ServiceTicketCd;
+    @Expose
     @SerializedName("SupportEndDateTime")
     private String SupportEndDateTime;
     @Expose
@@ -312,5 +372,20 @@ public class ServicesTicketItem {
     @Expose
     @SerializedName("WaitingEstimationDate")
     private String WaitingEstimationDate;
+    @Expose
+    @SerializedName("ShowLiveChat")
+    private boolean ShowLiveChat;
+    @Expose
+    @SerializedName("LiveChatName")
+    private String LiveChatName;
+    @Expose
+    @SerializedName("Guid")
+    private String Guid;
+    @Expose
+    @SerializedName("LiveChatAllowChat")
+    private boolean LiveChatAllowChat;
+    @SerializedName("LiveChatFirebaseToken")
+    private ArrayList<TokenList> LiveChatFirebaseToken = null;
+
 }
 

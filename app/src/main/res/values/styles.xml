@@ -39,5 +39,12 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
     </style>
-
+    <style name="CircularDeterminateProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/circle</item>
+    </style>
+    <style name="CircularDeterminateProgressBar2">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/circle_black</item>
+    </style>
 </resources>

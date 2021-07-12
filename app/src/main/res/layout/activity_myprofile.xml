@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Myprofile"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
     <LinearLayout
         android:orientation="horizontal"
         android:background="@color/colorPrimaryDark"
@@ -112,6 +113,24 @@
                 android:layout_height="wrap_content"
                 >
                 <LinearLayout
+                    android:id="@+id/pleaseshow"
+                    android:visibility="visible"
+                    android:layout_margin="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_cornergrey"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/seguisb"
+                        android:textSize="12sp"
+                        android:text="@string/title_pleasecomple"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+                <LinearLayout
                     android:orientation="vertical"
                     android:background="@color/dwhite"
                     android:layout_width="match_parent"
@@ -119,6 +138,7 @@
                     android:layout_margin="14dp"
                     android:elevation="5dp"
                    >
+
                     <TextView
                         android:textColor="@color/dwhite"
                         android:background="@color/colorPrimaryDark"
@@ -137,11 +157,11 @@
                             android:paddingTop="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_Namalengkap"
+                            android:text="@string/title_username"
                             android:fontFamily="@font/seguisb" />
                         <TextView
-                            android:id="@+id/username2"
-                            android:textSize="16sp"
+                            android:id="@+id/user"
+                            android:textSize="14sp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:layout_width="match_parent"
@@ -149,6 +169,12 @@
                             android:text="-"
                             android:textColor="@color/black"
                             android:fontFamily="@font/seguisb" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="4dp"
+                            android:background="@color/softgrey" />
                     </LinearLayout>
                     <LinearLayout
                         android:orientation="vertical"
@@ -159,11 +185,11 @@
                             android:paddingTop="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_username"
+                            android:text="@string/title_Namalengkap"
                             android:fontFamily="@font/seguisb" />
                         <TextView
-                            android:id="@+id/user"
-                            android:textSize="16sp"
+                            android:id="@+id/username2"
+                            android:textSize="14sp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:layout_width="match_parent"
@@ -171,6 +197,12 @@
                             android:text="-"
                             android:textColor="@color/black"
                             android:fontFamily="@font/seguisb" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="4dp"
+                            android:background="@color/softgrey" />
                     </LinearLayout>
                     <LinearLayout
                         android:orientation="vertical"
@@ -185,7 +217,7 @@
                             android:fontFamily="@font/seguisb" />
                         <TextView
                             android:id="@+id/namapt"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:layout_width="match_parent"
@@ -193,8 +225,15 @@
                             android:text="-"
                             android:textColor="@color/black"
                             android:fontFamily="@font/seguisb" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="4dp"
+                            android:background="@color/softgrey" />
                     </LinearLayout>
                     <LinearLayout
+                        android:visibility="visible"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -207,7 +246,7 @@
                             android:fontFamily="@font/seguisb" />
                         <TextView
                             android:id="@+id/group2"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:layout_width="match_parent"
@@ -216,8 +255,138 @@
                             android:textColor="@color/black"
                             android:fontFamily="@font/seguisb" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/title_phone"
+                                android:fontFamily="@font/seguisb" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/red"
+                                android:text="*"/>
+                        </LinearLayout>
+                       <EditText
+                           android:id="@+id/phone"
+                           android:inputType="number"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:fontFamily="@font/seguisb"
+                           android:textSize="14dp"
+                           android:paddingLeft="10dp"
+                           android:paddingRight="10dp"
+                           android:background="@color/transparent"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="4dp"
+                            android:background="@color/softgrey" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Email:"
+                                android:fontFamily="@font/seguisb" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/red"
+                                android:text="*"/>
+                        </LinearLayout>
+                        <EditText
+                            android:id="@+id/email"
+                            android:inputType="textEmailAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/seguisb"
+                            android:textSize="14dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:background="@color/transparent"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="4dp"
+                            android:background="@color/softgrey" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/title_jobtitle"
+                                android:fontFamily="@font/seguisb" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/red"
+                                android:text="*"/>
+                        </LinearLayout>
+                        <EditText
+                            android:id="@+id/jobtitle"
+                            android:inputType="textEmailAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/seguisb"
+                            android:textSize="14dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:background="@color/transparent"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="4dp"
+                            android:background="@color/softgrey" />
+                    </LinearLayout>
+
 
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/updatebtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/btnlogin"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:layout_marginBottom="34dp"
+                    android:text="Update"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
