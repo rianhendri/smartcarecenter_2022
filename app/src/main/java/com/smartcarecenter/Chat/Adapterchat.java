@@ -36,6 +36,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -78,12 +79,14 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import static android.content.Context.MODE_PRIVATE;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static com.smartcarecenter.ListChat.chatin;
 import static com.smartcarecenter.ListChat.mcopylay;
@@ -524,8 +527,13 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
         //showdate
         String date = new SimpleDateFormat("d MMM yyyy", Locale.getDefault()).format(new Date());
         if (date.equals(addFoclistreq.get(i).getDate())){
+            SharedPreferences sharedPreferences = context.getSharedPreferences("SHOW_ID", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("show_id", date);
+            editor.apply();
             myviewholder.mdate.setText("Hari Ini");
             myviewholder.mlaydate.setVisibility(View.VISIBLE);
+
         }
         else {
             myviewholder.mlaydate.setVisibility(View.VISIBLE);
@@ -693,40 +701,40 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
             }
         });
         //click chat long
-        myviewholder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (chatin){
-                    if (addFoclistreq.get(i).getMyuri().equals("-")){
-
-                    }else {
-                        File myuri = new File(addFoclistreq.get(i).getMyuri());
-                        if (myuri.exists()){
-
-                        }else {
-//                        startDownload();
-                        }
-                    }
-                    pos = i;
-                    if (name.equals(addFoclistreq.get(i).getName())){
-                        mdelcop.setVisibility(View.VISIBLE);
-                    }else {
-                        mdelcop.setVisibility(View.GONE);
-                    }
-                    mcopylay.setVisibility(View.VISIBLE);
-
-                    mback.setVisibility(View.GONE);
-                    myviewholder.mlayyou.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_corneryl));
-                    myviewholder.mlayme.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_corneryl));
-                    myviewholder.mMyname.setTextColor(Color.parseColor("#000000"));
-                }else {
-
-                }
-
-//                Toast.makeText(context, "Berhasil", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
+//        myviewholder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                if (chatin){
+//                    if (addFoclistreq.get(i).getMyuri().equals("-")){
+//
+//                    }else {
+//                        File myuri = new File(addFoclistreq.get(i).getMyuri());
+//                        if (myuri.exists()){
+//
+//                        }else {
+////                        startDownload();
+//                        }
+//                    }
+//                    pos = i;
+//                    if (name.equals(addFoclistreq.get(i).getName())){
+//                        mdelcop.setVisibility(View.VISIBLE);
+//                    }else {
+//                        mdelcop.setVisibility(View.GONE);
+//                    }
+//                    mcopylay.setVisibility(View.VISIBLE);
+//
+//                    mback.setVisibility(View.GONE);
+//                    myviewholder.mlayyou.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_corneryl));
+//                    myviewholder.mlayme.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_corneryl));
+//                    myviewholder.mMyname.setTextColor(Color.parseColor("#000000"));
+//                }else {
+//
+//                }
+//
+////                Toast.makeText(context, "Berhasil", Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+//        });
         //copy and delete chat
         mcopy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -742,6 +750,7 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
                 showDialog();
             }
         });
+// set margin terakhir
 
         //showicon download upload progress me
 //        if (addFoclistreq.get(i).getName().equals(name)){
@@ -821,10 +830,13 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
                 myviewholder.mplaybtnyou.setVisibility(View.GONE);
             }else {
                 if (addFoclistreq.get(i).getType().equals("image")){
+                    Log.d("getheigt", String.valueOf(myviewholder.mimgyou.getHeight())+"x"+String.valueOf(myviewholder.mimgyou.getWidth()));
+
                     myviewholder.mplaybtnyou.setVisibility(View.GONE);
                     Picasso.with(context).load(addFoclistreq.get(i).getThumb()).into(myviewholder.mimgyou, new Callback() {
                         @Override
                         public void onSuccess() {
+
                             myviewholder.mbgimgyou2.setVisibility(View.GONE);
                             myviewholder.mloadimgyou2.setVisibility(View.GONE);
                         }
@@ -1007,12 +1019,12 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
                 downloadUri);
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-        request.setDestinationInExternalPublicDir(DIRECTORY_DOWNLOADS, direct+"/"+downloadUri.getLastPathSegment());
+        request.setDestinationInExternalPublicDir(DIRECTORY_DOWNLOADS, String.valueOf(direct));
         mgr.enqueue(request);
 
         String external = Environment.getExternalStorageDirectory().toString()+"/";
         Log.d("pathsimpen","di sini: "+ external+DIRECTORY_DOWNLOADS+"/"+direct+"/"+downloadUri.getLastPathSegment());
-        pathnya=external+DIRECTORY_DOWNLOADS+"/"+direct+"/"+downloadUri.getLastPathSegment();
+        pathnya=external+DIRECTORY_DOWNLOADS+"/"+direct;
 
     }
 //    public void startDownload() {

@@ -115,6 +115,7 @@ public class ListChat extends AppCompatActivity {
 
     String mimeType="";
     String mimeType2="-";
+    int tokenpos=0;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +150,7 @@ public class ListChat extends AppCompatActivity {
 //            mfrnya.setText(noreq+" (Engineer: "+enginername+")");
             mfrnya.setText(noreq);
         }
-
+//        Log.d("tokenlist", String.valueOf(tokennya2.size())+"/"+tokennya2.get(0));
         getShowid();
         if (chatin){
             mlayketk.setVisibility(View.VISIBLE);
@@ -254,6 +255,7 @@ public class ListChat extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
 
                 sendnotifchat();
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -261,6 +263,7 @@ public class ListChat extends AppCompatActivity {
 
             }
         });
+        mimeType2 = "-";
     }
     public void loadchat(){
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -357,6 +360,7 @@ public class ListChat extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
 
+
 //                        UploadTask uploadTask = ref.child("images").putStream(stream);
 
 //                                ref.child("chat"+"/"+sessionnya+"/"+"listchat"+"/"+addFoclistreq.get(posi).getKey()+"/"+message).putFile(Uri.fromFile(imagefile)).addOnFailureListener(new OnFailureListener() {
@@ -410,7 +414,7 @@ public class ListChat extends AppCompatActivity {
 //                            loading.dismiss();
                             }
                         });
-
+                        mimeType2 = "-";
                     }
                 })
                 .setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -531,7 +535,6 @@ public class ListChat extends AppCompatActivity {
     }
     public void sendnotifchat(){
 //        loading = ProgressDialog.show(DetailsFormActivity.this, "", getString(R.string.title_loading), true);
-        for (int i = 0; i < tokennya2.size(); ++i) {
             JsonObject dataid = new JsonObject();
             dataid.addProperty("id", noreq);
 
@@ -541,7 +544,7 @@ public class ListChat extends AppCompatActivity {
             notifikasidata.addProperty("click_action", "ListChat");
 
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("to", tokennya2.get(i));
+            jsonObject.addProperty("to", tokennya2.get(tokenpos));
             jsonObject.add("data", dataid);
             jsonObject.add("notification", notifikasidata);
 //        Toast.makeText(DetailsFormActivity.this,jsonObject.toString(), Toast.LENGTH_SHORT).show();
@@ -551,16 +554,22 @@ public class ListChat extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
+                    Log.d("tokenplusisze", String.valueOf(tokennya2.size()-1)+"=="+String.valueOf(tokenpos));
+                    if (tokennya2.size()-1==tokenpos){
+                        tokenpos =0;
+                    }else {
+                        tokenpos +=1;
+                        sendnotifchat();
+                    }
                     String errornya = "";
                     JsonObject homedata = response.body();
                     int statusnya = homedata.get("success").getAsInt();
                     if (statusnya == 1) {
 //                    JsonObject data = homedata.getAsJsonObject("data");
-                        Log.d("responnotif", homedata.toString());
+                        Log.d("responnotif2", homedata.toString());
                     } else {
 //                    sesionid();
-                        loading.dismiss();
+//                        loading.dismiss();
 //                    Toast.makeText(DetailsFormActivity.this, errornya,Toast.LENGTH_LONG).show();
                     }
                 }
@@ -569,11 +578,11 @@ public class ListChat extends AppCompatActivity {
                 public void onFailure(Call<JsonObject> call, Throwable t) {
 //                Toast.makeText(DetailsFormActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
 //                cekInternet();
-                    loading.dismiss();
+//                    loading.dismiss();
 
                 }
             });
             Log.d("requestnotif", jsonObject.toString());
-        }
+
     }
 }

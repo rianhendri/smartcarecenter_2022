@@ -432,6 +432,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
                 if (myItem.get(i).getLiveChatFirebaseToken()==null){
                     token = "-";
                 }else {
+
                     for (int c = 0; c < myItem.get(i).getLiveChatFirebaseToken().size(); ++c) {
 //                        String assobj2 = myItem.get(i).getLiveChatFirebaseToken().get(c).getToken();
                         tokennya2.add(myItem.get(i).getLiveChatFirebaseToken().get(c).getToken());

@@ -67,6 +67,7 @@ import static com.smartcarecenter.FormActivity.list2;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
+import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 
 public class DetailsFormActivity extends AppCompatActivity {
@@ -170,7 +171,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         mservice_layout.setLayoutManager(linearLayoutManager);
         mservice_layout.setHasFixedSize(true);
         listticket = new ArrayList();
-
+        tokennya2.clear();
         //getsessionId
         seconds=0;
         Bundle bundle2 = getIntent().getExtras();
@@ -450,7 +451,11 @@ public class DetailsFormActivity extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
-
+                    if (data.get("showFooterWA").getAsBoolean()){
+                        mcs.setVisibility(View.VISIBLE);
+                    }else {
+                        mcs.setVisibility(View.GONE);
+                    }
                     inforeopen = data.get("allowToReopenCase").getAsBoolean();
                     if (inforeopen){
                         mreinfolay.setVisibility(View.VISIBLE);
