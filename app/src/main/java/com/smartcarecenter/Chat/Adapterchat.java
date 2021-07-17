@@ -88,6 +88,7 @@ import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
+import static com.smartcarecenter.DownloadBroadcastReceiver.urinya;
 import static com.smartcarecenter.ListChat.chatin;
 import static com.smartcarecenter.ListChat.mcopylay;
 import static com.smartcarecenter.ListChat.mdelcop;
@@ -123,6 +124,7 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
     Bitmap bitmap2 = null;
     Handler handler = new Handler();
     int pos=0;
+    String namafilenya = "";
     int pro = 0;
     public static int totalqty = 0;
     double subharga = 0;
@@ -133,7 +135,7 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
     int total2 = 0;
 //    public static String namenya = "";
     public static boolean download = true;
-    public static boolean download2 = false;
+    public static boolean download2 = true;
     public Adapterchat(Context context, ArrayList<Itemchat> addFoclistitem) {
         this.context = context;
         this.addFoclistreq = addFoclistitem;
@@ -205,7 +207,14 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
                                         bitmap = BitmapFactory.decodeFile(filePath);
                                     }
                                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+                                    float aspectRatio = bitmap.getWidth() /
+                                            (float) bitmap.getHeight();
+                                    int width = 300;
+                                    int height = Math.round(width / aspectRatio);
+
+                                    bitmap = Bitmap.createScaledBitmap(
+                                            bitmap, width, height, false);
+                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                                     byte[] data = baos.toByteArray();
 
                                     UploadTask uploadTask = ref.child("chat"+"/"+sessionnya+"/"+"listchat"+"/"+addFoclistreq.get(i).getKey()+"/"+"thumb"+"/"+addFoclistreq.get(i).getMessage()).putBytes(data);
@@ -270,7 +279,14 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
                     }else {
                         bitmap2 = BitmapFactory.decodeFile(filePath);
                     }
-                    bitmap2.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+                    float aspectRatio = bitmap2.getWidth() /
+                            (float) bitmap2.getHeight();
+                    int width = 720;
+                    int height = Math.round(width / aspectRatio);
+
+                    bitmap2 = Bitmap.createScaledBitmap(
+                            bitmap2, width, height, false);
+                    bitmap2.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                     byte[] data = baos.toByteArray();
                     ref.child("chat"+"/"+sessionnya+"/"+"listchat"+"/"+addFoclistreq.get(i).getKey()+"/"+addFoclistreq.get(i).getMessage()).putBytes(data).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -315,8 +331,15 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
                                     }else {
                                         bitmap = BitmapFactory.decodeFile(filePath);
                                     }
+                                    float aspectRatio = bitmap2.getWidth() /
+                                            (float) bitmap2.getHeight();
+                                    int width = 300;
+                                    int height = Math.round(width / aspectRatio);
+
+                                    bitmap2 = Bitmap.createScaledBitmap(
+                                            bitmap2, width, height, false);
                                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                    bitmap2.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+                                    bitmap2.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                                     byte[] data = baos.toByteArray();
 
                                     UploadTask uploadTask = ref.child("chat"+"/"+sessionnya+"/"+"listchat"+"/"+addFoclistreq.get(i).getKey()+"/"+"thumb"+"/"+addFoclistreq.get(i).getMessage()).putBytes(data);
@@ -427,8 +450,14 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
                     myviewholder.mloadyou.setVisibility(View.GONE);
 
                 }else {
-                    myviewholder.mloadyou.setVisibility(View.GONE);
-                    myviewholder.mdownloadyou.setVisibility(View.GONE);
+                    File myuri = new File(addFoclistreq.get(i).getYoururi());
+                    if (myuri.exists()){
+                        myviewholder.mloadyou.setVisibility(View.GONE);
+                        myviewholder.mdownloadyou.setVisibility(View.GONE);
+                    }else {
+                        myviewholder.mdownloadyou.setVisibility(View.VISIBLE);
+                        myviewholder.mloadyou.setVisibility(View.GONE);
+                    }
                 }
 
                 myviewholder.myourname.setText(addFoclistreq.get(i).getMessage());
@@ -547,12 +576,34 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
         }
 
         ///cekuri
-        File myuri = new File(addFoclistreq.get(i).getMyuri());
-        if (myuri.exists()){
-            myviewholder.mopenfile.setText("Open file");
+        if (addFoclistreq.get(i).getMyuri().equals("-")){
+            myviewholder.mopenfile.setVisibility(View.GONE);
+            myviewholder.mopenfile2.setVisibility(View.GONE);
         }else {
-            myviewholder.mopenfile.setText("Download file");
+            File myuri = new File(addFoclistreq.get(i).getMyuri());
+            if (myuri.exists()){
+                myviewholder.mdownloadme.setVisibility(View.GONE);
+                myviewholder.mloadme.setVisibility(View.GONE);
+                myviewholder.mopenfile.setText("Open file");
+                myviewholder.mopenfile.setVisibility(View.VISIBLE);
+                myviewholder.mopenfile2.setVisibility(View.VISIBLE);
+                String someFilepath = addFoclistreq.get(i).getMyuri();
+                String extension = someFilepath.substring(someFilepath.lastIndexOf(".")).replace(".","");
+                if (addFoclistreq.get(i).getName().equals(name)) {
+                    myviewholder.mextc.setText(extension.toUpperCase());
+                }else {
+                    myviewholder.mextc2.setText(extension.toUpperCase());
+
+                }
+            }else {
+                myviewholder.mdownloadme.setVisibility(View.VISIBLE);
+                myviewholder.mloadme.setVisibility(View.GONE);
+                myviewholder.mopenfile.setText("Download file");
+            }
+
+            Log.d("uriada","ga ada");
         }
+
 
         File myuri2 = new File(addFoclistreq.get(i).getYoururi());
         if (myuri2.exists()){
@@ -565,34 +616,20 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
 
         }
 
-        if (addFoclistreq.get(i).getMyuri().equals("-")){
-            myviewholder.mopenfile.setVisibility(View.GONE);
-            myviewholder.mopenfile2.setVisibility(View.GONE);
-        }else {
-            myviewholder.mopenfile.setVisibility(View.VISIBLE);
-            myviewholder.mopenfile2.setVisibility(View.VISIBLE);
-            String someFilepath = addFoclistreq.get(i).getMyuri();
-            String extension = someFilepath.substring(someFilepath.lastIndexOf(".")).replace(".","");
-            if (addFoclistreq.get(i).getName().equals(name)) {
-                myviewholder.mextc.setText(extension.toUpperCase());
-            }else {
-                myviewholder.mextc2.setText(extension.toUpperCase());
 
-            }
-            Log.d("uriada","ga ada");
-        }
         //click chat untuk chek file
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pos = i;
-
+                namafilenya = addFoclistreq.get(i).getMessage();
 //
                 if (addFoclistreq.get(i).getName().equals(name)){
 
                     if (addFoclistreq.get(i).getMyuri().equals("-")){
 
                     }else {
+                        key = addFoclistreq.get(i).getKey();
                         File myuri = new File(addFoclistreq.get(i).getMyuri());
                         Log.d("youruri",myuri.toString());
                         if (myuri.exists()){
@@ -610,9 +647,32 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
 
                         }else {
                             if (download2){
+                                myviewholder.mloadme.setVisibility(View.VISIBLE);
+                                myviewholder.mdownloadme.setVisibility(View.GONE);
                                 download2=false;
                                 Toast.makeText(context, "Downloading", Toast.LENGTH_SHORT).show();
                                 linkdownload = addFoclistreq.get(i).getUrl();
+                                urinya = "me";
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        while (pro<90){
+                                            pro +=1;
+
+                                            handler.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    myviewholder.mbarme.setProgress(pro);
+                                                }
+                                            });
+                                            try {
+                                                Thread.sleep(400);
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }).start();
 
                                 startDownload();
                                 Log.d("uriada","ga ada");
@@ -624,6 +684,7 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
 
                     }
                 }else {
+                    urinya = "you";
                     if (addFoclistreq.get(i).getMyuri().equals("-")){
 
                     }else {
@@ -681,7 +742,33 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
 
                                     startDownload();
                                 }else {
+                                    File youruri2 = new File( addFoclistreq.get(i).getYoururi());
+                                    Log.d("filepath",file);
+                                    if (youruri2.exists()){}
+                                    else {
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                while (pro<90){
+                                                    pro +=1;
 
+                                                    handler.post(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            myviewholder.mbaryou.setProgress(pro);
+                                                        }
+                                                    });
+                                                    try {
+                                                        Thread.sleep(400);
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }
+                                        }).start();
+
+                                        startDownload();
+                                    }
                                 }
 
                             }else {
@@ -1019,14 +1106,15 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
                 downloadUri);
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-        request.setDestinationInExternalPublicDir(DIRECTORY_DOWNLOADS, String.valueOf(direct));
+        request.setDestinationInExternalPublicDir(DIRECTORY_DOWNLOADS, direct+"/"+namafilenya);
         mgr.enqueue(request);
 
         String external = Environment.getExternalStorageDirectory().toString()+"/";
         Log.d("pathsimpen","di sini: "+ external+DIRECTORY_DOWNLOADS+"/"+direct+"/"+downloadUri.getLastPathSegment());
-        pathnya=external+DIRECTORY_DOWNLOADS+"/"+direct;
+        pathnya=external+DIRECTORY_DOWNLOADS+"/"+direct+"/"+namafilenya;
 
     }
+
 //    public void startDownload() {
 //        Toast.makeText(context, "Download", Toast.LENGTH_SHORT).show();
 //        File rootPath = new File(Environment.getExternalStorageDirectory() +
