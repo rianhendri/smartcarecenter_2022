@@ -82,12 +82,12 @@ public class RatingStar extends AppCompatActivity {
     String errornya = "";
     boolean internet = true;
     ProgressDialog loading;
-    EditText mcomment;
+    EditText mcomment, mcom1,mcom2,mcom3;
     TextView mnoticket;
-    RatingBar mratingstar;
+    RatingBar mratingstar,mrating2;
     TextView mratingvalue;
     LinearLayout msolved;
-    LinearLayout munsolved,mcapture, mlayoutmonitor, mlayoutwaktu;
+    LinearLayout munsolved,mcapture, mlayoutmonitor, mlayoutwaktu, mlay1,mlay2,mlay3;
     ConstraintLayout mlayoutimg;
     ImageView mimage;
     String noreq = "";
@@ -104,13 +104,35 @@ public class RatingStar extends AppCompatActivity {
     String imgbody ="";
     ConstraintLayout muploadlay;
     Integer solve = null;
-    RadioButton myes,mno, mtiga, mpatbelas, mtujuh;
+    RadioButton myes,mno, mtiga, mpatbelas, mtujuh,miya,mtidak, m1,m2,m3,m4,m5, mmudah,mlumayan,msusah;
     boolean cekmonitor = true;
     Integer days = null;
+
+    int ratingangka=0;
+    Boolean iyatidak = true;
+    String mudahlumayan="Mudah";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating_star);
+        mlay1 = findViewById(R.id.layjelas1);
+        mlay2 = findViewById(R.id.layjelas2);
+        mlay3 = findViewById(R.id.layjelas3);
+        mcom1 = findViewById(R.id.alasanrating3);
+        mcom2 = findViewById(R.id.alasantidak);
+        mcom3 = findViewById(R.id.mudahalasan);
+        miya = findViewById(R.id.iya);
+        mtidak = findViewById(R.id.tidak);
+        mrating2 = findViewById(R.id.ratingstar2);
+//        m1 = findViewById(R.id.satu);
+//        m2 = findViewById(R.id.dua);
+//        m3 = findViewById(R.id.tigaa);
+//        m4 = findViewById(R.id.empat);
+//        m5 = findViewById(R.id.lima);
+        mmudah = findViewById(R.id.mudah);
+        mlumayan =findViewById(R.id.lumayan);
+        msusah =findViewById(R.id.susah);
+
         msolved = (LinearLayout)findViewById(R.id.solved);
         munsolved = (LinearLayout)findViewById(R.id.unsolved);
         mratingvalue = (TextView)findViewById(R.id.ratingvalue);
@@ -154,6 +176,128 @@ public class RatingStar extends AppCompatActivity {
         }else {
 
         }
+//        m1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ratingangka = 1;
+//
+//                if (ratingangka<4){
+//                    mlay1.setVisibility(View.VISIBLE);
+//                }else {
+//                    mlay1.setVisibility(GONE);
+//                }
+//            }
+//        });
+//        m2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ratingangka = 2;
+//
+//                if (ratingangka<4){
+//                    mlay1.setVisibility(View.VISIBLE);
+//                }else {
+//                    mlay1.setVisibility(GONE);
+//                }
+//            }
+//        });
+//        m3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ratingangka = 3;
+//
+//                if (ratingangka<4){
+//                    mlay1.setVisibility(View.VISIBLE);
+//                }else {
+//                    mlay1.setVisibility(GONE);
+//                }
+//            }
+//        });
+//        m4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ratingangka = 4;
+//
+//                if (ratingangka<4){
+//                    mlay1.setVisibility(View.VISIBLE);
+//                }else {
+//                    mlay1.setVisibility(GONE);
+//                }
+//            }
+//        });
+//        m5.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ratingangka = 5;
+//
+//                if (ratingangka<4){
+//                    mlay1.setVisibility(View.VISIBLE);
+//                }else {
+//                    mlay1.setVisibility(GONE);
+//                }
+//            }
+//        });
+
+        miya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iyatidak = true;
+
+                if (iyatidak){
+                    mlay2.setVisibility(GONE);
+                }else {
+                    mlay2.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        mtidak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iyatidak = false;
+
+                if (iyatidak){
+                    mlay2.setVisibility(GONE);
+                }else {
+                    mlay2.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        mmudah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudahlumayan = "Mudah";
+
+                if (mudahlumayan.equals("Mudah")){
+                    mlay3.setVisibility(GONE);
+                }else {
+                    mlay3.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        mlumayan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudahlumayan = "Lumayan";
+
+                if (mudahlumayan.equals("Lumayan")){
+                    mlay3.setVisibility(View.VISIBLE);
+                }else {
+                    mlay3.setVisibility(GONE);
+                }
+            }
+        });
+        msusah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mudahlumayan = "Susah";
+
+                if (mudahlumayan.equals("Susah")){
+                    mlay3.setVisibility(View.VISIBLE);
+                }else {
+                    mlay3.setVisibility(GONE);
+                }
+            }
+        });
         myes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -229,6 +373,21 @@ public class RatingStar extends AppCompatActivity {
             ratvalue = (int) v;
             }
         });
+        mrating2.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+//                mratingvalue.setText("Rating: "+ String.valueOf(v));
+                ratingangka = (int) v;
+                Log.d("ratingnya",String.valueOf(ratingangka));
+                if (ratingangka<1){
+                    mlay1.setVisibility(GONE);
+                }else if (ratingangka>3){
+                    mlay1.setVisibility(GONE);
+                }else {
+                    mlay1.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         msolved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -237,11 +396,21 @@ public class RatingStar extends AppCompatActivity {
                     Toast.makeText(RatingStar.this, getString(R.string.title_require_rate), Toast.LENGTH_SHORT).show();
 
                 }else {
-                    approve = true;
-                    if (internet) {
-//                        sendRate();
-                        uploadData();
+                    if (ratingangka==0){
+                        Toast.makeText(RatingStar.this, "mohon beri rating pada pertanyaan pertama", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        if (ratingangka<4){
+                            if (mcom1.length()==0){
+                                Toast.makeText(RatingStar.this, "mohon beri penjelasan pada pertanyaan pertama", Toast.LENGTH_SHORT).show();
+                            }else {
+                                ceksend();
+                            }
+                        }else {
+                            ceksend();
+                        }
                     }
+
                 }
             }
         });
@@ -274,6 +443,57 @@ public class RatingStar extends AppCompatActivity {
 //
 //            }
 //        });
+    }
+    public void ceksend()
+    {
+
+            if (iyatidak){
+                if (mudahlumayan.equals("Mudah")){
+                    if (internet)
+                    {
+//                        Toast.makeText(RatingStar.this, "kirim", Toast.LENGTH_SHORT).show();
+                                                    uploadData();
+                    }
+                }else {
+                    if (mcom3.length()==0){
+                        Toast.makeText(RatingStar.this, "mohon beri penjelasan pada pertanyaan ketiga", Toast.LENGTH_SHORT).show();
+                    }else {
+                        if (internet)
+                        {
+//                            Toast.makeText(RatingStar.this, "kirim", Toast.LENGTH_SHORT).show();
+                                                    uploadData();
+                        }
+                    }
+
+                }
+            }else {
+                if (mcom2.length()==0){
+                    Toast.makeText(RatingStar.this, "mohon beri penjelasan pada pertanyaan kedua", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    if (mudahlumayan.equals("Mudah")){
+//                                     approve = true;
+                        if (internet) {
+//                            Toast.makeText(RatingStar.this, "kirim", Toast.LENGTH_SHORT).show();
+                                                    uploadData();
+                        }
+                    }else {
+                        if (mcom3.length()==0){
+                            Toast.makeText(RatingStar.this, "mohon beri penjelasan pada pertanyaan ketiga", Toast.LENGTH_SHORT).show();
+                        }else {
+                            approve = true;
+                            if (internet) {
+//                                Toast.makeText(RatingStar.this, "kirim", Toast.LENGTH_SHORT).show();
+                                                    uploadData();
+                            }
+//
+                        }
+
+                    }
+                }
+
+            }
+
     }
     public void sendRate(){
         loading = ProgressDialog.show(RatingStar.this, "", getString(R.string.title_loading), true);
@@ -532,6 +752,9 @@ public class RatingStar extends AppCompatActivity {
     public void uploadData(){
         loading = ProgressDialog.show(RatingStar.this, "", getString(R.string.title_loading), true);
         if (imagefile==null){
+            MediaType json = MediaType.parse("application/json");
+            MediaType image = MediaType.parse("image/*");
+            MediaType text = MediaType.parse("text/plain");
             IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
             jsonPostService.uploadRating(
                     MultipartBody.Part.createFormData((String)"",
@@ -540,10 +763,18 @@ public class RatingStar extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,noreq),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)),
                     RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
+                   value,
                     RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(cekmonitor)),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days))).enqueue(new Callback<JsonObject>() {
+                   cekmonitor,
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days)),
+
+                   ratingangka,
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcom1.getText().toString()),
+                    iyatidak,
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcom2.getText().toString()),
+                    RequestBody.create((MediaType)MultipartBody.FORM,mudahlumayan),
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcom3.getText().toString())
+                    ).enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     String errornya = "";
@@ -607,10 +838,17 @@ public class RatingStar extends AppCompatActivity {
                     RequestBody.create((MediaType)MultipartBody.FORM,noreq),
                     RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(ratvalue)),
                     RequestBody.create((MediaType)MultipartBody.FORM,mcomment.getText().toString()),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(value)),
+                   value,
                     RequestBody.create((MediaType)MultipartBody.FORM,BuildConfig.VERSION_NAME),
-                    RequestBody.create((MediaType)MultipartBody.FORM, String.valueOf(cekmonitor)),
-                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days))
+                   cekmonitor,
+                    RequestBody.create((MediaType)MultipartBody.FORM,String.valueOf(days)),
+
+                    ratingangka,
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcom1.getText().toString()),
+                    iyatidak,
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcom2.getText().toString()),
+                    RequestBody.create((MediaType)MultipartBody.FORM,mudahlumayan),
+                    RequestBody.create((MediaType)MultipartBody.FORM,mcom3.getText().toString())
             ).enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

@@ -165,10 +165,16 @@ public interface IRetrofit {
                                         @Part("formRequestCd") RequestBody formRequestCd,
                                         @Part("rating") RequestBody rating,
                                         @Part("comments") RequestBody comments,
-                                        @Part("isApprove") RequestBody isApprove,
+                                        @Part("isApprove") boolean isApprove,
                                         @Part("ver") RequestBody ver,
-                                        @Part("monitorCase") RequestBody monitorCase ,
-                                        @Part("monitorDays") RequestBody monitorDays);
+                                        @Part("monitorCase") boolean monitorCase ,
+                                        @Part("monitorDays") RequestBody monitorDays,
+                                        @Part("service") Integer service,
+                                        @Part("serviceNote") RequestBody serviceNote,
+                                        @Part("puas") boolean puas,
+                                        @Part("puasNote") RequestBody puasNote,
+                                        @Part("speed") RequestBody speed,
+                                        @Part("speedNote") RequestBody speedNote);
 
     @Multipart
     @POST("api/FOCOrder/AddWithInformation")

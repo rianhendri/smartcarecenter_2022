@@ -476,7 +476,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         ImageView mposbar;
         RatingBar mrating;
         LinearLayout mlayoutstart,mlasyass,mlayimpres,mlayoutnotes,mlayac, murlfoto, mlayestima, mread, mdot;
-        ConstraintLayout mchatclik;
+        LinearLayout mchatclik;
         public Myviewholder(@NonNull View view) {
             super(view);
 
