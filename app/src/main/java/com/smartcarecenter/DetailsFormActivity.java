@@ -46,6 +46,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.historyfr.AdapterHistoryfr;
+import com.smartcarecenter.historyfr.ItemHistoryfr;
 import com.smartcarecenter.messagecloud.FirebaseMessaging;
 import com.smartcarecenter.messagecloud.check;
 import com.smartcarecenter.serviceticket.ServiceTicketAdapter;
@@ -67,65 +69,71 @@ import static com.smartcarecenter.FormActivity.list2;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
+import static com.smartcarecenter.historyfr.AdapterHistoryfr.frpos;
 import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 
 public class DetailsFormActivity extends AppCompatActivity {
-    boolean inforeopen = true;
-    EditText mreasonnya;
+    public static LinearLayout mlayhistorifr;
+    public static boolean inforeopen = true;
+    public static EditText mreasonnya;
     public static String noreq = "";
-    String MhaveToUpdate = "";
-    String MsessionExpired = "";
-    boolean internet = true;
-    private LinearLayoutManager linearLayoutManager;
-    ArrayList<ServicesTicketItem> listticket;
-    ServiceTicketAdapter ticketadapter;
-    ProgressDialog loading;
-    String mallowToCancel = "";
-    String mallowtoconfirm = "";
-    ImageView mbanner;
-    LinearLayout mcancel, mconfirm, mcs, mbackgroundalert,mback, mreopenbtn;
-    TextView mcreatedate, mdate, mdeskription, missu, moperator, mreqno, mservicetype, msn, mstatusdetail,
+    public static String MhaveToUpdate = "";
+    public static String MsessionExpired = "";
+    public static boolean internet = true;
+    public static LinearLayoutManager linearLayoutManager,linearLayoutManager2;
+    public static ArrayList<ServicesTicketItem> listticket;
+    public static ServiceTicketAdapter ticketadapter;
+    public static ArrayList<ItemHistoryfr> itemfr;
+    public static AdapterHistoryfr adaptaerfr;
+    public static ProgressDialog loading;
+    public static String mallowToCancel = "";
+    public static String mallowtoconfirm = "";
+    public static ImageView mbanner;
+    public static LinearLayout mcancel, mconfirm, mcs, mbackgroundalert,mback, mreopenbtn;
+    public static TextView mcreatedate, mdate, mdeskription, missu, moperator, mreqno, mservicetype, msn, mstatusdetail,
             mstid, mtitle, munitcategory, mlocation, mtextalert, mrequestby, mreopeninfo;
-    String mdateapi = "";
-    String mdeskriptionapi = "";
-    String mformRequestCd = "";
-    String mreopen = "";
-    ImageView mimgpopup;
-    LinearLayout mlayoutticket,mlayoutunit1, mlayoutunit2, mlayoutunit3, mreinfolay;
-    private LinearLayoutManager mlinear;
-    String mphotoURL = "";
-    String mpressGuid = "";
-    String mpressName = "";
-    String mrequestedBy = "";
-    String mrequestedDateTime = "";
-    String mserviceTicketCd = "";
-    String xlocation = "";
-    JsonArray mserviceTicketHistory;
-    JsonArray massistengineer;
-    RecyclerView mservice_layout;
-    String mstatus = "";
-    String mstatusColorCode = "";
-    String mstatusName = "";
+    public static String mdateapi = "";
+    public static String mdeskriptionapi = "";
+    public static String mformRequestCd = "";
+    public static String mreopen = "";
+    public static ImageView mimgpopup;
+    public static LinearLayout mlayoutticket,mlayoutunit1, mlayoutunit2, mlayoutunit3, mreinfolay;
+    public static  LinearLayoutManager mlinear;
+    public static String mphotoURL = "";
+    public static  String mpressGuid = "";
+    public static String mpressName = "";
+    public static String mrequestedBy = "";
+    public static String mrequestedDateTime = "";
+    public static String mserviceTicketCd = "";
+    public static String xlocation = "";
+    public static JsonArray mserviceTicketHistory;
+    public static JsonArray mhistoryfr;
+    public static JsonArray massistengineer;
+    public static RecyclerView mservice_layout;
+    public static RecyclerView frhis_layout;
+    public static String mstatus = "";
+    public static String mstatusColorCode = "";
+    public static String mstatusName = "";
     public  static String noticket = "";
-    String sesionid_new = "";
-    String guid = "";
-    String mreason="";
+    public static String sesionid_new = "";
+    public static String guid = "";
+    public static String mreason="";
     public static String username = "";
     boolean installed= true;
     //timer
     public static String assist="";
     public static int seconds = 0;
     public static String usetime="";
-    private boolean running;
+    public static boolean running;
     //timer
-    private static int START_TIME_IN_MILLIS = 0;
-    private TextView mtimerconfirm;
-    private CountDownTimer mCountDownTimer;
-    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    public static int START_TIME_IN_MILLIS = 0;
+    public static TextView mtimerconfirm;
+    public static CountDownTimer mCountDownTimer;
+    public static long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     public static String Nowaform = "0";
-    NestedScrollView mscroll;
-    String scrollnya = "no";
+    public static  NestedScrollView mscroll;
+    public static String scrollnya = "no";
     public static int yverti=0;
     public static int xhori=0;
     @SuppressLint("WrongConstant")
@@ -133,6 +141,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_form);
+        mlayhistorifr = findViewById(R.id.layhistorifr);
         mscroll = findViewById(R.id.scrollnya);
         missu = findViewById(R.id.issucategroy);
         mservicetype = findViewById(R.id.servicetype);
@@ -156,6 +165,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         mlayoutunit3=findViewById(R.id.layoutunit3);
         mlayoutticket=findViewById(R.id.layoutticket);
         mservice_layout=findViewById(R.id.serviceticket);
+        frhis_layout=findViewById(R.id.historyfr);
         mlocation = findViewById(R.id.locationsn);
         mtextalert = findViewById(R.id.textalert);
         mbackgroundalert = findViewById(R.id.backgroundalert);
@@ -166,11 +176,16 @@ public class DetailsFormActivity extends AppCompatActivity {
         mreopeninfo = findViewById(R.id.reopeninfo);
         //setlayout recyler
         linearLayoutManager = new LinearLayoutManager(DetailsFormActivity.this, LinearLayout.VERTICAL,false);
+                linearLayoutManager2 = new LinearLayoutManager(DetailsFormActivity.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
 //        linearLayoutManager.setStackFromEnd(true);
         mservice_layout.setLayoutManager(linearLayoutManager);
         mservice_layout.setHasFixedSize(true);
+        frhis_layout.setLayoutManager(linearLayoutManager2);
+        frhis_layout.setHasFixedSize(true);
         listticket = new ArrayList();
+        itemfr = new ArrayList<>();
+
         tokennya2.clear();
         //getsessionId
         seconds=0;
@@ -451,6 +466,22 @@ public class DetailsFormActivity extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+
+                    if(data.get("relatedFormRequestList").toString().equals("null")){
+                            mlayhistorifr.setVisibility(View.GONE);
+                    }else {
+                        mlayhistorifr.setVisibility(View.VISIBLE);
+                        mhistoryfr = data.getAsJsonArray("relatedFormRequestList");
+                        Log.d("relatedFormRequestList",mhistoryfr.toString());
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<ArrayList<ItemHistoryfr>>(){}.getType();
+                        itemfr = gson.fromJson(mhistoryfr.toString(), type);
+                        adaptaerfr = new AdapterHistoryfr(DetailsFormActivity.this,itemfr);
+                        frhis_layout.setAdapter(adaptaerfr);
+
+
+                    }
+
                     if (data.get("showFooterWA").getAsBoolean()){
                         mcs.setVisibility(View.VISIBLE);
                     }else {
@@ -514,6 +545,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                     mreopen = data.get("allowToReopenCase").toString();
                     if (mreopen.equals("true")){
                         mreopenbtn.setVisibility(View.VISIBLE);
+
                     }else {
                         mreopenbtn.setVisibility(View.GONE);
                     }
@@ -610,6 +642,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                     Picasso.with(DetailsFormActivity.this).load(mphotoURL).into(mbanner);
                     mtitle.setText("#"+mformRequestCd);
                     mreqno.setText(mformRequestCd);
+                    frpos = mformRequestCd;
                     String datenew = "";
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                     SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
