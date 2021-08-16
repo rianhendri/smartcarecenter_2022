@@ -23,7 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.doku.sdkocov2.DirectSDK;
+//import com.doku.sdkocov2.DirectSDK;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -71,7 +71,7 @@ public class HistoryPayment extends AppCompatActivity {
     private static final int REQUEST_PHONE = 1;
     private static String[] PERMISSION_PHONE = {Manifest.permission.READ_PHONE_STATE};
     int PayChanChoosed = 0;
-    DirectSDK directSDK;
+//    DirectSDK directSDK;
     ProgressDialog loading;
     public static String payCd = "";
     RecyclerView mordrSumarylist;

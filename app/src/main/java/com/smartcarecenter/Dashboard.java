@@ -464,6 +464,7 @@ public class Dashboard extends AppCompatActivity {
 
             }
         });
+        Log.d("confignya",jsonObject.toString());
     }
     public void onBackPressed(){
             if (exit) {

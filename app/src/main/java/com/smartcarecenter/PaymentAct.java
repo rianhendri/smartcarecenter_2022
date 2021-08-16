@@ -28,9 +28,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.doku.sdkocov2.DirectSDK;
-import com.doku.sdkocov2.interfaces.iPaymentCallback;
-import com.doku.sdkocov2.model.PaymentItems;
+//import com.doku.sdkocov2.DirectSDK;
+//import com.doku.sdkocov2.interfaces.iPaymentCallback;
+//import com.doku.sdkocov2.model.PaymentItems;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -86,7 +86,7 @@ public class PaymentAct extends AppCompatActivity {
     private static final int REQUEST_PHONE = 1;
     private static String[] PERMISSION_PHONE = {Manifest.permission.READ_PHONE_STATE};
     int PayChanChoosed = 0;
-    DirectSDK directSDK;
+//    DirectSDK directSDK;
     ProgressDialog loading;
     long totalnya = 0;
     PaybankAdapter addFormAdapterAdapter;
@@ -118,7 +118,7 @@ public class PaymentAct extends AppCompatActivity {
         telephonyManager = (TelephonyManager) getSystemService(PaymentAct.this.TELEPHONY_SERVICE);
 
         invoiceNumber = String.valueOf(AppsUtil.nDigitRandomNo(10));
-        directSDK = new DirectSDK();
+//        directSDK = new DirectSDK();
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             nopo = bundle2.getString("nopo");

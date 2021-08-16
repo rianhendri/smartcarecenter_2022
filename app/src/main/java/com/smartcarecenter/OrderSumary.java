@@ -27,10 +27,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.doku.sdkocov2.DirectSDK;
-import com.doku.sdkocov2.interfaces.iPaymentCallback;
-import com.doku.sdkocov2.model.PaymentItems;
+//disable untuk test doku mati
+//import com.doku.sdkocov2.DirectSDK;
+//import com.doku.sdkocov2.interfaces.iPaymentCallback;
+//import com.doku.sdkocov2.model.PaymentItems;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -83,7 +83,8 @@ public class OrderSumary extends AppCompatActivity {
     private static final int REQUEST_PHONE = 1;
     private static String[] PERMISSION_PHONE = {Manifest.permission.READ_PHONE_STATE};
     int PayChanChoosed = 0;
-    DirectSDK directSDK;
+//    //disable untuk test doku mati
+//    DirectSDK directSDK;
     ProgressDialog loading;
     public static String payCd = "";
     RecyclerView mordrSumarylist;
@@ -113,7 +114,8 @@ public class OrderSumary extends AppCompatActivity {
         msubmit = findViewById(R.id.submit);
         telephonyManager = (TelephonyManager) getSystemService(OrderSumary.this.TELEPHONY_SERVICE);
         invoiceNumber = String.valueOf(AppsUtil.nDigitRandomNo(10));
-        directSDK = new DirectSDK();
+        //disable untuk test doku mati
+//        directSDK = new DirectSDK();
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
             nopo = bundle2.getString("nopo");
@@ -194,81 +196,83 @@ public class OrderSumary extends AppCompatActivity {
                         } else {
                             imeiHp = telephonyManager.getDeviceId();
                         }
-                        PaymentItems paymentItems = new PaymentItems();
-                        paymentItems.setDataAmount(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)));
-                        paymentItems.setDataBasket("[{\"name\":\"sayur\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":\"10000.00\"},{\"name\":\"buah\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":,\"10000.00\"}]");
-                        paymentItems.setDataCurrency("360");
-                        paymentItems.setDataWords(AppsUtil.SHA1(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)) + "8878" +
-                                "f599rtEZtH5A" + noOrder + 360 +
-                                imeiHp));
-                        paymentItems.setDataMerchantChain("NA");
-                        paymentItems.setDataSessionID(String.valueOf(AppsUtil.nDigitRandomNo(9)));
-                        paymentItems.setDataTransactionID(noOrder);
-                        paymentItems.setDataMerchantCode("8878");
-                        paymentItems.setDataImei(imeiHp);
-                        paymentItems.setMobilePhone("");
-                        paymentItems.isProduction(false); //set ‘true’ for production and ‘false’ for
-                        paymentItems.setPublicKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBkd2EipFMMn3hy/rgQ3UBYs0WFPiei2RFSU0r/ClJXgyh88Eq+BpKtSCivbCjCZE7YOhcdbtYonFIi+isheNv00zqo5msQNCvhT45uYZ2Arvh8+F9xGE+y1KTS7ruYnzsDHYTBv+MHOJxs0Yn1mi3+y0KSMIBhz5iSIPzQgnLdNww0VnhwNdCwlm1EeBBE4ijWAm7IWxrFAsmMynUVCZRzZ5tTU4mb8BEDc854Pu94m1YAugw74f7JzMol7tPf5MO79moXdvDmPKVzNrEvMVFDLk+KnvI/yYe4uReQA4H2glNB+hGRPjqDXztY/6EJBHDo79cjKSBmuU5WGYReRiwIDAQAB"); //PublicKey c
-                        directSDK.setCart_details(paymentItems);
-                        directSDK.setPaymentChannel(1);
-                        directSDK.getResponse(new iPaymentCallback() {
-                            @Override
-                            public void onSuccess(final String text) {
-                                Log.d("dddd",text);
-                                JsonObject test = new JsonObject();
-                                test.addProperty("sessionId",sesionid_new);
-                                String textnya = text.replace("}","");
 
-                                String sesion=test.toString().replace("{","");
-                                String textnya2 = textnya+","+sesion;
-                                Log.d("testq",textnya2);
-//                            Toast.makeText(DokuAct.this, respongetTokenSDK.toString(), Toast.LENGTH_SHORT).show();
-                                try {
-                                    respongetTokenSDK = new JSONObject(text);
-
-                                    if (respongetTokenSDK.getString("res_response_code").equalsIgnoreCase("0000")) {
-
-                                        Log.d("brs",text);
-//                                    tokenid = respongetTokenSDK.getString("res_token_id");
-//                                    pairingcode = respongetTokenSDK.getString("res_pairing_code");
-//                                    jsonRespon = text;
-//                                    new RequestPayment().execute();
-//                                    Toast.makeText(DokuAct.this, text, Toast.LENGTH_SHORT).show();
-                                        Intent gotoa = new Intent(OrderSumary.this,ResultPayment.class);
-                                        gotoa.putExtra("grandtotal",Grandtotal);
-                                        gotoa.putExtra("id",noOrder);
-                                        gotoa.putExtra("guid",guid);
-                                        gotoa.putExtra("username",username);
-                                        gotoa.putExtra("pdfyes",mmustUpload);
-                                        gotoa.putExtra("pos",valuefilter);
-                                        gotoa.putExtra("nopo",nopo);
-                                        gotoa.putExtra("ss","Payment Failed");
-                                        gotoa.putExtra("cc","Failed");
-                                        gotoa.putExtra("tokennya",textnya2);
-                                        startActivity(gotoa);
-                                        finish();
-                                    }
-                                } catch (JSONException e)
-                                {
-                                    e.printStackTrace();
-                                    Log.e("liateror2",e.toString());
-//                                Toast.makeText(PaymentAct.this, e.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            @Override
-                            public void onError(final String text) {
-                                Log.e("liateror",text);
-//                            Log.d("brs",jsonRespon);
-//error handling here                                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                            @Override
-                            public void onException(Exception eSDK) {
-                                eSDK.printStackTrace();
-                                Log.e("liateror1",eSDK.toString());
-//                            Toast.makeText(PaymentAct.this, eSDK.toString(), Toast.LENGTH_SHORT).show();
-
-                            }
-                        }, getApplicationContext());
+                        //disable untuk test doku mati
+//                        PaymentItems paymentItems = new PaymentItems();
+//                        paymentItems.setDataAmount(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)));
+//                        paymentItems.setDataBasket("[{\"name\":\"sayur\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":\"10000.00\"},{\"name\":\"buah\",\"amount\":\"10000.00\",\"quantity\":\"1\",\"subtotal\":,\"10000.00\"}]");
+//                        paymentItems.setDataCurrency("360");
+//                        paymentItems.setDataWords(AppsUtil.SHA1(AppsUtil.generateMoneyFormat(String.valueOf(totalnya)) + "8878" +
+//                                "f599rtEZtH5A" + noOrder + 360 +
+//                                imeiHp));
+//                        paymentItems.setDataMerchantChain("NA");
+//                        paymentItems.setDataSessionID(String.valueOf(AppsUtil.nDigitRandomNo(9)));
+//                        paymentItems.setDataTransactionID(noOrder);
+//                        paymentItems.setDataMerchantCode("8878");
+//                        paymentItems.setDataImei(imeiHp);
+//                        paymentItems.setMobilePhone("");
+//                        paymentItems.isProduction(false); //set ‘true’ for production and ‘false’ for
+//                        paymentItems.setPublicKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBkd2EipFMMn3hy/rgQ3UBYs0WFPiei2RFSU0r/ClJXgyh88Eq+BpKtSCivbCjCZE7YOhcdbtYonFIi+isheNv00zqo5msQNCvhT45uYZ2Arvh8+F9xGE+y1KTS7ruYnzsDHYTBv+MHOJxs0Yn1mi3+y0KSMIBhz5iSIPzQgnLdNww0VnhwNdCwlm1EeBBE4ijWAm7IWxrFAsmMynUVCZRzZ5tTU4mb8BEDc854Pu94m1YAugw74f7JzMol7tPf5MO79moXdvDmPKVzNrEvMVFDLk+KnvI/yYe4uReQA4H2glNB+hGRPjqDXztY/6EJBHDo79cjKSBmuU5WGYReRiwIDAQAB"); //PublicKey c
+//                        directSDK.setCart_details(paymentItems);
+//                        directSDK.setPaymentChannel(1);
+//                        directSDK.getResponse(new iPaymentCallback() {
+//                            @Override
+//                            public void onSuccess(final String text) {
+//                                Log.d("dddd",text);
+//                                JsonObject test = new JsonObject();
+//                                test.addProperty("sessionId",sesionid_new);
+//                                String textnya = text.replace("}","");
+//
+//                                String sesion=test.toString().replace("{","");
+//                                String textnya2 = textnya+","+sesion;
+//                                Log.d("testq",textnya2);
+////                            Toast.makeText(DokuAct.this, respongetTokenSDK.toString(), Toast.LENGTH_SHORT).show();
+//                                try {
+//                                    respongetTokenSDK = new JSONObject(text);
+//
+//                                    if (respongetTokenSDK.getString("res_response_code").equalsIgnoreCase("0000")) {
+//
+//                                        Log.d("brs",text);
+////                                    tokenid = respongetTokenSDK.getString("res_token_id");
+////                                    pairingcode = respongetTokenSDK.getString("res_pairing_code");
+////                                    jsonRespon = text;
+////                                    new RequestPayment().execute();
+////                                    Toast.makeText(DokuAct.this, text, Toast.LENGTH_SHORT).show();
+//                                        Intent gotoa = new Intent(OrderSumary.this,ResultPayment.class);
+//                                        gotoa.putExtra("grandtotal",Grandtotal);
+//                                        gotoa.putExtra("id",noOrder);
+//                                        gotoa.putExtra("guid",guid);
+//                                        gotoa.putExtra("username",username);
+//                                        gotoa.putExtra("pdfyes",mmustUpload);
+//                                        gotoa.putExtra("pos",valuefilter);
+//                                        gotoa.putExtra("nopo",nopo);
+//                                        gotoa.putExtra("ss","Payment Failed");
+//                                        gotoa.putExtra("cc","Failed");
+//                                        gotoa.putExtra("tokennya",textnya2);
+//                                        startActivity(gotoa);
+//                                        finish();
+//                                    }
+//                                } catch (JSONException e)
+//                                {
+//                                    e.printStackTrace();
+//                                    Log.e("liateror2",e.toString());
+////                                Toast.makeText(PaymentAct.this, e.toString(), Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                            @Override
+//                            public void onError(final String text) {
+//                                Log.e("liateror",text);
+////                            Log.d("brs",jsonRespon);
+////error handling here                                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+//                            }
+//                            @Override
+//                            public void onException(Exception eSDK) {
+//                                eSDK.printStackTrace();
+//                                Log.e("liateror1",eSDK.toString());
+////                            Toast.makeText(PaymentAct.this, eSDK.toString(), Toast.LENGTH_SHORT).show();
+//
+//                            }
+//                        }, getApplicationContext());
                     }
                 }
                 if (payCd.equals("VAMANDIRI")){
