@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.JsonObject;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
@@ -112,6 +113,7 @@ public class SettingActivity extends AppCompatActivity {
                 cekInternet();
                 if (internet){
                     logout();
+                    FirebaseAuth.getInstance().signOut();
                 }else {
 
                 }

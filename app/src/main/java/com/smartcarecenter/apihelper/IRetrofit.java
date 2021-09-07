@@ -47,9 +47,20 @@ public interface IRetrofit {
 
     @POST("api/Account/Config")
     public Call<JsonObject> postRawJSONconfig(@Body JsonObject var1);
-
-
-
+    @POST("api/formrequest/FlagLiveChat")
+    public Call<JsonObject> ping(@Body JsonObject var1);
+    @POST("api/FOCOrder/FlagLiveChat")
+    public Call<JsonObject> ping2(@Body JsonObject var1);
+    @POST("api/chargeable/FlagLiveChat")
+    public Call<JsonObject> ping3(@Body JsonObject var1);
+    @POST("api/account/FlagLiveChat")
+    public Call<JsonObject> ping4(@Body JsonObject var1);
+    @POST("api/account/GetCurrentLiveChatList")
+    public Call<JsonObject> livechastlist(@Body JsonObject var1);
+    @POST("api/account/GetLiveChat")
+    public Call<JsonObject> getlivechat(@Body JsonObject var1);
+    @POST("api/account/GetSupportLiveChat")
+    public Call<JsonObject> getlivechatcs(@Body JsonObject var1);
     @POST("api/account/get")
     public Call<JsonObject> getprofil(@Body JsonObject var1);
 

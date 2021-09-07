@@ -222,7 +222,7 @@ public class AddDetailFoc extends AppCompatActivity {
         Gson gson = new GsonBuilder().create();
         myCustomArray = gson.toJsonTree(reitem).getAsJsonArray();
         jsonarayitem = myCustomArray.toString();
-
+        Log.d("sohnya",jsonarayitem.toString());
         listpoact.clear();
         Log.d("sizecart_11", String.valueOf(reitem.size()));
         Log.d("sizecart_22", String.valueOf(listpoact.size()));
@@ -757,6 +757,7 @@ public class AddDetailFoc extends AppCompatActivity {
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
 //        mnotes.setText(myCustomArray.toString()+mpressId);
         //
+        Log.d("imoresinya",myCustomArray.toString());
         jsonPostService.uploadfoc(MultipartBody.Part.createFormData((String)"",
                 imgreq,requestBody),
                 RequestBody.create((MediaType)MultipartBody.FORM,sesionid_new),

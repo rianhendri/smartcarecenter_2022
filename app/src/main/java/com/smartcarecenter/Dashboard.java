@@ -1,5 +1,6 @@
 package com.smartcarecenter;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -30,10 +31,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.smartcarecenter.Chat.ItemUid;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.menuhome.ChatAdapter;
@@ -58,9 +70,25 @@ import static com.smartcarecenter.AddRequest.requestby;
 import static com.smartcarecenter.AddDetailFocView.Nowfoc;
 import static com.smartcarecenter.AddDetailsPoView.Nowpo;
 import static com.smartcarecenter.DetailsFormActivity.Nowaform;
+import static com.smartcarecenter.menuhome.MenuAdapter.chat;
+import static com.smartcarecenter.menuhome.MenuAdapter.id;
+import static com.smartcarecenter.menuhome.MenuAdapter.liveChatRepor;
 import static com.smartcarecenter.menuhome.MenuAdapter.mchatdialog;
+import static com.smartcarecenter.menuhome.MenuAdapter.module;
+import static com.smartcarecenter.menuhome.MenuAdapter.moduletrans;
+import static com.smartcarecenter.menuhome.MenuAdapter.name;
+import static com.smartcarecenter.menuhome.MenuAdapter.sessionnya;
+import static com.smartcarecenter.menuhome.MenuAdapter.titlenya;
+import static com.smartcarecenter.menuhome.MenuAdapter.username;
+import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 public class Dashboard extends AppCompatActivity {
+    FirebaseAuth mAuth;
+    DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference();
+    ItemUid ietmuid ;
+    String nme="";
+    String uidnya="";
+    String emainya="";
     public static boolean installed = true;
     public static boolean installed2 = true;
     public static String mshowFormRequest = "";
@@ -112,6 +140,7 @@ public class Dashboard extends AppCompatActivity {
     String sesionid_new = "";
     String notifications_new = "";
     public static String news_new = "";
+
     boolean notes = true;
     boolean survey = true;
     @Override
@@ -256,6 +285,14 @@ public class Dashboard extends AppCompatActivity {
                     mtermandcondition.setVisibility(View.VISIBLE);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    emainya=data.get("liveChatUserID").getAsString();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+                        //User is Logged in
+                    }else{
+                        //No User is Logged in
+                        reglogauth();
+                    }
                     //cek profile
                     if (data.get("showUpdateProfile").getAsBoolean()){
                         Intent gototoprofile = new Intent(Dashboard.this,Myprofile.class);
@@ -374,6 +411,8 @@ public class Dashboard extends AppCompatActivity {
                     MenuItem menuItem4 = new MenuItem();
                     MenuItem menuItem5 = new MenuItem();
                     MenuItem menuItem6 = new MenuItem();
+                    MenuItem menuItem8 = new MenuItem();
+                    MenuItem menuItem9 = new MenuItem();
                     new MenuItem();
                     MenuItem menuItem7 = new MenuItem();
                     menuItemlist = new ArrayList();
@@ -417,7 +456,46 @@ public class Dashboard extends AppCompatActivity {
                         menuItem6.setShow(mshowLiveChat);
                         menuItemlist.add(menuItem6);
                     }
+                    if (access.get("showChatWithSupport").getAsBoolean()){
+                        JsonObject chatas = data.getAsJsonObject("chatWithSupport");
+                        name=chatas.get("UserName").getAsString();
+                        sessionnya=chatas.get("LiveChatID").getAsString();
+                        chat=chatas.get("AllowToChat").getAsBoolean();
+                        titlenya=chatas.get("Title").getAsString();
+                        username=chatas.get("UserName").getAsString();
+                        module=chatas.get("Module").getAsString();
+                        if (chatas.get("ModuleTransactionNo").getAsString().equals("")){
+                            moduletrans="null";
+                        }else {
+                            moduletrans=chatas.get("ModuleTransactionNo").getAsString();
+                        }
 
+                         id="homes";
+                        liveChatRepor=data.get("chatWithSupportReportWhenUserChat").getAsBoolean();
+                        if (chatas.get("OthersFirebaseToken").toString().equals("null")){
+//                            tokennya = "-";
+                        }else {
+                            tokennya2.clear();
+                            JsonArray tokeny = chatas.getAsJsonArray("OthersFirebaseToken");
+                            for (int c = 0; c < tokeny.size(); ++c) {
+                                JsonObject assobj2 = tokeny.get(c).getAsJsonObject();
+                                tokennya2.add(assobj2.get("Token").getAsString());
+                            }
+
+                            Log.d("listToken", tokennya2.toString());
+                        }
+                        menuItem9.setMenuname("Chat With Support");
+                        menuItem9.setImg(R.drawable.ic_supportchat);
+                        menuItem9.setShow(access.get("showChatWithSupport").toString());
+                        menuItemlist.add(menuItem9);
+                    }
+
+                    if (access.get("showCurrentLiveChatList").getAsBoolean()){
+                        menuItem8.setMenuname("Live Chat List");
+                        menuItem8.setImg(R.drawable.ic_chat);
+                        menuItem8.setShow(access.get("showCurrentLiveChatList").toString());
+                        menuItemlist.add(menuItem8);
+                    }
                     if (mshowSettings.equals("true")){
                         menuItem7.setMenuname(getString(R.string.title_Setting));
                         menuItem7.setImg(R.drawable.settings);
@@ -430,17 +508,26 @@ public class Dashboard extends AppCompatActivity {
                     float width4 = getResources().getDimension(R.dimen.height4);
                     float width5 = getResources().getDimension(R.dimen.height5);
                     float width6 = getResources().getDimension(R.dimen.height6);
+                    float width7 = getResources().getDimension(R.dimen.height7);
                     if(mymenu.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                      if (menuItemlist.size()>4)
-                      { mymenu.getLayoutParams().height = (int) width3;
+                        Log.d("sizesa", String.valueOf(menuItemlist.size())+"4");
+                      if (menuItemlist.size()<5)
+                      {
+                          mymenu.getLayoutParams().height = (int) width3;
+                      }else {
+                          if( menuItemlist.size()<7) {
+                              mymenu.getLayoutParams().height = (int) width3;
+                          }else {
+                              if (menuItemlist.size()<9) {
+                                  mymenu.getLayoutParams().height = (int) width4;
+                              }else {
+                                  if( menuItemlist.size()<11) {
+                                      mymenu.getLayoutParams().height = (int) width5;
+                                  }
+                              }
+                          }
                       }
-                      else if( menuItemlist.size()>6) {
-                          mymenu.getLayoutParams().height = (int) width4;
-                        }else if (menuItemlist.size()>8) {
-                          mymenu.getLayoutParams().height = (int) width5;
-                      }else if( menuItemlist.size()>10) {
-                          mymenu.getLayoutParams().height = (int) width6;
-                      }
+
                         mymenu.setNestedScrollingEnabled(false);
                         mymenu.setLayoutManager(new GridLayoutManager(Dashboard.this, 2));
                     } else if (mymenu.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -485,5 +572,96 @@ public class Dashboard extends AppCompatActivity {
 
 
 
+    }
+    public void reglogauth(){
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(emainya, "x8x8x8")
+                .addOnCompleteListener(Dashboard.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("trag", "signInWithCustomToken:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            uidnya=user.getUid();
+                            setregistuser();
+
+                        } else {
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                mAuth.signInWithEmailAndPassword(emainya, "x8x8x8")
+                                        .addOnCompleteListener(Dashboard.this, new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if (task.isSuccessful()) {
+                                                    // Sign in success, update UI with the signed-in user's information
+
+                                                    FirebaseUser user = mAuth.getCurrentUser();
+                                                    uidnya=user.getUid();
+                                                    Log.d("trag", uidnya);
+                                                    setregistuser();
+//
+                                                } else {
+                                                    if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+//                                                                            Toast.makeText(DetailsST.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
+                                                    }else {
+
+                                                    }
+                                                    // If sign in fails, display a message to the user.
+                                                    Log.w("uii", "signInWithCustomToken:failure", task.getException());
+//                                    Toast.makeText(CustomAuthActivity.this, "Authentication failed.",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    updateUI(null);
+
+                                                }
+                                            }
+                                        });
+//                                                    Toast.makeText(DetailsST.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
+//                                            loading.dismiss();
+                            }else {
+//                                            loading.dismiss();
+                            }
+//                                        loading.dismiss();
+                            // If sign in fails, display a message to the user.
+                            Log.w("uii", "signInWithCustomToken:failure", task.getException());
+//                                    Toast.makeText(CustomAuthActivity.this, "Authentication failed.",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    updateUI(null);
+
+                        }
+                    }
+                }).addOnFailureListener(Dashboard.this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+//                            loading.dismiss();
+                Log.d("gagal login",e.toString());
+            }
+        });
+    }
+    public void setregistuser(){
+//        int posinya = 0;
+//        if ((addFoclistreq!=null)){
+//            posinya = 0;
+//        }else{
+//            posinya = addFoclistreq.size()+1;
+//        }
+        ietmuid= new ItemUid();
+
+        ietmuid.setEmail(emainya);
+        ietmuid.setUsername(nme);
+
+        databaseReference2.child("akunregist").child(uidnya).setValue(ietmuid).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                Log.d("failue","succes");
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("failue",e.toString());
+            }
+        });
     }
 }

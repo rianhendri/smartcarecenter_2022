@@ -1,5 +1,6 @@
 package com.smartcarecenter;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,7 +38,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -47,6 +59,8 @@ import com.smartcarecenter.Add_Foc_Request_view.Add_foc_req_adapterView;
 import com.smartcarecenter.Add_Foc_Request_view.Add_foc_req_itemView;
 import com.smartcarecenter.Add_Foc_request.Add_foc_req_adapter;
 import com.smartcarecenter.Add_Foc_request.Add_foc_req_item;
+import com.smartcarecenter.Chat.Adapterchat;
+import com.smartcarecenter.Chat.Itemchat;
 import com.smartcarecenter.Freeofcharge.FocAdapter;
 import com.smartcarecenter.Freeofcharge.FocItem;
 import com.smartcarecenter.apihelper.IRetrofit;
@@ -76,8 +90,20 @@ import static com.smartcarecenter.FormActivity.refresh;
 import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
+import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 public class AddDetailFocView extends AppCompatActivity {
+    FirebaseAuth mAuth;
+    LinearLayout mdot;
+    TextView mnotif;
+    int total1 = 0;
+    public static String name="";
+    LinearLayout mchactclik;
+    String tokennya = "-";
+    ArrayList<Itemchat> itemchat;
+    Itemchat itemchat2;
+    DatabaseReference databaseReference5;
+    Adapterchat adapterchat;
     boolean showprep = true;
     String colortextrep = "";
     String textprep="";
@@ -125,6 +151,9 @@ public class AddDetailFocView extends AppCompatActivity {
         setContentView(R.layout.activity_add_detail_foc_view);
         mlistitem_foc = findViewById(R.id.listitemfoc);
         mdate = findViewById(R.id.datefoc);
+        mchactclik = findViewById(R.id.chatclik);
+        mdot = findViewById(R.id.dot);
+        mnotif = findViewById(R.id.newnotif);
         mno_order = findViewById(R.id.noorder);
         mnoitem = findViewById(R.id.noitem);
         msend = findViewById(R.id.submit);
@@ -200,6 +229,7 @@ public class AddDetailFocView extends AppCompatActivity {
             public void onClick(View view) {
                 appInstalledOrNot("com.whatsapp");
                 appInstalledOrNot2("com.whatsapp.w4b");
+                Log.d("whats",String.valueOf(installed)+"/"+String.valueOf(installed2));
                 if (installed) {
                     String message = "Hi Support, "+getString(R.string.title_tanyafoc)+noOrder;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -290,6 +320,101 @@ public class AddDetailFocView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    //chat baru pasang
+                    if(data.get("liveChatShowButton").getAsBoolean()){
+
+                        itemchat = new ArrayList<Itemchat>();
+                        itemchat2 = new Itemchat();
+                        databaseReference5= FirebaseDatabase.getInstance().getReference().child("chat").child(data.get("liveChatID").getAsString()).child("listchat");
+                        //
+                        name=data.get("liveChatUserName").getAsString();
+                        mchactclik.setVisibility(View.VISIBLE);
+                        if (data.get("liveChatOthersFirebaseToken").toString().equals("null")){
+                            tokennya = "-";
+                        }else {
+                            tokennya2.clear();
+                            JsonArray tokeny = data.getAsJsonArray("liveChatOthersFirebaseToken");
+                            for (int c = 0; c < tokeny.size(); ++c) {
+                                JsonObject assobj2 = tokeny.get(c).getAsJsonObject();
+                                tokennya2.add(assobj2.get("Token").getAsString());
+                            }
+
+                            Log.d("listToken", tokennya2.toString());
+                        }
+                        databaseReference5.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                itemchat.clear();
+                                total1 = 0;
+                                if (dataSnapshot.exists()){
+                                    for(DataSnapshot ds: dataSnapshot.getChildren())
+                                    {
+                                        Itemchat fetchDatalist=ds.getValue(Itemchat.class);
+                                        fetchDatalist.setKey(ds.getKey());
+                                        itemchat.add(fetchDatalist);
+                                    }
+
+                                    adapterchat=new Adapterchat(AddDetailFocView.this, itemchat);
+                                    for (int i = 0; i < itemchat.size(); i++) {
+                                        if (itemchat.get(i).getName().equals(name)){
+                                            mdot.setVisibility(View.GONE);
+                                        }else {
+
+                                            if (itemchat.get(i).getRead().equals("yes")){
+                                                mdot.setVisibility(View.GONE);
+                                            }else {
+                                                total1 +=1;
+                                                mdot.setVisibility(View.VISIBLE);
+                                                mnotif.setText(String.valueOf(total1));
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+//                        engas = "";
+                    }else {
+                        mchactclik.setVisibility(View.GONE);
+
+                    }
+                    mchactclik.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+//                            loading.show();
+//                            Window window = loading.getWindow();
+//                            window.setLayout(300, 300);
+                            Intent gotonews = new Intent(AddDetailFocView.this, ListChat.class);
+                            gotonews.putExtra("name",data.get("liveChatUserName").getAsString());
+                            gotonews.putExtra("sessionnya",data.get("liveChatID").getAsString());
+                            gotonews.putExtra("chat",data.get("liveChatAllowToChat").getAsBoolean());
+                            gotonews.putExtra("titlenya",data.get("liveChatTitle").getAsString());
+                            gotonews.putExtra("user",username);
+                            gotonews.putExtra("id",data.get("liveChatTitle").getAsString());
+                            gotonews.putExtra("moduletrans", "kosong");
+                            gotonews.putExtra("ping",2);
+                            gotonews.putExtra("liveChatRepor",data.get("liveChatReportWhenUserChat").getAsBoolean());
+                            gotonews.putExtra("page","detailst");
+//                            gotonews.putExtra("tokennya",tokennya);
+//                            gotonews.putExtra("engname", mcustname);
+//                            gotonews.putExtra("nofr", mformRequestCd);
+                            startActivity(gotonews);
+                            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                            finish();
+                            /////
+                            Log.d("pingtrue",String.valueOf(data.get("liveChatReportWhenUserChat").getAsBoolean()));
+
+                        }
+                    });
+
                     mdescrip.setText(data.get("custNotes").getAsString());
                     if (data.get("photoURL").toString().equals("null")){
                         mlayoutphotoimpressi.setVisibility(GONE);
@@ -356,11 +481,11 @@ public class AddDetailFocView extends AppCompatActivity {
                     String cancelshow = data.get("allowToCancel").toString();
                     if (cancelshow.equals("true")){
                         msend.setVisibility(View.VISIBLE);
-                        mchat.setVisibility(View.VISIBLE);
+                        mchat.setVisibility(View.GONE);
 
                     }else {
                         msend.setVisibility(View.GONE);
-                        mchat.setVisibility(View.VISIBLE);
+                        mchat.setVisibility(View.GONE);
                     }
                     mstartimpresi.setText(pressstart);
                     mno_order.setText(orderno);
@@ -407,6 +532,7 @@ public class AddDetailFocView extends AppCompatActivity {
 
             }
         });
+        Log.d("focdetail",jsonObject.toString());
     }
     private void showDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(

@@ -12,15 +12,19 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -39,12 +43,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.smartcarecenter.Chat.Adapterchat;
 import com.smartcarecenter.Chat.Itemchat;
 import com.smartcarecenter.Chat.Itemchat2;
 import com.smartcarecenter.SendNotificationPack.APIService;
+import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.messagecloud.check;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,13 +68,31 @@ import retrofit2.Response;
 
 import static android.view.View.GONE;
 import static com.smartcarecenter.Chat.Adapterchat.addFoclistreq;
+import static com.smartcarecenter.DetailsFormActivity.mcustname;
+import static com.smartcarecenter.DetailsFormActivity.mformRequestCd;
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.fcmbase;
 import static com.smartcarecenter.messagecloud.check.tokennya2;
-
+import static com.smartcarecenter.LiveChatList.itemchat;
 public class ListChat extends AppCompatActivity {
+    String mustupload = "";
+    int ping=0;
+    String nofr = "";
+    String custnmae="";
+    Boolean liveChatRepor=false;
+    String id = "";
+    String titlenya= "";
+    String module = "";
+    String idnotif = "";
+    String ModuleTransactionNo = "";
+    Boolean internet = false;
+    String MhaveToUpdate = "";
+    String MsessionExpired = "";
+    String sesionid_new = "";
+    public static String modultrans="null";
     RecyclerView recyclerView;
     Itemchat2 itemchat2 ;
-    ArrayList<Itemchat> itemchat;
+    ArrayList<Itemchat> itemchat3;
     Adapterchat adapterchat;
     public static DatabaseReference databaseReference,databaseReference3,databaseReference4;
     DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference();
@@ -103,7 +128,7 @@ public class ListChat extends AppCompatActivity {
     String noreq = "";
     String username = "";
     String idnya = "";
-    TextView mfrnya;
+    TextView mfrnya,mstnya;
     String enginername = "";
     String fr="";
     String tokennya = "";
@@ -122,6 +147,7 @@ public class ListChat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_chat);
         mfrnya = findViewById(R.id.frnya);
+        mstnya = findViewById(R.id.stnya);
         mpaperclip = findViewById(R.id.paperclip);
         recyclerView=findViewById(R.id.lischat);
         sendtext = findViewById(R.id.textsend);
@@ -132,41 +158,83 @@ public class ListChat extends AppCompatActivity {
         mdelet = findViewById(R.id.delete);
         mcopy = findViewById(R.id.copy);
         mlayketk = findViewById(R.id.layketk);
-
+        getSessionId();
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
+            module=bundle2.getString("module");
+            modultrans=bundle2.getString("moduletrans");
+            ping=bundle2.getInt("ping");
             sessionnya = bundle2.getString("sessionnya");
             name = bundle2.getString("name");
-            noreq =  bundle2.getString("id");
+            noreq = bundle2.getString("id");
+            id = bundle2.getString("page");
             username = bundle2.getString("user");
-            fr = bundle2.getString("frnya");
+            mustupload = bundle2.getString("pdfyes");
+            chatin = bundle2.getBoolean("chat");
+            liveChatRepor = bundle2.getBoolean("liveChatRepor");
+            custnmae = bundle2.getString("engname");
+            tokennya = bundle2.getString("tokennya");
+            nofr = bundle2.getString("nofr");
             xhori=bundle2.getInt("xhori");
             yverti=bundle2.getInt("yverti");
+            titlenya=bundle2.getString("titlenya");
             scrollnya =   bundle2.getString("scrolbawah");
-            chatin = bundle2.getBoolean("chat");
-            enginername = bundle2.getString("engname");
-            tokennya = bundle2.getString("tokennya");
-//            Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-//            mfrnya.setText(noreq+" (Engineer: "+enginername+")");
-            mfrnya.setText(noreq);
+//            Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+//            mfrnya.setText(noreq+" (Customer: "+custnmae+")");
+            mfrnya.setText(titlenya);
+            if (id==null){
+                String currentString = noreq;
+                String[] separated = currentString.split("-");
+                modultrans = separated[1];
+                module = separated[2];
+                idnotif = separated[0];
+
+            }else {
+
+            }
         }
-//        Log.d("tokenlist", String.valueOf(tokennya2.size())+"/"+tokennya2.get(0));
+        Log.d("notifnyaas", sessionnya+"-"+modultrans+"-"+module+"/"+sessionnya);
         getShowid();
+        reqApi();
+        if (id==null){
+            if (module.equals("ChatWithSupport")){
+                reqnotif2();
+                id="ChatWithSupport";
+//                scs="yes";
+//                titlelist="Support Live Chat List";
+            }else {
+                reqnotif();
+//                scs="no";
+//                titlelist="List Live Chat";
+            }
+
+
+        }else {
+            databaseReference= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
+            databaseReference3= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
+            loadchat();
+        }
         if (chatin){
             mlayketk.setVisibility(View.VISIBLE);
         }else {
             mlayketk.setVisibility(GONE);
         }
+        if (modultrans.equals("kosong")){
+            mstnya.setVisibility(GONE);
+        }else {
+            mstnya.setText(Html.fromHtml("<u>"+getString(R.string.title_chatdetailst)+"</u>"));
+            mstnya.setVisibility(View.VISIBLE);
+        }
         linearLayoutManager = new LinearLayoutManager(ListChat.this, LinearLayout.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
 //        recyclerView.setHasFixedSize(true);
-        itemchat = new ArrayList<Itemchat>();
+        itemchat3 = new ArrayList<Itemchat>();
         itemchat2= new Itemchat2();
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
-        databaseReference3= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
+//        databaseReference= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
+//        databaseReference3= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
 
 
-        loadchat();
+//        loadchat();
 
         msend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +242,27 @@ public class ListChat extends AppCompatActivity {
                 message=sendtext.getText().toString();
                 showurl="-";
                 myuri = "-";
+//                ping();
+                if (liveChatRepor){
+                    if (ping==1){
+                        ping();
+                    }else {
+                        if (ping==2){
+                            pingfoc();
+                        }else {
+                            if (ping==3){
+                                pingcha();
+                            }else {
+                                if (ping==4){
+                                    pingcs();
+                                }
+                            }
+                        }
+                    }
+
+                }else {
+
+                }
                 if (sendtext.length()==0){
 
                 }else {
@@ -210,6 +299,68 @@ public class ListChat extends AppCompatActivity {
                 }
 
 //                launchPicker();
+            }
+        });
+        mstnya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check.checknotif=1;
+                if (module.equals("ServiceSupport")){
+                    Intent gotonews = new Intent(ListChat.this, DetailsFormActivity.class);
+                    gotonews.putExtra("name",username);
+                    gotonews.putExtra("sessionnya",sessionnya);
+                    gotonews.putExtra("chat",chatin);
+                    gotonews.putExtra("user",name);
+                    gotonews.putExtra("id",modultrans);
+//                gotonews.putExtra("tokennya",token);
+                    gotonews.putExtra("engname", mcustname);
+                    gotonews.putExtra("nofr", mformRequestCd);
+                    gotonews.putExtra("xhori", xhori);
+                    gotonews.putExtra("yverti", yverti);
+                    gotonews.putExtra("scrolbawah","-");
+                    startActivity(gotonews);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    finish();
+                }else {
+                    if (module.equals("FOC")){
+                        Intent gotonews = new Intent(ListChat.this, AddDetailFocView.class);
+                        gotonews.putExtra("name",username);
+                        gotonews.putExtra("sessionnya",sessionnya);
+                        gotonews.putExtra("chat",chatin);
+                        gotonews.putExtra("user",name);
+                        gotonews.putExtra("id",modultrans);
+                        gotonews.putExtra("username",username);
+//                gotonews.putExtra("tokennya",token);
+                        gotonews.putExtra("engname", mcustname);
+                        gotonews.putExtra("nofr", mformRequestCd);
+                        gotonews.putExtra("xhori", xhori);
+                        gotonews.putExtra("yverti", yverti);
+                        gotonews.putExtra("scrolbawah","-");
+                        startActivity(gotonews);
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                        finish();
+                    }else {
+                        if (module.equals("Chargeable")){
+                            Intent gotonews = new Intent(ListChat.this, AddDetailsPoView.class);
+                            gotonews.putExtra("name",username);
+                            gotonews.putExtra("sessionnya",sessionnya);
+                            gotonews.putExtra("chat",chatin);
+                            gotonews.putExtra("username",name);
+                            gotonews.putExtra("id",modultrans);
+//                gotonews.putExtra("tokennya",token);
+                            gotonews.putExtra("engname", mcustname);
+                            gotonews.putExtra("nofr", mformRequestCd);
+                            gotonews.putExtra("xhori", xhori);
+                            gotonews.putExtra("yverti", yverti);
+                            gotonews.putExtra("scrolbawah","-");
+                            gotonews.putExtra("pdfyes", "no");
+                            startActivity(gotonews);
+                            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                            finish();
+                        }
+                    }
+                }
+
             }
         });
 
@@ -265,20 +416,244 @@ public class ListChat extends AppCompatActivity {
         });
         mimeType2 = "-";
     }
+    public void ping() {
+        loading = ProgressDialog.show(ListChat.this, "", "", true);
+//        loading .setVisibility(View.VISIBLE);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("serviceTicketCd",sessionnya);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.ping(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                Log.d("configeng",homedata.toString());
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+//                jsonObject.addProperty("ver",ver);
+                if (statusnya.equals("OK")) {
+                    loading.dismiss();
+//                    loading .setVisibility(View.GONE);
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    Log.d("rekping","success");
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    //// error message
+//                    loading .setVisibility(View.GONE);
+//                    if (MsessionExpired.equals("true")) {
+//                        Toast.makeText(Home.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+                    Toast.makeText(ListChat.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(ListChat.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading .setVisibility(View.GONE);
+                loading.dismiss();
+
+            }
+        });
+        Log.d("reqnotifnya",jsonObject.toString());
+    }
+    public void pingfoc() {
+        loading = ProgressDialog.show(ListChat.this, "", "", true);
+//        loading .setVisibility(View.VISIBLE);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("orderNo",sessionnya);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.ping2(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                Log.d("configeng",homedata.toString());
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+//                jsonObject.addProperty("ver",ver);
+                if (statusnya.equals("OK")) {
+                    loading.dismiss();
+//                    loading .setVisibility(View.GONE);
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    Log.d("rekping","success");
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    //// error message
+//                    loading .setVisibility(View.GONE);
+//                    if (MsessionExpired.equals("true")) {
+//                        Toast.makeText(Home.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+                    Toast.makeText(ListChat.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(ListChat.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading .setVisibility(View.GONE);
+                loading.dismiss();
+
+            }
+        });
+        Log.d("reqnotifnya",jsonObject.toString());
+    }
+    public void pingcha() {
+        loading = ProgressDialog.show(ListChat.this, "", "", true);
+//        loading .setVisibility(View.VISIBLE);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("orderNo",sessionnya);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.ping3(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                Log.d("configeng",homedata.toString());
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+//                jsonObject.addProperty("ver",ver);
+                if (statusnya.equals("OK")) {
+                    loading.dismiss();
+//                    loading .setVisibility(View.GONE);
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    Log.d("rekping","success");
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    //// error message
+//                    loading .setVisibility(View.GONE);
+//                    if (MsessionExpired.equals("true")) {
+//                        Toast.makeText(Home.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+                    Toast.makeText(ListChat.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(ListChat.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading .setVisibility(View.GONE);
+                loading.dismiss();
+
+            }
+        });
+        Log.d("reqnotifnya",jsonObject.toString());
+    }
+    public void pingcs() {
+        loading = ProgressDialog.show(ListChat.this, "", "", true);
+//        loading .setVisibility(View.VISIBLE);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+//        jsonObject.addProperty("orderNo",sessionnya);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.ping4(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                Log.d("configeng",homedata.toString());
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+//                jsonObject.addProperty("ver",ver);
+                if (statusnya.equals("OK")) {
+                    loading.dismiss();
+//                    loading .setVisibility(View.GONE);
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    Log.d("rekping","success");
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    //// error message
+//                    loading .setVisibility(View.GONE);
+//                    if (MsessionExpired.equals("true")) {
+//                        Toast.makeText(Home.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+                    Toast.makeText(ListChat.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(ListChat.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading .setVisibility(View.GONE);
+                loading.dismiss();
+
+            }
+        });
+        Log.d("reqnotifnya",jsonObject.toString());
+    }
     public void loadchat(){
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                itemchat.clear();
+                itemchat3.clear();
                 if (dataSnapshot.exists()){
                     for(DataSnapshot ds: dataSnapshot.getChildren())
                     {
                         Itemchat fetchDatalist=ds.getValue(Itemchat.class);
                         fetchDatalist.setKey(ds.getKey());
-                        itemchat.add(fetchDatalist);
+                        itemchat3.add(fetchDatalist);
                     }
 
-                    adapterchat=new Adapterchat(ListChat.this, itemchat);
+                    adapterchat=new Adapterchat(ListChat.this, itemchat3);
                     recyclerView.setAdapter(adapterchat);
                     recyclerView.scrollToPosition(adapterchat.getItemCount()-1);
 //                recyclerView.scrollToPosition(adapterchat.getItemCount());
@@ -315,8 +690,8 @@ public class ListChat extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,int id) {
                         int position = 1;
 
-                        if (itemchat.toString().equals("[]")){
-                            Log.e("listkosong",itemchat.toString());
+                        if (itemchat3.toString().equals("[]")){
+                            Log.e("listkosong",itemchat3.toString());
 
 
                         }else {
@@ -523,25 +898,93 @@ public class ListChat extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(ListChat.this,DetailsFormActivity.class);
-        back.putExtra("name",name);
-        back.putExtra("id",fr);
-        back.putExtra("user",username);
-        back.putExtra("xhori", xhori);
-        back.putExtra("yverti", yverti);
-        back.putExtra("scrolbawah","sadadasd");
-        startActivity(back);
-        finish();
+        itemchat.clear();
+        Log.d("idnya",id);
+        if (id.equals("listchat")){
+            Intent back = new Intent(ListChat.this,LiveChatList.class);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }else{
+            if (ping==1){
+                Intent back = new Intent(ListChat.this,DetailsFormActivity.class);
+                back.putExtra("name",name);
+                back.putExtra("id",noreq);
+                back.putExtra("user",username);
+                back.putExtra("home", "homesa");
+                back.putExtra("xhori", xhori);
+                back.putExtra("yverti", yverti);
+                back.putExtra("scrolbawah","-");
+                startActivity(back);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                finish();
+            }else {
+                if (ping==2){
+//                    check.checknotif=1;
+                    Intent back = new Intent(ListChat.this,AddDetailFocView.class);
+                    back.putExtra("name",name);
+                    back.putExtra("id",sessionnya);
+                    back.putExtra("username",username);
+                    back.putExtra("home", "homesa");
+                    back.putExtra("xhori", xhori);
+                    back.putExtra("yverti", yverti);
+                    back.putExtra("scrolbawah","-");
+                    startActivity(back);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    finish();
+                }else {
+                    if (ping==3){
+                        Intent back = new Intent(ListChat.this,AddDetailsPoView.class);
+                        back.putExtra("name",name);
+                        back.putExtra("id",sessionnya);
+                        back.putExtra("username",username);
+                        back.putExtra("home", "homesa");
+                        back.putExtra("xhori", xhori);
+                        back.putExtra("yverti", yverti);
+                        back.putExtra("pdfyes", "no");
+                        back.putExtra("scrolbawah","-");
+                        startActivity(back);
+                        overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                        finish();
+                    }else {
+                        if (ping==4){
+                            Intent back = new Intent(ListChat.this,Dashboard.class);
+                            back.putExtra("name",name);
+                            back.putExtra("id",noreq);
+                            back.putExtra("username",username);
+                            back.putExtra("home", "homesa");
+                            back.putExtra("xhori", xhori);
+                            back.putExtra("yverti", yverti);
+                            back.putExtra("pdfyes", "no");
+                            back.putExtra("scrolbawah","-");
+                            startActivity(back);
+                            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                            finish();
+                        }
+                    }
+                }
+            }
+
+        }
+//        Intent back = new Intent(ListChat.this,DetailsFormActivity.class);
+//        back.putExtra("name",name);
+//        back.putExtra("id",noreq);
+//        back.putExtra("user",username);
+//        back.putExtra("xhori", xhori);
+//        back.putExtra("yverti", yverti);
+//        back.putExtra("scrolbawah","sadadasd");
+//        startActivity(back);
+//        finish();
     }
     public void sendnotifchat(){
 //        loading = ProgressDialog.show(DetailsFormActivity.this, "", getString(R.string.title_loading), true);
             JsonObject dataid = new JsonObject();
-            dataid.addProperty("id", noreq);
+            dataid.addProperty("id", sessionnya+"-"+modultrans+"-"+module);
 
             JsonObject notifikasidata = new JsonObject();
             notifikasidata.addProperty("title", noreq + "-" + name);
             notifikasidata.addProperty("body", message);
-            notifikasidata.addProperty("click_action", "ListChat");
+            notifikasidata.addProperty("click_action", "notifchat");
 
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("to", tokennya2.get(tokenpos));
@@ -555,7 +998,8 @@ public class ListChat extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     Log.d("tokenplusisze", String.valueOf(tokennya2.size()-1)+"=="+String.valueOf(tokenpos));
-                    if (tokennya2.size()-1==tokenpos){
+                    Log.d("tokenlist",tokennya2.get(tokenpos).toString());
+                    if (tokennya2.size()==tokenpos+1){
                         tokenpos =0;
                     }else {
                         tokenpos +=1;
@@ -585,4 +1029,309 @@ public class ListChat extends AppCompatActivity {
             Log.d("requestnotif", jsonObject.toString());
 
     }
+    public void reqnotif() {
+        loading = ProgressDialog.show(ListChat.this, "", "", true);
+//        loading .setVisibility(View.VISIBLE);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("liveChatID",idnotif);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.getlivechat(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                Log.d("configeng",homedata.toString());
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+//                jsonObject.addProperty("ver",ver);
+                if (statusnya.equals("OK")) {
+                    loading.dismiss();
+//                    loading .setVisibility(View.GONE);
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    JsonObject data2 = data.getAsJsonObject("details");
+                    if (data2.get("OthersFirebaseToken").toString().equals("null")){
+                        tokennya = "-";
+                    }else {
+                        tokennya2.clear();
+                        JsonArray tokeny = data2.getAsJsonArray("OthersFirebaseToken");
+                        for (int c = 0; c < tokeny.size(); ++c) {
+                            JsonObject assobj2 = tokeny.get(c).getAsJsonObject();
+                            tokennya2.add(assobj2.get("Token").getAsString());
+                        }
+
+                        Log.d("listToken", tokennya2.toString());
+                    }
+                    id="listchat";
+                    titlenya = data2.get("Title").getAsString();
+                    name = data2.get("UserName").getAsString();
+                    module = data2.get("Module").getAsString();
+                    String iduser = data2.get("UserID").getAsString();
+                    ModuleTransactionNo = data2.get("ModuleTransactionNo").getAsString();
+                    chatin = data2.get("AllowToChat").getAsBoolean();
+                    sessionnya = data2.get("LiveChatID").getAsString();
+                    databaseReference= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
+                    databaseReference3= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
+                    modultrans = ModuleTransactionNo;
+                    noreq=titlenya;
+                    Log.d("moduletrasn",name+"-"+noreq+"/"+iduser);
+                    if (modultrans.equals("")){
+                        mstnya.setVisibility(GONE);
+                    }else {
+                        mstnya.setText(Html.fromHtml("<u>"+getString(R.string.title_chatdetailst)+"</u>"));
+                        mstnya.setVisibility(View.VISIBLE);
+                    }
+                    if (chatin){
+                        mlayketk.setVisibility(View.VISIBLE);
+                    }else {
+                        mlayketk.setVisibility(GONE);
+                    }
+                    mfrnya.setText(titlenya);
+                    loadchat();
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    //// error message
+//                    loading .setVisibility(View.GONE);
+//                    if (MsessionExpired.equals("true")) {
+//                        Toast.makeText(Home.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+                    Toast.makeText(ListChat.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(ListChat.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading .setVisibility(View.GONE);
+                loading.dismiss();
+
+            }
+        });
+        Log.d("reqnotifnya",jsonObject.toString());
+    }
+    public void reqnotif2() {
+        loading = ProgressDialog.show(ListChat.this, "", "", true);
+//        loading .setVisibility(View.VISIBLE);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+//        jsonObject.addProperty("liveChatID",idnotif);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.getlivechatcs(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                Log.d("configeng",homedata.toString());
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+//                jsonObject.addProperty("ver",ver);
+                if (statusnya.equals("OK")) {
+                    loading.dismiss();
+//                    loading .setVisibility(View.GONE);
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    JsonObject data2 = data.getAsJsonObject("details");
+                    if (data2.get("OthersFirebaseToken").toString().equals("null")){
+                        tokennya = "-";
+                    }else {
+                        tokennya2.clear();
+                        JsonArray tokeny = data2.getAsJsonArray("OthersFirebaseToken");
+                        for (int c = 0; c < tokeny.size(); ++c) {
+                            JsonObject assobj2 = tokeny.get(c).getAsJsonObject();
+                            tokennya2.add(assobj2.get("Token").getAsString());
+                        }
+
+                        Log.d("listToken", tokennya2.toString());
+                    }
+                    id="cs";
+                    titlenya = data2.get("Title").getAsString();
+                    name = data2.get("UserName").getAsString();
+                    String iduser = data2.get("UserID").getAsString();
+                    module = data2.get("Module").getAsString();
+                    ModuleTransactionNo = data2.get("ModuleTransactionNo").getAsString();
+                    chatin = data2.get("AllowToChat").getAsBoolean();
+                    sessionnya = data2.get("LiveChatID").getAsString();
+                    databaseReference= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
+                    databaseReference3= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
+                    modultrans = ModuleTransactionNo;
+                    noreq=titlenya;
+                    Log.d("moduletrasn",name+"-"+noreq+"/"+iduser);
+                    if (modultrans.equals("")){
+                        mstnya.setVisibility(GONE);
+                    }else {
+                        if (module.equals("ServiceSupport")){
+//                            mstnya.setText(Html.fromHtml("<u>"+getString(R.string.title_detailchatst)+"</u>"));
+                            mstnya.setVisibility(View.VISIBLE);
+                            Log.d("moduletrasn",modultrans);
+                        }else {
+                            mstnya.setVisibility(GONE);
+                        }
+
+                    }
+                    if (chatin){
+                        mlayketk.setVisibility(View.VISIBLE);
+                    }else {
+                        mlayketk.setVisibility(GONE);
+                    }
+                    mfrnya.setText(titlenya);
+                    loadchat();
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    //// error message
+//                    loading .setVisibility(View.GONE);
+//                    if (MsessionExpired.equals("true")) {
+//                        Toast.makeText(Home.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+                    Toast.makeText(ListChat.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(ListChat.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading .setVisibility(View.GONE);
+                loading.dismiss();
+
+            }
+        });
+        Log.d("reqnotifnya",jsonObject.toString());
+    }
+    public void sesionid() {
+        if (MsessionExpired.equals("false")) {
+            if (MhaveToUpdate.equals("false")) {
+
+
+            }else {
+//                Intent gotoupdate = new Intent(Home.this, UpdateActivity.class);
+//                startActivity(gotoupdate);
+//                finish();
+            }
+
+        }else {
+            startActivity(new Intent(ListChat.this, LoginActivity.class));
+            finish();
+//            Toast.makeText(Home.this, getString(R.string.title_session_Expired),Toast.LENGTH_LONG).show();
+        }
+
+    }
+    public void getSessionId(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("SESSION_ID",MODE_PRIVATE);
+        sesionid_new = sharedPreferences.getString("session_id", "");
+        Log.d("session",sesionid_new);
+
+    }
+    public void cekInternet(){
+        /// cek internet apakah internet terhubung atau tidak
+        ConnectivityManager connectivityManager = (ConnectivityManager)ListChat.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)
+        {
+            internet = true;
+
+
+        }else {
+            internet=false;
+            Intent noconnection = new Intent(ListChat.this,NoInternet.class);
+            startActivity(noconnection);
+            finish();
+        }
+        //// pengecekan internet selesai
+
+    }
+    public void reqApi() {
+//        loading = ProgressDialog.show(this, "", "", true);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONconfig(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                Log.d("reqapi1",homedata.toString());
+
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+//                jsonObject.addProperty("ver",ver);
+                if (statusnya.equals("OK")) {
+
+//                    loading.dismiss();
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+
+//                    boolean clocksts = data.get("alreadyClockIn").getAsBoolean();
+
+//                    if (clocksts){
+//                        ;
+//                    }else {
+//                        startActivity(new Intent(ListChat.this, ClockInActivity.class));
+//                        finish();
+////                        mcheck.setVisibility(View.VISIBLE)
+//
+//                    }
+                }else {
+//                    mrefresh.setVisibility(View.VISIBLE);
+//                    mcheck.setVisibility(View.GONE);
+                    sesionid();
+                    //// error message
+//                    loading.dismiss();
+//                    if (MsessionExpired.equals("true")) {
+//                        Toast.makeText(Home.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+                    Toast.makeText(ListChat.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                mrefresh.setVisibility(View.VISIBLE);
+//                mcheck.setVisibility(View.GONE);
+                Toast.makeText(ListChat.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading.dismiss();
+            }
+        });
+        Log.d("reqapi",jsonObject.toString());
+
+    }
+
 }

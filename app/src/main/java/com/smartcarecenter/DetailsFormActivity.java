@@ -1,5 +1,6 @@
 package com.smartcarecenter;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
@@ -39,11 +40,25 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.smartcarecenter.Chat.Adapterchat;
+import com.smartcarecenter.Chat.Itemchat;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.historyfr.AdapterHistoryfr;
@@ -74,6 +89,19 @@ import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 
 public class DetailsFormActivity extends AppCompatActivity {
+    FirebaseAuth mAuth;
+    ArrayList<Itemchat> itemchat;
+    LinearLayout mdot;
+    TextView mnotif;
+    LinearLayout mchactclik;
+    String engas="";
+    int total1 = 0;
+    Itemchat itemchat2;
+    DatabaseReference databaseReference5;
+    public  static String mcustname="";
+    String tokennya = "-";
+    Adapterchat adapterchat;
+    public static String name="";
     public static LinearLayout mlayhistorifr;
     public static boolean inforeopen = true;
     public static EditText mreasonnya;
@@ -141,6 +169,9 @@ public class DetailsFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_form);
+        mnotif = findViewById(R.id.newnotif);
+        mdot = findViewById(R.id.dot);
+        mchactclik = findViewById(R.id.chatclik);
         mlayhistorifr = findViewById(R.id.layhistorifr);
         mscroll = findViewById(R.id.scrollnya);
         missu = findViewById(R.id.issucategroy);
@@ -466,7 +497,256 @@ public class DetailsFormActivity extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    //chat baru pasang
+                    if(data.get("liveChatShowButton").getAsBoolean()){
+                        mAuth = FirebaseAuth.getInstance();
+                        mAuth.createUserWithEmailAndPassword(data.get("liveChatUserID").getAsString(), "x8x8x8")
+                                .addOnCompleteListener(DetailsFormActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            Log.d("trag", "signInWithCustomToken:success");
+                                            FirebaseUser user = mAuth.getCurrentUser();
+//
+                                            loading.dismiss();
+                                        } else {
+                                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                                mAuth.signInWithEmailAndPassword(data.get("liveChatUserID").getAsString(), "x8x8x8")
+                                                        .addOnCompleteListener(DetailsFormActivity.this, new OnCompleteListener<AuthResult>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    // Sign in success, update UI with the signed-in user's information
+                                                                    Log.d("trag", "signInWithCustomToken:success");
+                                                                    FirebaseUser user = mAuth.getCurrentUser();
+//
+                                                                } else {
+                                                                    if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+//                                                                            Toast.makeText(DetailsST.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
+                                                                    }else {
 
+                                                                    }
+                                                                    // If sign in fails, display a message to the user.
+                                                                    Log.w("uii", "signInWithCustomToken:failure", task.getException());
+//                                    Toast.makeText(CustomAuthActivity.this, "Authentication failed.",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    updateUI(null);
+
+                                                                }
+                                                            }
+                                                        });
+//                                                    Toast.makeText(DetailsST.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
+                                                loading.dismiss();
+                                            }else {
+                                                loading.dismiss();
+                                            }
+                                            loading.dismiss();
+                                            // If sign in fails, display a message to the user.
+                                            Log.w("uii", "signInWithCustomToken:failure", task.getException());
+//                                    Toast.makeText(CustomAuthActivity.this, "Authentication failed.",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    updateUI(null);
+
+                                        }
+                                    }
+                                }).addOnFailureListener(DetailsFormActivity.this, new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                loading.dismiss();
+                                Log.d("gagal login",e.toString());
+                            }
+                        });
+
+                        itemchat = new ArrayList<Itemchat>();
+                        itemchat2 = new Itemchat();
+                        databaseReference5= FirebaseDatabase.getInstance().getReference().child("chat").child(data.get("liveChatID").getAsString()).child("listchat");
+                        //
+                        name=data.get("liveChatUserName").getAsString();
+                        mchactclik.setVisibility(View.VISIBLE);
+                        if (data.get("liveChatOthersFirebaseToken").toString().equals("null")){
+                            tokennya = "-";
+                        }else {
+                            tokennya2.clear();
+                            JsonArray tokeny = data.getAsJsonArray("liveChatOthersFirebaseToken");
+                            for (int c = 0; c < tokeny.size(); ++c) {
+                                JsonObject assobj2 = tokeny.get(c).getAsJsonObject();
+                                tokennya2.add(assobj2.get("Token").getAsString());
+                            }
+
+                            Log.d("listToken", tokennya2.toString());
+                        }
+                        databaseReference5.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                itemchat.clear();
+                                total1 = 0;
+                                if (dataSnapshot.exists()){
+                                    for(DataSnapshot ds: dataSnapshot.getChildren())
+                                    {
+                                        Itemchat fetchDatalist=ds.getValue(Itemchat.class);
+                                        fetchDatalist.setKey(ds.getKey());
+                                        itemchat.add(fetchDatalist);
+                                    }
+
+                                    adapterchat=new Adapterchat(DetailsFormActivity.this, itemchat);
+                                    for (int i = 0; i < itemchat.size(); i++) {
+                                        if (itemchat.get(i).getName().equals(name)){
+                                            mdot.setVisibility(View.GONE);
+                                        }else {
+
+                                            if (itemchat.get(i).getRead().equals("yes")){
+                                                mdot.setVisibility(View.GONE);
+                                            }else {
+                                                total1 +=1;
+                                                mdot.setVisibility(View.VISIBLE);
+                                                mnotif.setText(String.valueOf(total1));
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        engas = "";
+                    }else {
+                        mchactclik.setVisibility(View.GONE);
+
+                    }
+                    mchactclik.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            loading.show();
+//                            Window window = loading.getWindow();
+//                            window.setLayout(300, 300);
+                            Intent gotonews = new Intent(DetailsFormActivity.this, ListChat.class);
+                            gotonews.putExtra("name",data.get("liveChatUserName").getAsString());
+                            gotonews.putExtra("sessionnya",data.get("liveChatID").getAsString());
+                            gotonews.putExtra("chat",data.get("liveChatAllowToChat").getAsBoolean());
+                            gotonews.putExtra("titlenya",data.get("liveChatTitle").getAsString());
+                            gotonews.putExtra("user",username);
+                            gotonews.putExtra("id",noreq);
+                            gotonews.putExtra("moduletrans", "kosong");
+                            gotonews.putExtra("ping",1);
+                            gotonews.putExtra("liveChatRepor",data.get("liveChatReportWhenUserChat").getAsBoolean());
+                            gotonews.putExtra("page","detailst");
+                            gotonews.putExtra("tokennya",tokennya);
+                            gotonews.putExtra("engname", mcustname);
+                            gotonews.putExtra("nofr", mformRequestCd);
+                            startActivity(gotonews);
+                            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                            finish();
+                            /////
+
+                        }
+                    });
+//                    mchactclik.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            loading.show();
+////                            Window window = loading.getWindow();
+////                            window.setLayout(300, 300);
+//                            mAuth = FirebaseAuth.getInstance();
+//                            mAuth.createUserWithEmailAndPassword(data.get("liveChatUserID").getAsString(), "x8x8x8")
+//                                    .addOnCompleteListener(DetailsFormActivity.this, new OnCompleteListener<AuthResult>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<AuthResult> task) {
+//                                            if (task.isSuccessful()) {
+//                                                // Sign in success, update UI with the signed-in user's information
+//                                                Log.d("trag", "signInWithCustomToken:success");
+//                                                FirebaseUser user = mAuth.getCurrentUser();
+////                                                Toast.makeText(DetailsST.this,"hgjgh", Toast.LENGTH_SHORT).show();
+////                                    updateUI(user);
+//                                                Intent gotonews = new Intent(DetailsFormActivity.this, ListChat.class);
+//                                                gotonews.putExtra("name",data.get("liveChatUserName").getAsString());
+//                                                gotonews.putExtra("sessionnya",data.get("liveChatID").getAsString());
+//                                                gotonews.putExtra("chat",data.get("liveChatAllowToChat").getAsBoolean());
+//                                                gotonews.putExtra("titlenya",data.get("liveChatTitle").getAsString());
+//                                                gotonews.putExtra("user",username);
+//                                                gotonews.putExtra("id",noreq);
+//                                                gotonews.putExtra("tokennya",tokennya);
+//                                                gotonews.putExtra("engname", mcustname);
+//                                                gotonews.putExtra("nofr", mformRequestCd);
+//                                                startActivity(gotonews);
+//                                                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//                                                finish();
+//                                                loading.dismiss();
+//                                            } else {
+//                                                if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+//                                                    mAuth.signInWithEmailAndPassword(data.get("liveChatUserID").getAsString(), "x8x8x8")
+//                                                            .addOnCompleteListener(DetailsFormActivity.this, new OnCompleteListener<AuthResult>() {
+//                                                                @Override
+//                                                                public void onComplete(@NonNull Task<AuthResult> task) {
+//                                                                    if (task.isSuccessful()) {
+//                                                                        // Sign in success, update UI with the signed-in user's information
+//                                                                        Log.d("trag", "signInWithCustomToken:success");
+//                                                                        FirebaseUser user = mAuth.getCurrentUser();
+////                                                                        Toast.makeText(Chating.this,"hgjgh", Toast.LENGTH_SHORT).show();
+////                                    updateUI(user);
+//                                                                        Intent gotonews = new Intent(DetailsFormActivity.this, ListChat.class);
+//                                                                        gotonews.putExtra("name",data.get("liveChatUserName").getAsString());
+//                                                                        gotonews.putExtra("sessionnya",data.get("liveChatID").getAsString());
+//                                                                        gotonews.putExtra("chat",data.get("liveChatAllowToChat").getAsBoolean());
+//                                                                        gotonews.putExtra("titlenya",data.get("liveChatTitle").getAsString());
+//                                                                        gotonews.putExtra("user",username);
+//                                                                        gotonews.putExtra("id",noreq);
+//                                                                        gotonews.putExtra("tokennya",tokennya);
+//                                                                        gotonews.putExtra("engname", mcustname);
+//                                                                        gotonews.putExtra("nofr", mformRequestCd);
+//                                                                        startActivity(gotonews);
+//                                                                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//                                                                        finish();
+//                                                                        loading.dismiss();
+//                                                                    } else {
+//                                                                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+////                                                                            Toast.makeText(DetailsST.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
+//                                                                        }else {
+//
+//                                                                        }
+//                                                                        // If sign in fails, display a message to the user.
+//                                                                        Log.w("uii", "signInWithCustomToken:failure", task.getException());
+////                                    Toast.makeText(CustomAuthActivity.this, "Authentication failed.",
+////                                            Toast.LENGTH_SHORT).show();
+////                                    updateUI(null);
+//
+//                                                                    }
+//                                                                }
+//                                                            });
+////                                                    Toast.makeText(DetailsST.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
+//
+//                                                }else {
+//                                                    loading.dismiss();
+//                                                }
+////                                                loading.dismiss();
+//                                                // If sign in fails, display a message to the user.
+//                                                Log.w("uii", "signInWithCustomToken:failure", task.getException());
+////                                    Toast.makeText(CustomAuthActivity.this, "Authentication failed.",
+////                                            Toast.LENGTH_SHORT).show();
+////                                    updateUI(null);
+//
+//                                            }
+//                                        }
+//                                    }).addOnFailureListener(DetailsFormActivity.this, new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    loading.dismiss();
+//                                    Log.d("gagal login",e.toString());
+//                                }
+//                            });
+//
+//                            /////
+//
+//                        }
+//                    });
+                    /////
                     if(data.get("relatedFormRequestList").toString().equals("null")){
                             mlayhistorifr.setVisibility(View.GONE);
                     }else {

@@ -3,6 +3,7 @@
     <dimen name="height4">610dp</dimen>
     <dimen name="height5">760dp</dimen>
     <dimen name="height6">810dp</dimen>
+    <dimen name="height7">860dp</dimen>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->

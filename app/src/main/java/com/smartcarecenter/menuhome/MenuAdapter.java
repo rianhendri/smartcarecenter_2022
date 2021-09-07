@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +48,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.smartcarecenter.AddDetailFocView;
 import com.smartcarecenter.CategoryNews;
 import com.smartcarecenter.Dashboard;
 import com.smartcarecenter.FormActivity;
+import com.smartcarecenter.ListChat;
+import com.smartcarecenter.LiveChatList;
 import com.smartcarecenter.LoginActivity;
 import com.smartcarecenter.NewsActivity;
 import com.smartcarecenter.PurchaseMenu;
@@ -73,8 +77,19 @@ import static com.smartcarecenter.Dashboard.showaddfoc;
 import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
 import static com.smartcarecenter.Dashboard.list2;
+import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder> {
+    public static String module = "";
+    public static String moduletrans="null";
+    public static String name="";
+    public static String sessionnya="";
+    public static boolean chat=false;
+    public static String titlenya="";
+    public static String username="";
+    public static String id="";
+    public static boolean liveChatRepor=false;
+    int counter3 = 0;
     private LinearLayoutManager linearLayoutManager;
     Context context;
     ArrayList<MenuItem> myItem;
@@ -96,6 +111,8 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
 
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
+        String namemenu = myItem.get(i).getMenuname();
+
         if (myItem.get(i).getMenuname().equals((context.getString(R.string.title_News)))){
             if (news_new.equals("0")){
                 myviewholder.mdot.setVisibility(View.GONE);
@@ -104,14 +121,52 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 myviewholder.mnews_new.setText(news_new);
             }
         }
-
-        Picasso.with(context).load(myItem.get(i).getImg()).into(myviewholder.mimg_menu);
+        if (namemenu.equals("Live Chat List")){
+            if (counter3==0){
+                myviewholder.mdot.setVisibility(View.GONE);
+            }else {
+                myviewholder.mdot.setVisibility(View.VISIBLE);
+                myviewholder.mnews_new.setText(String.valueOf(counter3));
+            }
+        }
+        myviewholder.mimg_menu.setImageResource(myItem.get(i).getImg());
+//        Picasso.with(context).load(myItem.get(i).getImg()).into(myviewholder.mimg_menu);
         myviewholder.mnama_menu.setText(myItem.get(i).getMenuname());
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             @Override
             public void onClick(View v) {
                 String namemenu = myItem.get(i).getMenuname();
+                if (namemenu.equals("Chat With Support")){
+
+                    Intent gotonews = new Intent(context, ListChat.class);
+                    gotonews.putExtra("name",name);
+                    gotonews.putExtra("sessionnya",sessionnya);
+                    gotonews.putExtra("chat",chat);
+                    gotonews.putExtra("titlenya",titlenya);
+                    gotonews.putExtra("user",username);
+                    gotonews.putExtra("id",titlenya);
+                    gotonews.putExtra("ping",4);
+                    gotonews.putExtra("moduletrans", "kosong");
+                    gotonews.putExtra("module", module);
+                    gotonews.putExtra("liveChatRepor",liveChatRepor);
+                    gotonews.putExtra("page","detailst");
+                    context.startActivity(gotonews);
+                    ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//                    Log.d("module",myItem.get(i).getModule());
+                }
+                if (namemenu.equals("Live Chat List")){
+//                    myviewholder.mdot.setVisibility(View.GONE);
+                    Intent gotonews = new Intent(context, LiveChatList.class);
+                    gotonews.putExtra("home", "homes");
+
+//                    gotonews.putExtra("showaddform",showaddform);
+                    context.startActivity(gotonews);
+                    ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//                    Toast.makeText(context, "ticket", Toast.LENGTH_SHORT).show();
+                }
                 if (namemenu.equals(context.getString(R.string.title_ServiceSupport))){
                     Intent gotonews = new Intent(context, FormActivity.class);
                     gotonews.putExtra("showaddform",showaddform);
@@ -144,6 +199,8 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
 
                 }
                 if (namemenu.equals(context.getString(R.string.title_live_chat))){
+                    Log.d("whats",String.valueOf(installed)+"/"+String.valueOf(installed2));
+
                     if (installed) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                         builder.setTitle("Live Chat:");
@@ -184,7 +241,7 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                             AlertDialog dialog = builder.create();
                             dialog.show();
                         }else {
-                            Toast.makeText(context,"Whatsapp blum di instal", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"Whatsapp belum di instal", Toast.LENGTH_SHORT).show();
                         }
 
                     }

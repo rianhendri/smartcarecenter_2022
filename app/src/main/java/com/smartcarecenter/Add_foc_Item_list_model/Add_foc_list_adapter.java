@@ -149,6 +149,7 @@ extends RecyclerView.Adapter<Add_foc_list_adapter.Myviewholder> {
                 dialog.show();
             }
         });
+        Log.d("MaxSohnya",String.valueOf(addFoclistitem.get(i).getMaxSOH()));
         myviewholder.xadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

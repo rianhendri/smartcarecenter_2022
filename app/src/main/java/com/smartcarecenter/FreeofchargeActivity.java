@@ -17,6 +17,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -327,6 +328,7 @@ public class FreeofchargeActivity extends AppCompatActivity {
 
             }
         });
+        Log.d("reqfoc",jsonObject.toString());
     }
     public void loadSpin(){
         mfooterload.setVisibility(View.VISIBLE);

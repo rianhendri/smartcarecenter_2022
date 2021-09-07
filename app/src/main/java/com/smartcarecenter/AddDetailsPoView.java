@@ -1,5 +1,6 @@
 package com.smartcarecenter;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -37,7 +38,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -46,6 +52,8 @@ import com.smartcarecenter.Add_Foc_Request_view.Add_foc_req_adapterView;
 import com.smartcarecenter.Add_Foc_Request_view.Add_foc_req_itemView;
 import com.smartcarecenter.Add_Po_Rewuest_View.Add_po_req_adapterView;
 import com.smartcarecenter.Add_Po_Rewuest_View.Add_po_req_itemView;
+import com.smartcarecenter.Chat.Adapterchat;
+import com.smartcarecenter.Chat.Itemchat;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.smartcarecenter.messagecloud.check;
@@ -73,8 +81,20 @@ import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.ChargeableActivity.list2;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
+import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 public class AddDetailsPoView extends AppCompatActivity {
+    FirebaseAuth mAuth;
+    LinearLayout mdot;
+    TextView mnotif;
+    int total1 = 0;
+    public static String name="";
+    LinearLayout mchactclik;
+    String tokennya = "-";
+    ArrayList<Itemchat> itemchat;
+    Itemchat itemchat2;
+    DatabaseReference databaseReference5;
+    Adapterchat adapterchat;
     private static final int PERMISSION_CODE = 1000;
     String linkPo = "";
     boolean showprep = true;
@@ -130,6 +150,9 @@ public class AddDetailsPoView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_details_po_view);
         mpayment = findViewById(R.id.payment);
+        mchactclik = findViewById(R.id.chatclik);
+        mdot = findViewById(R.id.dot);
+        mnotif = findViewById(R.id.newnotif);
         mpayment2 = findViewById(R.id.payment2);
         mlistitem_foc = findViewById(R.id.listitemfoc);
         mdate = findViewById(R.id.datefoc);
@@ -470,6 +493,104 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    //chat baru pasang
+                    if(data.get("liveChatShowButton").getAsBoolean()){
+
+                        itemchat = new ArrayList<Itemchat>();
+                        itemchat2 = new Itemchat();
+                        databaseReference5= FirebaseDatabase.getInstance().getReference().child("chat").child(data.get("liveChatID").getAsString()).child("listchat");
+                        //
+                        name=data.get("liveChatUserName").getAsString();
+                        mchactclik.setVisibility(View.VISIBLE);
+
+                        if (data.get("liveChatOthersFirebaseToken").toString().equals("null")){
+                            tokennya = "-";
+                        }else {
+                            tokennya2.clear();
+                            JsonArray tokeny = data.getAsJsonArray("liveChatOthersFirebaseToken");
+                            for (int c = 0; c < tokeny.size(); ++c) {
+                                JsonObject assobj2 = tokeny.get(c).getAsJsonObject();
+                                tokennya2.add(assobj2.get("Token").getAsString());
+                            }
+
+                            Log.d("listToken", tokennya2.toString());
+                        }
+                        databaseReference5.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                itemchat.clear();
+                                total1 = 0;
+                                if (dataSnapshot.exists()){
+                                    for(DataSnapshot ds: dataSnapshot.getChildren())
+                                    {
+                                        Itemchat fetchDatalist=ds.getValue(Itemchat.class);
+                                        fetchDatalist.setKey(ds.getKey());
+                                        itemchat.add(fetchDatalist);
+                                    }
+
+                                    adapterchat=new Adapterchat(AddDetailsPoView.this, itemchat);
+                                    for (int i = 0; i < itemchat.size(); i++) {
+                                        if (itemchat.get(i).getName().equals(name)){
+                                            mdot.setVisibility(View.GONE);
+                                        }else {
+
+                                            if (itemchat.get(i).getRead().equals("yes")){
+                                                mdot.setVisibility(View.GONE);
+                                            }else {
+                                                total1 +=1;
+                                                mdot.setVisibility(View.VISIBLE);
+                                                mnotif.setText(String.valueOf(total1));
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+//                        engas = "";
+                    }else {
+                        mchactclik.setVisibility(View.GONE);
+
+                    }
+                    mchactclik.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+//                            loading.show();
+//                            Window window = loading.getWindow();
+//                            window.setLayout(300, 300);
+                            Intent gotonews = new Intent(AddDetailsPoView.this, ListChat.class);
+                            gotonews.putExtra("name",data.get("liveChatUserName").getAsString());
+                            gotonews.putExtra("sessionnya",data.get("liveChatID").getAsString());
+                            gotonews.putExtra("chat",data.get("liveChatAllowToChat").getAsBoolean());
+                            gotonews.putExtra("titlenya",data.get("liveChatTitle").getAsString());
+                            gotonews.putExtra("user",username);
+                            gotonews.putExtra("id",data.get("liveChatTitle").getAsString());
+                            gotonews.putExtra("pdfyes",mmustUpload);
+                            gotonews.putExtra("moduletrans", "kosong");
+                            gotonews.putExtra("ping",3);
+                            gotonews.putExtra("liveChatRepor",data.get("liveChatReportWhenUserChat").getAsBoolean());
+                            gotonews.putExtra("page","detailst");
+//                            gotonews.putExtra("tokennya",tokennya);
+//                            gotonews.putExtra("engname", mcustname);
+//                            gotonews.putExtra("nofr", mformRequestCd);
+                            startActivity(gotonews);
+                            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                            finish();
+                            /////
+                            Log.d("pingtrue",String.valueOf(data.get("liveChatReportWhenUserChat").getAsBoolean()));
+
+                        }
+                    });
+
+
                     if (data.get("showProcessPaymentButton").getAsBoolean()){
                         mpayment.setVisibility(VISIBLE);
                         mpayment.setText(data.get("ProcessPaymentButtonText").getAsString());
@@ -557,11 +678,11 @@ public class AddDetailsPoView extends AppCompatActivity {
                     String cancelshow = data.get("allowToCancel").toString();
                     if (cancelshow.equals("true")){
                         msend.setVisibility(View.VISIBLE);
-                        mchat.setVisibility(View.VISIBLE);
+                        mchat.setVisibility(View.GONE);
 
                     }else {
                         msend.setVisibility(View.GONE);
-                        mchat.setVisibility(View.VISIBLE);
+                        mchat.setVisibility(View.GONE);
                     }
 //                    mstartimpresi.setText(pressstart);
                     mno_order.setText(orderno);
@@ -618,6 +739,7 @@ public class AddDetailsPoView extends AppCompatActivity {
 
             }
         });
+        Log.d("getpoview",jsonObject.toString());
     }
     private void showDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
