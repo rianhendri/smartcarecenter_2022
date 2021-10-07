@@ -21,6 +21,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -29,6 +30,12 @@ import retrofit2.http.Part;
 public interface IRetrofit {
     @POST("api/FormRequest/ReopenCase")
     public Call<JsonObject> postRawJSONreopen(@Body JsonObject var1);
+    @POST("api/news/Read")
+    public Call<JsonObject> readnews(@Body JsonObject var1);
+    @POST("api/news/get")
+    public Call<JsonObject> loadnews(@Body JsonObject var1);
+    @GET("chat.json?auth=EGEEh1XOQyHdrTP8UZvedE79LBCH0mkmamZZOs0m")
+    public Call<JsonObject> getjsonchat();
 
     @POST("api/Notification/Read")
     public Call<JsonObject> Read(@Body JsonObject var1);
@@ -144,6 +151,9 @@ public interface IRetrofit {
 
     @POST("api/formRequest/PrepareNew")
     Call<JsonObject> prepform(@Body JsonObject locationPost);
+
+    @POST("api/LiveChat/PrepareChat")
+    public Call<JsonObject> preparechat(@Body JsonObject var1);
 
     @POST("api/Chargeable/PrepareNew")
     Call<JsonObject> prepcharge(@Body JsonObject locationPost);

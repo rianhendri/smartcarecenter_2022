@@ -68,7 +68,9 @@ public class NewsActivity extends AppCompatActivity {
     private LinearLayoutManager mlinear;
     DatabaseReference mlist_news;
     NestedScrollView mnested;
-    TextView mnonews, mcategory,msubcategory;
+   TextView mnonews, mcategory,msubcategory;
+    public static String subcat="";
+    public static String mcat="";
     NewsAdapter newsAdapter;
     ProgressDialog loading;
     int page = 1;
@@ -81,7 +83,7 @@ public class NewsActivity extends AppCompatActivity {
     public static String valuefilter = "-";
     List<String> listvalue = new ArrayList();
     List<String> listnamestatus = new ArrayList();
-    String cdsub = "";
+    public static String cdsub = "";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,8 @@ public class NewsActivity extends AppCompatActivity {
         if (bundle2 != null) {
             mcategory.setText(bundle2.getString("title"));
             msubcategory.setText(bundle2.getString("subtitle"));
+            subcat=bundle2.getString("subtitle");
+            mcat=bundle2.getString("title");
             cdsub = bundle2.getString("subcd");
             titlecategory=bundle2.getString("subtitle");
 
@@ -260,15 +264,15 @@ public class NewsActivity extends AppCompatActivity {
                     newsAdapter = new NewsAdapter(NewsActivity.this, list2);
                     layoutnews.setAdapter(newsAdapter);
                     layoutnews.setVisibility(View.VISIBLE);
-                    loading.dismiss();
+//                    loading.dismiss();
                     if (totalpage == 1) {
-                        loading.dismiss();
+//                        loading.dismiss();
                     }
                     if (totalpage == 0) {
-                        loading.dismiss();
+//                        loading.dismiss();
                     } else if (list2 != null) {
                         list2.size();
-                        loading.dismiss();
+//                        loading.dismiss();
                     }
 //                    loading.dismiss();
 //                    page++;

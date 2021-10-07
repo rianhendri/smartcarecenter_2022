@@ -65,6 +65,10 @@ import java.util.Date;
 import java.util.Locale;
 
 import static com.smartcarecenter.Dashboard.installed;
+import static com.smartcarecenter.NewsActivity.cdsub;
+import static com.smartcarecenter.NewsActivity.mcat;
+
+import static com.smartcarecenter.NewsActivity.subcat;
 
 public class NewsAdapter
 extends RecyclerView.Adapter<NewsAdapter.Myviewholder> {
@@ -107,6 +111,7 @@ extends RecyclerView.Adapter<NewsAdapter.Myviewholder> {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
         try {
             newdate = simpleDateFormat2.format(simpleDateFormat.parse(string2));
             System.out.println(newdate);
@@ -127,6 +132,10 @@ extends RecyclerView.Adapter<NewsAdapter.Myviewholder> {
                 intent.putExtra("title", (myItem.get(i).getTitle()));
                 intent.putExtra("date", (myviewholder.mdate.getText().toString()));
                 intent.putExtra("content", (myItem.get(i)).getContent());
+                intent.putExtra("newscd", (myItem.get(i)).getNewsCd());
+                intent.putExtra("subCategoryCd", (cdsub));
+                intent.putExtra("title", (subcat));
+                intent.putExtra("subtitle", (mcat));
                 context.startActivity(intent);
                 ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 ((Activity)context).finish();

@@ -20,7 +20,7 @@ public class ListLiveChatItem {
     }
 
 
-    public ListLiveChatItem(String titleInList, String module, String moduleTransactionNo, String liveChatID, boolean allowToChat, String title, String userID, String datea, String time, String details, String userName, ArrayList<TokenItem> othersFirebaseToken) {
+    public ListLiveChatItem(String titleInList, String module, String moduleTransactionNo, String liveChatID, boolean allowToChat, String title, String userID, String datea, String time, String details, String userName, String read, String pengirim, ArrayList<TokenItem> othersFirebaseToken) {
         TitleInList = titleInList;
         Module = module;
         ModuleTransactionNo = moduleTransactionNo;
@@ -32,6 +32,8 @@ public class ListLiveChatItem {
         Time = time;
         this.details = details;
         UserName = userName;
+        Read = read;
+        Pengirim = pengirim;
         OthersFirebaseToken = othersFirebaseToken;
     }
 
@@ -123,6 +125,22 @@ public class ListLiveChatItem {
         UserName = userName;
     }
 
+    public String getRead() {
+        return Read;
+    }
+
+    public void setRead(String read) {
+        Read = read;
+    }
+
+    public String getPengirim() {
+        return Pengirim;
+    }
+
+    public void setPengirim(String pengirim) {
+        Pengirim = pengirim;
+    }
+
     public ArrayList<TokenItem> getOthersFirebaseToken() {
         return OthersFirebaseToken;
     }
@@ -164,6 +182,11 @@ public class ListLiveChatItem {
     @Expose
     @SerializedName("UserName")
     private String UserName;
+    @SerializedName("Read")
+    private String Read;
+    @Expose
+    @SerializedName("Pengirim")
+    private String Pengirim;
     @Expose
     @SerializedName("OthersFirebaseToken")
         private ArrayList<TokenItem> OthersFirebaseToken = null;

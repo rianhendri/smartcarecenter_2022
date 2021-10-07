@@ -38,6 +38,7 @@ public class ServiceGenerator {
 
     public static String baseurl= "https://api.smartcarecenter.id/";
     public static String fcmbase= "https://fcm.googleapis.com/";
+    public static String getchatnya= "https://smartcare-7f57f.firebaseio.com/";
     public static String ver = BuildConfig.VERSION_NAME;
 //    private static OkHttpClient httpClient = new OkHttpClient().newBuilder()
 //                                .connectTimeout(100, TimeUnit.SECONDS)

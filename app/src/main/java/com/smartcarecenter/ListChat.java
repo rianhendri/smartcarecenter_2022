@@ -18,6 +18,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -25,12 +27,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +79,11 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.fcmbase;
 import static com.smartcarecenter.messagecloud.check.tokennya2;
 import static com.smartcarecenter.LiveChatList.itemchat;
 public class ListChat extends AppCompatActivity {
+    //note prepare
+    LinearLayout mlaypreparenote;
+    TextView mmessageprepare;
+    String colorbacground="";
+    String colortextnya="";
     String mustupload = "";
     int ping=0;
     String nofr = "";
@@ -138,14 +147,21 @@ public class ListChat extends AppCompatActivity {
     private APIService apiService;
     int PERMISSION_CODE = 100;
 
+    ProgressBar mloadingchat;
     String mimeType="";
     String mimeType2="-";
     int tokenpos=0;
+    LinearLayout mmnodatas;
+
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_chat);
+        mlaypreparenote = findViewById(R.id.backgroundalert);
+        mmnodatas = findViewById(R.id.nodatas);
+        mmessageprepare = findViewById(R.id.textalert);
+        mloadingchat = findViewById(R.id.loadingchat);
         mfrnya = findViewById(R.id.frnya);
         mstnya = findViewById(R.id.stnya);
         mpaperclip = findViewById(R.id.paperclip);
@@ -193,6 +209,7 @@ public class ListChat extends AppCompatActivity {
 
             }
         }
+        mloadingchat.setVisibility(View.VISIBLE);
         Log.d("notifnyaas", sessionnya+"-"+modultrans+"-"+module+"/"+sessionnya);
         getShowid();
         reqApi();
@@ -216,6 +233,7 @@ public class ListChat extends AppCompatActivity {
         }
         if (chatin){
             mlayketk.setVisibility(View.VISIBLE);
+            checkpreparechat();
         }else {
             mlayketk.setVisibility(GONE);
         }
@@ -268,7 +286,7 @@ public class ListChat extends AppCompatActivity {
                 }else {
                     mback.setVisibility(View.VISIBLE);
                     mdelcop.setVisibility(View.GONE);
-                    String date = new SimpleDateFormat("d MMM yyyy", Locale.getDefault()).format(new Date());
+                    String date = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH).format(new Date());
                     getShowid();
                     if (showid.equals(date)){
                         show="no";
@@ -378,6 +396,85 @@ public class ListChat extends AppCompatActivity {
 
         }
     }
+    public void  checkpreparechat(){
+        loading = ProgressDialog.show(ListChat.this, "", "", true);
+//        loading .setVisibility(View.VISIBLE);
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.preparechat(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                Log.d("configeng",homedata.toString());
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+//                jsonObject.addProperty("ver",ver);
+                if (statusnya.equals("OK")) {
+                    loading.dismiss();
+//                    loading .setVisibility(View.GONE);
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    if (data.get("showMessage").getAsBoolean()){
+//                        data.get("showMessage").getAsBoolean()
+                        String text = data.get("messageText").getAsString();
+                        String textcolor = data.get("messageTextColor").getAsString();
+                        String bgcolor = data.get("messageBackgroundColor").getAsString();
+//                        String text = "test text test texttest texttest texttest texttest texttest texttest text";
+//                        String bgcolor = "ed6a24";
+//                        String textcolor = "ffffff";
+                        GradientDrawable shape =  new GradientDrawable();
+                        shape.setCornerRadius( 15 );
+                        shape.setColor(Color.parseColor("#"+bgcolor));
+
+                        mlaypreparenote.setVisibility(View.VISIBLE);
+                        mmessageprepare.setTextColor(Color.parseColor("#"+textcolor));
+                        mlaypreparenote.setBackground(shape);
+                        if (Build.VERSION.SDK_INT >= 24) {
+                            mmessageprepare.setText((CharSequence) Html.fromHtml((String)text, Html.FROM_HTML_MODE_COMPACT));
+                            mmessageprepare.setMovementMethod(LinkMovementMethod.getInstance());
+                        } else {
+                            mmessageprepare.setText((CharSequence)Html.fromHtml((String)text));
+                            mmessageprepare.setMovementMethod(LinkMovementMethod.getInstance());
+                        }
+                    }else {
+                        mlaypreparenote.setVisibility(GONE);
+                    }
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    //// error message
+//                    loading .setVisibility(View.GONE);
+//                    if (MsessionExpired.equals("true")) {
+//                        Toast.makeText(Home.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+                    Toast.makeText(ListChat.this, errornya.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(ListChat.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading .setVisibility(View.GONE);
+                loading.dismiss();
+
+            }
+        });
+        Log.d("reqpreparechat",jsonObject.toString());
+    }
     public void sendDb(){
 //        int posinya = 0;
 //        if ((addFoclistreq!=null)){
@@ -385,8 +482,8 @@ public class ListChat extends AppCompatActivity {
 //        }else{
 //            posinya = addFoclistreq.size()+1;
 //        }
-        String date = new SimpleDateFormat("d MMM yyyy", Locale.getDefault()).format(new Date());
-        String time = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+        String date = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH).format(new Date());
+        String time = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date());
         itemchat2.setDate(date);
         itemchat2.setName(name);
         itemchat2.setShowDate(show);
@@ -657,6 +754,11 @@ public class ListChat extends AppCompatActivity {
                     recyclerView.setAdapter(adapterchat);
                     recyclerView.scrollToPosition(adapterchat.getItemCount()-1);
 //                recyclerView.scrollToPosition(adapterchat.getItemCount());
+                    mloadingchat.setVisibility(GONE);
+                    mmnodatas.setVisibility(GONE);
+                }else {
+                    mmnodatas.setVisibility(View.VISIBLE);
+                    mloadingchat.setVisibility(GONE);
                 }
 
 //                Log.d("posi",String.valueOf(recyclerView.getAdapter().getItemCount()));
@@ -664,6 +766,8 @@ public class ListChat extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                mloadingchat.setVisibility(GONE);
+                Toast.makeText(ListChat.this, databaseError.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -705,8 +809,8 @@ public class ListChat extends AppCompatActivity {
                         showurl="yes";
                         message = imagefile.getName();
                         myuri = pdfPath;
-                        String date = new SimpleDateFormat("d MMM yyyy", Locale.getDefault()).format(new Date());
-                        String time = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+                        String date = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH).format(new Date());
+                        String time = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date());
                         itemchat2.setDate(date);
                         itemchat2.setName(name);
                         itemchat2.setShowDate(show);

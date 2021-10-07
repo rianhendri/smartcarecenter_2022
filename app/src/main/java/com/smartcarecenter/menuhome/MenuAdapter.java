@@ -67,7 +67,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import java.util.ArrayList;
 
-import static com.smartcarecenter.Dashboard.addFormAdapterAdapter;
+//import static com.smartcarecenter.Dashboard.addFormAdapterAdapter;
 import static com.smartcarecenter.Dashboard.installed;
 import static com.smartcarecenter.Dashboard.installed2;
 import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
@@ -76,10 +76,13 @@ import static com.smartcarecenter.Dashboard.news_new;
 import static com.smartcarecenter.Dashboard.showaddfoc;
 import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
-import static com.smartcarecenter.Dashboard.list2;
+//import static com.smartcarecenter.Dashboard.list2;
 import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder> {
+    public static Integer counter = 0;
+    public static Integer counter2 = 0;
+    public static Integer countSC = 0;
     public static String module = "";
     public static String moduletrans="null";
     public static String name="";
@@ -89,7 +92,7 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
     public static String username="";
     public static String id="";
     public static boolean liveChatRepor=false;
-    int counter3 = 0;
+    public static int counter3 = 0;
     private LinearLayoutManager linearLayoutManager;
     Context context;
     ArrayList<MenuItem> myItem;
@@ -120,6 +123,16 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 myviewholder.mdot.setVisibility(View.VISIBLE);
                 myviewholder.mnews_new.setText(news_new);
             }
+        }
+        if (namemenu.equals("Chat With Support")){
+            if (countSC==0){
+                myviewholder.mdot.setVisibility(View.GONE);
+            }else {
+                myviewholder.mdot.setVisibility(View.VISIBLE);
+                myviewholder.mnews_new.setText(String.valueOf(countSC));
+            }
+
+
         }
         if (namemenu.equals("Live Chat List")){
             if (counter3==0){
@@ -198,55 +211,55 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                     ((Activity)context).finish();
 
                 }
-                if (namemenu.equals(context.getString(R.string.title_live_chat))){
-                    Log.d("whats",String.valueOf(installed)+"/"+String.valueOf(installed2));
-
-                    if (installed) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                        builder.setTitle("Live Chat:");
-                        // set the custom layout
-                        final View customLayout = LayoutInflater.from(context).inflate(R.layout.chatdialoghome, null);
-                        mchatdialog = (RecyclerView) customLayout.findViewById(R.id.chatdialog);
-                        linearLayoutManager = new LinearLayoutManager(context, LinearLayout.VERTICAL,false);
-//        linearLayoutManager.setReverseLayout(true);
-//        linearLayoutManager.setStackFromEnd(true);
-                        mchatdialog.setLayoutManager(linearLayoutManager);
-                        mchatdialog.setHasFixedSize(true);
-                        addFormAdapterAdapter = new ChatAdapter(context, list2);
-                        mchatdialog.setAdapter(addFormAdapterAdapter);
-                        builder.setView(customLayout);
-                        // add a button
-
-                        // create and show the alert dialog
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                    }else {
-                        if (installed2){
-                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                            builder.setTitle("Live Chat:");
-                            // set the custom layout
-                            final View customLayout = LayoutInflater.from(context).inflate(R.layout.chatdialoghome, null);
-                            mchatdialog = (RecyclerView) customLayout.findViewById(R.id.chatdialog);
-                            linearLayoutManager = new LinearLayoutManager(context, LinearLayout.VERTICAL,false);
-//        linearLayoutManager.setReverseLayout(true);
-//        linearLayoutManager.setStackFromEnd(true);
-                            mchatdialog.setLayoutManager(linearLayoutManager);
-                            mchatdialog.setHasFixedSize(true);
-                            addFormAdapterAdapter = new ChatAdapter(context, list2);
-                            mchatdialog.setAdapter(addFormAdapterAdapter);
-                            builder.setView(customLayout);
-                            // add a button
-
-                            // create and show the alert dialog
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-                        }else {
-                            Toast.makeText(context,"Whatsapp belum di instal", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                }
+//                if (namemenu.equals(context.getString(R.string.title_live_chat))){
+//                    Log.d("whats",String.valueOf(installed)+"/"+String.valueOf(installed2));
+//
+//                    if (installed) {
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//                        builder.setTitle("Live Chat:");
+//                        // set the custom layout
+//                        final View customLayout = LayoutInflater.from(context).inflate(R.layout.chatdialoghome, null);
+//                        mchatdialog = (RecyclerView) customLayout.findViewById(R.id.chatdialog);
+//                        linearLayoutManager = new LinearLayoutManager(context, LinearLayout.VERTICAL,false);
+////        linearLayoutManager.setReverseLayout(true);
+////        linearLayoutManager.setStackFromEnd(true);
+//                        mchatdialog.setLayoutManager(linearLayoutManager);
+//                        mchatdialog.setHasFixedSize(true);
+//                        addFormAdapterAdapter = new ChatAdapter(context, list2);
+//                        mchatdialog.setAdapter(addFormAdapterAdapter);
+//                        builder.setView(customLayout);
+//                        // add a button
+//
+//                        // create and show the alert dialog
+//                        AlertDialog dialog = builder.create();
+//                        dialog.show();
+//                    }else {
+//                        if (installed2){
+//                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//                            builder.setTitle("Live Chat:");
+//                            // set the custom layout
+//                            final View customLayout = LayoutInflater.from(context).inflate(R.layout.chatdialoghome, null);
+//                            mchatdialog = (RecyclerView) customLayout.findViewById(R.id.chatdialog);
+//                            linearLayoutManager = new LinearLayoutManager(context, LinearLayout.VERTICAL,false);
+////        linearLayoutManager.setReverseLayout(true);
+////        linearLayoutManager.setStackFromEnd(true);
+//                            mchatdialog.setLayoutManager(linearLayoutManager);
+//                            mchatdialog.setHasFixedSize(true);
+//                            addFormAdapterAdapter = new ChatAdapter(context, list2);
+//                            mchatdialog.setAdapter(addFormAdapterAdapter);
+//                            builder.setView(customLayout);
+//                            // add a button
+//
+//                            // create and show the alert dialog
+//                            AlertDialog dialog = builder.create();
+//                            dialog.show();
+//                        }else {
+//                            Toast.makeText(context,"Whatsapp belum di instal", Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                    }
+//
+//                }
                 if (namemenu.equals(context.getString(R.string.title_Setting))){
                     Intent gotosetting = new Intent(context, SettingActivity.class);
                     context.startActivity(gotosetting);

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListChat"
+    android:gravity="center"
     android:orientation="vertical">
 
     <LinearLayout
@@ -84,7 +85,54 @@
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/loadingchat"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"/>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/nodatas"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/seguisb"
+            android:textSize="13sp"
+            android:textColor="@color/darkgrey"
+            android:text="No Data"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:visibility="gone"
+        android:id="@+id/backgroundalert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="6dp"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            android:id="@+id/textalert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/segoeui"
+            android:paddingLeft="4dp"
+            android:text="asdasd sd asd as das as das sdas das das das das das das das dsa da sdasdas d"
+            android:gravity="center"
 
+            android:textColor="@color/dwhite"
+            android:textSize="12sp" />
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lischat"
         android:visibility="visible"

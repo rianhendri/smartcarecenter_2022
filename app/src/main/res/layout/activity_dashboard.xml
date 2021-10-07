@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@color/dwhite"
     tools:context=".Dashboard">
     <LinearLayout
         android:orientation="horizontal"
@@ -166,9 +167,12 @@
                 android:paddingBottom="12dp"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
-                android:layout_margin="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="12dp"
+
                 android:gravity="center_vertical"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="0dp"
                 android:background="@color/colorPrimaryDark">
                 <TextView
                     android:id="@+id/textalert"
@@ -180,6 +184,36 @@
                     android:textColor="@color/dwhite"
                     android:textSize="12sp" />
 
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/layoutrunning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/bgwhitecorner"
+                android:elevation="0dp"
+                android:padding="8dp">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_megaphone"/>
+                <TextView
+                    android:id="@+id/runningtext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoeui"
+                    android:textColor="@color/black"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    />
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/menu"

@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/seguisb"
-                    android:text="asdasd"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="20sp" />
                 <LinearLayout
@@ -78,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/segoeui"
                         android:textColor="@color/colorPrimary"
-                        android:text="asdasd"
+                        android:text=""
                         android:autoLink="all"/>
                     <View
                         android:id="@+id/underline"
@@ -92,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="adasdasd"
+                    android:text=""
                     android:layout_marginTop="12dp"
                     android:textColor="@color/black"
                     android:textSize="15sp" />

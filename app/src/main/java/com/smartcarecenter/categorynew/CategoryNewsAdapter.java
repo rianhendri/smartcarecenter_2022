@@ -58,18 +58,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import static com.smartcarecenter.Dashboard.addFormAdapterAdapter;
-import static com.smartcarecenter.Dashboard.installed;
-import static com.smartcarecenter.Dashboard.installed2;
-import static com.smartcarecenter.Dashboard.list2;
-import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
-import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
-import static com.smartcarecenter.Dashboard.news_new;
-import static com.smartcarecenter.Dashboard.showaddfoc;
-import static com.smartcarecenter.Dashboard.showaddform;
-import static com.smartcarecenter.Dashboard.showaddpo;
-import static com.smartcarecenter.CategoryNews.menuItemlist;
-import static com.smartcarecenter.DetailsSurvey.surveylistanswer;
+//import static com.smartcarecenter.Dashboard.addFormAdapterAdapter;
+//import static com.smartcarecenter.Dashboard.installed;
+//import static com.smartcarecenter.Dashboard.installed2;
+//import static com.smartcarecenter.Dashboard.list2;
+//import static com.smartcarecenter.Dashboard.mshowPurchaseOrderFOC;
+//import static com.smartcarecenter.Dashboard.mshowPurchaseOrderPO;
+//import static com.smartcarecenter.Dashboard.news_new;
+//import static com.smartcarecenter.Dashboard.showaddfoc;
+//import static com.smartcarecenter.Dashboard.showaddform;
+//import static com.smartcarecenter.Dashboard.showaddpo;
+//import static com.smartcarecenter.CategoryNews.menuItemlist;
+//import static com.smartcarecenter.DetailsSurvey.surveylistanswer;
 import static com.smartcarecenter.CategoryNews.listnews;
 import static com.smartcarecenter.SubCategoryNews.listnews2;
 
