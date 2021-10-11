@@ -554,7 +554,7 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
             myviewholder.mimg.setVisibility(View.VISIBLE);
         }
         //showdate
-        String date = new SimpleDateFormat("d MMM yyyy", Locale.getDefault()).format(new Date());
+        String date = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH).format(new Date());
         if (date.equals(addFoclistreq.get(i).getDate())){
             SharedPreferences sharedPreferences = context.getSharedPreferences("SHOW_ID", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();

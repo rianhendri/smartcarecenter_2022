@@ -261,26 +261,26 @@ public class ListChat extends AppCompatActivity {
                 showurl="-";
                 myuri = "-";
 //                ping();
-                if (liveChatRepor){
-                    if (ping==1){
-                        ping();
-                    }else {
-                        if (ping==2){
-                            pingfoc();
-                        }else {
-                            if (ping==3){
-                                pingcha();
-                            }else {
-                                if (ping==4){
-                                    pingcs();
-                                }
-                            }
-                        }
-                    }
-
-                }else {
-
-                }
+//                if (liveChatRepor){
+//                    if (ping==1){
+//                        ping();
+//                    }else {
+//                        if (ping==2){
+//                            pingfoc();
+//                        }else {
+//                            if (ping==3){
+//                                pingcha();
+//                            }else {
+//                                if (ping==4){
+//                                    pingcs();
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                }else {
+//
+//                }
                 if (sendtext.length()==0){
 
                 }else {
@@ -501,7 +501,26 @@ public class ListChat extends AppCompatActivity {
         databaseReference2.child("chat").child(sessionnya).child("listchat").push().setValue(itemchat2).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                if (liveChatRepor){
+                    if (ping==1){
+                        ping();
+                    }else {
+                        if (ping==2){
+                            pingfoc();
+                        }else {
+                            if (ping==3){
+                                pingcha();
+                            }else {
+                                if (ping==4){
+                                    pingcs();
+                                }
+                            }
+                        }
+                    }
 
+                }else {
+
+                }
                 sendnotifchat();
 
             }
@@ -601,7 +620,7 @@ public class ListChat extends AppCompatActivity {
 //                    loading .setVisibility(View.GONE);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
-                    Log.d("rekping","success");
+                    Log.d("rekping","successfoc");
                 }else {
                     sesionid();
                     loading.dismiss();
@@ -657,7 +676,7 @@ public class ListChat extends AppCompatActivity {
 //                    loading .setVisibility(View.GONE);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
-                    Log.d("rekping","success");
+                    Log.d("rekping","successcharge");
                 }else {
                     sesionid();
                     loading.dismiss();
@@ -713,7 +732,7 @@ public class ListChat extends AppCompatActivity {
 //                    loading .setVisibility(View.GONE);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
-                    Log.d("rekping","success");
+                    Log.d("rekping","successSupport");
                 }else {
                     sesionid();
                     loading.dismiss();
@@ -829,6 +848,26 @@ public class ListChat extends AppCompatActivity {
                         databaseReference2.child("chat").child(sessionnya).child("listchat").push().setValue(itemchat2).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+                                if (liveChatRepor){
+                                    if (ping==1){
+                                        ping();
+                                    }else {
+                                        if (ping==2){
+                                            pingfoc();
+                                        }else {
+                                            if (ping==3){
+                                                pingcha();
+                                            }else {
+                                                if (ping==4){
+                                                    pingcs();
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                }else {
+
+                                }
                                 sendnotifchat();
                                 int posi = addFoclistreq.size()-1;
                                 InputStream stream = null;

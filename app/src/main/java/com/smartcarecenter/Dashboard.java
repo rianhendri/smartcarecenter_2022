@@ -353,6 +353,7 @@ public class Dashboard extends AppCompatActivity {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if (user != null) {
                         //User is Logged in
+                        Log.d("user2","nggak kosong");
                     }else{
                         //No User is Logged in
                         reglogauth();
