@@ -9,7 +9,7 @@ android {
         applicationId "com.smartcarecenter"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 41
+        versionCode 47
         versionName "1.4.6"
         multiDexEnabled true
         useLibrary 'org.apache.http.legacy'

@@ -91,10 +91,11 @@
         android:layout_width="30dp"
         android:layout_height="match_parent"/>
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/nodatas"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:gravity="center">
         <TextView
             android:layout_width="wrap_content"
