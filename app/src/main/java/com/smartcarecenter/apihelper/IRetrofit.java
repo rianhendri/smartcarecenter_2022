@@ -51,7 +51,8 @@ public interface IRetrofit {
 
     @POST("api/Account/ChangePassword")
     public Call<JsonObject> postRawJSONchangepassword(@Body JsonObject var1);
-
+    @POST("api/DOKU/NotifyCreditCard")
+    public Call<JsonObject> credtcard(@Body JsonObject var1);
     @POST("api/Account/Config")
     public Call<JsonObject> postRawJSONconfig(@Body JsonObject var1);
     @POST("api/formrequest/FlagLiveChat")

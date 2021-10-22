@@ -94,6 +94,7 @@ public class PaymentAct extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     public static ArrayList<PaybankItem> list2;
     JsonArray listformreq;
+    String items="";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,7 @@ public class PaymentAct extends AppCompatActivity {
             guid = bundle2.getString("guid");;
             username = bundle2.getString("username");;
             mmustUpload = bundle2.getString("pdfyes");
+            items = bundle2.getString("items");
             Log.d("noorder",noOrder);
 
         }
@@ -192,6 +194,7 @@ public class PaymentAct extends AppCompatActivity {
                 gotoaddfoc.putExtra("ss","Payment Failed");
                 gotoaddfoc.putExtra("paycd","CREDITCARD");
                 gotoaddfoc.putExtra("method","Credit Card");
+                gotoaddfoc.putExtra("items",items);
                 startActivity(gotoaddfoc);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();

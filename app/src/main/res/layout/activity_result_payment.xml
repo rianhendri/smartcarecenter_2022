@@ -64,7 +64,7 @@
             android:gravity="center"
             android:textSize="22sp"
             android:fontFamily="@font/seguisb"
-            android:text="Pembayaran Berhasil" />
+            android:text="-" />
         <TextView
             android:id="@+id/suces"
             android:layout_width="wrap_content"
@@ -78,10 +78,10 @@
             android:fontFamily="@font/seguisb"
             android:text=""
             android:layout_marginBottom="40dp"/>
-         <EditText
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:id="@+id/token"/>
+<!--         <EditText-->
+<!--             android:layout_width="match_parent"-->
+<!--             android:layout_height="wrap_content"-->
+<!--             android:id="@+id/token"/>-->
 
 
         <TextView
@@ -96,6 +96,6 @@
             android:elevation="2dp"
             android:background="@drawable/bgwhite_cornerblack"
             android:text="Back"
-            android:textColor="#D32F2F" />
+            android:textColor="#656565" />
     </LinearLayout>
 </LinearLayout>

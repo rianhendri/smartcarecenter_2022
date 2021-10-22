@@ -82,7 +82,10 @@ public class ServiceGenerator {
             // Create an ssl socket factory with our all-trusting manager
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                    .connectTimeout(300, TimeUnit.SECONDS)
+                                .readTimeout(300, TimeUnit.SECONDS)
+                                .writeTimeout(300, TimeUnit.SECONDS);
             builder.sslSocketFactory(sslSocketFactory);
             builder.hostnameVerifier(new HostnameVerifier() {
                 @Override

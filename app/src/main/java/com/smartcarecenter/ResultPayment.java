@@ -3,6 +3,7 @@ package com.smartcarecenter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ public class ResultPayment extends AppCompatActivity {
     String username = "";
     String mmustUpload = "";
     String mcc= "";
+    String mssge= "";
     EditText mtoken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class ResultPayment extends AppCompatActivity {
         mtitle = findViewById(R.id.title);
         micon = findViewById(R.id.imageVar);
         mketerangan = findViewById(R.id.suces);
-        mtoken = findViewById(R.id.token);
+//        mtoken = findViewById(R.id.token);
 
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
@@ -49,15 +51,18 @@ public class ResultPayment extends AppCompatActivity {
             mcc= bundle2.getString("cc");
             mtitle.setText(bundle2.getString("cc"));
             mresult.setText(bundle2.getString("ss"));
+            mssge= bundle2.getString("message");
             if (mcc.equals("Success")){
                 Picasso.with(ResultPayment.this).load(R.drawable.ico_payment_success).into(micon);
-                mketerangan.setText("barang yg diminta akan di antar sesuai jadwal delivery");
+                mketerangan.setText(mssge);
                 mback.setText(getString(R.string.title_back));
+//                mback.setTextColor(Color.parseColor("#393939"));
             }else{
-                mketerangan.setText("Pembayaran gagal mohon periksa kembali data anda dengan benar!");
+                mketerangan.setText(mssge);
                 mback.setText(getString(R.string.title_btngagal));
+//                mback.setTextColor(Color.parseColor("#393939"));
                 Picasso.with(ResultPayment.this).load(R.drawable.ico_payment_failed).into(micon);
-                mtoken.setText(bundle2.getString("tokennya"));
+//                mtoken.setText(bundle2.getString("tokennya"));
             }
         }
         mback.setOnClickListener(new View.OnClickListener() {
@@ -69,20 +74,38 @@ public class ResultPayment extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent back = new Intent(ResultPayment.this,PaymentAct.class);
-        back.putExtra("grandtotal",Grandtotal);
-        back.putExtra("id",noOrder);
-        back.putExtra("guid",guid);
-        back.putExtra("username",username);
-        back.putExtra("pdfyes",mmustUpload);
-        back.putExtra("pos",valuefilter);
-        back.putExtra("nopo",nopo);
-        back.putExtra("ss","Payment Success");
-        back.putExtra("cc","Success");
-        startActivity(back);
-        startActivity(back);
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-        finish();
+        if (mcc.equals("Success")){
+            Intent back = new Intent(ResultPayment.this,ChargeableActivity.class);
+            back.putExtra("grandtotal",Grandtotal);
+            back.putExtra("id",noOrder);
+            back.putExtra("guid",guid);
+            back.putExtra("username",username);
+            back.putExtra("pdfyes",mmustUpload);
+            back.putExtra("pos",valuefilter);
+            back.putExtra("nopo",nopo);
+            back.putExtra("ss","Payment Success");
+            back.putExtra("cc","Success");
+            startActivity(back);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }else {
+            Intent back = new Intent(ResultPayment.this,PaymentAct.class);
+            back.putExtra("grandtotal",Grandtotal);
+            back.putExtra("id",noOrder);
+            back.putExtra("guid",guid);
+            back.putExtra("username",username);
+            back.putExtra("pdfyes",mmustUpload);
+            back.putExtra("pos",valuefilter);
+            back.putExtra("nopo",nopo);
+            back.putExtra("ss","Payment Success");
+            back.putExtra("cc","Success");
+            startActivity(back);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }
+
 
 
 

@@ -300,9 +300,14 @@ public class AddDetailsPoView extends AppCompatActivity {
                 gotoaddfoc.putExtra("pdfyes",mmustUpload);
                 gotoaddfoc.putExtra("pos",valuefilter);
                 gotoaddfoc.putExtra("nopo",nopo);
+                gotoaddfoc.putExtra("items",myCustomArray.toString());
                 startActivity(gotoaddfoc);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
+                SharedPreferences sharedPreferences = getSharedPreferences("ITEMS_CART", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("items_cart", myCustomArray.toString());
+                editor.apply();
             }
         });
         mpayment2.setOnClickListener(new View.OnClickListener() {
@@ -598,13 +603,14 @@ public class AddDetailsPoView extends AppCompatActivity {
                         mpayment.setVisibility(GONE);
 
                     }
-                    if (data.get("showPaymentHistoryButton").getAsBoolean()){
-                        mpayment2.setVisibility(VISIBLE);
-                        mpayment2.setText(data.get("paymentHistoryButtonText").getAsString());
-                    }else{
-                        mpayment2.setVisibility(GONE);
-
-                    }
+                    ///payment
+//                    if (data.get("showPaymentHistoryButton").getAsBoolean()){
+//                        mpayment2.setVisibility(VISIBLE);
+//                        mpayment2.setText(data.get("paymentHistoryButtonText").getAsString());
+//                    }else{
+//                        mpayment2.setVisibility(GONE);
+//
+//                    }
                     showlinkdownload = data.get("showUploadPOLink").getAsBoolean();
                     if (showlinkdownload){
                         mcopy.setVisibility(VISIBLE);
@@ -721,7 +727,13 @@ public class AddDetailsPoView extends AppCompatActivity {
                         mlistitem_foc.setVisibility(View.VISIBLE);
                         mlaytotal.setVisibility(VISIBLE);
                     }
+                    if (data.get("showPaymentHistoryButton").getAsBoolean()){
+                        mpayment2.setVisibility(VISIBLE);
+                        mpayment2.setText(data.get("paymentHistoryButtonText").getAsString());
+                    }else{
+                        mpayment2.setVisibility(GONE);
 
+                    }
 
                 }else {
                     cekInternet();
