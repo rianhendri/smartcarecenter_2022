@@ -295,7 +295,7 @@ public class DetailsNews extends AppCompatActivity {
                 String errornya = "";
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
-                Log.d("responread",homedata.toString());
+                Log.d("qewer",homedata.toString());
                 if (homedata.get("errorMessage").toString().equals("null")) {
 
                 }else {
@@ -310,8 +310,9 @@ public class DetailsNews extends AppCompatActivity {
                     if (data.get("ShowDownloadButton").getAsBoolean()){
                         mlaydownload.setVisibility(View.VISIBLE);
                         underline.setVisibility(View.VISIBLE);
-                        mbuttondownload.setText(textdownload);
-                        linkdownloadnya = linkdownload;
+                        mbuttondownload.setText(data.get("DownloadButtonText").getAsString());
+                        linkdownloadnya = data.get("DownloadButtonURL").getAsString();
+                        Log.d("booleannya",textdownload);
                     }else {
                         mlaydownload.setVisibility(View.GONE);
                         underline.setVisibility(View.GONE);

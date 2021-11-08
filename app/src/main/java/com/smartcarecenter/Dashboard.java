@@ -354,6 +354,10 @@ public class Dashboard extends AppCompatActivity {
                     if (user != null) {
                         //User is Logged in
                         Log.d("user2","nggak kosong");
+
+                        uidnya=user.getUid();
+                        Log.d("trag2", uidnya);
+                        setregistuser();
                     }else{
                         //No User is Logged in
                         reglogauth();

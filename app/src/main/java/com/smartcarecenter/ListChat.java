@@ -38,8 +38,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +56,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.smartcarecenter.Chat.Adapterchat;
+import com.smartcarecenter.Chat.ItemUid;
 import com.smartcarecenter.Chat.Itemchat;
 import com.smartcarecenter.Chat.Itemchat2;
 import com.smartcarecenter.SendNotificationPack.APIService;
@@ -79,6 +86,14 @@ import static com.smartcarecenter.apihelper.ServiceGenerator.fcmbase;
 import static com.smartcarecenter.messagecloud.check.tokennya2;
 import static com.smartcarecenter.LiveChatList.itemchat;
 public class ListChat extends AppCompatActivity {
+
+    ///chtregst
+    //
+    FirebaseAuth mAuth;
+    ItemUid ietmuid ;
+    String nme="";
+    String uidnya="";
+    String emainya="";
     //note prepare
     LinearLayout mlaypreparenote;
     TextView mmessageprepare;
@@ -1477,4 +1492,96 @@ public class ListChat extends AppCompatActivity {
 
     }
 
+
+    public void reglogauth(){
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(emainya, "x8x8x8")
+                .addOnCompleteListener(ListChat.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("trag", "signInWithCustomToken:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            uidnya=user.getUid();
+                            setregistuser();
+
+                        } else {
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                mAuth.signInWithEmailAndPassword(emainya, "x8x8x8")
+                                        .addOnCompleteListener(ListChat.this, new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if (task.isSuccessful()) {
+                                                    // Sign in success, update UI with the signed-in user's information
+
+                                                    FirebaseUser user = mAuth.getCurrentUser();
+                                                    uidnya=user.getUid();
+                                                    Log.d("trag", uidnya);
+                                                    setregistuser();
+//
+                                                } else {
+                                                    if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+//                                                                            Toast.makeText(DetailsST.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
+                                                    }else {
+
+                                                    }
+                                                    // If sign in fails, display a message to the user.
+                                                    Log.w("uii", "signInWithCustomToken:failure", task.getException());
+//                                    Toast.makeText(CustomAuthActivity.this, "Authentication failed.",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    updateUI(null);
+
+                                                }
+                                            }
+                                        });
+//                                                    Toast.makeText(DetailsST.this, "User with this email already exist.", Toast.LENGTH_SHORT).show();
+//                                            loading.dismiss();
+                            }else {
+//                                            loading.dismiss();
+                            }
+//                                        loading.dismiss();
+                            // If sign in fails, display a message to the user.
+                            Log.w("uii", "signInWithCustomToken:failure", task.getException());
+//                                    Toast.makeText(CustomAuthActivity.this, "Authentication failed.",
+//                                            Toast.LENGTH_SHORT).show();
+//                                    updateUI(null);
+
+                        }
+                    }
+                }).addOnFailureListener(ListChat.this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+//                            loading.dismiss();
+                Log.d("gagal login",e.toString());
+            }
+        });
+    }
+    public void setregistuser(){
+//        int posinya = 0;
+//        if ((addFoclistreq!=null)){
+//            posinya = 0;
+//        }else{
+//            posinya = addFoclistreq.size()+1;
+//        }
+        ietmuid= new ItemUid();
+
+        ietmuid.setEmail(emainya);
+        ietmuid.setUsername(nme);
+
+        databaseReference2.child("akunregist").child(uidnya).setValue(ietmuid).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                Log.d("failue","succes");
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("failue",e.toString());
+            }
+        });
+    }
 }

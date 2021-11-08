@@ -103,7 +103,17 @@ public class DetailsNotification extends AppCompatActivity {
                 if (module.equals("SSFeedback")){
                     prefFeedback();
                 }else {
-
+//                    if (module.equals("FormRequest")){
+//                        Intent gotorating = new Intent(DetailsNotification.this, DetailsFormActivity.class);
+//                        gotorating.putExtra("id", moduleid);
+//                        gotorating.putExtra("page", "notif");
+//                        gotorating.putExtra("guid", guid);
+//
+//                        startActivity(gotorating);
+//                        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//                        finish();
+//                    }else {
+//                    }
                 }
 
             }
