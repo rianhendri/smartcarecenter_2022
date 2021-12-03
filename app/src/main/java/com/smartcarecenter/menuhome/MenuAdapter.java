@@ -151,6 +151,13 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
             @Override
             public void onClick(View v) {
                 String namemenu = myItem.get(i).getMenuname();
+                if (namemenu.equals(context.getString(R.string.title_pmticket))){
+                    Intent gotonews = new Intent(context, PmList.class);
+                    context.startActivity(gotonews);
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    ((Activity)context).finish();
+
+                }
                 if (namemenu.equals("Chat With Support")){
 
                     Intent gotonews = new Intent(context, ListChat.class);
@@ -212,13 +219,7 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                     ((Activity)context).finish();
 
                 }
-                if (namemenu.equals(context.getString(R.string.title_pmticket))){
-                    Intent gotonews = new Intent(context, PmList.class);
-                    context.startActivity(gotonews);
-                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                    ((Activity)context).finish();
 
-                }
 
 //                if (namemenu.equals(context.getString(R.string.title_live_chat))){
 //                    Log.d("whats",String.valueOf(installed)+"/"+String.valueOf(installed2));

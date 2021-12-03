@@ -426,7 +426,7 @@ public class DetailsPM extends AppCompatActivity {
             @Override
             public void onPositiveButtonClick(Date date) {
                 mreschdate.setText(myDateFormat.format(date));
-                datetimekirim=myDateFormat.format(date);
+                datetimekirim=myDateFormat.format(date)+":00";
             }
 
             @Override
@@ -570,27 +570,6 @@ public class DetailsPM extends AppCompatActivity {
 
         // set title dialog
         alertDialogBuilder.setTitle("Approve PM");
-//        final EditText input = new EditText(this);
-//// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-//        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-//        View v = getLayoutInflater().inflate(R.layout.item_cancel, null);
-//        mreasonnya=v.findViewById(R.id.reasondes);
-//        mreasonnya.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                mreason = mreasonnya.getText().toString();
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
         // set pesan dari dialog
         AlertDialog d = new AlertDialog.Builder(DetailsPM.this)
 //                .setView(v)
@@ -598,26 +577,6 @@ public class DetailsPM extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.title_yes), null) //Set to null. We override the onclick
                 .setNegativeButton(getString(R.string.title_no), null)
                 .create();
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            alertDialogBuilder
-//                    .setMessage(getString(R.string.title_canelreq))
-//                    .setView(v)
-//                    .setIcon(R.mipmap.ic_launcher)
-//                    .setCancelable(false)
-//                    .setPositiveButton(getString(R.string.title_yes),null)
-//                    .setNegativeButton(getString(R.string.title_no),new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            // jika tombol ini diklik, akan menutup dialog
-//                            // dan tidak terjadi apa2
-//                            dialog.cancel();
-//                        }
-//                    });
-//        }
-
-        // membuat alert dialog dari builder
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//
-//        // menampilkan alert dialog
         d.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -628,12 +587,6 @@ public class DetailsPM extends AppCompatActivity {
                     public void onClick(View v) {
                         Approvereq();
                         d.dismiss();
-//                        if (mreasonnya.length()==0){
-//                            Toast.makeText(DetailsPM.this, getString(R.string.title_reasonrequired),Toast.LENGTH_LONG).show();
-//                        }else {
-//
-//
-//                        }
                     }
                 });
                 C.setOnClickListener(new View.OnClickListener() {

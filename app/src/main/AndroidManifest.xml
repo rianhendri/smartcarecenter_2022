@@ -28,7 +28,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailsPM"></activity>
+        <activity android:name=".DetailsPM">
+            <intent-filter>
+                <action android:name="SCCPM" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".PmList" />
         <activity android:name=".ProsesPembayaran" />
         <activity android:name=".LiveChatList" />
