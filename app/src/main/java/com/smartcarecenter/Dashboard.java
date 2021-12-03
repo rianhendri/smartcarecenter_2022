@@ -236,7 +236,7 @@ public class Dashboard extends AppCompatActivity {
                 Intent intent = new Intent(Dashboard.this, DetailsNews.class);
                 intent.putExtra("newscd", cdnews);
                 intent.putExtra("home", "home");
-               startActivity(intent);
+                startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
             }
@@ -482,6 +482,7 @@ public class Dashboard extends AppCompatActivity {
                     MenuItem menuItem6 = new MenuItem();
                     MenuItem menuItem8 = new MenuItem();
                     MenuItem menuItem9 = new MenuItem();
+                    MenuItem menuItem10 = new MenuItem();
                     new MenuItem();
                     MenuItem menuItem7 = new MenuItem();
                     menuItemlist = new ArrayList();
@@ -500,7 +501,12 @@ public class Dashboard extends AppCompatActivity {
                         menuItem2.setShow("true");
                         menuItemlist.add(menuItem2);
                     }
-
+                    if (access.get("showPM").getAsBoolean()){
+                        menuItem10.setMenuname(getString(R.string.title_pmticket));
+                        menuItem10.setImg(R.drawable.repairtools);
+                        menuItem10.setShow(access.get("showPM").toString());
+                        menuItemlist.add(menuItem10);
+                    }
                     if (mshowPressList.equals("true")){
                         menuItem3.setMenuname(getString(R.string.title_Presslist));
                         menuItem3.setImg(R.drawable.req);

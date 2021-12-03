@@ -1118,6 +1118,21 @@ public class ListChat extends AppCompatActivity {
                             startActivity(back);
                             overridePendingTransition(R.anim.left_in, R.anim.right_out);
                             finish();
+                        }else {
+                            if (ping==77){
+                                Intent back = new Intent(ListChat.this,DetailsPM.class);
+                                back.putExtra("name",name);
+                                back.putExtra("id",noreq);
+                                back.putExtra("user",username);
+                                back.putExtra("home", "homesa");
+                                back.putExtra("xhori", xhori);
+                                back.putExtra("yverti", yverti);
+                                back.putExtra("pdfyes", "no");
+                                back.putExtra("scrolbawah","-");
+                                startActivity(back);
+                                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                                finish();
+                            }
                         }
                     }
                 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingLeft="0dp"
+	android:paddingRight="0dp">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="@color/colorPrimaryDark"
+		android:padding="12dp">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginTop="4dp"
+			android:fontFamily="@font/seguisb"
+			android:paddingLeft="10dp"
+			android:text="Reject PM"
+			android:textColor="@color/dwhite"
+			android:textSize="12sp" />
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="12dp">
+
+
+		<LinearLayout
+			android:visibility="gone"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical" >
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginTop="4dp"
+			android:fontFamily="@font/seguisb"
+			android:paddingLeft="10dp"
+			android:text="Reschedule Date:"
+			android:textColor="@color/black"
+			android:textSize="12sp" />
+
+		<TextView
+			android:id="@+id/datereqres"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:fontFamily="@font/segoeui"
+			android:paddingLeft="10dp"
+			android:text="please choose"
+			android:textColor="@color/black"
+			android:textSize="13sp" />
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_margin="4dp"
+			android:background="@color/softgrey" />
+
+	</LinearLayout>
+		<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical" >
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginTop="4dp"
+			android:fontFamily="@font/seguisb"
+			android:paddingLeft="10dp"
+			android:text="Reason:"
+			android:textColor="@color/black"
+			android:textSize="12sp" />
+
+		<EditText
+			android:id="@+id/reasonreject"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/bgwhite_cornerblack"
+			android:fontFamily="@font/segoeui"
+			android:gravity="top|left"
+			android:inputType="textMultiLine"
+			android:lines="6"
+			android:overScrollMode="always"
+			android:padding="8dp"
+			android:scrollHorizontally="false"
+			android:scrollbarStyle="insideInset"
+			android:scrollbars="vertical"
+			android:text=""
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:textColor="@color/black"
+			android:textSize="13sp" />
+
+	</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

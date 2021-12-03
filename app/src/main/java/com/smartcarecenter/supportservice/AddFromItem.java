@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class AddFromItem {
 
-    public AddFromItem(String date, String formRequestCd, String photoURL, String photoThumbURL, String pressGuid, String pressName, String requestedBy, String requestedDateTime, String serviceTicketCd, String status, String statusColorCode, String statusName, String description) {
+    public AddFromItem(String date, String formRequestCd, String photoURL, String photoThumbURL, String pressGuid, String pressName, String requestedBy, String requestedDateTime, String serviceTicketCd, String status, String statusColorCode, String statusName, String description, String additionalTextHtml) {
         this.date = date;
         this.formRequestCd = formRequestCd;
         this.photoURL = photoURL;
@@ -28,8 +28,53 @@ public class AddFromItem {
         this.statusColorCode = statusColorCode;
         this.statusName = statusName;
         this.description = description;
+        this.additionalTextHtml = additionalTextHtml;
     }
 
+    @Expose
+    @SerializedName("date")
+    private String date;
+    @Expose
+    @SerializedName("formRequestCd")
+    private String formRequestCd;
+    @Expose
+    @SerializedName("photoURL")
+    private String photoURL;
+    @Expose
+    @SerializedName("photoThumbURL")
+    private String photoThumbURL;
+    @Expose
+    @SerializedName("pressGuid")
+    private String pressGuid;
+    @Expose
+    @SerializedName("pressName")
+    private String pressName;
+    @Expose
+    @SerializedName("requestedBy")
+    private String requestedBy;
+    @Expose
+    @SerializedName("requestedDateTime")
+    private String requestedDateTime;
+    @Expose
+    @SerializedName("serviceTicketCd")
+    private String serviceTicketCd;
+    @Expose
+    @SerializedName("status")
+    private String status;
+    @Expose
+    @SerializedName("statusColorCode")
+    private String statusColorCode;
+    @Expose
+    @SerializedName("statusName")
+    private String statusName;
+
+    @Expose
+    @SerializedName("description")
+    private String description;
+
+    @Expose
+    @SerializedName("additionalTextHtml")
+    private String additionalTextHtml;
     public String getDate() {
         return date;
     }
@@ -134,46 +179,13 @@ public class AddFromItem {
         this.description = description;
     }
 
-    @Expose
-    @SerializedName("date")
-    private String date;
-    @Expose
-    @SerializedName("formRequestCd")
-    private String formRequestCd;
-    @Expose
-    @SerializedName("photoURL")
-    private String photoURL;
-    @Expose
-    @SerializedName("photoThumbURL")
-    private String photoThumbURL;
-    @Expose
-    @SerializedName("pressGuid")
-    private String pressGuid;
-    @Expose
-    @SerializedName("pressName")
-    private String pressName;
-    @Expose
-    @SerializedName("requestedBy")
-    private String requestedBy;
-    @Expose
-    @SerializedName("requestedDateTime")
-    private String requestedDateTime;
-    @Expose
-    @SerializedName("serviceTicketCd")
-    private String serviceTicketCd;
-    @Expose
-    @SerializedName("status")
-    private String status;
-    @Expose
-    @SerializedName("statusColorCode")
-    private String statusColorCode;
-    @Expose
-    @SerializedName("statusName")
-    private String statusName;
+    public String getAdditionalTextHtml() {
+        return additionalTextHtml;
+    }
 
-    @Expose
-    @SerializedName("description")
-    private String description;
+    public void setAdditionalTextHtml(String additionalTextHtml) {
+        this.additionalTextHtml = additionalTextHtml;
+    }
 
 
     public AddFromItem() {

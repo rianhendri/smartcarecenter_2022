@@ -11,6 +11,7 @@
     <string name="title_purchase_order">Purchase Order</string>
     <string name="title_survei">Survey</string>
     <string name="title_News">News</string>
+
     <string name="title_live_chat">Live Chat</string>
     <string name="title_Setting">Settings</string>
     <string name="title_Presslist">Press List</string>
@@ -174,4 +175,6 @@
     <string name="title_pleasecomple">Please complete your data below:</string>
     <string name="titile_hisfr">Case History</string>
     <string name="title_chatdetailst">View request details</string>
+    <string name="title_pmticket">PM Ticket</string>
+    <string name="titile_resetlabel">" "</string>
 </resources>

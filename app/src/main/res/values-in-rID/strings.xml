@@ -175,4 +175,6 @@
     <string name="title_pleasecomple">Harap lengkapi data Anda dibawah ini:</string>
     <string name="titile_hisfr">Histori Case</string>
     <string name="title_chatdetailst">Lihat detail request</string>
+    <string name="title_pmticket">PM Tiket</string>
+    <string name="titile_resetlabel">" "</string>
 </resources>

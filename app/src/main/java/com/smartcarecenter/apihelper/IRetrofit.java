@@ -46,6 +46,14 @@ public interface IRetrofit {
     @POST("api/FormRequest/Cancel")
     public Call<JsonObject> postRawJSONcancelform(@Body JsonObject var1);
 
+
+    @POST("api/pm/Approve")
+    public Call<JsonObject> approvereqpm(@Body JsonObject var1);
+
+    @POST("api/pm/Reschedule")
+    public Call<JsonObject> resdhulepmreq(@Body JsonObject var1);
+    @POST("api/pm/Reject")
+    public Call<JsonObject> rejectpmrequ(@Body JsonObject var1);
     @POST("api/Account/ChangeLanguage")
     public Call<JsonObject> postRawJSONchangelanguage(@Body JsonObject var1);
 
@@ -83,6 +91,9 @@ public interface IRetrofit {
     @POST("api/FormRequest/Get")
     public Call<JsonObject> postRawJSONgetform(@Body JsonObject var1);
 
+    @POST("api/pm/get")
+    public Call<JsonObject> pmget(@Body JsonObject var1);
+
     @POST("api/Notification/Get")
     public Call<JsonObject> postRawJSONgetnotifget(@Body JsonObject var1);
 
@@ -97,6 +108,9 @@ public interface IRetrofit {
 
     @POST("api/FormRequest/List")
     public Call<JsonObject> postRawJSONlistform(@Body JsonObject var1);
+
+    @POST("api/pm/List")
+    public Call<JsonObject> pmlistreq(@Body JsonObject var1);
 
     @POST("api/Account/Login")
     public Call<JsonObject> postRawJSONlogin(@Body JsonObject var1);

@@ -105,6 +105,7 @@ public class DetailsFormActivity extends AppCompatActivity {
     public static LinearLayout mlayhistorifr;
     public static boolean inforeopen = true;
     public static EditText mreasonnya;
+    public static  TextView mreschdate;
     public static String noreq = "";
     public static String MhaveToUpdate = "";
     public static String MsessionExpired = "";
@@ -348,6 +349,7 @@ public class DetailsFormActivity extends AppCompatActivity {
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         View v = getLayoutInflater().inflate(R.layout.item_cancel, null);
         mreasonnya=v.findViewById(R.id.reasondes);
+//        mreschdate=v.findViewById(R.id.reasondes);
         mreasonnya.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

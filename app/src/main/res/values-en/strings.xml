@@ -175,4 +175,6 @@
     <string name="title_pleasecomple">Please complete your data below:</string>
     <string name="titile_hisfr">Case History</string>
     <string name="title_chatdetailst">View request details</string>
+    <string name="title_pmticket">PM Ticket</string>
+    <string name="titile_resetlabel">" "</string>
 </resources>

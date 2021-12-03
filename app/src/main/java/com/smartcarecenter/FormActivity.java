@@ -319,6 +319,7 @@ public class FormActivity extends AppCompatActivity {
 
             }
         });
+        Log.d("reqlistfr",jsonObject.toString());
     }
     public void loadSpin(){
 

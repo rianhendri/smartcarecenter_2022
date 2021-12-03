@@ -28,7 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProsesPembayaran"></activity>
+        <activity android:name=".DetailsPM"></activity>
+        <activity android:name=".PmList" />
+        <activity android:name=".ProsesPembayaran" />
         <activity android:name=".LiveChatList" />
 
         <receiver android:name=".DownloadBroadcastReceiver">

@@ -36,6 +36,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -128,6 +131,19 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
                 dialog.show();
             }
         });
+        if (addFromItem.get(i).getAdditionalTextHtml()!=null){
+            myviewholder.xtextcntn.setVisibility(View.VISIBLE);
+            if (Build.VERSION.SDK_INT >= 24) {
+                myviewholder.xtextcntn.setText((CharSequence) Html.fromHtml((String)addFromItem.get(i).getAdditionalTextHtml(), Html.FROM_HTML_MODE_COMPACT));
+                myviewholder.xtextcntn.setMovementMethod(LinkMovementMethod.getInstance());
+            } else {
+                myviewholder.xtextcntn.setText((CharSequence)Html.fromHtml((String)addFromItem.get(i).getAdditionalTextHtml()));
+                myviewholder.xtextcntn.setMovementMethod(LinkMovementMethod.getInstance());
+
+            }
+        }else {
+            myviewholder.xtextcntn.setVisibility(View.GONE);
+        }
 
     }
 
@@ -138,7 +154,7 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView xdate_news;
+        TextView xdate_news, xtextcntn;
         ImageView xgambar_item;
         TextView xid;
         TextView xstatus;
@@ -152,6 +168,7 @@ extends RecyclerView.Adapter<AddFormAdapter.Myviewholder> {
             xdate_news = itemView.findViewById(R.id.dateform);
             xpress = itemView.findViewById(R.id.press);
             xby = itemView.findViewById(R.id.by);
+            xtextcntn = itemView.findViewById(R.id.textcntn);
 
         }
     }
