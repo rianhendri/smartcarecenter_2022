@@ -177,4 +177,5 @@
     <string name="title_chatdetailst">View request details</string>
     <string name="title_pmticket">PM Ticket</string>
     <string name="titile_resetlabel">" "</string>
+    <string name="title_dailireport">Daily Report</string>
 </resources>

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -32,13 +34,19 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.daliyreport.DailyAdapter;
+import com.smartcarecenter.daliyreport.DailyItem;
 import com.smartcarecenter.messagecloud.check;
 import com.smartcarecenter.pmlist.PMAdapter;
 import com.smartcarecenter.pmlist.PmListAdd;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,16 +59,16 @@ import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 
-public class PmList extends AppCompatActivity {
+public class DailyReportList extends AppCompatActivity {
     private static final String TAG = "FormActivity";
     public static boolean refresh = false;
     public static String valuefilter = "-";
     String MhaveToUpdate = "";
     String MsessionExpired = "";
-    PMAdapter addFormAdapterAdapter;
+    DailyAdapter addFormAdapterAdapter;
     boolean internet = true;
     private LinearLayoutManager linearLayoutManager;
-    public static ArrayList<PmListAdd> list2;
+    public static ArrayList<DailyItem> list2;
     JsonArray listformreq;
     List<String> listnamestatus = new ArrayList();
     JsonArray liststatus;
@@ -71,9 +79,10 @@ public class PmList extends AppCompatActivity {
     private LinearLayoutManager mlinear;
     NestedScrollView mnested;
     TextView mrecord,mempetyreq;
-    Spinner mstatus_spin;
     RecyclerView myitem_place;
     int page = 1;
+    String startdate = "";
+    String enddate="";
     int pos = 0;
     boolean refreshscroll = true;
     String sesionid_new = "";
@@ -82,43 +91,96 @@ public class PmList extends AppCompatActivity {
     int totalpage = 0;
     String totalrec = "";
     SwipeRefreshLayout mswip;
+    TextView mstartdate, menddate;
+    final Calendar myCalendar = Calendar.getInstance();
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pm_list);
-        mrecord = findViewById(R.id.record);
+        setContentView(R.layout.activity_daily_report_list);
+//        mrecord = findViewById(R.id.record);
+        mstartdate =findViewById(R.id.startdate);
+        menddate = findViewById(R.id.enddate);
         mfooterload = findViewById(R.id.footerload);
         mback = findViewById(R.id.backbtn);
         myitem_place = findViewById(R.id.formlist);
         maddform = findViewById(R.id.addform);
-        mstatus_spin = findViewById(R.id.spinstatus);
         mnested = findViewById(R.id.nestedscrol);
         mempetyreq = findViewById(R.id.norequest);
         mswip = findViewById(R.id.swiprefresh);
         check.checklistform=1;
-        //showadd
-        if (showaddform.equals("false")){
-            maddform.setVisibility(View.GONE);
-            myitem_place.setPadding(0,0,0,0);
-        }else {
-            maddform.setVisibility(View.VISIBLE);
-            myitem_place.setPadding(0,0,0,120);
+        String string2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        mstartdate.setText((CharSequence)string2);
+        menddate.setText((CharSequence)string2);
+        startdate = string2;
+        enddate = string2;
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
-        }
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                startatepick();
+            }
+
+        };
+        DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                endatepick();
+            }
+
+        };
+        mstartdate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(DailyReportList.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        menddate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(DailyReportList.this, date2, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        //showadd
+//        if (showaddform.equals("false")){
+//            maddform.setVisibility(View.GONE);
+//            myitem_place.setPadding(0,0,0,0);
+//        }else {
+//            maddform.setVisibility(View.VISIBLE);
+//            myitem_place.setPadding(0,0,0,120);
+//
+//        }
         //setlayout recyler
-        linearLayoutManager = new LinearLayoutManager(PmList.this, LinearLayout.VERTICAL,false);
+        linearLayoutManager = new LinearLayoutManager(DailyReportList.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
 //        linearLayoutManager.setStackFromEnd(true);
         myitem_place.setLayoutManager(linearLayoutManager);
         myitem_place.setHasFixedSize(true);
-        list2 = new ArrayList<PmListAdd>();
+        list2 = new ArrayList<DailyItem>();
         getSessionId();
         cekInternet();
         refreshnotif();
         if (internet){
             loadData();
-            loadSpin();
         }else {
 
         }
@@ -174,37 +236,15 @@ public class PmList extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        mstatus_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                refreshscroll = true;
-                page=1;
-                cekInternet();
-                for (int i = 0; i < listvalue.size(); ++i) {
-                    valuefilter = listvalue.get(position);
-                    if (internet) {
-                        loadData();
-                    }else {
-
-                    }
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        maddform.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent gotonews = new Intent(PmList.this, DetailsPM.class);
-                startActivity(gotonews);
-                finish();
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-            }
-        });
+//        maddform.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent gotonews = new Intent(DailyReportList.this, DetailsPM.class);
+//                startActivity(gotonews);
+//                finish();
+//                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//            }
+//        });
         int color = getResources().getColor(R.color.colorPrimary);
         mswip.setColorSchemeColors(color);
         mswip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -238,16 +278,33 @@ public class PmList extends AppCompatActivity {
             }
         });
     }
+    private void startatepick() {
+        String myFormat = "yyyy-MM-dd "; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        mstartdate.setText(sdf.format(myCalendar.getTime()));
+        startdate=sdf.format(myCalendar.getTime());
+        loadData();
+    }
+    private void endatepick() {
+        String myFormat = "yyyy-MM-dd "; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        menddate.setText(sdf.format(myCalendar.getTime()));
+        enddate=sdf.format(myCalendar.getTime());
+        loadData();
+    }
     public void loadData(){
         page=1;
         mfooterload.setVisibility(View.VISIBLE);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
-        jsonObject.addProperty("status",valuefilter);
+        jsonObject.addProperty("startDate",startdate);
+        jsonObject.addProperty("endDate",enddate);
         jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        Call<JsonObject> panggilkomplek = jsonPostService.pmlistreq(jsonObject);
+        Call<JsonObject> panggilkomplek = jsonPostService.dailyrlist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -265,15 +322,16 @@ public class PmList extends AppCompatActivity {
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")){
                     JsonObject data = homedata.getAsJsonObject("data");
+                    Log.d("dataload",data.toString());
                     totalpage = data.get("totalPage").getAsInt();
-                    listformreq = data.getAsJsonArray("pmList");
-                    totalrec = data.get("totalRec").toString();
-                    mrecord.setText("Record: "+totalrec);
+                    listformreq = data.getAsJsonArray("dailyReportList");
+                    totalrec = data.get("totalRec").getAsString();
+//                    mrecord.setText("Record: "+totalrec);
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<ArrayList<PmListAdd>>() {
+                    Type listType = new TypeToken<ArrayList<DailyItem>>() {
                     }.getType();
                     list2 = gson.fromJson(listformreq.toString(), listType);
-                    addFormAdapterAdapter = new PMAdapter(PmList.this, list2);
+                    addFormAdapterAdapter = new DailyAdapter(DailyReportList.this, list2);
 //                    addFormAdapterAdapter.notifyDataSetChanged();
                     myitem_place.setAdapter(addFormAdapterAdapter);
                     myitem_place.setVisibility(View.VISIBLE);
@@ -298,14 +356,14 @@ public class PmList extends AppCompatActivity {
                 }else {
                     sesionid();
                     mfooterload.setVisibility(View.GONE);
-                    Toast.makeText(PmList.this, errornya,Toast.LENGTH_LONG).show();
+                    Toast.makeText(DailyReportList.this, errornya,Toast.LENGTH_LONG).show();
                 }
 
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(PmList.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                Toast.makeText(DailyReportList.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 mfooterload.setVisibility(View.GONE);
 
@@ -313,75 +371,16 @@ public class PmList extends AppCompatActivity {
         });
         Log.d("reqlistfr",jsonObject.toString());
     }
-    public void loadSpin(){
-
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("page",page);
-        jsonObject.addProperty("status","-");
-        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
-        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        Call<JsonObject> panggilkomplek = jsonPostService.pmlistreq(jsonObject);
-        panggilkomplek.enqueue(new Callback<JsonObject>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                String errornya = "";
-                JsonObject homedata=response.body();
-                String statusnya = homedata.get("status").getAsString();
-                if (homedata.get("errorMessage").toString().equals("null")) {
-
-                }else {
-                    errornya = homedata.get("errorMessage").getAsString();
-                }
-                MhaveToUpdate = homedata.get("haveToUpdate").toString();
-                MsessionExpired = homedata.get("sessionExpired").toString();
-                if (statusnya.equals("OK")){
-                    JsonObject data = homedata.getAsJsonObject("data");
-                    listformreq = data.getAsJsonArray("pmList");
-                    liststatus = data.getAsJsonArray("statusList");
-                    for (int i = 0; i < liststatus.size(); ++i) {
-                        JsonObject jsonObject3 = (JsonObject)liststatus.get(i);
-                        String string3 = jsonObject3.getAsJsonObject().get("Value").getAsString();
-                        String string4 = jsonObject3.getAsJsonObject().get("Text").getAsString();
-                        listvalue.add(string3);
-                        listnamestatus.add(string4);
-                        for (int j = 0; j < listvalue.size(); ++j) {
-                            if (listvalue.get(i).equals(valuefilter)){
-                                pos=j;
-                            }
-                        }
-                        final ArrayAdapter<String> kategori = new ArrayAdapter<String>(PmList.this, R.layout.spinstatus_layout,
-                                listnamestatus);
-                        kategori.setDropDownViewResource(R.layout.spinkategori);
-                        kategori.notifyDataSetChanged();
-                        mstatus_spin.setAdapter(kategori);
-                        mstatus_spin.setSelection(pos);
-                    }
-                } else {
-                    Toast.makeText(PmList.this, errornya,Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(PmList.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
-                cekInternet();
-                mfooterload.setVisibility(View.GONE);
-
-            }
-        });
-    }
     public void pagination(){
         mfooterload.setVisibility(View.VISIBLE);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
-        jsonObject.addProperty("status",valuefilter);
+        jsonObject.addProperty("startDate",startdate);
+        jsonObject.addProperty("endDate",enddate);
         jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        Call<JsonObject> panggilkomplek = jsonPostService.pmlistreq(jsonObject);
+        Call<JsonObject> panggilkomplek = jsonPostService.dailyrlist(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -400,17 +399,17 @@ public class PmList extends AppCompatActivity {
                 if (statusnya.equals("OK")){
                     JsonObject data = homedata.getAsJsonObject("data");
                     totalpage = data.get("totalPage").getAsInt();
-                    listformreq = data.getAsJsonArray("pmList");
+                    listformreq = data.getAsJsonArray("dailyReportList");
                     totalrec = data.get("totalRec").toString();
-                    mrecord.setText("Record: "+totalrec);
+//                    mrecord.setText("Record: "+totalrec);
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<ArrayList<PmListAdd>>() {
+                    Type listType = new TypeToken<ArrayList<DailyItem>>() {
                     }.getType();
-                    ArrayList<PmListAdd> list;
+                    ArrayList<DailyItem> list;
                     list=new ArrayList<>();
                     list = gson.fromJson(listformreq.toString(), listType);
                     list2.addAll(list);
-                    addFormAdapterAdapter = new PMAdapter(PmList.this, list2);
+                    addFormAdapterAdapter = new DailyAdapter(DailyReportList.this, list2);
                     myitem_place.setAdapter(addFormAdapterAdapter);
                     myitem_place.setVisibility(View.VISIBLE);
                     mfooterload.setVisibility(View.GONE);
@@ -422,20 +421,28 @@ public class PmList extends AppCompatActivity {
                     } else if (list2 != null) {
                         list2.size();
                     }
+                    if (listformreq.size() == 0) {
+                        myitem_place.setVisibility(View.GONE);
+                        mempetyreq.setVisibility(View.VISIBLE);
+
+                    }else {
+                        myitem_place.setVisibility(View.VISIBLE);
+                        mempetyreq.setVisibility(View.GONE);
+                    }
                     mfooterload.setVisibility(View.GONE);
 //                    page++;
                     refreshscroll=true;
                 }else {
 
                     mfooterload.setVisibility(View.GONE);
-                    Toast.makeText(PmList.this, errornya,Toast.LENGTH_LONG).show();
+                    Toast.makeText(DailyReportList.this, errornya,Toast.LENGTH_LONG).show();
                 }
 
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(PmList.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                Toast.makeText(DailyReportList.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
                 cekInternet();
                 mfooterload.setVisibility(View.GONE);
 
@@ -444,7 +451,7 @@ public class PmList extends AppCompatActivity {
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak
-        ConnectivityManager connectivityManager = (ConnectivityManager) PmList.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) DailyReportList.this.getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)
         {
@@ -453,7 +460,7 @@ public class PmList extends AppCompatActivity {
 
         }else {
             internet=false;
-            Intent noconnection = new Intent(PmList.this, NoInternet.class);
+            Intent noconnection = new Intent(DailyReportList.this, NoInternet.class);
             startActivity(noconnection);
             finish();
         }
@@ -479,15 +486,15 @@ public class PmList extends AppCompatActivity {
 
 
             }else {
-                Intent gotoupdate = new Intent(PmList.this, UpdateActivity.class);
+                Intent gotoupdate = new Intent(DailyReportList.this, UpdateActivity.class);
                 startActivity(gotoupdate);
                 finish();
             }
 
         }else {
-            startActivity(new Intent(PmList.this, LoginActivity.class));
+            startActivity(new Intent(DailyReportList.this, LoginActivity.class));
             finish();
-            Toast.makeText(PmList.this, getString(R.string.title_session_Expired),Toast.LENGTH_LONG).show();
+            Toast.makeText(DailyReportList.this, getString(R.string.title_session_Expired),Toast.LENGTH_LONG).show();
         }
 
     }

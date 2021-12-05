@@ -483,6 +483,7 @@ public class Dashboard extends AppCompatActivity {
                     MenuItem menuItem8 = new MenuItem();
                     MenuItem menuItem9 = new MenuItem();
                     MenuItem menuItem10 = new MenuItem();
+                    MenuItem menuItem11 = new MenuItem();
                     new MenuItem();
                     MenuItem menuItem7 = new MenuItem();
                     menuItemlist = new ArrayList();
@@ -506,6 +507,12 @@ public class Dashboard extends AppCompatActivity {
                         menuItem10.setImg(R.drawable.repairtools);
                         menuItem10.setShow(access.get("showPM").toString());
                         menuItemlist.add(menuItem10);
+                    }
+                    if (access.get("showDailyReport").getAsBoolean()){
+                        menuItem11.setMenuname(getString(R.string.title_dailireport));
+                        menuItem11.setImg(R.drawable.clipboarddaily);
+                        menuItem11.setShow(access.get("showDailyReport").toString());
+                        menuItemlist.add(menuItem11);
                     }
                     if (mshowPressList.equals("true")){
                         menuItem3.setMenuname(getString(R.string.title_Presslist));

@@ -50,6 +50,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartcarecenter.AddDetailFocView;
 import com.smartcarecenter.CategoryNews;
+import com.smartcarecenter.DailyReportList;
 import com.smartcarecenter.Dashboard;
 import com.smartcarecenter.FormActivity;
 import com.smartcarecenter.ListChat;
@@ -153,6 +154,13 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 String namemenu = myItem.get(i).getMenuname();
                 if (namemenu.equals(context.getString(R.string.title_pmticket))){
                     Intent gotonews = new Intent(context, PmList.class);
+                    context.startActivity(gotonews);
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    ((Activity)context).finish();
+
+                }
+                if (namemenu.equals(context.getString(R.string.title_dailireport))){
+                    Intent gotonews = new Intent(context, DailyReportList.class);
                     context.startActivity(gotonews);
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     ((Activity)context).finish();

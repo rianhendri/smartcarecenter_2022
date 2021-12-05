@@ -28,6 +28,11 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 public interface IRetrofit {
+    @POST("api/dailyReport/List")
+    public Call<JsonObject> dailyrlist(@Body JsonObject var1);
+    @POST("api/dailyReport/Get")
+    public Call<JsonObject> dailyrget(@Body JsonObject var1);
+
     @POST("api/FormRequest/ReopenCase")
     public Call<JsonObject> postRawJSONreopen(@Body JsonObject var1);
     @POST("api/news/Read")
