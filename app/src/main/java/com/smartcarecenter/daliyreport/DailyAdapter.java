@@ -34,6 +34,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -96,11 +97,33 @@ extends RecyclerView.Adapter<DailyAdapter.Myviewholder> {
         }
         myviewholder.mdatedaily.setText(newdate);
         myviewholder.mpresstypedaily.setText(addFromItem.get(i).getPressSN()+" ("+addFromItem.get(i).getPressTypeName()+")");
-        myviewholder.mpressstatudaily.setText(addFromItem.get(i).getPressStatusName());
+        myviewholder.mpressstatudaily.setText(": "+addFromItem.get(i).getPressStatusName());
 //        myviewholder.mpressstatudaily.setTextColor(Color.parseColor("#"+addFromItem.get(i).getStatusColorCode()));
-        myviewholder.msndaily.setText(addFromItem.get(i).getPressSN());
+        myviewholder.msndaily.setText(": "+addFromItem.get(i).getPressSN());
 //        myviewholder.mcaseiddaily.setText(addFromItem.get(i).getCaseProgressName());
-        myviewholder.mcaseprogressdaily.setText(addFromItem.get(i).getCaseProgressName());
+        myviewholder.mcaseprogressdaily.setText(": "+addFromItem.get(i).getCaseProgressName());
+        Typeface type = Typeface.createFromAsset(context.getAssets(),"font/segoeuib.ttf");
+        Typeface type2 = Typeface.createFromAsset(context.getAssets(),"font/segoeui.ttf");
+        if (addFromItem.get(i).isFlag()){
+            myviewholder.mdot.setVisibility(View.VISIBLE);
+            myviewholder.mdatedaily.setTypeface(type);
+            myviewholder.mpressstatudaily.setTypeface(type);
+            myviewholder.mcaseprogressdaily.setTypeface(type);
+            myviewholder.mcustomername.setTypeface(type);
+            myviewholder.msttitledaily.setTypeface(type);
+//            myviewholder.mcaseprog.setTypeface(type);
+//            myviewholder.mpressta.setTypeface(type);
+        }else {
+            myviewholder.mdot.setVisibility(View.GONE);
+            myviewholder.mdatedaily.setTypeface(type2);
+            myviewholder.mpressstatudaily.setTypeface(type2);
+            myviewholder.mcaseprogressdaily.setTypeface(type2);
+            myviewholder.mcustomername.setTypeface(type2);
+            myviewholder.msttitledaily.setTypeface(type2);
+//            myviewholder.mcaseprog.setTypeface(type2);
+//            myviewholder.mpressta.setTypeface(type2);
+        }
+        myviewholder.mcustomername.setText(addFromItem.get(i).getCustomerName());
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,8 +163,8 @@ extends RecyclerView.Adapter<DailyAdapter.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mdatedaily, msttitledaily,mpresstypedaily,mpressstatudaily,mhtml,msndaily,mcaseiddaily,mcaseprogressdaily;
-
+        TextView mdatedaily, msttitledaily,mpresstypedaily,mpressstatudaily,mhtml,msndaily,mcaseiddaily,mcaseprogressdaily,mcustomername,mpressta,mcaseprog;
+        ImageView mdot;
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
             mdatedaily = itemView.findViewById(R.id.datedaily);
@@ -152,6 +175,10 @@ extends RecyclerView.Adapter<DailyAdapter.Myviewholder> {
 //            mcaseiddaily = itemView.findViewById(R.id.caseiddaily);
             mcaseprogressdaily = itemView.findViewById(R.id.caseprogressdaily);
             mhtml = itemView.findViewById(R.id.textcntn);
+            mcustomername = itemView.findViewById(R.id.customername);
+            mdot = itemView.findViewById(R.id.dot);
+            mpressta = itemView.findViewById(R.id.pressta );
+            mcaseprog = itemView.findViewById(R.id.caseprog );
 
         }
     }

@@ -44,8 +44,11 @@ import com.smartcarecenter.pmlist.PMAdapter;
 import com.smartcarecenter.pmlist.PmListAdd;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -150,6 +153,58 @@ public class DetailsDailyReport extends AppCompatActivity {
         }else {
 
         }
+        mback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+    public void ReadNotif(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("reportCd",reportcd);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.dailyread(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                sesionid();
+                if (statusnya.equals("OK")){
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+//                    String message = data.get("message").getAsString();
+//                    Toast.makeText(DetailsNotification.this, message,Toast.LENGTH_LONG).show();
+
+                }else {
+                    sesionid();
+//                    loading.dismiss();
+                    Toast.makeText(DetailsDailyReport.this,errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(DetailsDailyReport.this,getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+//                loading.dismiss();
+
+            }
+        });
+        Log.d("readnotifdaily",jsonObject.toString());
     }
     public void loadData(){
 //        page=1;
@@ -176,10 +231,23 @@ public class DetailsDailyReport extends AppCompatActivity {
                 MhaveToUpdate = homedata.get("haveToUpdate").toString();
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")){
+                    ReadNotif();
                     JsonObject data = homedata.getAsJsonObject("data");
 
                     mcaseid.setText(data.get("caseID").getAsString());
-                    mreportdate.setText(data.get("caseID").getAsString());
+                    String newdate = "";
+                    String oldadate = data.get("reportDateTime").getAsString();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                    SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
+                    try {
+                        newdate = simpleDateFormat2.format(simpleDateFormat.parse(oldadate));
+                        System.out.println(newdate);
+                        Log.e((String)"Datexs", (String)newdate);
+                    }
+                    catch (ParseException parseException) {
+                        parseException.printStackTrace();
+                    }
+                    mreportdate.setText(newdate);
                     mpresssn.setText(data.get("pressSN").getAsString()+"("+data.get("pressType").getAsString()+")");
                     mcaseprogress.setText(data.get("caseProgress").getAsString());
                     mpressstatus.setText(data.get("pressStatus").getAsString());
@@ -303,7 +371,7 @@ public class DetailsDailyReport extends AppCompatActivity {
 
             }
         });
-        Log.d("reqlistfr",jsonObject.toString());
+        Log.d("loaddatadailyget",jsonObject.toString());
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak

@@ -99,68 +99,68 @@ public class DailyReportList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_report_list);
 //        mrecord = findViewById(R.id.record);
-        mstartdate =findViewById(R.id.startdate);
-        menddate = findViewById(R.id.enddate);
-        mfooterload = findViewById(R.id.footerload);
-        mback = findViewById(R.id.backbtn);
-        myitem_place = findViewById(R.id.formlist);
-        maddform = findViewById(R.id.addform);
-        mnested = findViewById(R.id.nestedscrol);
-        mempetyreq = findViewById(R.id.norequest);
-        mswip = findViewById(R.id.swiprefresh);
-        check.checklistform=1;
-        String string2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+    mstartdate =findViewById(R.id.startdate);
+    menddate = findViewById(R.id.enddate);
+    mfooterload = findViewById(R.id.footerload);
+    mback = findViewById(R.id.backbtn);
+    myitem_place = findViewById(R.id.formlist);
+    maddform = findViewById(R.id.addform);
+    mnested = findViewById(R.id.nestedscrol);
+    mempetyreq = findViewById(R.id.norequest);
+    mswip = findViewById(R.id.swiprefresh);
+    check.checklistform=1;
+    String string2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         mstartdate.setText((CharSequence)string2);
         menddate.setText((CharSequence)string2);
-        startdate = string2;
-        enddate = string2;
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+    startdate = string2;
+    enddate = string2;
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                startatepick();
-            }
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            startatepick();
+        }
 
-        };
-        DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
+    };
+    DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
 
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                endatepick();
-            }
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            endatepick();
+        }
 
-        };
+    };
         mstartdate.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(DailyReportList.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        @Override
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            new DatePickerDialog(DailyReportList.this, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        }
+    });
         menddate.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(DailyReportList.this, date2, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-        //showadd
+        @Override
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            new DatePickerDialog(DailyReportList.this, date2, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        }
+    });
+    //showadd
 //        if (showaddform.equals("false")){
 //            maddform.setVisibility(View.GONE);
 //            myitem_place.setPadding(0,0,0,0);
@@ -169,74 +169,74 @@ public class DailyReportList extends AppCompatActivity {
 //            myitem_place.setPadding(0,0,0,120);
 //
 //        }
-        //setlayout recyler
-        linearLayoutManager = new LinearLayoutManager(DailyReportList.this, LinearLayout.VERTICAL,false);
+    //setlayout recyler
+    linearLayoutManager = new LinearLayoutManager(DailyReportList.this, LinearLayout.VERTICAL,false);
 //        linearLayoutManager.setReverseLayout(true);
 //        linearLayoutManager.setStackFromEnd(true);
         myitem_place.setLayoutManager(linearLayoutManager);
         myitem_place.setHasFixedSize(true);
-        list2 = new ArrayList<DailyItem>();
-        getSessionId();
-        cekInternet();
-        refreshnotif();
+    list2 = new ArrayList<DailyItem>();
+    getSessionId();
+    cekInternet();
+    refreshnotif();
         if (internet){
-            loadData();
-        }else {
+        loadData();
+    }else {
 
-        }
+    }
         mnested.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
+        @Override
+        public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
 
-                if(nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1) != null)
+            if(nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1) != null)
+            {
+                if ((i1 >= (nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1)
+                        .getMeasuredHeight() - nestedScrollView.getMeasuredHeight()))
+                        && i1 > i3)
                 {
-                    if ((i1 >= (nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1)
-                            .getMeasuredHeight() - nestedScrollView.getMeasuredHeight()))
-                            && i1 > i3)
-                    {
-                        cekInternet();
-                        if (internet){
-                            if (refreshscroll){
-                                page++;
-                                mfooterload.setVisibility(View.VISIBLE);
-                                refreshscroll=false;
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable()
-                                {
-                                    @Override
-                                    public void run() {
-                                        if (page <=totalpage){
-                                            myitem_place.setLayoutFrozen(true);
-                                            pagination();
-                                        }else {
-                                            mfooterload.setVisibility(View.GONE);
-                                            refreshscroll=false;
-                                        }
+                    cekInternet();
+                    if (internet){
+                        if (refreshscroll){
+                            page++;
+                            mfooterload.setVisibility(View.VISIBLE);
+                            refreshscroll=false;
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable()
+                            {
+                                @Override
+                                public void run() {
+                                    if (page <=totalpage){
+                                        myitem_place.setLayoutFrozen(true);
+                                        pagination();
+                                    }else {
+                                        mfooterload.setVisibility(View.GONE);
+                                        refreshscroll=false;
                                     }
-                                },500);
-
-                            }
-
-                        }else {
+                                }
+                            },500);
 
                         }
 
-
-
-
+                    }else {
 
                     }
-                }
 
+
+
+
+
+                }
             }
-        });
+
+        }
+    });
         mback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-//        maddform.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onBackPressed();
+        }
+    });
+    //        maddform.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                Intent gotonews = new Intent(DailyReportList.this, DetailsPM.class);
@@ -245,39 +245,39 @@ public class DailyReportList extends AppCompatActivity {
 //                overridePendingTransition(R.anim.right_in, R.anim.left_out);
 //            }
 //        });
-        int color = getResources().getColor(R.color.colorPrimary);
+    int color = getResources().getColor(R.color.colorPrimary);
         mswip.setColorSchemeColors(color);
         mswip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                page=1;
-                cekInternet();
+        @Override
+        public void onRefresh() {
+            page=1;
+            cekInternet();
 
-                if (internet){
+            if (internet){
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override public void run() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
 
-                            // Berhenti berputar/refreshing
+                        // Berhenti berputar/refreshing
 
-                            mswip.setRefreshing(false);
-                            loadData();
+                        mswip.setRefreshing(false);
+                        loadData();
 
-                            // fungsi-fungsi lain yang dijalankan saat refresh berhenti
+                        // fungsi-fungsi lain yang dijalankan saat refresh berhenti
 
-                        }
-                    }, 500);
+                    }
+                }, 500);
 
-                }else {
+            }else {
 //                    mswip.setEnabled(false);
 //                    mswip.setRefreshing(false);
 //                    mcontent.setVisibility(View.GONE);
 
 
-                }
             }
-        });
-    }
+        }
+    });
+}
     private void startatepick() {
         String myFormat = "yyyy-MM-dd "; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);

@@ -14,8 +14,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class DailyItem {
 
-
-    public DailyItem(String serviceTicketCd, String reportCd, String guid, String reportDateTime, String reportBy, String caseProgress, String pressStatus, String serviceTypeCd, String actions, String findings, String followups, String spareParts, String createdByEngineers, String pressTypeName, String pressSN, String issueTitle, String customerName, String customerCd, String customerGroupCd, String caseProgressName, String pressStatusName) {
+    public DailyItem(String serviceTicketCd, String reportCd, String guid, String reportDateTime, String reportBy, String caseProgress, String pressStatus, String serviceTypeCd, String actions, String findings, String followups, String spareParts, String createdByEngineers, String pressTypeName, String pressSN, String issueTitle, String customerName, String customerCd, String customerGroupCd, String caseProgressName, String pressStatusName, boolean flag) {
         this.serviceTicketCd = serviceTicketCd;
         ReportCd = reportCd;
         Guid = guid;
@@ -37,6 +36,7 @@ public class DailyItem {
         CustomerGroupCd = customerGroupCd;
         CaseProgressName = caseProgressName;
         PressStatusName = pressStatusName;
+        Flag = flag;
     }
 
     public String getServiceTicketCd() {
@@ -207,6 +207,14 @@ public class DailyItem {
         PressStatusName = pressStatusName;
     }
 
+    public boolean isFlag() {
+        return Flag;
+    }
+
+    public void setFlag(boolean flag) {
+        Flag = flag;
+    }
+
     @Expose
     @SerializedName("ServiceTicketCd")
     private String serviceTicketCd;
@@ -270,6 +278,9 @@ public class DailyItem {
     @Expose
     @SerializedName("PressStatusName")
     private String PressStatusName;
+    @Expose
+    @SerializedName("Flag")
+    private boolean Flag;
 
     public DailyItem() {
     }

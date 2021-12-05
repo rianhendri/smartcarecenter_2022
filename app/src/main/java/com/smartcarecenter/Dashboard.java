@@ -494,14 +494,6 @@ public class Dashboard extends AppCompatActivity {
                         menuItem.setShow(mshowFormRequest);
                         menuItemlist.add(menuItem);
                     }
-                    if (mshowPurchaseOrderPO.equals("false") && mshowPurchaseOrderFOC.equals("false")){
-
-                    }else{
-                        menuItem2.setMenuname(getString(R.string.title_purchase_order));
-                        menuItem2.setImg(R.drawable.purchase);
-                        menuItem2.setShow("true");
-                        menuItemlist.add(menuItem2);
-                    }
                     if (access.get("showPM").getAsBoolean()){
                         menuItem10.setMenuname(getString(R.string.title_pmticket));
                         menuItem10.setImg(R.drawable.repairtools);
@@ -514,6 +506,15 @@ public class Dashboard extends AppCompatActivity {
                         menuItem11.setShow(access.get("showDailyReport").toString());
                         menuItemlist.add(menuItem11);
                     }
+                    if (mshowPurchaseOrderPO.equals("false") && mshowPurchaseOrderFOC.equals("false")){
+
+                    }else{
+                        menuItem2.setMenuname(getString(R.string.title_purchase_order));
+                        menuItem2.setImg(R.drawable.purchase);
+                        menuItem2.setShow("true");
+                        menuItemlist.add(menuItem2);
+                    }
+
                     if (mshowPressList.equals("true")){
                         menuItem3.setMenuname(getString(R.string.title_Presslist));
                         menuItem3.setImg(R.drawable.req);

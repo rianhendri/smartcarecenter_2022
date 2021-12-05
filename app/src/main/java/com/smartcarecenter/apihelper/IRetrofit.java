@@ -32,6 +32,8 @@ public interface IRetrofit {
     public Call<JsonObject> dailyrlist(@Body JsonObject var1);
     @POST("api/dailyReport/Get")
     public Call<JsonObject> dailyrget(@Body JsonObject var1);
+    @POST("api/dailyReport/Read")
+    public Call<JsonObject> dailyread(@Body JsonObject var1);
 
     @POST("api/FormRequest/ReopenCase")
     public Call<JsonObject> postRawJSONreopen(@Body JsonObject var1);

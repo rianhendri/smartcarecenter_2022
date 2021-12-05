@@ -87,9 +87,9 @@
                     android:textSize="11sp" />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/seguisb"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:text=" - "/>
                 <TextView
                     android:id="@+id/enddate"

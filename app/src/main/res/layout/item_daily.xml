@@ -47,15 +47,6 @@
 				android:orientation="vertical" >
 
 
-				<TextView
-					android:id="@+id/sttitledaily"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:fontFamily="@font/seguisb"
-					android:maxLength="30"
-					android:text="Lorem Ipsum Amet Dolor Ametasdasdasdasdasdsadasdasd"
-					android:textColor="@color/black"
-					android:textSize="14sp" />
 
 				<LinearLayout
 					android:layout_width="match_parent"
@@ -63,26 +54,63 @@
 					android:layout_marginTop="4dp"
 					android:gravity="center_vertical"
 					android:orientation="horizontal" >
-
+					<LinearLayout
+						android:layout_width="12dp"
+						android:layout_height="match_parent"
+						android:orientation="horizontal">
+						<ImageView
+							android:id="@+id/dot"
+							android:layout_width="12dp"
+							android:layout_height="match_parent"
+							android:src="@drawable/notification_red_dot" />
+					</LinearLayout>
 
 					<TextView
 
-						android:layout_width="wrap_content"
+						android:id="@+id/presstypedaily"
+						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
-						android:text="Date: "
+						android:fontFamily="@font/seguisb"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:paddingRight="8dp"
+						android:text="Lorem Ipasdasdadsum Aasdaasdmet dfgdfgdfgfdgdfgdgdgDolor Ametasdasdasdasdasdsadasdasd"
 						android:textColor="@color/black"
-						android:textSize="11sp" />
+						android:layout_weight="1"
+						android:textSize="14sp" />
 
 					<TextView
 						android:id="@+id/datedaily"
-						android:layout_width="match_parent"
+						android:layout_width="95dp"
 						android:layout_height="wrap_content"
 						android:fontFamily="@font/segoeui"
-						android:text="12 Juni 2020"
+						android:text="2021-12-31 12:30"
 						android:textColor="@color/black"
-						android:textSize="12sp" />
+						android:textSize="11sp" />
 
+				</LinearLayout>
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="4dp"
+					android:gravity="center_vertical"
+					android:orientation="horizontal" >
+
+					<LinearLayout
+						android:layout_width="12dp"
+						android:layout_height="match_parent"
+						android:orientation="horizontal">
+
+					</LinearLayout>
+
+					<TextView
+						android:id="@+id/customername"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="@color/black"
+						android:fontFamily="@font/seguisb"
+						android:text="asdasdasdasdasd"
+						android:textSize="11sp" />
 
 					<TextView
 						android:layout_width="wrap_content"
@@ -96,17 +124,22 @@
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="4dp"
+
 					android:gravity="center_vertical"
 					android:orientation="horizontal" >
 
+					<LinearLayout
+						android:layout_width="12dp"
+						android:layout_height="match_parent"
+						android:orientation="horizontal">
 
+					</LinearLayout>
 					<TextView
-
-						android:layout_width="wrap_content"
+						android:id="@+id/caseprog"
+						android:layout_width="70dp"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
-						android:text="Case Progress: "
+						android:fontFamily="@font/seguisb"
+						android:text="Case Progress"
 						android:textColor="@color/black"
 						android:textSize="11sp" />
 
@@ -115,43 +148,9 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="2dp"
-						android:fontFamily="@font/segoeui"
-						android:textSize="11sp" />
-
-
-
-					<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
-						android:text="Ticket Status:"
+						android:layout_weight="1"
 						android:textColor="@color/black"
-						android:textSize="11sp"
-						android:visibility="gone" />
-				</LinearLayout>
-				<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="4dp"
-					android:gravity="center_vertical"
-					android:orientation="horizontal" >
-
-
-					<TextView
-
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:fontFamily="@font/segoeui"
-						android:text="Press: "
-						android:textColor="@color/black"
-						android:textSize="11sp" />
-
-					<TextView
-						android:id="@+id/presstypedaily"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginLeft="2dp"
-						android:fontFamily="@font/segoeui"
+						android:fontFamily="@font/seguisb"
 						android:textSize="11sp" />
 
 
@@ -242,30 +241,35 @@
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="4dp"
+					android:layout_marginTop="0dp"
 					android:gravity="center_vertical"
 					android:orientation="horizontal" >
+					<LinearLayout
+						android:layout_width="12dp"
+						android:layout_height="match_parent"
+						android:orientation="horizontal">
 
+					</LinearLayout>
 
 					<TextView
-						android:gravity="center"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:fontFamily="@font/segoeui"
-						android:text="Press Status: "
+						android:id="@+id/pressta"
+						android:layout_width="70dp"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/seguisb"
+						android:text="Press Status "
 						android:textColor="@color/black"
 						android:textSize="11sp" />
+
 
 					<TextView
 						android:id="@+id/pressstatusdaily"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="2dp"
-						android:fontFamily="@font/segoeuib"
-						android:textSize="11sp"
-						android:text="asdasdasdasdasd"/>
-
-
+						android:textColor="@color/black"
+						android:fontFamily="@font/seguisb"
+						android:text="asdasdasdasdasd"
+						android:textSize="11sp" />
 
 					<TextView
 						android:layout_width="wrap_content"
@@ -277,6 +281,39 @@
 						android:visibility="gone" />
 				</LinearLayout>
 
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="0dp"
+					android:gravity="center_vertical"
+					android:orientation="horizontal">
+
+					<LinearLayout
+						android:layout_width="12dp"
+						android:layout_height="match_parent"
+						android:orientation="horizontal">
+
+					</LinearLayout>
+
+					<TextView
+						android:id="@+id/sttitledaily"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/seguisb"
+						android:text="asdasdasdasdasd"
+						android:textColor="@color/black"
+						android:textSize="11sp" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/segoeui"
+						android:text="Ticket Status:"
+						android:textColor="@color/black"
+						android:textSize="11sp"
+						android:visibility="gone" />
+				</LinearLayout>
 
 			</LinearLayout>
 		</LinearLayout>
