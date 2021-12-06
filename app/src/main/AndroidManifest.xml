@@ -28,7 +28,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailsDailyReport"></activity>
+        <activity android:name=".DetailsDailyReport2">
+
+        </activity>
+        <activity android:name=".DetailsDailyReport" >
+            <intent-filter>
+                <action android:name="SCCDR" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".DailyReportList" />
         <activity android:name=".DetailsPM">
             <intent-filter>

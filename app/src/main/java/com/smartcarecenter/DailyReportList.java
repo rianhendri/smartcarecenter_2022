@@ -81,8 +81,8 @@ public class DailyReportList extends AppCompatActivity {
     TextView mrecord,mempetyreq;
     RecyclerView myitem_place;
     int page = 1;
-    String startdate = "";
-    String enddate="";
+    public static String startdate = "";
+    public static  String enddate="";
     int pos = 0;
     boolean refreshscroll = true;
     String sesionid_new = "";
@@ -108,12 +108,23 @@ public class DailyReportList extends AppCompatActivity {
     mnested = findViewById(R.id.nestedscrol);
     mempetyreq = findViewById(R.id.norequest);
     mswip = findViewById(R.id.swiprefresh);
+        Bundle bundle2 = getIntent().getExtras();
+        if (bundle2 != null) {
+//            reportcd = bundle2.getString("id");
+            startdate = bundle2.getString("startd");
+            enddate = bundle2.getString("endd");
+
+            mstartdate.setText(startdate);
+            menddate.setText(enddate);
+        }else {
+            String string2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            mstartdate.setText((CharSequence)string2);
+            menddate.setText((CharSequence)string2);
+            startdate = string2;
+            enddate = string2;
+        }
     check.checklistform=1;
-    String string2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        mstartdate.setText((CharSequence)string2);
-        menddate.setText((CharSequence)string2);
-    startdate = string2;
-    enddate = string2;
+
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
         @Override

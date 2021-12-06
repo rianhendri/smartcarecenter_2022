@@ -406,7 +406,7 @@ public class DetailsPM extends AppCompatActivity {
         dateTimeFragment.setTimeZone(TimeZone.getDefault());
 
         // Init format
-        final SimpleDateFormat myDateFormat = new SimpleDateFormat("dd-MMMM-yyyy HH:mm", java.util.Locale.getDefault());
+        final SimpleDateFormat myDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault());
         // Assign unmodifiable values
         dateTimeFragment.set24HoursMode(false);
         dateTimeFragment.setHighlightAMPMSelection(false);
@@ -456,7 +456,7 @@ public class DetailsPM extends AppCompatActivity {
         AlertDialog d = new AlertDialog.Builder(DetailsPM.this)
                 .setView(v)
                 .setPositiveButton("Submit", null) //Set to null. We override the onclick
-                .setNegativeButton("Cancle", null)
+                .setNegativeButton("CANCEL", null)
                 .create();
 
         // membuat alert dialog dari builder
@@ -522,8 +522,8 @@ public class DetailsPM extends AppCompatActivity {
         // set pesan dari dialog
         AlertDialog d = new AlertDialog.Builder(DetailsPM.this)
                 .setView(v)
-                .setPositiveButton("Submit", null) //Set to null. We override the onclick
-                .setNegativeButton("Cancle", null)
+                .setPositiveButton("SUBMIT", null) //Set to null. We override the onclick
+                .setNegativeButton("CANCEL", null)
                 .create();
 
         // membuat alert dialog dari builder
@@ -1231,6 +1231,7 @@ public class DetailsPM extends AppCompatActivity {
 
                 String errornya = "";
                 JsonObject homedata=response.body();
+                Log.d("homedata",homedata.toString());
                 String statusnya = homedata.get("status").getAsString();
                 if (homedata.get("errorMessage").toString().equals("null")) {
 

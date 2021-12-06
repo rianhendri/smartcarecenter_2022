@@ -102,7 +102,7 @@ public class PmList extends AppCompatActivity {
             maddform.setVisibility(View.GONE);
             myitem_place.setPadding(0,0,0,0);
         }else {
-            maddform.setVisibility(View.VISIBLE);
+            maddform.setVisibility(View.GONE);
             myitem_place.setPadding(0,0,0,120);
 
         }

@@ -67,7 +67,7 @@ extends RecyclerView.Adapter<DetailsDailyAdapter5.Myviewholder> {
     @NonNull
     @Override
     public Myviewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_daily,
+        return new Myviewholder(LayoutInflater.from(context).inflate(R.layout.item_detaildaily5,
                 viewGroup, false));
 
     }

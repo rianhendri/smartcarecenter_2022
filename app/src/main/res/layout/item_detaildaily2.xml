@@ -3,26 +3,26 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:orientation="vertical" >
-
+	android:orientation="horizontal" >
+	<ImageView
+		android:visibility="visible"
+		android:paddingLeft="4dp"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_marginRight="4dp"
+		android:src="@drawable/blackdot"
+		android:text="."/>
 	<TextView
 		android:visibility="visible"
 		android:id="@+id/textcntn"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="14dp"
-		android:layout_marginRight="14dp"
-		android:layout_marginTop="14dp"
-		android:fontFamily="@font/segoeui"
-		android:textSize="12sp"
+		android:layout_marginLeft="0dp"
+		android:layout_marginRight="0dp"
+		android:layout_marginTop="2dp"
+		android:fontFamily="@font/opensanslight"
+		android:textSize="15sp"
 		android:textColor="@color/black"
-		android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-	<View
-		android:layout_width="match_parent"
-		android:layout_height="1dp"
-		android:layout_marginLeft="14dp"
-		android:layout_marginRight="14dp"
-		android:layout_marginTop="14dp"
-		android:background="@color/softgrey" />
+		android:text="Lorem Ipsum is nting and typesetting industry."/>
 
 </LinearLayout>

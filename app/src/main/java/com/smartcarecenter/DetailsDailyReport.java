@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -60,6 +61,8 @@ import static com.smartcarecenter.Dashboard.showaddfoc;
 import static com.smartcarecenter.Dashboard.showaddform;
 import static com.smartcarecenter.Dashboard.showaddpo;
 import static com.smartcarecenter.DailyReportList.valuefilter;
+import static com.smartcarecenter.FormActivity.list2;
+import static com.smartcarecenter.FormActivity.refresh;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 
 public class DetailsDailyReport extends AppCompatActivity {
@@ -92,15 +95,27 @@ public class DetailsDailyReport extends AppCompatActivity {
     int page = 1;
     int pos = 0;
     boolean refreshscroll = true;
+    String noreq = "";
+    String home = "";
+    String guid = "";
+    String username = "";
+    String noticket = "";
+    String scrollnya = "";
+    Integer xhori = 0;
+    Integer yverti = 0;
     String sesionid_new = "";
     String reportcd = "";
-    TextView mcaseid,mreportdate,mpresssn,mcaseprogress,mpressstatus,mticketlink,mservicetype;
+    String startdate = "";
+    String enddate="";
+    TextView mcaseid,mreportdate,mpresssn,mpresssn2,mcaseprogress,mpressstatus,mticketlink,mservicetype,mtanpasper,mcustname;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_daily_report);
         mrecord = findViewById(R.id.record);
+        mtanpasper=findViewById(R.id.tanpasper);
+        mcustname=findViewById(R.id.custname);
         mfooterload = findViewById(R.id.footerload);
         mback = findViewById(R.id.backbtn);
         myitem_place1 = findViewById(R.id.temuanlist);
@@ -112,6 +127,7 @@ public class DetailsDailyReport extends AppCompatActivity {
         mcaseid = findViewById(R.id.caseid);
         mreportdate = findViewById(R.id.reportdate);
         mpresssn = findViewById(R.id.presssn);
+        mpresssn2 = findViewById(R.id.presssn2);
         mcaseprogress = findViewById(R.id.caseprogress);
         mpressstatus = findViewById(R.id.pressstatus);
         mticketlink = findViewById(R.id.ticketlink);
@@ -120,7 +136,21 @@ public class DetailsDailyReport extends AppCompatActivity {
         check.checklistform=1;
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
+            noreq = bundle2.getString("id");
+            home = bundle2.getString("home");
+            guid = bundle2.getString("guid");
+            username = bundle2.getString("user");
+            noticket = bundle2.getString("noticket");
+//            ServiceTicket.valuefilter = bundle2.getString("pos");
+            scrollnya =   bundle2.getString("scrolbawah");
+            xhori=bundle2.getInt("xhori");
+            yverti=bundle2.getInt("yverti");
             reportcd = bundle2.getString("id");
+            startdate = bundle2.getString("startd");
+            enddate = bundle2.getString("endd");
+//            hide = bundle2.getString("hide");
+            Log.d("startdat",startdate+enddate);
+
 
         }
         //setlayout recyler
@@ -223,6 +253,7 @@ public class DetailsDailyReport extends AppCompatActivity {
                 String errornya = "";
                 JsonObject homedata=response.body();
                 String statusnya = homedata.get("status").getAsString();
+                Log.d("respombody",homedata.toString());
                 if (homedata.get("errorMessage").toString().equals("null")) {
 
                 }else {
@@ -233,7 +264,7 @@ public class DetailsDailyReport extends AppCompatActivity {
                 if (statusnya.equals("OK")){
                     ReadNotif();
                     JsonObject data = homedata.getAsJsonObject("data");
-
+                    mcustname.setText(data.get("customerName").getAsString());
                     mcaseid.setText(data.get("caseID").getAsString());
                     String newdate = "";
                     String oldadate = data.get("reportDateTime").getAsString();
@@ -248,9 +279,20 @@ public class DetailsDailyReport extends AppCompatActivity {
                         parseException.printStackTrace();
                     }
                     mreportdate.setText(newdate);
-                    mpresssn.setText(data.get("pressSN").getAsString()+"("+data.get("pressType").getAsString()+")");
+                    mpresssn.setText(data.get("pressSN").getAsString());
+                    mpresssn2.setText(data.get("pressType").getAsString());
                     mcaseprogress.setText(data.get("caseProgress").getAsString());
+//                    if (data.get("caseProgress").getAsString().equals("Masalah Sudah Selesai")){
+//                        mcaseprogress.setTextColor(Color.parseColor("#"));
+//                    }else {
+//
+//                    }
                     mpressstatus.setText(data.get("pressStatus").getAsString());
+                    if (data.get("pressStatus").getAsString().equals("Mesin Tetap Produksi")){
+                        mpressstatus.setTextColor(Color.parseColor("#0890cc"));
+                    }else {
+                        mpressstatus.setTextColor(Color.parseColor("#FF0000"));
+                    }
                     mticketlink.setText(data.get("ticketUntuk").getAsString());
                     mservicetype.setText(data.get("serviceType").getAsString());
 
@@ -289,18 +331,18 @@ public class DetailsDailyReport extends AppCompatActivity {
                     }.getType();
                     Type listType4 = new TypeToken<ArrayList<DetailsDailyItem4>>() {
                     }.getType();
-                    Type listType5 = new TypeToken<ArrayList<DetailsDailyItem4>>() {
+                    Type listType5 = new TypeToken<ArrayList<DetailsDailyItem5>>() {
                     }.getType();
                     list1 = gson.fromJson(listformreq.toString(), listType);
                     list2 = gson.fromJson(listformreq2.toString(), listType2);
                     list3 = gson.fromJson(listformreq3.toString(), listType3);
                     list4 = gson.fromJson(listformreq4.toString(), listType4);
-                    list5 = gson.fromJson(listformreq4.toString(), listType5);
+                    list5 = gson.fromJson(listformreq5.toString(), listType5);
                     addFormAdapterAdapter1 = new DetailsDailyAdapter1(DetailsDailyReport.this, list1);
                     addFormAdapterAdapter2 = new DetailsDailyAdapter2(DetailsDailyReport.this, list2);
                     addFormAdapterAdapter3 = new DetailsDailyAdapter3(DetailsDailyReport.this, list3);
                     addFormAdapterAdapter4 = new DetailsDailyAdapter4(DetailsDailyReport.this, list4);
-
+                    addFormAdapterAdapter5 = new DetailsDailyAdapter5(DetailsDailyReport.this, list5);
                     myitem_place1.setAdapter(addFormAdapterAdapter1);
                     myitem_place1.setVisibility(View.VISIBLE);
                     myitem_place2.setAdapter(addFormAdapterAdapter2);
@@ -311,6 +353,14 @@ public class DetailsDailyReport extends AppCompatActivity {
                     myitem_place4.setVisibility(View.VISIBLE);
                     myitem_place5.setAdapter(addFormAdapterAdapter5);
                     myitem_place5.setVisibility(View.VISIBLE);
+                    Log.d("lisffromm",listformreq5.toString());
+                    if (listformreq4.toString().equals("[]")){
+                        myitem_place4.setVisibility(View.GONE);
+                        mtanpasper.setVisibility(View.VISIBLE);
+                    }else {
+                        myitem_place4.setVisibility(View.VISIBLE);
+                        mtanpasper.setVisibility(View.GONE);
+                    }
 
 
 //                    if (listformreq.size() == 0) {
@@ -425,10 +475,46 @@ public class DetailsDailyReport extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(DetailsDailyReport.this,DailyReportList.class);
-        back.putExtra("pos",valuefilter);
-        startActivity(back);
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-        finish();
+        if (check.checknotif==1){
+            if (username==null){
+                if (check.checkhome==0){
+                    if (check.checklistform==1){
+                        list2.clear();
+                        refresh=true;
+                    }
+//                    Intent back = new Intent(DetailsST.this,Home.class);
+//                    back.putExtra("pos",valuefilter);
+//                    startActivity(back);
+//                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+//                    finish();
+                    super.onBackPressed();
+                    finish();
+                }else {
+                    Intent back = new Intent(DetailsDailyReport.this,Dashboard.class);
+                    back.putExtra("pos", FormActivity.valuefilter);
+                    startActivity(back);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                    finish();
+                }
+
+            }else {
+                super.onBackPressed();
+                Intent back = new Intent(DetailsDailyReport.this,DailyReportList.class);
+                back.putExtra("pos",valuefilter);
+                back.putExtra("startd",startdate);
+                back.putExtra("endd",enddate);
+                startActivity(back);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                finish();
+            }
+        }else {
+            Intent back = new Intent(DetailsDailyReport.this,Dashboard.class);
+            back.putExtra("pos", FormActivity.valuefilter);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }
+
+
     }
 }

@@ -57,6 +57,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.smartcarecenter.DailyReportList.enddate;
+import static com.smartcarecenter.DailyReportList.startdate;
 import static com.smartcarecenter.FormActivity.valuefilter;
 
 public class DailyAdapter
@@ -97,18 +99,23 @@ extends RecyclerView.Adapter<DailyAdapter.Myviewholder> {
         }
         myviewholder.mdatedaily.setText(newdate);
         myviewholder.mpresstypedaily.setText(addFromItem.get(i).getPressSN()+" ("+addFromItem.get(i).getPressTypeName()+")");
-        myviewholder.mpressstatudaily.setText(": "+addFromItem.get(i).getPressStatusName());
+        myviewholder.mpressstatudaily.setText(addFromItem.get(i).getPressStatusName());
+        if (addFromItem.get(i).getPressStatusName().equals("Mesin Tetap Produksi")){
+            myviewholder.mpressstatudaily.setTextColor(Color.parseColor("#0890cc"));
+        }else {
+            myviewholder.mpressstatudaily.setTextColor(Color.parseColor("#FF0000"));
+        }
 //        myviewholder.mpressstatudaily.setTextColor(Color.parseColor("#"+addFromItem.get(i).getStatusColorCode()));
-        myviewholder.msndaily.setText(": "+addFromItem.get(i).getPressSN());
+        myviewholder.msndaily.setText(addFromItem.get(i).getPressSN());
 //        myviewholder.mcaseiddaily.setText(addFromItem.get(i).getCaseProgressName());
-        myviewholder.mcaseprogressdaily.setText(": "+addFromItem.get(i).getCaseProgressName());
+        myviewholder.mcaseprogressdaily.setText(addFromItem.get(i).getCaseProgressName());
         Typeface type = Typeface.createFromAsset(context.getAssets(),"font/segoeuib.ttf");
         Typeface type2 = Typeface.createFromAsset(context.getAssets(),"font/segoeui.ttf");
         if (addFromItem.get(i).isFlag()){
             myviewholder.mdot.setVisibility(View.VISIBLE);
             myviewholder.mdatedaily.setTypeface(type);
-            myviewholder.mpressstatudaily.setTypeface(type);
-            myviewholder.mcaseprogressdaily.setTypeface(type);
+//            myviewholder.mpressstatudaily.setTypeface(type);
+//            myviewholder.mcaseprogressdaily.setTypeface(type);
             myviewholder.mcustomername.setTypeface(type);
             myviewholder.msttitledaily.setTypeface(type);
 //            myviewholder.mcaseprog.setTypeface(type);
@@ -116,8 +123,8 @@ extends RecyclerView.Adapter<DailyAdapter.Myviewholder> {
         }else {
             myviewholder.mdot.setVisibility(View.GONE);
             myviewholder.mdatedaily.setTypeface(type2);
-            myviewholder.mpressstatudaily.setTypeface(type2);
-            myviewholder.mcaseprogressdaily.setTypeface(type2);
+//            myviewholder.mpressstatudaily.setTypeface(type2);
+//            myviewholder.mcaseprogressdaily.setTypeface(type2);
             myviewholder.mcustomername.setTypeface(type2);
             myviewholder.msttitledaily.setTypeface(type2);
 //            myviewholder.mcaseprog.setTypeface(type2);
@@ -133,6 +140,8 @@ extends RecyclerView.Adapter<DailyAdapter.Myviewholder> {
                 intent.putExtra("pos", valuefilter);
                 intent.putExtra("user", addFromItem.get(i).getCustomerName());
                 intent.putExtra("scrolbawah", "yes");
+                intent.putExtra("startd", startdate);
+                intent.putExtra("endd", enddate);
                 context.startActivity(intent);
                 ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 ((Activity)context).finish();

@@ -77,6 +77,7 @@ extends RecyclerView.Adapter<DetailsDailyAdapter4.Myviewholder> {
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
         myviewholder.msparepartname.setText(addFromItem.get(i).getSparePartCd());
         myviewholder.mqty.setText(addFromItem.get(i).getQuantity());
+        myviewholder.mno.setText(String.valueOf(i+1));
     }
 
     @Override
@@ -86,12 +87,13 @@ extends RecyclerView.Adapter<DetailsDailyAdapter4.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mdatedaily, msttitledaily,mpresstypedaily,mpressstatudaily,mhtml,msndaily,mcaseiddaily,mcaseprogressdaily,msparepartname,mqty;
+        TextView mdatedaily, msttitledaily,mpresstypedaily,mpressstatudaily,mhtml,msndaily,mcaseiddaily,mcaseprogressdaily,msparepartname,mqty,mno;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
             msparepartname = itemView.findViewById(R.id.sparepartname);
             mqty = itemView.findViewById(R.id.qty);
+            mno = itemView.findViewById(R.id.nono);
 
         }
     }
