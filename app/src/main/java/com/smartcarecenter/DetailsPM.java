@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +39,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -75,6 +77,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -90,6 +93,7 @@ import static com.smartcarecenter.historyfr.AdapterHistoryfr.frpos;
 import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 public class DetailsPM extends AppCompatActivity {
+    DatePickerDialog datePickerDialog;
     FirebaseAuth mAuth;
     ArrayList<Itemchat> itemchat;
     LinearLayout mdot;
@@ -178,6 +182,8 @@ public class DetailsPM extends AppCompatActivity {
     private TextView textView;
 
     private SwitchDateTimeDialogFragment dateTimeFragment;
+    Integer jadwal = 05;
+    Integer mindatenya=0;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -352,7 +358,7 @@ public class DetailsPM extends AppCompatActivity {
     private void updateLabel() {
         String myFormat = "yyyy-MM-dd HH:mm"; //In which you need put here
 
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
         mreschdate.setText(sdf.format(myCalendar.getTime()));
     }
@@ -384,13 +390,7 @@ public class DetailsPM extends AppCompatActivity {
                 reasonkirim = mreasonnya.getText().toString();
             }
         });
-//
-//        if (savedInstanceState != null) {
-//            // Restore value from saved state
-//            mreschdate.setText(savedInstanceState.getCharSequence(STATE_TEXTVIEW));
-//        }
 
-        // Construct SwitchDateTimePicker
         dateTimeFragment = (SwitchDateTimeDialogFragment) getSupportFragmentManager().findFragmentByTag(TAG_DATETIME_FRAGMENT);
         if (dateTimeFragment == null) {
             dateTimeFragment = SwitchDateTimeDialogFragment.newInstance(
@@ -406,16 +406,15 @@ public class DetailsPM extends AppCompatActivity {
         dateTimeFragment.setTimeZone(TimeZone.getDefault());
 
         // Init format
-        final SimpleDateFormat myDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault());
+        final SimpleDateFormat myDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH);
         // Assign unmodifiable values
         dateTimeFragment.set24HoursMode(false);
         dateTimeFragment.setHighlightAMPMSelection(false);
         dateTimeFragment.setMinimumDateTime(new GregorianCalendar(2015, Calendar.JANUARY, 1).getTime());
-        dateTimeFragment.setMaximumDateTime(new GregorianCalendar(2025, Calendar.DECEMBER, 31).getTime());
-
+        dateTimeFragment.setMaximumDateTime(new GregorianCalendar(2225, Calendar.DECEMBER, 31).getTime());
         // Define new day and month format
         try {
-            dateTimeFragment.setSimpleDateMonthAndDayFormat(new SimpleDateFormat("MMMM dd", Locale.getDefault()));
+            dateTimeFragment.setSimpleDateMonthAndDayFormat(new SimpleDateFormat("MMMM dd", Locale.ENGLISH));
         } catch (SwitchDateTimeDialogFragment.SimpleDateMonthAndDayFormatException e) {
             Log.e(TAG, e.getMessage());
         }
@@ -445,11 +444,12 @@ public class DetailsPM extends AppCompatActivity {
         mreschdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showDateTimeDialog();
                 // Re-init each time
-                dateTimeFragment.startAtCalendarView();
-                dateTimeFragment.set24HoursMode(true);
-//                dateTimeFragment.setDefaultDateTime(new GregorianCalendar(2017, Calendar.MARCH, 4, 15, 20).getTime());
-                dateTimeFragment.show(getSupportFragmentManager(), TAG_DATETIME_FRAGMENT);
+//                dateTimeFragment.startAtCalendarView();
+//                dateTimeFragment.set24HoursMode(true);
+////                dateTimeFragment.setDefaultDateTime(new GregorianCalendar(2017, Calendar.MARCH, 4, 15, 20).getTime());
+//                dateTimeFragment.show(getSupportFragmentManager(), TAG_DATETIME_FRAGMENT);
             }
         });
         // set pesan dari dialog
@@ -490,6 +490,37 @@ public class DetailsPM extends AppCompatActivity {
         });
         d.show();
 
+    }
+    private void showDateTimeDialog() {
+
+        final Calendar calendar=Calendar.getInstance();
+        final int day=calendar.get(Calendar.DAY_OF_MONTH);
+        final int year=calendar.get(Calendar.YEAR);
+        final int month=calendar.get(Calendar.MONTH);
+        datePickerDialog=new DatePickerDialog(DetailsPM.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                mreschdate.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+                mreschdate.setText(year+"-"+(month+1)+"-"+dayOfMonth);
+            }
+        },year,month,day);
+        if (jadwal > day) {
+            mindatenya = jadwal-day;
+//            Toast.makeText(DetailsPM.this, "Selected date is greater than 8 days", Toast.LENGTH_SHORT).show();
+        } else if (jadwal< day){
+            mindatenya = jadwal-day;
+//            Toast.makeText(DetailsPM.this, "Selected date is less than 8 days", Toast.LENGTH_SHORT).show();
+        }
+        if (20==20){
+            datePickerDialog.getDatePicker().setSelected(false);
+        }
+        calendar.add(Calendar.DAY_OF_MONTH, mindatenya);
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());  //set min date                 // set today's date as min date
+        calendar.add(Calendar.DAY_OF_MONTH, 30); // add date to 30 days later
+        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+        //Disable all SUNDAYS and SATURDAYS between Min and Max Dates
+
+        datePickerDialog.show();
     }
     private void rejectpm() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -1000,8 +1031,8 @@ public class DetailsPM extends AppCompatActivity {
                     }
                     String newdatew = "";
                     String oldadate = data.get("pmScheduledDateTime").getAsString();
-                    SimpleDateFormat simpleDateFormat7 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-                    SimpleDateFormat simpleDateFormat20 = new SimpleDateFormat("dd-MM-yyyy  HH:mm", Locale.getDefault());
+                    SimpleDateFormat simpleDateFormat7 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+                    SimpleDateFormat simpleDateFormat20 = new SimpleDateFormat("dd-MM-yyyy  HH:mm", Locale.ENGLISH);
                     try {
                         newdatew = simpleDateFormat20.format(simpleDateFormat7.parse(oldadate));
                         System.out.println(newdatew);
@@ -1057,8 +1088,8 @@ public class DetailsPM extends AppCompatActivity {
                         }
 
                         String string7 = data.get("serviceTicketCreated").getAsString();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-                        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss",Locale.ENGLISH);
+                        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
                         String string5 = null;
                         String string6="";
                         try {
@@ -1128,8 +1159,8 @@ public class DetailsPM extends AppCompatActivity {
 //                    mreqno.setText(mformRequestCd);
                     frpos = mformRequestCd;
                     String datenew = "";
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-                    SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss",Locale.ENGLISH);
+                    SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
                     try {
                         datenew = simpleDateFormat.format(simpleDateFormat.parse(mdateapi));
                         System.out.println(datenew);
@@ -1213,6 +1244,7 @@ public class DetailsPM extends AppCompatActivity {
 
             }
         });
+        Log.d("approvepPM",jsonObject.toString());
     }
     public void reschedulepm(){
         loading = ProgressDialog.show(DetailsPM.this, "", getString(R.string.title_loading), true);

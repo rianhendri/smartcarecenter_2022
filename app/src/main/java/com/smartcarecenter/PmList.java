@@ -98,6 +98,7 @@ public class PmList extends AppCompatActivity {
         mswip = findViewById(R.id.swiprefresh);
         check.checklistform=1;
         //showadd
+        //showadd
         if (showaddform.equals("false")){
             maddform.setVisibility(View.GONE);
             myitem_place.setPadding(0,0,0,0);

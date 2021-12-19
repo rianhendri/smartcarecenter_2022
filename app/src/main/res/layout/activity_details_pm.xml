@@ -696,7 +696,101 @@
                         android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:gravity="start"
+                android:orientation="horizontal"
+                android:paddingLeft="12sp" >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/seguisb"
+                        android:gravity="start"
+                        android:text="@string/title_serviceticket"
+                        android:textColor="@color/dwhite"
+                        android:textSize="17sp" />
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/stid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/segoeui"
+                        android:gravity="start"
+                        android:text="-"
+                        android:textColor="@color/dwhite"
+                        android:textSize="17sp" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/chatclik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="12dp"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/seguisb"
+                        android:textSize="12sp"
+                        android:text="Live Chat "
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:layout_marginRight="8dp"/>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp">
+                        <ImageView
+                            android:id="@+id/waa"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/chat"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                        <LinearLayout
+
+                            android:id="@+id/dot"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:background="@drawable/notification_red_dot2"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0">
+
+                            <TextView
+                                android:id="@+id/newnotif"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/seguisb"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="@color/dwhite"
+                                android:textSize="8dp"
+                                android:visibility="visible" />
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/layoutticket"
                 android:layout_width="match_parent"
@@ -705,100 +799,7 @@
                 android:orientation="vertical"
                 android:paddingBottom="16dp" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:gravity="start"
-                    android:orientation="horizontal"
-                    android:paddingLeft="12sp" >
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="1">
-                        <TextView
-                            android:visibility="gone"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/seguisb"
-                            android:gravity="start"
-                            android:text="@string/title_serviceticket"
-                            android:textColor="@color/dwhite"
-                            android:textSize="17sp" />
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/stid"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginTop="0dp"
-                            android:fontFamily="@font/segoeui"
-                            android:gravity="start"
-                            android:text="-"
-                            android:textColor="@color/dwhite"
-                            android:textSize="17sp" />
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/chatclik"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:orientation="horizontal"
-                        android:layout_marginRight="12dp"
-                        android:gravity="center_vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/seguisb"
-                            android:textSize="12sp"
-                            android:text="Live Chat "
-                            android:gravity="center_vertical"
-                            android:textColor="@color/dwhite"
-                            android:layout_marginRight="8dp"/>
-                        <androidx.constraintlayout.widget.ConstraintLayout
-
-                            android:layout_width="30dp"
-                            android:layout_height="30dp">
-                            <ImageView
-                                android:id="@+id/waa"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:src="@drawable/chat"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                            <LinearLayout
-
-                                android:id="@+id/dot"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/notification_red_dot2"
-                                android:orientation="vertical"
-                                android:visibility="gone"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="1.0"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0">
-
-                                <TextView
-                                    android:id="@+id/newnotif"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:fontFamily="@font/seguisb"
-                                    android:gravity="center"
-                                    android:text="-"
-                                    android:textColor="@color/dwhite"
-                                    android:textSize="8dp"
-                                    android:visibility="visible" />
-                            </LinearLayout>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
