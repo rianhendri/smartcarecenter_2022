@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -33,11 +32,14 @@ import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -69,6 +71,7 @@ import com.smartcarecenter.messagecloud.check;
 import com.smartcarecenter.serviceticket.ServiceTicketAdapter;
 import com.smartcarecenter.serviceticket.ServicesTicketItem;
 import com.squareup.picasso.Picasso;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -93,7 +96,7 @@ import static com.smartcarecenter.historyfr.AdapterHistoryfr.frpos;
 import static com.smartcarecenter.messagecloud.check.tokennya2;
 
 public class DetailsPM extends AppCompatActivity {
-    DatePickerDialog datePickerDialog;
+    com.wdullaer.materialdatetimepicker.date.DatePickerDialog datePickerDialog;
     FirebaseAuth mAuth;
     ArrayList<Itemchat> itemchat;
     LinearLayout mdot;
@@ -113,6 +116,9 @@ public class DetailsPM extends AppCompatActivity {
     String reasonkirim = "";
     String datetimekirim = "";
     public static  TextView mreschdate;
+    String datenya = "";
+    Spinner mstatus_spin;
+    String jampilih = "";
     public static String noreq = "";
     public static String MhaveToUpdate = "";
     public static String MsessionExpired = "";
@@ -182,13 +188,16 @@ public class DetailsPM extends AppCompatActivity {
     private TextView textView;
 
     private SwitchDateTimeDialogFragment dateTimeFragment;
-    Integer jadwal = 05;
+    Integer jadwal = 30;
     Integer mindatenya=0;
+    List<String> listtime = new ArrayList();
+    JsonArray liststatus;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_pm);
+
         mnotif = findViewById(R.id.newnotif);
         mstpm = findViewById(R.id.stpm);
         mreasonpm = findViewById(R.id.reasonpm);
@@ -354,6 +363,7 @@ public class DetailsPM extends AppCompatActivity {
             });
 
         }
+
     }
     private void updateLabel() {
         String myFormat = "yyyy-MM-dd HH:mm"; //In which you need put here
@@ -374,6 +384,32 @@ public class DetailsPM extends AppCompatActivity {
         View v = getLayoutInflater().inflate(R.layout.dialogspar2, null);
         mreasonnya=v.findViewById(R.id.reasondes);
         mreschdate=v.findViewById(R.id.datereqres);
+        mstatus_spin = v.findViewById(R.id.spinstatus);
+        listtime.add("choose time");
+        listtime.add("08:00");
+        listtime.add("09:00");
+        listtime.add("10:00");
+        listtime.add("11:00");
+        listtime.add("12:00");
+        listtime.add("13:00");
+        listtime.add("14:00");
+        listtime.add("15:00");
+        final ArrayAdapter<String> kategori = new ArrayAdapter<String>(DetailsPM.this, R.layout.spinstatus_layout2,
+                listtime);
+        kategori.setDropDownViewResource(R.layout.spinkategori);
+        kategori.notifyDataSetChanged();
+        mstatus_spin.setAdapter(kategori);
+        mstatus_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                jampilih=listtime.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         mreasonnya.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -471,19 +507,30 @@ public class DetailsPM extends AppCompatActivity {
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        if (mreasonnya.length()==0){
-                            Toast.makeText(DetailsPM.this, getString(R.string.title_reasonrequired),Toast.LENGTH_LONG).show();
+                        if (jampilih.equals("choose time")){
+                            Toast.makeText(DetailsPM.this, "Please choose time", Toast.LENGTH_SHORT).show();
                         }else {
-                            reschedulepm();
-                            d.dismiss();
+                            if(mreschdate.getText().toString().equals("choose date")){
+                                Toast.makeText(DetailsPM.this, "Please choose date", Toast.LENGTH_SHORT).show();
+                            }else {
+                                datetimekirim=datenya+" "+jampilih+":00";
+                                Log.d("datekirim",datetimekirim);
+                                if (mreasonnya.length()==0){
+                                    Toast.makeText(DetailsPM.this, getString(R.string.title_reasonrequired),Toast.LENGTH_LONG).show();
+                                }else {
+                                    reschedulepm();
+                                    d.dismiss();
+                                }
+                            }
                         }
+
                     }
                 });
                 C.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         d.dismiss();
+                        listtime.clear();
                     }
                 });
             }
@@ -497,30 +544,55 @@ public class DetailsPM extends AppCompatActivity {
         final int day=calendar.get(Calendar.DAY_OF_MONTH);
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);
-        datePickerDialog=new DatePickerDialog(DetailsPM.this, new DatePickerDialog.OnDateSetListener() {
+
+        datePickerDialog = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                mreschdate.setText(dayOfMonth+"/"+(month+1)+"/"+year);
-                mreschdate.setText(year+"-"+(month+1)+"-"+dayOfMonth);
+            public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                String nbulan="";
+                String hari="";
+                if (monthOfYear<10){
+                    nbulan = "0"+String.valueOf(monthOfYear+1);
+                }else {
+                    nbulan = String.valueOf(monthOfYear+1);
+                }
+                if (dayOfMonth<10){
+                    hari = "0"+String.valueOf(dayOfMonth);
+                }else {
+                    hari = String.valueOf(dayOfMonth);
+                }
+                mreschdate.setText(hari+"-"+nbulan+"-"+year);
+                datenya  =year+"-"+nbulan+"-"+hari;
+
+
             }
         },year,month,day);
-        if (jadwal > day) {
-            mindatenya = jadwal-day;
-//            Toast.makeText(DetailsPM.this, "Selected date is greater than 8 days", Toast.LENGTH_SHORT).show();
-        } else if (jadwal< day){
-            mindatenya = jadwal-day;
-//            Toast.makeText(DetailsPM.this, "Selected date is less than 8 days", Toast.LENGTH_SHORT).show();
-        }
-        if (20==20){
-            datePickerDialog.getDatePicker().setSelected(false);
-        }
-        calendar.add(Calendar.DAY_OF_MONTH, mindatenya);
-        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());  //set min date                 // set today's date as min date
-        calendar.add(Calendar.DAY_OF_MONTH, 30); // add date to 30 days later
-        datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
-        //Disable all SUNDAYS and SATURDAYS between Min and Max Dates
 
-        datePickerDialog.show();
+        if (jadwal > day) {
+            mindatenya = jadwal-day+30;
+//            Toast.makeText(DetailsPM.this, "Selected date is greater than 8 days", Toast.LENGTH_SHORT).show();
+        }
+//        calendar.add(Calendar.DAY_OF_MONTH, mindatenya);
+        datePickerDialog.setMinDate(calendar);  //set min date                 // set today's date as min date
+        calendar.add(Calendar.DAY_OF_MONTH, mindatenya); // add date to 30 days later
+        datePickerDialog.setMaxDate(calendar);
+        //Disable all SUNDAYS and SATURDAYS between Min and Max Dates
+         Calendar saturday;
+        Calendar sunday;
+        List<Calendar> weekends = new ArrayList<>();
+        int weeks = 30;
+
+        for (int i = 0; i < (weeks * 7); i = i + 7) {
+            for(int j =0; j > (weeks*7) ; j = j - 7);
+            sunday = Calendar.getInstance();
+            sunday.add(Calendar.DAY_OF_YEAR, (Calendar.SUNDAY - sunday.get(Calendar.DAY_OF_WEEK) + 7 + i));
+             saturday = Calendar.getInstance();
+             saturday.add(Calendar.DAY_OF_YEAR, (Calendar.SATURDAY - saturday.get(Calendar.DAY_OF_WEEK) + i));
+             weekends.add(saturday);
+            weekends.add(sunday);
+        }
+        Calendar[] disabledDays = weekends.toArray(new Calendar[weekends.size()]);
+        datePickerDialog.setDisabledDays(disabledDays);
+        datePickerDialog.show(getSupportFragmentManager(),"DateTimePicker");
     }
     private void rejectpm() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -1030,9 +1102,11 @@ public class DetailsPM extends AppCompatActivity {
                         mreopenbtn.setVisibility(View.GONE);
                     }
                     String newdatew = "";
+                    String visitd = "";
                     String oldadate = data.get("pmScheduledDateTime").getAsString();
                     SimpleDateFormat simpleDateFormat7 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
                     SimpleDateFormat simpleDateFormat20 = new SimpleDateFormat("dd-MM-yyyy  HH:mm", Locale.ENGLISH);
+                    SimpleDateFormat simpleDateFormat21 = new SimpleDateFormat("dd", Locale.ENGLISH);
                     try {
                         newdatew = simpleDateFormat20.format(simpleDateFormat7.parse(oldadate));
                         System.out.println(newdatew);
@@ -1042,6 +1116,16 @@ public class DetailsPM extends AppCompatActivity {
                     catch (ParseException parseException) {
                         parseException.printStackTrace();
                     }
+                    try {
+                        visitd = simpleDateFormat21.format(simpleDateFormat7.parse(oldadate));
+                        System.out.println(visitd);
+                        Log.e((String)"Datexse", (String)visitd);
+
+                    }
+                    catch (ParseException parseException) {
+                        parseException.printStackTrace();
+                    }
+//                    jadwal = Integer.parseInt(visitd);
                     mvisitdate.setText(newdatew);
 
                     mserviceTicketCd = data.get("serviceTicketCd").toString();

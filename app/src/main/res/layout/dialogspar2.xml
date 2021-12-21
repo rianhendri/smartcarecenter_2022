@@ -45,16 +45,57 @@
 			android:text="Reschedule Date:"
 			android:textColor="@color/black"
 			android:textSize="12sp" />
-
-		<TextView
-			android:id="@+id/datereqres"
+		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:fontFamily="@font/segoeui"
-			android:paddingLeft="10dp"
-			android:text="please choose"
-			android:textColor="@color/black"
-			android:textSize="13sp" />
+			android:orientation="horizontal">
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="horizontal">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/segoeui"
+					android:paddingLeft="10dp"
+					android:text="Date: "
+					android:textColor="@color/black"
+					android:textSize="13sp" />
+				<TextView
+					android:id="@+id/datereqres"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/segoeui"
+					android:text="choose date"
+					android:textColor="@color/black"
+					android:textSize="13sp" />
+			</LinearLayout>
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="end"
+				android:orientation="horizontal">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/segoeui"
+					android:paddingLeft="10dp"
+					android:text="Time: "
+					android:textColor="@color/black"
+					android:textSize="13sp" />
+				<Spinner
+					android:id="@+id/spinstatus"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:fontFamily="@font/seguisb"
+					android:gravity="start"
+					android:spinnerMode="dialog"
+					android:text="Semua"
+					android:textColor="@color/black" />
+			</LinearLayout>
+		</LinearLayout>
+
 
 		<View
 			android:layout_width="match_parent"

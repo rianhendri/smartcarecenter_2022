@@ -107,13 +107,14 @@ public class DetailsDailyReport extends AppCompatActivity {
     String reportcd = "";
     String startdate = "";
     String enddate="";
-    TextView mcaseid,mreportdate,mpresssn,mpresssn2,mcaseprogress,mpressstatus,mticketlink,mservicetype,mtanpasper,mcustname;
+    TextView mnotesdal,mcaseid,mreportdate,mpresssn,mpresssn2,mcaseprogress,mpressstatus,mticketlink,mservicetype,mtanpasper,mcustname;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_daily_report);
         mrecord = findViewById(R.id.record);
+        mnotesdal = findViewById(R.id.notesdal);
         mtanpasper=findViewById(R.id.tanpasper);
         mcustname=findViewById(R.id.custname);
         mfooterload = findViewById(R.id.footerload);
@@ -264,6 +265,12 @@ public class DetailsDailyReport extends AppCompatActivity {
                 if (statusnya.equals("OK")){
                     ReadNotif();
                     JsonObject data = homedata.getAsJsonObject("data");
+
+                    if (data.get("notes").getAsString().equals("")){
+                        mnotesdal.setText("-");
+                    }else {
+                        mnotesdal.setText(data.get("notes").getAsString());
+                    }
                     mcustname.setText(data.get("customerName").getAsString());
                     mcaseid.setText(data.get("caseID").getAsString());
                     String newdate = "";
