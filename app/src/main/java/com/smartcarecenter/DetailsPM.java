@@ -544,7 +544,6 @@ public class DetailsPM extends AppCompatActivity {
         final int day=calendar.get(Calendar.DAY_OF_MONTH);
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);
-
         datePickerDialog = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
@@ -590,8 +589,11 @@ public class DetailsPM extends AppCompatActivity {
              weekends.add(saturday);
             weekends.add(sunday);
         }
+        Locale locale = new Locale("ID");
         Calendar[] disabledDays = weekends.toArray(new Calendar[weekends.size()]);
         datePickerDialog.setDisabledDays(disabledDays);
+        datePickerDialog.setFirstDayOfWeek(Calendar.getInstance().MONDAY);
+//        datePickerDialog.setLocale(Locale.setDefault(locale));
         datePickerDialog.show(getSupportFragmentManager(),"DateTimePicker");
     }
     private void rejectpm() {
