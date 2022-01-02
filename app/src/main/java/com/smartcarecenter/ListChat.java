@@ -71,6 +71,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -167,7 +168,7 @@ public class ListChat extends AppCompatActivity {
     String mimeType2="-";
     int tokenpos=0;
     LinearLayout mmnodatas;
-
+    boolean kirim = true;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -790,6 +791,7 @@ public class ListChat extends AppCompatActivity {
 //                recyclerView.scrollToPosition(adapterchat.getItemCount());
                     mloadingchat.setVisibility(GONE);
                     mmnodatas.setVisibility(GONE);
+                    readchat();
                 }else {
                     mmnodatas.setVisibility(View.VISIBLE);
                     mloadingchat.setVisibility(GONE);
@@ -1599,4 +1601,47 @@ public class ListChat extends AppCompatActivity {
             }
         });
     }
+
+    public void readchat (){
+        String keyread = "";
+        for (int v = 0; v < addFoclistreq.size(); ++v) {
+            if (name.equals(addFoclistreq.get(v).getName())){
+
+            }else {
+                if (addFoclistreq.get(v).getRead().equals("yes")){
+
+                }else {
+                    keyread = addFoclistreq.get(v).getKey();
+//                    kirim=false;
+                }
+            }
+        }
+            if (kirim){
+                kirim=false;
+                Log.d("testresdad",keyread);
+                if (keyread.equals("")){
+
+                }else {
+                    HashMap hashMap = new HashMap();
+                    hashMap.put("read","yes");
+                    databaseReference2.child("chat").child(sessionnya).child("listchat").child(keyread).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            kirim=true;
+                            readchat();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            kirim=true;
+                            readchat();
+                        }
+                    });
+                }
+
+                }else {
+
+            }
+    }
+
 }

@@ -119,6 +119,7 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
     Context context;
     ImageView mimgpopup;
     String keynya = "";
+    boolean kirim=true;
     String linkdownload = "";
     Uri uriimg=null;
     Bitmap bitmap2 = null;
@@ -506,26 +507,31 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
             myviewholder.myourname.setVisibility(View.VISIBLE);
         }
         //READ
-        if (name.equals(addFoclistreq.get(i).getName())){
-
-        }else {
-            int posnya = addFoclistreq.size();
-            keynya = addFoclistreq.get(i).getKey();
-
-            HashMap hashMap = new HashMap();
-            hashMap.put("read","yes");
-            databaseReference2.child("chat").child(sessionnya).child("listchat").child(keynya).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                }
-            });
-        }
+//        if (name.equals(addFoclistreq.get(i).getName())){
+//
+//        }else {
+//            int posnya = addFoclistreq.size();
+//            keynya = addFoclistreq.get(i).getKey();
+//            if (kirim){
+//                kirim=false;
+//                HashMap hashMap = new HashMap();
+//                hashMap.put("read","yes");
+//                databaseReference2.child("chat").child(sessionnya).child("listchat").child(keynya).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//
+//                    }
+//                });
+//            }else {
+//                kirim=true;
+//            }
+//
+//        }
         //ceknama lvl
         if(name.equals(addFoclistreq.get(i).getName())){
 
@@ -1045,6 +1051,7 @@ extends RecyclerView.Adapter<Adapterchat.Myviewholder>  {
             mopenfile2 = itemView.findViewById(R.id.openile2);
         }
     }
+
     private void showDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 context);

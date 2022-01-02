@@ -20,7 +20,7 @@ public class ServicesTicketItem {
     }
 
 
-    public ServicesTicketItem(String assignedDateTime, String bar1Text, String bar2Text, String bar3Text, boolean bar4Red, String bar4Text, int barPosition, String engineerName, String feedbackComments, int feedbackRating, String issueCategoryName, int position, String serviceTypeName, String statusName, String serviceTicketCd, String supportEndDateTime, String supportStartDateTime, String unitCategoryName, String assist, int lastImpression, String description, boolean showOnProgressAction, String onProgressActionName, String feedbackPhotoFullURL, String waitingEstimationDate, boolean showLiveChat, String liveChatName, String guid, boolean liveChatAllowChat, ArrayList<TokenList> liveChatFirebaseToken) {
+    public ServicesTicketItem(String assignedDateTime, String bar1Text, String bar2Text, String bar3Text, boolean bar4Red, String bar4Text, int barPosition, String engineerName, String feedbackComments, int feedbackRating, String issueCategoryName, int position, String serviceTypeName, String statusName, String serviceTicketCd, String supportEndDateTime, String supportStartDateTime, String unitCategoryName, String assist, int lastImpression, String description, boolean showOnProgressAction, String onProgressActionName, String feedbackPhotoFullURL, String waitingEstimationDate, boolean showLiveChat, String liveChatName, String guid, String pressStatusCd, boolean liveChatAllowChat, ArrayList<TokenList> liveChatFirebaseToken) {
         AssignedDateTime = assignedDateTime;
         Bar1Text = bar1Text;
         Bar2Text = bar2Text;
@@ -49,6 +49,7 @@ public class ServicesTicketItem {
         ShowLiveChat = showLiveChat;
         LiveChatName = liveChatName;
         Guid = guid;
+        PressStatusCd = pressStatusCd;
         LiveChatAllowChat = liveChatAllowChat;
         LiveChatFirebaseToken = liveChatFirebaseToken;
     }
@@ -277,6 +278,14 @@ public class ServicesTicketItem {
         Guid = guid;
     }
 
+    public String getPressStatusCd() {
+        return PressStatusCd;
+    }
+
+    public void setPressStatusCd(String pressStatusCd) {
+        PressStatusCd = pressStatusCd;
+    }
+
     public boolean isLiveChatAllowChat() {
         return LiveChatAllowChat;
     }
@@ -381,6 +390,9 @@ public class ServicesTicketItem {
     @Expose
     @SerializedName("Guid")
     private String Guid;
+    @Expose
+    @SerializedName("PressStatusCd")
+    private String PressStatusCd;
     @Expose
     @SerializedName("LiveChatAllowChat")
     private boolean LiveChatAllowChat;

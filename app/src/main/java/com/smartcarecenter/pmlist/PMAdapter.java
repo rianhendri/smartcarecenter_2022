@@ -109,6 +109,7 @@ extends RecyclerView.Adapter<PMAdapter.Myviewholder> {
                 intent.putExtra("id", (addFromItem.get(i).getServiceTicketCd()));
                 intent.putExtra("noticket", (addFromItem.get(i)).getServiceTicketCd());
                 intent.putExtra("pos", valuefilter);
+//                intent.putExtra("guid", addFromItem.get(i).getPressGuid());
                 intent.putExtra("user", addFromItem.get(i).getStatusName());
                 intent.putExtra("scrolbawah", "yes");
                 context.startActivity(intent);

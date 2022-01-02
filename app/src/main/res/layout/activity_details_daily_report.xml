@@ -179,7 +179,7 @@
                             android:fontFamily="@font/opensansbold"
                             android:gravity="start"
                             android:paddingLeft="4dp"
-                            android:text="2000"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -191,7 +191,7 @@
                             android:gravity="start"
                             android:fontFamily="@font/opensanslight"
                             android:paddingLeft="4dp"
-                            android:text="HP INDIGO 2000"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                         <TextView
@@ -202,7 +202,7 @@
                             android:gravity="start"
                             android:fontFamily="@font/opensanslight"
                             android:paddingLeft="4dp"
-                            android:text="Delapan Soft"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -221,7 +221,7 @@
                             android:gravity="end"
                             android:fontFamily="@font/opensanslight"
                             android:paddingLeft="4dp"
-                            android:text="ST211118018"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -233,7 +233,7 @@
                             android:gravity="end"
                             android:fontFamily="@font/opensanslight"
                             android:paddingLeft="4dp"
-                            android:text="05-12-2021 08:30"
+                            android:text="-"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                         <TextView
@@ -241,7 +241,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:text="ONSITE"
+                            android:text="-"
                             android:fontFamily="@font/opensansbold"
                             android:paddingLeft="12dp"
                             android:paddingRight="12dp"
@@ -300,7 +300,7 @@
                                 android:textAllCaps="true"
                                 android:fontFamily="@font/opensansbold"
                                 android:gravity="center"
-                                android:text="asdasdasdasdsad"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
 
@@ -347,7 +347,7 @@
                                 android:fontFamily="@font/opensansbold"
                                 android:gravity="center"
                                 android:textAllCaps="true"
-                                android:text="asdasdasdasdsad"
+                                android:text="-"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
 
@@ -474,7 +474,7 @@
                         android:fontFamily="@font/opensanslight"
                         android:gravity="top"
                         android:paddingLeft="4dp"
-                        android:text="asdasdasdasdsad"
+                        android:text="-"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -779,7 +779,7 @@
                         android:fontFamily="@font/opensanslight"
                         android:gravity="top"
                         android:paddingLeft="4dp"
-                        android:text="asdasdasdasdsad"
+                        android:text="-"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 

@@ -117,6 +117,11 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
+        if (myItem.get(i).getPressStatusCd().equals("")){
+            myviewholder.mstatusadress.setText("-");
+        }else {
+            myviewholder.mstatusadress.setText(myItem.get(i).getPressStatusCd());
+        }
         TextView textView = myviewholder.mstatustik;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("#");
@@ -471,7 +476,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
         TextView massigndate;
         TextView mbar1,mbar2,mbar3,mbar4,mcomment,mendtime,mengineer,mservicetype,mstarttime
                 ,mstatusservice,mstatustik;
-        TextView mnotif,mtimer,msupport,massengineer,mlastimpresi, mactionprogress, mfeedbackfoto, mestima, mreadmore, mnotes;
+        TextView mstatusadress,mnotif,mtimer,msupport,massengineer,mlastimpresi, mactionprogress, mfeedbackfoto, mestima, mreadmore, mnotes;
 //        ExpandableTextView mnotes;
         ImageView mposbar;
         RatingBar mrating;
@@ -482,6 +487,7 @@ extends RecyclerView.Adapter<ServiceTicketAdapter.Myviewholder> {
 
             mdot = view.findViewById(R.id.dot);
             mnotif = view.findViewById(R.id.newnotif);
+            mstatusadress = view.findViewById(R.id.statusadress);
             mchatclik = view.findViewById(R.id.chatclik);
             mread = view.findViewById(R.id.read);
             massigndate = (TextView)view.findViewById(R.id.assigndate);

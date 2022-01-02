@@ -89,6 +89,8 @@ import static com.smartcarecenter.AddDetailFocView.Nowfoc;
 import static com.smartcarecenter.AddDetailsPoView.Nowpo;
 import static com.smartcarecenter.DetailsFormActivity.Nowaform;
 import static com.smartcarecenter.menuhome.MenuAdapter.chat;
+import static com.smartcarecenter.menuhome.MenuAdapter.countDA;
+import static com.smartcarecenter.menuhome.MenuAdapter.countPM;
 import static com.smartcarecenter.menuhome.MenuAdapter.id;
 import static com.smartcarecenter.menuhome.MenuAdapter.liveChatRepor;
 import static com.smartcarecenter.menuhome.MenuAdapter.mchatdialog;
@@ -335,6 +337,7 @@ public class Dashboard extends AppCompatActivity {
                     mtermandcondition.setVisibility(View.VISIBLE);
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+
                     //running news
                     if (data.get("showNewsSticker").getAsBoolean()){
                         mlayoutrunning.setVisibility(View.VISIBLE);
@@ -506,6 +509,8 @@ public class Dashboard extends AppCompatActivity {
                         menuItem11.setShow(access.get("showDailyReport").toString());
                         menuItemlist.add(menuItem11);
                     }
+                    countPM = access.get("showPMCounter").getAsInt();
+                    countDA = access.get("showDailyReportCounter").getAsInt();
                     if (mshowPurchaseOrderPO.equals("false") && mshowPurchaseOrderFOC.equals("false")){
 
                     }else{

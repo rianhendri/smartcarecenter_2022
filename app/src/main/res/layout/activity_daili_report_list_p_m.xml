@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/dwhite"
+    tools:context=".DailiReportListPM"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal" >
+        <LinearLayout
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="0dp"
+                android:gravity="left"
+                android:src="@drawable/back_white" />
+
+            <TextView
+                android:id="@+id/title_language"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center_vertical"
+                android:text="Daily Report PM"
+                android:textColor="@color/dwhite"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/sttitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="64dp"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/dwhite"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:id="@+id/layoutdaterange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dwhite"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:elevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal" >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="center"
+                    android:text="Date : "
+                    android:textSize="12sp"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/startdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="center"
+                    android:paddingBottom="2dp"
+                    android:text="2021-12-04"
+                    android:textColor="@color/black"
+                    android:textSize="11sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/seguisb"
+                    android:textSize="11sp"
+                    android:text=" - "/>
+                <TextView
+                    android:id="@+id/enddate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="center"
+                    android:paddingBottom="2dp"
+                    android:text="2021-12-04"
+                    android:textColor="@color/black"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:gravity="end"-->
+            <!--                android:orientation="horizontal" >-->
+
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:fontFamily="@font/seguisb"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:text="Enddate Date : "-->
+            <!--                    android:paddingBottom="2dp"-->
+            <!--                    android:textSize="12sp"-->
+            <!--                    android:textColor="@color/colorPrimaryDark" />-->
+            <!--                <TextView-->
+            <!--                    android:id="@+id/enddate"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:fontFamily="@font/seguisb"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:paddingBottom="2dp"-->
+            <!--                    android:text="2021-12-04"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    android:textSize="11sp" />-->
+            <!--            </LinearLayout>-->
+        </LinearLayout>
+    </LinearLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiprefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedscrol"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:id="@+id/contentinbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/formlist"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toTopOf="@+id/addform"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        android:scrollbars="none" >
+                    </androidx.recyclerview.widget.RecyclerView>
+                    <TextView
+                        android:id="@+id/norequest"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/segoeui"
+                        android:textSize="13sp"
+                        android:text="@string/title_RequestNone"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <ProgressBar
+                android:id="@+id/footerload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/addform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/nestedscrol"
+                android:visibility="gone" />
+
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/addform"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="50dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                android:background="@color/colorPrimaryDark"-->
+            <!--                android:gravity="center"-->
+            <!--                android:visibility="gone"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:paddingLeft="0dp"-->
+            <!--                android:paddingRight="14dp" >-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:gravity="center_vertical"-->
+            <!--                    android:orientation="horizontal" >-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="20dp"-->
+            <!--                        android:layout_height="20dp"-->
+            <!--                        android:layout_marginRight="12dp"-->
+            <!--                        android:src="@drawable/ic_plus2"-->
+            <!--                        android:rotation="-90"/>-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:fontFamily="@font/seguisb"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:text="@string/title_addform"-->
+            <!--                        android:textColor="@color/dwhite"-->
+            <!--                        android:textSize="15sp" />-->
+            <!--                </LinearLayout>-->
+            <!--            </LinearLayout>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

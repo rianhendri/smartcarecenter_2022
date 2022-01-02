@@ -100,7 +100,7 @@ public class DetailsPM extends AppCompatActivity {
     FirebaseAuth mAuth;
     ArrayList<Itemchat> itemchat;
     LinearLayout mdot;
-    TextView mnotif;
+    TextView mnotif, mlistdailyst;
     LinearLayout mchactclik;
     String engas="";
     int total1 = 0;
@@ -132,7 +132,7 @@ public class DetailsPM extends AppCompatActivity {
     public static String mallowToCancel = "";
     public static String mallowtoconfirm = "";
     public static ImageView mbanner;
-    public static LinearLayout mcancel, mconfirm, mcs, mbackgroundalert,mback, mreopenbtn,mlayreasonpm;
+    public static LinearLayout mlayoutadddaily,mcancel, mconfirm, mcs, mbackgroundalert,mback, mreopenbtn,mlayreasonpm;
     public static TextView mcreatedate, mdate, mdeskription, missu, moperator, mreqno, mservicetype, msn, mstatusdetail,mvisitdate,
             mstid, mtitle, munitcategory, mlocation, mtextalert, mrequestby, mreopeninfo,mstpm,mpmstatus,mreasonpm;
     public static String mdateapi = "";
@@ -197,7 +197,8 @@ public class DetailsPM extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_pm);
-
+        mlistdailyst = findViewById(R.id.listdailyst);
+        mlayoutadddaily = findViewById(R.id.layoutadddaily);
         mnotif = findViewById(R.id.newnotif);
         mstpm = findViewById(R.id.stpm);
         mreasonpm = findViewById(R.id.reasonpm);
@@ -333,6 +334,25 @@ public class DetailsPM extends AppCompatActivity {
                 mimgpopup = dialog.findViewById(R.id.imagepopup);
                 Picasso.with(DetailsPM.this).load(mphotoURL).into(mimgpopup);
                 dialog.show();
+            }
+        });
+        mlistdailyst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailsPM.this, DailiReportListPM.class);
+//              intent.putExtra("id", (addFromItem.get(i).getFormRequestCd()));
+                intent.putExtra("home", "homesa");
+                intent.putExtra("pos", valuefilter);
+                intent.putExtra("noticket", noreq);
+                intent.putExtra("pos", valuefilter);
+                intent.putExtra("user", username);
+                intent.putExtra("scrolbawah", scrollnya);
+                intent.putExtra("xhori", xhori);
+                intent.putExtra("yverti", yverti);
+                intent.putExtra("hide","yes");
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
             }
         });
         //REOPEN
@@ -516,7 +536,7 @@ public class DetailsPM extends AppCompatActivity {
                                 datetimekirim=datenya+" "+jampilih+":00";
                                 Log.d("datekirim",datetimekirim);
                                 if (mreasonnya.length()==0){
-                                    Toast.makeText(DetailsPM.this, getString(R.string.title_reasonrequired),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(DetailsPM.this, "Please Input Reason",Toast.LENGTH_LONG).show();
                                 }else {
                                     reschedulepm();
                                     d.dismiss();
@@ -645,7 +665,7 @@ public class DetailsPM extends AppCompatActivity {
                     public void onClick(View v) {
 
                         if (mreasonnya.length()==0){
-                            Toast.makeText(DetailsPM.this, getString(R.string.title_reasonrequired),Toast.LENGTH_LONG).show();
+                            Toast.makeText(DetailsPM.this, "Please Input Reason",Toast.LENGTH_LONG).show();
                         }else {
                             rejectpmreq();
                             d.dismiss();
@@ -784,6 +804,14 @@ public class DetailsPM extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    //details button daily
+
+                    if (data.get("showViewSTDailyReport").getAsBoolean()){
+                        mlistdailyst.setVisibility(View.VISIBLE);
+                        mlistdailyst.setText(data.get("stDailyReportButtonText").getAsString());
+                    }else {
+                        mlistdailyst.setVisibility(View.GONE);
+                    }
                     //chat baru pasang
                     if(data.get("liveChatShowButton").getAsBoolean()){
                         mAuth = FirebaseAuth.getInstance();
@@ -1146,49 +1174,55 @@ public class DetailsPM extends AppCompatActivity {
                     mallowtoconfirm = data.get("allowToApprovePM").toString();
                     xlocation = data.get("locationName").getAsString();
                     mlocation.setText(xlocation);
-                    if (data.get("pmStatus").getAsString().equals("Request")){
-                        mlayoutticket.setVisibility(View.GONE);
-                    }else {
-                        mlayoutticket.setVisibility(View.VISIBLE);
-                        mserviceTicketHistory = data.getAsJsonArray("serviceTicketHistory");
+                    if (data.get("showAssignment").getAsBoolean()){
+                        if (data.get("pmStatus").getAsString().equals("Request")){
+                            mlayoutticket.setVisibility(View.GONE);
+                        }else {
 
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<ArrayList<ServicesTicketItem>>(){}.getType();
-                        listticket = gson.fromJson(mserviceTicketHistory.toString(), type);
-                        ticketadapter = new ServiceTicketAdapter(DetailsPM.this,listticket);
-                        mservice_layout.setAdapter(ticketadapter);
-                        mservice_layout.setVisibility(View.VISIBLE);
-                        for (int i = 0; i < mserviceTicketHistory.size(); ++i) {
-                            String string6 = (mserviceTicketHistory.get(0)).getAsJsonObject().get("ServiceTicketCd").getAsString();
-                            mstid.setText(string6);
-                            String asist = "";
-                            JsonObject ass = mserviceTicketHistory.get(i).getAsJsonObject();
-                            massistengineer = ass.getAsJsonArray("Assists");
-                            for (int x = 0; x < massistengineer.size(); ++x){
-                                JsonObject assobj = massistengineer.get(x).getAsJsonObject();
-                                asist += assobj.get("Name").getAsString();
-                                asist += "\n";
-                                listticket.get(i).setAssist(asist);
+                            mlayoutticket.setVisibility(View.VISIBLE);
+                            mserviceTicketHistory = data.getAsJsonArray("serviceTicketHistory");
 
+                            Gson gson = new Gson();
+                            Type type = new TypeToken<ArrayList<ServicesTicketItem>>(){}.getType();
+                            listticket = gson.fromJson(mserviceTicketHistory.toString(), type);
+                            ticketadapter = new ServiceTicketAdapter(DetailsPM.this,listticket);
+                            mservice_layout.setAdapter(ticketadapter);
+                            mservice_layout.setVisibility(View.VISIBLE);
+                            for (int i = 0; i < mserviceTicketHistory.size(); ++i) {
+                                String string6 = (mserviceTicketHistory.get(0)).getAsJsonObject().get("ServiceTicketCd").getAsString();
+                                mstid.setText(string6);
+                                String asist = "";
+                                JsonObject ass = mserviceTicketHistory.get(i).getAsJsonObject();
+                                massistengineer = ass.getAsJsonArray("Assists");
+                                for (int x = 0; x < massistengineer.size(); ++x){
+                                    JsonObject assobj = massistengineer.get(x).getAsJsonObject();
+                                    asist += assobj.get("Name").getAsString();
+                                    asist += "\n";
+                                    listticket.get(i).setAssist(asist);
+
+                                }
                             }
-                        }
 
-                        String string7 = data.get("serviceTicketCreated").getAsString();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss",Locale.ENGLISH);
-                        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-                        String string5 = null;
-                        String string6="";
-                        try {
-                            string6 = simpleDateFormat2.format(simpleDateFormat.parse(string7));
-                            string5 = simpleDateFormat.format(simpleDateFormat.parse(string7));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                            String string7 = data.get("serviceTicketCreated").getAsString();
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss",Locale.ENGLISH);
+                            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                            String string5 = null;
+                            String string6="";
+                            try {
+                                string6 = simpleDateFormat2.format(simpleDateFormat.parse(string7));
+                                string5 = simpleDateFormat.format(simpleDateFormat.parse(string7));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            String[] separated = string5.split("T");
+                            separated[0].trim();; // this will contain "Fruit"
+                            separated[1].trim();;
+                            mcreatedate.setText(separated[0]+" "+ separated[1]);
                         }
-                        String[] separated = string5.split("T");
-                        separated[0].trim();; // this will contain "Fruit"
-                        separated[1].trim();;
-                        mcreatedate.setText(separated[0]+" "+ separated[1]);
+                    }else {
+                        mlayoutticket.setVisibility(View.GONE);
                     }
+
                     if (data.get("unitCategoryName") == null) {
                         mlayoutunit2.setVisibility(View.GONE);
                     } else {

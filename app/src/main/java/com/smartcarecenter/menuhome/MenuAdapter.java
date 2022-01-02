@@ -85,6 +85,8 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
     public static Integer counter = 0;
     public static Integer counter2 = 0;
     public static Integer countSC = 0;
+    public static Integer countPM = 0;
+    public static Integer countDA = 0;
     public static String module = "";
     public static String moduletrans="null";
     public static String name="";
@@ -132,6 +134,26 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
             }else {
                 myviewholder.mdot.setVisibility(View.VISIBLE);
                 myviewholder.mnews_new.setText(String.valueOf(countSC));
+            }
+
+
+        }
+        if (namemenu.equals(context.getString(R.string.title_pmticket))){
+            if (countPM==0){
+                myviewholder.mdot.setVisibility(View.GONE);
+            }else {
+                myviewholder.mdot.setVisibility(View.VISIBLE);
+                myviewholder.mnews_new.setText(String.valueOf(countPM));
+            }
+
+
+        }
+        if (namemenu.equals(context.getString(R.string.title_dailireport))){
+            if (countDA==0){
+                myviewholder.mdot.setVisibility(View.GONE);
+            }else {
+                myviewholder.mdot.setVisibility(View.VISIBLE);
+                myviewholder.mnews_new.setText(String.valueOf(countDA));
             }
 
 

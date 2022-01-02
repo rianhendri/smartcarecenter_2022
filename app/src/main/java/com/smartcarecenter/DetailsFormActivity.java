@@ -165,11 +165,13 @@ public class DetailsFormActivity extends AppCompatActivity {
     public static String scrollnya = "no";
     public static int yverti=0;
     public static int xhori=0;
+    TextView mlistdailyst;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_form);
+        mlistdailyst = findViewById(R.id.listdailyst);
         mnotif = findViewById(R.id.newnotif);
         mdot = findViewById(R.id.dot);
         mchactclik = findViewById(R.id.chatclik);
@@ -249,7 +251,26 @@ public class DetailsFormActivity extends AppCompatActivity {
         String TAG = "FirebaseMessaging";
         Log.d(TAG,"noreq:"+noreq);
 
-
+        mlistdailyst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailsFormActivity.this, DailiReportListFR.class);
+//              intent.putExtra("id", (addFromItem.get(i).getFormRequestCd()));
+                intent.putExtra("home", "homesa");
+                intent.putExtra("pos", valuefilter);
+                intent.putExtra("noticket", noticket);
+                intent.putExtra("id", noreq);
+                intent.putExtra("pos", valuefilter);
+                intent.putExtra("user", username);
+                intent.putExtra("scrolbawah", scrollnya);
+                intent.putExtra("xhori", xhori);
+                intent.putExtra("yverti", yverti);
+                intent.putExtra("hide","yes");
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+            }
+        });
 
         mback.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -499,6 +520,12 @@ public class DetailsFormActivity extends AppCompatActivity {
 
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    if (data.get("showViewSTDailyReport").getAsBoolean()){
+                        mlistdailyst.setVisibility(View.VISIBLE);
+                        mlistdailyst.setText(data.get("stDailyReportButtonText").getAsString());
+                    }else {
+                        mlistdailyst.setVisibility(View.GONE);
+                    }
                     //chat baru pasang
                     if(data.get("liveChatShowButton").getAsBoolean()){
                         mAuth = FirebaseAuth.getInstance();

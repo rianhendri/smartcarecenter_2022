@@ -29,7 +29,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content">
 					<androidx.constraintlayout.widget.ConstraintLayout
-						android:layout_width="wrap_content"
+						android:layout_width="79dp"
 						android:layout_height="wrap_content">
 						<ImageView
 							android:layout_gravity="center"
@@ -37,7 +37,7 @@
 							android:visibility="visible"
 							android:layout_width="59dp"
 							android:layout_height="59dp"
-							android:src="@drawable/req"
+
 							app:layout_constraintBottom_toBottomOf="parent"
 							app:layout_constraintEnd_toEndOf="parent"
 							app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
 								android:layout_height="match_parent"
 								android:fontFamily="@font/seguisb"
 								android:gravity="center"
-								android:text="999"
+								android:text="-"
 								android:textColor="@color/dwhite"
 								android:textSize="9dp"
 								android:visibility="visible" />
