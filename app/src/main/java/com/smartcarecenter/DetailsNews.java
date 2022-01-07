@@ -63,7 +63,7 @@ public class DetailsNews extends AppCompatActivity {
     String img_details = "";
     ImageView mimage,mimgpopup;
     LinearLayout mback,mlaydownload;
-    TextView mcontentnews,mcountdislike,mcountlike,mcountview,mdate,mtitlenews;
+    TextView mcontentnews2,mcontentnews,mcountdislike,mcountlike,mcountview,mdate,mtitlenews;
     String title_details = "";
     TextView mbuttondownload;
     String linkdownloadnya = "";
@@ -87,6 +87,7 @@ public class DetailsNews extends AppCompatActivity {
         mback = findViewById(R.id.backbtn);
         mimage = findViewById(R.id.imgdetailsnews);
         mcontentnews = findViewById(R.id.contentnews);
+        mcontentnews2 = findViewById(R.id.contentnews2);
         mdate = findViewById(R.id.date_detailnews);
         mtitlenews = findViewById(R.id.titlenewsdetail);
         mbuttondownload = findViewById(R.id.linkdownload);
@@ -156,6 +157,14 @@ public class DetailsNews extends AppCompatActivity {
 //                Toast.makeText(DetailsNews.this, linkdownloadnya,Toast.LENGTH_LONG).show();
             }
         });
+        if (Build.VERSION.SDK_INT >= 24) {
+            mcontentnews2.setText((CharSequence) Html.fromHtml((String)"<p><a href=\"https://www.w3schools.com/html/tryit.asp?filename=tryhtml_links_w3schools\">Visit Link</a></p>", Html.FROM_HTML_MODE_COMPACT));
+            mcontentnews2.setMovementMethod(LinkMovementMethod.getInstance());
+        } else {
+            mcontentnews2.setText((CharSequence)Html.fromHtml((String)"<p><a href=\"https://www.w3schools.com/html/tryit.asp?filename=tryhtml_links_w3schools\">Visit Link</a></p>"));
+            mcontentnews2.setMovementMethod(LinkMovementMethod.getInstance());
+
+        }
 
     }
     private void setRequestImage() {

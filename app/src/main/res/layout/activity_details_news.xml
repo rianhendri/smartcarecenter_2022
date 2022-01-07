@@ -86,7 +86,15 @@
                         android:layout_height="1dp"
                         android:background="@color/colorPrimary"/>
                 </LinearLayout>
-
+                <TextView
+                    android:id="@+id/contentnews2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/segoeui"
+                    android:text=""
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
                 <TextView
                     android:id="@+id/contentnews"
                     android:layout_width="match_parent"

@@ -28,9 +28,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DailiReportListPM"></activity>
-        <activity android:name=".DetailsDailyReport2"></activity>
-        <activity android:name=".DetailsDailyReport3"></activity>
+        <activity android:name=".DetailsOrderFoc"></activity>
+        <activity android:name=".DailiReportListPM" />
+        <activity android:name=".DetailsDailyReport2" />
+        <activity android:name=".DetailsDailyReport3" />
         <activity android:name=".DetailsDailyReport">
             <intent-filter>
                 <action android:name="SCCDR" />
