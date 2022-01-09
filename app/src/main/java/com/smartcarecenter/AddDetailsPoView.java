@@ -121,7 +121,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     String mpressId2 = "";
     Integer previmpressvlaue = 100;
     LinearLayout madd_item,mchat, mcopy;
-    TextView msn,mtextalert, mdeskrip, mlinktext, mpayment,mpayment2;
+    TextView mpaymenttype,msn,mtextalert, mdeskrip, mlinktext, mpayment,mpayment2;
     DatabaseReference reference;
     public static RecyclerView mlistitem_foc;
     String sesionid_new = "";
@@ -149,6 +149,7 @@ public class AddDetailsPoView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_details_po_view);
+        mpaymenttype=findViewById(R.id.paymenttype);
         mpayment = findViewById(R.id.payment);
         mchactclik = findViewById(R.id.chatclik);
         mdot = findViewById(R.id.dot);
@@ -498,6 +499,7 @@ public class AddDetailsPoView extends AppCompatActivity {
                 if (statusnya.equals("OK")) {
                     sesionid();
                     JsonObject data = homedata.getAsJsonObject("data");
+                    mpaymenttype.setText(data.get("paymentTypeName").getAsString());
                     //chat baru pasang
                     if(data.get("liveChatShowButton").getAsBoolean()){
 
