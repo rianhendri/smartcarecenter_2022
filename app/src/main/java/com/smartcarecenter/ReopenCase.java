@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -74,7 +75,7 @@ public class ReopenCase extends AppCompatActivity {
     LinearLayout msubmit, mcapture, mback;
     ConstraintLayout muploadlay;
     ImageView mimage;
-    EditText mcomment;
+    TextView mcomment;
     String noreq = "";
     String noticket = "";
     int ratvalue = 0;
@@ -82,6 +83,7 @@ public class ReopenCase extends AppCompatActivity {
     boolean value;
     RequestBody requestBody = null;
     String imgreq ="";
+    String mdeskriptionapi = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +92,7 @@ public class ReopenCase extends AppCompatActivity {
         mimage = findViewById(R.id.imgbanner);
         mcapture = (LinearLayout)this.findViewById(R.id.upladfoto);
         muploadlay = findViewById(R.id.uploadlay);
-        mcomment = (EditText)findViewById(R.id.comment);
+        mcomment = findViewById(R.id.comment);
         msubmit = findViewById(R.id.submit);
         mback = findViewById(R.id.backbtn);
         Bundle extras = this.getIntent().getExtras();
@@ -98,6 +100,8 @@ public class ReopenCase extends AppCompatActivity {
             noreq = extras.getString("id");
             noticket = extras.getString("noticket");
             valuefilter = extras.getString("pos");
+            mdeskriptionapi = extras.getString("decribe");
+            mcomment.setText(mdeskriptionapi);
         }
         getSessionId();
         cekInternet();
@@ -116,12 +120,13 @@ public class ReopenCase extends AppCompatActivity {
         msubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mcomment.length()!=0){
-                    uploadData();
-                }else {
-                    mcomment.setError(getString(R.string.title_deserror));
-//                    mcomment.setTextColor(getResources().getColor(R.color.red));
-                }
+                uploadData();
+//                if (mcomment.length()!=0){
+//                    uploadData();
+//                }else {
+//                    mcomment.setError(getString(R.string.title_deserror));
+////                    mcomment.setTextColor(getResources().getColor(R.color.red));
+//                }
             }
         });
         mcapture.setOnClickListener(new View.OnClickListener() {

@@ -340,6 +340,7 @@ public class DetailsFormActivity extends AppCompatActivity {
                 gotorating.putExtra("id", noreq);
                 gotorating.putExtra("noticket", noticket);
                 gotorating.putExtra("user", username);
+                gotorating.putExtra("decribe", mdeskriptionapi);
                 startActivity(gotorating);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 finish();
