@@ -92,6 +92,9 @@ public class DetailsDailyReport2 extends AppCompatActivity {
     int page = 1;
     int pos = 0;
     boolean refreshscroll = true;
+    public static String grandt2 = "";
+    LinearLayout mlayoutgrandtotal;
+    public static TextView mgrandtotal2;
     String sesionid_new = "";
     String reportcd = "";
     String startdate = "";
@@ -113,6 +116,8 @@ public class DetailsDailyReport2 extends AppCompatActivity {
         myitem_place2 = findViewById(R.id.tindakanlist);
         myitem_place3 = findViewById(R.id.langkahlanjutanlist);
         myitem_place4 = findViewById(R.id.sperpartdaily);
+        mgrandtotal2 = (TextView) findViewById(R.id.grandtotal2);
+        mlayoutgrandtotal = findViewById(R.id.layoutgrandtotal);
         myitem_place5 = findViewById(R.id.createdby);
 
         mcaseid = findViewById(R.id.caseid);
@@ -123,7 +128,7 @@ public class DetailsDailyReport2 extends AppCompatActivity {
         mpressstatus = findViewById(R.id.pressstatus);
         mticketlink = findViewById(R.id.ticketlink);
         mservicetype = findViewById(R.id.servicetype);
-
+        grandt2 = "dua";
         check.checklistform=1;
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
@@ -286,6 +291,7 @@ public class DetailsDailyReport2 extends AppCompatActivity {
                     }
                     if (data.getAsJsonArray("sparePartList").toString().equals("[]")){
                         mtanpasper.setVisibility(View.VISIBLE);
+                        mlayoutgrandtotal.setVisibility(View.GONE);
                     }else {
                         listformreq4 = data.getAsJsonArray("sparePartList");
                         Gson gson = new Gson();
@@ -297,6 +303,7 @@ public class DetailsDailyReport2 extends AppCompatActivity {
                         myitem_place4.setAdapter(addFormAdapterAdapter4);
                         myitem_place4.setVisibility(View.VISIBLE);
                         mtanpasper.setVisibility(View.GONE);
+                        mlayoutgrandtotal.setVisibility(View.VISIBLE);
                     }
                     if (data.getAsJsonArray("createdBy").toString().equals("[]")){
                         mtanpasper.setVisibility(View.VISIBLE);

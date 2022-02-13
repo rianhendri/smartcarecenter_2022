@@ -702,8 +702,24 @@
                                 android:textColor="@color/dwhite"
                                 android:fontFamily="@font/opensansbold"
                                 android:textSize="15sp"/>
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:text="Sparepart"-->
+<!--                                android:textColor="@color/dwhite"-->
+<!--                                android:fontFamily="@font/opensansbold"-->
+<!--                                android:textSize="15sp"/>-->
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:text="Quantity"-->
+<!--                                android:textColor="@color/dwhite"-->
+<!--                                android:fontFamily="@font/opensansbold"-->
+<!--                                android:textSize="15sp"/>-->
                             <TextView
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Sparepart"
@@ -711,14 +727,28 @@
                                 android:fontFamily="@font/opensansbold"
                                 android:textSize="15sp"/>
                             <TextView
-                                android:layout_width="match_parent"
+                                android:layout_width="60sp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Quantity"
+                                android:text="Price"
                                 android:textColor="@color/dwhite"
                                 android:fontFamily="@font/opensansbold"
                                 android:textSize="15sp"/>
-
+                            <TextView
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:text="Qty"
+                                android:gravity="center"
+                                android:textColor="@color/dwhite"
+                                android:fontFamily="@font/opensansbold"
+                                android:textSize="15sp"/>
+                            <TextView
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:text="Total"
+                                android:gravity="center"
+                                android:textColor="@color/dwhite"
+                                android:fontFamily="@font/opensansbold"
+                                android:textSize="15sp"/>
                         </LinearLayout>
                         <TextView
                             android:id="@+id/tanpasper"
@@ -744,7 +774,35 @@
                             android:layout_marginBottom="12dp"
                             android:scrollbars="none" >
                         </androidx.recyclerview.widget.RecyclerView>
-
+                        <LinearLayout
+                            android:id="@+id/layoutgrandtotal"
+                            android:visibility="visible"
+                            android:paddingLeft="24dp"
+                            android:paddingRight="24dp"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="4dp"
+                            android:layout_marginBottom="24dp"
+                            android:background="@color/darkgrey"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Grand Total"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/opensansbold"
+                                android:textSize="15sp"/>
+                            <TextView
+                                android:id="@+id/grandtotal"
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/opensansbold"
+                                android:textSize="15sp"/>
+                        </LinearLayout>
 
                     </LinearLayout>
                 </LinearLayout>

@@ -46,11 +46,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.smartcarecenter.DetailsDailyReport;
 import com.smartcarecenter.R;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.smartcarecenter.DetailsDailyReport.grand2;
+import static com.smartcarecenter.DetailsDailyReport.mgrandtotal;
+import static com.smartcarecenter.DetailsDailyReport.grandt1;
+import static com.smartcarecenter.DetailsDailyReport2.grandt2;
+import static com.smartcarecenter.DetailsDailyReport2.mgrandtotal2;
+import static com.smartcarecenter.DetailsDailyReport3.grandt3;
+import static com.smartcarecenter.DetailsDailyReport3.mgrandtotal3;
 import static com.smartcarecenter.FormActivity.valuefilter;
 
 public class DetailsDailyAdapter4
@@ -58,7 +66,7 @@ extends RecyclerView.Adapter<DetailsDailyAdapter4.Myviewholder> {
     ArrayList<DetailsDailyItem4> addFromItem;
     Context context;
     ImageView mimgpopup;
-
+    Double GRrandprie=0.0;
     public DetailsDailyAdapter4(Context context, ArrayList<DetailsDailyItem4> addFromItem) {
         this.context = context;
         this.addFromItem = addFromItem;
@@ -78,6 +86,39 @@ extends RecyclerView.Adapter<DetailsDailyAdapter4.Myviewholder> {
         myviewholder.msparepartname.setText(addFromItem.get(i).getSparePartCd());
         myviewholder.mqty.setText(addFromItem.get(i).getQuantity());
         myviewholder.mno.setText(String.valueOf(i+1));
+        //Price Total
+        if (addFromItem.get(i).getPricePerQty()==null){
+            myviewholder.mprice.setText("");
+            myviewholder.mtotal.setText("");
+        }else {
+            Locale locale = new Locale("en", "US");
+            NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+            myviewholder.mprice.setText(currencyFormatter.format(Double.valueOf(addFromItem.get(i).getPricePerQty())));
+            Locale locale2 = new Locale("en", "US");
+            NumberFormat currencyFormatter2 = NumberFormat.getCurrencyInstance(locale2);
+            myviewholder.mtotal.setText(currencyFormatter2.format(Double.valueOf(addFromItem.get(i).getPricePerQty())*
+                    Integer.parseInt(myviewholder.mqty.getText().toString())));
+            GRrandprie += Double.valueOf(addFromItem.get(i).getPricePerQty())*
+                    Integer.parseInt(myviewholder.mqty.getText().toString());
+            Log.d("grandtotal",String.valueOf(GRrandprie));
+            if (grandt2.equals("dua")){
+                mgrandtotal2.setText("2");
+            }
+            if (grandt3.equals("tiga")){
+                mgrandtotal3.setText(currencyFormatter.format(Double.valueOf(GRrandprie)));
+            }
+            if (grandt1.equals("satu")){
+                  mgrandtotal.setText(currencyFormatter.format(Double.valueOf(GRrandprie)));
+            }
+
+            Log.d("grandtotal",String.valueOf(GRrandprie));
+//            myviewholder.mpricea.setText("$"+String.valueOf(new DecimalFormat("##,###,###.00").format(Double.valueOf(addFoclistitem.get(i).getPricePerQty()))));
+//            myviewholder.mtotalpricea.setText("$"+String.valueOf(new DecimalFormat("##,###,###.00").format(Double.valueOf(addFoclistitem.get(i).getPricePerQty())*
+//                    Integer.parseInt(myviewholder.mqtysper.getText().toString()))));
+            if ( myviewholder.mtotal.getText().toString().equals("$,00")){
+                myviewholder.mtotal.setText("$0");
+            }
+        }
     }
 
     @Override
@@ -87,14 +128,15 @@ extends RecyclerView.Adapter<DetailsDailyAdapter4.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mdatedaily, msttitledaily,mpresstypedaily,mpressstatudaily,mhtml,msndaily,mcaseiddaily,mcaseprogressdaily,msparepartname,mqty,mno;
+        TextView mtotal,mprice, mdatedaily, msttitledaily,mpresstypedaily,mpressstatudaily,mhtml,msndaily,mcaseiddaily,mcaseprogressdaily,msparepartname,mqty,mno;
 
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
             msparepartname = itemView.findViewById(R.id.sparepartname);
             mqty = itemView.findViewById(R.id.qty);
             mno = itemView.findViewById(R.id.nono);
-
+            mprice = itemView.findViewById(R.id.price);
+            mtotal = itemView.findViewById(R.id.total);
         }
     }
     public void clear() {

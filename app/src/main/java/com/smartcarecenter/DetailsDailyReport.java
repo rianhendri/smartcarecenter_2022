@@ -107,6 +107,10 @@ public class DetailsDailyReport extends AppCompatActivity {
     String reportcd = "";
     String startdate = "";
     String enddate="";
+    LinearLayout mlayoutgrandtotal;
+    public static TextView mgrandtotal;
+    public static boolean grand2=true;
+    public static String grandt1 = "";
     TextView mnotesdal,mcaseid,mreportdate,mpresssn,mpresssn2,mcaseprogress,mpressstatus,mticketlink,mservicetype,mtanpasper,mcustname;
     @SuppressLint("WrongConstant")
     @Override
@@ -123,6 +127,8 @@ public class DetailsDailyReport extends AppCompatActivity {
         myitem_place2 = findViewById(R.id.tindakanlist);
         myitem_place3 = findViewById(R.id.langkahlanjutanlist);
         myitem_place4 = findViewById(R.id.sperpartdaily);
+        mgrandtotal = findViewById(R.id.grandtotal);
+        mlayoutgrandtotal = findViewById(R.id.layoutgrandtotal);
         myitem_place5 = findViewById(R.id.createdby);
 
         mcaseid = findViewById(R.id.caseid);
@@ -133,7 +139,7 @@ public class DetailsDailyReport extends AppCompatActivity {
         mpressstatus = findViewById(R.id.pressstatus);
         mticketlink = findViewById(R.id.ticketlink);
         mservicetype = findViewById(R.id.servicetype);
-
+        grandt1 = "satu";
         check.checklistform=1;
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
@@ -364,9 +370,11 @@ public class DetailsDailyReport extends AppCompatActivity {
                     if (listformreq4.toString().equals("[]")){
                         myitem_place4.setVisibility(View.GONE);
                         mtanpasper.setVisibility(View.VISIBLE);
+                        mlayoutgrandtotal.setVisibility(View.GONE);
                     }else {
                         myitem_place4.setVisibility(View.VISIBLE);
                         mtanpasper.setVisibility(View.GONE);
+                        mlayoutgrandtotal.setVisibility(View.VISIBLE);
                     }
 
 

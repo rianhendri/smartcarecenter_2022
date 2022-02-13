@@ -21,25 +21,60 @@
 			android:textColor="@color/black"
 			android:fontFamily="@font/opensanslight"
 			android:textSize="15sp"/>
+<!--		<TextView-->
+<!--			android:id="@+id/sparepartname"-->
+<!--			android:layout_width="match_parent"-->
+<!--			android:layout_height="wrap_content"-->
+<!--			android:layout_weight="1"-->
+<!--			android:text="Sparepart Name"-->
+<!--			android:textColor="@color/black"-->
+<!--			android:fontFamily="@font/opensanslight"-->
+<!--			android:textSize="15sp"/>-->
+<!--		<TextView-->
+<!--			android:id="@+id/qty"-->
+<!--			android:layout_width="match_parent"-->
+<!--			android:layout_height="wrap_content"-->
+<!--			android:layout_weight="1"-->
+<!--			android:text="Quantity"-->
+<!--			android:textColor="@color/black"-->
+<!--			android:fontFamily="@font/opensanslight"-->
+<!--			android:textSize="15sp"/>-->
 		<TextView
 			android:id="@+id/sparepartname"
-			android:layout_width="match_parent"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:text="Sparepart Name"
+			android:textColor="@color/black"
+			android:paddingRight="8dp"
+			android:fontFamily="@font/opensanslight"
+			android:textSize="15sp"/>
+		<TextView
+			android:id="@+id/price"
+			android:layout_width="60dp"
+			android:layout_height="wrap_content"
+			android:text=""
 			android:textColor="@color/black"
 			android:fontFamily="@font/opensanslight"
 			android:textSize="15sp"/>
 		<TextView
 			android:id="@+id/qty"
-			android:layout_width="match_parent"
+			android:layout_width="50dp"
 			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="Quantity"
+			android:text="Qty"
+			android:gravity="center"
 			android:textColor="@color/black"
 			android:fontFamily="@font/opensanslight"
 			android:textSize="15sp"/>
-
+		<TextView
+			android:id="@+id/total"
+			android:layout_width="70dp"
+			android:layout_height="wrap_content"
+			android:text=""
+			android:gravity="center"
+			android:textColor="@color/black"
+			android:fontFamily="@font/opensanslight"
+			android:textSize="15sp"/>
 	</LinearLayout>
 
 </LinearLayout>

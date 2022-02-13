@@ -153,6 +153,7 @@ extends RecyclerView.Adapter<DailyAdapter2.Myviewholder> {
                 intent.putExtra("startd", startdate);
                 intent.putExtra("endd", enddate);
                 intent.putExtra("hide", hide);
+                intent.putExtra("grandt", "dua");
                 context.startActivity(intent);
                 ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 ((Activity)context).finish();
