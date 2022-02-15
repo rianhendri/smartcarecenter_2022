@@ -39,10 +39,15 @@ public interface IRetrofit {
     public Call<JsonObject> postRawJSONreopen(@Body JsonObject var1);
     @POST("api/news/Read")
     public Call<JsonObject> readnews(@Body JsonObject var1);
-    @POST("api/news/get")
-    public Call<JsonObject> loadnews(@Body JsonObject var1);
+    @POST("api/SPMonthlyUsageReport/prepare")
+    public Call<JsonObject> preparereport(@Body JsonObject var1);
+    @POST("api/SPMonthlyUsageReport/get")
+    public Call<JsonObject> preparereportget(@Body JsonObject var1);
     @GET("chat.json?auth=EGEEh1XOQyHdrTP8UZvedE79LBCH0mkmamZZOs0m")
     public Call<JsonObject> getjsonchat();
+
+    @POST("api/news/get")
+    public Call<JsonObject> loadnews(@Body JsonObject var1);
 
     @POST("api/Notification/Read")
     public Call<JsonObject> Read(@Body JsonObject var1);

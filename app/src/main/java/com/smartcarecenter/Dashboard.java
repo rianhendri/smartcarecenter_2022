@@ -100,6 +100,8 @@ import static com.smartcarecenter.menuhome.MenuAdapter.name;
 import static com.smartcarecenter.menuhome.MenuAdapter.sessionnya;
 import static com.smartcarecenter.menuhome.MenuAdapter.titlenya;
 import static com.smartcarecenter.menuhome.MenuAdapter.username;
+import static com.smartcarecenter.menuhome.MenuAdapter.xdaily;
+import static com.smartcarecenter.menuhome.MenuAdapter.xmonth;
 import static com.smartcarecenter.messagecloud.check.tokennya2;
 import static com.smartcarecenter.menuhome.MenuAdapter.countSC;
 import static com.smartcarecenter.menuhome.MenuAdapter.counter3;
@@ -504,10 +506,27 @@ public class Dashboard extends AppCompatActivity {
                         menuItemlist.add(menuItem10);
                     }
                     if (access.get("showDailyReport").getAsBoolean()){
-                        menuItem11.setMenuname(getString(R.string.title_dailireport));
-                        menuItem11.setImg(R.drawable.clipboarddaily);
+                        menuItem11.setMenuname("Reports");
+                        menuItem11.setImg(R.drawable.folder);
                         menuItem11.setShow(access.get("showDailyReport").toString());
                         menuItemlist.add(menuItem11);
+                        xdaily=true;
+                        if (access.get("showSPMonthlyUsageReport").getAsBoolean()){
+                            xmonth=true;
+                        }else {
+                            xmonth=false;
+                        }
+                    }else {
+                        xdaily=false;
+                        if (access.get("showSPMonthlyUsageReport").getAsBoolean()){
+                            menuItem11.setMenuname("Reports");
+                            menuItem11.setImg(R.drawable.folder);
+                            menuItem11.setShow(access.get("showDailyReport").toString());
+                            menuItemlist.add(menuItem11);
+                            xmonth=true;
+                        }else {
+                            xmonth=false;
+                        }
                     }
                     countPM = access.get("showPMCounter").getAsInt();
                     countDA = access.get("showDailyReportCounter").getAsInt();

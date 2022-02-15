@@ -92,6 +92,8 @@ public class DailyReportList extends AppCompatActivity {
     String totalrec = "";
     SwipeRefreshLayout mswip;
     TextView mstartdate, menddate;
+    Boolean xdaily=false;
+    Boolean xmonth = false;
     final Calendar myCalendar = Calendar.getInstance();
     @SuppressLint("WrongConstant")
     @Override
@@ -108,20 +110,32 @@ public class DailyReportList extends AppCompatActivity {
     mnested = findViewById(R.id.nestedscrol);
     mempetyreq = findViewById(R.id.norequest);
     mswip = findViewById(R.id.swiprefresh);
+        String string2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        mstartdate.setText((CharSequence)string2);
+        menddate.setText((CharSequence)string2);
+        startdate = string2;
+        enddate = string2;
         Bundle bundle2 = getIntent().getExtras();
         if (bundle2 != null) {
 //            reportcd = bundle2.getString("id");
-            startdate = bundle2.getString("startd");
-            enddate = bundle2.getString("endd");
+            if ( bundle2.getString("startd")!=null){
+                startdate = bundle2.getString("startd");
+                enddate = bundle2.getString("endd");
+                mstartdate.setText(startdate);
+                menddate.setText(enddate);
+            }
 
-            mstartdate.setText(startdate);
-            menddate.setText(enddate);
+            xdaily = bundle2.getBoolean("daily");
+//            items = bundle2.getString("items");
+            xmonth = bundle2.getBoolean("month");
+
+
         }else {
-            String string2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-            mstartdate.setText((CharSequence)string2);
-            menddate.setText((CharSequence)string2);
-            startdate = string2;
-            enddate = string2;
+//            String string2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+//            mstartdate.setText((CharSequence)string2);
+//            menddate.setText((CharSequence)string2);
+//            startdate = string2;
+//            enddate = string2;
         }
     check.checklistform=1;
 
@@ -512,9 +526,14 @@ public class DailyReportList extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent((Context)this, Dashboard.class));
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
+        Intent back = new Intent(DailyReportList.this,ReportsMenu.class);
+//        back.putExtra("subcd",cdsub);
+        back.putExtra("daily",xdaily);
+        back.putExtra("month",xmonth);
+        startActivity(back);
+//        overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
+        overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
     public  void refreshnotif() {
         Handler handler = new Handler();

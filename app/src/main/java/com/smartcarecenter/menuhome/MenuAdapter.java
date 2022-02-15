@@ -60,6 +60,7 @@ import com.smartcarecenter.NewsActivity;
 import com.smartcarecenter.PmList;
 import com.smartcarecenter.PurchaseMenu;
 import com.smartcarecenter.R;
+import com.smartcarecenter.ReportsMenu;
 import com.smartcarecenter.SettingActivity;
 import com.smartcarecenter.SurveyList_Activity;
 import com.smartcarecenter.menuhome.MenuAdapter;
@@ -97,6 +98,8 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
     public static String id="";
     public static boolean liveChatRepor=false;
     public static int counter3 = 0;
+    public static Boolean xdaily=false;
+    public static Boolean xmonth = false;
     private LinearLayoutManager linearLayoutManager;
     Context context;
     ArrayList<MenuItem> myItem;
@@ -181,8 +184,10 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                     ((Activity)context).finish();
 
                 }
-                if (namemenu.equals(context.getString(R.string.title_dailireport))){
-                    Intent gotonews = new Intent(context, DailyReportList.class);
+                if (namemenu.equals("Reports")){
+                    Intent gotonews = new Intent(context, ReportsMenu.class);
+                    gotonews.putExtra("daily", xdaily);
+                    gotonews.putExtra("month",xmonth);
                     context.startActivity(gotonews);
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     ((Activity)context).finish();

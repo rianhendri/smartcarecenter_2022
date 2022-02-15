@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".DailyReportList"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bgwhitecorner2"
+        android:orientation="horizontal"
+        android:elevation="5dp"
+        >
+
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@drawable/bgwhitecorner2"-->
+<!--            android:src="@drawable/headeropsi2ac"-->
+<!--            android:scaleType="centerCrop"/>-->
+
+        <LinearLayout
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="7dp"
+                android:gravity="left"
+                android:rotation="0"
+                android:src="@drawable/back_white"/>
+
+            <TextView
+                android:id="@+id/title_language"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="64dp"
+                android:fontFamily="@font/segoeuib"
+                android:gravity="center_vertical"
+                android:text="Sparepart Monthly Usage Report"
+                android:textColor="@color/dwhite"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:fontFamily="@font/seguisb"
+            android:textColor="@color/dwhite"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:textSize="15sp"
+            android:text="Period"/>
+
+        <LinearLayout
+            android:id="@+id/calender"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/bgwhitecorner2">
+<!--            <ImageView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:src="@drawable/calendar"/>-->
+            <Spinner
+                android:id="@+id/datenya"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:fontFamily="@font/segoeui"
+                android:paddingLeft="4dp"
+                android:text="Lorem Ipsum"
+                android:textColor="@color/dwhite"
+                android:textSize="13sp"
+                android:visibility="visible" />
+<!--            <TextView-->
+<!--                android:visibility="gone"-->
+<!--                android:id="@+id/datenya"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/seguisb"-->
+<!--                android:gravity="start"-->
+
+<!--                android:layout_marginLeft="12sp"-->
+<!--                android:textColor="@color/dwhite"-->
+<!--                android:textSize="15sp"-->
+<!--                android:text=""-->
+<!--                />-->
+
+            </LinearLayout>
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/segoeuib"-->
+<!--            android:gravity="center"-->
+<!--            android:textColor="@color/dwhite"-->
+<!--            android:textSize="15sp"-->
+<!--            android:text="To"-->
+<!--            />-->
+<!--        <LinearLayout-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            android:layout_marginLeft="22dp"-->
+<!--            android:layout_marginRight="22dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:paddingLeft="8dp"-->
+<!--            android:paddingRight="8dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:background="@drawable/bgwhitecorner2">-->
+<!--&lt;!&ndash;            <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="40dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="40dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:src="@drawable/calendar"/>&ndash;&gt;-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/seguisb"-->
+<!--                android:gravity="start"-->
+
+<!--                android:layout_marginLeft="12sp"-->
+<!--                android:textColor="@color/dwhite"-->
+<!--                android:textSize="15sp"-->
+<!--                android:text="12-Januari-2022"-->
+<!--                />-->
+
+<!--        </LinearLayout>-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:fontFamily="@font/seguisb"
+            android:textColor="@color/dwhite"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:textSize="15sp"
+            android:text="Press"/>
+
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/bgwhitecorner2">
+<!--            <ImageView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:src="@drawable/printer"/>-->
+            <Spinner
+                android:id="@+id/pressspin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:fontFamily="@font/segoeui"
+                android:paddingLeft="4dp"
+                android:text="Lorem Ipsum"
+                android:textColor="@color/dwhite"
+                android:textSize="13sp"
+                android:visibility="visible" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/seguisb"-->
+<!--                android:gravity="start"-->
+<!--                android:layout_marginLeft="12sp"-->
+<!--                android:textColor="@color/dwhite"-->
+<!--                android:textSize="15sp"-->
+<!--                android:text="5600-HP Indigo 5600"-->
+<!--                />-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/viewreport"
+        android:layout_marginTop="42dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_cornergrey">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/seguisb"
+            android:gravity="center"
+
+            android:layout_marginLeft="12sp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="View Report"
+            />
+
+    </LinearLayout>
+
+    </LinearLayout>
+

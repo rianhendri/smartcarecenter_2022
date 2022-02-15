@@ -28,7 +28,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailsOrderFoc"></activity>
+        <activity android:name=".MonthlyReportDetails"></activity>
+        <activity android:name=".MonthlyReport" />
+        <activity android:name=".ReportsMenu" />
+        <activity android:name=".DetailsOrderFoc" />
         <activity android:name=".DailiReportListPM" />
         <activity android:name=".DetailsDailyReport2" />
         <activity android:name=".DetailsDailyReport3" />
