@@ -95,24 +95,25 @@
                 <LinearLayout
                     android:id="@+id/backbtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <!--            <ImageView-->
-                    <!--                android:layout_width="19dp"-->
-                    <!--                android:layout_height="60dp"-->
-                    <!--                android:layout_gravity="left"-->
-                    <!--                android:layout_marginLeft="7dp"-->
-                    <!--                android:layout_marginRight="7dp"-->
-                    <!--                android:layout_marginTop="0dp"-->
-                    <!--                android:gravity="left"-->
-                    <!--                android:src="@drawable/back_white" />-->
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="19dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginTop="0dp"
+                        android:gravity="left"
+                        android:rotation="180"
+                        android:src="@drawable/back_black" />
 
                     <TextView
                         android:id="@+id/title_language"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="64dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="0dp"
                         android:layout_marginLeft="12dp"
                         android:fontFamily="@font/opensanslight"
                         android:gravity="center_vertical"

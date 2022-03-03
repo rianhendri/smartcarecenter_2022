@@ -110,24 +110,29 @@ public class Myprofile extends AppCompatActivity {
                     if(memail.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(),"Email kosong",Toast.LENGTH_SHORT).show();
                     }else {
-                        if (memail.getText().toString().trim().matches(emailPattern)) {
-                            if (mjobtitle.getText().toString().isEmpty()){
-                                Toast.makeText(getApplicationContext(),"Job Title kosong",Toast.LENGTH_SHORT).show();
-                            }else {
-                                updateprofil();
-                            }
-                        }else if (memail.getText().toString().trim().matches(emailPattern2)){
-
-                                if (mjobtitle.getText().toString().isEmpty()){
-                                    Toast.makeText(getApplicationContext(),"Job Title kosong",Toast.LENGTH_SHORT).show();
-                                }else {
-                                    updateprofil();
-                                }
-
+                        if (mjobtitle.getText().toString().isEmpty()){
+                            Toast.makeText(getApplicationContext(),"Job Title kosong",Toast.LENGTH_SHORT).show();
+                        }else {
+                            updateprofil();
                         }
-                        else {
-                            Toast.makeText(getApplicationContext(),"Format email salah", Toast.LENGTH_SHORT).show();
-                        }
+//                        if (memail.getText().toString().trim().matches(emailPattern)) {
+//                            if (mjobtitle.getText().toString().isEmpty()){
+//                                Toast.makeText(getApplicationContext(),"Job Title kosong",Toast.LENGTH_SHORT).show();
+//                            }else {
+//                                updateprofil();
+//                            }
+//                        }else if (memail.getText().toString().trim().matches(emailPattern2)){
+//
+//                                if (mjobtitle.getText().toString().isEmpty()){
+//                                    Toast.makeText(getApplicationContext(),"Job Title kosong",Toast.LENGTH_SHORT).show();
+//                                }else {
+//                                    updateprofil();
+//                                }
+//
+//                        }
+//                        else {
+//                            Toast.makeText(getApplicationContext(),"Format email salah", Toast.LENGTH_SHORT).show();
+//                        }
                     }
                 }
 

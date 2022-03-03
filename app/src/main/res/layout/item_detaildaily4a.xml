@@ -17,7 +17,7 @@
 		android:orientation="horizontal">
 		<TextView
 			android:id="@+id/nono"
-			android:layout_width="30dp"
+			android:layout_width="25dp"
 			android:layout_height="wrap_content"
 			android:text="100"
 			android:textColor="@color/black"
@@ -43,7 +43,7 @@
 <!--			android:textSize="15sp"/>-->
 		<TextView
 			android:id="@+id/code"
-			android:layout_width="70dp"
+			android:layout_width="75dp"
 			android:layout_height="wrap_content"
 			android:fontFamily="@font/opensanslight"
 			android:paddingRight="8dp"

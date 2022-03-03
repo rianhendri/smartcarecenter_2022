@@ -397,7 +397,12 @@ public class ListChat extends AppCompatActivity {
 
             }
         });
-
+        mback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
     @Override

@@ -157,14 +157,14 @@ public class DetailsNews extends AppCompatActivity {
 //                Toast.makeText(DetailsNews.this, linkdownloadnya,Toast.LENGTH_LONG).show();
             }
         });
-        if (Build.VERSION.SDK_INT >= 24) {
-            mcontentnews2.setText((CharSequence) Html.fromHtml((String)"<p><a href=\"https://www.w3schools.com/html/tryit.asp?filename=tryhtml_links_w3schools\">Visit Link</a></p>", Html.FROM_HTML_MODE_COMPACT));
-            mcontentnews2.setMovementMethod(LinkMovementMethod.getInstance());
-        } else {
-            mcontentnews2.setText((CharSequence)Html.fromHtml((String)"<p><a href=\"https://www.w3schools.com/html/tryit.asp?filename=tryhtml_links_w3schools\">Visit Link</a></p>"));
-            mcontentnews2.setMovementMethod(LinkMovementMethod.getInstance());
-
-        }
+//        if (Build.VERSION.SDK_INT >= 24) {
+//            mcontentnews2.setText((CharSequence) Html.fromHtml((String)"<p><a href=\"https://www.w3schools.com/html/tryit.asp?filename=tryhtml_links_w3schools\">Visit Link</a></p>", Html.FROM_HTML_MODE_COMPACT));
+//            mcontentnews2.setMovementMethod(LinkMovementMethod.getInstance());
+//        } else {
+//            mcontentnews2.setText((CharSequence)Html.fromHtml((String)"<p><a href=\"https://www.w3schools.com/html/tryit.asp?filename=tryhtml_links_w3schools\">Visit Link</a></p>"));
+//            mcontentnews2.setMovementMethod(LinkMovementMethod.getInstance());
+//
+//        }
 
     }
     private void setRequestImage() {

@@ -94,7 +94,7 @@ extends RecyclerView.Adapter<ListLiveChatAdapter.Myviewholder> {
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
         namea=myItem.get(i).getUserName();
 
-        myviewholder.mstnya.setText(myItem.get(i).getTitleInList());
+        myviewholder.mstnya.setText(myItem.get(i).getTitle());
         myviewholder.mdetailchat.setText(myItem.get(i).getDetails());
 
         String date = new SimpleDateFormat("d MMM yyyy", Locale.getDefault()).format(new Date());

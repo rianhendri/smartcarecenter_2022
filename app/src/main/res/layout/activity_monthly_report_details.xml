@@ -95,17 +95,18 @@
                 <LinearLayout
                     android:id="@+id/backbtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <!--            <ImageView-->
-                    <!--                android:layout_width="19dp"-->
-                    <!--                android:layout_height="60dp"-->
-                    <!--                android:layout_gravity="left"-->
-                    <!--                android:layout_marginLeft="7dp"-->
-                    <!--                android:layout_marginRight="7dp"-->
-                    <!--                android:layout_marginTop="0dp"-->
-                    <!--                android:gravity="left"-->
-                    <!--                android:src="@drawable/back_white" />-->
+                                <ImageView
+                                    android:layout_width="19dp"
+                                    android:layout_height="60dp"
+                                    android:layout_gravity="left"
+                                    android:layout_marginLeft="7dp"
+                                    android:layout_marginRight="7dp"
+                                    android:layout_marginTop="0dp"
+                                    android:gravity="left"
+                                    android:rotation="180"
+                                    android:src="@drawable/back_black" />
 
                     <TextView
                         android:id="@+id/title_language"
@@ -308,7 +309,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <TextView
-                            android:layout_width="30dp"
+                            android:layout_width="25dp"
                             android:layout_height="wrap_content"
                             android:text="No"
                             android:textColor="@color/dwhite"
@@ -331,7 +332,7 @@
                         <!--                                android:fontFamily="@font/opensansbold"-->
                         <!--                                android:textSize="15sp"/>-->
                         <TextView
-                            android:layout_width="70dp"
+                            android:layout_width="75dp"
                             android:layout_height="wrap_content"
                             android:text="Code"
                             android:textColor="@color/dwhite"

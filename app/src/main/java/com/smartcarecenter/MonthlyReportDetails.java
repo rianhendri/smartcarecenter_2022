@@ -71,11 +71,13 @@ public class MonthlyReportDetails extends AppCompatActivity {
     String consum = "";
     int pos = 0;
     int pos2 = 0;
+    LinearLayout mback;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_report_details);
+        mback=findViewById(R.id.backbtn);
         mlayoutgrandtotal = findViewById(R.id.layoutgrandtotal);
         mgrandtotal7 = (TextView) findViewById(R.id.grandtotal7);
         mtanpasper = findViewById(R.id.tanpasper);
@@ -114,7 +116,12 @@ public class MonthlyReportDetails extends AppCompatActivity {
         }else {
 
         }
-
+        mback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     @Override
     public void onBackPressed() {

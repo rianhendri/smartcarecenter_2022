@@ -213,7 +213,12 @@ public class ListChat2 extends AppCompatActivity {
 //                launchPicker();
             }
         });
-
+        mback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
     @Override
