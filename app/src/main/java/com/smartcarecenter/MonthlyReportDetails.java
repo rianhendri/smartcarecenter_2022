@@ -39,6 +39,7 @@ import com.smartcarecenter.reportsmenu.ReportAdapter;
 import com.smartcarecenter.reportsmenu.ReportsItem;
 
 import java.lang.reflect.Type;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,8 +56,8 @@ public class MonthlyReportDetails extends AppCompatActivity {
     Boolean xmonth = false;
     String period = "";
     String guid = "";
-    LinearLayout mviewreport,mcalender,mlayoutgrandtotal;
-    TextView mdatenya;
+    LinearLayout mviewreport,mcalender,mlayoutgrandtotal,mlayoutconsum;
+    TextView mdatenya, mrebate,msparepartcon, monvisit;
     String sesionid_new = "";
     String MhaveToUpdate = "";
     boolean internet = true;
@@ -77,6 +78,10 @@ public class MonthlyReportDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_report_details);
+        mrebate =findViewById(R.id.rebate);
+        mlayoutconsum=findViewById(R.id.layoutcunsum);
+        msparepartcon= findViewById(R.id.sparepartconsum);
+        monvisit =findViewById(R.id.onvisit);
         mback=findViewById(R.id.backbtn);
         mlayoutgrandtotal = findViewById(R.id.layoutgrandtotal);
         mgrandtotal7 = (TextView) findViewById(R.id.grandtotal7);
@@ -168,6 +173,19 @@ public class MonthlyReportDetails extends AppCompatActivity {
                 sesionid();
                 if (statusnya.equals("OK")){
                     JsonObject data = homedata.getAsJsonObject("data");
+                    if (data.get("showSummary").getAsBoolean()){
+                        mlayoutconsum.setVisibility(View.VISIBLE);
+
+                        Locale locale = new Locale("en", "US");
+                        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+                        msparepartcon.setText(currencyFormatter.format(Double.valueOf(data.get("sparePartConsumption").toString())));
+
+                        mrebate.setText(String.valueOf(data.get("rebatePercentage").getAsInt())+"%");
+                        monvisit.setText(String.valueOf(data.get("onSiteVisit").getAsInt()));
+                        msparepartcon.setText(String.valueOf(data.get("sparePartConsumption").getAsInt()));
+                    }else {
+                        mlayoutconsum.setVisibility(View.GONE);
+                    }
 //                    String oldadate = data.get("minPeriod").getAsString();
                     mcustomera.setText(data.get("customerName").getAsString());
                     mpressnamea.setText(data.get("pressSN").getAsString());
