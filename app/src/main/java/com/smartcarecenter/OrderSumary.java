@@ -105,7 +105,7 @@ public class OrderSumary extends AppCompatActivity {
     long totalnya = 0;
     ImageView mlogoorder;
     String imeiHp = "";
-
+    String paymentmethod="";
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,8 +136,11 @@ public class OrderSumary extends AppCompatActivity {
             mmustUpload = bundle2.getString("pdfyes");
             payCd = bundle2.getString("paycd");
             Log.d("noorder",noOrder+"/-"+items);
-            String paymentmethod = bundle2.getString("method");
+            paymentmethod = bundle2.getString("method");
             mpaymentMethod.setText(paymentmethod);
+            if (payCd.equals("KLIKPAY")){
+                Picasso.with(OrderSumary.this).load(R.drawable.logo_bcaklikpay).into(mlogoorder);
+            }
             if (payCd.equals("VAMANDIRI")){
                 Picasso.with(OrderSumary.this).load(R.drawable.mandiri).into(mlogoorder);
             }
@@ -383,6 +386,23 @@ public class OrderSumary extends AppCompatActivity {
 ////                        }, getApplicationContext());
 ////                        Log.d("payment",paymentItems.toString());
 //                    }
+                }
+                if (payCd.equals("KLIKPAY")){
+                    Intent gotoa = new Intent(OrderSumary.this,KlikPay.class);
+                    gotoa.putExtra("grandtotal",Grandtotal);
+                    gotoa.putExtra("id",noOrder);
+                    gotoa.putExtra("guid",guid);
+                    gotoa.putExtra("username",username);
+                    gotoa.putExtra("pdfyes",mmustUpload);
+                    gotoa.putExtra("pos",valuefilter);
+                    gotoa.putExtra("nopo",nopo);
+                    gotoa.putExtra("ss","Payment Failed");
+                    gotoa.putExtra("cc","Failed");
+                    gotoa.putExtra("tokennya","");
+                    gotoa.putExtra("paycd",payCd);
+                    gotoa.putExtra("method",paymentmethod);
+                    startActivity(gotoa);
+                    finish();
                 }
                 if (payCd.equals("VAMANDIRI")){
                     Intent gotoa = new Intent(OrderSumary.this,VirtualAccount.class);

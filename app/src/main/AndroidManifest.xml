@@ -28,7 +28,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MonthlyReportDetails"></activity>
+        <activity
+            android:name=".KlikPayError"
+            android:exported="false" />
+        <activity
+            android:name=".KlikPaySuccess"
+            android:exported="false" />
+        <activity
+            android:name=".KlikPay"
+            android:exported="false" />
+        <activity android:name=".MonthlyReportDetails" />
         <activity android:name=".MonthlyReport" />
         <activity android:name=".ReportsMenu" />
         <activity android:name=".DetailsOrderFoc" />

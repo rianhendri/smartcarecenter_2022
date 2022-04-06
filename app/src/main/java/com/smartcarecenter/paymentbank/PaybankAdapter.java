@@ -80,6 +80,9 @@ extends RecyclerView.Adapter<PaybankAdapter.Myviewholder> {
     public void onBindViewHolder(@NonNull Myviewholder myviewholder, int i) {
         myviewholder.mnamebank.setText(myItem.get(i).getName());
         myviewholder.mdeskripbank.setText(myItem.get(i).getDescription());
+        if (myItem.get(i).getPaymentGatewayCd().equals("KLIKPAY")){
+            myItem.get(i).setImg(R.drawable.logo_bcaklikpay);
+        }
         if (myItem.get(i).getPaymentGatewayCd().equals("CREDITCARD")){
             myItem.get(i).setImg(R.drawable.cc);
         }
@@ -108,6 +111,21 @@ extends RecyclerView.Adapter<PaybankAdapter.Myviewholder> {
         myviewholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (myItem.get(i).getPaymentGatewayCd().equals("KLIKPAY")){
+                    Intent gotoaddfoc = new Intent(context, OrderSumary.class);
+                    gotoaddfoc.putExtra("grandtotal",Grandtotal);
+                    gotoaddfoc.putExtra("id",noOrder);
+                    gotoaddfoc.putExtra("guid",guid);
+                    gotoaddfoc.putExtra("username",username);
+                    gotoaddfoc.putExtra("pdfyes",mmustUpload);
+                    gotoaddfoc.putExtra("pos",valuefilter);
+                    gotoaddfoc.putExtra("nopo",nopo);
+                    gotoaddfoc.putExtra("paycd","KLIKPAY");
+                    gotoaddfoc.putExtra("method",myItem.get(i).getName());
+                    context.startActivity(gotoaddfoc);
+                    ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                }
                 if (myItem.get(i).getPaymentGatewayCd().equals("CREDITCARD")){
                     Intent gotoaddfoc = new Intent(context, OrderSumary.class);
                     gotoaddfoc.putExtra("grandtotal",Grandtotal);

@@ -304,6 +304,7 @@ public class PaymentAct extends AppCompatActivity {
 
             }
         });
+        Log.d("prefpay",jsonObject.toString());
     }
     @Override
     public void onBackPressed() {
