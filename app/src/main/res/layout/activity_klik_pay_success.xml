@@ -28,15 +28,15 @@
       <!--                android:gravity="left"-->
       <!--                android:src="@drawable/back_white" />-->
 
-<!--      <TextView-->
-<!--          android:id="@+id/title"-->
-<!--          android:layout_width="wrap_content"-->
-<!--          android:layout_height="match_parent"-->
-<!--          android:fontFamily="@font/seguisb"-->
-<!--          android:gravity="center_vertical"-->
-<!--          android:text="@string/title_detailchargeable"-->
-<!--          android:textColor="@color/dwhite"-->
-<!--          android:textSize="15sp" />-->
+      <TextView
+          android:id="@+id/title"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:fontFamily="@font/seguisb"
+          android:gravity="center_vertical"
+          android:text="Payment Result"
+          android:textColor="@color/dwhite"
+          android:textSize="15sp" />
     </LinearLayout>
 
   </LinearLayout>
@@ -77,7 +77,7 @@
         android:gravity="center"
         android:textSize="15sp"
         android:fontFamily="@font/seguisb"
-        android:text=""
+        android:text="Order SO220308010 lunas"
         android:layout_marginBottom="40dp"/>
     <!--         <EditText-->
     <!--             android:layout_width="match_parent"-->

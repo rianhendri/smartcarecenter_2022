@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -236,15 +237,22 @@ public class Add_Po_Item_List extends AppCompatActivity {
     }
     private void filter(String text) {
         ArrayList<Add_po_list_item> filteredList = new ArrayList<>();
-        for (Add_po_list_item item : list2) {
-            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item);
-            }else if (item.getCategoryName().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
-            }else if (item.getItemCd().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
+        if (list2.toString().equals("[]")){
+            Log.d("filter",list2.toString());
+
+        }else {
+            for (Add_po_list_item item : list2) {
+                if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.add(item);
+                }else if (item.getCategoryName().toLowerCase().contains(text.toLowerCase())){
+                    filteredList.add(item);
+                }else if (item.getItemCd().toLowerCase().contains(text.toLowerCase())){
+                    filteredList.add(item);
+                }
             }
+            Log.d("filter",list2.toString());
+            addpoitemadapter.filterList(filteredList);
         }
-        addpoitemadapter.filterList(filteredList);
+
     }
 }

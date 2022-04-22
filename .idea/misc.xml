@@ -3,17 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/drawable/bg_cornergrey.xml" value="0.168" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_add__po__item__list.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_add_details_po.xml" value="0.264" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_add_details_po_view.xml" value="0.144" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_change_password.xml" value="0.264" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_chargeable.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_daili_report_list_f_r.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_dashboard.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_history_payment.xml" value="0.1234375" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_klik_pay.xml" value="0.1234375" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_klik_pay_error.xml" value="0.259375" />
-        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_klik_pay_success.xml" value="0.259375" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_klik_pay_success.xml" value="0.264" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_login.xml" value="0.176" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_monthly_report.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_monthly_report_details.xml" value="0.1234375" />
-        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_order_sumary.xml" value="0.1234375" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_myprofile.xml" value="0.655367231638418" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_order_sumary.xml" value="0.2" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_payment.xml" value="0.1234375" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_pm_list.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_proses_pembayaran.xml" value="0.213768115942029" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_result_payment.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_setting.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_spalsh_screen.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_virtual_account.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/dialogspar2.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/dialogspar2b.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/item_add_foc_buy.xml" value="0.15885416666666666" />
       </map>
     </option>
   </component>

@@ -243,18 +243,25 @@ public class Add_Foc_Item_List extends AppCompatActivity {
         Log.d("focjson",jsonObject.toString());
     }
     private void filter(String text) {
-        ArrayList<Add_foc_list_item> filteredList = new ArrayList<>();
-        for (Add_foc_list_item item : list2) {
-            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item);
-            }else if (item.getCategoryName().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
-            }else if (item.getItemCd().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
-            }else if (item.getStsActiveInfo().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
+        if (list2.toString().equals("[]")){
+            Log.d("filter",list2.toString());
+
+        }else {
+            ArrayList<Add_foc_list_item> filteredList = new ArrayList<>();
+            for (Add_foc_list_item item : list2) {
+                if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.add(item);
+                }else if (item.getCategoryName().toLowerCase().contains(text.toLowerCase())){
+                    filteredList.add(item);
+                }else if (item.getItemCd().toLowerCase().contains(text.toLowerCase())){
+                    filteredList.add(item);
+                }else if (item.getStsActiveInfo().toLowerCase().contains(text.toLowerCase())){
+                    filteredList.add(item);
+                }
             }
+            Log.d("filter",list2.toString());
+            addfocitemadapter.filterList(filteredList);
         }
-        addfocitemadapter.filterList(filteredList);
+
     }
 }

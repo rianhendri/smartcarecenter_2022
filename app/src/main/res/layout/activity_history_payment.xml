@@ -551,6 +551,7 @@
                         android:id="@+id/submit"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:layout_marginBottom="50dp"
                         android:background="@drawable/bg_yellow_borderradius"
                         android:gravity="center"
                         android:orientation="horizontal"

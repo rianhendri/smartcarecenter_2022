@@ -1026,16 +1026,34 @@ public class ListChat extends AppCompatActivity {
 
     public void gallery( ) {
         if (Build.VERSION.SDK_INT < 25) {
-            Intent mediaChooser = new Intent(Intent.ACTION_PICK);
-//comma-separated MIME types
-            mediaChooser.setType("video/*, image/*");
-            startActivityForResult(mediaChooser, REQUEST_IMAGE_GALLERY);
-//        Intent imageIntentGallery = new Intent(Intent.ACTION_PICK,
-//                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//        startActivityForResult(imageIntentGallery, REQUEST_IMAGE_GALLERY);
-//            String[] mimetypes = {"image/*", "video/*"};
-//            mediaChooser.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
-            photo_location=mediaChooser.getData();
+            //coba settingan baru
+//            Intent mediaChooser = new Intent(Intent.ACTION_GET_CONTENT);
+//            mediaChooser.setType("*/*");
+//            startActivityForResult(mediaChooser, REQUEST_IMAGE_GALLERY);
+//            photo_location=mediaChooser.getData();
+//            Log.d("versionnya","dibawah android 7.0");
+//
+
+            Intent imageIntentGallery = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            imageIntentGallery.setType("*/*");
+        startActivityForResult(imageIntentGallery, REQUEST_IMAGE_GALLERY);
+            String[] mimetypes = {"image/*", "video/*"};
+            imageIntentGallery.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
+            photo_location=imageIntentGallery.getData();
+            ///close
+
+//            Intent mediaChooser = new Intent(Intent.ACTION_PICK);
+////comma-separated MIME types
+//            mediaChooser.setType("video/*, image/*");
+//            startActivityForResult(mediaChooser, REQUEST_IMAGE_GALLERY);
+////        Intent imageIntentGallery = new Intent(Intent.ACTION_PICK,
+////                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+////        startActivityForResult(imageIntentGallery, REQUEST_IMAGE_GALLERY);
+////            String[] mimetypes = {"image/*", "video/*"};
+////            mediaChooser.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
+//            photo_location=mediaChooser.getData();
+            Log.d("versionnya","dibawah android 7.0");
         } else {
             Intent i = new Intent(Intent.ACTION_PICK);
             i.setType("*/*");
@@ -1045,6 +1063,7 @@ public class ListChat extends AppCompatActivity {
             startActivityForResult(i, REQUEST_IMAGE_GALLERY);
             Log.d("urinya",String.valueOf(i.getData()));
             photo_location=i.getData();
+            Log.d("versionnya","diatas android 7.0");
         }
 
 
