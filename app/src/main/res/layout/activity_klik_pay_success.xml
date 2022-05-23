@@ -16,8 +16,9 @@
         android:id="@+id/backbtn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:paddingLeft="24dp"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="start">
       <!--            <ImageView-->
       <!--                android:layout_width="19dp"-->
       <!--                android:layout_height="60dp"-->
@@ -42,43 +43,204 @@
   </LinearLayout>
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:gravity="center">
-    <ImageView
-        android:id="@+id/imageVar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ico_payment_success"
+      android:layout_margin="24dp"
+      android:background="@color/dwhite"
+      android:elevation="3dp"
+      android:padding="24dp"
+      android:gravity="start">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+      <ImageView
+          android:id="@+id/imageVar"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_marginLeft="0dp"
+          android:layout_centerHorizontal="true"
+          android:src="@drawable/ico_payment_success"
+          />
+      <TextView
+          android:id="@+id/resultText"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="0dp"
+          android:padding="24dp"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="22sp"
+          android:fontFamily="@font/seguisb"
+          android:text="Pembayaran Berhasil" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/segoeuib"
+          android:text="No Order"
+          />
+      <TextView
+          android:id="@+id/noorder"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/seguisb"
+          android:text="SO220411007"
         />
-    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="wrap_content"
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageVar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:textColor="#3a3a3a"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:gravity="center"
-        android:textSize="22sp"
-        android:fontFamily="@font/seguisb"
-        android:text="Pembayaran Berhasil" />
-    <TextView
-        android:id="@+id/suces"
-        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/segoeuib"
+          android:text="Payment Date"
+          />
+      <TextView
+          android:id="@+id/date"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/seguisb"
+          android:text="08-Mar-2022 15:40:58"
+          />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageVar"
-        android:layout_centerHorizontal="true"
-        android:textColor="#3a3a3a"
-        android:padding="12dp"
-        android:gravity="center"
-        android:textSize="15sp"
-        android:fontFamily="@font/seguisb"
-        android:text="Order SO220308010 lunas"
-        android:layout_marginBottom="40dp"/>
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/segoeuib"
+          android:text="Grand Total"
+          />
+      <TextView
+          android:id="@+id/grandtotal"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/seguisb"
+          android:text="Rp. 10,764.00"
+          />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/segoeuib"
+          android:text="Payment Type"
+          />
+      <TextView
+          android:id="@+id/paymenttype"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/seguisb"
+          android:text="Credit Card"
+          />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/segoeuib"
+          android:text="Ref No"
+          />
+      <TextView
+          android:id="@+id/refno"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/imageVar"
+          android:layout_centerHorizontal="true"
+          android:textColor="#3a3a3a"
+
+          android:gravity="center"
+          android:textSize="15sp"
+          android:fontFamily="@font/seguisb"
+          android:text="489087******7571"
+          />
+    </LinearLayout>
+
     <!--         <EditText-->
     <!--             android:layout_width="match_parent"-->
     <!--             android:layout_height="wrap_content"-->
@@ -89,14 +251,16 @@
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:padding="12dp"
+
+        android:padding="8dp"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:fontFamily="@font/seguisb"
-        android:textSize="15sp"
-        android:elevation="2dp"
-        android:background="@drawable/bgwhite_cornerblack"
+        android:textSize="12sp"
+        android:elevation="0dp"
+        android:background="@drawable/bg_cornerblue"
         android:text="Back"
-        android:textColor="#656565" />
+
+        android:textColor="@color/dwhite" />
   </LinearLayout>
 </LinearLayout>

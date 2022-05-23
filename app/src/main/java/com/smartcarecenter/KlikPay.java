@@ -7,7 +7,9 @@ import static com.smartcarecenter.PaymentAct.noOrder;
 import static com.smartcarecenter.PaymentAct.nopo;
 import static com.smartcarecenter.PaymentAct.username;
 import static com.smartcarecenter.PaymentAct.valuefilter;
+import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -15,16 +17,26 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.smartcarecenter.apihelper.IRetrofit;
+import com.smartcarecenter.apihelper.ServiceGenerator;
 import com.squareup.picasso.Picasso;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class KlikPay extends AppCompatActivity {
     WebView mwebView;
@@ -55,6 +67,8 @@ public class KlikPay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_klik_pay);
+
+
         getSessionId();
         cekInternet();
         Bundle bundle2 = getIntent().getExtras();
@@ -71,7 +85,11 @@ public class KlikPay extends AppCompatActivity {
             Log.d("noorder",noOrder+"/-"+items);
             urlklikpay ="https://www.smartcarecenter.id/gateway/doku/gate.aspx?orderno="+noOrder+"&"+"sessionid="+sesionid_new;
             Log.d("noorder","https://www.smartcarecenter.id/gateway/doku/gate.aspx?orderno="+noOrder+"&"+"sessionid="+sesionid_new);
-
+            SharedPreferences sharedPreferences = getSharedPreferences("NOORDERNYA", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("no_order", noOrder);
+//                    editor.putString("user",user);
+            editor.apply();
         }
         mwebView = (WebView)findViewById(R.id.help_webview);
         mwebView.getSettings().setJavaScriptEnabled(true);
@@ -193,4 +211,5 @@ public class KlikPay extends AppCompatActivity {
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
         finish();
     }
+
 }

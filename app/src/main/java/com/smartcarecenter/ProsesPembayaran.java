@@ -109,7 +109,27 @@ public class ProsesPembayaran extends AppCompatActivity {
                     }else {
                         success= "Failed";
                     }
-                    Intent gotoa = new Intent(ProsesPembayaran.this,ResultPayment.class);
+//                    Intent gotoa = new Intent(ProsesPembayaran.this,ResultPayment.class);
+//                    gotoa.putExtra("grandtotal",Grandtotal);
+//                    gotoa.putExtra("id",noOrder);
+//                    gotoa.putExtra("guid",guid);
+//                    gotoa.putExtra("username",username);
+//                    gotoa.putExtra("pdfyes",mmustUpload);
+//                    gotoa.putExtra("pos",valuefilter);
+//                    gotoa.putExtra("nopo",nopo);
+//                    gotoa.putExtra("ss","Payment "+success);
+//                    gotoa.putExtra("cc",success);
+//                    gotoa.putExtra("message",homedata.getAsJsonObject("data").get("paymentSuccessMessage").getAsString());
+//
+//                    startActivity(gotoa);
+//                    finish();
+                    SharedPreferences sharedPreferences = getSharedPreferences("NOORDERNYA", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("no_order", noOrder);
+//                    editor.putString("user",user);
+                    editor.apply();
+
+                    Intent gotoa = new Intent(ProsesPembayaran.this,KlikPaySuccess.class);
                     gotoa.putExtra("grandtotal",Grandtotal);
                     gotoa.putExtra("id",noOrder);
                     gotoa.putExtra("guid",guid);

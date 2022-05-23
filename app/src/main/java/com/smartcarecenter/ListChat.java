@@ -53,8 +53,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.smartcarecenter.Chat.Adapterchat;
 import com.smartcarecenter.Chat.ItemUid;
 import com.smartcarecenter.Chat.Itemchat;
@@ -62,16 +66,25 @@ import com.smartcarecenter.Chat.Itemchat2;
 import com.smartcarecenter.SendNotificationPack.APIService;
 import com.smartcarecenter.apihelper.IRetrofit;
 import com.smartcarecenter.apihelper.ServiceGenerator;
+import com.smartcarecenter.historyfr.AdapterHistoryfr;
+import com.smartcarecenter.historyfr.ItemHistoryfr;
 import com.smartcarecenter.messagecloud.check;
+import com.smartcarecenter.serviceticket.ServiceTicketAdapter;
+import com.smartcarecenter.serviceticket.ServicesTicketItem;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -84,6 +97,7 @@ import static com.smartcarecenter.DetailsFormActivity.mcustname;
 import static com.smartcarecenter.DetailsFormActivity.mformRequestCd;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.fcmbase;
+import static com.smartcarecenter.historyfr.AdapterHistoryfr.frpos;
 import static com.smartcarecenter.messagecloud.check.tokennya2;
 import static com.smartcarecenter.LiveChatList.itemchat;
 public class ListChat extends AppCompatActivity {
@@ -108,6 +122,7 @@ public class ListChat extends AppCompatActivity {
     String id = "";
     String titlenya= "";
     String module = "";
+    String pagechat="";
     String idnotif = "";
     String ModuleTransactionNo = "";
     Boolean internet = false;
@@ -169,6 +184,8 @@ public class ListChat extends AppCompatActivity {
     int tokenpos=0;
     LinearLayout mmnodatas;
     boolean kirim = true;
+    List<String> tokenlist;
+    JsonArray myCustomArray;
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,10 +233,21 @@ public class ListChat extends AppCompatActivity {
             mfrnya.setText(titlenya);
             if (id==null){
                 String currentString = noreq;
-                String[] separated = currentString.split("-");
+                String[] separated = currentString.split("/");
                 modultrans = separated[1];
                 module = separated[2];
                 idnotif = separated[0];
+                //edit
+//                String token = separated[3].replace("[","").replace("]","");
+//                tokenlist = new ArrayList<String>(Arrays.asList(token.split(",")));
+//                Gson gson = new GsonBuilder().create();
+//                myCustomArray = gson.toJsonTree(tokenlist).getAsJsonArray();
+//                String jsonarayitem = myCustomArray.toString();
+//                Log.d("tokesa",jsonarayitem);
+//                Log.d("dzsa","adaid");
+                //pagechat
+//                pagechat = separated[3];
+//                Log.d("pagechatnya",pagechat.toString());
 
             }else {
 
@@ -230,19 +258,29 @@ public class ListChat extends AppCompatActivity {
         getShowid();
         reqApi();
         if (id==null){
+//            Log.d("pagechatnya",pagechat.toString());
+            Log.d("dsa3","nulls");
             if (module.equals("ChatWithSupport")){
                 reqnotif2();
                 id="ChatWithSupport";
+
 //                scs="yes";
 //                titlelist="Support Live Chat List";
             }else {
                 reqnotif();
+
 //                scs="no";
 //                titlelist="List Live Chat";
             }
 
 
         }else {
+//            Log.d("pagechatnya",pagechat.toString());
+            Gson gson = new GsonBuilder().create();
+            myCustomArray = gson.toJsonTree(tokennya2).getAsJsonArray();
+            tokenlist = new ArrayList<>();
+            tokenlist.addAll(tokennya2);
+            Log.d("dsa1",tokenlist.toString());
             databaseReference= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
             databaseReference3= FirebaseDatabase.getInstance().getReference().child("chat").child(sessionnya).child("listchat");
             loadchat();
@@ -1191,16 +1229,24 @@ public class ListChat extends AppCompatActivity {
     }
     public void sendnotifchat(){
 //        loading = ProgressDialog.show(DetailsFormActivity.this, "", getString(R.string.title_loading), true);
+        //tambahtokennya2 ke dataid
+
             JsonObject dataid = new JsonObject();
-            dataid.addProperty("id", sessionnya+"-"+modultrans+"-"+module);
+            dataid.addProperty("id", sessionnya+"/"+modultrans+"/"+module+"/"+pagechat);
 
             JsonObject notifikasidata = new JsonObject();
             notifikasidata.addProperty("title", noreq + "-" + name);
             notifikasidata.addProperty("body", message);
             notifikasidata.addProperty("click_action", "notifchat");
 
+
+//            Gson gson = new GsonBuilder().create();
+//            JsonArray myCustomArray = gson.toJsonTree(tokennya2).getAsJsonArray();
+////             jsonarayitem = myCustomArray.toString();
+//            Log.d("tokes",tokens);
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("to", tokennya2.get(tokenpos));
+            jsonObject.add("registration_ids", myCustomArray);
+//        jsonObject.addProperty("to", tokennya2.get(tokenpos));
             jsonObject.add("data", dataid);
             jsonObject.add("notification", notifikasidata);
 //        Toast.makeText(DetailsFormActivity.this,jsonObject.toString(), Toast.LENGTH_SHORT).show();
@@ -1212,12 +1258,12 @@ public class ListChat extends AppCompatActivity {
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                     Log.d("tokenplusisze", String.valueOf(tokennya2.size()-1)+"=="+String.valueOf(tokenpos));
                     Log.d("tokenlist",tokennya2.get(tokenpos).toString());
-                    if (tokennya2.size()==tokenpos+1){
-                        tokenpos =0;
-                    }else {
-                        tokenpos +=1;
-                        sendnotifchat();
-                    }
+//                    if (tokennya2.size()==tokenpos+1){
+//                        tokenpos =0;
+//                    }else {
+//                        tokenpos +=1;
+//                        sendnotifchat();
+//                    }
                     String errornya = "";
                     JsonObject homedata = response.body();
                     int statusnya = homedata.get("success").getAsInt();
@@ -1285,7 +1331,11 @@ public class ListChat extends AppCompatActivity {
                             tokennya2.add(assobj2.get("Token").getAsString());
                         }
 
-                        Log.d("listToken", tokennya2.toString());
+                        Log.d("listTokennotif", tokennya2.toString());
+                        Gson gson = new GsonBuilder().create();
+                        myCustomArray = gson.toJsonTree(tokennya2).getAsJsonArray();
+                        tokenlist = new ArrayList<>();
+                        tokenlist.addAll(tokennya2);
                     }
                     id="listchat";
                     titlenya = data2.get("Title").getAsString();
@@ -1379,7 +1429,11 @@ public class ListChat extends AppCompatActivity {
                             tokennya2.add(assobj2.get("Token").getAsString());
                         }
 
-                        Log.d("listToken", tokennya2.toString());
+                        Log.d("listTokennotif", tokennya2.toString());
+                        Gson gson = new GsonBuilder().create();
+                        myCustomArray = gson.toJsonTree(tokennya2).getAsJsonArray();
+                        tokenlist = new ArrayList<>();
+                        tokenlist.addAll(tokennya2);
                     }
                     id="cs";
                     titlenya = data2.get("Title").getAsString();
@@ -1680,6 +1734,65 @@ public class ListChat extends AppCompatActivity {
                 }else {
 
             }
+    }
+
+    ///Load Token
+    public void tokenFr(){
+        loading = ProgressDialog.show(ListChat.this, "", getString(R.string.title_loading), true);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("formRequestCd",modultrans);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+//        Toast.makeText(DetailsFormActivity.this,jsonObject.toString(), Toast.LENGTH_SHORT).show();
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONgetform(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                if (statusnya.equals("OK")){
+
+                    sesionid();
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    if (data.get("liveChatOthersFirebaseToken").toString().equals("null")){
+                        tokennya = "-";
+                    }else {
+                        tokennya2.clear();
+                        JsonArray tokeny = data.getAsJsonArray("liveChatOthersFirebaseToken");
+                        for (int c = 0; c < tokeny.size(); ++c) {
+                            JsonObject assobj2 = tokeny.get(c).getAsJsonObject();
+                            tokennya2.add(assobj2.get("Token").getAsString());
+                        }
+
+                        Log.d("listToken", tokennya2.toString());
+                    }
+                }else {
+                    sesionid();
+                    loading.dismiss();
+                    Toast.makeText(ListChat.this, errornya,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(ListChat.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+                loading.dismiss();
+
+            }
+        });
+        Log.d("requestSTdetails",jsonObject.toString());
     }
 
 }

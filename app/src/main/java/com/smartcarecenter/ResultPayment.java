@@ -90,7 +90,8 @@ public class ResultPayment extends AppCompatActivity {
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
             finish();
         }else {
-            Intent back = new Intent(ResultPayment.this,PaymentAct.class);
+//            Intent back = new Intent(ResultPayment.this,PaymentAct.class);
+            Intent back = new Intent(ResultPayment.this,ChargeableActivity.class);
             back.putExtra("grandtotal",Grandtotal);
             back.putExtra("id",noOrder);
             back.putExtra("guid",guid);
