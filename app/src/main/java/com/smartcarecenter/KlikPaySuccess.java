@@ -103,10 +103,10 @@ public class KlikPaySuccess extends AppCompatActivity {
         loading = ProgressDialog.show(KlikPaySuccess.this, "", getString(R.string.title_loading), true);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("sessionId",sesionid_new);
-        jsonObject.addProperty("noOrder",noOrder);
+        jsonObject.addProperty("orderNo",noOrder);
         jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
-        Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
+        Call<JsonObject> panggilkomplek = jsonPostService.getsummaryklikpay(jsonObject);
         panggilkomplek.enqueue(new Callback<JsonObject>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -180,8 +180,10 @@ public class KlikPaySuccess extends AppCompatActivity {
         showaddform = show.getString("showaddform", "");
         mshowPurchaseOrderPO = show.getString("mshowPurchaseOrderPO", "");
         mshowPurchaseOrderFOC = show.getString("mshowPurchaseOrderFOC", "");
-        SharedPreferences noroder = getSharedPreferences("Show",MODE_PRIVATE);
-        noOrder = noroder.getString("no_order","");
+        SharedPreferences noroder = getSharedPreferences("NO_ORDER",MODE_PRIVATE);
+        noOrder = noroder.getString("noorder","");
+
+
 
 
     }

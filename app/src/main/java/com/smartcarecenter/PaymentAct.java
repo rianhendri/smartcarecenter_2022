@@ -131,6 +131,11 @@ public class PaymentAct extends AppCompatActivity {
             username = bundle2.getString("username");;
             mmustUpload = bundle2.getString("pdfyes");
             items = bundle2.getString("items");
+
+            SharedPreferences sharedPreferences = getSharedPreferences("NO_ORDER", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("noorder", noOrder);
+            editor.apply();
             Log.d("noorder",noOrder);
 
         }
@@ -158,6 +163,11 @@ public class PaymentAct extends AppCompatActivity {
         mbackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // ganti lagi y
+//                Intent gotoaddfoc = new Intent(PaymentAct.this, KlikPay.class);
+//                startActivity(gotoaddfoc);
+//                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//                finish();
                 onBackPressed();
             }
         });

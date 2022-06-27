@@ -603,6 +603,7 @@ public class AddDetailsPoView extends AppCompatActivity {
                         mpayment.setText(data.get("ProcessPaymentButtonText").getAsString());
                     }else{
                         mpayment.setVisibility(GONE);
+                        //GANTI KE GONE LAGI YA
 
                     }
                     ///payment

@@ -121,6 +121,9 @@ public interface IRetrofit {
     @POST("api/FormRequest/List")
     public Call<JsonObject> postRawJSONlistform(@Body JsonObject var1);
 
+    @POST("api/doku/GetPaymentSummary")
+    public Call<JsonObject> getsummaryklikpay(@Body JsonObject var1);
+
     @POST("api/pm/List")
     public Call<JsonObject> pmlistreq(@Body JsonObject var1);
 

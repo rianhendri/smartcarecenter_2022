@@ -85,11 +85,11 @@ public class KlikPay extends AppCompatActivity {
             Log.d("noorder",noOrder+"/-"+items);
             urlklikpay ="https://www.smartcarecenter.id/gateway/doku/gate.aspx?orderno="+noOrder+"&"+"sessionid="+sesionid_new;
             Log.d("noorder","https://www.smartcarecenter.id/gateway/doku/gate.aspx?orderno="+noOrder+"&"+"sessionid="+sesionid_new);
-            SharedPreferences sharedPreferences = getSharedPreferences("NOORDERNYA", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("no_order", noOrder);
-//                    editor.putString("user",user);
-            editor.apply();
+//            SharedPreferences sharedPreferences = getSharedPreferences("NOORDERNYA", MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putString("noorder", noOrder);
+////                    editor.putString("user",user);
+//            editor.apply();
         }
         mwebView = (WebView)findViewById(R.id.help_webview);
         mwebView.getSettings().setJavaScriptEnabled(true);

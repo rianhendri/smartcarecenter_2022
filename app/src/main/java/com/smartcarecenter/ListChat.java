@@ -50,6 +50,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -161,7 +162,8 @@ public class ListChat extends AppCompatActivity {
     String idhcat="admin1";
     public static String levelStatus="admin";
     public static String sessionnya = "";
-
+    String sesichat = "";
+    String dateini = "";
     final int REQUEST_IMAGE_GALLERY = 2;
     Uri photo_location;
     public static boolean chatin = false;
@@ -342,14 +344,26 @@ public class ListChat extends AppCompatActivity {
                     mdelcop.setVisibility(View.GONE);
                     String date = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH).format(new Date());
                     getShowid();
-                    if (showid.equals(date)){
+                    String chekdatesesi = sessionnya+"/"+date;
+                    Log.d("dateini1",chekdatesesi+"==="+sesichat);
+                    if(chekdatesesi.equals(sesichat)){
                         show="no";
+//
                     }else {
-                        show="yes";
+                        dateini= itemchat3.get(itemchat3.size()-1).getDate();
+                        Log.d("dateini",dateini);
+                        if(dateini.equals(date)){
+                            show="no";
+                        }else {
+                            show="yes";
+                        }
+
                     }
+
                     SharedPreferences sharedPreferences = getSharedPreferences("SHOW_ID", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("show_id", date);
+                    editor.putString("sesichatnya", sessionnya+"/"+date);
                     editor.apply();
                     sendDb();
                     loadchat();
@@ -855,6 +869,7 @@ public class ListChat extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("SHOW_ID",MODE_PRIVATE);
         showid = sharedPreferences.getString("show_id", "");
+        sesichat = sharedPreferences.getString("sesichatnya","");
 
     }
     private void dialogfile() {

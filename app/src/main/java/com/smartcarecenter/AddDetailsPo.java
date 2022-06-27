@@ -265,37 +265,40 @@ public class AddDetailsPo extends AppCompatActivity {
             }
         });
         mnopo.setText(pono);
+        Log.d("json-barang",jsonarayitem);
 ////////////////////// adapter di masukan ke recyler//
 
         req_adapter = new Add_po_req_adapter(this, reitem);
         mlistitem_foc.setAdapter(req_adapter);
         String string2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         mdate.setText((CharSequence)string2);
-        msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mpressId = snid.get(position);
-                previmpressvlaue = previmpression.get(position);
-//                    Toast.makeText(AddDetailsPo.this, mpressId,Toast.LENGTH_SHORT).show();
-                if (pos==position){
-
-                }else {
-                    listpoact.clear();
-                    reitem.clear();
-                    req_adapter = new Add_po_req_adapter(AddDetailsPo.this, reitem);
-                    mlistitem_foc.setAdapter(req_adapter);
-                    mlaytotal.setVisibility(View.GONE);
-                    mnoitem.setVisibility(View.VISIBLE);
-                    mlistitem_foc.setVisibility(View.GONE);
-                }
+//        msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                mpressId = snid.get(position);
+//                previmpressvlaue = previmpression.get(position);
+////                    Toast.makeText(AddDetailsPo.this, mpressId,Toast.LENGTH_SHORT).show();
+//                if (pos==position){
 //
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//                }else {
+//                    listpoact.clear();
+//                    reitem.clear();
+//                    req_adapter = new Add_po_req_adapter(AddDetailsPo.this, reitem);
+//                    mlistitem_foc.setAdapter(req_adapter);
+//                    mlaytotal.setVisibility(View.GONE);
+//                    mnoitem.setVisibility(View.VISIBLE);
+//                    mlistitem_foc.setVisibility(View.GONE);
+//                }
+//                Log.d("json-barangsn",jsonarayitem);
+//
+//// Log.d("json-barang",jsonarayitem);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
         mback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -591,20 +594,99 @@ public class AddDetailsPo extends AppCompatActivity {
                         Integer previmpress = jsonObject2.getAsJsonObject().get("previousImpression").getAsInt();
                         snname.add(string4);
                         snid.add(string5);
-
-                        for (int j = 0; j < snid.size(); ++j) {
-                            if (snid.get(i).equals(mpressId)){
-                                pos=j;
-                            }
-                        }
+                        // pindah ke bawah ++
+//                        for (int j = 0; j < snid.size(); ++j) {
+//                            if (snid.get(i).equals(mpressId)){
+//                                pos=j;
+//                                Log.d("possisi",String.valueOf(pos));
+//                            }else {
+//
+//                            }
+//                        }
                         previmpression.add(previmpress);
-                        ArrayAdapter arrayAdapter = new ArrayAdapter(AddDetailsPo.this, R.layout.spinstatus_layout, snname);
-                        arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
-                        arrayAdapter.notifyDataSetChanged();
-                        msn.setAdapter(arrayAdapter);
-                        msn.setSelection(pos);
-                        loading.dismiss();
+                        //pindah kebawah ++
+//                        ArrayAdapter arrayAdapter = new ArrayAdapter(AddDetailsPo.this, R.layout.spinstatus_layout, snname);
+//                        arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
+//                        arrayAdapter.notifyDataSetChanged();
+//                        msn.setAdapter(arrayAdapter);
+//                        msn.setSelection(pos);
+//                        loading.dismiss();
+//                        ///di pindah ke sini fungsi spinner
+//                        msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                            @Override
+//                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                                mpressId = snid.get(position);
+//                                previmpressvlaue = previmpression.get(position);
+////                    Toast.makeText(AddDetailsPo.this, mpressId,Toast.LENGTH_SHORT).show();
+//                                Log.d("possisi2",String.valueOf(position));
+//                                if (pos==position){
+//
+//                                }else {
+//                                    listpoact.clear();
+//                                    reitem.clear();
+//                                    req_adapter = new Add_po_req_adapter(AddDetailsPo.this, reitem);
+//                                    mlistitem_foc.setAdapter(req_adapter);
+//                                    mlaytotal.setVisibility(View.GONE);
+//                                    mnoitem.setVisibility(View.VISIBLE);
+//                                    mlistitem_foc.setVisibility(View.GONE);
+//                                    Log.d("json-barangsn","aktif");
+//                                }
+//
+//
+//// Log.d("json-barang",jsonarayitem);
+//                            }
+//
+//                            @Override
+//                            public void onNothingSelected(AdapterView<?> parent) {
+//
+//                            }
+//                        });
                     }
+                    // ++
+                    for (int j = 0; j < snid.size(); ++j) {
+                        if (snid.get(j).equals(mpressId)){
+                            pos=j;
+                            Log.d("possisi",String.valueOf(pos));
+                        }else {
+
+                        }
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(AddDetailsPo.this, R.layout.spinstatus_layout, snname);
+                    arrayAdapter.setDropDownViewResource(R.layout.spinkategori);
+                    arrayAdapter.notifyDataSetChanged();
+                    msn.setAdapter(arrayAdapter);
+                    msn.setSelection(pos);
+                    loading.dismiss();
+                    ///di pindah ke sini fungsi spinner
+                    msn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            mpressId = snid.get(position);
+                            previmpressvlaue = previmpression.get(position);
+//                    Toast.makeText(AddDetailsPo.this, mpressId,Toast.LENGTH_SHORT).show();
+                            Log.d("possisi2",String.valueOf(position));
+                            if (pos==position){
+                                Log.d("json-barangsn","tidak");
+                            }else {
+                                listpoact.clear();
+                                reitem.clear();
+                                req_adapter = new Add_po_req_adapter(AddDetailsPo.this, reitem);
+                                mlistitem_foc.setAdapter(req_adapter);
+                                mlaytotal.setVisibility(View.GONE);
+                                mnoitem.setVisibility(View.VISIBLE);
+                                mlistitem_foc.setVisibility(View.GONE);
+                                Log.d("json-barangsn","aktif");
+                            }
+
+
+// Log.d("json-barang",jsonarayitem);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
                 }else {
                     Toast.makeText(AddDetailsPo.this, errornya.toString(),Toast.LENGTH_LONG).show();
                     loading.dismiss();
