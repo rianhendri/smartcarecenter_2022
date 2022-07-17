@@ -139,6 +139,9 @@ public interface IRetrofit {
     @POST("api/survey/List")
     public Call<JsonObject> listsurveyapi(@Body JsonObject var1);
 
+    @POST("api/survey/get")
+    public Call<JsonObject> sharesurvey(@Body JsonObject var1);
+
     @POST("api/Account/Ping")
     public Call<JsonObject> postRawJSONping(@Body JsonObject var1);
 

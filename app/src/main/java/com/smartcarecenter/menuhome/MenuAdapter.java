@@ -50,6 +50,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartcarecenter.AddDetailFocView;
 import com.smartcarecenter.CategoryNews;
+import com.smartcarecenter.ChartPage;
 import com.smartcarecenter.DailyReportList;
 import com.smartcarecenter.Dashboard;
 import com.smartcarecenter.FormActivity;
@@ -243,6 +244,12 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.Myviewholder>
                 }
                 if (namemenu.equals(context.getString(R.string.title_survei))){
                     Intent gotosurvey = new Intent(context, SurveyList_Activity.class);
+                    context.startActivity(gotosurvey);
+                    ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                    ((Activity)context).finish();
+                }
+                if (namemenu.equals("Dashboard")){
+                    Intent gotosurvey = new Intent(context, ChartPage.class);
                     context.startActivity(gotosurvey);
                     ((Activity)context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     ((Activity)context).finish();

@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,6 +61,7 @@ import static com.smartcarecenter.AddDetailFocView.Nowfoc;
 import static com.smartcarecenter.AddDetailsPoView.Nowpo;
 import static com.smartcarecenter.AddRequest.requestby;
 import static com.smartcarecenter.DetailsFormActivity.Nowaform;
+import static com.smartcarecenter.FormActivity.valuefilter;
 import static com.smartcarecenter.ListSurvey.ListSurvey.ListSurvey_adapter.listAnswer;
 import static com.smartcarecenter.apihelper.ServiceGenerator.baseurl;
 import static com.smartcarecenter.apihelper.ServiceGenerator.ver;
@@ -84,8 +86,10 @@ public class SurveyActivity extends AppCompatActivity {
     ProgressBar mloading;
     TextView mgagalload;
     NestedScrollView mnested;
+    String cdSurvey = "";
     boolean multichose=true;
     boolean text = true;
+    Uri uri ;
     public static JsonArray AnswersArray;
     @SuppressLint("WrongConstant")
     @Override
@@ -113,11 +117,23 @@ public class SurveyActivity extends AppCompatActivity {
         cekInternet();
         getSessionId();
         check.checknotif=1;
-        if (internet){
-            loadData();
+        uri = getIntent().getData();
+        if (uri !=null){
+            Log.d("survecd",uri.toString());
+            String url = uri.toString().replace("?","-");
+            String[] separated = url.split("-");
+//            separated[0]; // this will contain "Fruit"
+           cdSurvey =  separated[1];
+//            mdata.setText(uri.toString());
+            loadSurveyshrare();
         }else {
+            if (internet){
+                loadData();
+            }else {
 
+            }
         }
+
 //        mnested.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
 //            @Override
 //            public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
@@ -352,6 +368,88 @@ public class SurveyActivity extends AppCompatActivity {
             }
         });
     }
+    public void loadSurveyshrare(){
+        mloading.setVisibility(VISIBLE);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sessionId",sesionid_new);
+        jsonObject.addProperty("surveyCd",cdSurvey);
+        jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
+        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
+        Call<JsonObject> panggilkomplek = jsonPostService.sharesurvey(jsonObject);
+        panggilkomplek.enqueue(new Callback<JsonObject>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                String errornya = "";
+                JsonObject homedata=response.body();
+                String statusnya = homedata.get("status").getAsString();
+                if (homedata.get("errorMessage").toString().equals("null")) {
+
+                }else {
+                    errornya = homedata.get("errorMessage").getAsString();
+                }
+                MhaveToUpdate = homedata.get("haveToUpdate").toString();
+                MsessionExpired = homedata.get("sessionExpired").toString();
+                if (statusnya.equals("OK")){
+                    mprogress.setVisibility(GONE);
+                    mgagalload.setVisibility(GONE);
+                    mprogress.setVisibility(GONE);
+                    JsonObject data = homedata.getAsJsonObject("data");
+                    JsonObject survey = data.getAsJsonObject("survey");
+                    if (survey.get("Description").toString().equals("null")){
+                        mbackground.setVisibility(GONE);
+                    }else {
+                        mbackground.setVisibility(VISIBLE);
+                        mheader.setText(survey.get("Description").getAsString());
+                    }
+
+                    mtitlesurvey.setText(survey.get("Title").getAsString());
+                    surveycd=survey.get("SurveyCd").getAsString();
+                    listformreq = survey.getAsJsonArray("Questions");
+                    Gson gson = new Gson();
+                    Type listType = new TypeToken<ArrayList<ListSurvey_tem>>() {
+                    }.getType();
+                    ArrayList<ListSurvey_tem> list;
+                    list=new ArrayList<>();
+                    list = gson.fromJson(listformreq.toString(), listType);
+                    listsurvey.addAll(list);
+
+                    addSurveyAdapter = new ListSurvey_adapter(SurveyActivity.this, listsurvey);
+                    MrecylerSurvey.setAdapter(addSurveyAdapter);
+                    MrecylerSurvey.setVisibility(View.VISIBLE);
+
+
+                }else {
+
+                    sesionid();
+                    Toast.makeText(SurveyActivity.this, errornya,Toast.LENGTH_LONG).show();
+                    mloading.setVisibility(GONE);
+                    mgagalload.setText(errornya);
+                    if (MsessionExpired.equals("false")){
+                        Intent back = new Intent(SurveyActivity.this,Dashboard.class);
+                        back.putExtra("pos",valuefilter);
+                        startActivity(back);
+                        overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                        finish();
+                    }else {
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                mloading.setVisibility(GONE);
+                mgagalload.setText(R.string.title_excpetation);
+                Toast.makeText(SurveyActivity.this, getString(R.string.title_excpetation),Toast.LENGTH_LONG).show();
+                cekInternet();
+
+            }
+        });
+        Log.d("sharesurvey",jsonObject.toString());
+    }
     public void sesionid() {
         if (MsessionExpired.equals("false")) {
             if (MhaveToUpdate.equals("false")) {
@@ -395,21 +493,30 @@ public class SurveyActivity extends AppCompatActivity {
 
     }
     public void onBackPressed(){
-        if (exit) {
-            this.finish();
+        if (uri !=null){
+            Intent back = new Intent(SurveyActivity.this,Dashboard.class);
+            back.putExtra("pos",valuefilter);
+            startActivity(back);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+        }else {
+            if (exit) {
+                this.finish();
 
-        } else {
-            Toast.makeText(this, getString(R.string.title_exit),
-                    Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 3 * 1000);
+            } else {
+                Toast.makeText(this, getString(R.string.title_exit),
+                        Toast.LENGTH_SHORT).show();
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 3 * 1000);
 
+            }
         }
+
 
 
 

@@ -128,6 +128,7 @@ public class Dashboard extends AppCompatActivity {
     public static boolean installed = true;
     public static boolean installed2 = true;
     public static String mshowFormRequest = "";
+    public static String mshowdasboard = "";
     public static String mshowLiveChat = "";
     public static String mshowNews = "";
     public static String mshowNotification = "";
@@ -456,6 +457,7 @@ public class Dashboard extends AppCompatActivity {
                     //MENU
                     JsonObject access = data.getAsJsonObject("accessLevel");
                     mshowFormRequest = access.get("showFormRequest").toString();
+                    mshowdasboard = access.get("showDashboard").toString();
                     mshowPurchaseOrderPO = access.get("showPurchaseOrderPO").toString();
                     mshowPurchaseOrderFOC = access.get("showPurchaseOrderFOC").toString();
                     mshowSurvey = access.get("showSurvey").toString();
@@ -489,6 +491,7 @@ public class Dashboard extends AppCompatActivity {
                     MenuItem menuItem9 = new MenuItem();
                     MenuItem menuItem10 = new MenuItem();
                     MenuItem menuItem11 = new MenuItem();
+                    MenuItem menuItem12 = new MenuItem();
                     new MenuItem();
                     MenuItem menuItem7 = new MenuItem();
                     menuItemlist = new ArrayList();
@@ -537,6 +540,12 @@ public class Dashboard extends AppCompatActivity {
                         menuItem2.setImg(R.drawable.purchase);
                         menuItem2.setShow("true");
                         menuItemlist.add(menuItem2);
+                    }
+                    if (mshowdasboard.equals("true")){
+                        menuItem12.setMenuname("Dashboard");
+                        menuItem12.setImg(R.drawable.chart);
+                        menuItem12.setShow(mshowdasboard);
+                        menuItemlist.add(menuItem12);
                     }
 
                     if (mshowPressList.equals("true")){
