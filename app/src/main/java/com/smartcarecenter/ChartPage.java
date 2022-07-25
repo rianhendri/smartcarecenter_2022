@@ -29,9 +29,11 @@ public class ChartPage extends AppCompatActivity {
 //        webView.loadUrl("https://exitme");
         Log.d("linknya",link);
         mchart.getSettings().setJavaScriptEnabled(true);
+//        mchart.getSettings().setLoadWithOverviewMode(true);
+//        mchart.getSettings().setUseWideViewPort(true);
+//        mchart.getSettings().setBuiltInZoomControls(true);
         mchart.getSettings().setLoadWithOverviewMode(true);
         mchart.getSettings().setUseWideViewPort(true);
-        mchart.getSettings().setBuiltInZoomControls(true);
         mchart.loadUrl(link);
         mback.setOnClickListener(new View.OnClickListener() {
             @Override

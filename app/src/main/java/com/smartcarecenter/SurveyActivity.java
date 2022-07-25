@@ -248,7 +248,7 @@ public class SurveyActivity extends AppCompatActivity {
                     Toast.makeText(SurveyActivity.this, "Terimakasih Atas Jawaban Anda", Toast.LENGTH_SHORT).show();
                 }else {
                     sesionid();
-                    Toast.makeText(SurveyActivity.this, "ststaus NOK",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SurveyActivity.this, "status NOK",Toast.LENGTH_LONG).show();
                     mloading.setVisibility(GONE);
                     mgagalload.setText(errornya);
                     Log.e("NOK",AnswersArray.toString());

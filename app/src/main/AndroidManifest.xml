@@ -100,18 +100,19 @@
         <activity android:name=".CategoryNews" />
         <activity android:name=".DetailsSurvey" />
         <activity android:name=".SurveyList_Activity" /> <!-- <activity android:name=".SurveyActivity" /> -->
-        <activity android:name=".SurveyActivity">
-            <tools:validation testUrl="https://www.smartcarecenter.id/survey/" />
+        <activity
+            android:name=".SurveyActivity"
+            android:launchMode="singleTask">
 
+            <tools:validation testUrl="https://www.smartcarecenter.id/survey/" />
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "example://gizmos” -->
                 <data
                     android:host="www.smartcarecenter.id"
-                    android:path="/survey/"
+                    android:pathPrefix="/survey"
                     android:scheme="https" />
             </intent-filter>
         </activity>
