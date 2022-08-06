@@ -120,8 +120,8 @@ public class SurveyActivity extends AppCompatActivity {
         uri = getIntent().getData();
         if (uri !=null){
             Log.d("survecd",uri.toString());
-            String url = uri.toString().replace("?","-");
-            String[] separated = url.split("-");
+            String url = uri.toString().replace("?","%");
+            String[] separated = url.split("%");
 //            separated[0]; // this will contain "Fruit"
            cdSurvey =  separated[1];
 //            mdata.setText(uri.toString());

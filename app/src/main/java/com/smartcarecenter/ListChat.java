@@ -350,7 +350,12 @@ public class ListChat extends AppCompatActivity {
                         show="no";
 //
                     }else {
-                        dateini= itemchat3.get(itemchat3.size()-1).getDate();
+                        if(itemchat3.size()==0){
+
+                        }else {
+                            Log.d("dateitemchat",String.valueOf(itemchat3.size()));
+                            dateini= itemchat3.get(itemchat3.size()-1).getDate();
+                        }
                         Log.d("dateini",dateini);
                         if(dateini.equals(date)){
                             show="no";
