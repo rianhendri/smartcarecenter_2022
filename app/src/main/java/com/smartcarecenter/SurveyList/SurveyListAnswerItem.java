@@ -22,7 +22,7 @@ public class SurveyListAnswerItem {
     }
 
 
-    public SurveyListAnswerItem(String questionType, String answerText, int answerPosition, int questionPosition, String questionGroupCd, String questionGroupName, String question, Integer position, ArrayList<ListSurveyAnswer_tem> questionAnswerOptions) {
+    public SurveyListAnswerItem(String questionType, String answerText, int answerPosition, int questionPosition, String questionGroupCd, String questionGroupName, String question, Integer position, boolean showOptionalCommentTextbox, ArrayList<ListSurveyAnswer_tem> questionAnswerOptions) {
         QuestionType = questionType;
         AnswerText = answerText;
         AnswerPosition = answerPosition;
@@ -31,6 +31,7 @@ public class SurveyListAnswerItem {
         QuestionGroupName = questionGroupName;
         Question = question;
         Position = position;
+        ShowOptionalCommentTextbox = showOptionalCommentTextbox;
         QuestionAnswerOptions = questionAnswerOptions;
     }
 
@@ -98,6 +99,14 @@ public class SurveyListAnswerItem {
         Position = position;
     }
 
+    public boolean isShowOptionalCommentTextbox() {
+        return ShowOptionalCommentTextbox;
+    }
+
+    public void setShowOptionalCommentTextbox(boolean showOptionalCommentTextbox) {
+        ShowOptionalCommentTextbox = showOptionalCommentTextbox;
+    }
+
     public ArrayList<ListSurveyAnswer_tem> getQuestionAnswerOptions() {
         return QuestionAnswerOptions;
     }
@@ -128,6 +137,9 @@ public class SurveyListAnswerItem {
     @Expose
     @SerializedName("Position")
     private Integer Position;
+    @Expose
+    @SerializedName("ShowOptionalCommentTextbox")
+    private boolean ShowOptionalCommentTextbox;
     @Expose
     @SerializedName("QuestionAnswerOptions")
     private ArrayList<ListSurveyAnswer_tem> QuestionAnswerOptions = null;

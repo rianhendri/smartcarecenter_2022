@@ -178,9 +178,20 @@ public class SurveyActivity extends AppCompatActivity {
                           
                         }else {
                             if (listAnswer.get(x).getAnswerPosition()==0){
-                              multichose=false;
+                                if (listAnswer.get(x).getQuestionType().equals("Rating")){
+
+                                }else {
+                                    multichose=false;
+                                }
+//                              multichose=false;
                             }else {
-                                
+                                if (listAnswer.get(x).getQuestionType().equals("Rating")){
+                                    if (listAnswer.get(x).getAnswerPosition()==99999){
+                                        multichose=false;
+                                    }else {
+
+                                    }
+                                }
                             }
                         }
                     }
@@ -197,6 +208,7 @@ public class SurveyActivity extends AppCompatActivity {
                     multichose=true;
                     Toast.makeText(SurveyActivity.this, "Jawaban Berbintang Merah Wajib Diisi", Toast.LENGTH_SHORT).show();
                 }
+                Log.e("ANSWERE",AnswersArray.toString());
             }
         });
         MrecylerSurvey.addOnLayoutChangeListener(new View.OnLayoutChangeListener()
@@ -367,6 +379,7 @@ public class SurveyActivity extends AppCompatActivity {
 
             }
         });
+        Log.d("apisurvey",jsonObject.toString());
     }
     public void loadSurveyshrare(){
         mloading.setVisibility(VISIBLE);

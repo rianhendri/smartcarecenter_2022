@@ -65,17 +65,17 @@
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/seguisb"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:text="Status :"
                     android:paddingBottom="2dp"
                     android:textColor="@color/colorPrimaryDark" />
 
                 <Spinner
                     android:id="@+id/spinstatus"
-                    android:layout_width="wrap_content"
+                    android:layout_width="230dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
                     android:fontFamily="@font/seguisb"
@@ -102,6 +102,42 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="13sp" />
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal" >
+
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="start"
+                    android:text="Press  :"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <Spinner
+                    android:id="@+id/spinpress"
+                    android:layout_width="230dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/seguisb"
+                    android:gravity="start"
+                    android:spinnerMode="dialog"
+                    android:text="Semua"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

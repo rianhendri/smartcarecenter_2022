@@ -291,6 +291,7 @@ public class SurveyList_Activity extends AppCompatActivity {
 
             }
         });
+        Log.d("surveyapilist",jsonObject.toString());
     }
     public void cekInternet(){
         /// cek internet apakah internet terhubung atau tidak

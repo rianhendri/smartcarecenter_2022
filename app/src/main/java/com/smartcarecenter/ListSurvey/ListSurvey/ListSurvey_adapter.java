@@ -40,8 +40,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,6 +97,7 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
     public static int totalqty = 0;
     public static double totalprice = 0.0;
     boolean required = true;
+    boolean hidenum = false;
     public ListSurvey_adapter(Context context, ArrayList<ListSurvey_tem> ListSurvey) {
         this.context = context;
         this.listsurvey = ListSurvey;
@@ -116,6 +119,27 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
         myviewholder.mmultiplerecyler.setLayoutManager(linearLayoutManager);
         myviewholder.mmultiplerecyler.setHasFixedSize(true);
         int liat = listsurvey.get(i).getPosition();
+        if (listsurvey.get(i).getQuestionType().equals("Rating")){
+            myviewholder.mratinglayout.setVisibility(View.VISIBLE);
+//            myviewholder.mgroupname.setVisibility(View.GONE);
+            myviewholder.mhidenumber.setVisibility(View.GONE);
+            myviewholder.manswerhide.setVisibility(View.GONE);
+            myviewholder.mratingpertanyaan.setText(listsurvey.get(i).getQuestion());
+            hidenum = true;
+
+           
+
+        }else {
+            myviewholder.mratinglayout.setVisibility(View.GONE);
+//            myviewholder.mgroupname.setVisibility(View.VISIBLE);
+            myviewholder.mhidenumber.setVisibility(View.VISIBLE);
+            myviewholder.manswerhide.setVisibility(View.VISIBLE);
+        }
+        if (listsurvey.get(i).isShowOptionalCommentTextbox()){
+            myviewholder.mlaynotedes.setVisibility(View.VISIBLE);
+        }else {
+            myviewholder.mlaynotedes.setVisibility(View.GONE);
+        }
 //        if (liat==listsurvey.size()){
 //            Log.e("liat", i + " :posisi: " + String.valueOf(liat));
 //            MrecylerSurvey.setNestedScrollingEnabled(false);
@@ -163,6 +187,11 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
         }
 
         myviewholder.mnosur.setText(String.valueOf(i+1)+".");
+       if (hidenum){
+           myviewholder.mnosur.setVisibility(View.GONE);
+       }else {
+           myviewholder.mnosur.setVisibility(View.VISIBLE);
+       }
         myviewholder.mtitleAnswer.setText(listsurvey.get(i).getQuestion());
 
         if (listsurvey.get(i).getGroupCd().equals("A")){
@@ -233,10 +262,17 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
             myviewholder.mansgr.setVisibility(View.GONE);
 //            myviewholder.manstext.setVisibility(View.VISIBLE);
             myviewholder.manstext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(listsurvey.get(i).getMaxTextLength())});
-
+            myviewholder.manswerhide.setVisibility(View.GONE);
+            myviewholder.mnoteoptional.setVisibility(View.GONE);
         }else {
             myviewholder.mansgr.setVisibility(View.VISIBLE);
 //            myviewholder.manstext.setVisibility(View.GONE);
+            if (listsurvey.get(i).getQuestionType().equals("Rating")){
+                myviewholder.manswerhide.setVisibility(View.GONE);
+            }else {
+                myviewholder.manswerhide.setVisibility(View.VISIBLE);
+            }
+            myviewholder.mnoteoptional.setVisibility(View.VISIBLE);
             String ada = "";
             if (listsurvey.get(i).getAnswers()!=null){
                 ada = String.valueOf(listsurvey.get(i).getAnswers().size());
@@ -420,7 +456,12 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
         }
 
         Answers = new AnswerSurvey_tem();
-        Answers.setAnswerPosition(0);
+        if (listsurvey.get(i).getQuestionType().equals("Rating")){
+            Answers.setAnswerPosition(99999);
+        }else {
+            Answers.setAnswerPosition(0);
+        }
+
         Answers.setQuestionPosition(listsurvey.get(i).getPosition());
         Answers.setAnswerText("");
         Answers.setOptional(listsurvey.get(i).isOptional());
@@ -451,6 +492,242 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
             }
 
         });
+        ///mrating
+        myviewholder.mcircle0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.VISIBLE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+
+
+                listAnswer.get(i).setAnswerPosition(0);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(0));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+
+
+        myviewholder.mcircle1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.VISIBLE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+                listAnswer.get(i).setAnswerPosition(1);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(1));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+        myviewholder.mcircle2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.VISIBLE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+                listAnswer.get(i).setAnswerPosition(2);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(2));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+        myviewholder.mcircle3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.VISIBLE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+                listAnswer.get(i).setAnswerPosition(3);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(3));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+        myviewholder.mcircle4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.VISIBLE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+                listAnswer.get(i).setAnswerPosition(4);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(4));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+        myviewholder.mcircle5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.VISIBLE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+                listAnswer.get(i).setAnswerPosition(5);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(5));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+        myviewholder.mcircle6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.VISIBLE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+                listAnswer.get(i).setAnswerPosition(6);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(6));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+        myviewholder.mcircle7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.VISIBLE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+                listAnswer.get(i).setAnswerPosition(7);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(7));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+        myviewholder.mcircle8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.VISIBLE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+                listAnswer.get(i).setAnswerPosition(8);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(8));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+        myviewholder.mcircle9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.VISIBLE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+                listAnswer.get(i).setAnswerPosition(9);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(9));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
+        myviewholder.mcircle10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.VISIBLE);
+
+                listAnswer.get(i).setAnswerPosition(10);
+                Log.e("POSISI", i + " :onCheckedChanged: " + String.valueOf(10));
+                Gson gson = new GsonBuilder().create();
+                AnswersArray = gson.toJsonTree(listAnswer).getAsJsonArray();
+            }
+        });
 
     }
 
@@ -462,9 +739,11 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
 
     public static class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView mnosur, mtitleAnswer,mrequired, mgroupname;
+        TextView mnosur, mtitleAnswer,mrequired, mgroupname,mratingpertanyaan,mnoteoptional;
         EditText manstext;
         RecyclerView mmultiplerecyler;
+        LinearLayout mratinglayout,mlaynotedes,manswerhide,mhidenumber,mcheck10,mcheck9,mcheck8,mcheck7,mcheck6,mcheck5,mcheck4,mcheck3,mcheck2,mcheck1,mcheck0;
+        RelativeLayout mcircle0,mcircle1,mcircle2,mcircle3,mcircle4,mcircle5,mcircle6,mcircle7,mcircle8,mcircle9,mcircle10;
         private RadioGroup mansgr;
         private RadioButton mans1, mans2, mans3,mans4,mans5,mans6,mans7,mans8,mans9,mans10 ;
         public Myviewholder(@NonNull View itemView) {
@@ -487,8 +766,35 @@ extends RecyclerView.Adapter<ListSurvey_adapter.Myviewholder> {
             mans9 = itemView.findViewById(R.id.ans9);
             mans10 = itemView.findViewById(R.id.ans10);
             mansgr = itemView.findViewById(R.id.ansgr);
+            manswerhide = itemView.findViewById(R.id.answerhide);
+            mhidenumber = itemView.findViewById(R.id.hidenumber);
+            mratinglayout = itemView.findViewById(R.id.rartinglayout);
+            mlaynotedes = itemView.findViewById(R.id.laynotedes);
+            mcheck10 = itemView.findViewById(R.id.check10);
+            mcheck9 = itemView.findViewById(R.id.check9);
+            mcheck8 = itemView.findViewById(R.id.check8);
+            mcheck7 = itemView.findViewById(R.id.check7);
+            mcheck6 = itemView.findViewById(R.id.check6);
+            mcheck5 = itemView.findViewById(R.id.check5);
+            mcheck4 = itemView.findViewById(R.id.check4);
+            mcheck3 = itemView.findViewById(R.id.check3);
+            mcheck2 = itemView.findViewById(R.id.check2);
+            mcheck1 = itemView.findViewById(R.id.check1);
+            mcheck0 = itemView.findViewById(R.id.check0);
 
-
+            mcircle0 = itemView.findViewById(R.id.circle0);
+            mcircle1 = itemView.findViewById(R.id.circle1);
+            mcircle2 = itemView.findViewById(R.id.circle2);
+            mcircle3 = itemView.findViewById(R.id.circle3);
+            mcircle4 = itemView.findViewById(R.id.circle4);
+            mcircle5 = itemView.findViewById(R.id.circle5);
+            mcircle6 = itemView.findViewById(R.id.circle6);
+            mcircle7 = itemView.findViewById(R.id.circle7);
+            mcircle8 = itemView.findViewById(R.id.circle8);
+            mcircle9 = itemView.findViewById(R.id.circle9);
+            mcircle10 = itemView.findViewById(R.id.circle10);
+            mratingpertanyaan = itemView.findViewById(R.id.ratingpertanyaan);
+            mnoteoptional = itemView.findViewById(R.id.noteoptional);
 
 
         }

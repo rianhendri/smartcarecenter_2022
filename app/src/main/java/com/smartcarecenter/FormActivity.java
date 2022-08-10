@@ -59,6 +59,7 @@ public class FormActivity extends AppCompatActivity {
     private static final String TAG = "FormActivity";
     public static boolean refresh = false;
     public static String valuefilter = "-";
+    public static String valuefilter2 = "-";
     String MhaveToUpdate = "";
     String MsessionExpired = "";
     AddFormAdapter addFormAdapterAdapter;
@@ -69,16 +70,20 @@ public class FormActivity extends AppCompatActivity {
     List<String> listnamestatus = new ArrayList();
     JsonArray liststatus;
     List<String> listvalue = new ArrayList();
+    List<String> listpressspin = new ArrayList();
+    JsonArray listpressarray;
+    List<String> valuepressspin = new ArrayList();
     LinearLayout maddform;
     LinearLayout mback;
     ProgressBar mfooterload;
     private LinearLayoutManager mlinear;
     NestedScrollView mnested;
     TextView mrecord,mempetyreq;
-    Spinner mstatus_spin;
+    Spinner mstatus_spin,mspinpress;
     RecyclerView myitem_place;
     int page = 1;
     int pos = 0;
+    int pos2 = 0;
     boolean refreshscroll = true;
     String sesionid_new = "";
     int spin = 0;
@@ -97,6 +102,7 @@ public class FormActivity extends AppCompatActivity {
         myitem_place = findViewById(R.id.formlist);
         maddform = findViewById(R.id.addform);
         mstatus_spin = findViewById(R.id.spinstatus);
+        mspinpress = findViewById(R.id.spinpress);
         mnested = findViewById(R.id.nestedscrol);
         mempetyreq = findViewById(R.id.norequest);
         mswip = findViewById(R.id.swiprefresh);
@@ -204,6 +210,28 @@ public class FormActivity extends AppCompatActivity {
 
             }
         });
+        mspinpress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                refreshscroll = true;
+                page=1;
+                cekInternet();
+                for (int i = 0; i < valuepressspin.size(); ++i) {
+                    valuefilter2 = valuepressspin.get(position);
+                    if (internet) {
+                        loadData();
+                    }else {
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         maddform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -253,6 +281,7 @@ public class FormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
+        jsonObject.addProperty("pressGuid",valuefilter2);
         jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
@@ -327,6 +356,7 @@ public class FormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status","-");
+        jsonObject.addProperty("pressGuid","-");
         jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);
@@ -347,8 +377,31 @@ public class FormActivity extends AppCompatActivity {
                 MsessionExpired = homedata.get("sessionExpired").toString();
                 if (statusnya.equals("OK")){
                     JsonObject data = homedata.getAsJsonObject("data");
+
                    listformreq = data.getAsJsonArray("frList");
                     liststatus = data.getAsJsonArray("statusList");
+                    listpressarray = data.getAsJsonArray("pressList");
+                    Log.d("listpress",listpressarray.toString());
+                    for (int i = 0; i < listpressarray.size(); ++i) {
+                        JsonObject jsonObject3 = (JsonObject)listpressarray.get(i);
+                        String string3 = jsonObject3.getAsJsonObject().get("Guid").getAsString();
+                        String string4 = jsonObject3.getAsJsonObject().get("SNAndName").getAsString();
+
+                        valuepressspin.add(string3);
+                        listpressspin.add(string4);
+                        for (int j = 0; j < valuepressspin.size(); ++j) {
+                            if (valuepressspin.get(i).equals(valuefilter2)){
+                                pos2=j;
+                            }
+                        }
+
+                        final ArrayAdapter<String> kategori2 = new ArrayAdapter<String>(FormActivity.this, R.layout.spinstatus_layout,
+                                listpressspin);
+                        kategori2.setDropDownViewResource(R.layout.spinkategori);
+                        kategori2.notifyDataSetChanged();
+                        mspinpress.setAdapter(kategori2);
+                        mspinpress.setSelection(pos2);
+                    }
                     for (int i = 0; i < liststatus.size(); ++i) {
                         JsonObject jsonObject3 = (JsonObject)liststatus.get(i);
                         String string3 = jsonObject3.getAsJsonObject().get("Value").getAsString();
@@ -366,6 +419,7 @@ public class FormActivity extends AppCompatActivity {
                         kategori.notifyDataSetChanged();
                         mstatus_spin.setAdapter(kategori);
                         mstatus_spin.setSelection(pos);
+
                     }
                 } else {
                     Toast.makeText(FormActivity.this, errornya,Toast.LENGTH_LONG).show();
@@ -387,6 +441,7 @@ public class FormActivity extends AppCompatActivity {
         jsonObject.addProperty("sessionId",sesionid_new);
         jsonObject.addProperty("page",page);
         jsonObject.addProperty("status",valuefilter);
+        jsonObject.addProperty("pressGuid",valuefilter2);
         jsonObject.addProperty("ver",BuildConfig.VERSION_NAME);
         IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, baseurl);
         Call<JsonObject> panggilkomplek = jsonPostService.postRawJSONlistform(jsonObject);

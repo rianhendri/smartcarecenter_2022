@@ -20,10 +20,7 @@ public class ListSurvey_tem {
     }
 
 
-    @SerializedName("SurveyCd")
-    private String SurveyCd;
-
-    public ListSurvey_tem(String surveyCd, String groupCd, String groupName, Integer position, Integer maxTextLength, String question, String questionType, boolean optional, ArrayList<ListSurveyAnswer_tem> answers) {
+    public ListSurvey_tem(String surveyCd, String groupCd, String groupName, Integer position, Integer maxTextLength, String question, String questionType, boolean optional, boolean showOptionalCommentTextbox, ArrayList<ListSurveyAnswer_tem> answers) {
         SurveyCd = surveyCd;
         GroupCd = groupCd;
         GroupName = groupName;
@@ -32,6 +29,7 @@ public class ListSurvey_tem {
         Question = question;
         QuestionType = questionType;
         Optional = optional;
+        ShowOptionalCommentTextbox = showOptionalCommentTextbox;
         Answers = answers;
     }
 
@@ -99,6 +97,14 @@ public class ListSurvey_tem {
         Optional = optional;
     }
 
+    public boolean isShowOptionalCommentTextbox() {
+        return ShowOptionalCommentTextbox;
+    }
+
+    public void setShowOptionalCommentTextbox(boolean showOptionalCommentTextbox) {
+        ShowOptionalCommentTextbox = showOptionalCommentTextbox;
+    }
+
     public ArrayList<ListSurveyAnswer_tem> getAnswers() {
         return Answers;
     }
@@ -106,6 +112,11 @@ public class ListSurvey_tem {
     public void setAnswers(ArrayList<ListSurveyAnswer_tem> answers) {
         Answers = answers;
     }
+
+    @SerializedName("SurveyCd")
+    private String SurveyCd;
+
+
     @SerializedName("GroupCd")
     private String GroupCd;
     @SerializedName("GroupName")
@@ -126,6 +137,9 @@ public class ListSurvey_tem {
     @Expose
     @SerializedName("Optional")
     private boolean Optional;
+    @Expose
+    @SerializedName("ShowOptionalCommentTextbox")
+    private boolean ShowOptionalCommentTextbox;
     @Expose
     @SerializedName("Answers")
     private ArrayList<ListSurveyAnswer_tem> Answers = null;

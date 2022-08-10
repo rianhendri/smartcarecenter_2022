@@ -21,6 +21,7 @@
 			android:fontFamily="@font/segoeuib"
 			android:text="Service"/>
 		<LinearLayout
+			android:id="@+id/hidenumber"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:orientation="horizontal"
@@ -53,6 +54,7 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
 			<LinearLayout
+				android:id="@+id/answerhide"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:orientation="horizontal">
@@ -83,6 +85,458 @@
 				>
 
 			</androidx.recyclerview.widget.RecyclerView>
+			<LinearLayout
+				android:id="@+id/rartinglayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:gravity="center">
+					<TextView
+						android:id="@+id/ratingpertanyaan"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="How likely are you to recommend HP Indigo to a colleague?"
+						android:fontFamily="@font/seguisb"
+						android:textSize="15sp"
+						android:layout_marginLeft="12dp"
+						android:textColor="@color/black"/></LinearLayout>
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:gravity="center">
+
+					<RelativeLayout
+						android:id="@+id/circle0"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bgredcircle">
+
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:fontFamily="@font/seguisb"
+							android:gravity="center"
+							android:text="0"
+							android:textColor="@color/dwhite"
+							android:textSize="13sp" />
+
+						<LinearLayout
+							android:id="@+id/check0"
+							android:visibility="gone"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/circle1"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bgredcircle">
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:fontFamily="@font/seguisb"
+							android:textColor="@color/dwhite"
+							android:text="1"
+							android:textSize="13sp"/>
+
+						<LinearLayout
+							android:id="@+id/check1"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/circle2"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bgredcircle">
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:fontFamily="@font/seguisb"
+							android:textColor="@color/dwhite"
+							android:text="2"
+							android:textSize="13sp"/>
+
+						<LinearLayout
+							android:id="@+id/check2"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/circle3"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bgredcircle">
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:fontFamily="@font/seguisb"
+							android:textColor="@color/dwhite"
+							android:text="3"
+							android:textSize="13sp"/>
+
+						<LinearLayout
+							android:id="@+id/check3"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/circle4"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bgredcircle">
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:fontFamily="@font/seguisb"
+							android:textColor="@color/dwhite"
+							android:text="4"
+							android:textSize="13sp"/>
+
+						<LinearLayout
+							android:id="@+id/check4"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/circle5"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bgredcircle">
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:fontFamily="@font/seguisb"
+							android:textColor="@color/dwhite"
+							android:text="5"
+							android:textSize="13sp"/>
+
+						<LinearLayout
+							android:id="@+id/check5"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+				</LinearLayout>
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:gravity="center">
+
+
+
+					<RelativeLayout
+					android:id="@+id/circle6"
+					android:layout_width="35dp"
+					android:layout_height="35dp"
+					android:orientation="vertical"
+					android:gravity="center"
+					android:layout_margin="6dp"
+					android:background="@drawable/bgredcircle">
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:fontFamily="@font/seguisb"
+							android:textColor="@color/dwhite"
+							android:text="6"
+							android:textSize="13sp"/>
+
+						<LinearLayout
+							android:id="@+id/check6"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+				</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/circle7"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bgyellowcircle">
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:fontFamily="@font/seguisb"
+							android:textColor="@color/dwhite"
+							android:text="7"
+							android:textSize="13sp"/>
+
+						<LinearLayout
+							android:id="@+id/check7"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/circle8"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bgyellowcircle">
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:fontFamily="@font/seguisb"
+							android:textColor="@color/dwhite"
+							android:text="8"
+							android:textSize="13sp"/>
+
+						<LinearLayout
+							android:id="@+id/check8"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/circle9"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bggreencircle">
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:fontFamily="@font/seguisb"
+							android:textColor="@color/dwhite"
+							android:text="9"
+							android:textSize="13sp"/>
+
+						<LinearLayout
+							android:id="@+id/check9"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+					<RelativeLayout
+						android:id="@+id/circle10"
+						android:layout_width="35dp"
+						android:layout_height="35dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:layout_margin="6dp"
+						android:background="@drawable/bggreencircle">
+
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:fontFamily="@font/seguisb"
+							android:gravity="center"
+							android:text="10"
+							android:textColor="@color/dwhite"
+							android:textSize="13sp" />
+
+						<LinearLayout
+							android:id="@+id/check10"
+							android:layout_width="35dp"
+							android:layout_height="35dp"
+							android:background="@drawable/bggreycircle"
+							android:gravity="center"
+							android:visibility="gone"
+
+							android:orientation="vertical">
+
+							<ImageView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_margin="7dp"
+								android:src="@drawable/ic_check" />
+						</LinearLayout>
+
+					</RelativeLayout>
+				</LinearLayout>
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:layout_marginLeft="24dp"
+					android:layout_marginRight="24dp">
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_weight="1">
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:fontFamily="@font/seguisb"
+							android:textSize="11sp"
+							android:text="0 - Not Likely"/>
+					</LinearLayout>
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:gravity="end"
+						android:layout_weight="1">
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:fontFamily="@font/seguisb"
+							android:textSize="11sp"
+							android:text="10 - Very Likely"/>
+					</LinearLayout>
+				</LinearLayout>
+			</LinearLayout>
 			<RadioGroup
 				android:id="@+id/ansgr"
 				android:layout_width="match_parent"
@@ -175,35 +629,44 @@
 					android:textColor="@color/radiobuttonstate" />
 			</RadioGroup>
 
-			<TextView
-				android:layout_marginLeft="12dp"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="@color/black"
-				android:fontFamily="@font/seguisb"
-				android:textSize="13sp"
-				android:text="@string/title_optionaltext"/>
-			<EditText
-				android:id="@+id/anstext"
+			<LinearLayout
+				android:id="@+id/laynotedes"
 				android:layout_width="match_parent"
-				android:layout_height="70dp"
-				android:background="@drawable/bgwhite_cornerblack"
-				android:fontFamily="@font/segoeui"
-				android:gravity="top|left"
-				android:inputType="textMultiLine"
-				android:lines="3"
-				android:overScrollMode="always"
-				android:padding="8dp"
-				android:layout_marginLeft="12dp"
-				android:layout_marginRight="12dp"
-				android:scrollHorizontally="false"
-				android:scrollbarStyle="insideInset"
-				android:scrollbars="vertical"
-				android:text=""
-				android:visibility="visible"
-				android:textAppearance="?android:attr/textAppearanceMedium"
-				android:textColor="@color/black"
-				android:textSize="13sp" />
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+				<TextView
+					android:id="@+id/noteoptional"
+					android:layout_marginLeft="12dp"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/black"
+					android:fontFamily="@font/seguisb"
+					android:textSize="13sp"
+					android:text="@string/title_optionaltext"/>
+				<EditText
+					android:id="@+id/anstext"
+					android:layout_width="match_parent"
+					android:layout_height="70dp"
+					android:background="@drawable/bgwhite_cornerblack"
+					android:fontFamily="@font/segoeui"
+					android:gravity="top|left"
+					android:inputType="textMultiLine"
+					android:lines="3"
+					android:overScrollMode="always"
+					android:padding="8dp"
+					android:layout_marginLeft="12dp"
+					android:layout_marginRight="12dp"
+					android:scrollHorizontally="false"
+					android:scrollbarStyle="insideInset"
+					android:scrollbars="vertical"
+					android:text=""
+					android:layout_marginTop="10dp"
+					android:visibility="visible"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:textColor="@color/black"
+					android:textSize="13sp" />
+			</LinearLayout>
+
 		</LinearLayout>
 	</LinearLayout>
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bg_surveymulti"
+	android:layout_margin="2dp"
+	android:orientation="vertical"
+	>
+
+	<LinearLayout
+		android:id="@+id/bgselect"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="0dp"
+		android:layout_marginTop="0dp"
+		android:orientation="vertical"
+		android:paddingLeft="14dp"
+		android:paddingRight="14dp"
+		android:background="@color/dwhite"
+		>
+		<LinearLayout
+			android:layout_width="35dp"
+			android:layout_height="35dp"
+			android:orientation="vertical"
+			android:gravity="center"
+			android:background="@drawable/bgredcircle">
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/seguisb"
+				android:textColor="@color/dwhite"
+				android:text="10"
+				android:textSize="13sp"/>
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

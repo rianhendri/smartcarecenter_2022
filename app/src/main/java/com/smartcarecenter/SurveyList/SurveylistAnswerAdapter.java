@@ -35,10 +35,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -88,6 +91,7 @@ extends RecyclerView.Adapter<SurveylistAnswerAdapter.Myviewholder> {
     int posie = 0;
     int posif = 0;
     int posig = 0;
+    boolean hidenum = false;
     public SurveylistAnswerAdapter(Context c, ArrayList<SurveyListAnswerItem> p){
         context = c;
         myItem = p;
@@ -114,6 +118,184 @@ extends RecyclerView.Adapter<SurveylistAnswerAdapter.Myviewholder> {
 //            Log.e("liat", i + " :posisi: " + String.valueOf(liat));
 //            mrecylersurvey.setNestedScrollingEnabled(false);
 //        }
+        if (myItem.get(i).getQuestionType().equals("Rating")){
+            myviewholder.mratinglayout.setVisibility(View.VISIBLE);
+//            myviewholder.mgroupname.setVisibility(View.GONE);
+            myviewholder.mhidenumber.setVisibility(View.GONE);
+            myviewholder.manswerhide.setVisibility(View.GONE);
+            myviewholder.mratingpertanyaan.setText(myItem.get(i).getQuestion());
+            hidenum = true;
+            if (myItem.get(i).getAnswerText().equals("")) {
+                myviewholder.mlaynotedes.setVisibility(View.GONE);
+
+            }else {
+                myviewholder.mlaynotedes.setVisibility(View.VISIBLE);
+            }
+            Log.d("GetAnswerText",myItem.get(i).getAnswerText());
+            if (myItem.get(i).getAnswerPosition()==0){
+                myviewholder.mcheck0.setVisibility(View.VISIBLE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+
+            }
+            if (myItem.get(i).getAnswerPosition()==1){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.VISIBLE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+            }
+            if (myItem.get(i).getAnswerPosition()==2){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.VISIBLE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+            }
+            if (myItem.get(i).getAnswerPosition()==3){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.VISIBLE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+            }
+            if (myItem.get(i).getAnswerPosition()==4){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.VISIBLE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+            }
+            if (myItem.get(i).getAnswerPosition()==5){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.VISIBLE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+            }
+            if (myItem.get(i).getAnswerPosition()==6){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.VISIBLE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+            }
+            if (myItem.get(i).getAnswerPosition()==7){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.VISIBLE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+            }
+            if (myItem.get(i).getAnswerPosition()==8){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.VISIBLE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+            }
+            if (myItem.get(i).getAnswerPosition()==9){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.VISIBLE);
+                myviewholder.mcheck10.setVisibility(View.GONE);
+            }
+            if (myItem.get(i).getAnswerPosition()==10){
+                myviewholder.mcheck0.setVisibility(View.GONE);
+                myviewholder.mcheck1.setVisibility(View.GONE);
+                myviewholder.mcheck2.setVisibility(View.GONE);
+                myviewholder.mcheck3.setVisibility(View.GONE);
+                myviewholder.mcheck4.setVisibility(View.GONE);
+                myviewholder.mcheck5.setVisibility(View.GONE);
+                myviewholder.mcheck6.setVisibility(View.GONE);
+                myviewholder.mcheck7.setVisibility(View.GONE);
+                myviewholder.mcheck8.setVisibility(View.GONE);
+                myviewholder.mcheck9.setVisibility(View.GONE);
+                myviewholder.mcheck10.setVisibility(View.VISIBLE);
+            }
+
+        }else {
+            myviewholder.mratinglayout.setVisibility(View.GONE);
+//            myviewholder.mgroupname.setVisibility(View.VISIBLE);
+//            myviewholder.mhidenumber.setVisibility(View.VISIBLE);
+            myviewholder.manswerhide.setVisibility(View.GONE);
+            if (myItem.get(i).getAnswerText().equals("")) {
+                myviewholder.mlaynotedes.setVisibility(View.GONE);
+
+            }else {
+                myviewholder.mlaynotedes.setVisibility(View.VISIBLE);
+            }
+            Log.d("GetAnswerText",myItem.get(i).getAnswerText());
+        }
+//        if (myItem.get(i).isShowOptionalCommentTextbox()){
+//            myviewholder.mlaynotedes.setVisibility(View.VISIBLE);
+//        }else {
+//            myviewholder.mlaynotedes.setVisibility(View.GONE);
+//        }
+        ////
         if (myItem.get(i).getAnswerText()!=null) {
             myviewholder.Manstext.setText(myItem.get(i).getAnswerText());
         }
@@ -121,6 +303,7 @@ extends RecyclerView.Adapter<SurveylistAnswerAdapter.Myviewholder> {
         if (myItem.get(i).getQuestionType().equals("Text")){
             myviewholder.mansgr.setVisibility(View.GONE);
 //            myviewholder.Manstext.setVisibility(View.VISIBLE);
+
 
 
         }else {
@@ -557,12 +740,19 @@ extends RecyclerView.Adapter<SurveylistAnswerAdapter.Myviewholder> {
 
     public class Myviewholder extends RecyclerView.ViewHolder{
 
-        TextView  mnoSurvey,MtitleAnswer,Manstext,mrequiredanswer,mgroupname;
-        ImageView mpic;
-        ProgressBar mporg;
-        RecyclerView Mmultiplerecyler;
+        TextView mnosur, mtitleAnswer,mrequired, mgroupname,mratingpertanyaan,mnoteoptional;
+        EditText manstext;
+        RecyclerView mmultiplerecyler;
+        LinearLayout mratinglayout,mlaynotedes,manswerhide,mhidenumber,mcheck10,mcheck9,mcheck8,mcheck7,mcheck6,mcheck5,mcheck4,mcheck3,mcheck2,mcheck1,mcheck0;
+        RelativeLayout mcircle0,mcircle1,mcircle2,mcircle3,mcircle4,mcircle5,mcircle6,mcircle7,mcircle8,mcircle9,mcircle10;
         private RadioGroup mansgr;
         private RadioButton mans1, mans2, mans3,mans4,mans5,mans6,mans7,mans8,mans9,mans10 ;
+        TextView  mnoSurvey,MtitleAnswer,Manstext,mrequiredanswer;
+//        ImageView mpic;
+//        ProgressBar mporg;
+        RecyclerView Mmultiplerecyler;
+//        private RadioGroup mansgr;
+//        private RadioButton mans1, mans2, mans3,mans4,mans5,mans6,mans7,mans8,mans9,mans10 ;
         public Myviewholder(@NonNull View itemView) {
             super(itemView);
             mnoSurvey = itemView.findViewById(R.id.noSurvey);
@@ -582,6 +772,37 @@ extends RecyclerView.Adapter<SurveylistAnswerAdapter.Myviewholder> {
             mans9 = itemView.findViewById(R.id.ans9);
             mans10 = itemView.findViewById(R.id.ans10);
             mansgr = itemView.findViewById(R.id.ansgr);
+
+            manswerhide = itemView.findViewById(R.id.answerhide);
+            mhidenumber = itemView.findViewById(R.id.hidenumber);
+            mratinglayout = itemView.findViewById(R.id.rartinglayout);
+            mlaynotedes = itemView.findViewById(R.id.laynotedes);
+            mcheck10 = itemView.findViewById(R.id.check10);
+            mcheck9 = itemView.findViewById(R.id.check9);
+            mcheck8 = itemView.findViewById(R.id.check8);
+            mcheck7 = itemView.findViewById(R.id.check7);
+            mcheck6 = itemView.findViewById(R.id.check6);
+            mcheck5 = itemView.findViewById(R.id.check5);
+            mcheck4 = itemView.findViewById(R.id.check4);
+            mcheck3 = itemView.findViewById(R.id.check3);
+            mcheck2 = itemView.findViewById(R.id.check2);
+            mcheck1 = itemView.findViewById(R.id.check1);
+            mcheck0 = itemView.findViewById(R.id.check0);
+
+            mcircle0 = itemView.findViewById(R.id.circle0);
+            mcircle1 = itemView.findViewById(R.id.circle1);
+            mcircle2 = itemView.findViewById(R.id.circle2);
+            mcircle3 = itemView.findViewById(R.id.circle3);
+            mcircle4 = itemView.findViewById(R.id.circle4);
+            mcircle5 = itemView.findViewById(R.id.circle5);
+            mcircle6 = itemView.findViewById(R.id.circle6);
+            mcircle7 = itemView.findViewById(R.id.circle7);
+            mcircle8 = itemView.findViewById(R.id.circle8);
+            mcircle9 = itemView.findViewById(R.id.circle9);
+            mcircle10 = itemView.findViewById(R.id.circle10);
+            mratingpertanyaan = itemView.findViewById(R.id.ratingpertanyaan);
+            mnoteoptional = itemView.findViewById(R.id.noteoptional);
+
         }
     }
 }
