@@ -605,8 +605,8 @@ public class DetailsPM extends AppCompatActivity {
             sunday = Calendar.getInstance();
             sunday.add(Calendar.DAY_OF_YEAR, (Calendar.SUNDAY - sunday.get(Calendar.DAY_OF_WEEK) + 7 + i));
              saturday = Calendar.getInstance();
-             saturday.add(Calendar.DAY_OF_YEAR, (Calendar.SATURDAY - saturday.get(Calendar.DAY_OF_WEEK) + i));
-             weekends.add(saturday);
+//             saturday.add(Calendar.DAY_OF_YEAR, (Calendar.SATURDAY - saturday.get(Calendar.DAY_OF_WEEK) + i));
+//             weekends.add(saturday);
             weekends.add(sunday);
         }
         Locale locale = new Locale("ID");

@@ -13,6 +13,7 @@
         <entry key="..\:/Users/62812/Desktop/project 2022/2022/Scc/scc/smartcarecenter/app/src/main/res/layout/item_rating.xml" value="0.5" />
         <entry key="..\:/Users/62812/Desktop/project 2022/2022/Scc/scc/smartcarecenter/app/src/main/res/layout/item_serviceticket.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/62812/Desktop/project 2022/2022/Scc/scc/smartcarecenter/app/src/main/res/layout/item_survey.xml" value="0.33" />
+        <entry key="..\:/Users/62812/OneDrive/Desktop/project 2022/2022/Scc/scc/smartcarecenter/app/src/main/res/layout/activity_klik_pay.xml" value="0.2791666666666667" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/drawable/bg_cornergrey.xml" value="0.168" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_add__po__item__list.xml" value="0.213768115942029" />
         <entry key="..\:/Users/Delapansoft/Desktop/rian/smartcarecenter/app/src/main/res/layout/activity_add_details_po.xml" value="0.264" />
@@ -53,7 +54,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

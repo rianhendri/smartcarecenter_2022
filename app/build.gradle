@@ -9,8 +9,8 @@ android {
         applicationId "com.smartcarecenter"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 60
-        versionName "1.5.9"
+        versionCode 61
+        versionName "1.6.0"
         multiDexEnabled true
         useLibrary 'org.apache.http.legacy'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
