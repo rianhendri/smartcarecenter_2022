@@ -562,29 +562,18 @@ public class DetailsPM extends AppCompatActivity {
 
         final Calendar calendar=Calendar.getInstance();
         final int day=calendar.get(Calendar.DAY_OF_MONTH);
-        final int year=calendar.get(Calendar.YEAR);
-        final int month=calendar.get(Calendar.MONTH);
         datePickerDialog = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                String nbulan="";
-                String hari="";
-                if (monthOfYear<10){
-                    nbulan = "0"+String.valueOf(monthOfYear+1);
-                }else {
-                    nbulan = String.valueOf(monthOfYear+1);
-                }
-                if (dayOfMonth<10){
-                    hari = "0"+String.valueOf(dayOfMonth);
-                }else {
-                    hari = String.valueOf(dayOfMonth);
-                }
-                mreschdate.setText(hari+"-"+nbulan+"-"+year);
-                datenya  =year+"-"+nbulan+"-"+hari;
-
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, monthOfYear,dayOfMonth );
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                datenya = format.format(calendar.getTime());
+                mreschdate.setText(datenya);
+                Log.d("datenya",datenya);
 
             }
-        },year,month,day);
+        });
 
         if (jadwal > day) {
             mindatenya = jadwal-day+30;
@@ -595,7 +584,7 @@ public class DetailsPM extends AppCompatActivity {
         calendar.add(Calendar.DAY_OF_MONTH, mindatenya); // add date to 30 days later
         datePickerDialog.setMaxDate(calendar);
         //Disable all SUNDAYS and SATURDAYS between Min and Max Dates
-         Calendar saturday;
+        Calendar saturday;
         Calendar sunday;
         List<Calendar> weekends = new ArrayList<>();
         int weeks = 30;
@@ -604,7 +593,7 @@ public class DetailsPM extends AppCompatActivity {
             for(int j =0; j > (weeks*7) ; j = j - 7);
             sunday = Calendar.getInstance();
             sunday.add(Calendar.DAY_OF_YEAR, (Calendar.SUNDAY - sunday.get(Calendar.DAY_OF_WEEK) + 7 + i));
-             saturday = Calendar.getInstance();
+            saturday = Calendar.getInstance();
 //             saturday.add(Calendar.DAY_OF_YEAR, (Calendar.SATURDAY - saturday.get(Calendar.DAY_OF_WEEK) + i));
 //             weekends.add(saturday);
             weekends.add(sunday);
@@ -616,6 +605,72 @@ public class DetailsPM extends AppCompatActivity {
 //        datePickerDialog.setLocale(Locale.setDefault(locale));
         datePickerDialog.show(getSupportFragmentManager(),"DateTimePicker");
     }
+//    private void showDateTimeDialog() {
+//
+//        final Calendar calendar=Calendar.getInstance();
+//        final int day=calendar.get(Calendar.DAY_OF_MONTH);
+//        final int year=calendar.get(Calendar.YEAR);
+//        final int month=calendar.get(Calendar.MONTH);
+//        datePickerDialog = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+//                String nbulan="";
+//                String hari="";
+//                if (monthOfYear<10){
+//                    nbulan = "0"+String.valueOf(monthOfYear+1);
+//                }else {
+//                    nbulan = String.valueOf(monthOfYear+1);
+//                }
+//                if (dayOfMonth<10){
+//                    hari = "0"+String.valueOf(dayOfMonth);
+//                }else {
+//                    hari = String.valueOf(dayOfMonth);
+//                }
+//
+////                Calendar calendar = Calendar.getInstance();
+////                calendar.set(year, monthOfYear,dayOfMonth );
+////                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+////                datenya = format.format(calendar.getTime());
+////                mreschdate.setText(datenya);
+////                Log.d("datenya",datenya);
+//                mreschdate.setText(hari+"-"+nbulan+"-"+year);
+//                datenya  =year+"-"+nbulan+"-"+hari;
+//
+//
+//            }
+////        });
+//        },year,month,day);
+//
+//        if (jadwal > day) {
+//            mindatenya = jadwal-day+30;
+////            Toast.makeText(DetailsPM.this, "Selected date is greater than 8 days", Toast.LENGTH_SHORT).show();
+//        }
+////        calendar.add(Calendar.DAY_OF_MONTH, mindatenya);
+//        datePickerDialog.setMinDate(calendar);  //set min date                 // set today's date as min date
+//        calendar.add(Calendar.DAY_OF_MONTH, mindatenya); // add date to 30 days later
+//        datePickerDialog.setMaxDate(calendar);
+//        //Disable all SUNDAYS and SATURDAYS between Min and Max Dates
+//         Calendar saturday;
+//        Calendar sunday;
+//        List<Calendar> weekends = new ArrayList<>();
+//        int weeks = 30;
+//
+//        for (int i = 0; i < (weeks * 7); i = i + 7) {
+//            for(int j =0; j > (weeks*7) ; j = j - 7);
+//            sunday = Calendar.getInstance();
+//            sunday.add(Calendar.DAY_OF_YEAR, (Calendar.SUNDAY - sunday.get(Calendar.DAY_OF_WEEK) + 7 + i));
+//             saturday = Calendar.getInstance();
+////             saturday.add(Calendar.DAY_OF_YEAR, (Calendar.SATURDAY - saturday.get(Calendar.DAY_OF_WEEK) + i));
+////             weekends.add(saturday);
+//            weekends.add(sunday);
+//        }
+//        Locale locale = new Locale("ID");
+//        Calendar[] disabledDays = weekends.toArray(new Calendar[weekends.size()]);
+//        datePickerDialog.setDisabledDays(disabledDays);
+//        datePickerDialog.setFirstDayOfWeek(Calendar.getInstance().MONDAY);
+////        datePickerDialog.setLocale(Locale.setDefault(locale));
+//        datePickerDialog.show(getSupportFragmentManager(),"DateTimePicker");
+//    }
     private void rejectpm() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 this);
